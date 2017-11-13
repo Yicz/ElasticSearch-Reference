@@ -3,7 +3,7 @@
 如下是elasticsearch系统中的专有名词
 
 ##  分析 (Analysis)
-分析(Analysis)是将文本（texf）转换为项（term）的过程。 根据使用哪个分析器(Analyzer)，这些短语：FOO BAR，Foo-Bar，foo，bar可能全部以foo和bar的项形式出现。 这些项（term）是实际存储在索引中的。 FoO：bAR的全文查询（不是词条查询）也将被分析到条件foo，bar，并且将因此匹配存储在索引中的项（term）。 正是这个分析过程（在索引时间和搜索时间）允许elasticsearch执行全文查询。 另请参阅文本(Text)和项（Term）。
+分析(Analysis)是将文本（text）转换为项（term）的过程。 根据使用哪个分析器(Analyzer)，这些短语：FOO BAR，Foo-Bar，foo，bar可能全部以foo和bar的项形式出现。 这些项（term）是实际存储在索引中的。 FoO：bAR的全文查询（不是词条查询）也将被分析到条件foo，bar，并且将因此匹配存储在索引中的项（term）。 正是这个分析过程（在索引时间和搜索时间）允许elasticsearch执行全文查询。 另请参阅文本(Text)和项（Term）。
 ##  集群 (Cluster)
 群集由相同群集名称的一个或多个节点组成（elasticsearch.yml中cluster.name:配置）。 每个集群都有一个由集群自动选择的主节点（master），如果当前的主节点发生故障，集群会竞选出新的主结点。
 ##  文档 (Document)
