@@ -31,4 +31,28 @@ elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的
 ## [专业术语（Glossary of terms）](/19_Glossary_of_terms/Glossary_of_terms.md)
 ## [发布说明（Release Notes）](/20_Release_Notes/Release_Notes.md)
 
+# 完成进度
+
+| 模块 | 完成情况 |
+|---|---|
+| 入门指南 | 完成 |
+| 安装elastic | 未开始 |
+| 版本变更 | 未开始 |
+| API 约定 | 未开始 |
+| 文档API | 未开始 |
+| 搜索API | 未开始 |
+| 聚合（Aggregations） | 未开始 |
+| 索引 APIs | 未开始 |
+| _cat APIs | 未开始 |
+| 集群（clusters） APIs | 未开始 |
+| 询查特定领域语言（Query DSL（Domain Special Language）) | 未开始 |
+| 映射（Mapping） | 未开始 |
+| 分析（Analysis） | 未开始 |
+| 模块（Modules） | 未开始 |
+| 索引模块 （Index Modules） | 未开始 |
+| 吸收结点(Ingest Node) | 未开始 |
+| How To | 未开始 |
+| 测试（Testing） | 未开始 |
+| 专业术语（Glossary of terms） | 完成 |
+| 发布说明（Release Notes） | 照搬 |
 
