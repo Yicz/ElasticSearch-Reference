@@ -1,7 +1,7 @@
 # ElasticSearch-Reference（非权威指南）
-本项目翻译[https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html](/https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html)
+本项目翻译[https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html)
 
-官方各个版本权威指南地址：[https://www.elastic.co/guide/en/elasticsearch/reference/index.html](/https://www.elastic.co/guide/en/elasticsearch/reference/index.html)
+官方各个版本权威指南地址：[https://www.elastic.co/guide/en/elasticsearch/reference/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/index.html)
 
 说明：本人太(hen)忙(lan),极其有可能只写下了README.md,同时说明不定期更新。
 - - - 
@@ -28,7 +28,7 @@ elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的
 ## [吸收结点(Ingest Node)](/16_Ingest_Node/Ingest_Node.md)
 ## [How To](/17_How_To/How_To.md)
 ## [测试（Testing）](/18_Testing/Testing.md)
-## [专业词典（Glossary of terms）](/19_Glossary_of_terms/Glossary_of_terms.md)
+## [专业术语（Glossary of terms）](/19_Glossary_of_terms/Glossary_of_terms.md)
 ## [发布说明（Release Notes）](/20_Release_Notes/Release_Notes.md)
 
 
