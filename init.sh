@@ -28,9 +28,10 @@ do
 	else
 		dirName="${index}_$i"
 	fi
-    mkdir $dirName
-    touch "$dirName/$i.md"
-    #echo  "To be continued">>"$i/$1.md"
+ #    mkdir $dirName
+ #    touch "$dirName/$i.md"
+    # echo  "To be continued">>"$dirName/$i.md"
+    echo "$dirName/$i.md"
     let index+=1
    # or do whatever with individual element of the array
 done
