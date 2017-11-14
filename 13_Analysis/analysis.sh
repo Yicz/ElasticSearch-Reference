@@ -1,0 +1,18 @@
+#!/bin/sh
+
+dirNames=(Analyzers Tokenizers Token_Filters Character_Filters )
+files=(Anatomy_of_an_analyzer.md Testing_analyzers.md Analyzers/Configuring_built-in_analyzers.md Analyzers/Standard_Analyzer.md Analyzers/Simple_Analyzer.md Analyzers/Whitespace_Analyzer.md Analyzers/Stop_Analyzer.md Analyzers/Keyword_Analyzer.md Analyzers/Pattern_Analyzer.md Analyzers/Language_Analyzers.md Analyzers/Fingerprint_Analyzer.md Analyzers/Custom_Analyzer.md Analyzers/Analyzers.md Normalizers.md Tokenizers/Standard_Tokenizer.md Tokenizers/Letter_Tokenizer.md Tokenizers/Lowercase_Tokenizer.md Tokenizers/Whitespace_Tokenizer.md Tokenizers/UAX_URL_Email_Tokenizer.md Tokenizers/Classic_Tokenizer.md Tokenizers/Thai_Tokenizer.md Tokenizers/NGram_Tokenizer.md Tokenizers/Edge_NGram_Tokenizer.md Tokenizers/Keyword_Tokenizer.md Tokenizers/Pattern_Tokenizer.md Tokenizers/Path_Hierarchy_Tokenizer.md Tokenizers/Tokenizers.md Token_Filters/Standard_Token_Filter.md Token_Filters/ASCII_Folding_Token_Filter.md Token_Filters/Flatten_Graph_Token_Filter.md Token_Filters/Length_Token_Filter.md Token_Filters/Lowercase_Token_Filter.md Token_Filters/Uppercase_Token_Filter.md Token_Filters/NGram_Token_Filter.md Token_Filters/Edge_NGram_Token_Filter.md Token_Filters/Porter_Stem_Token_Filter.md Token_Filters/Shingle_Token_Filter.md Token_Filters/Stop_Token_Filter.md Token_Filters/Word_Delimiter_Token_Filter.md Token_Filters/Word_Delimiter_Graph_Token_Filter.md Token_Filters/Stemmer_Token_Filter.md Token_Filters/Stemmer_Override_Token_Filter.md Token_Filters/Keyword_Marker_Token_Filter.md Token_Filters/Keyword_Repeat_Token_Filter.md Token_Filters/KStem_Token_Filter.md Token_Filters/Snowball_Token_Filter.md Token_Filters/Phonetic_Token_Filter.md Token_Filters/Synonym_Token_Filter.md Token_Filters/Synonym_Graph_Token_Filter.md Token_Filters/Compound_Word_Token_Filters.md Token_Filters/Reverse_Token_Filter.md Token_Filters/Elision_Token_Filter.md Token_Filters/Truncate_Token_Filter.md Token_Filters/Unique_Token_Filter.md Token_Filters/Pattern_Capture_Token_Filter.md Token_Filters/Pattern_Replace_Token_Filter.md Token_Filters/Trim_Token_Filter.md Token_Filters/Limit_Token_Count_Token_Filter.md Token_Filters/Hunspell_Token_Filter.md Token_Filters/Common_Grams_Token_Filter.md Token_Filters/Normalization_Token_Filter.md Token_Filters/CJK_Width_Token_Filter.md Token_Filters/CJK_Bigram_Token_Filter.md Token_Filters/Delimited_Payload_Token_Filter.md Token_Filters/Keep_Words_Token_Filter.md Token_Filters/Keep_Types_Token_Filter.md Token_Filters/Classic_Token_Filter.md Token_Filters/Apostrophe_Token_Filter.md Token_Filters/Decimal_Digit_Token_Filter.md Token_Filters/Fingerprint_Token_Filter.md Token_Filters/Minhash_Token_Filter.md Token_Filters/Token_Filters.md Character_Filters/HTML_Strip_Char_Filter.md Character_Filters/Mapping_Char_Filter.md Character_Filters/Pattern_Replace_Char_Filter.md Character_Filters/Character_Filters.md )
+
+
+
+
+for dirName in ${dirNames[@]}
+do
+		mkdir ${dirName}
+done
+
+for file in ${files[@]}
+do 
+		touch ${file}
+		echo "To be Continued!">>${file}
+done
