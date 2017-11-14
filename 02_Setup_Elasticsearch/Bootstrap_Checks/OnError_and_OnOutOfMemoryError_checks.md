@@ -1,1 +1,3 @@
-To be Continued!
+# OnError 和 OOM 检查
+
+如果JVM遇到致命错误（OnError）或OutOfMemoryError（OnOutOfMemoryError），JVM选项OnError和OnOutOfMemoryError将启用执行任意命令。 但是，默认情况下，Elasticsearch系统调用筛选器（seccomp）已启用，并且这些筛选器可防止分叉。 因此，使用OnError或OnOutOfMemoryError和系统调用过滤器是不兼容的。 OnError和OnOutOfMemoryError检查可防止在使用这些JVM选项中的任何一个并启用系统调用筛选器时启动Elasticsearch。 此检查始终执行。 要通过这个检查，不要启用OnError或OnOutOfMemoryError; 相反，升级到Java 8u92并使用JVM标志ExitOnOutOfMemoryError。 虽然这并不具有OnError和OnOutOfMemoryError的全部功能，但启用seccomp时将不支持任意分叉。
