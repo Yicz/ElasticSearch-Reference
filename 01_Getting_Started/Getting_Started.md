@@ -16,7 +16,7 @@
 
 ## [基本概念](Basic_Concepts.md)
 ## [安装](Installation.md)
-## [了解你的集群]()
+## [了解你的集群](Exploring_Your_Cluster/Exploring_Your_Cluster.md)
 ### [集群状态](Exploring_Your_Cluster/Cluster_Health.md)
 ### [列出所有索引](Exploring_Your_Cluster/List_All_Indices.md)
 ### [新建索引](Exploring_Your_Cluster/Create_an_Index.md)

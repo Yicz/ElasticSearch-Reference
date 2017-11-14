@@ -13,7 +13,7 @@ elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的
 ## [入门指南](/01_Getting_Started/Getting_Started.md)
 ### [基本概念](/01_Getting_Started/Basic_Concepts.md)
 ### [设置Elasticsearch](/01_Getting_Started/Installation.md)
-### [了解你的集群](/01_Getting_Started/)
+### [了解你的集群](/01_Getting_Started/Exploring_Your_Cluster/Exploring_Your_Cluster.md)
 #### [集群状态](/01_Getting_Started/Exploring_Your_Cluster/Cluster_Health.md)
 #### [列出所有索引](/01_Getting_Started/Exploring_Your_Cluster/List_All_Indices.md)
 #### [新建索引](/01_Getting_Started/Exploring_Your_Cluster/Create_an_Index.md)
