@@ -55,8 +55,8 @@ elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的
 | 模块 | 完成情况 |
 |---|---|
 | 入门指南 | 待校验 |
-| 配置elastic | 未开始 |
-| 版本变更 | 未开始 |
+| 配置elasticsearch | 待校验 |
+| 版本变更记录 | 未开始 |
 | API 约定 | 未开始 |
 | 文档API | 未开始 |
 | 搜索API | 未开始 |
