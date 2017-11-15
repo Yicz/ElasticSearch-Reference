@@ -1,6 +1,8 @@
 # ElasticSearch-Reference（非权威指南）
 本项目翻译[https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/index.html)
 
+本项目阅读地址:[https://elasticsearch.rainplus.xyz/](https://elasticsearch.rainplus.xyz/)
+
 官方各个版本权威指南地址：[https://www.elastic.co/guide/en/elasticsearch/reference/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/index.html)
 
 说明：本人太(hen)忙(lan),极其有可能只写下了README.md,同时说明不定期更新。
