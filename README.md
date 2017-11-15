@@ -11,48 +11,6 @@
 
 elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的lucene版本是 lucene 6.5.1,我的目标也就是深入了解应用这两个版本，所以选择了elasticsearhc 5.4 的文档进行了翻译
 
-# 目录内容
-## [入门指南](/01_Getting_Started/Getting_Started.md)
-### [基本概念](/01_Getting_Started/Basic_Concepts.md)
-### [配置Elasticsearch](/01_Getting_Started/Installation.md)
-### [了解你的集群](/01_Getting_Started/Exploring_Your_Cluster/Exploring_Your_Cluster.md)
-#### [集群状态](/01_Getting_Started/Exploring_Your_Cluster/Cluster_Health.md)
-#### [列出所有索引](/01_Getting_Started/Exploring_Your_Cluster/List_All_Indices.md)
-#### [新建索引](/01_Getting_Started/Exploring_Your_Cluster/Create_an_Index.md)
-#### [索引并查询一个文档](/01_Getting_Started/Exploring_Your_Cluster/Index_and_Query_a_Document.md)
-#### [删除索引](/01_Getting_Started/Exploring_Your_Cluster/Delete_an_Index.md)
-### [修改你的数据](/01_Getting_Started/Modifying_Your_Data/Modifying_Your_Data.md)
-#### [更新操作](/01_Getting_Started/Modifying_Your_Data/Updating_Documents.md)
-#### [批量操作](/01_Getting_Started/Modifying_Your_Data/Batch_Processing.md)
-#### [删除操作](/01_Getting_Started/Modifying_Your_Data/Deleting_Documents.md)
-### [了解你的数据](/01_Getting_Started/Exploring_Your_Data/Exploring_Your_Data.md)
-#### [查询API（Search API）](/01_Getting_Started/Exploring_Your_Data/The_Search_API.md)
-#### [查询语言介绍](/01_Getting_Started/Exploring_Your_Data/Introducing_the_Query_Language.md)
-#### [执行查询](/01_Getting_Started/Exploring_Your_Data/Executing_Searches.md)
-#### [执行过虑器](/01_Getting_Started/Exploring_Your_Data/Executing_Filters.md)
-#### [执行聚合](/01_Getting_Started/Exploring_Your_Data/Executing_Aggregations.md)
-### [结论](/01_Getting_Started/Conclusion.md)
-## [安装elastic](/02_Setup_Elasticsearch/Setup_Elasticsearch.md)
-## [版本变更](/03_Breaking_changes/Breaking_changes.md)
-## [API 约定](/04_API_Conventions/API_Conventions.md)
-## [文档API](/05_Document_APIs/Document_APIs.md)
-## [搜索API](/06_Search_APIs/Search_APIs.md)
-## [聚合（Aggregations）](/07_Aggregations/Aggregations.md)
-## [索引 APIs](/08_Indices_APIs/Indices_APIs.md)
-## [_cat APIs](/09_cat_APIs/cat_APIs.md)
-## [集群（clusters） APIs](/10_Cluster_APIs/Cluster_APIs.md)
-## [询查特定领域语言（Query DSL（Domain Special Language）)](/11_Query_DSL/Query_DSL.md)
-## [映射（Mapping）](/12_Mapping/Mapping.md)
-## [分析（Analysis）](/13_Analysis/Analysis.md)
-## [模块（Modules）](/14_Modules/Modules.md)
-## [索引模块 （Index Modules）](/15_Index_Modules/Index_Modules.md)
-## [吸收结点(Ingest Node)](/16_Ingest_Node/Ingest_Node.md)
-## [How To](/17_How_To/How_To.md)
-## [测试（Testing）](/18_Testing/Testing.md)
-## [专业术语（Glossary of terms）](/19_Glossary_of_terms/Glossary_of_terms.md)
-## [发布说明（Release Notes）](/20_Release_Notes/Release_Notes.md)
-
-# 完成进度
 
 | 模块 | 完成情况 |
 |---|---|
