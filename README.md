@@ -12,6 +12,8 @@
 
 elasticsearch 5.4.0+ 对应的lucene 6.5.0+，所以elasticsearch 5.4.3实际的lucene版本是 lucene 6.5.1,我的目标也就是深入了解应用这两个版本，所以选择了elasticsearhc 5.4 的文档进行了翻译
 
+# 翻译进度说明
+
 | 模块 | 完成情况 |
 |---|---|
 | [入门指南](01_Getting_Started/Getting_Started.md) | 待校验（2017-11-13） |
