@@ -49,7 +49,7 @@ curl -XGET 'localhost:9200/twitter/tweet/0?_source=*.id,retweeted&pretty'
 ```
 
 ### Store Fields
-将通过stored_fields返回参数,get操作允许指定一组存储字段,。如果所请求的字段不存储,它们将被忽略。考虑例如以下映射:
+将通过stored_fields返回参数,get操作可以指定存储一组字段。如果所请求的字段不存储,它们将被忽略。考虑例如以下映射:
 
 ```sh
 curl -XPUT 'localhost:9200/twitter?pretty' -H 'Content-Type: application/json' -d'
@@ -76,6 +76,8 @@ curl -XPUT 'localhost:9200/twitter/tweet/1?pretty' -H 'Content-Type: application
     "counter" : 1,
     "tags" : ["red"]
 }
+# 尝试获取结果
+curl -XGET 'localhost:9200/twitter/tweet/1?stored_fields=tags,counter&pretty'
 # 查询结果
 {
    "_index": "twitter",
@@ -92,7 +94,82 @@ curl -XPUT 'localhost:9200/twitter/tweet/1?pretty' -H 'Content-Type: application
 
 ```
 
-字段值从文档中提取它自我总是作为一个数组返回。因为计数器字段不是存储get请求试图让stored_fields时只是忽略它。 　　 　　还可以检索元数据字段_routing和_parent字段:
+从文档中提取字段值，总是作为一个数组返回。尝试获取counter字段的时候，因为映射关系中设置了不存储counter值，所以返回值中，我们找不到counter字段。
+还可以检索元数据字段`_routing`和`_parent`字段:
+
+```sh
+# 首先存放一个routing的文档，下面的值routing的内容是user1
+curl -XPUT 'localhost:9200/twitter/tweet/2?routing=user1&pretty' -H 'Content-Type: application/json' -d'
+{
+    "counter" : 1,
+    "tags" : ["white"]
+}
+'
+# 在查找的时候也要相应地设置routing=user1,才可以确定到分片上，进行查找到相应的内容。
+curl -XGET 'localhost:9200/twitter/tweet/2?routing=user1&stored_fields=tags,counter&pretty'
+# 返回的内容为
+{
+   "_index": "twitter",
+   "_type": "tweet",
+   "_id": "2",
+   "_version": 1,
+   "_routing": "user1",
+   "found": true,
+   "fields": {
+      "tags": [
+         "white"
+      ]
+   }
+}
+```
+
+在返回的store_filed中，有一个这样的限制：必须为文档的叶子字段，非叶子字段的请求将会失败。
+
+### elastics生成的字段
+
+当建立索引的时候，文档中的一些特殊字段是elasticsearch本身生成的，如果elasticseach在建立索引的过程中，如果还没有刷新索引，你请求了一个由elasticsearch生成的字段时，将会发生异常（默认设置），你可以通过设置：`ignore_errors_on_generated_fields=true.`去忽略这些由elasticsearch 自动生成的字段。
+
+## 直接获取原文档`_source`
+我们可以直接过能`/{index}/{type}/{id}/_source`接口，获取一个文档的原为json文档内容：
+
+```sh
+curl -XGET 'localhost:9200/twitter/tweet/2?routing=user1&pretty'
+```    
+
+我们还可以针对文档的内容字段进行过滤：
+
+```sh
+curl -XGET 'localhost:9200/twitter/tweet/1/_source?_source_include=*.id&_source_exclude=entities'&pretty'
+```
+
+`_source_include `是指定返回的内容，`_source_exclude `是指定排除的内容。
+
+同时还提供了一个HEAD方法的查询_source字段是否存在，因为_source字段可以根据映射（mapping）中设置进行隐藏。详情请移步[映射内容](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/mapping-source-field.html)
+
+## routing 
+当我们设置了一个路由文档到分片位置的字段的时候，我们要查询这样的一个文档时，我们又也进行指定文档的routing字段。否则我们将查询不到这样的一个文档：
+
+## 优先权
+`perference`是这样的一个参数，它指定了请求优先去哪一种分片进行查找，它默认的设置是随机到各个分片之间进行查询。它可以有以下几种的设值内容：
+
+* _primary  
+顾名思义，它只在主分片进行为查询
+* _local  
+请未会尽量在请求本地的分片上进行查询
+* 自定义值  
+自定义值将用于保证自定义值相同的碎片。这可以帮助与“jumping values”当触及不同的碎片刷新状态。自定义值可以像web会话id,或者用户名。
+
+# refresh 
+`refresh`参数可以让elastic正在索引的内容可以被搜索到，原理是在请求执行之前，对正在进行建立索引的内容先保存到索引中。
+
+# 分发 
+get操作被hash到一个特定的分片id。然后被重定向到一个副本分片片id并计算后返回结果。分片组包含了主分片及其复制分片的id。这意味着更多的副本,elasticsearch可以进行大量的计算。
+
+# 版本控制支持
+
+可以使用`version`参数来检索特定版本的文档。___`FORCE`将会强制返回一个文档，不管指定的文档存不存在(已经弃用)___，在elasticsearch的内部原理中，旧版本的文档只是被标志成删除状态并没有立刻进行删除，只有ealsticsearch刷新了缓存区的内容，它才会彻底删除
+
+
 
 
 
