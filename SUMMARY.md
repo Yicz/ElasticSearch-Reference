@@ -98,7 +98,7 @@
   * [Reindex API](05_Document_APIs/Reindex_API.md)
   * [Term Vectors](05_Document_APIs/Term_Vectors.md)
   * [Multi termvectors API](05_Document_APIs/Multi_termvectors_API.md)
-  * [refresh](05_Document_APIs/?refresh.md)
+  * [refresh](05_Document_APIs/refresh.md)
 * [06 Search APIs](06_Search_APIs/Search_APIs.md)
   * [Search](06_Search_APIs/Search.md)
   * [URI Search](06_Search_APIs/URI_Search.md)
