@@ -1,2 +1,0 @@
-# 最大线程数检查
-Elasticsearch通过将请求分成几个阶段来执行请求，并将这些阶段交给不同的线程池执行者。 Elasticsearch中有各种不同的[线程池执行器](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/modules-threadpool.html)。 因此，Elasticsearch需要创建大量线程的能力。 线程最大数量检查确保Elasticsearch进程有权在正常使用情况下创建足够的线程。 此检查仅在Linux上执行。 如果你在Linux上，为了传递最大数量的线程检查，你必须配置你的系统让Elasticsearch进程能够创建至少2048个线程。 这可以通过/etc/security/limits.conf使用nproc设置来完成（请注意，您可能还必须增加root用户的限制）。

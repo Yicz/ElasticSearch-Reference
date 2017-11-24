@@ -1,2 +1,0 @@
-# 最大的虚拟内存检查
-Elasticsearch和Lucene使用mmap来将索引的一部分映射到Elasticsearch地址空间。 这样可以将某些索引数据从JVM堆中删除，但在内存中可以快速访问。 为了有效，Elasticsearch应该有无限的地址空间。 最大的虚拟内存检查强制Elasticsearch进程具有无限的地址空间，并且仅在Linux上执行。 要通过最大容量虚拟内存检查，您必须配置您的系统以允许Elasticsearch进程拥有无限制的地址空间。 这可以通过/etc/security/limits.conf使用as设置为unlimited来完成（请注意，您可能还必须增加root用户的限制）。
