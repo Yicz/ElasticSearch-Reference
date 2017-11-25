@@ -6,6 +6,11 @@
 
 本项目阅读地址：[https://elasticsearch.rainplus.xyz/](https://elasticsearch.rainplus.xyz/)
 
+本项目新版本草稿地址(与主分支重构了文档目录结构，使用python转换官方原本格式)：[https://elasticsearch.rainplus.xyz/](https://elasticsearch.rainplus.xyz/v/drafts)
+
+本项目官方原版gitbook模式阅读地址：[https://elasticsearch.rainplus.xyz/](https://elasticsearch.rainplus.xyz/v/english)
+
+
 官方各个版本权威指南地址：[https://www.elastic.co/guide/en/elasticsearch/reference/index.html](https://www.elastic.co/guide/en/elasticsearch/reference/index.html)
 
 说明：本人**太\(hen\)忙\(lan\)**,极其有可能只写下了README.md,同时说明不定期更新。
