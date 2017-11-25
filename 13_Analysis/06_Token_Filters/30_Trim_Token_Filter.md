@@ -1,0 +1,3 @@
+## Trim Token Filter
+
+The `trim` token filter trims the whitespace surrounding a token.

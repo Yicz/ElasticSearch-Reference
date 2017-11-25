@@ -1,0 +1,190 @@
+## Range datatypes
+
+The following range types are supported:
+
+`integer_range`
+
+| 
+
+A range of signed 32-bit integers with a minimum value of `-231` and maximum of `231-1`.   
+  
+---|---  
+  
+`float_range`
+
+| 
+
+A range of single-precision 32-bit IEEE 754 floating point values.   
+  
+`long_range`
+
+| 
+
+A range of signed 64-bit integers with a minimum value of `-263` and maximum of `263-1`.   
+  
+`double_range`
+
+| 
+
+A range of double-precision 64-bit IEEE 754 floating point values.   
+  
+`date_range`
+
+| 
+
+A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.   
+  
+Below is an example of configuring a mapping with various range fields followed by an example that indexes several range types.
+    
+    
+    PUT range_index
+    {
+      "mappings": {
+        "my_type": {
+          "properties": {
+            "expected_attendees": {
+              "type": "integer_range"
+            },
+            "time_frame": {
+              "type": "date_range", ![](images/icons/callouts/1.png)
+              "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+            }
+          }
+        }
+      }
+    }
+    
+    PUT range_index/my_type/1
+    {
+      "expected_attendees" : { ![](images/icons/callouts/2.png)
+        "gte" : 10,
+        "lte" : 20
+      },
+      "time_frame" : { ![](images/icons/callouts/3.png)
+        "gte" : "2015-10-31 12:00:00", ![](images/icons/callouts/4.png)
+        "lte" : "2015-11-01"
+      }
+    }
+
+The following is an example of a `date_range` query over the `date_range` field named "time_frame".
+    
+    
+    POST range_index/_search
+    {
+      "query" : {
+        "range" : {
+          "time_frame" : { ![](images/icons/callouts/1.png)
+            "gte" : "2015-10-31",
+            "lte" : "2015-11-01",
+            "relation" : "within" ![](images/icons/callouts/2.png)
+          }
+        }
+      }
+    }
+
+The result produced by the above query.
+    
+    
+    {
+      "took": 13,
+      "timed_out": false,
+      "_shards" : {
+        "total": 2,
+        "successful": 2,
+        "failed": 0
+      },
+      "hits" : {
+        "total" : 1,
+        "max_score" : 1.0,
+        "hits" : [
+          {
+            "_index" : "range_index",
+            "_type" : "my_type",
+            "_id" : "1",
+            "_score" : 1.0,
+            "_source" : {
+              "expected_attendees" : {
+                "gte" : 10, "lte" : 20
+              },
+              "time_frame" : {
+                "gte" : "2015-10-31 12:00:00", "lte" : "2015-11-01"
+              }
+            }
+          }
+        ]
+      }
+    }
+
+![](images/icons/callouts/1.png)
+
+| 
+
+`date_range` types accept the same field parameters defined by the [`date`](date.html "Date datatype") type.   
+  
+---|---  
+  
+![](images/icons/callouts/2.png)
+
+| 
+
+Example indexing a meeting with 10 to 20 attendees.   
+  
+![](images/icons/callouts/3.png)
+
+| 
+
+Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates "Ranges on date fields").   
+  
+![](images/icons/callouts/4.png)
+
+| 
+
+Example date range using date time stamp. This also accepts [date math](common-options.html#date-math "Date Mathedit") formatting, or "now" for system time.   
+  
+![](images/icons/callouts/1.png)
+
+| 
+
+Range queries work the same as described in [range query](query-dsl-range-query.html "Range Query").   
+  
+![](images/icons/callouts/2.png)
+
+| 
+
+Range queries over range [fields](mapping-types.html "Field datatypes") support a `relation` parameter which can be one of `WITHIN`, `CONTAINS`, `INTERSECTS` (default).   
+  
+### Parameters for range fields
+
+The following parameters are accepted by range types:
+
+[`coerce`](coerce.html "coerce")
+
+| 
+
+Try to convert strings to numbers and truncate fractions for integers. Accepts `true` (default) and `false`.   
+  
+---|---  
+  
+[`boost`](mapping-boost.html "boost")
+
+| 
+
+Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
+  
+[`include_in_all`](include-in-all.html "include_in_all")
+
+| 
+
+Whether or not the field value should be included in the [`_all`](mapping-all-field.html "_all field") field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html "index") is set to `false`, or if a parent [`object`](object.html "Object datatype") field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
+  
+[`index`](mapping-index.html "index")
+
+| 
+
+Should the field be searchable? Accepts `true` (default) and `false`.   
+  
+[`store`](mapping-store.html "store")
+
+| 
+
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default). 

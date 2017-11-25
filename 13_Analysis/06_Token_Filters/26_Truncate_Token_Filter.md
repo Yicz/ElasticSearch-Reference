@@ -1,0 +1,5 @@
+## Truncate Token Filter
+
+The `truncate` token filter can be used to truncate tokens into a specific length.
+
+It accepts a `length` parameter which control the number of characters to truncate to, defaults to `10`.

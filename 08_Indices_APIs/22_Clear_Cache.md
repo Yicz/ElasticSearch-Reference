@@ -1,0 +1,19 @@
+## Clear Cache
+
+The clear cache API allows to clear either all caches or specific cached associated with one or more indices.
+    
+    
+    POST /twitter/_cache/clear
+
+The API, by default, will clear all caches. Specific caches can be cleaned explicitly by setting `query`, `fielddata` or `request`.
+
+All caches relating to a specific field(s) can also be cleared by specifying `fields` parameter with a comma delimited list of the relevant fields.
+
+### Multi Index
+
+The clear cache API can be applied to more than one index with a single call, or even on `_all` the indices.
+    
+    
+    POST /kimchy,elasticsearch/_cache/clear
+    
+    POST /_cache/clear

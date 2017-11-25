@@ -1,0 +1,15 @@
+## Refresh
+
+The refresh API allows to explicitly refresh one or more index, making all operations performed since the last refresh available for search. The (near) real-time capabilities depend on the index engine used. For example, the internal one requires refresh to be called, but by default a refresh is scheduled periodically.
+    
+    
+    POST /twitter/_refresh
+
+### Multi Index
+
+The refresh API can be applied to more than one index with a single call, or even on `_all` the indices.
+    
+    
+    POST /kimchy,elasticsearch/_refresh
+    
+    POST /_refresh

@@ -1,0 +1,76 @@
+## Stemmer Override Token Filter
+
+Overrides stemming algorithms, by applying a custom mapping, then protecting these terms from being modified by stemmers. Must be placed before any stemming filters.
+
+Rules are separated by `=>`
+
+Setting | Description  
+---|---  
+  
+`rules`
+
+| 
+
+A list of mapping rules to use.  
+  
+`rules_path`
+
+| 
+
+A path (either relative to `config` location, or absolute) to a list of mappings.  
+  
+Here is an example:
+    
+    
+    PUT /my_index
+    {
+        "settings": {
+            "analysis" : {
+                "analyzer" : {
+                    "my_analyzer" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["lowercase", "custom_stems", "porter_stem"]
+                    }
+                },
+                "filter" : {
+                    "custom_stems" : {
+                        "type" : "stemmer_override",
+                        "rules_path" : "analysis/stemmer_override.txt"
+                    }
+                }
+            }
+        }
+    }
+
+Where the file looks like:
+    
+    
+    running => run
+    
+    stemmer => stemmer
+
+You can also define the overrides rules inline:
+    
+    
+    PUT /my_index
+    {
+        "settings": {
+            "analysis" : {
+                "analyzer" : {
+                    "my_analyzer" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["lowercase", "custom_stems", "porter_stem"]
+                    }
+                },
+                "filter" : {
+                    "custom_stems" : {
+                        "type" : "stemmer_override",
+                        "rules" : [
+                            "running => run",
+                            "stemmer => stemmer"
+                        ]
+                    }
+                }
+            }
+        }
+    }
