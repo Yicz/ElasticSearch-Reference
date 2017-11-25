@@ -1,0 +1,3 @@
+{
+    "plugins": ["-search","-sharing","-livereload","-lunr"]
+}
