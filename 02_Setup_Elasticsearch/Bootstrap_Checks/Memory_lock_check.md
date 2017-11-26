@@ -1,2 +1,0 @@
-# 内存锁检查
-当JVM执行一个主要的垃圾收集时，它会触及堆的每一页。 如果这些页面中的任何一个被换出（swap）到磁盘上，它们将不得不被换回到存储器中。 Elasticsearch处理请求时，这会导致大量的磁盘抖动。 有几种方法可以配置系统禁止交换。 一种方法是通过请求JVM通过mlockall（Unix）或虚拟锁（Windows）将内存锁定在内存中。 这是通过Elasticsearch设置bootstrap.memory_lock完成的。 但是，有些情况下可以将此设置传递给Elasticsearch，但Elasticsearch无法锁定堆（例如，如果elasticsearch用户不具有memlock unlimits）。 内存锁定检查验证是否启用了bootstrap.memory_lock设置，JVM已成功锁定堆。 要通过内存锁定检查，您可能必须配置[mlockall](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/setup-configuration-memory.html#mlockall)。
