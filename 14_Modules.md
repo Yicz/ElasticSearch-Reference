@@ -1,41 +1,41 @@
 # Modules
 
-This div contains modules responsible for various aspects of the functionality in Elasticsearch. Each module has settings which may be:
+本章节主要说明ES各个方面的功能模块，大致两个模块如下：
 
-_static_
-     These settings must be set at the node level, either in the `elasticsearch.yml` file, or as an environment variable or on the command line when starting a node. They must be set on every relevant node in the cluster. 
-_dynamic_
-     These settings can be dynamically updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API. 
+_静态部分（static）_ 
+     这一部分属于节点级别，包含`elasticsearch.yml`，环境变量，节点启动的命令行参数，它们在群集的节点中必须明确指定。
+_动态部分（dynamic）_
+     这一部分主要使用 [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API. 
 
-The modules in this div are:
+模块详细划分如下:
 
-[Cluster-level routing and shard allocation](modules-cluster.html "Cluster")
-     Settings to control where, when, and how shards are allocated to nodes. 
-[Discovery](modules-discovery.html "Discovery")
-     How nodes discover each other to form a cluster. 
-[Gateway](modules-gateway.html "Local Gateway")
+[集群级别的分片划分](modules-cluster.html "Cluster")
+     配置控制着在哪，什么时候，怎么样去分配分片到节点。
+[注册中心（Discovery）](modules-discovery.html "Discovery")
+     集群如何发现节点
+[网关](modules-gateway.html "Local Gateway")
      How many nodes need to join the cluster before recovery can start. 
 [HTTP](modules-http.html "HTTP")
-     Settings to control the HTTP REST interface. 
-[Indices](modules-indices.html "Indices")
-     Global index-related settings. 
-[Network](modules-network.html "Network Settings")
-     Controls default network settings. 
-[Node client](modules-node.html "Node")
-     A Java node client joins the cluster, but doesn’t hold data or act as a master node. 
+     配置HTTP节点的接口 
+[索引](modules-indices.html "Indices")
+     全局索引相关 
+[网络模块](modules-network.html "Network Settings")
+     网络设置. 
+[客户端节点](modules-node.html "Node")
+     一个结点，但不包含数据，只有功能的节点
 [Painless](modules-scripting-painless.html "Painless Scripting Language")
-     A built-in scripting language for Elasticsearch that’s designed to be as secure as possible. 
-[Plugins](modules-plugins.html "Plugins")
-     Using plugins to extend Elasticsearch. 
-[Scripting](modules-scripting.html "Scripting")
-     Custom scripting available in Lucene Expressions, Groovy, Python, and Javascript. You can also write scripts in the built-in scripting language, [Painless](modules-scripting-painless.html "Painless Scripting Language"). 
-[Snapshot/Restore](modules-snapshots.html "Snapshot And Restore")
-     Backup your data with snapshot/restore. 
-[Thread pools](modules-threadpool.html "Thread Pool")
-     Information about the dedicated thread pools used in Elasticsearch. 
-[Transport](modules-transport.html "Transport")
-     Configure the transport networking layer, used internally by Elasticsearch to communicate between nodes. 
-[Tribe nodes](modules-tribe.html "Tribe node")
+     是为了ES安全的内置脚本语言 
+[插件](modules-plugins.html "Plugins")
+     ES的功能拓展 
+[脚本](modules-scripting.html "Scripting")
+     自定义脚本包含 Lucene Expressions, Groovy, Python, and Javascript.还有内置的[Painless](modules-scripting-painless.html "Painless Scripting Language"). 
+[快照/重建（Snapshot/Restore）](modules-snapshots.html "Snapshot And Restore")
+     备份功能
+[线程池](modules-threadpool.html "Thread Pool")
+     ES线程池的说明
+[传输模块](modules-transport.html "Transport")
+     集群中节点之间的传输，包含网络层相关信息。
+[簇节点（Tribe nodes）](modules-tribe.html "Tribe node")
      A tribe node joins one or more clusters and acts as a federated client across them. 
-[Cross cluster Search](modules-cross-cluster-search.html "Cross Cluster Search")
-     Cross cluster search enables executing search requests across more than one cluster without joining them and acts as a federated client across them. 
+[跨集群搜索（Cross cluster Search）](modules-cross-cluster-search.html "Cross Cluster Search")
+     使用多个集群进行搜索
