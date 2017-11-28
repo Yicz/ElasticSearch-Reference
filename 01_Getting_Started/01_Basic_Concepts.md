@@ -1,73 +1,71 @@
-## Basic Concepts
+## 基本概念
 
-There are a few concepts that are core to Elasticsearch. Understanding these concepts from the outset will tremendously help ease the learning process.
+这里列出了几个ES的核心概念，理解这些概念能帮助你的更好学习ES
 
-### Near Realtime (NRT)
+### 近实时 (NRT)
 
-Elasticsearch is a near real time search platform. What this means is there is a slight latency (normally one second) from the time you index a document until the time it becomes searchable.
+ES是一个近实时的搜索平台，意味着只要一个延迟就可以（通常是1秒），你可以查询到你索引的文档。
 
-### Cluster
+### 集群（Cluster）
 
-A cluster is a collection of one or more nodes (servers) that together holds your entire data and provides federated indexing and search capabilities across all nodes. A cluster is identified by a unique name which by default is "elasticsearch". This name is important because a node can only be part of a cluster if the node is set up to join the cluster by its name.
+集群是一个或者多个结点，它们持有你全部的数据并联合起来提供索引跟查询的功能，标志一个群集的是它的名字，默认是`elasticsearch`,名字是很重要的一个部分，他标志着一个节点（Node）唯一所属的集群。
 
-Make sure that you don’t reuse the same cluster names in different environments, otherwise you might end up with nodes joining the wrong cluster. For instance you could use `logging-dev`, `logging-stage`, and `logging-prod` for the development, staging, and production clusters.
+确保你在不同的环境使用不一样的名字，否则他们将会加入不同的节点。举个例子：你可以使用`logging-dev`，`logging-stage`,`logging-prod`分别为开发环境，测试环境，生产环境。
 
-Note that it is valid and perfectly fine to have a cluster with only a single node in it. Furthermore, you may also have multiple independent clusters each with its own unique cluster name.
+注意！只有一个节点的集群是完全可以的。 此外，您还可能拥有多个独立的群集，每个群集都有自己的唯一群集名称。
+### 节点 (Node)
 
-### Node
+一个节点是集群中一个独立的应用，它保存你的数据，并参与索引和搜索的功能。类似集群，节点也有一个唯一的名字，默认是在启动的时候分配一个随机的UUID，你也可以指定一个你喜欢的名字，如果你不喜欢这个名字。这个名字对ES集群的管理者是相当重要的，它标志着集群中有那个节点在工作。
 
-A node is a single server that is part of your cluster, stores your data, and participates in the cluster’s indexing and search capabilities. Just like a cluster, a node is identified by a name which by default is a random Universally Unique IDentifier (UUID) that is assigned to the node at startup. You can define any node name you want if you do not want the default. This name is important for administration purposes where you want to identify which servers in your network correspond to which nodes in your Elasticsearch cluster.
+一个节点通过配置它的群集各称，让它加入一个集群，节点默认加入的集群是`elasticsearch`,意味着默认启动一个节点就会加入`elasticsearch`的集群。
 
-A node can be configured to join a specific cluster by the cluster name. By default, each node is set up to join a cluster named `elasticsearch` which means that if you start up a number of nodes on your network and—assuming they can discover each other—they will all automatically form and join a single cluster named `elasticsearch`.
+在一个群集中，你会有大量的节点。 此外，如果你的环境没有ES服务，你启动一个ES节点，它会自己加入一个单节点的集群。
 
-In a single cluster, you can have as many nodes as you want. Furthermore, if there are no other Elasticsearch nodes currently running on your network, starting a single node will by default form a new single-node cluster named `elasticsearch`.
+### 索引（Index）
 
-### Index
+索引是具有相似特征的文档的集合。 例如，您可以拥有客户数据的索引，产品目录的另一个索引以及订单数据的另一个索引。 索引由名称标识（必须全部为小写），该名称用于在对索引文档进行索引，搜索，更新和删除操作时引用索引。
 
-An index is a collection of documents that have somewhat similar characteristics. For example, you can have an index for customer data, another index for a product catalog, and yet another index for order data. An index is identified by a name (that must be all lowercase) and this name is used to refer to the index when performing indexing, search, update, and delete operations against the documents in it.
+在一个集群中，你可以定义你想要多的索引
 
-In a single cluster, you can define as many indexes as you want.
+### 类型 (Type)
 
-### Type
+在一个索引内，你可以定义一个或者多个类型，类型是
 
-Within an index, you can define one or more types. A type is a logical category/partition of your index whose semantics is completely up to you. In general, a type is defined for documents that have a set of common fields. For example, let’s assume you run a blogging platform and store all your data in a single index. In this index, you may define a type for user data, another type for blog data, and yet another type for comments data.
+类型是您的索引的逻辑类别/分区，其语义完全取决于您。 通常，为具有一组公共字段的文档定义类型。 例如，假设您运行博客平台并将所有数据存储在单个索引中。 在此索引中，您可以为用户数据定义类型，为博客数据定义另一个类型，为定义数据定义另一个类型。
 
-### Document
+### 文档（Document）
 
-A document is a basic unit of information that can be indexed. For example, you can have a document for a single customer, another document for a single product, and yet another for a single order. This document is expressed in [JSON](http://json.org/) (JavaScript Object Notation) which is an ubiquitous internet data interchange format.
+文档是可以索引的最基本信息，例如，你可以对一个客户称作一个文档，一个产品称作另个一个文档，再另个一个文档是订单。文档被表述为一个[Json]（http://json.org/）(javascript object Notation)数据传输对象。
 
-Within an index/type, you can store as many documents as you want. Note that although a document physically resides in an index, a document actually must be indexed/assigned to a type inside an index.
+在索引/类型中，您可以根据需要存储多个文档。 请注意，尽管文档实际上驻留在索引中，但实际上文档必须被索引/分配给索引内的类型。
 
-### Shards & Replicas
+### 分片 & 副本
 
-An index can potentially store a large amount of data that can exceed the hardware limits of a single node. For example, a single index of a billion documents taking up 1TB of disk space may not fit on the disk of a single node or may be too slow to serve search requests from a single node alone.
+索引可能潜在地存储大量数据，这些数据可能会超出单个节点的硬件限制。 例如，占用1TB磁盘空间的十亿份文档的单个索引可能不适合单个节点的磁盘，或者可能太慢而无法单独为来自单个节点的搜索请求提供服务。
 
-To solve this problem, Elasticsearch provides the ability to subdivide your index into multiple pieces called shards. When you create an index, you can simply define the number of shards that you want. Each shard is in itself a fully-functional and independent "index" that can be hosted on any node in the cluster.
+为解决这个问题，ES提供了分片机制：分割你的数据到不同的地方，当你创建索引的时候，你可以定义分片的数量，每一个分片都是管委会完全并独立的索引
 
-Sharding is important for two primary reasons:
+分片是非常重要的两个理由:
 
-  * It allows you to horizontally split/scale your content volume 
-  * It allows you to distribute and parallelize operations across shards (potentially on multiple nodes) thus increasing performance/throughput 
+  * 允许你垂直分割/拓展你的容量
+  * 允许你分布式和并行地进行操作，这样可以提高性能/生产力
+
+如何分片的机制以及文档如何聚合回搜索请求完全由ES管理，这操作对用户来说是透明的。
+
+在任何时候都可能出现故障的网络/云环境中，非常有用并强烈建议有一个故障切换机制，以防碎片/节点以某种方式脱机或因任何原因而消失。 为此，Elasticsearch允许您将索引分片的一个或多个副本。
+
+副本是非常重要的两个理由:
+
+  * 它提供了一个高可用的机制，当一个分片或者节点失败的时候。一个副本分片是不允许跟`原始/主`分片分在同一个结点上的
+  * 它允许你大量计算人的数据通过在分片上并行执行请求
+
+总结，第一个索引可以被分成多个分片。一个索引也可以设置0个副本。一旦设置了副本，索引就会存在主分片（原始数据）和副本分片（原始数据的拷贝），分片是数量是在索引创建的时候进行指定的，你可以随时动态更改副本的数量，但您无法在事后更改碎片的数量。
+
+ES分片默认的设置是分配5个分片和一个副本，这意味着至少集群要包含两个结点。通过默认设置，你会得到5个分片和5个副本分片，总共就是每个索引（index）10个分片。
 
 
+![提示](images/icons/note.png)
 
-The mechanics of how a shard is distributed and also how its documents are aggregated back into search requests are completely managed by Elasticsearch and is transparent to you as the user.
+每一个ES分片都是一个lucene的索引. 单个lucene索引中文档数是有一个最大值的. 参考 [`LUCENE-5843`](https://issues.apache.org/jira/browse/LUCENE-5843), 最大值是 `2,147,483,519` (= Integer.MAX_VALUE - 128) 你可以使用 [`_cat/shards`](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/cat-shards.html) api进行查看分片的大小
 
-In a network/cloud environment where failures can be expected anytime, it is very useful and highly recommended to have a failover mechanism in case a shard/node somehow goes offline or disappears for whatever reason. To this end, Elasticsearch allows you to make one or more copies of your index’s shards into what are called replica shards, or replicas for short.
-
-Replication is important for two primary reasons:
-
-  * It provides high availability in case a shard/node fails. For this reason, it is important to note that a replica shard is never allocated on the same node as the original/primary shard that it was copied from. 
-  * It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel. 
-
-
-
-To summarize, each index can be split into multiple shards. An index can also be replicated zero (meaning no replicas) or more times. Once replicated, each index will have primary shards (the original shards that were replicated from) and replica shards (the copies of the primary shards). The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may change the number of replicas dynamically anytime but you cannot change the number of shards after-the-fact.
-
-By default, each index in Elasticsearch is allocated 5 primary shards and 1 replica which means that if you have at least two nodes in your cluster, your index will have 5 primary shards and another 5 replica shards (1 complete replica) for a total of 10 shards per index.
-
-![Note](images/icons/note.png)
-
-Each Elasticsearch shard is a Lucene index. There is a maximum number of documents you can have in a single Lucene index. As of [`LUCENE-5843`](https://issues.apache.org/jira/browse/LUCENE-5843), the limit is `2,147,483,519` (= Integer.MAX_VALUE - 128) documents. You can monitor shard sizes using the [`_cat/shards`](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/cat-shards.html) api.
-
-With that out of the way, let’s get started with the fun part…
+现在让我们开始最有趣的部分。
