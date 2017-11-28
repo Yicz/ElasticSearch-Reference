@@ -1,14 +1,14 @@
-# Getting Started
+# 开始入门
 
-Elasticsearch is a highly scalable open-source full-text search and analytics engine. It allows you to store, search, and analyze big volumes of data quickly and in near real time. It is generally used as the underlying engine/technology that powers applications that have complex search features and requirements.
+ES是一个高可拓展开源的全文`搜索和分析`引擎，它可以`快速（近实时）`存储，搜索，分析大量数据，它通常用途是作应用的底层并提交复杂的搜索特性。
 
-Here are a few sample use-cases that Elasticsearch could be used for:
+这里有几个ES的案例：
 
-  * You run an online web store where you allow your customers to search for products that you sell. In this case, you can use Elasticsearch to store your entire product catalog and inventory and provide search and autocomplete suggestions for them. 
-  * You want to collect log or transaction data and you want to analyze and mine this data to look for trends, statistics, summarizations, or anomalies. In this case, you can use Logstash (part of the Elasticsearch/Logstash/Kibana stack) to collect, aggregate, and parse your data, and then have Logstash feed this data into Elasticsearch. Once the data is in Elasticsearch, you can run searches and aggregations to mine any information that is of interest to you. 
-  * You run a price alerting platform which allows price-savvy customers to specify a rule like "I am interested in buying a specific electronic gadget and I want to be notified if the price of gadget falls below $X from any vendor within the next month". In this case you can scrape vendor prices, push them into Elasticsearch and use its reverse-search (Percolator) capability to match price movements against customer queries and eventually push the alerts out to the customer once matches are found. 
-  * You have analytics/business-intelligence needs and want to quickly investigate, analyze, visualize, and ask ad-hoc questions on a lot of data (think millions or billions of records). In this case, you can use Elasticsearch to store your data and then use Kibana (part of the Elasticsearch/Logstash/Kibana stack) to build custom dashboards that can visualize aspects of your data that are important to you. Additionally, you can use the Elasticsearch aggregations functionality to perform complex business intelligence queries against your data. 
+  * 你有一个在线商店，允许你的客户进行查询你的商品,ES可以帮你存储产品分类和库存并向用户提供一个建议查询。
+  * 你想收集你的应用日志或事务（交易\报表）数据并你想对它们进行数据挖掘，观查它们的走势，数据，汇总或异常。这样你可以使用`ELK（Elasticsearch/Logstash/Kibana stack）`进行收集，聚合并分析你的数据，然后使用Logstash反馈给ES，一旦数据放入你的ES中，你就可以使用它进行你感兴趣数据挖掘。
+  * 你有一个价格提示平台可以提示给客户他感兴趣的端口正在进行促销，并发能提示这个价格的最近几个月走势，这样你可以把价格存放到ES中，并使用ES的反向搜索去匹配价格的变动给用户，并能精确地推送价格提醒给用户。
+  * 您有分析/业务智能的需求，并希望快速调查，分析，可视化并针对大量数据提出特别的问题（考虑数据大小为几百万或几十亿条记录）。 在这种情况下，您可以使用Elasticsearch存储数据，然后使用Kibana（Elasticsearch / Logstash / Kibana堆栈的一部分）来构建自定义仪表板，以便可视化数据对您很重要的方面。 另外，您可以使用Elasticsearch聚合功能对数据执行复杂的业务智能查询。
+   
 
+本章接下的剩余的教程，我会引导你进行一个学习并学会安装\运行ES，并针对ES内部进行一个大概讲解。学习它的基本概念：例如，建立索引，搜索，修改你的数据。在学习本章后，你会对ES有一个初步的全面了解它是什么，如何进行运作，并能让你搭建一个搜索应用去挖掘你的数据。
 
-
-For the rest of this tutorial, I will guide you through the process of getting Elasticsearch up and running, taking a peek inside it, and performing basic operations like indexing, searching, and modifying your data. At the end of this tutorial, you should have a good idea of what Elasticsearch is, how it works, and hopefully be inspired to see how you can use it to either build sophisticated search applications or to mine intelligence from your data.
