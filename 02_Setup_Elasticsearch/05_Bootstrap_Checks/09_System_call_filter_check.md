@@ -1,3 +1,9 @@
-## System call filter check
+## 检查系统调用过滤器（System call filter）
 
-Elasticsearch installs system call filters of various flavors depending on the operating system (e.g., seccomp on Linux). These system call filters are installed to prevent the ability to execute system calls related to forking as a defense mechanism against arbitrary code execution attacks on Elasticsearch The system call filter check ensures that if system call filters are enabled, then they were successfully installed. To pass the system call filter check you must either fix any configuration errors on your system that prevented system call filters from installing (check your logs), or **at your own risk** disable system call filters by setting `bootstrap.system_call_filter` to `false`.
+
+ES根据不同的平台安装发不一样的系统调用过滤器（如：在Linux上使用的是seccomp）。安装这些系统调用过滤器是为了防止执行与子进程（forking）相关的系统调用的能力，作为抵御Elasticsearch上的任意代码执行攻击的防御机制。系统调用过滤器检查确保如果系统调用过滤器被启用，则成功安装它们。 要通过系统调用过滤器检查，您必须修复系统中阻止系统调用过滤器安装（检查日志）的任何配置错误，或者通过将bootstrap.system_call_filter设置为false来禁用系统调用过滤器，您必须自行承担禁用过滤器系统调用检查带来的风险。
+
+elasticsearch.yaml
+
+
+    bootstrap.system_call_filter: false

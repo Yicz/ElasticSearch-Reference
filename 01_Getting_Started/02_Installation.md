@@ -1,35 +1,29 @@
 ## Installation
 
-Elasticsearch requires at least Java 8. Specifically as of this writing, it is recommended that you use the Oracle JDK version 1.8.0_131. Java installation varies from platform to platform so we won’t go into those details here. Oracle’s recommended installation documentation can be found on [Oracle’s website](http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html). Suffice to say, before you install Elasticsearch, please check your Java version first by running (and then install/upgrade accordingly if needed):
-    
-    
+ES要求至少java 8的环境，特别地指现在这个版本，我们推荐使用`Oracle JDK 1.8.0_131`,java的安装因平台而已，这里我们不进行多详述，可以查看Oracle JDK的推荐安装[文档](http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html),请查安装之前检查你的java版本（须要请安装或升级）：
+
     java -version
     echo $JAVA_HOME
 
-Once we have Java set up, we can then download and run Elasticsearch. The binaries are available from [`www.elastic.co/downloads`](http://www.elastic.co/downloads) along with all the releases that have been made in the past. For each release, you have a choice among a `zip` or `tar` archive, or a `DEB` or `RPM` package. For simplicity, let’s use the tar file.
+一旦java安装好，我们就可以下载并安装运行ES，安装包可以从[`www.elastic.co/downloads`](http://www.elastic.co/downloads)下载。ES有很多发现的版本，但每个版本都提供了`zip`或`tar`压缩文件，或者`DEB`/`RPM`安装包。这里，方便起见，我们使用tar包进行示范安装。
 
-Let’s download the Elasticsearch 5.4.3 tar as follows (Windows users should download the zip package):
-    
+我们通过如下的链接下载ES 5.4.3版本的tar包
     
     curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.tar.gz
 
-Then extract it as follows (Windows users should unzip the zip package):
-    
+通过下面的命令进行解压（window平台请使用zip的解压软件进行解压）
     
     tar -xvf elasticsearch-5.4.3.tar.gz
 
-It will then create a bunch of files and folders in your current directory. We then go into the bin directory as follows:
-    
+执行上面的命令会解压出一个文件夹，里面包含了我们想要的程序，进入bin查看内容
     
     cd elasticsearch-5.4.3/bin
 
-And now we are ready to start our node and single cluster (Windows users should run the elasticsearch.bat file):
-    
+现在我们可以启动我们的ES节点和单结点的集群：    
     
     ./elasticsearch
 
-If everything goes well, you should see a bunch of messages that look like below:
-    
+如果一切正常，你会得到下面的日志输出：
     
     [2016-09-16T14:17:51,251][INFO ][o.e.n.Node               ] [] initializing ...
     [2016-09-16T14:17:51,329][INFO ][o.e.e.NodeEnvironment    ] [6-bjhwl] using [1] data paths, mounts [[/ (/dev/sda1)]], net usable_space [317.7gb], net total_space [453.6gb], spins? [no], types [ext4]
@@ -55,11 +49,11 @@ If everything goes well, you should see a bunch of messages that look like below
     [2016-09-16T14:17:56,732][INFO ][o.e.g.GatewayService     ] [6-bjhwl] recovered [0] indices into cluster_state
     [2016-09-16T14:17:56,748][INFO ][o.e.n.Node               ] [6-bjhwl] started
 
-Without going too much into detail, we can see that our node named "6-bjhwl" (which will be a different set of characters in your case) has started and elected itself as a master in a single cluster. Don’t worry yet at the moment what master means. The main thing that is important here is that we have started one node within one cluster.
+不用了解太详细，我们从日志中看到结点（node）被命令成了 `6-bjhwl` (在你的例子中可以是不同的名字) 且启动成功并选择了它自己作为单集群的主节点. 
+现在别担主节点（master）的意思.重要的事情是我们成功运行了一个单集群节点。
 
-As mentioned previously, we can override either the cluster or node name. This can be done from the command line when starting Elasticsearch as follows:
-    
+此外，我们可以通过 如下的命令指定集群或者节点的名字：
     
     ./elasticsearch -Ecluster.name=my_cluster_name -Enode.name=my_node_name
 
-Also note the line marked http with information about the HTTP address (`192.168.8.112`) and port (`9200`) that our node is reachable from. By default, Elasticsearch uses port `9200` to provide access to its REST API. This port is configurable if necessary.
+日志同时还标记出了HTTP访问地址和它的端口。默认地ES会使用9200端口进行的提供 REST API，当然这个端口也是进行指定的。

@@ -1,12 +1,12 @@
-## Exploring Your Cluster
+## 探索ES的集群
 
 ### The REST API
 
-Now that we have our node (and cluster) up and running, the next step is to understand how to communicate with it. Fortunately, Elasticsearch provides a very comprehensive and powerful REST API that you can use to interact with your cluster. Among the few things that can be done with the API are as follows:
+现在我们运行了ES节点和集群，下一步就是学会如何去跟ES进行一个交互，幸运地ES提供了容易理解并功能强大的REST API让你跟ES集群进行交互。下面的事情可以通过REST API进行操作：
 
-  * Check your cluster, node, and index health, status, and statistics 
-  * Administer your cluster, node, and index data and metadata 
-  * Perform CRUD (Create, Read, Update, and Delete) and search operations against your indexes 
-  * Execute advanced search operations such as paging, sorting, filtering, scripting, aggregations, and many others 
+  * 检查你的集群，节点，索引的健康状态，和数据统计
+  * 管理你的ES集群，索引数据和元数据
+  * 提供了对索引数据的 CRUD (增, 查, 更新,删除) 和 查询操作
+  * 执行高级的功能如：分布，排序，过滤，使用且脚本，聚合待
 
 

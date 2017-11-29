@@ -1,43 +1,40 @@
-## Modifying Your Data
+## 修改你的数据
 
-Elasticsearch provides data manipulation and search capabilities in near real time. By default, you can expect a one second delay (refresh interval) from the time you index/update/delete your data until the time that it appears in your search results. This is an important distinction from other platforms like SQL wherein data is immediately available after a transaction is completed.
+ES提供了近实时的数据操作和查询的能力，默认地，你可以创建/更新/删除（index/update/delete）你的数据并能在1秒的延迟内能查询到你操作的数据。这功能类似SQL平台的事务操作，当一个事务完成的时候，你就可以立即看到了操作的数据。
 
-### Indexing/Replacing Documents
+### 创建或替换（Indexing/Replacing）文档
 
-We’ve previously seen how we can index a single document. Let’s recall that command again:
-    
-    
+我们之前操作过如何去创建一个文档，现在我重新查看这条命令：
+        
     PUT /customer/external/1?pretty
     {
       "name": "John Doe"
     }
 
-Again, the above will index the specified document into the customer index, external type, with the ID of 1. If we then executed the above command again with a different (or same) document, Elasticsearch will replace (i.e. reindex) a new document on top of the existing one with the ID of 1:
-    
+上面的命令指出了索引是customer，类型为external并且文档的主键（ID）为1，如果我们再一次执行上面的命令并使用不同的文档，ES将会替换（或重创建）主键为1一个新的文档
     
     PUT /customer/external/1?pretty
     {
       "name": "Jane Doe"
     }
 
-The above changes the name of the document with the ID of 1 from "John Doe" to "Jane Doe". If, on the other hand, we use a different ID, a new document will be indexed and the existing document(s) already in the index remains untouched.
-    
-    
+上面的命令改变了文档1的内容：从`John Doe`变到`Jane Doe`,ES使用一个id操作一个文档的时候，如果文档已经存在则是替换（重新创建）一个文档，否则是新建一个文档。
+        
     PUT /customer/external/2?pretty
     {
       "name": "Jane Doe"
     }
 
-The above indexes a new document with an ID of 2.
+上面的命令是创建一个Id为2的新索引
 
-When indexing, the ID part is optional. If not specified, Elasticsearch will generate a random ID and then use it to index the document. The actual ID Elasticsearch generates (or whatever we specified explicitly in the previous examples) is returned as part of the index API call.
+当创建索引的时候，Id是可选项，如果没有明确指定。ES会生成一个随机ID并分配给该文档，Index API被调用的时候ES会返回文档的Id。
 
-This example shows how to index a document without an explicit ID:
-    
+
+下面的例子展示了没有明确指定一个Id的情况。    
     
     POST /customer/external?pretty
     {
       "name": "Jane Doe"
     }
 
-Note that in the above case, we are using the `POST` verb instead of PUT since we didn’t specify an ID.
+注意上面的例子, 我们没有明确一个Id的时候，使用 `POST`方法 而不是`PUT`方法.
