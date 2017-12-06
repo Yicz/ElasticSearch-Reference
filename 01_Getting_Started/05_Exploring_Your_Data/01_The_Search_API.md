@@ -1,15 +1,14 @@
-## The Search API
+## 查询API
 
-Now let’s start with some simple searches. There are two basic ways to run searches: one is by sending search parameters through the [REST request URI](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-uri-request.html) and the other by sending them through the [REST request body](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-request-body.html). The request body method allows you to be more expressive and also to define your searches in a more readable JSON format. We’ll try one example of the request URI method but for the remainder of this tutorial, we will exclusively be using the request body method.
+现在让我们做一些简单的查询，这里有两种方式去执行查询操作：一种是通过使用[REST request URI](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-uri-request.html)发送URI参数，另一种是参过[REST request body](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-request-body.html)发送请求体。发送请求体的方式能更准确地表述请求条件同时也能有一个可阅读的JSON格式。我们会尝试一下使用[REST request RUI]()做为一个教程，我们更加倾向使用[REST reqeust body]()
 
-The REST API for search is accessible from the `_search` endpoint. This example returns all documents in the bank index:
-    
+使用查询的REST API接口是`_search`，下面的例子是返回`bank`索引中的所有文档：    
     
     GET /bank/_search?q=*&sort=account_number:asc&pretty
 
-Let’s first dissect the search call. We are searching (`_search` endpoint) in the bank index, and the `q=*` parameter instructs Elasticsearch to match all documents in the index. The `sort=account_number:asc` parameter indicates to sort the results using the `account_number` field of each document in an ascending order. The `pretty` parameter, again, just tells Elasticsearch to return pretty-printed JSON results.
+下面详细介绍一下这个请求的具体内容：我们使用了`_search`接口查询`bank`索引，并使用了`q=*`参数去匹配索引中所有的文档，然后使用了`sort=account_number:asc`参数去指定结果的排序为`account_number`的增序。再一次我们使用了`pretty`参数将回去的JSON结果进行格式化。
 
-And the response (partially shown):
+显示部分响应内容:
     
     
     {
@@ -42,21 +41,21 @@ And the response (partially shown):
       }
     }
 
-As for the response, we see the following parts:
+在响应内容中，我们看到了如下的内容
 
-  * `took` – time in milliseconds for Elasticsearch to execute the search 
-  * `timed_out` – tells us if the search timed out or not 
-  * `_shards` – tells us how many shards were searched, as well as a count of the successful/failed searched shards 
-  * `hits` – search results 
-  * `hits.total` – total number of documents matching our search criteria 
-  * `hits.hits` – actual array of search results (defaults to first 10 documents) 
-  * `hits.sort` \- sort key for results (missing if sorting by score) 
-  * `hits._score` and `max_score` \- ignore these fields for now 
+  * `took` – ES执行耗费的时间 
+  * `timed_out` –告诉我的查询是否超时
+  * `_shards` – 告诉我们查询了多少分片，并详细说明有多少分片是成功/失败的
+  * `hits` – 查询结果
+  * `hits.total` – 匹配的查询结果
+  * `hits.hits` – 实际的查询结果
+  * `hits.sort` \- 排序的关键字
+  * `hits._score` and `max_score` \- 暂时忽略这个内容
 
 
 
-Here is the same exact search above using the alternative request body method:
-    
+
+下面是使用[reqeust body method]()的方式 
     
     GET /bank/_search
     {
@@ -66,6 +65,7 @@ Here is the same exact search above using the alternative request body method:
       ]
     }
 
-The difference here is that instead of passing `q=*` in the URI, we POST a JSON-style query request body to the `_search` API. We’ll discuss this JSON query in the next div.
+这里的主要区别是使用了JSON风格的请求体替换了使用`_search`接口的URI参数`q=*`，在下一节，我们将详细说明JSON的内容。
 
-It is important to understand that once you get your search results back, Elasticsearch is completely done with the request and does not maintain any kind of server-side resources or open cursors into your results. This is in stark contrast to many other platforms such as SQL wherein you may initially get a partial subset of your query results up-front and then you have to continuously go back to the server if you want to fetch (or page through) the rest of the results using some kind of stateful server-side cursor.
+
+理解结果返回的每一个字段对刚开始学习的人来说是很重要的。ES完全执行请求并不会包含额外的数据在返回结果中。这中SQL平台的数据有一个区别，SQL平台会返回一个服务端的游标。
