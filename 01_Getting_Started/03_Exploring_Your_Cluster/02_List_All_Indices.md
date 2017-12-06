@@ -1,13 +1,13 @@
-## List All Indices
+## 列出所有的索引
 
-Now let’s take a peek at our indices:
-    
+现在我们看一眼我们的索引：
+
     
     GET /_cat/indices?v
 
-And the response:
+响应:
     
     
     health status index uuid pri rep docs.count docs.deleted store.size pri.store.size
 
-Which simply means we have no indices yet in the cluster.
+简单显示在我们的集群中还没有索引。

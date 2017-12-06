@@ -1,19 +1,18 @@
-## Create an Index
+## 建立一个索引
 
-Now let’s create an index named "customer" and then list all the indexes again:
-    
+现在我们建立一个索引将它命名为`customer`并再次列出全部的索引：
     
     PUT /customer?pretty
     GET /_cat/indices?v
 
-The first command creates the index named "customer" using the PUT verb. We simply append `pretty` to the end of the call to tell it to pretty-print the JSON response (if any).
+上面的命令，第一行使用PUT动是建立名称为`customer`的索引，我们简单地在URI上追加了`pretty`参加让响应的结果可以拥有一个漂亮的格式（如果存在响应结果）。
 
-And the response:
+响应结果:
     
     
     health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
     yellow open   customer 95SQ4TSUT7mWBT7VNHH67A   5   1          0            0       260b           260b
 
-The results of the second command tells us that we now have 1 index named customer and it has 5 primary shards and 1 replica (the defaults) and it contains 0 documents in it.
+响应结果的第二行告诉我们，我们现在拥有一个索引，名字是`customer`,它有5个主分片，并且拥有1个副本（默认配置），并包含了0个文档。
 
-You might also notice that the customer index has a yellow health tagged to it. Recall from our previous discussion that yellow means that some replicas are not (yet) allocated. The reason this happens for this index is because Elasticsearch by default created one replica for this index. Since we only have one node running at the moment, that one replica cannot yet be allocated (for high availability) until a later point in time when another node joins the cluster. Once that replica gets allocated onto a second node, the health status for this index will turn to green.
+你可能注意到了我们当前集群索引的是一个黄色的状态。回忆一下，黄色状态表示副本没有进行分配。原因是ES集群默认给索引设置了1个副本。当前我们只有一个节点，副本不能分配到同一个节点上（为了高可用）当其他节点没有起来的时候。一旦副本被分配到另外的一个节点上时，ES的健康状态就会转变为绿色。

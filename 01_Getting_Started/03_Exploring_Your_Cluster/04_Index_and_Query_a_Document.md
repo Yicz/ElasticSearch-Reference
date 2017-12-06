@@ -1,8 +1,8 @@
-## Index and Query a Document
+## 索引并查询一个文档
 
-Let’s now put something into our customer index. Remember previously that in order to index a document, we must tell Elasticsearch which type in the index it should go to.
+现在让我们放点内容到我们名称为`customer`索引中，回忆前面的内容，要建立一个文档，我们心須告诉ES文档的类型是什么。
 
-Let’s index a simple customer document into the customer index, "external" type, with an ID of 1 as follows:
+我们索引一个简单的`customer`文档，它的类型是`external`,并主键（ID）为1，如下：
     
     
     PUT /customer/external/1?pretty
@@ -10,7 +10,7 @@ Let’s index a simple customer document into the customer index, "external" typ
       "name": "John Doe"
     }
 
-And the response:
+响应:
     
     
     {
@@ -27,17 +27,15 @@ And the response:
       "created" : true
     }
 
-From the above, we can see that a new customer document was successfully created inside the customer index and the external type. The document also has an internal id of 1 which we specified at index time.
+从上面的内容，我们得知文档被成功建立。文档拥有一个内部的主键（id）为1，这是我们显示地指定的。
 
-It is important to note that Elasticsearch does not require you to explicitly create an index first before you can index documents into it. In the previous example, Elasticsearch will automatically create the customer index if it didn’t already exist beforehand.
+ES不要求你在索引一个文档的时候，先建立了一个索引，在上面的例子中，ES中如果不存在`customer`索引，ES会自动地创建一个名字为`customer`的索引。
 
-Let’s now retrieve that document that we just indexed:
-    
-    
+我们现在获取一个我们刚刚索引的文档：
+        
     GET /customer/external/1?pretty
 
-And the response:
-    
+响应如下：
     
     {
       "_index" : "customer",
@@ -48,4 +46,4 @@ And the response:
       "_source" : { "name": "John Doe" }
     }
 
-Nothing out of the ordinary here other than a field, `found`, stating that we found a document with the requested ID 1 and another field, `_source`, which returns the full JSON document that we indexed from the previous step.
+这里除了`found`字段表示了我们找到了一个主键（ID）为1有文档，还有其他字段`_source`字段的内容是我们在上一步中索引文档的全部的JSON内容

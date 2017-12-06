@@ -1,19 +1,18 @@
-## Delete an Index
+## 删除一个索引
 
-Now let’s delete the index that we just created and then list all the indexes again:
-    
+现在让我们删除索引并再一次列出所有的索引：
     
     DELETE /customer?pretty
     GET /_cat/indices?v
 
-And the response:
+响应:
     
     
     health status index uuid pri rep docs.count docs.deleted store.size pri.store.size
 
-Which means that the index was deleted successfully and we are now back to where we started with nothing in our cluster.
+这意味着我们成功删除了索引，并又回到了ES作集群没有数据的状态。
 
-Before we move on, let’s take a closer look again at some of the API commands that we have learned so far:
+在我们往下学习之前，我们回顾一下至今我们学到的API有哪些：
     
     
     PUT /customer
@@ -24,9 +23,8 @@ Before we move on, let’s take a closer look again at some of the API commands 
     GET /customer/external/1
     DELETE /customer
 
-If we study the above commands carefully, we can actually see a pattern of how we access data in Elasticsearch. That pattern can be summarized as follows:
-    
+如果我们认真学习了上面的命令，我们就会总结出一个在ES集群中访问数据的模式，这个模式总结如下：
     
     <REST Verb> /<Index>/<Type>/<ID>
 
-This REST access pattern is so pervasive throughout all the API commands that if you can simply remember it, you will have a good head start at mastering Elasticsearch.
+这就是RES风格的模式，你可以简单地记住它们，这样就可以对ES的学习有了一个好的开头。
