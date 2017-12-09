@@ -1,9 +1,9 @@
-## Executing Aggregations
+## 执行聚合
 
-Aggregations provide the ability to group and extract statistics from your data. The easiest way to think about aggregations is by roughly equating it to the SQL GROUP BY and the SQL aggregate functions. In Elasticsearch, you have the ability to execute searches returning hits and at the same time return aggregated results separate from the hits all in one response. This is very powerful and efficient in the sense that you can run queries and multiple aggregations and get the results back of both (or either) operations in one shot avoiding network roundtrips using a concise and simplified API.
+聚合提供组合和分析你数据的能力。可以简单地想象聚合（aggregations）类似于`SQL GROUP BY`和SQL的聚合函数。在ES中，你可以在一个请求聚合查询结果，这个功能是非常强大和高效的，你可以使用一个请求来避免大量的网络传输和聚合所有请求结果。
 
-To start with, this example groups all the accounts by state, and then returns the top 10 (default) states sorted by count descending (also default):
-    
+
+下面的例子，通过account的state进行分组并返回默认10个文档，state的的排序是倒序的（ES默认）    
     
     GET /bank/_search
     {
@@ -17,13 +17,11 @@ To start with, this example groups all the accounts by state, and then returns t
       }
     }
 
-In SQL, the above aggregation is similar in concept to:
-    
+使用SQL来替换上面的请求：    
     
     SELECT state, COUNT(*) FROM bank GROUP BY state ORDER BY COUNT(*) DESC
 
-And the response (partially shown):
-    
+响应内容（只展示部分）：    
     
     {
       "took": 29,
@@ -76,13 +74,14 @@ And the response (partially shown):
         }
       }
     }
-
-We can see that there are 27 accounts in `ID` (Idaho), followed by 27 accounts in `TX` (Texas), followed by 25 accounts in `AL` (Alabama), and so forth.
-
-Note that we set `size=0` to not show search hits because we only want to see the aggregation results in the response.
-
-Building on the previous aggregation, this example calculates the average account balance by state (again only for the top 10 states sorted by count in descending order):
     
+我们可以看到27个文档的国家（state）是`ID`,27个文档是`TX`,还有25个文档是`AL`,等等。
+
+
+提示：我们设置了sieze=0,进行不显示查询到的文档，只查看聚合函数的结果。
+
+
+在前面聚合的基础上，下面的例子求account的各个state的balance的平均值（默认的返回10个聚合结果，并还是统计个数倒排序）
     
     GET /bank/_search
     {
@@ -103,9 +102,9 @@ Building on the previous aggregation, this example calculates the average accoun
       }
     }
 
-Notice how we nested the `average_balance` aggregation inside the `group_by_state` aggregation. This is a common pattern for all the aggregations. You can nest aggregations inside aggregations arbitrarily to extract pivoted summarizations that you require from your data.
+提示：我们在`group_by_state`中嵌套了`average_balance`聚合。这个模式可以使用于全部的聚合。你可以嵌套一个聚合到另外一个聚合中。
 
-Building on the previous aggregation, let’s now sort on the average balance in descending order:
+在前面的聚合基础上，我们来排序balance的平均值，使用倒排序：
     
     
     GET /bank/_search
@@ -130,8 +129,7 @@ Building on the previous aggregation, let’s now sort on the average balance in
       }
     }
 
-This example demonstrates how we can group by age brackets (ages 20-29, 30-39, and 40-49), then by gender, and then finally get the average account balance, per age bracket, per gender:
-    
+下面的例子展示了使用年龄范围聚合和性别聚合并计算balance平均值的聚合。    
     
     GET /bank/_search
     {
@@ -173,4 +171,4 @@ This example demonstrates how we can group by age brackets (ages 20-29, 30-39, a
       }
     }
 
-There are many other aggregations capabilities that we won’t go into detail here. The [aggregations reference guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-aggregations.html) is a great starting point if you want to do further experimentation.
+还是更多的聚合类型，这是不进行详细阐述，请自行参考[聚合参考的指南](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/search-aggregations.html)。

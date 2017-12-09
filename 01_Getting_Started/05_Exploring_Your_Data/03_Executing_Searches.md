@@ -1,9 +1,8 @@
-## Executing Searches
+## 执行查询
 
-Now that we have seen a few of the basic search parameters, let’s dig in some more into the Query DSL. Let’s first take a look at the returned document fields. By default, the full JSON document is returned as part of all searches. This is referred to as the source (`_source` field in the search hits). If we don’t want the entire source document returned, we have the ability to request only a few fields from within source to be returned.
+现在我们对查询参数有了一个基本的了解，让我们更加深入挖掘Query DSL。我们先来看查询的返回结果的字段。默认地，整个文档会当作查询结果的一部分返回。可以参考`_source`字段，如果我们不想返回整个JSON文档的所有字段。我们可以请求设置一部分字段进行返回。
 
-This example shows how to return two fields, `account_number` and `balance` (inside of `_source`), from the search:
-    
+下面的查询例子，展示了只返回文档的两个字段，`account_number`和`balance`(在`_source`部分)：
     
     GET /bank/_search
     {
@@ -11,48 +10,43 @@ This example shows how to return two fields, `account_number` and `balance` (ins
       "_source": ["account_number", "balance"]
     }
 
-Note that the above example simply reduces the `_source` field. It will still only return one field named `_source` but within it, only the fields `account_number` and `balance` are included.
+提示：在上面的例子中减少了`_source`字段的返回内容。但它仍然会内置地返回一个命名为`_source`的字段去包含返回结果。将`account_number`和`balancd`进行囊括。
 
-If you come from a SQL background, the above is somewhat similar in concept to the `SQL SELECT FROM` field list.
+如果你学习过SQL，上面的例子类似于`SQL SELECT FROM`语句。
 
-Now let’s move on to the query part. Previously, we’ve seen how the `match_all` query is used to match all documents. Let’s now introduce a new query called the [`match` query](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-match-query.html), which can be thought of as a basic fielded search query (i.e. a search done against a specific field or set of fields).
+现在让我们继续学习query部分的内容。在前面，我们展示使用了`match_all`查询条件去匹配所有的文档。现在我们介绍一个新的查询：[`match`查询](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-match-query.html)，这是一个基本的字段查询（例如：通过指定一个字段或者多个字段进行匹配查询）
 
-This example returns the account numbered 20:
-    
+下面的例子是匹配account_number=20:
     
     GET /bank/_search
     {
       "query": { "match": { "account_number": 20 } }
     }
 
-This example returns all accounts containing the term "mill" in the address:
-    
+下面的例子匹配address中包含了mill的文档：
     
     GET /bank/_search
     {
       "query": { "match": { "address": "mill" } }
     }
 
-This example returns all accounts containing the term "mill" or "lane" in the address:
-    
+下面的例子匹配address中包含了mill或者lane的文档
     
     GET /bank/_search
     {
       "query": { "match": { "address": "mill lane" } }
     }
 
-This example is a variant of `match` (`match_phrase`) that returns all accounts containing the phrase "mill lane" in the address:
-    
+下面的例子是词组匹配（`match_phrase`）,返回的文档必须完全匹配"mill land":
     
     GET /bank/_search
     {
       "query": { "match_phrase": { "address": "mill lane" } }
     }
 
-Let’s now introduce the [`bool`(Boolean) query](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-bool-query.html). The `bool` query allows us to compose smaller queries into bigger queries using boolean logic.
+现在我们来介绍[bool(布隆|Boolean)查询](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-bool-query.html),bool查询使用boolean逻辑允许组合小查询（如上面）成为一个大的查询条件。
 
-This example composes two `match` queries and returns all accounts containing "mill" and "lane" in the address:
-    
+下面的例子组合了两个`match`查询并返回了文档的address字段中包含"mill"和“lane”的所有文档：
     
     GET /bank/_search
     {
@@ -66,10 +60,9 @@ This example composes two `match` queries and returns all accounts containing "m
       }
     }
 
-In the above example, the `bool must` clause specifies all the queries that must be true for a document to be considered a match.
+在上面的例子中 `bool.must`子句指定了所有的查询条件必须为true，才认为这个文档匹配了。
 
-In contrast, this example composes two `match` queries and returns all accounts containing "mill" or "lane" in the address:
-    
+对比上面的，下面的例子是组合两个`match`查询并返回address字段包含“mill”或“lane”的文档。：
     
     GET /bank/_search
     {
@@ -83,9 +76,11 @@ In contrast, this example composes two `match` queries and returns all accounts 
       }
     }
 
-In the above example, the `bool should` clause specifies a list of queries either of which must be true for a document to be considered a match.
+在上面的例子中，`bool.should`子句指定了一系列的查询条件，只要文档满足了其中一条，就认为文档匹配了。
 
-This example composes two `match` queries and returns all accounts that contain neither "mill" nor "lane" in the address:
+
+对比上面的，下面的例子是组合两个`match`查询并返回address字段**不包含**“mill”或“lane”的文档。：
+
     
     
     GET /bank/_search
@@ -100,12 +95,11 @@ This example composes two `match` queries and returns all accounts that contain 
       }
     }
 
-In the above example, the `bool must_not` clause specifies a list of queries none of which must be true for a document to be considered a match.
+在上面的例子中，`bool.must_not`子句指定了一系列的查询条件，只要文档不满足了所有条件，才认为文档匹配了。
 
-We can combine `must`, `should`, and `must_not` clauses simultaneously inside a `bool` query. Furthermore, we can compose `bool` queries inside any of these `bool` clauses to mimic any complex multi-level boolean logic.
+我们还可以组合`must`,`should`和`must_not`子句成为一个`bool`查询。再者还可以组合一个`bool`查询成为一个大的`bool`查询，形成多层级的bool逻辑。
 
-This example returns all accounts of anybody who is 40 years old but doesn’t live in ID(aho):
-    
+举例如下，匹配文档江西40岁并state=ID：    
     
     GET /bank/_search
     {

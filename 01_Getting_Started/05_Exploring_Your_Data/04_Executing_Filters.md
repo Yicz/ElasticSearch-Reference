@@ -1,13 +1,11 @@
-## Executing Filters
+## 执行过滤
+在前面的例子中，我们忽略了返回结果中的一些细节：查询结果中的一个`_score`字段。`_score`是一个数据类型的字段，是我们查询文档匹配度的一个度量标准。分值越高，证明文档的相关度就高，分值越低，文档的相关度就越低。
 
-In the previous div, we skipped over a little detail called the document score (`_score` field in the search results). The score is a numeric value that is a relative measure of how well the document matches the search query that we specified. The higher the score, the more relevant the document is, the lower the score, the less relevant the document is.
+但查询并不需要一直产生分值。特别当我们使用过滤（filtering）文档的时候。ES检测情景并自动优化查询执行不比较分值。
 
-But queries do not always need to produce scores, in particular when they are only used for "filtering" the document set. Elasticsearch detects these situations and automatically optimizes query execution in order not to compute useless scores.
+在前面介绍的[`bool`查询](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-bool-query.html)支持过滤（filtering）子句，允诉查询文档但不修改它的分值。举个例子,[range 查询](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-range-query.html)(范围查询)允诉过滤一定范围的文档，这个过滤要求数值或者日期类型的字段。
 
-The [`bool` query](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-bool-query.html) that we introduced in the previous div also supports `filter` clauses which allow to use a query to restrict the documents that will be matched by other clauses, without changing how scores are computed. As an example, let’s introduce the [`range` query](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/query-dsl-range-query.html), which allows us to filter documents by a range of values. This is generally used for numeric or date filtering.
-
-This example uses a bool query to return all accounts with balances between 20000 and 30000, inclusive. In other words, we want to find accounts with a balance that is greater than or equal to 20000 and less than or equal to 30000.
-    
+下面的例子使用了一个bools查询返回acount的balances 在2000~3000的区间。 换句话说的我们要匹配文档条件是2000<=balance<=3000:
     
     GET /bank/_search
     {
@@ -26,6 +24,6 @@ This example uses a bool query to return all accounts with balances between 2000
       }
     }
 
-Dissecting the above, the bool query contains a `match_all` query (the query part) and a `range` query (the filter part). We can substitute any other queries into the query and the filter parts. In the above case, the range query makes perfect sense since documents falling into the range all match "equally", i.e., no document is more relevant than another.
+剖析上面的请求，`bool`查询使用了`match_all`查询和`range`过滤查询，我们可以替换任何的查询语句和过滤部分。在上面的例子中，范围（range）查询更适合使用。并跟文档的相关度无关。
 
-In addition to the `match_all`, `match`, `bool`, and `range` queries, there are a lot of other query types that are available and we won’t go into them here. Since we already have a basic understanding of how they work, it shouldn’t be too difficult to apply this knowledge in learning and experimenting with the other query types.
+除此`match_all`, `match`, `bool`, 和 `range`查询外，还有大量可用的查询类型可以使用，在里我们不进行阐述，我们只要理解他们是如何进行生效的，只要掌握了他们的原理，这样才可以举一反三地学习基他的查询类型。
