@@ -1,61 +1,39 @@
 ## Installing Elasticsearch
 
-Elasticsearch is provided in the following package formats:
+ES提供了如下的安装包格式：
 
-`zip`/`tar.gz`
+###`zip`/`tar.gz`
 
-| 
 
-The `zip` and `tar.gz` packages are suitable for installation on any system and are the easiest choice for getting started with Elasticsearch. 
+ `zip`或`tar.gz` 是ES在任何系统最容易安装的格式
 
-[Install Elasticsearch with `.zip` or `.tar.gz`](zip-targz.html "Install Elasticsearch with .zip or .tar.gz") or [Install Elasticsearch on Windows](windows.html "Install Elasticsearch on Windows")  
+ [使用`zip`或`tar.gz`安装ES](zip-targz.html "Install Elasticsearch with .zip or .tar.gz")
+
+ [在Windows是安装ES](windows.html "Install Elasticsearch on Windows")  
   
----|---  
+###`deb`
+
+ `deb` 安装包是给Debain,Ubuntu和其他Debain系的系统使用。可以在ES官网和Debain仓库中获取。
+[使用deb安装ES](deb.html "Install Elasticsearch with Debian Package")  
   
-`deb`
+###`rpm`
 
-| 
+`rpm`安装包是给红帽系列的系统，如Red Hat,Centos,SLES,OpenSuSE等等系统使用。RPMs安装包可以在ES官网和我们的RPM仓库中获取。
 
-The `deb` package is suitable for Debian, Ubuntu, and other Debian-based systems. Debian packages may be downloaded from the Elasticsearch website or from our Debian repository. 
-
-[Install Elasticsearch with Debian Package](deb.html "Install Elasticsearch with Debian Package")  
+[使用rpm安装ES](rpm.html "Install Elasticsearch with RPM")  
   
-`rpm`
+###`docker`
 
-| 
+ES提供了docker的安装方式。可以在Docker的注册中心获取[X-Pack]进行安装。 
 
-The `rpm` package is suitable for installation on Red Hat, Centos, SLES, OpenSuSE and other RPM-based systems. RPMs may be downloaded from the Elasticsearch website or from our RPM repository. 
-
-[Install Elasticsearch with RPM](rpm.html "Install Elasticsearch with RPM")  
+[使用rpm安装ES](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docker.html)  
   
-`docker`
+###配置管理工具
 
-| 
-
-An image is available for running Elasticsearch as a Docker container. It ships with [X-Pack](https://www.elastic.co/guide/en/x-pack/5.4/index.html) pre-installed and may be downloaded from the Elastic Docker Registry. 
-
-[Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docker.html)  
-  
-### Configuration Management Tools
-
-We also provide the following configuration management tools to help with large deployments:
-
-Puppet 
-
-| 
+ES为了进行大量的部署，提供了方便配置的管理工具：
 
 [puppet-elasticsearch](https://github.com/elastic/puppet-elasticsearch)  
-  
----|---  
-  
-Chef 
-
-| 
 
 [cookbook-elasticsearch](https://github.com/elastic/cookbook-elasticsearch)  
-  
-Ansible 
-
-| 
 
 [ansible-elasticsearch](https://github.com/elastic/ansible-elasticsearch)

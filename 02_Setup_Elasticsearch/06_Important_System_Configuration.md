@@ -1,19 +1,18 @@
-## Important System Configuration
-
-Ideally, Elasticsearch should run alone on a server and use all of the resources available to it. In order to do so, you need to configure your operating system to allow the user running Elasticsearch to access more resources than allowed by default.
-
-The following settings **must** be addressed before going to production:
-
-  * [Set JVM heap size](heap-size.html "Set JVM heap size via jvm.options")
-  * [Disable swapping](setup-configuration-memory.html "Disable swapping")
-  * [Increase file descriptors](file-descriptors.html "File Descriptors")
-  * [Ensure sufficient virtual memory](vm-max-map-count.html "Virtual memory")
-  * [Ensure sufficient threads](max-number-of-threads.html "Number of threads")
+## 重要的系统配置
 
 
+理想情况下，Elasticsearch应该在服务器上独立运行，并使用所有可用的资源。为此，您需要配置您的操作系统，以允许运行Elasticsearch的用户访问比默认允许的资源更多的资源。
 
-### Development mode vs production mode
+在投入生产之前**必须**解决以下设置：
 
-By default, Elasticsearch assumes that you are working in development mode. If any of the above settings are not configured correctly, a warning will be written to the log file, but you will be able to start and run your Elasticsearch node.
+  * [Set JVM heap size](heap-size.html "Set JVM heap size via jvm.options") JVM堆栈大小
+  * [Disable swapping](setup-configuration-memory.html "Disable swapping") 禁用内存交换
+  * [Increase file descriptors](file-descriptors.html "File Descriptors") 增加文件描述
+  * [Ensure sufficient virtual memory](vm-max-map-count.html "Virtual memory") 增加虚拟内存
+  * [Ensure sufficient threads](max-number-of-threads.html "Number of threads") 增加线程数
 
-As soon as you configure a network setting like `network.host`, Elasticsearch assumes that you are moving to production and will upgrade the above warnings to exceptions. These exceptions will prevent your Elasticsearch node from starting. This is an important safety measure to ensure that you will not lose data because of a malconfigured server.
+### 开发环境 vs 生产环境
+
+默认情况下，Elasticsearch假定你正在开发模式下工作。如果以上任何设置配置不正确，则将向日志文件写入警告，但您将能够启动并运行Elasticsearch节点。
+
+只要你配置了一个像network.host这样的网络设置，Elasticsearch就会假设你正在转向生产，并将上述警告升级为异常。这些异常将阻止您的Elasticsearch节点启动。这是一个重要的安全措施，以确保您不会因为配置错误的服务器而丢失数据。

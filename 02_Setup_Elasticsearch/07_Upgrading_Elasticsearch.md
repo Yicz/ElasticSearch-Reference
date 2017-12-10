@@ -1,82 +1,35 @@
-## Upgrading Elasticsearch
-
-![Important](images/icons/important.png)
-
-Before upgrading Elasticsearch:
-
-  * Consult the [breaking changes](breaking-changes.html "Breaking changes") docs. 
-  * Use the [Elasticsearch Migration Plugin](https://github.com/elastic/elasticsearch-migration/) to detect potential issues before upgrading. 
-  * Test upgrades in a dev environment before upgrading your production cluster. 
-  * Always [back up your data](modules-snapshots.html "Snapshot And Restore") before upgrading. You **cannot roll back** to an earlier version unless you have a backup of your data. 
-  * If you are using custom plugins, check that a compatible version is available. 
+## ES升级
 
 
+在升级Elasticsearch之前：
 
-Elasticsearch can usually be upgraded using a rolling upgrade process, resulting in no interruption of service. This div details how to perform both rolling upgrades and upgrades with full cluster restarts.
+  * 请参阅[版本变化](breaking-changes.html“破坏性变化”)文件。
+  * 使用[Elasticsearch迁移插件](https://github.com/elastic/elasticsearch-migration/)在升级之前检测潜在的问题。
+  * 在升级您的生产群集之前，在开发环境中测试升级。
+  * 升级前，请务必[备份您的数据](modules-snapshots.html“快照和还原”)。除非您有数据备份，否则无法将回滚到较早的版本。
+  * 如果您使用自定义插件，请检查兼容版本是否可用。
 
-To determine whether a rolling upgrade is supported for your release, please consult this table:
 
-Upgrade From | Upgrade To | Supported Upgrade Type  
----|---|---  
+
+通常可以使用滚动升级过程来升级Elasticsearch，从而不会中断服务。本章详细说明了如何在完全集群重启的情况下执行滚动升级和升级。
+
+要确定您的版本是否支持滚动升级，请参阅此表：
+
+|Upgrade From | Upgrade To | Supported Upgrade Type |
+|:---:|:---:|:---:|  
+|`1.x`| `5.x`| [Reindex to upgrade](reindex-upgrade.html "Reindex to upgrade")  |  
+|`2.x`|`2.y`|[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  |
+|`2.x`|`5.x`|[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  |
+|`5.0.0 pre GA`|`5.x`|[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  |
+|`5.x`|`5.y`|[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  |
   
-`1.x`
 
-| 
+### ES 1.x 或之前的版本索引
 
-`5.x`
+Elasticsearch能够读取在**前一个主要版本中创建的索引**。例如，Elasticsearch 5.x可以使用在Elasticsearch 2.x中创建的索引，但不能使用在Elasticsearch 1.x或之前创建的索引。
 
-| 
+这种情况也适用于使用[快照和还原](modules-snapshots.html“快照和还原”)备份的索引。如果索引最初是在1.x中创建的，即使快照是由2.x集群创建的，也不能恢复到5.x集群。
 
-[Reindex to upgrade](reindex-upgrade.html "Reindex to upgrade")  
-  
-`2.x`
+Elasticsearch 5.x节点在索引太旧时将无法启动。
 
-| 
-
-`2.y`
-
-| 
-
-[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  
-  
-`2.x`
-
-| 
-
-`5.x`
-
-| 
-
-[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  
-  
-`5.0.0 pre GA`
-
-| 
-
-`5.x`
-
-| 
-
-[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  
-  
-`5.x`
-
-| 
-
-`5.y`
-
-| 
-
-[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  
-  
-![Important](images/icons/important.png)
-
-### Indices created in Elasticsearch 1.x or before
-
-Elasticsearch is able to read indices created in the **previous major version only**. For instance, Elasticsearch 5.x can use indices created in Elasticsearch 2.x, but not those created in Elasticsearch 1.x or before.
-
-This condition also applies to indices backed up with [snapshot and restore](modules-snapshots.html "Snapshot And Restore"). If an index was originally created in 1.x, it cannot be restored into a 5.x cluster even if the snapshot was made by a 2.x cluster.
-
-Elasticsearch 5.x nodes will fail to start in the presence of too old indices.
-
-See [Reindex to upgrade](reindex-upgrade.html "Reindex to upgrade") for more information about how to upgrade old indices.
+有关如何升级旧索引的更多信息，请参见[重建索引以升级](reindex-upgrade.html“重建索引以升级”)。

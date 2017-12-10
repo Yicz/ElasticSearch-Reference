@@ -1,3 +1,4 @@
 ## Conclusion
 
-Elasticsearch is both a simple and complex product. We’ve so far learned the basics of what it is, how to look inside of it, and how to work with it using some of the REST APIs. I hope that this tutorial has given you a better understanding of what Elasticsearch is and more importantly, inspired you to further experiment with the rest of its great features!
+ES是一个简单而复杂的产品。目前我们学习的本章内容只是皮毛，了解ES的内部原理以及学习REST APIs，我们希望本章教程
+帮助你对ES有了一个很好的了解。

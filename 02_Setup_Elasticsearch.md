@@ -1,26 +1,25 @@
 # Setup Elasticsearch
 
-This div includes information on how to setup Elasticsearch and get it running, including:
+本章节包含如下的内容：
 
-  * Downloading 
-  * Installing 
-  * Starting 
-  * Configuring 
+  * 下载
+  * 安装 
+  * 启动 
+  * 配置
 
 
 
-## Supported platforms
+## 支持的平台
+[支持列表](/support/matrix)中列出的平台，ES都测试过使用过。但不限于这些平台，还要可能在其他没有测试过的平台。
 
-The matrix of officially supported operating systems and JVMs is available here: [Support Matrix](/support/matrix). Elasticsearch is tested on the listed platforms, but it is possible that it will work on other platforms too.
+## Java (JVM) 版本
 
-## Java (JVM) Version
+ES是使用java语言开发的，至少需要[java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)的运行环境，目录ES只支持Oracle和OpenJDK.ES集群中的节点应该都使用一致的JAVA运行环境。
 
-Elasticsearch is built using Java, and requires at least [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) in order to run. Only Oracle’s Java and the OpenJDK are supported. The same JVM version should be used on all Elasticsearch nodes and clients.
 
-We recommend installing Java version **1.8.0_131 or later**. Elasticsearch will refuse to start if a known-bad version of Java is used.
+我们推荐使用**1.8.0_131以上**的java版本.ES会拒绝启动，如果使用了一个不运行的JAVA版本。
 
-The version of Java that Elasticsearch will use can be configured by setting the `JAVA_HOME` environment variable.
+ES使用的是`JAVA_HOME`的环境变量
 
 ![Note](images/icons/note.png)
-
-Elasticsearch ships with default configuration for running Elasticsearch on 64-bit server JVMs. If you are using a 32-bit client JVM, you must remove `-server` from [jvm.options](setting-system-settings.html#jvm-options "Setting JVM options") and if you are using any 32-bit JVM you should reconfigure the thread stack size from `-Xss1m` to `-Xss320k`.
+ES默认设置的是使用64位的服务器版的jvms,如果你想将他运行在32位的JVM上，你必须在[`jvm.options`]中移除`-server`并重新配置线程栈（thread stack）的大小，从`-Xss1m`到`-Xss320k`
