@@ -1,10 +1,9 @@
-## URL-based access control
+##  基于URL的访问控制 URL-based access control
 
-Many users use a proxy with URL-based access control to secure access to Elasticsearch indices. For [multi-search](search-multi-search.html "Multi Search API"), [multi-get](docs-multi-get.html "Multi Get API") and [bulk](docs-bulk.html "Bulk API") requests, the user has the choice of specifying an index in the URL and on each individual request within the request body. This can make URL-based access control challenging.
+许多用户使用基于URL的访问控制代理来保护对Elasticsearch索引的访问。 对于[multi-search](search-multi-search.html "Multi Search API")，[multi-get](docs-multi-get.html "Multi Get API")和[bulk](docs-bulk.html "批量API")请求，用户可以选择在URL中指定一个索引，也可以在请求体内的每个请求中指定一个索引。 这可以使基于URL的访问控制具有挑战性。
 
-To prevent the user from overriding the index which has been specified in the URL, add this setting to the `elasticsearch.yml` file:
-    
-    
-    rest.action.multi.allow_explicit_index: false
+为了防止用户重写已经在URL中指定的索引，将这个设置添加到`elasticsearch.yml`文件中：
+    
+     rest.action.multi.allow_explicit_index：false
 
-The default value is `true`, but when set to `false`, Elasticsearch will reject requests that have an explicit index specified in the request body.
+默认值是“true”，但是当设置为“false”时，Elasticsearch将拒绝在请求体中指定具有明确索引的请求。

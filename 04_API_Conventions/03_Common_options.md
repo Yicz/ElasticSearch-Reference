@@ -24,93 +24,30 @@ The expression starts with an anchor date, which can either be `now`, or a date 
 
 The supported time units differ than those supported by [time units](common-options.html#time-units "Time unitsedit") for durations. The supported units are:
 
-`y`
+`y`| years     
+---|---    
+`M`| months     
+`w`| weeks     
+`d`| days     
+`h`| hours     
+`H`| hours     
+`m`| minutes     
+`s`| seconds     
 
-| 
-
-years   
+Some examples are:`now+1h`| The current time plus one hour, with ms resolution.   
   
----|---  
-  
-`M`
-
-| 
-
-months   
-  
-`w`
-
-| 
-
-weeks   
-  
-`d`
-
-| 
-
-days   
-  
-`h`
-
-| 
-
-hours   
-  
-`H`
-
-| 
-
-hours   
-  
-`m`
-
-| 
-
-minutes   
-  
-`s`
-
-| 
-
-seconds   
-  
-Some examples are:
-
-`now+1h`
-
-| 
-
-The current time plus one hour, with ms resolution.   
-  
----|---  
-  
-`now+1h+1m`
-
-| 
-
-The current time plus one hour plus one minute, with ms resolution.   
-  
-`now+1h/d`
-
-| 
-
-The current time plus one hour, rounded down to the nearest day.   
-  
-`2015-01-01||+1M/d`
-
-| 
-
-`2015-01-01` plus one month, rounded down to the nearest day.   
+---|---   
+`now+1h+1m`| The current time plus one hour plus one minute, with ms resolution.     
+`now+1h/d`| The current time plus one hour, rounded down to the nearest day.     
+`2015-01-01||+1M/d`| `2015-01-01` plus one month, rounded down to the nearest day.   
   
 ### Response Filtering
 
 All REST APIs accept a `filter_path` parameter that can be used to reduce the response returned by elasticsearch. This parameter takes a comma separated list of filters expressed with the dot notation:
     
-    
     GET /_search?q=elasticsearch&filter_path=took,hits.hits._id,hits.hits._score
 
 Responds:
-    
     
     {
       "took" : 3,
@@ -126,11 +63,9 @@ Responds:
 
 It also supports the `*` wildcard character to match any field or part of a field’s name:
     
-    
     GET /_cluster/state?filter_path=metadata.indices.*.stat*
 
 Responds:
-    
     
     {
       "metadata" : {
@@ -290,91 +225,26 @@ All REST APIs support providing numbered parameters as `string` on top of suppor
 
 Whenever durations need to be specified, e.g. for a `timeout` parameter, the duration must specify the unit, like `2d` for 2 days. The supported units are:
 
-`d`
-
-| 
-
-days   
-  
----|---  
-  
-`h`
-
-| 
-
-hours   
-  
-`m`
-
-| 
-
-minutes   
-  
-`s`
-
-| 
-
-seconds   
-  
-`ms`
-
-| 
-
-milliseconds   
-  
-`micros`
-
-| 
-
-microseconds   
-  
-`nanos`
-
-| 
-
-nanoseconds   
+`d`| days     
+---|---    
+`h`| hours     
+`m`| minutes     
+`s`| seconds     
+`ms`| milliseconds     
+`micros`| microseconds     `
+nanos`| nanoseconds   
   
 ### Byte size units
 
 Whenever the byte size of data needs to be specified, eg when setting a buffer size parameter, the value must specify the unit, like `10kb` for 10 kilobytes. Note that these units use powers of 1024, so `1kb` means 1024 bytes. The supported units are:
 
-`b`
-
-| 
-
-Bytes   
-  
----|---  
-  
-`kb`
-
-| 
-
-Kilobytes   
-  
-`mb`
-
-| 
-
-Megabytes   
-  
-`gb`
-
-| 
-
-Gigabytes   
-  
-`tb`
-
-| 
-
-Terabytes   
-  
-`pb`
-
-| 
-
-Petabytes   
+`b`| Bytes     
+---|---    
+`kb`| Kilobytes     
+`mb`| Megabytes     
+`gb`| Gigabytes     
+`tb`| Terabytes     
+`pb`| Petabytes   
   
 ### Unit-less quantities
 
@@ -382,43 +252,13 @@ Unit-less quantities means that they don’t have a "unit" like "bytes" or "Hert
 
 If one of these quantities is large we’ll print it out like 10m for 10,000,000 or 7k for 7,000. We’ll still print 87 when we mean 87 though. These are the supported multipliers:
 
-`` 
-
-| 
-
-Single   
-  
----|---  
-  
-`k`
-
-| 
-
-Kilo   
-  
-`m`
-
-| 
-
-Mega   
-  
-`g`
-
-| 
-
-Giga   
-  
-`t`
-
-| 
-
-Tera   
-  
-`p`
-
-| 
-
-Peta   
+`` | Single     
+---|---    
+`k`| Kilo     
+`m`| Mega     
+`g`| Giga     
+`t`| Tera     
+`p`| Peta   
   
 ### Distance Units
 
@@ -426,61 +266,16 @@ Wherever distances need to be specified, such as the `distance` parameter in the
 
 The full list of units is listed below:
 
-Mile 
-
-| 
-
-`mi` or `miles`  
-  
----|---  
-  
-Yard 
-
-| 
-
-`yd` or `yards`  
-  
-Feet 
-
-| 
-
-`ft` or `feet`  
-  
-Inch 
-
-| 
-
-`in` or `inch`  
-  
-Kilometer 
-
-| 
-
-`km` or `kilometers`  
-  
-Meter 
-
-| 
-
-`m` or `meters`  
-  
-Centimeter 
-
-| 
-
-`cm` or `centimeters`  
-  
-Millimeter 
-
-| 
-
-`mm` or `millimeters`  
-  
-Nautical mile 
-
-| 
-
-`NM`, `nmi` or `nauticalmiles`  
+Mile | `mi` or `miles`    
+---|---    
+Yard | `yd` or `yards`    
+Feet | `ft` or `feet`    
+Inch | `in` or `inch`    
+Kilometer | `km` or `kilometers`    
+Meter | `m` or `meters`    
+entimeter | `cm` or `centimeters`   
+Millimeter | `mm` or `millimeters`    
+Nautical mile | `NM`, `nmi` or `nauticalmiles`  
   
 ### Fuzziness
 
