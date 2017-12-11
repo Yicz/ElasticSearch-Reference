@@ -1,3 +1,5 @@
 ## Maximum size virtual memory check
 
-Elasticsearch and Lucene use `mmap` to great effect to map portions of an index into the Elasticsearch address space. This keeps certain index data off the JVM heap but in memory for blazing fast access. For this to be effective, the Elasticsearch should have unlimited address space. The maximum size virtual memory check enforces that the Elasticsearch process has unlimited address space and is enforced only on Linux. To pass the maximum size virtual memory check, you must configure your system to allow the Elasticsearch process the ability to have unlimited address space. This can be done via `/etc/security/limits.conf` using the `as` setting to `unlimited` (note that you might have to increase the limits for the `root` user too).
+Elasticsearch和Lucene使用mmap来将索引的一部分映射到Elasticsearch地址空间。 这样可以将某些索引数据从JVM堆中删除，但在内存中可以快速访问。 为了有效，Elasticsearch应该有无限的地址空间。 最大大小的虚拟内存检查强制Elasticsearch进程具有无限的地址空间，并且仅在Linux上执行。 要通过最大容量虚拟内存检查，您必须配置您的系统以允许Elasticsearch进程拥有无限制的地址空间。 这可以通过`/ etc / security / limits.conf`完成，使用`as`设置为'unlimited'（注意，你可能还需要增加`root`用户的限制）。
+
+

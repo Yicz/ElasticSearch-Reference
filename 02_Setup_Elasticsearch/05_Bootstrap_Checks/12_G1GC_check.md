@@ -1,3 +1,3 @@
 ## G1GC check
 
-Early versions of the HotSpot JVM that shipped with JDK 8 are known to have issues that can lead to index corruption when the G1GC collector is enabled. The versions impacted are those earlier than the version of HotSpot that shipped with JDK 8u40. The G1GC check detects these early versions of the HotSpot JVM.
+已知JDK 8附带的HotSpot JVM的早期版本在启用G1GC收集器时会导致索引损坏。 受影响的版本是早于JDK 8u40附带的HotSpot版本的版本。 G1GC检查检测到这些HotSpot JVM的早期版本。

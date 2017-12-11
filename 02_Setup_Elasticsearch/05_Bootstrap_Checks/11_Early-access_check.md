@@ -1,3 +1,4 @@
 ## Early-access check
 
-The OpenJDK project provides early-access snapshots of upcoming releases. These releases are not suitable for production. The early-access check detects these early-access snapshots. To pass this check, you must start Elasticsearch on a release build of the JVM.
+OpenJDK项目提供即将发布的快照。 这些版本不适合生产。 早期访问检查检测这些早期访问快照。 要通过此检查，您必须在JVM的发行版本上启动Elasticsearch。
+
