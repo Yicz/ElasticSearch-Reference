@@ -1,0 +1,41 @@
+## ASCII Folding Token Filter
+
+A token filter of type `asciifolding` that converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the "Basic Latin" Unicode block) into their ASCII equivalents, if one exists. Example:
+    
+    
+    PUT /asciifold_example
+    {
+        "settings" : {
+            "analysis" : {
+                "analyzer" : {
+                    "default" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["standard", "asciifolding"]
+                    }
+                }
+            }
+        }
+    }
+
+Accepts `preserve_original` setting which defaults to false but if true will keep the original token as well as emit the folded token. For example:
+    
+    
+    PUT /asciifold_example
+    {
+        "settings" : {
+            "analysis" : {
+                "analyzer" : {
+                    "default" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["standard", "my_ascii_folding"]
+                    }
+                },
+                "filter" : {
+                    "my_ascii_folding" : {
+                        "type" : "asciifolding",
+                        "preserve_original" : true
+                    }
+                }
+            }
+        }
+    }

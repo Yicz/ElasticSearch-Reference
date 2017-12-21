@@ -1,0 +1,12 @@
+{
+    "plugins": [
+        "-search",
+        "toc2"
+    ],
+    "pluginsConfig": {
+        "toc2": {
+            "addClass": true,
+            "className": "toc"
+        }
+    }
+}

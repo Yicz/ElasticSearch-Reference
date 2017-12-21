@@ -1,0 +1,259 @@
+## cat thread pool
+
+The `thread_pool` command shows cluster wide thread pool statistics per node. By default the active, queue and rejected statistics are returned for all thread pools.
+    
+    
+    % curl 192.168.56.10:9200/_cat/thread_pool
+    0EWUhXe bulk                0 0 0
+    0EWUhXe fetch_shard_started 0 0 0
+    0EWUhXe fetch_shard_store   0 0 0
+    0EWUhXe flush               0 0 0
+    0EWUhXe force_merge         0 0 0
+    0EWUhXe generic             0 0 0
+    0EWUhXe get                 0 0 0
+    0EWUhXe index               0 0 0
+    0EWUhXe listener            0 0 0
+    0EWUhXe management          1 0 0
+    0EWUhXe refresh             0 0 0
+    0EWUhXe search              0 0 0
+    0EWUhXe snapshot            0 0 0
+    0EWUhXe warmer              0 0 0
+
+The first column is the node name
+    
+    
+    node_name
+    0EWUhXe
+
+The second column is the thread pool name
+    
+    
+    name
+    bulk
+    fetch_shard_started
+    fetch_shard_store
+    flush
+    force_merge
+    generic
+    get
+    index
+    listener
+    management
+    refresh
+    search
+    snapshot
+    warmer
+
+The next three columns show the active, queue, and rejected statistics for each thread pool
+    
+    
+    active queue rejected
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         1     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+         0     0        0
+
+The cat thread pool API accepts a `thread_pool_patterns` URL parameter for specifying a comma-separated list of regular expressions to match thread pool names.
+    
+    
+    % curl 'localhost:9200/_cat/thread_pool/generic?v&h=id,name,active,rejected,completed'
+    id                     name    active rejected completed
+    0EWUhXeBQtaVGlexUeVwMg generic      0        0        70
+
+Here the host columns and the active, rejected and completed suggest thread pool statistics are displayed.
+
+All [built-in thread pools](modules-threadpool.html "Thread Pool") and custom thread pools are available.
+
+#### Thread Pool Fields
+
+For each thread pool, you can load details about it by using the field names in the table below.
+
+Field Name | Alias | Description  
+---|---|---  
+  
+`type`
+
+| 
+
+`t`
+
+| 
+
+The current (*) type of thread pool (`fixed` or `scaling`)  
+  
+`active`
+
+| 
+
+`a`
+
+| 
+
+The number of active threads in the current thread pool  
+  
+`size`
+
+| 
+
+`s`
+
+| 
+
+The number of threads in the current thread pool  
+  
+`queue`
+
+| 
+
+`q`
+
+| 
+
+The number of tasks in the queue for the current thread pool  
+  
+`queue_size`
+
+| 
+
+`qs`
+
+| 
+
+The maximum number of tasks permitted in the queue for the current thread pool  
+  
+`rejected`
+
+| 
+
+`r`
+
+| 
+
+The number of tasks rejected by the thread pool executor  
+  
+`largest`
+
+| 
+
+`l`
+
+| 
+
+The highest number of active threads in the current thread pool  
+  
+`completed`
+
+| 
+
+`c`
+
+| 
+
+The number of tasks completed by the thread pool executor  
+  
+`min`
+
+| 
+
+`mi`
+
+| 
+
+The configured minimum number of active threads allowed in the current thread pool  
+  
+`max`
+
+| 
+
+`ma`
+
+| 
+
+The configured maximum number of active threads allowed in the current thread pool  
+  
+`keep_alive`
+
+| 
+
+`k`
+
+| 
+
+The configured keep alive time for threads  
+  
+### Other Fields
+
+In addition to details about each thread pool, it is also convenient to get an understanding of where those thread pools reside. As such, you can request other details like the `ip` of the responding node(s).
+
+Field Name | Alias | Description  
+---|---|---  
+  
+`node_id`
+
+| 
+
+`id`
+
+| 
+
+The unique node ID  
+  
+`ephemeral_id`
+
+| 
+
+`eid`
+
+| 
+
+The ephemeral node ID  
+  
+`pid`
+
+| 
+
+`p`
+
+| 
+
+The process ID of the running node  
+  
+`host`
+
+| 
+
+`h`
+
+| 
+
+The hostname for the current node  
+  
+`ip`
+
+| 
+
+`i`
+
+| 
+
+The IP address for the current node  
+  
+`port`
+
+| 
+
+`po`
+
+| 
+
+The bound transport port for the current node

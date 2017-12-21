@@ -1,0 +1,3 @@
+## Reverse Token Filter
+
+A token filter of type `reverse` that simply reverses each token.
