@@ -1,26 +1,26 @@
-# Document APIs
+#文档操作 APIs 
 
-This div starts with a short introduction to Elasticsearch’s [data replication model](docs-replication.html "Reading and Writing documents"), followed by a detailed description of the following CRUD APIs:
+本部分将简短地介绍ES的[数据分片模型](docs-replication.html), 接下来都会进行详细地介绍增删查找(CRUD)APIs:
 
- **Single document APIs**
+ **单文档 APIs**
 
-  * [_Index API_](docs-index_.html "Index API")
-  * [_Get API_](docs-get.html "Get API")
-  * [_Delete API_](docs-delete.html "Delete API")
-  * [_Update API_](docs-update.html "Update API")
-
-
-
-**Multi-document APIs**
-
-  * [_Multi Get API_](docs-multi-get.html "Multi Get API")
-  * [_Bulk API_](docs-bulk.html "Bulk API")
-  * [_Delete By Query API_](docs-delete-by-query.html "Delete By Query API")
-  * [_Update By Query API_](docs-update-by-query.html "Update By Query API")
-  * [_Reindex API_](docs-reindex.html "Reindex API")
+  * [_Index API_](docs-index_.html)
+  * [_Get API_](docs-get.html)
+  * [_Delete API_](docs-delete.html)
+  * [_Update API_](docs-update.html)
 
 
 
-![Note](images/icons/note.png)
+**多文档 APIs**
 
-All CRUD APIs are single-index APIs. The `index` parameter accepts a single index name, or an `alias` which points to a single index.
+  * [_多个获取 Multi Get API_](docs-multi-get.html)
+  * [_批量操作 Bulk API_](docs-bulk.html)
+  * [_查询删除 Delete By Query API_](docs-delete-by-query.html)
+  * [_查询更新 Update By Query API_](docs-update-by-query.html)
+  * [_重建索引 Reindex API_](docs-reindex.html)
+
+
+
+![提醒](images/icons/note.png)
+
+全部增删查找(CRUD)APIs都只能进行单文档操作，`index`参数是单索引的名称，或者使用`alias`指向单个索引。

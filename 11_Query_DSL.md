@@ -1,4 +1,4 @@
-# Query DSL
+# 查询结构语言
 
 Elasticsearch provides a full Query DSL based on JSON to define queries. Think of the Query DSL as an AST of queries, consisting of two types of clauses:
 

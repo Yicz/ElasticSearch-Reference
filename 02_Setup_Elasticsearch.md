@@ -1,4 +1,4 @@
-# Setup Elasticsearch
+# ES的配置
 
 本章节包含如下的内容：
 

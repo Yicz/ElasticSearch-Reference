@@ -1,4 +1,4 @@
-# Release Notes
+# 版本发布信息
 
 This div summarizes the changes in each release.
 

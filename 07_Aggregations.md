@@ -1,4 +1,4 @@
-# Aggregations
+# 聚合操作
 
 The aggregations framework helps provide aggregated data based on a search query. It is based on simple building blocks called aggregations, that can be composed in order to build complex summaries of the data.
 

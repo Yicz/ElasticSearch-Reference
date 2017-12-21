@@ -1,12 +1,12 @@
-# API Conventions
+# API 规约
 
-The **elasticsearch** REST APIs are exposed using [JSON over HTTP](modules-http.html "HTTP").
+ES APIsr的接口是通过[HTTP并使用JSON数据](modules-http.html "HTTP")进行暴露的
 
-The conventions listed in this chapter can be applied throughout the REST API, unless otherwise specified.
+下面列举的规约可以用于全部的ES REST API，除特殊指定外：
 
-  * [_Multiple Indices_](multi-index.html "Multiple Indices")
-  * [_Date math support in index names_](date-math-index-names.html "Date math support in index names")
-  * [_Common options_](common-options.html "Common options")
-  * [_URL-based access control_](url-access-control.html "URL-based access control")
+  * [_ 多索引操作 （Multiple Indices）_](multi-index.html "Multiple Indices")
+  * [_索引名称支持日期数运算符 （Date math support in index names）_](date-math-index-names.html "Date math support in index names")
+  * [_ 通用选项（Common options）_](common-options.html "Common options")
+  * [_基于URL的权限控制（URL-based access control）_](url-access-control.html "URL-based access control")
 
 

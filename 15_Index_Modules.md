@@ -1,4 +1,4 @@
-# Index Modules
+# 索引模块 Index Modules
 
 Index Modules are modules created per index and control all aspects related to an index.
 

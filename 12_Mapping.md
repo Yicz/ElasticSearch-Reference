@@ -1,4 +1,4 @@
-# Mapping
+# 映射 Mapping
 
 Mapping is the process of defining how a document, and the fields it contains, are stored and indexed. For instance, use mappings to define:
 

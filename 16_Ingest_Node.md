@@ -1,4 +1,4 @@
-# Ingest Node
+# 功能节点 Ingest Node
 
 You can use ingest node to pre-process documents before the actual indexing takes place. This pre-processing happens by an ingest node that intercepts bulk and index requests, applies the transformations, and then passes the documents back to the index or bulk APIs.
 

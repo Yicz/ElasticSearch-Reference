@@ -1,4 +1,4 @@
-# Analysis
+# 分词 Analysis
 
  _Analysis_ is the process of converting text, like the body of any email, into _tokens_ or _terms_ which are added to the inverted index for searching. Analysis is performed by an [_analyzer_](analysis-analyzers.html "Analyzers") which can be either a built-in analyzer or a [`custom`](analysis-custom-analyzer.html "Custom Analyzer") analyzer defined per index.
 

@@ -1,13 +1,11 @@
-# Breaking changes
+# 本版修改记录
 
-This div discusses the changes that you need to be aware of when migrating your application from one version of Elasticsearch to another.
+本部分讨论ES各个版本升级的变化
 
-As a general rule:
+通用规则:
 
-  * Migration between minor versions — e.g. `5.x` to `5.y` — can be performed by [upgrading one node at a time](rolling-upgrades.html "Rolling upgrades"). 
-  * Migration between consecutive major versions — e.g. `2.x` to `5.x` —  requires a [full cluster restart](restart-upgrade.html "Full cluster restart upgrade"). 
-  * Migration between non-consecutive major versions — e.g. `1.x` to `5.x` —  is not supported. 
+  * 小版本之间的迁移— 例如. `5.x` to `5.y` —[滚动更新](rolling-upgrades.html). 
+  * 大版本之间的迁移— 例如. `2.x` to `5.x` —[重建立集群](restart-upgrade.html). 
+  * 非连续的大版本之前的迁移— e.g. `1.x` to `5.x` —  不支持. 
 
-
-
-See [_Upgrading Elasticsearch_](setup-upgrade.html "Upgrading Elasticsearch") for more info.
+详情请查阅 [_ES升级_](setup-upgrade.html).
