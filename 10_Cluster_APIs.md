@@ -2,8 +2,7 @@
 
 ## Node specification
 
-Most cluster level APIs allow to specify which nodes to execute on (for example, getting the node stats for a node). Nodes can be identified in the APIs either using their internal node id, the node name, address, custom attributes, or just the `_local` node receiving the request. For example, here are some sample executions of nodes info:
-    
+大部分的集群级别的APIs都允许指定一个节点进行执行操作（如，查询一个节点的状态），节点（node）使用内部的（节点id）Node id，（节点名称）node name,(地址)address ，（自定义属性）custom attributes在APIs中标识他们的身份,或者只是`_local`标识本地的节点。 例如，下面是一些节点info的示例执行：    
     
     # Local
     GET /_nodes/_local

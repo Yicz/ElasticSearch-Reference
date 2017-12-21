@@ -1,7 +1,6 @@
 # How To
+ES附带默认设置，旨在提供良好的开箱即用体验。 全文搜索，突出显示，聚合和索引应该都可以正常工作，用户不必改变任何东西。
 
-Elasticsearch ships with defaults which are intended to give a good out of the box experience. Full text search, highlighting, aggregations, and indexing should all just work without the user having to change anything.
+当你想如何更好地使用ES的时候，你可以做一些优化来提高你的用例的性能。
 
-Once you better understand how you want to use Elasticsearch, however, there are a number of optimizations you can make to improve performance for your use case.
-
-This div provides guidance about which changes should and shouldn’t be made.
+这个部分提供了哪些应该改变和不应该做的指导。

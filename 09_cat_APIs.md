@@ -1,14 +1,14 @@
 # 查询_cat_ APIs
 
-## Introduction
+## 介绍
 
 JSON is great… for computers. Even if it’s pretty-printed, trying to find relationships in the data is tedious. Human eyes, especially when looking at an ssh terminal, need compact and aligned text. The cat API aims to meet this need.
 
 All the cat commands accept a query string parameter `help` to see all the headers and info they provide, and the `/_cat` command alone lists all the available commands.
 
-## Common parameters
+## 通用参数
 
-### Verbose
+### 动词（Verb）
 
 Each of the commands accepts a query string parameter `v` to turn on verbose output. For example:
     
@@ -21,7 +21,7 @@ Might respond with:
     id                     host      ip        node
     u_n93zwxThWHi1PDBJAGAg 127.0.0.1 127.0.0.1 u_n93zw
 
-### Help
+### 帮助
 
 Each of the commands accepts a query string parameter `help` which will output its available columns. For example:
     
@@ -36,7 +36,7 @@ Might respond respond with:
     ip   |   | ip address
     node | n | node name
 
-### Headers
+### 头信息 Headers
 
 Each of the commands accepts a query string parameter `h` which forces only those columns to appear. For example:
     
@@ -50,7 +50,7 @@ Responds with:
 
 You can also request multiple columns using simple wildcards like `/_cat/thread_pool?h=ip,bulk.*` to get all headers (or aliases) starting with `bulk.`.
 
-### Numeric formats
+### 数据格式 Numeric formats
 
 Many commands provide a few types of numeric output, either a byte, size or a time value. By default, these types are human-formatted, for example, `3.5mb` instead of `3763212`. The human values are not sortable numerically, so in order to operate on these values where order is important, you can change it.
 
@@ -68,7 +68,7 @@ If you want to change the [size units](common-options.html#size-units "Unit-less
 
 If you want to change the [byte units](common-options.html#byte-units "Byte size unitsedit"), use `bytes` parameter.
 
-### Response as text, json, smile, yaml or cbor
+### 作为text, json, smile, yaml 或 cbor进行响应
     
     
     % curl 'localhost:9200/_cat/indices?format=json&pretty'
@@ -106,7 +106,7 @@ Alternatively you can set the "Accept" HTTP header to the appropriate media form
       }
     ]
 
-### Sort
+### 排序 Sort
 
 Each of the commands accepts a query string parameter `s` which sorts the table by the columns specified as the parameter value. Columns are specified either by name or by alias, and are provided as a comma separated string. By default, sorting is done in ascending fashion. Appending `:desc` to a column will invert the ordering for that column. `:asc` is also accepted but exhibits the same behavior as the default sort order.
 

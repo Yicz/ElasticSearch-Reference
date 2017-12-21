@@ -1,6 +1,6 @@
 # 测试 Testing
 
-This div is about utilizing elasticsearch as part of your testing infrastructure.
+这个部分是关于使用elasticsearch作为你的测试基础设施的一部分。
 
 ## Testing:
 
