@@ -1,30 +1,35 @@
 # 聚合操作
 
-The aggregations framework helps provide aggregated data based on a search query. It is based on simple building blocks called aggregations, that can be composed in order to build complex summaries of the data.
+聚合框架帮助你在使用查询的时候进行数据的分析聚合。它建立在一个叫做聚合操作基础上，可以组合分析数据。
 
-An aggregation can be seen as a _unit-of-work_ that builds analytic information over a set of documents. The context of the execution defines what this document set is (e.g. a top-level aggregation executes within the context of the executed query/filters of the search request).
+一个聚合操作可以看作是一组数据的整理分析的工作单元。执行的上下文定义了该文档所设置的内容（例如，顶级聚合在执行的查询/搜索请求的过滤器的上下文内执行）。
 
-There are many different types of aggregations, each with its own purpose and output. To better understand these types, it is often easier to break them into four main families:
+聚合操作有许多不同的型，每一个都拥有它自己的目的和输出。为了更加容易地了解它们的类型，可以将它们划分为4大类型：
 
-[_Bucketing_](search-aggregations-bucket.html "Bucket Aggregations")
-     A family of aggregations that build buckets, where each bucket is associated with a _key_ and a document criterion. When the aggregation is executed, all the buckets criteria are evaluated on every document in the context and when a criterion matches, the document is considered to "fall in" the relevant bucket. By the end of the aggregation process, we’ll end up with a list of buckets - each one with a set of documents that "belong" to it. 
-[_Metric_](search-aggregations-metrics.html "Metrics Aggregations")
-     Aggregations that keep track and compute metrics over a set of documents. 
-[_Matrix_](search-aggregations-matrix.html "Matrix Aggregations")
-     A family of aggregations that operate on multiple fields and produce a matrix result based on the values extracted from the requested document fields. Unlike metric and bucket aggregations, this aggregation family does not yet support scripting. 
-[_Pipeline_](search-aggregations-pipeline.html "Pipeline Aggregations")
-     Aggregations that aggregate the output of other aggregations and their associated metrics 
+[_归类（桶） Bucketing_](search-aggregations-bucket.html)
 
-The interesting part comes next. Since each bucket effectively defines a document set (all documents belonging to the bucket), one can potentially associate aggregations on the bucket level, and those will execute within the context of that bucket. This is where the real power of aggregations kicks in: **aggregations can be nested!**
+    构建归类的一系列聚合，其中每个类别都与_key_和文档条件相关联。在执行汇总时，所有的时段标准都会在上下文中的每个文档上进行评估，当标准匹配，文档被认为是“落入”相关的分类。 在聚合过程结束之前，我们将得到一个分类列表 - 每个分类都有一组“属于”的文档。
+
+[_度量 Metric_](search-aggregations-metrics.html)
+
+     通过一组文档跟踪和计算度量标准的聚合。
+[_矩阵 Matrix_](search-aggregations-matrix.html)
+
+    一组聚合操作在多个字段上，并基于从请求的文档字段中提取的值生成矩阵结果。 与度量和存储桶聚合不同，此聚合系列还不支持脚本。
+    
+[_管道传送 Pipeline_](search-aggregations-pipeline.html)
+     
+    聚合其他聚合的输出及其相关度量的聚合 
+
+接下来是有趣的部分。由于每个分类有效地定义了一个文档集（属于分类的所有文档），因此可能会将存分类级别的聚合关联起来，这些存储将在该存储区的上下文内执行。 这是聚合的真正力量：**聚合可以嵌套！**
 
 ![Note](images/icons/note.png)
 
-Bucketing aggregations can have sub-aggregations (bucketing or metric). The sub-aggregations will be computed for the buckets which their parent aggregation generates. There is no hard limit on the level/depth of nested aggregations (one can nest an aggregation under a "parent" aggregation, which is itself a sub-aggregation of another higher-level aggregation).
+分类聚合可以拥有子聚合操作（分类聚合或度量聚合),将针对其父聚合生成的分类聚合计算的子集合。 嵌套聚合的级别/深度没有硬性限制（可以在“父级”聚合下嵌套聚合，这本身就是一个子聚合
 
-## Structuring Aggregations
+## 聚合操作结构
 
-The following snippet captures the basic structure of aggregations:
-    
+下面是一个最基本的聚合操作的结构：    
     
     "aggregations" : {
         "<aggregation_name>" : {
@@ -37,16 +42,15 @@ The following snippet captures the basic structure of aggregations:
         [,"<aggregation_name_2>" : { ... } ]*
     }
 
-The `aggregations` object (the key `aggs` can also be used) in the JSON holds the aggregations to be computed. Each aggregation is associated with a logical name that the user defines (e.g. if the aggregation computes the average price, then it would make sense to name it `avg_price`). These logical names will also be used to uniquely identify the aggregations in the response. Each aggregation has a specific type (`<aggregation_type>` in the above snippet) and is typically the first key within the named aggregation body. Each type of aggregation defines its own body, depending on the nature of the aggregation (e.g. an `avg` aggregation on a specific field will define the field on which the average will be calculated). At the same level of the aggregation type definition, one can optionally define a set of additional aggregations, though this only makes sense if the aggregation you defined is of a bucketing nature. In this scenario, the sub-aggregations you define on the bucketing aggregation level will be computed for all the buckets built by the bucketing aggregation. For example, if you define a set of aggregations under the `range` aggregation, the sub-aggregations will be computed for the range buckets that are defined.
+`aggregations` 对象 (可以使用`aggs`进行使用) 在JSON文档中定义了聚合操作的定义.每一个聚合操作都有一个用户定义的逻辑名称。 (例如. 如果要计算价格，可以将逻辑名称定义为`avg_price`).在响应中逻辑名称是聚合操作的唯一的标识，每个聚合都有一个特定的类型（上面代码片段中的<aggregation_type>），通常是指定聚合体中的第一个键。每种类型的聚合定义了它自己的身体，这取决于聚合的性质（例如，在特定字段上的`avg`聚合将定义计算平均值的字段）。在聚合类型定义的同一级别，可以选择定义一组额外的聚合，尽管这只有在您定义的聚合具有分组性质时才有意义。在这种情况下，将在分类聚合级别上定义的子聚合将针对分类聚合构建的所有分区进行计算。 例如，如果您在“range”聚合下定义了一组汇总，则将针对定义的范围分类聚合计算子汇总。
 
-### Values Source
 
-Some aggregations work on values extracted from the aggregated documents. Typically, the values will be extracted from a specific document field which is set using the `field` key for the aggregations. It is also possible to define a [`script`](modules-scripting.html "Scripting") which will generate the values (per document).
+### 操作的值来源
+某些聚合操作是在聚合操作生成的文档上进行处理的。通常，这些值将从聚合生成文档的`feild`键设置的特定文档字段中提取。 还可以定义一个[`script`](modules-scripting.html)，用来生成值（每个文档）。当为聚合操作配置“field”和“script”设置时，`script`将被视为`value script`。虽然正常脚本是在文档级别上进行操作的（即脚本可以访问与文档相关的所有数据），但`value script`是在**值**级别上操作的。在这种模式下，值从聚合操作生成的的`field`中提取，`script`用于对这些值进行“变换”。
 
-When both `field` and `script` settings are configured for the aggregation, the script will be treated as a `value script`. While normal scripts are evaluated on a document level (i.e. the script has access to all the data associated with the document), value scripts are evaluated on the **value** level. In this mode, the values are extracted from the configured `field` and the `script` is used to apply a "transformation" over these value/s.
 
 ![Note](images/icons/note.png)
 
-When working with scripts, the `lang` and `params` settings can also be defined. The former defines the scripting language which is used (assuming the proper language is available in Elasticsearch, either by default or as a plugin). The latter enables defining all the "dynamic" expressions in the script as parameters, which enables the script to keep itself static between calls (this will ensure the use of the cached compiled scripts in Elasticsearch).
+使用脚本时，也可以定义`lang`和`params`设置。 前者定义了使用的脚本语言（假定Elasticsearch中有适当的语言，默认或插件）。后者可以将脚本中的所有“动态”表达式定义为参数，从而使脚本在调用之间保持静态（这将确保在Elasticsearch中使用缓存的编译脚本）。
 
-Elasticsearch uses the type of the field in the mapping in order to figure out how to run the aggregation and format the response. However there are two cases in which Elasticsearch cannot figure out this information: unmapped fields (for instance in the case of a search request across multiple indices, and only some of them have a mapping for the field) and pure scripts. For those cases, it is possible to give Elasticsearch a hint using the `value_type` option, which accepts the following values: `string`, `long` (works for all integer types), `double` (works for all decimal types like `float` or `scaled_float`), `date`, `ip` and `boolean`.
+ES使用映射中字段的类型来计算如何运行聚合和格式化响应。然而，有两种情况Elasticsearch无法找出这些信息：未映射的字段（例如在跨多个索引的搜索请求的情况下，只有一些字段具有映射）和纯脚本。 对于这些情况，可以使用`value_type`选项给Elasticsearch一个提示，它接受下列值：`string`，`long`（适用于所有整数类型），`double`（适用于所有小数类型 `float`或`scaled_float`），`date`，`ip`和`boolean`。

@@ -1,23 +1,20 @@
 # 分词 Analysis
 
- _Analysis_ is the process of converting text, like the body of any email, into _tokens_ or _terms_ which are added to the inverted index for searching. Analysis is performed by an [_analyzer_](analysis-analyzers.html "Analyzers") which can be either a built-in analyzer or a [`custom`](analysis-custom-analyzer.html "Custom Analyzer") analyzer defined per index.
+分词是转换文本的过程，就如任何的邮件（email）的内容都会分词成具体的 _符号(tokens)_ 或 _项(terms)_ 以方便可以索引可以被倒序查找。 分词要要求有一个[分词器_analyzer_](analysis-analyzers.html),可以使用内置的分词器，也可以[自定义分词器](analysis-custom-analyzer.html) 。
 
-## Index time analysis
+## 索引时分析
 
-For instance at index time, the built-in [`english`](analysis-lang-analyzer.html#english-analyzer "english analyzer") _analyzer_ would convert this sentence:
-    
+例如，在索引时，内置的[`english _分词器_`](analysis-lang-analyzer.html＃english-analyzer) 将会转换这个句子：
     
     "The QUICK brown foxes jumped over the lazy dog!"
 
-into these terms, which would be added to the inverted index.
-    
+变成具体的项（terms）或者符号（tokens），这将被添加到倒排索引。
     
     [ quick, brown, fox, jump, over, lazi, dog ]
 
-### Specifying an index time analyzer
+### 指定一个索引的分词器
 
-Each [`text`](text.html "Text datatype") field in a mapping can specify its own [`analyzer`](analyzer.html "analyzer"):
-    
+每一个[`text`](text.html) 类型的字段要在映射关系（mapping）中指定自己使用的[分词器 `analyzer`](analyzer.html):
     
     PUT my_index
     {
@@ -33,35 +30,34 @@ Each [`text`](text.html "Text datatype") field in a mapping can specify its own 
       }
     }
 
-At index time, if no `analyzer` has been specified, it looks for an analyzer in the index settings called `default`. Failing that, it defaults to using the [`standard` analyzer](analysis-standard-analyzer.html "Standard Analyzer").
+在进行索引时，如果没有指定一个分词器，ES会查找一个`默认 defalut`的分词器。缺省的分词器是[`标准 standard` 分词器](analysis-standard-analyzer.html).
 
-## Search time analysis
+## 查询时分析
 
-This same analysis process is applied to the query string at search time in [full text queries](full-text-queries.html "Full text queries") like the [`match` query](query-dsl-match-query.html "Match Query") to convert the text in the query string into terms of the same form as those that are stored in the inverted index.
+ES进行[全文查询 `full text queries`](full-text-queries.html)的时候也会到分词,如[`匹配 match` 查询](query-dsl-match-query.html) 会转换文档成索引时分成的具体的项（term）
 
-For instance, a user might search for:
-    
+例如，一个查询内容:
     
     "a quick fox"
 
-which would be analysed by the same `english` analyzer into the following terms:
-    
+如果使用的`english` 分词器 ,会分成如下具体的项：
     
     [ quick, fox ]
 
-Even though the exact words used in the query string don’t appear in the original text (`quick` vs `QUICK`, `fox` vs `foxes`), because we have applied the same analyzer to both the text and the query string, the terms from the query string exactly match the terms from the text in the inverted index, which means that this query would match our example document.
+即使查询字符串中使用的确切单词不出现在原始文本（如`确切词`vs`原始文本` `quick` vs`QUICK`，`fox` vs`foxes`）中，因为我们已经将相同的分析器应用于文本和查询 字符串，查询字符串中的术语与倒排索引中的文本中的术语完全匹配，这意味着此查询将匹配我们的示例文档。
 
-### Specifying a search time analyzer
 
-Usually the same analyzer should be used both at index time and at search time, and [full text queries](full-text-queries.html "Full text queries") like the [`match` query](query-dsl-match-query.html "Match Query") will use the mapping to look up the analyzer to use for each field.
+### 指定一个查询分词器
 
-The analyzer to use to search a particular field is determined by looking for:
+通常应该在索引时和搜索时使用相同的分析器，并使用[全文查询](full-text-queries.html)，如[match match query](query-dsl-match-query.html)将使用映射关系来查找每个字段使用的分析器。
 
-  * An `analyzer` specified in the query itself. 
-  * The [`search_analyzer`](search-analyzer.html "search_analyzer") mapping parameter. 
-  * The [`analyzer`](analyzer.html "analyzer") mapping parameter. 
-  * An analyzer in the index settings called `default_search`. 
-  * An analyzer in the index settings called `default`. 
-  * The `standard` analyzer. 
+用于搜索特定字段的分析器是通过查找：
+
+  * 在查询体或查询字符串中指定一个分词器
+  * [`search_analyzer`](search-analyzer.html)的映射参数. 
+  * [`analyzer`](analyzer.html)映射参数. 
+  * 索引指定的默认分词器 `default_search`. 
+  * 在索引设置中的默认的分词器 `default`. 
+  * `标准 standard` 分词器. 
 
 
