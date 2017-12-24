@@ -1,107 +1,77 @@
-## Configuring system settings
+## 重要的系统设置
 
-Where to configure systems settings depends on which package you have used to install Elasticsearch, and which operating system you are using.
+设置系统设置取决于你使用什么平台系统和安装ES使用的方式。
 
-When using the `.zip` or `.tar.gz` packages, system settings can be configured:
+当你使用`.zpi`或`.tar.gz`包进行安装的时候，可以使用如下的方式进行配置：
 
-  * temporarily with [`ulimit`](setting-system-settings.html#ulimit "ulimit"), or 
-  * permanently in [`/etc/security/limits.conf`](setting-system-settings.html#limits.conf "/etc/security/limits.conf"). 
+  * 使用 [`ulimit`](setting-system-settings.html#ulimit)命令进行临时设置,  
+  * 在系统的配置文件[`/etc/security/limits.conf`](setting-system-settings.html#limits.conf) 进行永久地变更. 
 
 
-
-When using the RPM or Debian packages, most system settings are set in the [system configuration file](setting-system-settings.html#sysconfig "Sysconfig file"). However, systems which use systemd require that system limits are specified in a [systemd configuration file](setting-system-settings.html#systemd "Systemd configuration").
+当你使用`RPM`或`Deb`包进行安装的进修，大部分的系统设置在[系统配置文件](setting-system-settings.html#sysconfig)中，如果系统使用提是`systemd`，将要在[`systemd`配置文件]中指定 `system ulimit`.
 
 ### `ulimit`
-
-On Linux systems, `ulimit` can be used to change resource limits on a temporary basis. Limits usually need to be set as `root` before switching to the user that will run Elasticsearch. For example, to set the number of open file handles (`ulimit -n`) to 65,536, you can do the following:
-    
-    
-    sudo su  ![](images/icons/callouts/1.png)
-    ulimit -n 65536 ![](images/icons/callouts/2.png)
-    su elasticsearch ![](images/icons/callouts/3.png)
-
-![](images/icons/callouts/1.png)
-
-| 
-
-Become `root`.   
+在Linux平台，`ulimit`命令可以用于临时变更资源限制（resource limits）,命令的执行要使用`root`用户，例如，修改打开文件的数量`ulimint -n 65536`，修改打开文件数到65536，你要执行如下命令：
+```sh
+    sudo su  # 切换到root用户
+    ulimit -n 65536 # 执行修改打开文件数的大小
+    su elasticsearch # 切换回elasticsearch用户
+```
   
----|---  
-  
-![](images/icons/callouts/2.png)
+新的资源限制只会应用到当前的会话状态。
 
-| 
-
-Change the max number of open files.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Become the `elasticsearch` user in order to start Elasticsearch.   
-  
-The new limit is only applied during the current session.
-
-You can consult all currently applied limits with `ulimit -a`.
+你可以使用`ulimit -a`查看所有的配置情况。
 
 ### `/etc/security/limits.conf`
 
-On Linux systems, persistent limits can be set for a particular user by editing the `/etc/security/limits.conf` file. To set the maximum number of open files for the `elasticsearch` user to 65,536, add the following line to the `limits.conf` file:
-    
+在Linux平台，永久地变更`limits`可以修改配置文件`/etc/security/limits.conf`,只修改elasticsearch用户的资源限制可以使用如下的配置：
     
     elasticsearch  -  nofile  65536
 
-This change will only take effect the next time the `elasticsearch` user opens a new session.
+这个只修改影响到`elasticsearch`新打开的会话。
 
 ![Note](images/icons/note.png)
 
-### Ubuntu and `limits.conf`
+### Ubuntu系统与`limits.conf`
 
-Ubuntu ignores the `limits.conf` file for processes started by `init.d`. To enable the `limits.conf` file, edit `/etc/pam.d/su` and uncomment the following line:
-    
+Ubuntu系统会忽略`limits.conf`文件，转而使用`init.d`,要启用`limits.conf`,要编辑`/etc/pam.d/su`,取消如下的注释内容：
     
     # session    required   pam_limits.so
 
-### Sysconfig file
+### 系统配置文件 Sysconfig file
 
-When using the RPM or Debian packages, system settings and environment variables can be specified in the system configuration file, which is located in:
 
-RPM 
+当使用`RPM`或`deb`的安装方式的时候，系统配置和环境变量可以在系统的配置文件中指定，配置文件位于：
 
-| 
-
-`/etc/sysconfig/elasticsearch`  
+RPM | `/etc/sysconfig/elasticsearch`  
   
 ---|---  
   
-Debian 
-
-| 
-
-`/etc/default/elasticsearch`  
+Debian | `/etc/default/elasticsearch`  
   
-However, for systems which uses `systemd`, system limits need to be specified via [systemd](setting-system-settings.html#systemd "Systemd configuration").
 
-### Systemd configuration
+然后，使用`systemd`的系统，要使用[`systemd`](setting-system-settings.html#systemd)进行修改
 
-When using the RPM or Debian packages on systems that use [systemd](https://en.wikipedia.org/wiki/Systemd), system limits must be specified via systemd.
+### `Systemd` 配置
 
-The systemd service file (`/usr/lib/systemd/system/elasticsearch.service`) contains the limits that are applied by default.
+如果使用`RPM`或`deb`包安装的平台使用[`systemd`](https://en.wikipedia.org/wiki/Systemd),系统资源将由`sytemd`进行指定。
 
-To override these, add a file called `/etc/systemd/system/elasticsearch.service.d/elasticsearch.conf` and specify any changes in that file, such as:
-    
+系统服务文件(`/usr/lib/systemd/system/elasticsearch.service`) 包含了`limits`配置，会被默认应用 
+
+要覆盖默认配置，可以添加一个文件`/etc/systemd/system/elasticsearch.service.d/elasticsearch.conf`并在文件中指定如下内容：
     
     [Service]
     LimitMEMLOCK=infinity
 
-### Setting JVM options
+###  JVM 配置
 
-The preferred method of setting Java Virtual Machine options (including system properties and JVM flags) is via the `jvm.options` configuration file. The default location of this file is `config/jvm.options` (when installing from the tar or zip distributions) and `/etc/elasticsearch/jvm.options` (when installing from the Debian or RPM packages). This file contains a line-delimited list of JVM arguments, which must begin with `-`. You can add custom JVM flags to this file and check this configuration into your version control system.
+配置JVM虚拟机选项最优的方式是通过`jvm.options`配置文件，默认的文件位置是`$ES_HOME/config/jvm.options`(使用`.zip`或`.tar.gz`方式安装)，或`/etc/elasticsearch/jvm.options`(使用`RPM`或`deb`方式安装)，这个配置文件使用了以`-`开头（**必须**）的的JVM选项。您可以将自定义JVM标志添加到此文件，并将此配置检入到您的版本控制系统中。
 
-An alternative mechanism for setting Java Virtual Machine options is via the `ES_JAVA_OPTS` environment variable. For instance:
-    
-    
+
+
+另一种设置Java虚拟机选项的机制是通过`ES_JAVA_OPTS`环境变量。 例如：
+```sh    
     export ES_JAVA_OPTS="$ES_JAVA_OPTS -Djava.io.tmpdir=/path/to/temp/dir"
     ./bin/elasticsearch
-
-When using the RPM or Debian packages, `ES_JAVA_OPTS` can be specified in the [system configuration file](setting-system-settings.html#sysconfig "Sysconfig file").
+```
+当使用`RPM`或`deb`包进行安装时，可以在[系统配置文件](setting-system-settings.html#sysconfig)中指定`ES_JAVA_OPTS`环境变量。

@@ -1,16 +1,17 @@
-## File Descriptors
+## 文件描述符 File Descriptors
 
 ![Note](images/icons/note.png)
 
-This is only relevant for Linux and macOS and can be safely ignored if running Elasticsearch on Windows. On Windows that JVM uses an [API](https://msdn.microsoft.com/en-us/library/windows/desktop/aa363858\(v=vs.85\).aspx) limited only by available resources.
+这只适用于Linux和macOS，如果在Windows上运行Elasticsearch，可以放心地忽略它。 在Windows上，JVM使用[API](https://msdn.microsoft.com/en-us/library/windows/desktop/aa363858v=vs.85.aspx)仅受可用资源的限制。
 
-Elasticsearch uses a lot of file descriptors or file handles. Running out of file descriptors can be disastrous and will most probably lead to data loss. Make sure to increase the limit on the number of open files descriptors for the user running Elasticsearch to 65,536 or higher.
 
-For the `.zip` and `.tar.gz` packages, set [`ulimit -n 65536`](setting-system-settings.html#ulimit "ulimit") as root before starting Elasticsearch, or set `nofile` to `65536` in [`/etc/security/limits.conf`](setting-system-settings.html#limits.conf "/etc/security/limits.conf").
+Elasticsearch使用了大量的文件描述符或文件句柄。 用完文件描述符可能是灾难性的，并且很可能导致数据丢失。 确保将运行Elasticsearch的用户的打开文件描述符的数量限制增加到65,536或更高。
 
-RPM and Debian packages already default the maximum number of file descriptors to 65536 and do not require further configuration.
 
-You can check the `max_file_descriptors` configured for each node using the [_Nodes Stats_](cluster-nodes-stats.html "Nodes Stats") API, with:
-    
+使用 `.zip`或`.tar.gz` 包安装的方式, 可以使用rooty启用执行[`ulimit -n 65536`](setting-system-settings.html#ulimit) 配置打开文件数量为`65535`, 或在[`/etc/security/limits.conf`](setting-system-settings.html#limits.conf)配置`nofile` 为 `65536`
+
+使用`RPM`或`deb`包安装的方式已经默认配置了打开的文件描述符为`65536`不需要进行其他的配置。
+
+你可以[_Nodes Stats_](cluster-nodes-stats.html) API来检查配置的`max_file_descriptors`大小：
     
     GET _nodes/stats/process?filter_path=**.max_file_descriptors

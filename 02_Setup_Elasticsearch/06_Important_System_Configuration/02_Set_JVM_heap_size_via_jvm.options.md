@@ -1,69 +1,40 @@
-## Set JVM heap size via jvm.options
+## 通过文件jvm.options修改JV的堆大小（heap size）
 
-By default, Elasticsearch tells the JVM to use a heap with a minimum and maximum size of 2 GB. When moving to production, it is important to configure heap size to ensure that Elasticsearch has enough heap available.
-
-Elasticsearch will assign the entire heap specified in [jvm.options](setting-system-settings.html#jvm-options "Setting JVM options") via the Xms (minimum heap size) and Xmx (maximum heap size) settings.
-
-The value for these setting depends on the amount of RAM available on your server. Good rules of thumb are:
-
-  * Set the minimum heap size (Xms) and maximum heap size (Xmx) to be equal to each other. 
-  * The more heap available to Elasticsearch, the more memory it can use for caching. But note that too much heap can subject you to long garbage collection pauses. 
-  * Set Xmx to no more than 50% of your physical RAM, to ensure that there is enough physical RAM left for kernel file system caches. 
-  * Don’t set Xmx to above the cutoff that the JVM uses for compressed object pointers (compressed oops); the exact cutoff varies but is near 32 GB. You can verify that you are under the limit by looking for a line in the logs like the following: 
-    
-        heap size [1.9gb], compressed ordinary object pointers [true]
-
-  * Even better, try to stay below the threshold for zero-based compressed oops; the exact cutoff varies but 26 GB is safe on most systems, but can be as large as 30 GB on some systems. You can verify that you are under the limit by starting Elasticsearch with the JVM options `-XX:+UnlockDiagnosticVMOptions -XX:+PrintCompressedOopsMode` and looking for a line like the following: 
-    
-        heap address: 0x000000011be00000, size: 27648 MB, zero based Compressed Oops
-
-showing that zero-based compressed oops are enabled instead of
-    
-        heap address: 0x0000000118400000, size: 28672 MB, Compressed Oops with base: 0x00000001183ff000
+默认地，ES使用的最小堆和最大堆的设置是2G,当迁移到生产环境时，配置一个满足可用的堆大小是一件重要的事情。
 
 
+Elasticsearch将通过[jvm.options](setting-system-settings.html#jvm-options)来指定的整个堆的大小,配置选项是Xms（最小堆大小）和Xmx（最大堆大小）设置。
+
+这些设置的值取决于服务器上可用的内存大小。 最佳的实践设置如下：
+
+  * 将最小堆大小（Xms）和最大堆大小（Xmx）设置为彼此相等。
+  * ES可用的堆越多，可用于缓存的内存就越多。 但是请注意，太大的堆可能会使您长时间垃圾收集暂停。
+  * 将Xmx设置为不超过物理RAM的50％，以确保有足够的物理内存留给内核文件系统缓存。
+  * 不要将Xmx设置为JVM用于压缩对象指针（压缩oops）的临界值以上; 确切上限不是脆只知道接近32 GB。 
+
+    您可以通过在日志中查找如下信息来验证您是否在限制之下：
+
+            heap size [1.9gb], compressed ordinary object pointers [true]
+  * 甚至更好地尽量保持低于零压缩oops的门槛; 确切上限不清楚，但大多数系统上设置26GB是安全的，但在某些系统上可能设置到30GB。 您可以使用JVM选项“-XX：+ UnlockDiagnosticVMOptions -XX：+ PrintCompressedOopsMode”启动Elasticsearch，然后查找如下日志输出：
+
+            heap address: 0x000000011be00000, size: 27648 MB, zero based Compressed Oops
+  显示基于零的压缩oops被启用是如下输出
+
+             heap address: 0x0000000118400000, size: 28672 MB, Compressed Oops with base: 0x00000001183ff000
 
 
+下面是`jvm.options`文件的例子
 Here are examples of how to set the heap size via the jvm.options file:
-    
-    
-    -Xms2g ![](images/icons/callouts/1.png)
-    -Xmx2g ![](images/icons/callouts/2.png)
-
-![](images/icons/callouts/1.png)
-
-| 
-
-Set the minimum heap size to 2g.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Set the maximum heap size to 2g.   
-  
-It is also possible to set the heap size via an environment variable. This can be done by commenting out the `Xms` and `Xmx` settings in the jvm.options file and setting these values via `ES_JAVA_OPTS`:
-    
-    
-    ES_JAVA_OPTS="-Xms2g -Xmx2g" ./bin/elasticsearch ![](images/icons/callouts/1.png)
-    ES_JAVA_OPTS="-Xms4000m -Xmx4000m" ./bin/elasticsearch ![](images/icons/callouts/2.png)
-
-![](images/icons/callouts/1.png)
-
-| 
-
-Set the minimum and maximum heap size to 2 GB.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Set the minimum and maximum heap size to 4000 MB.   
+```sh
+-Xms2g  # 最小堆大小为2G
+-Xmx2g  # 最大堆大小为2G
+```
+也可以通过环境变量设置堆大小。 这可以通过在`jvm.options`文件中注释掉`Xms`和`Xmx`设置并通过`ES_JAVA_OPTS`设置这些值来完成： 
+```sh
+ES_JAVA_OPTS="-Xms2g -Xmx2g" ./bin/elasticsearch 
+ES_JAVA_OPTS="-Xms4000m -Xmx4000m" ./bin/elasticsearch 
+``` 
   
 ![Note](images/icons/note.png)
 
-Configuring the heap for the [Windows service](windows.html#windows-service "Installing Elasticsearch as a Service on Windows") is different than the above. The values initially populated for the Windows service can be configured as above but are different after the service has been installed. Consult the [Windows service documentation](windows.html#windows-service "Installing Elasticsearch as a Service on Windows") for additional details.
+为[Windows服务](windows.html#windows-service) 配置堆大小不同于上述内容。最初为Windows服务的值可以像上面那样配置，但在安装服务之后会有所不同。 有关更多详细信息，请参阅[Windows服务文档](windows.html#windows-service) 。
