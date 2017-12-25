@@ -175,72 +175,21 @@ Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch
 
 The RPM also has a system configuration file (`/etc/sysconfig/elasticsearch`), which allows you to set the following parameters:
 
-`ES_USER`
-
-| 
-
-The user to run as, defaults to `elasticsearch`.   
-  
----|---  
-  
-`ES_GROUP`
-
-| 
-
-The group to run as, defaults to `elasticsearch`.   
-  
-`JAVA_HOME`
-
-| 
-
-Set a custom Java path to be used.   
-  
-`MAX_OPEN_FILES`
-
-| 
-
-Maximum number of open files, defaults to `65536`.   
-  
-`MAX_LOCKED_MEMORY`
-
-| 
-
-Maximum locked memory size. Set to `unlimited` if you use the `bootstrap.memory_lock` option in elasticsearch.yml.   
-  
-`MAX_MAP_COUNT`
-
-| 
+`ES_USER`| The user to run as, defaults to `elasticsearch`.     
+---|---    
+`ES_GROUP`| The group to run as, defaults to `elasticsearch`.     
+`JAVA_HOME`| Set a custom Java path to be used.     
+`MAX_OPEN_FILES`| Maximum number of open files, defaults to `65536`.     
+`MAX_LOCKED_MEMORY`| Maximum locked memory size. Set to `unlimited` if you use the `bootstrap.memory_lock` option in elasticsearch.yml.     
+`MAX_MAP_COUNT`| 
 
 Maximum number of memory map areas a process may have. If you use `mmapfs` as index store type, make sure this is set to a high value. For more information, check the [linux kernel documentation](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/vm.txt) about `max_map_count`. This is set via `sysctl` before starting elasticsearch. Defaults to `262144`.   
   
-`LOG_DIR`
-
-| 
-
-Log directory, defaults to `/var/log/elasticsearch`.   
-  
-`DATA_DIR`
-
-| 
-
-Data directory, defaults to `/var/lib/elasticsearch`.   
-  
-`CONF_DIR`
-
-| 
-
-Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `/etc/elasticsearch`.   
-  
-`ES_JAVA_OPTS`
-
-| 
-
-Any additional JVM system properties you may want to apply.   
-  
-`RESTART_ON_UPGRADE`
-
-| 
-
+`LOG_DIR`| Log directory, defaults to `/var/log/elasticsearch`.     
+`DATA_DIR`| Data directory, defaults to `/var/lib/elasticsearch`.     
+`CONF_DIR`| Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `/etc/elasticsearch`.     
+`ES_JAVA_OPTS`| Any additional JVM system properties you may want to apply.     
+`RESTART_ON_UPGRADE`| 
 Configure restart on package upgrade, defaults to `false`. This means you will have to restart your elasticsearch instance after installing a package manually. The reason for this is to ensure, that upgrades in a cluster do not result in a continuous shard reallocation resulting in high network traffic and reducing the response times of your cluster.   
   
 ![Note](images/icons/note.png)
@@ -252,127 +201,16 @@ Distributions that use `systemd` require that system resource limits be configur
 The RPM places config files, logs, and the data directory in the appropriate locations for an RPM-based system:
 
 Type |  Description |  Default Location |  Setting  
----|---|---|---  
-  
- **home**
-
-| 
-
-Elasticsearch home directory or `$ES_HOME`
-
-| 
-
-`/usr/share/elasticsearch`
-
-|   
-  
- **bin**
-
-| 
-
-Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins
-
-| 
-
-`/usr/share/elasticsearch/bin`
-
-|   
-  
- **conf**
-
-| 
-
-Configuration files including `elasticsearch.yml`
-
-| 
-
-`/etc/elasticsearch`
-
-| 
-
-`path.conf`  
-  
- **conf**
-
-| 
-
-Environment variables including heap size, file descriptors.
-
-| 
-
-`/etc/sysconfig/elasticsearch`
-
-|   
-  
- **data**
-
-| 
-
-The location of the data files of each index / shard allocated on the node. Can hold multiple locations.
-
-| 
-
-`/var/lib/elasticsearch`
-
-| 
-
-`path.data`  
-  
- **logs**
-
-| 
-
-Log files location.
-
-| 
-
-`/var/log/elasticsearch`
-
-| 
-
-`path.logs`  
-  
- **plugins**
-
-| 
-
-Plugin files location. Each plugin will be contained in a subdirectory.
-
-| 
-
-`/usr/share/elasticsearch/plugins`
-
-| 
-
-``  
-  
- **repo**
-
-| 
-
-Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.
-
-| 
-
-Not configured
-
-| 
-
-`path.repo`  
-  
- **script**
-
-| 
-
-Location of script files.
-
-| 
-
-`/etc/elasticsearch/scripts`
-
-| 
-
-`path.scripts`  
+---|---|---|---     
+**home**| Elasticsearch home directory or `$ES_HOME`| `/usr/share/elasticsearch`|      
+**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `/usr/share/elasticsearch/bin`|      
+**conf**| Configuration files including `elasticsearch.yml`| `/etc/elasticsearch`| `path.conf`     
+**conf**| Environment variables including heap size, file descriptors.| `/etc/sysconfig/elasticsearch`|      
+**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `/var/lib/elasticsearch`| `path.data`     
+**logs**| Log files location.| `/var/log/elasticsearch`| `path.logs`     
+**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `/usr/share/elasticsearch/plugins`| ``     
+**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
+**script**| Location of script files.| `/etc/elasticsearch/scripts`| `path.scripts`  
   
 ### Next steps
 

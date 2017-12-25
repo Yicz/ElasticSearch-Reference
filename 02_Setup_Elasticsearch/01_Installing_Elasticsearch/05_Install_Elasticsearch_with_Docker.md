@@ -209,7 +209,8 @@ One way of checking the Docker daemon defaults for the aforementioned ulimits is
   6. Pin your deployments to a specific version of the Elasticsearch Docker image. For example, `docker.elastic.co/elasticsearch/elasticsearch:5.4.3`. 
   7. Always use a volume bound on `/usr/share/elasticsearch/data`, as shown in the [production example](docker.html#docker-cli-run-prod-mode), for the following reasons: 
 
-    1. The data of your elasticsearch node won’t be lost if the container is killed 
+    1. The data of your elasticsearch node won’t be lost if the container is 
+    killed   
     2. Elasticsearch is I/O sensitive and the Docker storage driver is not ideal for fast I/O 
     3. It allows the use of advanced [Docker volume plugins](https://docs.docker.com/engine/extend/plugins/#volume-plugins)
 

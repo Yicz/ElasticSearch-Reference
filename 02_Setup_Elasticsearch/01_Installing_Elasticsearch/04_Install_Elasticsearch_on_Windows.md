@@ -80,35 +80,11 @@ The script requires one parameter (the command to execute) followed by an option
 
 The commands available are:
 
-`install`
-
-| 
-
-Install Elasticsearch as a service   
-  
----|---  
-  
-`remove`
-
-| 
-
-Remove the installed Elasticsearch service (and stop the service if started)   
-  
-`start`
-
-| 
-
-Start the Elasticsearch service (if installed)   
-  
-`stop`
-
-| 
-
-Stop the Elasticsearch service (if started)   
-  
-`manager`
-
-| 
+`install`| Install Elasticsearch as a service     ---|---    
+`remove`| Remove the installed Elasticsearch service (and stop the service if started)     
+`start`| Start the Elasticsearch service (if installed)     
+`stop`| Stop the Elasticsearch service (if started)     
+`manager`| 
 
 Start a GUI for managing the installed service   
   
@@ -132,77 +108,18 @@ The system environment variable `JAVA_HOME` should be set to the path to the JDK
 
 The Elasticsearch service can be configured prior to installation by setting the following environment variables (either using the [set command](https://technet.microsoft.com/en-us/library/cc754250\(v=ws.10\).aspx) from the command line, or through the `System Properties->Environment Variables` GUI).
 
-`SERVICE_ID`
-
-| 
-
-A unique identifier for the service. Useful if installing multiple instances on the same machine. Defaults to `elasticsearch-service-x86` (on 32-bit Windows) or `elasticsearch-service-x64` (on 64-bit Windows).   
-  
----|---  
-  
-`SERVICE_USERNAME`
-
-| 
-
-The user to run as, defaults to the local system account.   
-  
-`SERVICE_PASSWORD`
-
-| 
-
-The password for the user specified in `%SERVICE_USERNAME%`.   
-  
-`SERVICE_DISPLAY_NAME`
-
-| 
-
-The name of the service. Defaults to `Elasticsearch <version> %SERVICE_ID%`.   
-  
-`SERVICE_DESCRIPTION`
-
-| 
-
-The description of the service. Defaults to `Elasticsearch <version> Windows Service - https://elastic.co`.   
-  
-`JAVA_HOME`
-
-| 
-
-The installation directory of the desired JVM to run the service under.   
-  
-`LOG_DIR`
-
-| 
-
-Log directory, defaults to `%ES_HOME%\logs`.   
-  
-`DATA_DIR`
-
-| 
-
-Data directory, defaults to `%ES_HOME%\data`.   
-  
-`CONF_DIR`
-
-| 
-
-Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `%ES_HOME%\conf`.   
-  
-`ES_JAVA_OPTS`
-
-| 
-
-Any additional JVM system properties you may want to apply.   
-  
-`ES_START_TYPE`
-
-| 
-
-Startup mode for the service. Can be either `auto` or `manual` (default).   
-  
-`ES_STOP_TIMEOUT`
-
-| 
+`SERVICE_ID`| A unique identifier for the service. Useful if installing multiple instances on the same machine. Defaults to `elasticsearch-service-x86` (on 32-bit Windows) or `elasticsearch-service-x64` (on 64-bit Windows).     ---|---    
+`SERVICE_USERNAME`| The user to run as, defaults to the local system account.     
+`SERVICE_PASSWORD`| The password for the user specified in `%SERVICE_USERNAME%`.     
+`SERVICE_DISPLAY_NAME`| The name of the service. Defaults to `Elasticsearch <version> %SERVICE_ID%`.     
+`SERVICE_DESCRIPTION`| The description of the service. Defaults to `Elasticsearch <version> Windows Service - https://elastic.co`.     
+`JAVA_HOME`| The installation directory of the desired JVM to run the service under.     
+`LOG_DIR`| Log directory, defaults to `%ES_HOME%\logs`.     
+`DATA_DIR`| Data directory, defaults to `%ES_HOME%\data`.     
+`CONF_DIR`| Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `%ES_HOME%\conf`.     
+`ES_JAVA_OPTS`| Any additional JVM system properties you may want to apply.     
+`ES_START_TYPE`| Startup mode for the service. Can be either `auto` or `manual` (default).     
+`ES_STOP_TIMEOUT`| 
 
 The timeout in seconds that procrun waits for service to exit gracefully. Defaults to `0`.   
   
@@ -228,117 +145,15 @@ The `.zip` package is entirely self-contained. All files and directories are, by
 This is very convenient because you don’t have to create any directories to start using Elasticsearch, and uninstalling Elasticsearch is as easy as removing the `%ES_HOME%` directory. However, it is advisable to change the default locations of the config directory, the data directory, and the logs directory so that you do not delete important data later on.
 
 Type |  Description |  Default Location |  Setting  
----|---|---|---  
-  
- **home**
-
-| 
-
-Elasticsearch home directory or `%ES_HOME%`
-
-| 
-
-Directory created by unpacking the archive
-
-| 
-
-``  
-  
- **bin**
-
-| 
-
-Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins
-
-| 
-
-`%ES_HOME%\bin`
-
-|   
-  
- **conf**
-
-| 
-
-Configuration files including `elasticsearch.yml`
-
-| 
-
-`%ES_HOME%\config`
-
-| 
-
-`path.conf`  
-  
- **data**
-
-| 
-
-The location of the data files of each index / shard allocated on the node. Can hold multiple locations.
-
-| 
-
-`%ES_HOME%\data`
-
-| 
-
-`path.data`  
-  
- **logs**
-
-| 
-
-Log files location.
-
-| 
-
-`%ES_HOME%\logs`
-
-| 
-
-`path.logs`  
-  
- **plugins**
-
-| 
-
-Plugin files location. Each plugin will be contained in a subdirectory.
-
-| 
-
-`%ES_HOME%\plugins`
-
-| 
-
-``  
-  
- **repo**
-
-| 
-
-Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.
-
-| 
-
-Not configured
-
-| 
-
-`path.repo`  
-  
- **script**
-
-| 
-
-Location of script files.
-
-| 
-
-`%ES_HOME%\scripts`
-
-| 
-
-`path.scripts`  
+---|---|---|---     
+**home**| Elasticsearch home directory or `%ES_HOME%`| Directory created by unpacking the archive| ``     
+**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `%ES_HOME%\bin`|      
+**conf**| Configuration files including `elasticsearch.yml`| `%ES_HOME%\config`| `path.conf`     
+**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `%ES_HOME%\data`| `path.data`     
+**logs**| Log files location.| `%ES_HOME%\logs`| `path.logs`     
+**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `%ES_HOME%\plugins`| ``     
+**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
+**script**| Location of script files.| `%ES_HOME%\scripts`| `path.scripts`  
   
 ### Next steps
 
