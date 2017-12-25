@@ -1,4 +1,4 @@
-## Aggregation changes
+## 聚合操作变更 Aggregation changes
 
 ### Significant terms on numeric fields
 

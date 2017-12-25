@@ -1,4 +1,4 @@
-## HTTP changes
+## HTTP协议变更 HTTP changes
 
 ### Compressed HTTP requests are always accepted
 

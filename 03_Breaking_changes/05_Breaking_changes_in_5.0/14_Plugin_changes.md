@@ -1,4 +1,4 @@
-## Plugin changes
+## 插件变更 Plugin changes
 
 The command `bin/plugin` has been renamed to `bin/elasticsearch-plugin`. The structure of the plugin ZIP archive has changed. All the plugin files must be contained in a top-level directory called `elasticsearch`. If you use the gradle build, this structure is automatically generated.
 

@@ -1,4 +1,4 @@
-## Index APIs changes
+## 索引APIs变更 Index APIs changes
 
 ### Closing / deleting indices while running snapshot
 

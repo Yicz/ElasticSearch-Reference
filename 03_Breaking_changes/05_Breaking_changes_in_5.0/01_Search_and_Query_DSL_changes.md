@@ -1,4 +1,4 @@
-## Search and Query DSL changes
+## 查询和结构查询语言变更 Search and Query DSL changes
 
 ### `search_type`
 

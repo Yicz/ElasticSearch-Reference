@@ -1,4 +1,4 @@
-## Mapping changes
+## 映射关系变更 Mapping changes
 
 ### `string` fields replaced by `text`/`keyword` fields
 

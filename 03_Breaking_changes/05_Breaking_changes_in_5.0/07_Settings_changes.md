@@ -1,4 +1,4 @@
-## Settings changes
+## 配置变更 Settings changes
 
 From Elasticsearch 5.0 on all settings are validated before they are applied. Node level and default index level settings are validated on node startup, dynamic cluster and index setting are validated before they are updated/added to the cluster state.
 

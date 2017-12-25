@@ -1,4 +1,4 @@
-## Allocation changes
+## 分配策略变更 Allocation changes
 
 ### Primary shard allocation
 

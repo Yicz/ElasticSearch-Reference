@@ -1,4 +1,4 @@
-## Suggester changes
+## 建议器变更 Suggester changes
 
 The completion suggester has undergone a complete rewrite. This means that the syntax and data structure for fields of type `completion` have changed, as have the syntax and response of completion suggester requests. See [completion suggester](search-suggesters-completion.html) for details.
 

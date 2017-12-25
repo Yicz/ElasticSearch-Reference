@@ -1,4 +1,4 @@
-## Path to data on disk
+##  磁盘数据路径变更 Path to data on disk
 
 In prior versions of Elasticsearch, the `path.data` directory included a folder for the cluster name, so that data was in a folder such as `$DATA_DIR/$CLUSTER_NAME/nodes/$nodeOrdinal`. In 5.0 the cluster name as a directory is deprecated. Data will now be stored in `$DATA_DIR/nodes/$nodeOrdinal` if there is no existing data. Upon startup, Elasticsearch will check to see if the cluster folder exists and has data, and will read from it if necessary. In Elasticsearch 6.0 this backwards-compatible behavior will be removed.
 
