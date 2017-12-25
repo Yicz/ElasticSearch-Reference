@@ -23,6 +23,7 @@
   * [本章小结](01_Getting_Started/06_Conclusion.md)
 * [ES配置](02_Setup_Elasticsearch.md)
   * [安装ES](02_Setup_Elasticsearch/01_Installing_Elasticsearch.md)
+    * [以zip/tar.gz的方式进行安装](02_Setup_Elasticsearch/01_Installing_Elasticsearch_with_zip_tar_gz.md)
     * [使用Debian Package包安装](02_Setup_Elasticsearch/01_Installing_Elasticsearch/02_Install_Elasticsearch_with_Debian_Package.md)
     * [使用RPM安装](02_Setup_Elasticsearch/01_Installing_Elasticsearch/03_Install_Elasticsearch_with_RPM.md)
     * [在Windows上安装](02_Setup_Elasticsearch/01_Installing_Elasticsearch/04_Install_Elasticsearch_on_Windows.md)

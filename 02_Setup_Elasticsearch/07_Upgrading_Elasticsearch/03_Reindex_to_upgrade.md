@@ -1,62 +1,41 @@
-## Reindex to upgrade
+# 重新建立引过升级
+Elasticsearch能够只兼容在主要版本变动创建索引。例如,Elasticsearch 5.x可以使用索引创建Elasticsearch 2.x,但Elasticsearch 1中创建的索引例外！
 
-Elasticsearch is able to use indices created in the previous major version only. For instance, Elasticsearch 5.x can use indices created in Elasticsearch 2.x, but not those created in Elasticsearch 1.x or before.
+> ### Tips 
+> Elasticsearch 5.x 的版本不能使用太旧版本的索引数据，否则5.x将启动不成功。
 
-![Note](images/icons/note.png)
+如果您正在运行Elasticsearch 2.x群集包含了在2.x之前旧版本创建的索引，在升级到5.x之前则需要删除这些旧的索引或重新索引它们。 
 
-Elasticsearch 5.x nodes will fail to start in the presence of too old indices.
+如果你傅的是Elasticsearch 1.x 的版本，你有两种方式进行升级：
 
-If you are running an Elasticsearch 2.x cluster which contains indices that were created before 2.x, you will either need to delete those old indices or to reindex them before upgrading to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace).
+1. 先升级到2.4.x的版本，[重建索引](#reindex)文件后，再升级到5.x.x的版本
+2. 直接建立5.x.x 版本的群集，然后使用[reindex-from-remote](#reindex-from-remote)导入1.x版本的索引
 
-If you are running an Elasticsearch 1.x cluster, you have two options:
+## [重建索引并替换](reindex)
+将旧的（1.x）索引重建索引的最简单方法是使用[Elasticsearch迁移插件(migration plugin)](https://github.com/elastic/elasticsearch-migration/tree/2.x)。您将需要先升级到Elasticsearch 2.3.x或2.4.x。
 
-  * First upgrade to Elasticsearch 2.4.x, reindex the old indices, then upgrade to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace). 
-  * Create a new 5.x cluster and use reindex-from-remote to import indices directly from the 1.x cluster. See [Upgrading with reindex-from-remote](reindex-upgrade.html#reindex-upgrade-remote). 
+迁移插件中提供的reindex实用程序执行以下操作：
 
+* 使用类似旧索引名称（例如my_index-2.4.1）的在Elasticsearch版本创建新索引，并从旧索引复制映射和设置。新索引上的刷新处于禁用状态，为有效重新索引，副本数量设置为0。
+* 将旧索引设置为只读，以确保没有数据写入旧索引。
+* 将旧索引中的所有文档重新索引到新索引。
+* 将refresh_interval和number_of_replicas重置为旧索引中使用的值，并等待索引变为绿色。
+* 将旧索引中存在的任何别名添加到新索引。
+* 删除旧的索引。
+* 使用旧的索引名称为新索引添加一个别名，例如别名my_index指向索引my_index-2.4.1。
 
+在这个过程的最后，你将会有一个新的2.x索引，可以被Elasticsearch 5.x集群使用。
+## [Reindex-from-remote](reindex-from-remote)
+如果您正在运行1.x群集，并且希望直接迁移到5.x而无需先迁移到2.x，则可以使用[reindex-from-remote](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-reindex.html#reindex-from-remote)。
 
-**Time-based indices and retention periods**
+您需要在现有的1.x群集里面设置5.x群集。 5.x群集需要访问1.x群集的REST API权限。
 
-For many use cases with time-based indices, you will not need to worry about carrying old 1.x indices with you to 5.x. Data in time-based indices usually becomes less interesting as time passes. Old indices can be deleted once they fall outside of your retention period.
+对于要转移到5.x群集的每个1.x索引，您需要：
 
-Users in this position can continue to use 2.x until all old 1.x indices have been deleted, then upgrade to 5.x directly.
+* 在5.x中使用适当的映射和设置创建一个新的索引。将refresh_interval设置为-1，并将number_of_replicas设置为0以加快重新索引。
+* 使用[reindex-from-remote](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-reindex.html#reindex-from-remote)将1.x索引中的文档拖入新的5.x索引。
+* 如果您在后台运行reindex作业（wait_for_completion设置为false），则重新索引请求将返回一个task_id，该task_id可用于监视任务API中reindex作业的进度：GET _tasks /task_id。
+* 重新索引完成后，将refresh_interval和number_of_replicas设置为所需值（默认值分别为30秒和1）。
+* 新索引完成复制后，可以删除旧的索引。
 
-### Reindex in place
-
-The easiest way to reindex old (1.x) indices in place is to use the [Elasticsearch Migration Plugin](https://github.com/elastic/elasticsearch-migration/tree/2.x). You will need to upgrade to Elasticsearch 2.3.x or 2.4.x first.
-
-The reindex utility provided in the migration plugin does the following:
-
-  * Creates a new index with the Elasticsearch version appended to the old index name (e.g. `my_index-2.4.1`), copying the mappings and settings from the old index. Refresh is disabled on the new index and the number of replicas is set to `0` for efficient reindexing. 
-  * Sets the old index to read only to ensure that no data is written to the old index. 
-  * Reindexes all documents from the old index to the new index. 
-  * Resets the `refresh_interval` and `number_of_replicas` to the values used in the old index, and waits for the index to become green. 
-  * Adds any aliases that existed on the old index to the new index. 
-  * Deletes the old index. 
-  * Adds an alias to the new index with the old index name, e.g. alias `my_index` points to index `my_index-2.4.1`. 
-
-
-
-At the end of this process, you will have a new 2.x index which can be used by an Elasticsearch 5.x cluster.
-
-### Upgrading with reindex-from-remote
-
-If you are running a 1.x cluster and would like to migrate directly to 5.x without first migrating to 2.x, you can do so using [reindex-from-remote](docs-reindex.html#reindex-from-remote).
-
-![Warning](images/icons/warning.png)
-
-Elasticsearch includes backwards compatibility code that allows indices from the previous major version to be upgraded to the current major version. By moving directly from Elasticsearch 1.x to 5.x, you will have to solve any backwards compatibility issues yourself.
-
-You will need to set up a 5.x cluster alongside your existing 1.x cluster. The 5.x cluster needs to have access to the REST API of the 1.x cluster.
-
-For each 1.x index that you want to transfer to the 5.x cluster, you will need to:
-
-  * Create a new index in 5.x with the appropriate mappings and settings. Set the `refresh_interval` to `-1` and set `number_of_replicas` to `0` for faster reindexing. 
-  * Use [reindex-from-remote](docs-reindex.html#reindex-from-remote) to pull documents from the 1.x index into the new 5.x index. 
-  * If you run the reindex job in the background (with `wait_for_completion` set to `false`), the reindex request will return a `task_id` which can be used to monitor progress of the reindex job in the [task API](tasks.html): `GET _tasks/TASK_ID`. 
-  * Once reindex has completed, set the `refresh_interval` and `number_of_replicas` to the desired values (the defaults are `30s` and `1` respectively). 
-  * Once the new index has finished replication, you can delete the old index. 
-
-
-
-The 5.x cluster can start out small, and you can gradually move nodes from the 1.x cluster to the 5.x cluster as you migrate indices across.
+5.x集群可以从小处开始，并且可以在迁移索引时逐渐将节点从1.x集群移动到5.x集群

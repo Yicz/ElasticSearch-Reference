@@ -1,74 +1,56 @@
-## Full cluster restart upgrade
+# 整个集群重启升级
+Elasticsearch需要完整的集群跨大版本升级时重新启动。滚动升级在主要版本不支持。查阅[此表](Upgrading_Elasticsearch.md)来验证一个集群需要完整重启。 　　 　　
 
-Elasticsearch requires a full cluster restart when upgrading across major versions. Rolling upgrades are not supported across major versions. Consult this [table](setup-upgrade.html) to verify that a full cluster restart is required.
+集群需要完整重启执行流程如下:
 
-The process to perform an upgrade with a full cluster restart is as follows:
-
-  1. **Disable shard allocation**
-
-When you shut down a node, the allocation process will immediately try to replicate the shards that were on that node to other nodes in the cluster, causing a lot of wasted I/O. This can be avoided by disabling allocation before shutting down a node:
+1. 禁用分片分配  
+    当关闭节点时，分配过程将等待一分钟，然后开始将该节点上的分片复制到集群中的其他节点，导致大量浪费的I/O。 这可以通过关闭节点之前禁用分配来避免：
     
-        PUT _cluster/settings
+    ```sh
+    curl -XPUT 'localhost:9200/_cluster/settings?pretty' -H 'Content-Type: application/json' -d'
     {
-      "persistent": {
+      "transient": {
         "cluster.routing.allocation.enable": "none"
       }
     }
-
-  2. **Perform a synced flush**
-
-Shard recovery will be much faster if you stop indexing and issue a [synced-flush](indices-synced-flush.html) request:
+    '
+    ```
     
-        POST _flush/synced
-
-A synced flush request is a “best effort” operation. It will fail if there are any pending indexing operations, but it is safe to reissue the request multiple times if necessary.
-
-  3. **Shutdown and upgrade all nodes**
-
-Stop all Elasticsearch services on all nodes in the cluster. Each node can be upgraded following the same procedure described in [[upgrade-node]](rolling-upgrades.html#upgrade-node).
-
-  4. **Upgrade any plugins**
-
-Elasticsearch plugins must be upgraded when upgrading a node. Use the `elasticsearch-plugin` script to install the correct version of any plugins that you need.
-
-  5. **Start the cluster**
-
-If you have dedicated master nodes — nodes with `node.master` set to `true`(the default) and `node.data` set to `false` —  then it is a good idea to start them first. Wait for them to form a cluster and to elect a master before proceeding with the data nodes. You can check progress by looking at the logs.
-
-As soon as the [minimum number of master-eligible nodes](modules-discovery-zen.html#master-election) have discovered each other, they will form a cluster and elect a master. From that point on, the [`_cat/health`](cat-health.html) and [`_cat/nodes`](cat-nodes.html) APIs can be used to monitor nodes joining the cluster:
+2. 执行一个同步刷新
+    分片复原将更快:
     
-        GET _cat/health
+    ```sh
+    curl -XPOST 'localhost:9200/_flush/synced?pretty'
+    ```
     
-    GET _cat/nodes
-
-Use these APIs to check that all nodes have successfully joined the cluster.
-
-  6. **Wait for yellow**
-
-As soon as each node has joined the cluster, it will start to recover any primary shards that are stored locally. Initially, the [`_cat/health`](cat-health.html) request will report a `status` of `red`, meaning that not all primary shards have been allocated.
-
-Once each node has recovered its local shards, the `status` will become `yellow`, meaning all primary shards have been recovered, but not all replica shards are allocated. This is to be expected because allocation is still disabled.
-
-  7. **Reenable allocation**
-
-Delaying the allocation of replicas until all nodes have joined the cluster allows the master to allocate replicas to nodes which already have local shard copies. At this point, with all the nodes in the cluster, it is safe to reenable shard allocation:
-    
-        PUT _cluster/settings
+3. 停止并升级全部结节  
+   停止集群中所有elastisearch服务，每一个的[升级](Rolling_upgrades.md)的过程都是一致的
+   
+   
+4. 升级插件  
+   升级集群中的一个节点，必须升级这个节点的插件。使用elasticsearch-plugin命令进行重新安装
+   
+5. 启动整个集群的节点  
+   启动升级后的节点，并使用如下命令的检查集群的状态：
+   
+   ```sh
+   # 查看节点状态
+   curl -XGET 'localhost:9200/_cat/nodes?pretty'
+   # 查看集群状态
+   curl -XGET 'localhost:9200/_cat/nodes?pretty'
+   ```
+6. 等待集群状态变黄色
+   慢慢的一个个节点交会加入到集群中，单个节点会开始恢复本地的主分片，一旦主分片恢复完成,状态就会变成黄色，没有变成绿色的原因是我们这实禁用了分功的配置。   
+7. 重新雇用分片配置
+   一旦一个升级后的结节重新进入到集群中后，我们就要重新设置这个结点的分片配置功能：
+   
+   ```sh
+   curl -XPUT 'localhost:9200/_cluster/settings?pretty' -H 'Content-Type: application/json' -d'
     {
-      "persistent": {
+      "transient": {
         "cluster.routing.allocation.enable": "all"
       }
     }
-
-The cluster will now start allocating replica shards to all data nodes. At this point it is safe to resume indexing and searching, but your cluster will recover more quickly if you can delay indexing and searching until all shards have recovered.
-
-You can monitor progress with the [`_cat/health`](cat-health.html) and [`_cat/recovery`](cat-recovery.html) APIs:
-    
-        GET _cat/health
-    
-    GET _cat/recovery
-
-Once the `status` column in the `_cat/health` output has reached `green`, all primary and replica shards have been successfully allocated.
-
-
-
+    '
+    ``` 
+   
