@@ -66,13 +66,13 @@ If set to `true` will cause format based failures (like providing text to a nume
 
 | 
 
-The minimum number of clauses that must match for a document to be returned. See the [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") documentation for the full list of options.  
+The minimum number of clauses that must match for a document to be returned. See the [`minimum_should_match`](query-dsl-minimum-should-match.html) documentation for the full list of options.  
   
 `quote_field_suffix`
 
 | 
 
-A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming "Mixing exact search with stemmingedit") for a comprehensive example.  
+A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensive example.  
   
 `all_fields`
 

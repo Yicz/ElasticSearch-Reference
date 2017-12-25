@@ -4,13 +4,13 @@ Depending on where a script is used, it will have access to certain special vari
 
 ## Update scripts
 
-A script used in the [update](docs-update.html "Update API"), [update-by-query](docs-update-by-query.html "Update By Query API"), or [reindex](docs-reindex.html "Reindex API") API will have access to the `ctx` variable which exposes:
+A script used in the [update](docs-update.html), [update-by-query](docs-update-by-query.html), or [reindex](docs-reindex.html) API will have access to the `ctx` variable which exposes:
 
 `ctx._source`
 
 | 
 
-Access to the document [`_source` field](mapping-source-field.html "_source field").   
+Access to the document [`_source` field](mapping-source-field.html).   
   
 ---|---  
   
@@ -24,21 +24,21 @@ The operation that should be applied to the document: `index` or `delete`.
 
 | 
 
-Access to [document meta-fields](mapping-fields.html "Meta-Fields"), some of which may be read-only.   
+Access to [document meta-fields](mapping-fields.html), some of which may be read-only.   
   
 ## Search and Aggregation scripts
 
-With the exception of [script fields](search-request-script-fields.html "Script Fields") which are executed once per search hit, scripts used in search and aggregations will be executed once for every document which might match a query or an aggregation. Depending on how many documents you have, this could mean millions or billions of executions: these scripts need to be fast!
+With the exception of [script fields](search-request-script-fields.html) which are executed once per search hit, scripts used in search and aggregations will be executed once for every document which might match a query or an aggregation. Depending on how many documents you have, this could mean millions or billions of executions: these scripts need to be fast!
 
-Field values can be accessed from a script using [doc-values](modules-scripting-fields.html#modules-scripting-doc-vals "Doc Valuesedit"), or [stored fields or `_source` field](modules-scripting-fields.html#modules-scripting-stored "Stored Fields and _sourceedit"), which are explained below.
+Field values can be accessed from a script using [doc-values](modules-scripting-fields.html#modules-scripting-doc-vals), or [stored fields or `_source` field](modules-scripting-fields.html#modules-scripting-stored), which are explained below.
 
-Scripts may also have access to the document’s relevance [`_score`](modules-scripting-fields.html#scripting-score "Accessing the score of a document within a scriptedit") and, via the experimental `_index` variable, to term statistics for [advanced text scoring](modules-advanced-scripting.html "Advanced text scoring in scripts").
+Scripts may also have access to the document’s relevance [`_score`](modules-scripting-fields.html#scripting-score) and, via the experimental `_index` variable, to term statistics for [advanced text scoring](modules-advanced-scripting.html).
 
 ### Accessing the score of a document within a script
 
-Scripts used in the [`function_score` query](query-dsl-function-score-query.html "Function Score Query"), in [script-based sorting](search-request-sort.html "Sort"), or in [aggregations](search-aggregations.html "Aggregations") have access to the `_score` variable which represents the current relevance score of a document.
+Scripts used in the [`function_score` query](query-dsl-function-score-query.html), in [script-based sorting](search-request-sort.html), or in [aggregations](search-aggregations.html) have access to the `_score` variable which represents the current relevance score of a document.
 
-Here’s an example of using a script in a [`function_score` query](query-dsl-function-score-query.html "Function Score Query") to alter the relevance `_score` of each document:
+Here’s an example of using a script in a [`function_score` query](query-dsl-function-score-query.html) to alter the relevance `_score` of each document:
     
     
     PUT my_index/my_type/1?refresh
@@ -74,7 +74,7 @@ Here’s an example of using a script in a [`function_score` query](query-dsl-fu
 
 ### Doc Values
 
-By far the fastest most efficient way to access a field value from a script is to use the `doc['field_name']` syntax, which retrieves the field value from [doc values](doc-values.html "doc_values"). Doc values are a columnar field value store, enabled by default on all fields except for [analyzed `text` fields](text.html "Text datatype").
+By far the fastest most efficient way to access a field value from a script is to use the `doc['field_name']` syntax, which retrieves the field value from [doc values](doc-values.html). Doc values are a columnar field value store, enabled by default on all fields except for [analyzed `text` fields](text.html).
     
     
     PUT my_index/my_type/1?refresh
@@ -103,13 +103,13 @@ Doc-values can only return "simple" field values like numbers, dates, geo- point
 
 ### Doc values and `text` fields
 
-The `doc['field']` syntax can also be used for [analyzed `text` fields](text.html "Text datatype") if [`fielddata`](fielddata.html "fielddata") is enabled, but **BEWARE** : enabling fielddata on a `text` field requires loading all of the terms into the JVM heap, which can be very expensive both in terms of memory and CPU. It seldom makes sense to access `text` fields from scripts.
+The `doc['field']` syntax can also be used for [analyzed `text` fields](text.html) if [`fielddata`](fielddata.html) is enabled, but **BEWARE** : enabling fielddata on a `text` field requires loading all of the terms into the JVM heap, which can be very expensive both in terms of memory and CPU. It seldom makes sense to access `text` fields from scripts.
 
 ### Stored Fields and `_source`
 
- _Stored fields_  — fields explicitly marked as [`"store": true`](mapping-store.html "store") — can be accessed using the `_fields['field_name'].value` or `_fields['field_name'].values` syntax.
+ _Stored fields_  — fields explicitly marked as [`"store": true`](mapping-store.html) — can be accessed using the `_fields['field_name'].value` or `_fields['field_name'].values` syntax.
 
-The document [`_source`](mapping-source-field.html "_source field"), which is really just a special stored field, can be accessed using the `_source.field_name` syntax. The `_source` is loaded as a map-of-maps, so properties within object fields can be accessed as, for example, `_source.name.first`.
+The document [`_source`](mapping-source-field.html), which is really just a special stored field, can be accessed using the `_source.field_name` syntax. The `_source` is loaded as a map-of-maps, so properties within object fields can be accessed as, for example, `_source.name.first`.
 
 ![Important](images/icons/important.png)
 
@@ -117,7 +117,7 @@ The document [`_source`](mapping-source-field.html "_source field"), which is re
 
 Stored fields (which includes the stored `_source` field) are much slower than doc-values. They are optimised for returning several fields per result, while doc values are optimised for accessing the value of a specific field in many documents.
 
-It makes sense to use `_source` or stored fields when generating a [script field](search-request-script-fields.html "Script Fields") for the top ten hits from a search result but, for other search and aggregation use cases, always prefer using doc values.
+It makes sense to use `_source` or stored fields when generating a [script field](search-request-script-fields.html) for the top ten hits from a search result but, for other search and aggregation use cases, always prefer using doc values.
 
 For instance:
     

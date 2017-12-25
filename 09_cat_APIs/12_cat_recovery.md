@@ -1,6 +1,6 @@
 ## cat recovery
 
-The `recovery` command is a view of index shard recoveries, both on-going and previously completed. It is a more compact view of the JSON [recovery](indices-recovery.html "Indices Recovery") API.
+The `recovery` command is a view of index shard recoveries, both on-going and previously completed. It is a more compact view of the JSON [recovery](indices-recovery.html) API.
 
 A recovery event occurs anytime an index shard moves to a different node in the cluster. This can happen during a snapshot recovery, a change in replication level, node failure, or on node startup. This last type is called a local store recovery and is the normal way for shards to be loaded from disk when a node starts up.
 
@@ -30,7 +30,7 @@ This will return a line like:
 
 We can see in the above listing that our thw twitter shard was recovered from another node. Notice that the recovery type is shown as `peer`. The files and bytes copied are real-time measurements.
 
-Finally, let’s see what a snapshot recovery looks like. Assuming I have previously made a backup of my index, I can restore it using the [snapshot and restore](modules-snapshots.html "Snapshot And Restore") API.
+Finally, let’s see what a snapshot recovery looks like. Assuming I have previously made a backup of my index, I can restore it using the [snapshot and restore](modules-snapshots.html) API.
     
     
     GET _cat/recovery?v&h=i,s,t,ty,st,rep,snap,f,fp,b,bp

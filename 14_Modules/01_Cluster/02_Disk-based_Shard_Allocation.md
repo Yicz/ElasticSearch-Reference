@@ -2,7 +2,7 @@
 
 Elasticsearch factors in the available disk space on a node before deciding whether to allocate new shards to that node or to actively relocate shards away from that node.
 
-Below are the settings that can be configured in the `elasticsearch.yml` config file or updated dynamically on a live cluster with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API:
+Below are the settings that can be configured in the `elasticsearch.yml` config file or updated dynamically on a live cluster with the [cluster-update-settings](cluster-update-settings.html) API:
 
 `cluster.routing.allocation.disk.threshold_enabled`
      Defaults to `true`. Set to `false` to disable the disk allocation decider. 

@@ -2,7 +2,7 @@
 
 The scripting module enables you to use scripts to evaluate custom expressions. For example, you could use a script to return "script fields" as part of a search request or evaluate a custom score for a query.
 
-The default scripting language is [`Painless`](modules-scripting-painless.html "Painless Scripting Language"). Additional `lang` plugins enable you to run scripts written in other languages. Everywhere a script can be used, you can include a `lang` parameter to specify the language of the script.
+The default scripting language is [`Painless`](modules-scripting-painless.html). Additional `lang` plugins enable you to run scripts written in other languages. Everywhere a script can be used, you can include a `lang` parameter to specify the language of the script.
 
 ### General-purpose languages:
 
@@ -11,7 +11,7 @@ These languages can be used for any purpose in the scripting APIs, and give the 
 Language | Sandboxed | Required plugin  
 ---|---|---  
   
-[`painless`](modules-scripting-painless.html "Painless Scripting Language")
+[`painless`](modules-scripting-painless.html)
 
 | 
 
@@ -21,11 +21,11 @@ yes
 
 built-in  
   
-[`groovy`](modules-scripting-groovy.html "Groovy Scripting Language")
+[`groovy`](modules-scripting-groovy.html)
 
 | 
 
-[no](modules-scripting-security.html "Scripting and security")
+[no](modules-scripting-security.html)
 
 | 
 
@@ -35,7 +35,7 @@ built-in
 
 | 
 
-[no](modules-scripting-security.html "Scripting and security")
+[no](modules-scripting-security.html)
 
 | 
 
@@ -45,7 +45,7 @@ built-in
 
 | 
 
-[no](modules-scripting-security.html "Scripting and security")
+[no](modules-scripting-security.html)
 
 | 
 
@@ -58,7 +58,7 @@ These languages are less flexible, but typically have higher performance for cer
 Language | Sandboxed | Required plugin | Purpose  
 ---|---|---|---  
   
-[`expression`](modules-scripting-expression.html "Lucene Expressions Language")
+[`expression`](modules-scripting-expression.html)
 
 | 
 
@@ -72,7 +72,7 @@ built-in
 
 fast custom ranking and sorting  
   
-[`mustache`](search-template.html "Search Template")
+[`mustache`](search-template.html)
 
 | 
 
@@ -86,7 +86,7 @@ built-in
 
 templates  
   
-[`java`](modules-scripting-native.html "Native \(Java\) Scripts")
+[`java`](modules-scripting-native.html)
 
 | 
 
@@ -104,4 +104,4 @@ expert API
 
 ### Scripts and security
 
-Languages that are sandboxed are designed with security in mind. However, non- sandboxed languages can be a security issue, please read [Scripting and security](modules-scripting-security.html "Scripting and security") for more details.
+Languages that are sandboxed are designed with security in mind. However, non- sandboxed languages can be a security issue, please read [Scripting and security](modules-scripting-security.html) for more details.

@@ -6,7 +6,7 @@ The cluster nodes info API allows to retrieve one or more (or all) of the cluste
     curl -XGET 'http://localhost:9200/_nodes'
     curl -XGET 'http://localhost:9200/_nodes/nodeId1,nodeId2'
 
-The first command retrieves information of all the nodes in the cluster. The second command selectively retrieves nodes information of only `nodeId1` and `nodeId2`. All the nodes selective options are explained [here](cluster.html#cluster-nodes "Node specificationedit").
+The first command retrieves information of all the nodes in the cluster. The second command selectively retrieves nodes information of only `nodeId1` and `nodeId2`. All the nodes selective options are explained [here](cluster.html#cluster-nodes).
 
 By default, it just returns all attributes and core settings for a node:
 
@@ -21,7 +21,7 @@ By default, it just returns all attributes and core settings for a node:
 `name`
      The node’s name. 
 `total_indexing_buffer`
-     Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by [Indexing Buffer settings](indexing-buffer.html "Indexing Buffer"). 
+     Total heap allowed to be used to hold recently indexed documents before they must be written to disk. This size is a shared pool across all shards on this node, and is controlled by [Indexing Buffer settings](indexing-buffer.html). 
 `total_indexing_buffer_in_bytes`
      Same as `total_indexing_buffer`, but expressed in bytes. 
 `transport_address`

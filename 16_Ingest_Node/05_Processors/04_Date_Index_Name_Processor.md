@@ -1,6 +1,6 @@
 ## Date Index Name Processor
 
-The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the [date math index name support](date-math-index-names.html "Date math support in index names").
+The purpose of this processor is to point documents to the right time based index based on a date or timestamp field in a document by using the [date math index name support](date-math-index-names.html).
 
 The processor sets the `_index` meta field with a date math index name expression based on the provided index name prefix, a date or timestamp field in the documents being processed and the provided date rounding.
 
@@ -96,7 +96,7 @@ and the result:
       ]
     }
 
-The above example shows that `_index` was set to `<myindex-{2016-04-25||/M{yyyy-MM-dd|UTC} }>`. Elasticsearch understands this to mean `2016-04-01` as is explained in the [date math index name documentation](date-math-index-names.html "Date math support in index names")
+The above example shows that `_index` was set to `<myindex-{2016-04-25||/M{yyyy-MM-dd|UTC} }>`. Elasticsearch understands this to mean `2016-04-01` as is explained in the [date math index name documentation](date-math-index-names.html)
 
  **Table 17. Date index name options**
 

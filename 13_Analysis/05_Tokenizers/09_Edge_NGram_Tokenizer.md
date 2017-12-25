@@ -6,7 +6,7 @@ Edge N-Grams are useful for _search-as-you-type_ queries.
 
 ![Tip](images/icons/tip.png)
 
-When you need _search-as-you-type_ for text which has a widely known order, such as movie or song titles, the [completion suggester](search-suggesters-completion.html "Completion Suggester") is a much more efficient choice than edge N-grams. Edge N-grams have the advantage when trying to autocomplete words that can appear in any order.
+When you need _search-as-you-type_ for text which has a widely known order, such as movie or song titles, the [completion suggester](search-suggesters-completion.html) is a much more efficient choice than edge N-grams. Edge N-grams have the advantage when trying to autocomplete words that can appear in any order.
 
 ### Example output
 

@@ -1,6 +1,6 @@
 ## Suggester changes
 
-The completion suggester has undergone a complete rewrite. This means that the syntax and data structure for fields of type `completion` have changed, as have the syntax and response of completion suggester requests. See [completion suggester](search-suggesters-completion.html "Completion Suggester") for details.
+The completion suggester has undergone a complete rewrite. This means that the syntax and data structure for fields of type `completion` have changed, as have the syntax and response of completion suggester requests. See [completion suggester](search-suggesters-completion.html) for details.
 
 For indices created before Elasticsearch 5.0.0, `completion` fields and the completion suggester will continue to work as they did in Elasticsearch 2.x. However, it is not possible to run a completion suggester query across indices created in 2.x and indices created in 5.x.
 

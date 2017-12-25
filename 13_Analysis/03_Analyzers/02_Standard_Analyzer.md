@@ -9,16 +9,16 @@ It consists of:
 Tokenizer 
     
 
-  * [Standard Tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer")
+  * [Standard Tokenizer](analysis-standard-tokenizer.html)
 
 
 
 Token Filters 
     
 
-  * [Standard Token Filter](analysis-standard-tokenfilter.html "Standard Token Filter")
-  * [Lower Case Token Filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter")
-  * [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") (disabled by default) 
+  * [Standard Token Filter](analysis-standard-tokenfilter.html)
+  * [Lower Case Token Filter](analysis-lowercase-tokenfilter.html)
+  * [Stop Token Filter](analysis-stop-tokenfilter.html) (disabled by default) 
 
 
 
@@ -60,7 +60,7 @@ A pre-defined stop words list like `_english_` or an array containing a list of 
 
 The path to a file containing stop words.   
   
-See the [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") for more information about stop word configuration.
+See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 
 ### Example configuration
 

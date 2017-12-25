@@ -1,6 +1,6 @@
 ## Native (Java) Scripts
 
-Sometimes `groovy` and [expression](modules-scripting-expression.html "Lucene Expressions Language") aren’t enough. For those times you can implement a native script.
+Sometimes `groovy` and [expression](modules-scripting-expression.html) aren’t enough. For those times you can implement a native script.
 
 The best way to implement a native script is to write a plugin and install it. The plugin [documentation](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/plugin-authors.html) has more information on how to write a plugin so that Elasticsearch will properly load it.
 

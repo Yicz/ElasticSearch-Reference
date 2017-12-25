@@ -40,7 +40,7 @@ That will return something like this:
       "failures" : [ ]
     }
 
-Just like [`_update_by_query`](docs-update-by-query.html "Update By Query API"), `_reindex` gets a snapshot of the source index but its target must be a **different** index so version conflicts are unlikely. The `dest` element can be configured like the index API to control optimistic concurrency control. Just leaving out `version_type` (as above) or setting it to `internal` will cause Elasticsearch to blindly dump documents into the target, overwriting any that happen to have the same type and id:
+Just like [`_update_by_query`](docs-update-by-query.html), `_reindex` gets a snapshot of the source index but its target must be a **different** index so version conflicts are unlikely. The `dest` element can be configured like the index API to control optimistic concurrency control. Just leaving out `version_type` (as above) or setting it to `internal` will cause Elasticsearch to blindly dump documents into the target, overwriting any that happen to have the same type and id:
     
     
     POST _reindex
@@ -159,7 +159,7 @@ If you want a particular set of documents from the twitter index you’ll need t
       }
     }
 
-The `source` div supports all the elements that are supported in a [search request](search-request-body.html "Request Body Search"). For instance only a subset of the fields from the original documents can be reindexed using source filtering as follows:
+The `source` div supports all the elements that are supported in a [search request](search-request-body.html). For instance only a subset of the fields from the original documents can be reindexed using source filtering as follows:
     
     
     POST _reindex
@@ -194,9 +194,9 @@ Like `_update_by_query`, `_reindex` supports a script that modifies the document
 Just as in `_update_by_query`, you can set `ctx.op` to change the operation that is executed on the destination index:
 
 `noop`
-     Set `ctx.op = "noop"` if your script decides that the document doesn’t have to be indexed in the destination index. This no operation will be reported in the `noop` counter in the [response body](docs-reindex.html#docs-reindex-response-body "Response bodyedit"). 
+     Set `ctx.op =). 
 `delete`
-     Set `ctx.op = "delete"` if your script decides that the document must be deleted from the destination index. The deletion will be reported in the `deleted` counter in the [response body](docs-reindex.html#docs-reindex-response-body "Response bodyedit"). 
+     Set `ctx.op =). 
 
 Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
 
@@ -256,7 +256,7 @@ By default `_reindex` uses scroll batches of 1000. You can change the batch size
       }
     }
 
-Reindex can also use the [Ingest Node](ingest.html "Ingest Node") feature by specifying a `pipeline` like this:
+Reindex can also use the [Ingest Node](ingest.html) feature by specifying a `pipeline` like this:
     
     
     POST _reindex
@@ -358,9 +358,9 @@ In addition to the standard parameters like `pretty`, the Reindex API also suppo
 
 Sending the `refresh` url parameter will cause all indexes to which the request wrote to be refreshed. This is different than the Index API’s `refresh` parameter which causes just the shard that received the new data to be refreshed.
 
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-reindex.html#docs-reindex-task-api "Works with the Task APIedit") to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
+If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-reindex.html#docs-reindex-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
 
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the reindexing. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html "Bulk API").
+`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the reindexing. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
 
 `requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the reindex issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
 
@@ -402,7 +402,7 @@ The JSON response looks like this:
 
 ### Works with the Task API
 
-You can fetch the status of all running reindex requests with the [Task API](tasks.html "Task Management API"):
+You can fetch the status of all running reindex requests with the [Task API](tasks.html):
     
     
     GET _tasks?detailed=true&actions=*reindex
@@ -465,7 +465,7 @@ The advantage of this API is that it integrates with `wait_for_completion=false`
 
 ### Works with the Cancel Task API
 
-Any Reindex can be canceled using the [Task Cancel API](tasks.html "Task Management API"):
+Any Reindex can be canceled using the [Task Cancel API](tasks.html):
     
     
     POST _tasks/task_id:1/_cancel
@@ -508,7 +508,7 @@ But you don’t like the name `flag` and want to replace it with `tag`. `_reinde
         "index": "test2"
       },
       "script": {
-        "inline": "ctx._source.tag = ctx._source.remove(\"flag\")"
+       )"
       }
     }
 
@@ -536,7 +536,7 @@ Or you can search by `tag` or whatever you want.
 
 #### Manual slicing
 
-Reindex supports [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll"), allowing you to manually parallelize the process relatively easily:
+Reindex supports [Sliced Scroll](search-request-scroll.html#sliced-scroll), allowing you to manually parallelize the process relatively easily:
     
     
     POST _reindex
@@ -583,7 +583,7 @@ Which results in a sensible `total` like this one:
 
 ### Automatic slicing
 
-You can also let reindex automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll") to slice on `_uid`:
+You can also let reindex automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
     
     
     POST _reindex?slices=5&refresh
@@ -612,7 +612,7 @@ Which results in a sensible `total` like this one:
 
 Adding `slices` to `_reindex` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
 
-  * You can see these requests in the [Tasks APIs](docs-reindex.html#docs-reindex-task-api "Works with the Task APIedit"). These sub-requests are "child" tasks of the task for the request with `slices`. 
+  * You can see these requests in the [Tasks APIs](docs-reindex.html#docs-reindex-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
   * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
   * These sub-requests are individually addressable for things like cancellation and rethrottling. 
   * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 
@@ -637,7 +637,7 @@ At this point we have a few recommendations around the number of `slices` to use
 
 ### Reindex daily indices
 
-You can use `_reindex` in combination with [Painless](modules-scripting-painless.html "Painless Scripting Language") to reindex daily indices to apply a new template to the existing documents.
+You can use `_reindex` in combination with [Painless](modules-scripting-painless.html) to reindex daily indices to apply a new template to the existing documents.
 
 Assuming you have indices consisting of documents as following:
     
@@ -672,7 +672,7 @@ All documents from the previous metricbeat indices now can be found in the `*-1`
     GET metricbeat-2016.05.30-1/beat/1
     GET metricbeat-2016.05.31-1/beat/1
 
-The previous method can also be used in combination with [change the name of a field](docs-reindex.html#docs-reindex-change-name "Reindex to change the name of a fieldedit") to only load the existing data into the new index, but also rename fields if needed.
+The previous method can also be used in combination with [change the name of a field](docs-reindex.html#docs-reindex-change-name) to only load the existing data into the new index, but also rename fields if needed.
 
 ### Extracting a random subset of an index
 

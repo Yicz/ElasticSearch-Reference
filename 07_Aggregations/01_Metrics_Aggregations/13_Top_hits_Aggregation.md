@@ -16,14 +16,14 @@ The `top_hits` aggregator can effectively be used to group result sets by certai
 
 The top_hits aggregation returns regular search hits, because of this many per hit features can be supported:
 
-  * [Highlighting](search-request-highlighting.html "Highlighting")
-  * [Explain](search-request-explain.html "Explain")
-  * [Named filters and queries](search-request-named-queries-and-filters.html "Named Queries")
-  * [Source filtering](search-request-source-filtering.html "Source filtering")
-  * [Stored fields](search-request-stored-fields.html "Fields")
-  * [Script fields](search-request-script-fields.html "Script Fields")
-  * [Doc value fields](search-request-docvalue-fields.html "Doc value Fields")
-  * [Include versions](search-request-version.html "Version")
+  * [Highlighting](search-request-highlighting.html)
+  * [Explain](search-request-explain.html)
+  * [Named filters and queries](search-request-named-queries-and-filters.html)
+  * [Source filtering](search-request-source-filtering.html)
+  * [Stored fields](search-request-stored-fields.html)
+  * [Script fields](search-request-script-fields.html)
+  * [Doc value fields](search-request-docvalue-fields.html)
+  * [Include versions](search-request-version.html)
 
 
 
@@ -194,7 +194,7 @@ At the moment the `max` (or `min`) aggregator is needed to make sure the buckets
 
 ### top_hits support in a nested or reverse_nested aggregator
 
-If the `top_hits` aggregator is wrapped in a `nested` or `reverse_nested` aggregator then nested hits are being returned. Nested hits are in a sense hidden mini documents that are part of regular document where in the mapping a nested field type has been configured. The `top_hits` aggregator has the ability to un-hide these documents if it is wrapped in a `nested` or `reverse_nested` aggregator. Read more about nested in the [nested type mapping](nested.html "Nested datatype").
+If the `top_hits` aggregator is wrapped in a `nested` or `reverse_nested` aggregator then nested hits are being returned. Nested hits are in a sense hidden mini documents that are part of regular document where in the mapping a nested field type has been configured. The `top_hits` aggregator has the ability to un-hide these documents if it is wrapped in a `nested` or `reverse_nested` aggregator. Read more about nested in the [nested type mapping](nested.html).
 
 If nested type has been configured a single document is actually indexed as multiple Lucene documents and they share the same id. In order to determine the identity of a nested hit there is more needed than just the id, so that is why nested hits also include their nested identity. The nested identity is kept under the `_nested` field in the search hit and includes the array field and the offset in the array field the nested hit belongs to. The offset is zero based.
 

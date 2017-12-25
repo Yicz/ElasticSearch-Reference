@@ -1,6 +1,6 @@
 ## Lowercase Tokenizer
 
-The `lowercase` tokenizer, like the [`letter` tokenizer](analysis-letter-tokenizer.html "Letter Tokenizer") breaks text into terms whenever it encounters a character which is not a letter, but it also lowercases all terms. It is functionally equivalent to the [`letter` tokenizer](analysis-letter-tokenizer.html "Letter Tokenizer") combined with the [`lowercase` token filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter"), but is more efficient as it performs both steps in a single pass.
+The `lowercase` tokenizer, like the [`letter` tokenizer](analysis-letter-tokenizer.html) breaks text into terms whenever it encounters a character which is not a letter, but it also lowercases all terms. It is functionally equivalent to the [`letter` tokenizer](analysis-letter-tokenizer.html) combined with the [`lowercase` token filter](analysis-lowercase-tokenfilter.html), but is more efficient as it performs both steps in a single pass.
 
 ### Example output
     

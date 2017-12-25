@@ -35,4 +35,4 @@ Consider the query string `quick brown f`. This query works by creating a phrase
 
 The problem is that the first 50 terms may not include the term `fox` so the phrase `quick brown fox` will not be found. This usually isn’t a problem as the user will continue to type more letters until the word they are looking for appears.
 
-For better solutions for _search-as-you-type_ see the [completion suggester](search-suggesters-completion.html "Completion Suggester") and [Index-Time Search-as-You-Type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html).
+For better solutions for _search-as-you-type_ see the [completion suggester](search-suggesters-completion.html) and [Index-Time Search-as-You-Type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html).

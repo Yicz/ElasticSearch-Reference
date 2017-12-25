@@ -55,7 +55,7 @@ This document will be rejected because coercion is disabled.
   
 ![Tip](images/icons/tip.png)
 
-The `coerce` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `coerce` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 ### Index-level default
 

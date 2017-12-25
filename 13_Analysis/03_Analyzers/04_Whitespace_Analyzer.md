@@ -9,7 +9,7 @@ It consists of:
 Tokenizer 
     
 
-  * [Whitespace Tokenizer](analysis-whitespace-tokenizer.html "Whitespace Tokenizer")
+  * [Whitespace Tokenizer](analysis-whitespace-tokenizer.html)
 
 
 

@@ -13,4 +13,4 @@ These are static settings which must be configured on every data node in the clu
 
 #### Monitoring field data
 
-You can monitor memory usage for field data as well as the field data circuit breaker using [Nodes Stats API](cluster-nodes-stats.html "Nodes Stats")
+You can monitor memory usage for field data as well as the field data circuit breaker using [Nodes Stats API](cluster-nodes-stats.html)

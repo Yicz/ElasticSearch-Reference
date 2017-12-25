@@ -47,7 +47,7 @@ Name | Description
 
 | 
 
-The query string (maps to the `query_string` query, see [_Query String Query_](query-dsl-query-string-query.html "Query String Query") for more details).  
+The query string (maps to the `query_string` query, see [_Query String Query_](query-dsl-query-string-query.html) for more details).  
   
 `df`
 
@@ -95,7 +95,7 @@ For each hit, contain an explanation of how scoring of the hits was computed.
 
 | 
 
-Set to `false` to disable retrieval of the `_source` field. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see the [request body](search-request-source-filtering.html "Source filtering") documentation for more details)  
+Set to `false` to disable retrieval of the `_source` field. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see the [request body](search-request-source-filtering.html) documentation for more details)  
   
 `stored_fields`
 
@@ -143,4 +143,4 @@ The number of hits to return. Defaults to `10`.
 
 | 
 
-The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html "Search Type") for more details on the different types of search that can be performed.
+The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more details on the different types of search that can be performed.

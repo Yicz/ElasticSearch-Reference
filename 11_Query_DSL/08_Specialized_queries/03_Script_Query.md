@@ -1,6 +1,6 @@
 ## Script Query
 
-A query allowing to define [scripts](modules-scripting.html "Scripting") as queries. They are typically used in a filter context, for example:
+A query allowing to define [scripts](modules-scripting.html) as queries. They are typically used in a filter context, for example:
     
     
     GET /_search

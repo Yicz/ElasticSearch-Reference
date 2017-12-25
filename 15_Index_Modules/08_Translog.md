@@ -10,7 +10,7 @@ An Elasticsearch flush is the process of performing a Lucene commit and starting
 
 ### Flush settings
 
-The following [dynamically updatable](indices-update-settings.html "Update Indices Settings") settings control how often the in-memory buffer is flushed to disk:
+The following [dynamically updatable](indices-update-settings.html) settings control how often the in-memory buffer is flushed to disk:
 
 `index.translog.flush_threshold_size`
      Once the translog hits this size, a flush will happen. Defaults to `512mb`. 
@@ -19,9 +19,9 @@ The following [dynamically updatable](indices-update-settings.html "Update Indic
 
 The data in the transaction log is only persisted to disk when the translog is `fsync`ed and committed. In the event of hardware failure, any data written since the previous translog commit will be lost.
 
-By default, Elasticsearch `fsync`s and commits the translog every 5 seconds if `index.translog.durability` is set to `async` or if set to `request` (default) at the end of every [index](docs-index_.html "Index API"), [delete](docs-delete.html "Delete API"), [update](docs-update.html "Update API"), or [bulk](docs-bulk.html "Bulk API") request. In fact, Elasticsearch will only report success of an index, delete, update, or bulk request to the client after the transaction log has been successfully `fsync`ed and committed on the primary and on every allocated replica.
+By default, Elasticsearch `fsync`s and commits the translog every 5 seconds if `index.translog.durability` is set to `async` or if set to `request` (default) at the end of every [index](docs-index_.html), [delete](docs-delete.html), [update](docs-update.html), or [bulk](docs-bulk.html) request. In fact, Elasticsearch will only report success of an index, delete, update, or bulk request to the client after the transaction log has been successfully `fsync`ed and committed on the primary and on every allocated replica.
 
-The following [dynamically updatable](indices-update-settings.html "Update Indices Settings") per-index settings control the behaviour of the transaction log:
+The following [dynamically updatable](indices-update-settings.html) per-index settings control the behaviour of the transaction log:
 
 `index.translog.sync_interval`
      How often the translog is `fsync`ed to disk and committed, regardless of write operations. Defaults to `5s`. Values less than `100ms` are not allowed. 

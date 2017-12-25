@@ -4,7 +4,7 @@ A field to index structured content such as email addresses, hostnames, status c
 
 They are typically used for filtering ( _Find me all blog posts where`status` is `published`_ ), for sorting, and for aggregations. Keyword fields are only searchable by their exact value.
 
-If you need to index full text content such as email bodies or product descriptions, it is likely that you should rather use a [`text`](text.html "Text datatype") field.
+If you need to index full text content such as email bodies or product descriptions, it is likely that you should rather use a [`text`](text.html) field.
 
 Below is an example of a mapping for a keyword field:
     
@@ -26,7 +26,7 @@ Below is an example of a mapping for a keyword field:
 
 The following parameters are accepted by `keyword` fields:
 
-[`boost`](mapping-boost.html "boost")
+[`boost`](mapping-boost.html)
 
 | 
 
@@ -34,73 +34,73 @@ Mapping field-level query time boosting. Accepts a floating point number, defaul
   
 ---|---  
   
-[`doc_values`](doc-values.html "doc_values")
+[`doc_values`](doc-values.html)
 
 | 
 
 Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations, or scripting? Accepts `true` (default) or `false`.   
   
-[`eager_global_ordinals`](fielddata.html#global-ordinals "Global ordinals")
+[`eager_global_ordinals`](fielddata.html#global-ordinals)
 
 | 
 
 Should global ordinals be loaded eagerly on refresh? Accepts `true` or `false` (default). Enabling this is a good idea on fields that are frequently used for terms aggregations.   
   
-[`fields`](multi-fields.html "fields")
+[`fields`](multi-fields.html)
 
 | 
 
 Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one field for search and a multi-field for sorting and aggregations.   
   
-[`ignore_above`](ignore-above.html "ignore_above")
+[`ignore_above`](ignore-above.html)
 
 | 
 
 Do not index any string longer than this value. Defaults to `2147483647` so that all values would be accepted.   
   
-[`include_in_all`](include-in-all.html "include_in_all")
+[`include_in_all`](include-in-all.html)
 
 | 
 
-Whether or not the field value should be included in the [`_all`](mapping-all-field.html "_all field") field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html "index") is set to `no`, or if a parent [`object`](object.html "Object datatype") field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
+Whether or not the field value should be included in the [`_all`](mapping-all-field.html) field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html) is set to `no`, or if a parent [`object`](object.html) field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
   
-[`index`](mapping-index.html "index")
+[`index`](mapping-index.html)
 
 | 
 
 Should the field be searchable? Accepts `true` (default) or `false`.   
   
-[`index_options`](index-options.html "index_options")
+[`index_options`](index-options.html)
 
 | 
 
 What information should be stored in the index, for scoring purposes. Defaults to `docs` but can also be set to `freqs` to take term frequency into account when computing scores.   
   
-[`norms`](norms.html "norms")
+[`norms`](norms.html)
 
 | 
 
 Whether field-length should be taken into account when scoring queries. Accepts `true` or `false` (default).   
   
-[`null_value`](null-value.html "null_value")
+[`null_value`](null-value.html)
 
 | 
 
 Accepts a string value which is substituted for any explicit `null` values. Defaults to `null`, which means the field is treated as missing.   
   
-[`store`](mapping-store.html "store")
+[`store`](mapping-store.html)
 
 | 
 
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default).   
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default).   
   
-[`similarity`](similarity.html "similarity")
+[`similarity`](similarity.html)
 
 | 
 
 Which scoring algorithm or _similarity_ should be used. Defaults to `BM25`.   
   
-[`normalizer`](normalizer.html "normalizer")
+[`normalizer`](normalizer.html)
 
 | 
 

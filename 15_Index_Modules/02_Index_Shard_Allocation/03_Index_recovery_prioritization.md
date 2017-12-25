@@ -40,7 +40,7 @@ In the above example:
 
 
 
-This setting accepts an integer, and can be updated on a live index with the [update index settings API](indices-update-settings.html "Update Indices Settings"):
+This setting accepts an integer, and can be updated on a live index with the [update index settings API](indices-update-settings.html):
     
     
     PUT index_4/_settings

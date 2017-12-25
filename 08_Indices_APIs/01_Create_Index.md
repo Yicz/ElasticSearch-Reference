@@ -59,7 +59,7 @@ or more simplified
 
 You do not have to explicitly specify `index` div inside the `settings` div.
 
-For more information regarding all the different index level settings that can be set when creating an index, please check the [index modules](index-modules.html "Index Modules") div.
+For more information regarding all the different index level settings that can be set when creating an index, please check the [index modules](index-modules.html) div.
 
 ### Mappings
 
@@ -82,7 +82,7 @@ The create index API allows to provide a set of one or more mappings:
 
 ### Aliases
 
-The create index API allows also to provide a set of [aliases](indices-aliases.html "Index Aliases"):
+The create index API allows also to provide a set of [aliases](indices-aliases.html):
     
     
     PUT test
@@ -125,4 +125,4 @@ or through the request parameter `wait_for_active_shards`:
     
     PUT test?wait_for_active_shards=2
 
-A detailed explanation of `wait_for_active_shards` and its possible values can be found [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit").
+A detailed explanation of `wait_for_active_shards` and its possible values can be found [here](docs-index_.html#index-wait-for-active-shards).

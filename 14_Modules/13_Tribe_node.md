@@ -4,7 +4,7 @@
 
 ### Deprecated in 5.4.0. 
 
-The `tribe` node is deprecated in favour of [_Cross Cluster Search_](modules-cross-cluster-search.html "Cross Cluster Search") and will be removed in Elasticsearch 7.0. 
+The `tribe` node is deprecated in favour of [_Cross Cluster Search_](modules-cross-cluster-search.html) and will be removed in Elasticsearch 7.0. 
 
 The _tribes_ feature allows a _tribe node_ to act as a federated client across multiple clusters.
 
@@ -27,15 +27,15 @@ The `elasticsearch.yml` config file for a tribe node just needs to list the clus
   
 ---|---  
   
-The example above configures connections to two clusters, name `t1` and `t2` respectively. The tribe node will create a [node client](modules-node.html "Node") to connect each cluster using [unicast discovery](modules-discovery-zen.html#unicast "Unicastedit") by default. Any other settings for the connection can be configured under `tribe.{name}`, just like the `cluster.name` in the example.
+The example above configures connections to two clusters, name `t1` and `t2` respectively. The tribe node will create a [node client](modules-node.html) to connect each cluster using [unicast discovery](modules-discovery-zen.html#unicast) by default. Any other settings for the connection can be configured under `tribe.{name}`, just like the `cluster.name` in the example.
 
 The merged global cluster state means that almost all operations work in the same way as a single cluster: distributed search, suggest, percolation, indexing, etc.
 
 However, there are a few exceptions:
 
   * The merged view cannot handle indices with the same name in multiple clusters. By default it will pick one of them, see later for on_conflict options. 
-  * Master level read operations (eg [_Cluster State_](cluster-state.html "Cluster State"), [_Cluster Health_](cluster-health.html "Cluster Health")) will automatically execute with a local flag set to true since there is no master. 
-  * Master level write operations (eg [_Create Index_](indices-create-index.html "Create Index")) are not allowed. These should be performed on a single cluster. 
+  * Master level read operations (eg [_Cluster State_](cluster-state.html), [_Cluster Health_](cluster-health.html)) will automatically execute with a local flag set to true since there is no master. 
+  * Master level write operations (eg [_Create Index_](indices-create-index.html)) are not allowed. These should be performed on a single cluster. 
 
 
 

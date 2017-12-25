@@ -134,7 +134,7 @@ If using the HTTP API, make sure that the client does not send HTTP chunks, as t
 
 ### Versioning
 
-Each bulk item can include the version value using the `_version`/`version` field. It automatically follows the behavior of the index / delete operation based on the `_version` mapping. It also support the `version_type`/`_version_type` (see [versioning](docs-index_.html#index-versioning "Versioningedit"))
+Each bulk item can include the version value using the `_version`/`version` field. It automatically follows the behavior of the index / delete operation based on the `_version` mapping. It also support the `version_type`/`_version_type` (see [versioning](docs-index_.html#index-versioning))
 
 ### Routing
 
@@ -146,7 +146,7 @@ Each bulk item can include the parent value using the `_parent`/`parent` field. 
 
 ### Wait For Active Shards
 
-When making bulk calls, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the bulk request. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for further details and a usage example.
+When making bulk calls, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the bulk request. See [here](docs-index_.html#index-wait-for-active-shards) for further details and a usage example.
 
 ### Refresh
 
@@ -156,7 +156,7 @@ Control when the changes made by this request are visible to search. See [refres
 
 When using `update` action `_retry_on_conflict` can be used as field in the action itself (not in the extra payload line), to specify how many times an update should be retried in the case of a version conflict.
 
-The `update` action payload, supports the following options: `doc` (partial document), `upsert`, `doc_as_upsert`, `script` and `_source`. See [update](docs-update.html "Update API") documentation for details on the options. Example with update actions:
+The `update` action payload, supports the following options: `doc` (partial document), `upsert`, `doc_as_upsert`, `script` and `_source`. See [update](docs-update.html) documentation for details on the options. Example with update actions:
     
     
     POST _bulk
@@ -173,4 +173,4 @@ The `update` action payload, supports the following options: `doc` (partial docu
 
 ### Security
 
-See [_URL-based access control_](url-access-control.html "URL-based access control")
+See [_URL-based access control_](url-access-control.html)

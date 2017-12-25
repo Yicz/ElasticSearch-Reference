@@ -293,7 +293,7 @@ Customized scores can be implemented via a script:
                   }
                 }
 
-Scripts can be inline (as in above example), indexed or stored on disk. For details on the options, see [script documentation](modules-scripting.html "Scripting").
+Scripts can be inline (as in above example), indexed or stored on disk. For details on the options, see [script documentation](modules-scripting.html).
 
 Available parameters in the script are
 
@@ -392,7 +392,7 @@ Use of background filters will slow the query as each term’s postings must be 
 
 #### Filtering Values
 
-It is possible (although rarely required) to filter the values for which buckets will be created. This can be done using the `include` and `exclude` parameters which are based on a regular expression string or arrays of exact terms. This functionality mirrors the features described in the [terms aggregation](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation") documentation.
+It is possible (although rarely required) to filter the values for which buckets will be created. This can be done using the `include` and `exclude` parameters which are based on a regular expression string or arrays of exact terms. This functionality mirrors the features described in the [terms aggregation](search-aggregations-bucket-terms-aggregation.html) documentation.
 
 #### Execution hint
 

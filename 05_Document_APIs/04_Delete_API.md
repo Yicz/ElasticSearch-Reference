@@ -41,13 +41,13 @@ When the `_routing` mapping is set as `required` and no routing value is specifi
 
 The `parent` parameter can be set, which will basically be the same as setting the routing parameter.
 
-Note that deleting a parent document does not automatically delete its children. One way of deleting all child documents given a parent’s id is to use the [Delete By Query API](docs-delete-by-query.html "Delete By Query API") to perform a index with the automatically generated (and indexed) field _parent, which is in the format parent_type#parent_id.
+Note that deleting a parent document does not automatically delete its children. One way of deleting all child documents given a parent’s id is to use the [Delete By Query API](docs-delete-by-query.html) to perform a index with the automatically generated (and indexed) field _parent, which is in the format parent_type#parent_id.
 
 When deleting a child document its parent id must be specified, otherwise the delete request will be rejected and a `RoutingMissingException` will be thrown instead.
 
 ### Automatic index creation
 
-The delete operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html "Create Index") for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if it has not been created before (check out the [put mapping](indices-put-mapping.html "Put Mapping") API for manually creating type mapping).
+The delete operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html) for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if it has not been created before (check out the [put mapping](indices-put-mapping.html) API for manually creating type mapping).
 
 ### Distributed
 
@@ -55,7 +55,7 @@ The delete operation gets hashed into a specific shard id. It then gets redirect
 
 ### Wait For Active Shards
 
-When making delete requests, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the delete request. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for further details and a usage example.
+When making delete requests, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the delete request. See [here](docs-index_.html#index-wait-for-active-shards) for further details and a usage example.
 
 ### Refresh
 

@@ -1,6 +1,6 @@
 ## Nested Query
 
-Nested query allows to query nested objects / docs (see [nested mapping](nested.html "Nested datatype")). The query is executed against the nested objects / docs as if they were indexed as separate docs (they are, internally) and resulting in the root parent doc (or parent nested mapping). Here is a sample mapping we will work with:
+Nested query allows to query nested objects / docs (see [nested mapping](nested.html)). The query is executed against the nested objects / docs as if they were indexed as separate docs (they are, internally) and resulting in the root parent doc (or parent nested mapping). Here is a sample mapping we will work with:
     
     
     PUT /my_index

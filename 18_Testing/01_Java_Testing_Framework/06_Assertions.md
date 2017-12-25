@@ -128,4 +128,4 @@ Usually, you would combine assertions and matchers in your test like this
     SearchResponse searchResponse = client().prepareSearch() ...;
     assertHitCount(searchResponse, 4);
     assertFirstHit(searchResponse, hasId("4"));
-    assertSearchHits(searchResponse, "1", "2", "3", "4");
+    assertSearchHits(searchResponse,);

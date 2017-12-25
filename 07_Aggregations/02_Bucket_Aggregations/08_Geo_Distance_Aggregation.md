@@ -1,6 +1,6 @@
 ## Geo Distance Aggregation
 
-A multi-bucket aggregation that works on `geo_point` fields and conceptually works very similar to the [range](search-aggregations-bucket-range-aggregation.html "Range Aggregation") aggregation. The user can define a point of origin and a set of distance range buckets. The aggregation evaluate the distance of each document value from the origin point and determines the buckets it belongs to based on the ranges (a document belongs to a bucket if the distance between the document and the origin falls within the distance range of the bucket).
+A multi-bucket aggregation that works on `geo_point` fields and conceptually works very similar to the [range](search-aggregations-bucket-range-aggregation.html) aggregation. The user can define a point of origin and a set of distance range buckets. The aggregation evaluate the distance of each document value from the origin point and determines the buckets it belongs to based on the ranges (a document belongs to a bucket if the distance between the document and the origin falls within the distance range of the bucket).
     
     
     PUT /museums
@@ -77,7 +77,7 @@ Response:
         }
     }
 
-The specified field must be of type `geo_point` (which can only be set explicitly in the mappings). And it can also hold an array of `geo_point` fields, in which case all will be taken into account during aggregation. The origin point can accept all formats supported by the [`geo_point` type](geo-point.html "Geo-point datatype"):
+The specified field must be of type `geo_point` (which can only be set explicitly in the mappings). And it can also hold an array of `geo_point` fields, in which case all will be taken into account during aggregation. The origin point can accept all formats supported by the [`geo_point` type](geo-point.html):
 
   * Object format: `{ "lat" : 52.3760, "lon" : 4.894 }` \- this is the safest format as it is the most explicit about the `lat` & `lon` values 
   * String format: `"52.3760, 4.894"` \- where the first number is the `lat` and the second is the `lon`

@@ -6,12 +6,12 @@ Elasticsearch is able to use indices created in the previous major version only.
 
 Elasticsearch 5.x nodes will fail to start in the presence of too old indices.
 
-If you are running an Elasticsearch 2.x cluster which contains indices that were created before 2.x, you will either need to delete those old indices or to reindex them before upgrading to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace "Reindex in place").
+If you are running an Elasticsearch 2.x cluster which contains indices that were created before 2.x, you will either need to delete those old indices or to reindex them before upgrading to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace).
 
 If you are running an Elasticsearch 1.x cluster, you have two options:
 
-  * First upgrade to Elasticsearch 2.4.x, reindex the old indices, then upgrade to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace "Reindex in place"). 
-  * Create a new 5.x cluster and use reindex-from-remote to import indices directly from the 1.x cluster. See [Upgrading with reindex-from-remote](reindex-upgrade.html#reindex-upgrade-remote "Upgrading with reindex-from-remote"). 
+  * First upgrade to Elasticsearch 2.4.x, reindex the old indices, then upgrade to 5.x. See [Reindex in place](reindex-upgrade.html#reindex-upgrade-inplace). 
+  * Create a new 5.x cluster and use reindex-from-remote to import indices directly from the 1.x cluster. See [Upgrading with reindex-from-remote](reindex-upgrade.html#reindex-upgrade-remote). 
 
 
 
@@ -41,7 +41,7 @@ At the end of this process, you will have a new 2.x index which can be used by a
 
 ### Upgrading with reindex-from-remote
 
-If you are running a 1.x cluster and would like to migrate directly to 5.x without first migrating to 2.x, you can do so using [reindex-from-remote](docs-reindex.html#reindex-from-remote "Reindex from Remoteedit").
+If you are running a 1.x cluster and would like to migrate directly to 5.x without first migrating to 2.x, you can do so using [reindex-from-remote](docs-reindex.html#reindex-from-remote).
 
 ![Warning](images/icons/warning.png)
 
@@ -52,8 +52,8 @@ You will need to set up a 5.x cluster alongside your existing 1.x cluster. The 5
 For each 1.x index that you want to transfer to the 5.x cluster, you will need to:
 
   * Create a new index in 5.x with the appropriate mappings and settings. Set the `refresh_interval` to `-1` and set `number_of_replicas` to `0` for faster reindexing. 
-  * Use [reindex-from-remote](docs-reindex.html#reindex-from-remote "Reindex from Remoteedit") to pull documents from the 1.x index into the new 5.x index. 
-  * If you run the reindex job in the background (with `wait_for_completion` set to `false`), the reindex request will return a `task_id` which can be used to monitor progress of the reindex job in the [task API](tasks.html "Task Management API"): `GET _tasks/TASK_ID`. 
+  * Use [reindex-from-remote](docs-reindex.html#reindex-from-remote) to pull documents from the 1.x index into the new 5.x index. 
+  * If you run the reindex job in the background (with `wait_for_completion` set to `false`), the reindex request will return a `task_id` which can be used to monitor progress of the reindex job in the [task API](tasks.html): `GET _tasks/TASK_ID`. 
   * Once reindex has completed, set the `refresh_interval` and `number_of_replicas` to the desired values (the defaults are `30s` and `1` respectively). 
   * Once the new index has finished replication, you can delete the old index. 
 

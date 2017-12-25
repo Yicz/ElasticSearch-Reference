@@ -1,6 +1,6 @@
 ## `include_in_all`
 
-The `include_in_all` parameter provides per-field control over which fields are included in the [`_all`](mapping-all-field.html "_all field") field. It defaults to `true`, unless [`index`](mapping-index.html "index") is set to `no`.
+The `include_in_all` parameter provides per-field control over which fields are included in the [`_all`](mapping-all-field.html) field. It defaults to `true`, unless [`index`](mapping-index.html) is set to `no`.
 
 This example demonstrates how to exclude the `date` field from the `_all` field:
     
@@ -41,9 +41,9 @@ The `date` field will not be included in the `_all` field.
   
 ![Tip](images/icons/tip.png)
 
-The `include_in_all` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `include_in_all` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
-The `include_in_all` parameter can also be set at the type level and on [`object`](object.html "Object datatype") or [`nested`](nested.html "Nested datatype") fields, in which case all sub- fields inherit that setting. For instance:
+The `include_in_all` parameter can also be set at the type level and on [`object`](object.html) or [`nested`](nested.html) fields, in which case all sub- fields inherit that setting. For instance:
     
     
     PUT my_index
@@ -95,4 +95,4 @@ Only the `editor.last_name` field is included in `_all`. The `editor.first_name`
 
 ### Multi-fields and `include_in_all`
 
-The original field value is added to the `_all` field, not the terms produced by a field’s analyzer. For this reason, it makes no sense to set `include_in_all` to `true` on [multi-fields](multi-fields.html "fields"), as each multi-field has exactly the same value as its parent.
+The original field value is added to the `_all` field, not the terms produced by a field’s analyzer. For this reason, it makes no sense to set `include_in_all` to `true` on [multi-fields](multi-fields.html), as each multi-field has exactly the same value as its parent.

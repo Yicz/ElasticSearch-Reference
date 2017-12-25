@@ -2,10 +2,10 @@
 
 Fields of type `geo_point` accept latitude-longitude pairs, which can be used:
 
-  * to find geo-points within a [bounding box](query-dsl-geo-bounding-box-query.html "Geo Bounding Box Query"), within a certain [distance](query-dsl-geo-distance-query.html "Geo Distance Query") of a central point, or within a [polygon](query-dsl-geo-polygon-query.html "Geo Polygon Query"). 
-  * to aggregate documents by [geographically](search-aggregations-bucket-geohashgrid-aggregation.html "GeoHash grid Aggregation") or by [distance](search-aggregations-bucket-geodistance-aggregation.html "Geo Distance Aggregation") from a central point. 
-  * to integrate distance into a document’s [relevance score](query-dsl-function-score-query.html "Function Score Query"). 
-  * to [sort](search-request-sort.html#geo-sorting "Geo Distance Sorting") documents by distance. 
+  * to find geo-points within a [bounding box](query-dsl-geo-bounding-box-query.html), within a certain [distance](query-dsl-geo-distance-query.html) of a central point, or within a [polygon](query-dsl-geo-polygon-query.html). 
+  * to aggregate documents by [geographically](search-aggregations-bucket-geohashgrid-aggregation.html) or by [distance](search-aggregations-bucket-geodistance-aggregation.html) from a central point. 
+  * to integrate distance into a document’s [relevance score](query-dsl-function-score-query.html). 
+  * to [sort](search-request-sort.html#geo-sorting) documents by distance. 
 
 
 
@@ -114,7 +114,7 @@ Originally, `lat,lon` was used for both array and string, but the array format w
 
 The following parameters are accepted by `geo_point` fields:
 
-[`ignore_malformed`](ignore-malformed.html "ignore_malformed")
+[`ignore_malformed`](ignore-malformed.html)
 
 | 
 

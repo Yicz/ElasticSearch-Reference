@@ -2,7 +2,7 @@
 
 ![Note](images/icons/note.png)
 
-In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html "Suggesters") page first.
+In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
 
 The `term` suggester provides a very convenient API to access word alternatives on a per token basis within a certain string distance. The API allows accessing each token in the stream individually while suggest-selection is left to the API consumer. Yet, often pre-selected suggestions are required in order to present to the end-user. The `phrase` suggester adds additional logic on top of the `term` suggester to select entire corrected phrases instead of individual tokens weighted based on `ngram-language` models. In practice this suggester will be able to make better decisions about which tokens to pick based on co-occurrence and frequencies.
 
@@ -187,7 +187,7 @@ Sets up suggestion highlighting. If not provided then no `highlighted` field is 
 
 | 
 
-Checks each suggestion against the specified `query` to prune suggestions for which no matching docs exist in the index. The collate query for a suggestion is run only on the local shard from which the suggestion has been generated from. The `query` must be specified, and it is run as a [`template` query](query-dsl-template-query.html "Template Query"). The current suggestion is automatically made available as the `{ {suggestion} }` variable, which should be used in your query. You can still specify your own template `params` — the `suggestion` value will be added to the variables you specify. Additionally, you can specify a `prune` to control if all phrase suggestions will be returned, when set to `true` the suggestions will have an additional option `collate_match`, which will be `true` if matching documents for the phrase was found, `false` otherwise. The default value for `prune` is `false`.   
+Checks each suggestion against the specified `query` to prune suggestions for which no matching docs exist in the index. The collate query for a suggestion is run only on the local shard from which the suggestion has been generated from. The `query` must be specified, and it is run as a [`template` query](query-dsl-template-query.html). The current suggestion is automatically made available as the `{ {suggestion} }` variable, which should be used in your query. You can still specify your own template `params` — the `suggestion` value will be added to the variables you specify. Additionally, you can specify a `prune` to control if all phrase suggestions will be returned, when set to `true` the suggestions will have an additional option `collate_match`, which will be `true` if matching documents for the phrase was found, `false` otherwise. The default value for `prune` is `false`.   
       
     
     POST _search

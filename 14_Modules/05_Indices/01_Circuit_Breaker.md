@@ -2,7 +2,7 @@
 
 Elasticsearch contains multiple circuit breakers used to prevent operations from causing an OutOfMemoryError. Each breaker specifies a limit for how much memory it can use. Additionally, there is a parent-level breaker that specifies the total amount of memory that can be used across all breakers.
 
-These settings can be dynamically updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API.
+These settings can be dynamically updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html) API.
 
 #### Parent circuit breaker
 
@@ -42,7 +42,7 @@ The in flight requests circuit breaker allows Elasticsearch to limit the memory 
 
 Slightly different than the previous memory-based circuit breaker, the script compilation circuit breaker limits the number of inline script compilations within a period of time.
 
-See the "prefer-parameters" div of the [scripting](modules-scripting-using.html "How to use scripts") documentation for more information.
+See the) documentation for more information.
 
 `script.max_compilations_per_minute`
      Limit for the number of unique dynamic scripts within a minute that are allowed to be compiled. Defaults to 15. 

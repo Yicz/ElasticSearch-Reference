@@ -17,11 +17,11 @@
 
 |Upgrade From | Upgrade To | Supported Upgrade Type |
 |:---:|:---:|:---:|  
-|`1.x`| `5.x`| [Reindex to upgrade](reindex-upgrade.html "Reindex to upgrade")  |  
-|`2.x`|`2.y`|[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  |
-|`2.x`|`5.x`|[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  |
-|`5.0.0 pre GA`|`5.x`|[Full cluster restart](restart-upgrade.html "Full cluster restart upgrade")  |
-|`5.x`|`5.y`|[Rolling upgrade](rolling-upgrades.html "Rolling upgrades") (where `y > x`)  |
+|`1.x`| `5.x`| [Reindex to upgrade](reindex-upgrade.html)  |  
+|`2.x`|`2.y`|[Rolling upgrade](rolling-upgrades.html) (where `y > x`)  |
+|`2.x`|`5.x`|[Full cluster restart](restart-upgrade.html)  |
+|`5.0.0 pre GA`|`5.x`|[Full cluster restart](restart-upgrade.html)  |
+|`5.x`|`5.y`|[Rolling upgrade](rolling-upgrades.html) (where `y > x`)  |
   
 
 ### ES 1.x 或之前的版本索引

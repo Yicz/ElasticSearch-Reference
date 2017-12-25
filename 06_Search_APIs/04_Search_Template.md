@@ -20,7 +20,7 @@ For more information on how Mustache templating and what kind of templating you 
 
 ![Note](images/icons/note.png)
 
-The mustache language is implemented in elasticsearch as a sandboxed scripting language, hence it obeys settings that may be used to enable or disable scripts per language, source and operation as described in the [scripting docs](modules-scripting-security.html#security-script-source "Script source settingsedit")
+The mustache language is implemented in elasticsearch as a sandboxed scripting language, hence it obeys settings that may be used to enable or disable scripts per language, source and operation as described in the [scripting docs](modules-scripting-security.html#security-script-source)
 
 #### More template examples
 

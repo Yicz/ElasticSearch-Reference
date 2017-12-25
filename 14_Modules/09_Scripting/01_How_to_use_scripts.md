@@ -29,7 +29,7 @@ The script itself which may be specified as `inline`, `stored`, or `file`.
 
 Any named parameters that should be passed into the script.   
   
-For example, the following script is used in a search request to return a [scripted field](search-request-script-fields.html "Script Fields"):
+For example, the following script is used in a search request to return a [scripted field](search-request-script-fields.html):
     
     
     PUT my_index/my_type/1
@@ -55,13 +55,13 @@ For example, the following script is used in a search request to return a [scrip
 ### Script Parameters
 
 `lang`
-     Specifies the language the script is written in. Defaults to `painless` but may be set to any of languages listed in [_Scripting_](modules-scripting.html "Scripting"). The default language may be changed in the `elasticsearch.yml` config file by setting `script.default_lang` to the appropriate language. 
+     Specifies the language the script is written in. Defaults to `painless` but may be set to any of languages listed in [_Scripting_](modules-scripting.html). The default language may be changed in the `elasticsearch.yml` config file by setting `script.default_lang` to the appropriate language. 
 `inline`, `stored`, `file`
     
 
-Specifies the source of the script. An `inline` script is specified `inline` as in the example above, a `stored` script is specified `stored` and is retrieved from the cluster state (see [Stored Scripts](modules-scripting-using.html#modules-scripting-stored-scripts "Stored Scriptsedit")), and a `file` script is retrieved from a file in the `config/scripts` directory (see [File Scripts](modules-scripting-using.html#modules-scripting-file-scripts "File-based Scriptsedit")). 
+Specifies the source of the script. An `inline` script is specified `inline` as in the example above, a `stored` script is specified `stored` and is retrieved from the cluster state (see [Stored Scripts](modules-scripting-using.html#modules-scripting-stored-scripts)), and a `file` script is retrieved from a file in the `config/scripts` directory (see [File Scripts](modules-scripting-using.html#modules-scripting-file-scripts)). 
 
-While languages like `expression` and `painless` can be used out of the box as inline or stored scripts, other languages like `groovy` can only be specified as `file` unless you first adjust the default [scripting security settings](modules-scripting-security.html "Scripting and security").
+While languages like `expression` and `painless` can be used out of the box as inline or stored scripts, other languages like `groovy` can only be specified as `file` unless you first adjust the default [scripting security settings](modules-scripting-security.html).
 
 `params`
      Specifies any named parameters that are passed into the script as variables. 
@@ -91,11 +91,11 @@ If you compile too many unique scripts within a small amount of time, Elasticsea
 
 ### File-based Scripts
 
-To increase security, non-sandboxed languages can only be specified in script files stored on every node in the cluster. File scripts must be saved in the `scripts` directory whose default location depends on whether you use the [`zip`/`tar.gz`](zip-targz.html#zip-targz-layout "Directory layout of .zip and .tar.gz archives") (`$ES_HOME/config/scripts/`), [RPM](rpm.html#rpm-layout "Directory layout of RPM"), or [Debian](deb.html#deb-layout "Directory layout of Debian package") package. The default may be changed with the `path.scripts` setting.
+To increase security, non-sandboxed languages can only be specified in script files stored on every node in the cluster. File scripts must be saved in the `scripts` directory whose default location depends on whether you use the [`zip`/`tar.gz`](zip-targz.html#zip-targz-layout) (`$ES_HOME/config/scripts/`), [RPM](rpm.html#rpm-layout), or [Debian](deb.html#deb-layout) package. The default may be changed with the `path.scripts` setting.
 
 The languages which are assumed to be safe by default are: `painless`, `expression`, and `mustache` (used for search and query templates).
 
-Any files placed in the `scripts` directory will be compiled automatically when the node starts up and then [every 60 seconds thereafter](modules-scripting-using.html#reload-scripts "Automatic script reloadingedit").
+Any files placed in the `scripts` directory will be compiled automatically when the node starts up and then [every 60 seconds thereafter](modules-scripting-using.html#reload-scripts).
 
 The file should be named as follows: `{script-name}.{lang}`. For instance, the following example creates a Groovy script called `calculate-score`:
     
@@ -204,4 +204,4 @@ All scripts are cached by default so that they only need to be recompiled when u
 
 ![Note](images/icons/note.png)
 
-The size of stored scripts is limited to 65,535 bytes. This can be changed by setting `script.max_size_in_bytes` setting to increase that soft limit, but if scripts are really large then alternatives like [native](modules-scripting-native.html "Native \(Java\) Scripts") scripts should be considered instead.
+The size of stored scripts is limited to 65,535 bytes. This can be changed by setting `script.max_size_in_bytes` setting to increase that soft limit, but if scripts are really large then alternatives like [native](modules-scripting-native.html) scripts should be considered instead.

@@ -2,7 +2,7 @@
 
 In JSON documents, dates are represented as strings. Elasticsearch uses a set of preconfigured formats to recognize and parse these strings into a long value representing _milliseconds-since-the-epoch_ in UTC.
 
-Besides the [built-in formats](mapping-date-format.html#built-in-date-formats "Built In Formats"), your own [custom formats](mapping-date-format.html#custom-date-formats "Custom date formats") can be specified using the familiar `yyyy/MM/dd` syntax:
+Besides the [built-in formats](mapping-date-format.html#built-in-date-formats), your own [custom formats](mapping-date-format.html#custom-date-formats) can be specified using the familiar `yyyy/MM/dd` syntax:
     
     
     PUT my_index
@@ -19,11 +19,11 @@ Besides the [built-in formats](mapping-date-format.html#built-in-date-formats "B
       }
     }
 
-Many APIs which support date values also support [date math](common-options.html#date-math "Date Mathedit") expressions, such as `now-1m/d` — the current time, minus one month, rounded down to the nearest day.
+Many APIs which support date values also support [date math](common-options.html#date-math) expressions, such as `now-1m/d` — the current time, minus one month, rounded down to the nearest day.
 
 ![Tip](images/icons/tip.png)
 
-The `format` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `format` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 ### Custom date formats
 

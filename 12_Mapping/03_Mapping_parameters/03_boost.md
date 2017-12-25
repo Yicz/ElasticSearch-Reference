@@ -61,7 +61,7 @@ is equivalent to:
         }
     }
 
-The boost is also applied when it is copied with the value in the [`_all`](mapping-all-field.html "_all field") field. This means that, when querying the `_all` field, words that originated from the `title` field will have a higher score than words that originated in the `content` field. This functionality comes at a cost: queries on the `_all` field are slower when field boosting is used.
+The boost is also applied when it is copied with the value in the [`_all`](mapping-all-field.html) field. This means that, when querying the `_all` field, words that originated from the `title` field will have a higher score than words that originated in the `content` field. This functionality comes at a cost: queries on the `_all` field are slower when field boosting is used.
 
 ![Warning](images/icons/warning.png)
 
@@ -77,6 +77,6 @@ We advise against using index time boosting for the following reasons:
 
   * You cannot change index-time `boost` values without reindexing all of your documents. 
   * Every query supports query-time boosting which achieves the same effect. The difference is that you can tweak the `boost` value without having to reindex. 
-  * Index-time boosts are stored as part of the [`norm`](norms.html "norms"), which is only one byte. This reduces the resolution of the field length normalization factor which can lead to lower quality relevance calculations. 
+  * Index-time boosts are stored as part of the [`norm`](norms.html), which is only one byte. This reduces the resolution of the field length normalization factor which can lead to lower quality relevance calculations. 
 
 

@@ -1,6 +1,6 @@
 ## 配置ES
 
-ES提供了很好的默认配置，在通常情况下，我们只要配置一小部分设置。同时大部分的配置可以通过[_Cluster Update Settings_](cluster-update-settings.html "Cluster Update Settings") API进行动态修改。
+ES提供了很好的默认配置，在通常情况下，我们只要配置一小部分设置。同时大部分的配置可以通过[_Cluster Update Settings_](cluster-update-settings.html) API进行动态修改。
 
 这一小部分的配置是节点的特殊指定，如`node.name`和`path`,它们是一个集群中节点的唯一设置，还有配置同一个集群的设置，如：`cluster.name` and `network.host`.
 

@@ -1,6 +1,6 @@
 ## Percolator type
 
-The `percolator` field type parses a json structure into a native query and stores that query, so that the [percolate query](query-dsl-percolate-query.html "Percolate Query") can use it to match provided documents.
+The `percolator` field type parses a json structure into a native query and stores that query, so that the [percolate query](query-dsl-percolate-query.html) can use it to match provided documents.
 
 Any field that contains a json object can be configured to be a percolator field. The percolator field type has no settings. Just configuring the `percolator` field type is sufficient to instruct Elasticsearch to treat a field as a query.
 
@@ -28,7 +28,7 @@ Then the following json snippet can be indexed as a native query:
 
 ![Important](images/icons/important.png)
 
-Fields referred to in a percolator query must **already** exist in the mapping associated with the index used for percolation. In order to make sure these fields exist, add or update a mapping via the [create index](indices-create-index.html "Create Index") or [put mapping](indices-put-mapping.html "Put Mapping") APIs. Fields referred in a percolator query may exist in any type of the index containing the `percolator` field type.
+Fields referred to in a percolator query must **already** exist in the mapping associated with the index used for percolation. In order to make sure these fields exist, add or update a mapping via the [create index](indices-create-index.html) or [put mapping](indices-put-mapping.html) APIs. Fields referred in a percolator query may exist in any type of the index containing the `percolator` field type.
 
 #### Dedicated Percolator Index
 

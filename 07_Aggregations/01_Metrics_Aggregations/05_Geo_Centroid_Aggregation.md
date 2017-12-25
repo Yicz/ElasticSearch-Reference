@@ -1,6 +1,6 @@
 ## Geo Centroid Aggregation
 
-A metric aggregation that computes the weighted [centroid](https://en.wikipedia.org/wiki/Centroid) from all coordinate values for a [Geo-point datatype](geo-point.html "Geo-point datatype") field.
+A metric aggregation that computes the weighted [centroid](https://en.wikipedia.org/wiki/Centroid) from all coordinate values for a [Geo-point datatype](geo-point.html) field.
 
 Example:
     
@@ -47,7 +47,7 @@ Example:
 
 | 
 
-The `geo_centroid` aggregation specifies the field to use for computing the centroid. (NOTE: field must be a [Geo-point datatype](geo-point.html "Geo-point datatype") type)   
+The `geo_centroid` aggregation specifies the field to use for computing the centroid. (NOTE: field must be a [Geo-point datatype](geo-point.html) type)   
   
 ---|---  
   
@@ -87,7 +87,7 @@ Example:
         }
     }
 
-The above example uses `geo_centroid` as a sub-aggregation to a [terms](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation") bucket aggregation for finding the central location for museums in each city.
+The above example uses `geo_centroid` as a sub-aggregation to a [terms](search-aggregations-bucket-terms-aggregation.html) bucket aggregation for finding the central location for museums in each city.
 
 The response for the above aggregation:
     

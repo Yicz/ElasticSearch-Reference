@@ -30,4 +30,4 @@ Or :
         }
     }
 
-This multi term query allows to control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html "Multi Term Query Rewrite") parameter.
+This multi term query allows to control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html) parameter.

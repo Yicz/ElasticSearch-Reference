@@ -9,7 +9,7 @@ It consists of:
 Tokenizer 
     
 
-  * [Lower Case Tokenizer](analysis-lowercase-tokenizer.html "Lowercase Tokenizer")
+  * [Lower Case Tokenizer](analysis-lowercase-tokenizer.html)
 
 
 

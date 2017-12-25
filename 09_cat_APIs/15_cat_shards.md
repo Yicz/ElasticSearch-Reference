@@ -51,7 +51,7 @@ You can get the initializing state in the response like this
     twitter 0 p STARTED      3014 31.1mb 192.168.56.10 H5dfFeA
     twitter 0 r INITIALIZING    0 14.3mb 192.168.56.30 bGG90GE
 
-If a shard cannot be assigned, for example you’ve overallocated the number of replicas for the number of nodes in the cluster, the shard will remain `UNASSIGNED` with the [reason code](cat-shards.html#reason-unassigned "Reasons for unassigned shardedit") `ALLOCATION_FAILED`.
+If a shard cannot be assigned, for example you’ve overallocated the number of replicas for the number of nodes in the cluster, the shard will remain `UNASSIGNED` with the [reason code](cat-shards.html#reason-unassigned) `ALLOCATION_FAILED`.
 
 You can use the shards API to find out that reason.
     

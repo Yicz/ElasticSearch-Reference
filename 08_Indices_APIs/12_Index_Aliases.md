@@ -101,7 +101,7 @@ The index we should have added
 
 | 
 
-`remove_index` is just like [_Delete Index_](indices-delete-index.html "Delete Index")  
+`remove_index` is just like [_Delete Index_](indices-delete-index.html)  
   
 ### Filtered Aliases
 
@@ -261,7 +261,7 @@ Then add the alias for a specific user:
 
 ### Aliases during index creation
 
-Aliases can also be specified during [index creation](indices-create-index.html#create-index-aliases "Aliasesedit"):
+Aliases can also be specified during [index creation](indices-create-index.html#create-index-aliases):
     
     
     PUT /logs_20162801

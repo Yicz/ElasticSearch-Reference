@@ -43,7 +43,7 @@ Pipelines can optionally add a `version` number, which can be any integer value,
       ]
     }
 
-To check for the `version`, you can [filter responses](common-options.html#common-options-response-filtering "Response Filteringedit") using `filter_path` to limit the response to just the `version`:
+To check for the `version`, you can [filter responses](common-options.html#common-options-response-filtering) using `filter_path` to limit the response to just the `version`:
     
     
     GET /_ingest/pipeline/my-pipeline-id?filter_path=*.version

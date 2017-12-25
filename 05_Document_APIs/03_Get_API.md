@@ -158,7 +158,7 @@ You can also use the same source filtering parameters to control which parts of 
     
     GET twitter/tweet/1/_source?_source_include=*.id&_source_exclude=entities'
 
-Note, there is also a HEAD variant for the _source endpoint to efficiently test for document _source existence. An existing document will not have a _source if it is disabled in the [mapping](mapping-source-field.html "_source field").
+Note, there is also a HEAD variant for the _source endpoint to efficiently test for document _source existence. An existing document will not have a _source if it is disabled in the [mapping](mapping-source-field.html).
     
     
     HEAD twitter/tweet/1/_source

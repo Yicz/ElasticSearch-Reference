@@ -41,7 +41,7 @@ define the offset of the first collapsed result
 
 The total number of hits in the response indicates the number of matching documents without collapsing. The total number of distinct group is unknown.
 
-The field used for collapsing must be a single valued [`keyword`](keyword.html "Keyword datatype") or [`numeric`](number.html "Numeric datatypes") field with [`doc_values`](doc-values.html "doc_values") activated
+The field used for collapsing must be a single valued [`keyword`](keyword.html) or [`numeric`](number.html) field with [`doc_values`](doc-values.html) activated
 
 ![Note](images/icons/note.png)
 
@@ -103,10 +103,10 @@ how to sort the document inside each group
 
 the number of concurrent requests allowed to retrieve the inner_hits` per group   
   
-See [inner hits](search-request-inner-hits.html "Inner hits") for the complete list of supported options and the format of the response.
+See [inner hits](search-request-inner-hits.html) for the complete list of supported options and the format of the response.
 
 The expansion of the group is done by sending an additional query for each collapsed hit returned in the response. The `max_concurrent_group_searches` request parameter can be used to control the maximum number of concurrent searches allowed in this phase. The default is based on the number of data nodes and the default search thread pool size.
 
 ![Warning](images/icons/warning.png)
 
-`collapse` cannot be used in conjunction with [scroll](search-request-scroll.html "Scroll"), [rescore](search-request-rescore.html "Rescoring") or [search after](search-request-search-after.html "Search After").
+`collapse` cannot be used in conjunction with [scroll](search-request-scroll.html), [rescore](search-request-rescore.html) or [search after](search-request-search-after.html).

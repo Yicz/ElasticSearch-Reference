@@ -14,11 +14,11 @@ If your search is CPU-bound, you should investigate buying faster CPUs.
 
 Documents should be modeled so that search-time operations are as cheap as possible.
 
-In particular, joins should be avoided. [`nested`](nested.html "Nested datatype") can make queries several times slower and [parent-child](mapping-parent-field.html "_parent field") relations can make queries hundreds of times slower. So if the same questions can be answered without joins by denormalizing documents, significant speedups can be expected.
+In particular, joins should be avoided. [`nested`](nested.html) can make queries several times slower and [parent-child](mapping-parent-field.html) relations can make queries hundreds of times slower. So if the same questions can be answered without joins by denormalizing documents, significant speedups can be expected.
 
 ### Pre-index data
 
-You should leverage patterns in your queries to optimize the way data is indexed. For instance, if all your documents have a `price` field and most queries run [`range`](search-aggregations-bucket-range-aggregation.html "Range Aggregation") aggregations on a fixed list of ranges, you could make this aggregation faster by pre-indexing the ranges into the index and using a [`terms`](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation") aggregations.
+You should leverage patterns in your queries to optimize the way data is indexed. For instance, if all your documents have a `price` field and most queries run [`range`](search-aggregations-bucket-range-aggregation.html) aggregations on a fixed list of ranges, you could make this aggregation faster by pre-indexing the ranges into the index and using a [`terms`](search-aggregations-bucket-terms-aggregation.html) aggregations.
 
 For instance, if documents look like:
     
@@ -48,7 +48,7 @@ and search requests look like:
       }
     }
 
-Then documents could be enriched by a `price_range` field at index time, which should be mapped as a [`keyword`](keyword.html "Keyword datatype"):
+Then documents could be enriched by a `price_range` field at index time, which should be mapped as a [`keyword`](keyword.html):
     
     
     PUT index
@@ -87,7 +87,7 @@ And then search requests could aggregate this new field rather than running a `r
 
 ### Mappings
 
-The fact that some data is numeric does not mean it should always be mapped as a [numeric field](number.html "Numeric datatypes"). Typically, fields storing identifiers such as an `ISBN` or any number identifying a record from another database, might benefit from being mapped as [`keyword`](keyword.html "Keyword datatype") rather than `integer` or `long`.
+The fact that some data is numeric does not mean it should always be mapped as a [numeric field](number.html). Typically, fields storing identifiers such as an `ISBN` or any number identifying a record from another database, might benefit from being mapped as [`keyword`](keyword.html) rather than `integer` or `long`.
 
 ### Avoid scripts
 
@@ -189,7 +189,7 @@ However such practice might make the query run slower in some cases since the ov
 
 ### Force-merge read-only indices
 
-Indices that are read-only would benefit from being [merged down to a single segment](indices-forcemerge.html "Force Merge"). This is typically the case with time-based indices: only the index for the current time frame is getting new documents while older indices are read-only.
+Indices that are read-only would benefit from being [merged down to a single segment](indices-forcemerge.html). This is typically the case with time-based indices: only the index for the current time frame is getting new documents while older indices are read-only.
 
 ![Important](images/icons/important.png)
 
@@ -197,7 +197,7 @@ Don’t force-merge indices that are still being written to — leave mergin
 
 ### Warm up global ordinals
 
-Global ordinals are a data-structure that is used in order to run [`terms`](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation") aggregations on [`keyword`](keyword.html "Keyword datatype") fields. They are loaded lazily in memory because elasticsearch does not know which fields will be used in `terms` aggregations and which fields won’t. You can tell elasticsearch to load global ordinals eagerly at refresh-time by configuring mappings as described below:
+Global ordinals are a data-structure that is used in order to run [`terms`](search-aggregations-bucket-terms-aggregation.html) aggregations on [`keyword`](keyword.html) fields. They are loaded lazily in memory because elasticsearch does not know which fields will be used in `terms` aggregations and which fields won’t. You can tell elasticsearch to load global ordinals eagerly at refresh-time by configuring mappings as described below:
     
     
     PUT index
@@ -216,7 +216,7 @@ Global ordinals are a data-structure that is used in order to run [`terms`](sear
 
 ### Warm up the filesystem cache
 
-If the machine running elasticsearch is restarted, the filesystem cache will be empty, so it will take some time before the operating system loads hot regions of the index into memory so that search operations are fast. You can explicitly tell the operating system which files should be loaded into memory eagerly depending on the file extension using the [`index.store.preload`](index-modules-store.html#file-system "File system storage typesedit") setting.
+If the machine running elasticsearch is restarted, the filesystem cache will be empty, so it will take some time before the operating system loads hot regions of the index into memory so that search operations are fast. You can explicitly tell the operating system which files should be loaded into memory eagerly depending on the file extension using the [`index.store.preload`](index-modules-store.html#file-system) setting.
 
 ![Warning](images/icons/warning.png)
 

@@ -18,7 +18,7 @@ First it searches for documents which match the more important terms. These are 
 
 Then, it executes a second query for the less important terms — terms which appear frequently and have a low impact on relevance. But instead of calculating the relevance score for **all** matching documents, it only calculates the `_score` for documents already matched by the first query. In this way the high frequency terms can improve the relevance calculation without paying the cost of poor performance.
 
-If a query consists only of high frequency terms, then a single query is executed as an `AND` (conjunction) query, in other words all terms are required. Even though each individual term will match many documents, the combination of terms narrows down the resultset to only the most relevant. The single query can also be executed as an `OR` with a specific [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match"), in this case a high enough value should probably be used.
+If a query consists only of high frequency terms, then a single query is executed as an `AND` (conjunction) query, in other words all terms are required. Even though each individual term will match many documents, the combination of terms narrows down the resultset to only the most relevant. The single query can also be executed as an `OR` with a specific [`minimum_should_match`](query-dsl-minimum-should-match.html), in this case a high enough value should probably be used.
 
 Terms are allocated to the high or low frequency groups based on the `cutoff_frequency`, which can be specified as an absolute frequency (`>=1`) or as a relative frequency (`0.0 .. 1.0`). (Remember that document frequencies are computed on a per shard level as explained in the blog post [Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html).)
 
@@ -41,7 +41,7 @@ In this example, words that have a document frequency greater than 0.1% (eg `"th
         }
     }
 
-The number of terms which should match can be controlled with the [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") (`high_freq`, `low_freq`), `low_freq_operator` (default `"or"`) and `high_freq_operator` (default `"or"`) parameters.
+The number of terms which should match can be controlled with the [`minimum_should_match`](query-dsl-minimum-should-match.html) (`high_freq`, `low_freq`), `low_freq_operator` (default `"or"`) and `high_freq_operator` (default `"or"`) parameters.
 
 For low frequency terms, set the `low_freq_operator` to `"and"` to make all terms required:
     
@@ -80,7 +80,7 @@ which is roughly equivalent to:
         }
     }
 
-Alternatively use [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") to specify a minimum number or percentage of low frequency terms which must be present, for instance:
+Alternatively use [`minimum_should_match`](query-dsl-minimum-should-match.html) to specify a minimum number or percentage of low frequency terms which must be present, for instance:
     
     
     GET /_search
@@ -124,7 +124,7 @@ which is roughly equivalent to:
 
 minimum_should_match
 
-A different [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") can be applied for low and high frequency terms with the additional `low_freq` and `high_freq` parameters. Here is an example when providing additional parameters (note the change in structure):
+A different [`minimum_should_match`](query-dsl-minimum-should-match.html) can be applied for low and high frequency terms with the additional `low_freq` and `high_freq` parameters. Here is an example when providing additional parameters (note the change in structure):
     
     
     GET /_search
@@ -175,7 +175,7 @@ which is roughly equivalent to:
         }
     }
 
-In this case it means the high frequency terms have only an impact on relevance when there are at least three of them. But the most interesting use of the [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") for high frequency terms is when there are only high frequency terms:
+In this case it means the high frequency terms have only an impact on relevance when there are at least three of them. But the most interesting use of the [`minimum_should_match`](query-dsl-minimum-should-match.html) for high frequency terms is when there are only high frequency terms:
     
     
     GET /_search

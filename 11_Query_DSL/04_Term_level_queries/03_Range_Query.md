@@ -52,7 +52,7 @@ Sets the boost value of the query, defaults to `1.0`
   
 ### Ranges on date fields
 
-When running `range` queries on fields of type [`date`](date.html "Date datatype"), ranges can be specified using [Date Math:
+When running `range` queries on fields of type [`date`](date.html), ranges can be specified using [Date Math:
     
     
     GET _search
@@ -69,7 +69,7 @@ When running `range` queries on fields of type [`date`](date.html "Date datatype
 
 #### Date math and rounding
 
-When using [date math](common-options.html#date-math "Date Mathedit") to round dates to the nearest day, month, hour, etc, the rounded dates depend on whether the ends of the ranges are inclusive or exclusive.
+When using [date math](common-options.html#date-math) to round dates to the nearest day, month, hour, etc, the rounded dates depend on whether the ends of the ranges are inclusive or exclusive.
 
 Rounding up moves to the last millisecond of the rounding scope, and rounding down to the first millisecond of the rounding scope. For example:
 
@@ -101,7 +101,7 @@ Less than or equal to the date rounded up: `2014-11-18||/M` becomes `2014-11-30T
   
 #### Date format in range queries
 
-Formatted dates will be parsed using the [`format`](mapping-date-format.html "format") specified on the [`date`](date.html "Date datatype") field by default, but it can be overridden by passing the `format` parameter to the `range` query:
+Formatted dates will be parsed using the [`format`](mapping-date-format.html) specified on the [`date`](date.html) field by default, but it can be overridden by passing the `format` parameter to the `range` query:
     
     
     GET _search
@@ -119,7 +119,7 @@ Formatted dates will be parsed using the [`format`](mapping-date-format.html "fo
 
 #### Time zone in range queries
 
-Dates can be converted from another timezone to UTC either by specifying the time zone in the date value itself (if the [`format`](mapping-date-format.html "format") accepts it), or it can be specified as the `time_zone` parameter:
+Dates can be converted from another timezone to UTC either by specifying the time zone in the date value itself (if the [`format`](mapping-date-format.html) accepts it), or it can be specified as the `time_zone` parameter:
     
     
     GET _search

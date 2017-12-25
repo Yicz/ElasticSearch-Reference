@@ -23,7 +23,7 @@ In order to perform highlighting, the actual content of the field is required. I
 
 The `_all` field cannot be extracted from `_source`, so it can only be used for highlighting if it mapped to have `store` set to `true`.
 
-The field name supports wildcard notation. For example, using `comment_*` will cause all [text](text.html "Text datatype") and [keyword](keyword.html "Keyword datatype") fields (and [string](string.html "String datatype") from versions before 5.0) that match the expression to be highlighted. Note that all other fields will not be highlighted. If you use a custom mapper and want to highlight on a field anyway, you have to provide the field name explicitly.
+The field name supports wildcard notation. For example, using `comment_*` will cause all [text](text.html) and [keyword](keyword.html) fields (and [string](string.html) from versions before 5.0) that match the expression to be highlighted. Note that all other fields will not be highlighted. If you use a custom mapper and want to highlight on a field anyway, you have to provide the field name explicitly.
 
 ### Plain highlighter
 
@@ -74,7 +74,7 @@ The postings highlighter doesn’t support highlighting some complex queries, li
 If `term_vector` information is provided by setting `term_vector` to `with_positions_offsets` in the mapping then the fast vector highlighter will be used instead of the plain highlighter. The fast vector highlighter:
 
   * Is faster especially for large fields (> `1MB`) 
-  * Can be customized with `boundary_scanner` (see [below](search-request-highlighting.html#boundary-scanners "Boundary Scanners")) 
+  * Can be customized with `boundary_scanner` (see [below](search-request-highlighting.html#boundary-scanners)) 
   * Requires setting `term_vector` to `with_positions_offsets` which increases the size of the index 
   * Can combine matches from multiple fields into one result. See `matched_fields`
   * Can assign different weights to matches at different positions allowing for things like phrase matches being sorted above term matches when highlighting a Boosting Query that boosts phrase matches over term matches 
@@ -566,7 +566,7 @@ The above matches both "run with scissors" and "running with scissors" and would
         }
     }
 
-The above highlights "run" as well as "running" and "scissors" but still sorts "running with scissors" above "run with scissors" because the plain match ("running") is boosted.
+The above highlights) is boosted.
     
     
     GET /_search

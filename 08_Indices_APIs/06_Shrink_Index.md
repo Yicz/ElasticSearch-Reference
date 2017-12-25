@@ -12,7 +12,7 @@ Shrinking works as follows:
 
 ### Preparing an index for shrinking
 
-In order to shrink an index, the index must be marked as read-only, and a (primary or replica) copy of every shard in the index must be relocated to the same node and have [health](cluster-health.html "Cluster Health") `green`.
+In order to shrink an index, the index must be marked as read-only, and a (primary or replica) copy of every shard in the index must be relocated to the same node and have [health](cluster-health.html) `green`.
 
 These two conditions can be achieved with the following request:
     
@@ -29,7 +29,7 @@ These two conditions can be achieved with the following request:
 
 | 
 
-Forces the relocation of a copy of each shard to the node with name `shrink_node_name`. See [Shard Allocation Filtering](shard-allocation-filtering.html "Shard Allocation Filtering") for more options.   
+Forces the relocation of a copy of each shard to the node with name `shrink_node_name`. See [Shard Allocation Filtering](shard-allocation-filtering.html) for more options.   
   
 ---|---  
   
@@ -39,7 +39,7 @@ Forces the relocation of a copy of each shard to the node with name `shrink_node
 
 Prevents write operations to this index while still allowing metadata changes like deleting the index.   
   
-It can take a while to relocate the source index. Progress can be tracked with the [`_cat recovery` API](cat-recovery.html "cat recovery"), or the [`cluster health` API](cluster-health.html "Cluster Health") can be used to wait until all shards have relocated with the `wait_for_no_relocating_shards` parameter.
+It can take a while to relocate the source index. Progress can be tracked with the [`_cat recovery` API](cat-recovery.html), or the [`cluster health` API](cluster-health.html) can be used to wait until all shards have relocated with the `wait_for_no_relocating_shards` parameter.
 
 ### Shrinking an index
 
@@ -62,7 +62,7 @@ Indices can only be shrunk if they satisfy the following requirements:
 
 
 
-The `_shrink` API is similar to the [`create index` API](indices-create-index.html "Create Index") and accepts `settings` and `aliases` parameters for the target index:
+The `_shrink` API is similar to the [`create index` API](indices-create-index.html) and accepts `settings` and `aliases` parameters for the target index:
     
     
     POST my_source_index/_shrink/my_target_index
@@ -89,7 +89,7 @@ The number of shards in the target index. This must be a factor of the number of
 
 | 
 
-Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html "Force Merge") the shard to a single segment.   
+Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html) the shard to a single segment.   
   
 ![Note](images/icons/note.png)
 
@@ -97,7 +97,7 @@ Mappings may not be specified in the `_shrink` request, and all `index.analysis.
 
 ### Monitoring the shrink process
 
-The shrink process can be monitored with the [`_cat recovery` API](cat-recovery.html "cat recovery"), or the [`cluster health` API](cluster-health.html "Cluster Health") can be used to wait until all primary shards have been allocated by setting the `wait_for_status` parameter to `yellow`.
+The shrink process can be monitored with the [`_cat recovery` API](cat-recovery.html), or the [`cluster health` API](cluster-health.html) can be used to wait until all primary shards have been allocated by setting the `wait_for_status` parameter to `yellow`.
 
 The `_shrink` API returns as soon as the target index has been added to the cluster state, before any shards have been allocated. At this point, all shards are in the state `unassigned`. If, for any reason, the target index can’t be allocated on the shrink node, its primary shard will remain `unassigned` until it can be allocated on that node.
 
@@ -105,4 +105,4 @@ Once the primary shard is allocated, it moves to state `initializing`, and the s
 
 ### Wait For Active Shards
 
-Because the shrink operation creates a new index to shrink the shards to, the [wait for active shards](indices-create-index.html#create-index-wait-for-active-shards "Wait For Active Shardsedit") setting on index creation applies to the shrink index action as well.
+Because the shrink operation creates a new index to shrink the shards to, the [wait for active shards](indices-create-index.html#create-index-wait-for-active-shards) setting on index creation applies to the shrink index action as well.

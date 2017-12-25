@@ -4,7 +4,7 @@
 
 The functionality described on this page is considered experimental and may be changed or removed in a future release 
 
-Text features, such as term or document frequency for a specific term can be accessed in scripts with the `_index` variable. This can be useful if, for example, you want to implement your own scoring model using for example a script inside a [function score query](query-dsl-function-score-query.html "Function Score Query"). Statistics over the document collection are computed **per shard** , not per index.
+Text features, such as term or document frequency for a specific term can be accessed in scripts with the `_index` variable. This can be useful if, for example, you want to implement your own scoring model using for example a script inside a [function score query](query-dsl-function-score-query.html). Statistics over the document collection are computed **per shard** , not per index.
 
 ### Nomenclature:
 
@@ -50,11 +50,11 @@ Field statistics can be accessed with a subscript operator like this: `_index['F
 `_index['FIELD'].sumdf()`
      The sum of `df` s over all terms that appear in field `FIELD` in all documents. 
 
-Field statistics are computed per shard and therefore these numbers can vary depending on the shard the current document resides in. The number of terms in a field cannot be accessed using the `_index` variable. See [Token count datatype](token-count.html "Token count datatype") for how to do that.
+Field statistics are computed per shard and therefore these numbers can vary depending on the shard the current document resides in. The number of terms in a field cannot be accessed using the `_index` variable. See [Token count datatype](token-count.html) for how to do that.
 
 ### Term statistics:
 
-Term statistics for a field can be accessed with a subscript operator like this: `_index['FIELD']['TERM']`. This will never return null, even if term or field does not exist. If you do not need the term frequency, call `_index['FIELD'].get('TERM', 0)` to avoid unnecessary initialization of the frequencies. The flag will have only affect is your set the [`index_options`](index-options.html "index_options") to `docs`.
+Term statistics for a field can be accessed with a subscript operator like this: `_index['FIELD']['TERM']`. This will never return null, even if term or field does not exist. If you do not need the term frequency, call `_index['FIELD'].get('TERM', 0)` to avoid unnecessary initialization of the frequencies. The flag will have only affect is your set the [`index_options`](index-options.html) to `docs`.
 
 `_index['FIELD']['TERM'].df()`
      `df` of term `TERM` in field `FIELD`. Will be returned, even if the term is not present in the current document. 
@@ -129,4 +129,4 @@ Example: sums up all payloads for the term `foo`.
 
 ### Term vectors:
 
-The `_index` variable can only be used to gather statistics for single terms. If you want to use information on all terms in a field, you must store the term vectors (see [`term_vector`](term-vector.html "term_vector")). To access them, call `_index.termVectors()` to get a [Fields](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/index/Fields.html) instance. This object can then be used as described in [lucene doc](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/index/Fields.html) to iterate over fields and then for each field iterate over each term in the field. The method will return null if the term vectors were not stored.
+The `_index` variable can only be used to gather statistics for single terms. If you want to use information on all terms in a field, you must store the term vectors (see [`term_vector`](term-vector.html)). To access them, call `_index.termVectors()` to get a [Fields](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/index/Fields.html) instance. This object can then be used as described in [lucene doc](https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/index/Fields.html) to iterate over fields and then for each field iterate over each term in the field. The method will return null if the term vectors were not stored.

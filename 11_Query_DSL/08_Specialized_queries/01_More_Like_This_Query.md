@@ -17,7 +17,7 @@ The simplest use case consists of asking for documents that are similar to a pro
         }
     }
 
-A more complicated use case consists of mixing texts with documents already existing in the index. In this case, the syntax to specify a document is similar to the one used in the [Multi GET API](docs-multi-get.html "Multi Get API").
+A more complicated use case consists of mixing texts with documents already existing in the index. In this case, the syntax to specify a document is similar to the one used in the [Multi GET API](docs-multi-get.html).
     
     
     GET /_search
@@ -44,7 +44,7 @@ A more complicated use case consists of mixing texts with documents already exis
         }
     }
 
-Finally, users can mix some texts, a chosen set of documents but also provide documents not necessarily present in the index. To provide documents not present in the index, the syntax is similar to [artificial documents](docs-termvectors.html#docs-termvectors-artificial-doc "Example: Artificial documentsedit").
+Finally, users can mix some texts, a chosen set of documents but also provide documents not necessarily present in the index. To provide documents not present in the index, the syntax is similar to [artificial documents](docs-termvectors.html#docs-termvectors-artificial-doc).
     
     
     GET /_search
@@ -124,7 +124,7 @@ The only required parameter is `like`, all other parameters have sensible defaul
 
 | 
 
-The only **required** parameter of the MLT query is `like` and follows a versatile syntax, in which the user can specify free form text and/or a single or multiple documents (see examples above). The syntax to specify documents is similar to the one used by the [Multi GET API](docs-multi-get.html "Multi Get API"). When specifying documents, the text is fetched from `fields` unless overridden in each document request. The text is analyzed by the analyzer at the field, but could also be overridden. The syntax to override the analyzer at the field follows a similar syntax to the `per_field_analyzer` parameter of the [Term Vectors API](docs-termvectors.html#docs-termvectors-per-field-analyzer "Per-field analyzeredit"). Additionally, to provide documents not necessarily present in the index, [artificial documents](docs-termvectors.html#docs-termvectors-artificial-doc "Example: Artificial documentsedit") are also supported.   
+The only **required** parameter of the MLT query is `like` and follows a versatile syntax, in which the user can specify free form text and/or a single or multiple documents (see examples above). The syntax to specify documents is similar to the one used by the [Multi GET API](docs-multi-get.html). When specifying documents, the text is fetched from `fields` unless overridden in each document request. The text is analyzed by the analyzer at the field, but could also be overridden. The syntax to override the analyzer at the field follows a similar syntax to the `per_field_analyzer` parameter of the [Term Vectors API](docs-termvectors.html#docs-termvectors-per-field-analyzer). Additionally, to provide documents not necessarily present in the index, [artificial documents](docs-termvectors.html#docs-termvectors-artificial-doc) are also supported.   
   
 ---|---  
   
@@ -150,7 +150,7 @@ The text to find documents like it.
 
 | 
 
-A list of documents following the same syntax as the [Multi GET API](docs-multi-get.html "Multi Get API").   
+A list of documents following the same syntax as the [Multi GET API](docs-multi-get.html).   
   
 #### Term Selection Parameters
 
@@ -210,7 +210,7 @@ The analyzer that is used to analyze the free form text. Defaults to the analyze
 
 | 
 
-After the disjunctive query has been formed, this parameter controls the number of terms that must match. The syntax is the same as the [minimum should match](query-dsl-minimum-should-match.html "Minimum Should Match"). (Defaults to `"30%"`).   
+After the disjunctive query has been formed, this parameter controls the number of terms that must match. The syntax is the same as the [minimum should match](query-dsl-minimum-should-match.html). (Defaults to `"30%"`).   
   
 ---|---  
   

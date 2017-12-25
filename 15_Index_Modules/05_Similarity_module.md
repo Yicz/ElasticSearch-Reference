@@ -2,7 +2,7 @@
 
 A similarity (scoring / ranking model) defines how matching documents are scored. Similarity is per field, meaning that via the mapping one can define a different similarity per field.
 
-Configuring a custom similarity is considered a expert feature and the builtin similarities are most likely sufficient as is described in [`similarity`](similarity.html "similarity").
+Configuring a custom similarity is considered a expert feature and the builtin similarities are most likely sufficient as is described in [`similarity`](similarity.html).
 
 ### Configuring a similarity
 
@@ -166,7 +166,7 @@ Type name: `LMJelinekMercer`
 
 By default, Elasticsearch will use whatever similarity is configured as `default`. However, the similarity functions `queryNorm()` and `coord()` are not per-field. Consequently, for expert users wanting to change the implementation used for these two methods, while not changing the `default`, it is possible to configure a similarity with the name `base`. This similarity will then be used for the two methods.
 
-You can change the default similarity for all fields in an index when it is [created](indices-create-index.html "Create Index"):
+You can change the default similarity for all fields in an index when it is [created](indices-create-index.html):
     
     
     PUT /my_index
@@ -182,7 +182,7 @@ You can change the default similarity for all fields in an index when it is [cre
       }
     }
 
-If you want to change the default similarity after creating the index you must [close](indices-open-close.html "Open / Close Index API") your index, send the follwing request and [open](indices-open-close.html "Open / Close Index API") it again afterwards:
+If you want to change the default similarity after creating the index you must [close](indices-open-close.html) your index, send the follwing request and [open](indices-open-close.html) it again afterwards:
     
     
     PUT /my_index/_settings

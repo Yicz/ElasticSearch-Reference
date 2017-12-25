@@ -46,7 +46,7 @@ The `netty.epollBugWorkaround` settings is removed. This settings allow people t
 
 ### Forbid changing of thread pool types
 
-Previously, [thread pool types](modules-threadpool.html "Thread Pool") could be dynamically adjusted. The thread pool type effectively controls the backing queue for the thread pool and modifying this is an expert setting with minimal practical benefits and high risk of being misused. The ability to change the thread pool type for any thread pool has been removed. It is still possible to adjust relevant thread pool parameters for each of the thread pools (e.g., depending on the thread pool type, `keep_alive`, `queue_size`, etc.).
+Previously, [thread pool types](modules-threadpool.html) could be dynamically adjusted. The thread pool type effectively controls the backing queue for the thread pool and modifying this is an expert setting with minimal practical benefits and high risk of being misused. The ability to change the thread pool type for any thread pool has been removed. It is still possible to adjust relevant thread pool parameters for each of the thread pools (e.g., depending on the thread pool type, `keep_alive`, `queue_size`, etc.).
 
 ### Threadpool settings
 
@@ -128,7 +128,7 @@ The `indices.memory.min_shard_index_buffer_size` and `indices.memory.max_shard_i
 
 ### Removed es.max-open-files
 
-Setting the system property es.max-open-files to true to get Elasticsearch to print the number of maximum open files for the Elasticsearch process has been removed. This same information can be obtained from the [_Nodes Info_](cluster-nodes-info.html "Nodes Info") API, and a warning is logged on startup if it is set too low.
+Setting the system property es.max-open-files to true to get Elasticsearch to print the number of maximum open files for the Elasticsearch process has been removed. This same information can be obtained from the [_Nodes Info_](cluster-nodes-info.html) API, and a warning is logged on startup if it is set too low.
 
 ### Removed es.netty.gathering
 

@@ -6,7 +6,7 @@ Since the sync id marker was added when there were no ongoing indexing operation
 
 This is particularly useful for use cases having lots of indices which are never or very rarely updated, such as time based data. This use case typically generates lots of indices whose recovery without the synced flush marker would take a long time.
 
-To check whether a shard has a marker or not, look for the `commit` div of shard stats returned by the [indices stats](indices-stats.html "Indices Stats") API:
+To check whether a shard has a marker or not, look for the `commit` div of shard stats returned by the [indices stats](indices-stats.html) API:
     
     
     GET twitter/_stats?level=shards

@@ -2,7 +2,7 @@
 
 ![Note](images/icons/note.png)
 
-In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html "Suggesters") page first.
+In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
 
 The `completion` suggester provides auto-complete/search-as-you-type functionality. This is a navigational feature to guide users to relevant results as they are typing, improving search precision. It is not meant for spell correction or did-you-mean functionality like the `term` or `phrase` suggesters.
 
@@ -89,7 +89,7 @@ You can use the following shorthand form. Note that you can not specify a weight
 
 ### Querying
 
-Suggesting works as usual, except that you have to specify the suggest type as `completion`. Suggestions are near real-time, which means new suggestions can be made visible by [refresh](indices-refresh.html "Refresh") and documents once deleted are never shown. This request:
+Suggesting works as usual, except that you have to specify the suggest type as `completion`. Suggestions are near real-time, which means new suggestions can be made visible by [refresh](indices-refresh.html) and documents once deleted are never shown. This request:
     
     
     POST music/_search?pretty
@@ -139,7 +139,7 @@ returns this response:
 
 `_source` meta-field must be enabled, which is the default behavior, to enable returning `_source` with suggestions.
 
-The configured weight for a suggestion is returned as `_score`. The `text` field uses the `input` of your indexed suggestion. Suggestions return the full document `_source` by default. The size of the `_source` can impact performance due to disk fetch and network transport overhead. To save some network overhead, filter out unnecessary fields from the `_source` using [source filtering](search-request-source-filtering.html "Source filtering") to minimize `_source` size. Note that the _suggest endpoint doesn’t support source filtering but using suggest on the `_search` endpoint does:
+The configured weight for a suggestion is returned as `_score`. The `text` field uses the `input` of your indexed suggestion. Suggestions return the full document `_source` by default. The size of the `_source` can impact performance due to disk fetch and network transport overhead. To save some network overhead, filter out unnecessary fields from the `_source` using [source filtering](search-request-source-filtering.html) to minimize `_source` size. Note that the _suggest endpoint doesn’t support source filtering but using suggest on the `_search` endpoint does:
     
     
     POST music/_search?size=0
@@ -199,7 +199,7 @@ The basic completion suggester query supports the following parameters:
 
 ![Note](images/icons/note.png)
 
-The completion suggester considers all documents in the index. See [Context Suggester](suggester-context.html "Context Suggester") for an explanation of how to query a subset of documents instead.
+The completion suggester considers all documents in the index. See [Context Suggester](suggester-context.html) for an explanation of how to query a subset of documents instead.
 
 ![Note](images/icons/note.png)
 
@@ -288,7 +288,7 @@ The regex query can take specific regex parameters. The following parameters are
 
 | 
 
-Possible flags are `ALL` (default), `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`. See [regexp-syntax](query-dsl-regexp-query.html "Regexp Query") for their meaning   
+Possible flags are `ALL` (default), `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`. See [regexp-syntax](query-dsl-regexp-query.html) for their meaning   
   
 ---|---  
   

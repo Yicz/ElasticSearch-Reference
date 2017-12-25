@@ -1,6 +1,6 @@
 ## `ignore_malformed`
 
-Sometimes you don’t have much control over the data that you receive. One user may send a `login` field that is a [`date`](date.html "Date datatype"), and another sends a `login` field that is an email address.
+Sometimes you don’t have much control over the data that you receive. One user may send a `login` field that is a [`date`](date.html), and another sends a `login` field that is an email address.
 
 Trying to index the wrong datatype into a field throws an exception by default, and rejects the whole document. The `ignore_malformed` parameter, if set to `true`, allows the exception to be ignored. The malformed field is not indexed, but other fields in the document are processed normally.
 
@@ -52,7 +52,7 @@ This document will be rejected because `number_two` does not allow malformed val
   
 ![Tip](images/icons/tip.png)
 
-The `ignore_malformed` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `ignore_malformed` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 ### Index-level default
 

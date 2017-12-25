@@ -9,7 +9,7 @@ An entire cluster may be set to read-only with the following _dynamic_ setting:
 
 ![Warning](images/icons/warning.png)
 
-Don’t rely on this setting to prevent changes to your cluster. Any user with access to the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API can make the cluster read-write again.
+Don’t rely on this setting to prevent changes to your cluster. Any user with access to the [cluster-update-settings](cluster-update-settings.html) API can make the cluster read-write again.
 
 ### Index Tombstones
 

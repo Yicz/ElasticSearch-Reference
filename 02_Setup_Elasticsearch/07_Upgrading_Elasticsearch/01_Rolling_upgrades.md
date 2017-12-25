@@ -2,7 +2,7 @@
 
 A rolling upgrade allows the Elasticsearch cluster to be upgraded one node at a time, with no downtime for end users. Running multiple versions of Elasticsearch in the same cluster for any length of time beyond that required for an upgrade is not supported, as shards will not be replicated from the more recent version to the older version.
 
-Consult this [table](setup-upgrade.html "Upgrading Elasticsearch") to verify that rolling upgrades are supported for your version of Elasticsearch.
+Consult this [table](setup-upgrade.html) to verify that rolling upgrades are supported for your version of Elasticsearch.
 
 To perform a rolling upgrade:
 
@@ -19,7 +19,7 @@ When you shut down a node, the allocation process will wait for one minute befor
 
   2. **Stop non-essential indexing and perform a synced flush (Optional)**
 
-You may happily continue indexing during the upgrade. However, shard recovery will be much faster if you temporarily stop non-essential indexing and issue a [synced-flush](indices-synced-flush.html "Synced Flush") request:
+You may happily continue indexing during the upgrade. However, shard recovery will be much faster if you temporarily stop non-essential indexing and issue a [synced-flush](indices-synced-flush.html) request:
     
         POST _flush/synced
 
@@ -33,11 +33,11 @@ Shut down one of the nodes in the cluster **before** starting the upgrade.
 
 When using the zip or tarball packages, the `config`, `data`, `logs` and `plugins` directories are placed within the Elasticsearch home directory by default.
 
-It is a good idea to place these directories in a different location so that there is no chance of deleting them when upgrading Elasticsearch. These custom paths can be [configured](important-settings.html#path-settings "path.data and path.logsedit") with the `path.conf`, `path.logs`, and `path.data` settings, and using `ES_JVM_OPTIONS` to specify the location of the `jvm.options` file.
+It is a good idea to place these directories in a different location so that there is no chance of deleting them when upgrading Elasticsearch. These custom paths can be [configured](important-settings.html#path-settings) with the `path.conf`, `path.logs`, and `path.data` settings, and using `ES_JVM_OPTIONS` to specify the location of the `jvm.options` file.
 
-The [Debian](deb.html "Install Elasticsearch with Debian Package") and [RPM](rpm.html "Install Elasticsearch with RPM") packages place these directories in the appropriate place for each operating system.
+The [Debian](deb.html) and [RPM](rpm.html) packages place these directories in the appropriate place for each operating system.
 
-To upgrade using a [Debian](deb.html "Install Elasticsearch with Debian Package") or [RPM](rpm.html "Install Elasticsearch with RPM") package:
+To upgrade using a [Debian](deb.html) or [RPM](rpm.html) package:
 
     * Use `rpm` or `dpkg` to install the new package. All files should be placed in their proper locations, and config files should not be overwritten. 
 
@@ -70,7 +70,7 @@ Once the node has joined the cluster, reenable shard allocation to start using t
 
   7. **Wait for the node to recover**
 
-You should wait for the cluster to finish shard allocation before upgrading the next node. You can check on progress with the [`_cat/health`](cat-health.html "cat health") request:
+You should wait for the cluster to finish shard allocation before upgrading the next node. You can check on progress with the [`_cat/health`](cat-health.html) request:
     
         GET _cat/health
 
@@ -86,7 +86,7 @@ In this case, check that there are no initializing or relocating shards (the `in
 
 As soon as another node is upgraded, the replicas should be assigned and the cluster health will reach status `green`.
 
-Shards that have not been [sync-flushed](indices-synced-flush.html "Synced Flush") may take some time to recover. The recovery status of individual shards can be monitored with the [`_cat/recovery`](cat-recovery.html "cat recovery") request:
+Shards that have not been [sync-flushed](indices-synced-flush.html) may take some time to recover. The recovery status of individual shards can be monitored with the [`_cat/recovery`](cat-recovery.html) request:
     
         GET _cat/recovery
 

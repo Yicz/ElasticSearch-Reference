@@ -2,7 +2,7 @@
 
 Multi termvectors API allows to get multiple termvectors at once. The documents from which to retrieve the term vectors are specified by an index, type and id. But the documents could also be artificially provided in the request itself.
 
-The response includes a `docs` array with all the fetched termvectors, each element having the structure provided by the [termvectors](docs-termvectors.html "Term Vectors") API. Here is an example:
+The response includes a `docs` array with all the fetched termvectors, each element having the structure provided by the [termvectors](docs-termvectors.html) API. Here is an example:
     
     
     POST /_mtermvectors
@@ -25,7 +25,7 @@ The response includes a `docs` array with all the fetched termvectors, each elem
        ]
     }
 
-See the [termvectors](docs-termvectors.html "Term Vectors") API for a description of possible parameters.
+See the [termvectors](docs-termvectors.html) API for a description of possible parameters.
 
 The `_mtermvectors` endpoint can also be used against an index (in which case it is not required in the body):
     
@@ -81,7 +81,7 @@ If all requested documents are on same index and have same type and also the par
         }
     }
 
-Additionally, just like for the [termvectors](docs-termvectors.html "Term Vectors") API, term vectors could be generated for user provided documents. The mapping used is determined by `_index` and `_type`.
+Additionally, just like for the [termvectors](docs-termvectors.html) API, term vectors could be generated for user provided documents. The mapping used is determined by `_index` and `_type`.
     
     
     POST /_mtermvectors

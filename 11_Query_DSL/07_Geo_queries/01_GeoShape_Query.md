@@ -2,7 +2,7 @@
 
 Filter documents indexed using the `geo_shape` type.
 
-Requires the [`geo_shape` Mapping](geo-shape.html "Geo-Shape datatype").
+Requires the [`geo_shape` Mapping](geo-shape.html).
 
 The `geo_shape` query uses the same grid square representation as the `geo_shape` mapping to find documents that have a shape that intersects with the query shape. It will also use the same PrefixTree configuration as defined for the field mapping.
 
@@ -119,7 +119,7 @@ The following is an example of using the Filter with a pre-indexed shape:
 
 ### Spatial Relations
 
-The [geo_shape strategy](geo-shape.html#spatial-strategy "Spatial strategiesedit") mapping parameter determines which spatial relation operators may be used at search time.
+The [geo_shape strategy](geo-shape.html#spatial-strategy) mapping parameter determines which spatial relation operators may be used at search time.
 
 The following is a complete list of spatial relation operators available:
 

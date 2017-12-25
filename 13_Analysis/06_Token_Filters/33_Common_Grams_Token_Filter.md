@@ -1,6 +1,6 @@
 ## Common Grams Token Filter
 
-Token filter that generates bigrams for frequently occurring terms. Single terms are still indexed. It can be used as an alternative to the [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") when we don’t want to completely ignore common terms.
+Token filter that generates bigrams for frequently occurring terms. Single terms are still indexed. It can be used as an alternative to the [Stop Token Filter](analysis-stop-tokenfilter.html) when we don’t want to completely ignore common terms.
 
 For example, the text "the quick brown is a fox" will be tokenized as "the", "the_quick", "quick", "brown", "brown_is", "is_a", "a_fox", "fox". Assuming "the", "is" and "a" are common words.
 

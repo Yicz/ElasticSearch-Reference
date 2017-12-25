@@ -1,6 +1,6 @@
 ## Multi Get API
 
-Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). The response includes a `docs` array with all the fetched documents, each element similar in structure to a document provided by the [get](docs-get.html "Get API") API. Here is an example:
+Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). The response includes a `docs` array with all the fetched documents, each element similar in structure to a document provided by the [get](docs-get.html) API. Here is an example:
     
     
     GET _mget
@@ -92,7 +92,7 @@ You need in that case to explicitly set the `_type`:
 
 ### Source filtering
 
-By default, the `_source` field will be returned for every document (if stored). Similar to the [get](docs-get.html#get-source-filtering "Source filteringedit") API, you can retrieve only parts of the `_source` (or not at all) by using the `_source` parameter. You can also use the url parameters `_source`,`_source_include` & `_source_exclude` to specify defaults, which will be used when there are no per-document instructions.
+By default, the `_source` field will be returned for every document (if stored). Similar to the [get](docs-get.html#get-source-filtering) API, you can retrieve only parts of the `_source` (or not at all) by using the `_source` parameter. You can also use the url parameters `_source`,`_source_include` & `_source_exclude` to specify defaults, which will be used when there are no per-document instructions.
 
 For example:
     
@@ -126,7 +126,7 @@ For example:
 
 ### Fields
 
-Specific stored fields can be specified to be retrieved per document to get, similar to the [stored_fields](docs-get.html#get-stored-fields "Stored Fieldsedit") parameter of the Get API. For example:
+Specific stored fields can be specified to be retrieved per document to get, similar to the [stored_fields](docs-get.html#get-stored-fields) parameter of the Get API. For example:
     
     
     GET _mget
@@ -207,4 +207,4 @@ In this example, document `test/type/2` will be fetch from shard corresponding t
 
 ### Security
 
-See [_URL-based access control_](url-access-control.html "URL-based access control")
+See [_URL-based access control_](url-access-control.html)

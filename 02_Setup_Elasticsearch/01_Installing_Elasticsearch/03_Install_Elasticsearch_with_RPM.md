@@ -1,10 +1,10 @@
 ## Install Elasticsearch with RPM
 
-The RPM for Elasticsearch can be [downloaded from our website](rpm.html#install-rpm "Download and install the RPM manually") or from our [RPM repository](rpm.html#rpm-repo "Installing from the RPM repository"). It can be used to install Elasticsearch on any RPM-based system such as OpenSuSE, SLES, Centos, Red Hat, and Oracle Enterprise.
+The RPM for Elasticsearch can be [downloaded from our website](rpm.html#install-rpm) or from our [RPM repository](rpm.html#rpm-repo). It can be used to install Elasticsearch on any RPM-based system such as OpenSuSE, SLES, Centos, Red Hat, and Oracle Enterprise.
 
 ![Note](images/icons/note.png)
 
-RPM install is not supported on distributions with old versions of RPM, such as SLES 11 and CentOS 5. Please see [Install Elasticsearch with `.zip` or `.tar.gz`](zip-targz.html "Install Elasticsearch with .zip or .tar.gz") instead.
+RPM install is not supported on distributions with old versions of RPM, such as SLES 11 and CentOS 5. Please see [Install Elasticsearch with `.zip` or `.tar.gz`](zip-targz.html) instead.
 
 The latest stable version of Elasticsearch can be found on the [Download Elasticsearch](/downloads/elasticsearch) page. Other versions can be found on the [Past Releases page](/downloads/past-releases).
 
@@ -171,7 +171,7 @@ which should give you a response something like this:
 
 ### Configuring Elasticsearch
 
-Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html "Configuring Elasticsearch").
+Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html).
 
 The RPM also has a system configuration file (`/etc/sysconfig/elasticsearch`), which allows you to set the following parameters:
 
@@ -245,7 +245,7 @@ Configure restart on package upgrade, defaults to `false`. This means you will h
   
 ![Note](images/icons/note.png)
 
-Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd "Systemd configuration") for more information.
+Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd) for more information.
 
 ### Directory layout of RPM
 
@@ -378,8 +378,8 @@ Location of script files.
 
 You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
 
-  * Learn how to [configure Elasticsearch](settings.html "Configuring Elasticsearch"). 
-  * Configure [important Elasticsearch settings](important-settings.html "Important Elasticsearch configuration"). 
-  * Configure [important system settings](system-config.html "Important System Configuration"). 
+  * Learn how to [configure Elasticsearch](settings.html). 
+  * Configure [important Elasticsearch settings](important-settings.html). 
+  * Configure [important system settings](system-config.html). 
 
 

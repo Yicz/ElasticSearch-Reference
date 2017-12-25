@@ -4,7 +4,7 @@
 
 This functionality is in beta and is subject to change. The design and code is considered to be less mature than official GA features. Elastic will take a best effort approach to fix any issues, but beta features are not subject to the support SLA of official GA features.
 
-The _cross cluster search_ feature allows any node to act as a federated client across multiple clusters. In contrast to the [tribe node](modules-tribe.html "Tribe node") feature, a cross cluster search node won’t join the remote cluster, instead it connects to a remote cluster in a light fashion in order to execute federated search requests.
+The _cross cluster search_ feature allows any node to act as a federated client across multiple clusters. In contrast to the [tribe node](modules-tribe.html) feature, a cross cluster search node won’t join the remote cluster, instead it connects to a remote cluster in a light fashion in order to execute federated search requests.
 
 Cross cluster search works by configuring a remote cluster in the cluster state and connecting only to a limited number of nodes in the remote cluster. Each remote cluster is referenced by a name and a list of seed nodes. When a remote cluster is registered, its cluster state is retrieved from one of the seed nodes so that up to 3 _gateway nodes_ are selected to be connected to as part of upcoming cross cluster search requests. Cross cluster search requests consist of uni-directional connections from the coordinating node to the previously selected remote nodes only. It is possible to tag which nodes should be selected through node attributes (see [Cross cluster search settings.
 
@@ -12,9 +12,9 @@ Each node in a cluster that has remote clusters configured connects to one or mo
 
 ### Configuring Cross Cluster Search
 
-Remote clusters can be specified globally using [cluster settings](cluster-update-settings.html "Cluster Update Settings") (which can be updated dynamically), or local to individual nodes using the `elasticsearch.yml` file.
+Remote clusters can be specified globally using [cluster settings](cluster-update-settings.html) (which can be updated dynamically), or local to individual nodes using the `elasticsearch.yml` file.
 
-If a remote cluster is configured via `elasticsearch.yml` only the nodes with that configuration will be able to connect to the remote cluster. In other words, federated search requests will have to be sent specifically to those nodes. Remote clusters set via the [cluster settings API](cluster-update-settings.html "Cluster Update Settings") will be available on every node in the cluster.
+If a remote cluster is configured via `elasticsearch.yml` only the nodes with that configuration will be able to connect to the remote cluster. In other words, federated search requests will have to be sent specifically to those nodes. Remote clusters set via the [cluster settings API](cluster-update-settings.html) will be available on every node in the cluster.
 
 ![Warning](images/icons/warning.png)
 
@@ -38,7 +38,7 @@ The `elasticsearch.yml` config file for a _cross cluster search_ node just needs
   
 ---|---  
   
-The equivalent example using the [cluster settings API](cluster-update-settings.html "Cluster Update Settings") to add remote clusters to all nodes in the cluster would look like the following:
+The equivalent example using the [cluster settings API](cluster-update-settings.html) to add remote clusters to all nodes in the cluster would look like the following:
     
     
     PUT _cluster/settings

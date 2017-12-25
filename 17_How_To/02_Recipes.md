@@ -2,7 +2,7 @@
 
 ### Mixing exact search with stemming
 
-When building a search application, stemming is often a must as it is desirable for a query on `skiing` to match documents that contain `ski` or `skis`. But what if a user wants to search for `skiing` specifically? The typical way to do this would be to use a [multi-field](multi-fields.html "fields") in order to have the same content indexed in two different ways:
+When building a search application, stemming is often a must as it is desirable for a query on `skiing` to match documents that contain `ski` or `skis`. But what if a user wants to search for `skiing` specifically? The typical way to do this would be to use a [multi-field](multi-fields.html) in order to have the same content indexed in two different ways:
     
     
     PUT index
@@ -190,7 +190,7 @@ Say the same user runs the same request twice in a row and documents do not come
 
 Now why is it a problem? Index statistics are an important part of the score. And these index statistics may be different across copies of the same shard due to deleted documents. As you may know when documents are deleted or updated, the old document is not immediately removed from the index, it is just marked as deleted and it will only be removed from disk on the next time that the segment this old document belongs to is merged. However for practical reasons, those deleted documents are taken into account for index statistics. So imagine that the primary shard just finished a large merge that removed lots of deleted documents, then it might have index statistics that are sufficiently different from the replica (which still have plenty of deleted documents) so that scores are different too.
 
-The recommended way to work around this issue is to use a string that identifies the user that is logged is (a user id or session id for instance) as a [preference](search-request-preference.html "Preference"). This ensures that all queries of a given user are always going to hit the same shards, so scores remain more consistent across queries.
+The recommended way to work around this issue is to use a string that identifies the user that is logged is (a user id or session id for instance) as a [preference](search-request-preference.html). This ensures that all queries of a given user are always going to hit the same shards, so scores remain more consistent across queries.
 
 This work around has another benefit: when two documents have the same score, they will be sorted by their internal Lucene doc id (which is unrelated to the `_id` or `_uid`) by default. However these doc ids could be different across copies of the same shard. So by always hitting the same shard, we would get more consistent ordering of documents that have the same scores.
 
@@ -200,6 +200,6 @@ If you notice that two documents with the same content get different scores or t
 
 If you have a small dataset, the easiest way to work around this issue is to index everything into an index that has a single shard (`index.number_of_shards: 1`). Then index statistics will be the same for all documents and scores will be consistent.
 
-Otherwise the recommended way to work around this issue is to use the [`dfs_query_then_fetch`](search-request-search-type.html#dfs-query-then-fetch "Dfs, Query Then Fetch") search type. This will make Elasticsearch perform an inital round trip to all involved shards, asking them for their index statistics relatively to the query, then the coordinating node will merge those statistics and send the merged statistics alongside the request when asking shards to perform the `query` phase, so that shards can use these global statistics rather than their own statistics in order to do the scoring.
+Otherwise the recommended way to work around this issue is to use the [`dfs_query_then_fetch`](search-request-search-type.html#dfs-query-then-fetch) search type. This will make Elasticsearch perform an inital round trip to all involved shards, asking them for their index statistics relatively to the query, then the coordinating node will merge those statistics and send the merged statistics alongside the request when asking shards to perform the `query` phase, so that shards can use these global statistics rather than their own statistics in order to do the scoring.
 
 In most cases, this additional round trip should be very cheap. However in the event that your query contains a very large number of fields/terms or fuzzy queries, beware that gathering statistics alone might not be cheap since all terms have to be looked up in the terms dictionaries in order to look up statistics.

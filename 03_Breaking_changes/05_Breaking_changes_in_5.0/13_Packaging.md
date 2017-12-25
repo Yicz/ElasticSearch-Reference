@@ -4,7 +4,7 @@
 
 The repository for apt and yum packages has changed from `https://packages.elastic.co` to `https://artifacts.elastic.co/`.
 
-Full details can be found in [_Installing Elasticsearch_](install-elasticsearch.html "Installing Elasticsearch").
+Full details can be found in [_Installing Elasticsearch_](install-elasticsearch.html).
 
 ### Default logging using systemd (since Elasticsearch 2.2.0)
 
@@ -24,7 +24,7 @@ The default location for this file is in config/jvm.options if installing from t
 
 ### Thread stack size for the Windows service
 
-Previously when installing the Windows service, the installation script would configure the thread stack size (this is required for the service daemon). As a result of moving all JVM configuration to the [jvm.options file](setting-system-settings.html#jvm-options "Setting JVM options"), the service installation script no longer configures the thread stack size. When installing the Windows service, you must configure thread stack size. For additional details, see the [installation docs](windows.html#windows-service "Installing Elasticsearch as a Service on Windows").
+Previously when installing the Windows service, the installation script would configure the thread stack size (this is required for the service daemon). As a result of moving all JVM configuration to the [jvm.options file](setting-system-settings.html#jvm-options), the service installation script no longer configures the thread stack size. When installing the Windows service, you must configure thread stack size. For additional details, see the [installation docs](windows.html#windows-service).
 
 ### /bin/bash is now required
 

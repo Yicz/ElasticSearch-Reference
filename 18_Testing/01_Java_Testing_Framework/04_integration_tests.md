@@ -150,7 +150,7 @@ If you want to ensure a certain configuration for the nodes, which are started a
       @Override
       protected Settings nodeSettings(int nodeOrdinal) {
           return Settings.builder().put(super.nodeSettings(nodeOrdinal))
-                 .put("node.mode", "network")
+                 .put("node.mode",)
                  .build();
       }
     

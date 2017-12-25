@@ -19,15 +19,15 @@ It consists of:
 Tokenizer 
     
 
-  * [Pattern Tokenizer](analysis-pattern-tokenizer.html "Pattern Tokenizer")
+  * [Pattern Tokenizer](analysis-pattern-tokenizer.html)
 
 
 
 Token Filters 
     
 
-  * [Lower Case Token Filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter")
-  * [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") (disabled by default) 
+  * [Lower Case Token Filter](analysis-lowercase-tokenfilter.html)
+  * [Stop Token Filter](analysis-stop-tokenfilter.html) (disabled by default) 
 
 
 
@@ -81,7 +81,7 @@ A pre-defined stop words list like `_english_` or an array containing a list of 
 
 The path to a file containing stop words.   
   
-See the [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") for more information about stop word configuration.
+See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 
 ### Example configuration
 

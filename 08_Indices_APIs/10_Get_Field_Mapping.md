@@ -1,6 +1,6 @@
 ## Get Field Mapping
 
-The get field mapping API allows you to retrieve mapping definitions for one or more fields. This is useful when you do not need the complete type mapping returned by the [_Get Mapping_](indices-get-mapping.html "Get Mapping") API.
+The get field mapping API allows you to retrieve mapping definitions for one or more fields. This is useful when you do not need the complete type mapping returned by the [_Get Mapping_](indices-get-mapping.html) API.
 
 For example, consider the following mapping:
     

@@ -1,27 +1,27 @@
 ## `analyzer`
 
-The values of [`analyzed`](mapping-index.html "index") string fields are passed through an [analyzer](analysis.html "Analysis") to convert the string into a stream of _tokens_ or _terms_. For instance, the string `"The quick Brown Foxes."` may, depending on which analyzer is used, be analyzed to the tokens: `quick`, `brown`, `fox`. These are the actual terms that are indexed for the field, which makes it possible to search efficiently for individual words _within_ big blobs of text.
+The values of [`analyzed`](mapping-index.html) string fields are passed through an [analyzer](analysis.html) to convert the string into a stream of _tokens_ or _terms_. For instance, the string `"The quick Brown Foxes."` may, depending on which analyzer is used, be analyzed to the tokens: `quick`, `brown`, `fox`. These are the actual terms that are indexed for the field, which makes it possible to search efficiently for individual words _within_ big blobs of text.
 
 This analysis process needs to happen not just at index time, but also at query time: the query string needs to be passed through the same (or a similar) analyzer so that the terms that it tries to find are in the same format as those that exist in the index.
 
-Elasticsearch ships with a number of [pre-defined analyzers](analysis-analyzers.html "Analyzers"), which can be used without further configuration. It also ships with many [character filters](analysis-charfilters.html "Character Filters"), [tokenizers](analysis-tokenizers.html "Tokenizers"), and [_Token Filters_](analysis-tokenfilters.html "Token Filters") which can be combined to configure custom analyzers per index.
+Elasticsearch ships with a number of [pre-defined analyzers](analysis-analyzers.html), which can be used without further configuration. It also ships with many [character filters](analysis-charfilters.html), [tokenizers](analysis-tokenizers.html), and [_Token Filters_](analysis-tokenfilters.html) which can be combined to configure custom analyzers per index.
 
 Analyzers can be specified per-query, per-field or per-index. At index time, Elasticsearch will look for an analyzer in this order:
 
   * The `analyzer` defined in the field mapping. 
   * An analyzer named `default` in the index settings. 
-  * The [`standard`](analysis-standard-analyzer.html "Standard Analyzer") analyzer. 
+  * The [`standard`](analysis-standard-analyzer.html) analyzer. 
 
 
 
 At query time, there are a few more layers:
 
-  * The `analyzer` defined in a [full-text query](full-text-queries.html "Full text queries"). 
+  * The `analyzer` defined in a [full-text query](full-text-queries.html). 
   * The `search_analyzer` defined in the field mapping. 
   * The `analyzer` defined in the field mapping. 
   * An analyzer named `default_search` in the index settings. 
   * An analyzer named `default` in the index settings. 
-  * The [`standard`](analysis-standard-analyzer.html "Standard Analyzer") analyzer. 
+  * The [`standard`](analysis-standard-analyzer.html) analyzer. 
 
 
 
@@ -71,7 +71,7 @@ The `text` field uses the default `standard` analyzer`.
 
 | 
 
-The `text.english` [multi-field](multi-fields.html "fields") uses the `english` analyzer, which removes stop words and applies stemming.   
+The `text.english` [multi-field](multi-fields.html) uses the `english` analyzer, which removes stop words and applies stemming.   
   
 ![](images/icons/callouts/3.png)
 

@@ -5,4 +5,4 @@ The following _expert_ setting can be set to manage the recovery policy.
 `indices.recovery.max_bytes_per_sec`
      Defaults to `40mb`. 
 
-This setting can be dynamically updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API:
+This setting can be dynamically updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html) API:

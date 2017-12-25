@@ -51,7 +51,7 @@ Default Value
 
 | 
 
-The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_](modules-scripting.html "Scripting") for more details)
+The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_](modules-scripting.html) for more details)
 
 | 
 

@@ -2,7 +2,7 @@
 
 The `geo_shape` datatype facilitates the indexing of and searching with arbitrary geo shapes such as rectangles and polygons. It should be used when either the data being indexed or the queries being executed contain shapes other than just points.
 
-You can query documents using this type using [geo_shape Query](query-dsl-geo-shape-query.html "GeoShape Query").
+You can query documents using this type using [geo_shape Query](query-dsl-geo-shape-query.html).
 
 #### Mapping Options
 
@@ -45,7 +45,7 @@ Maximum number of layers to be used by the PrefixTree. This can be used to contr
 
 | 
 
-The strategy parameter defines the approach for how to represent shapes at indexing and search time. It also influences the capabilities available so it is recommended to let Elasticsearch set this parameter automatically. There are two strategies available: `recursive` and `term`. Term strategy supports point types only (the `points_only` parameter will be automatically set to true) while Recursive strategy supports all shape types. (IMPORTANT: see [Prefix trees](geo-shape.html#prefix-trees "Prefix treesedit") for more detailed information)
+The strategy parameter defines the approach for how to represent shapes at indexing and search time. It also influences the capabilities available so it is recommended to let Elasticsearch set this parameter automatically. There are two strategies available: `recursive` and `term`. Term strategy supports point types only (the `points_only` parameter will be automatically set to true) while Recursive strategy supports all shape types. (IMPORTANT: see [Prefix trees](geo-shape.html#prefix-trees) for more detailed information)
 
 | 
 
@@ -83,7 +83,7 @@ Setting this option to `true` (defaults to `false`) configures the `geo_shape` f
   
 #### Prefix trees
 
-To efficiently represent shapes in the index, Shapes are converted into a series of hashes representing grid squares (commonly referred to as "rasters") using implementations of a PrefixTree. The tree notion comes from the fact that the PrefixTree uses multiple grid layers, each with an increasing level of precision to represent the Earth. This can be thought of as increasing the level of detail of a map or image at higher zoom levels.
+To efficiently represent shapes in the index, Shapes are converted into a series of hashes representing grid squares (commonly referred to as) using implementations of a PrefixTree. The tree notion comes from the fact that the PrefixTree uses multiple grid layers, each with an increasing level of precision to represent the Earth. This can be thought of as increasing the level of detail of a map or image at higher zoom levels.
 
 Multiple PrefixTree implementations are provided:
 
@@ -111,7 +111,7 @@ Strategy | Supported Shapes | Supported Queries | Multiple Shapes
 
 | 
 
-[All](geo-shape.html#input-structure "Input Structureedit")
+[All](geo-shape.html#input-structure)
 
 | 
 
@@ -125,7 +125,7 @@ Yes
 
 | 
 
-[Points](geo-shape.html#point "Pointedit")
+[Points](geo-shape.html#point)
 
 | 
 

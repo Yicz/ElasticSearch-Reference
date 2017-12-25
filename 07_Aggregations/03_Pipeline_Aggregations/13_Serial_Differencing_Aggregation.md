@@ -64,7 +64,7 @@ Default Value
 
 | 
 
-Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax "buckets_path Syntaxedit") for more details
+Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) for more details
 
 | 
 

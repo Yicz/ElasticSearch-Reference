@@ -1,6 +1,6 @@
 ## Count API
 
-The count API allows to easily execute a query and get the number of matches for that query. It can be executed across one or more indices and across one or more types. The query can either be provided using a simple query string as a parameter, or using the [Query DSL](query-dsl.html "Query DSL") defined within the request body. Here is an example:
+The count API allows to easily execute a query and get the number of matches for that query. It can be executed across one or more indices and across one or more types. The query can either be provided using a simple query string as a parameter, or using the [Query DSL](query-dsl.html) defined within the request body. Here is an example:
     
     
     PUT /twitter/tweet/1?refresh
@@ -19,7 +19,7 @@ The count API allows to easily execute a query and get the number of matches for
 
 ![Note](images/icons/note.png)
 
-The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html "Search") works
+The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html) works
 
 Both examples above do the same thing, which is count the number of tweets from the twitter index for a certain user. The result is:
     
@@ -37,7 +37,7 @@ The query is optional, and when not provided, it will use `match_all` to count a
 
 ### Multi index, Multi type
 
-The count API can be applied to [multiple types in multiple indices](search-search.html#search-multi-index-type "Multi-Index, Multi-Typeedit").
+The count API can be applied to [multiple types in multiple indices](search-search.html#search-multi-index-type).
 
 ### Request Parameters
 
@@ -84,7 +84,7 @@ The maximum count for each shard, upon reaching which the query execution will t
   
 ### Request Body
 
-The count can use the [Query DSL](query-dsl.html "Query DSL") within its body in order to express the query that should be executed. The body content can also be passed as a REST parameter named `source`.
+The count can use the [Query DSL](query-dsl.html) within its body in order to express the query that should be executed. The body content can also be passed as a REST parameter named `source`.
 
 Both HTTP GET and HTTP POST can be used to execute count with body. Since not all clients support GET with body, POST is allowed as well.
 

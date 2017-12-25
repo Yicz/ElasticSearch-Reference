@@ -28,7 +28,7 @@ By default, Elasticsearch runs in the foreground, prints its logs to `STDOUT`, a
 
 ### Configuring Elasticsearch on the command line
 
-Elasticsearch loads its configuration from the `%ES_HOME%\config\elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html "Configuring Elasticsearch").
+Elasticsearch loads its configuration from the `%ES_HOME%\config\elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html).
 
 Any settings that can be specified in the config file can also be specified on the command line, using the `-E` syntax as follows:
     
@@ -212,7 +212,7 @@ At its core, `elasticsearch-service.bat` relies on [Apache Commons Daemon](http:
 
 ![Note](images/icons/note.png)
 
-On Windows, the [heap size](heap-size.html "Set JVM heap size via jvm.options") can be configured as for any other Elasticsearch installation when running Elasticsearch from the command line, or when installing Elasticsearch as a service for the first time. To adjust the heap size for an already installed service, use the service manager: `bin\elasticsearch-service.bat manager`.
+On Windows, the [heap size](heap-size.html) can be configured as for any other Elasticsearch installation when running Elasticsearch from the command line, or when installing Elasticsearch as a service for the first time. To adjust the heap size for an already installed service, use the service manager: `bin\elasticsearch-service.bat manager`.
 
 Using the Manager GUI 
      It is also possible to configure the service after it’s been installed using the manager GUI (`elasticsearch-service-mgr.exe`), which offers insight into the installed service, including its status, startup type, JVM, start and stop settings amongst other things. Simply invoking `elasticsearch-service.bat manager` from the command-line will open up the manager window: 
@@ -344,8 +344,8 @@ Location of script files.
 
 You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
 
-  * Learn how to [configure Elasticsearch](settings.html "Configuring Elasticsearch"). 
-  * Configure [important Elasticsearch settings](important-settings.html "Important Elasticsearch configuration"). 
-  * Configure [important system settings](system-config.html "Important System Configuration"). 
+  * Learn how to [configure Elasticsearch](settings.html). 
+  * Configure [important Elasticsearch settings](important-settings.html). 
+  * Configure [important system settings](system-config.html). 
 
 

@@ -17,7 +17,7 @@ Python
 
 The results that are returned from a scroll request reflect the state of the index at the time that the initial `search` request was made, like a snapshot in time. Subsequent changes to documents (index, update or delete) will only affect later search requests.
 
-In order to use scrolling, the initial search request should specify the `scroll` parameter in the query string, which tells Elasticsearch how long it should keep the “search context” alive (see [Keeping the search context alive](search-request-scroll.html#scroll-search-context "Keeping the search context alive")), eg `?scroll=1m`.
+In order to use scrolling, the initial search request should specify the `scroll` parameter in the query string, which tells Elasticsearch how long it should keep the “search context” alive (see [Keeping the search context alive](search-request-scroll.html#scroll-search-context)), eg `?scroll=1m`.
     
     
     POST /twitter/tweet/_search?scroll=1m
@@ -95,16 +95,16 @@ Normally, the background merge process optimizes the index by merging together s
 
 ![Tip](images/icons/tip.png)
 
-Keeping older segments alive means that more file handles are needed. Ensure that you have configured your nodes to have ample free file handles. See [File Descriptors](file-descriptors.html "File Descriptors").
+Keeping older segments alive means that more file handles are needed. Ensure that you have configured your nodes to have ample free file handles. See [File Descriptors](file-descriptors.html).
 
-You can check how many search contexts are open with the [nodes stats API](cluster-nodes-stats.html "Nodes Stats"):
+You can check how many search contexts are open with the [nodes stats API](cluster-nodes-stats.html):
     
     
     GET /_nodes/stats/indices/search
 
 ### Clear scroll API
 
-Search context are automatically removed when the `scroll` timeout has been exceeded. However keeping scrolls open has a cost, as discussed in the [previous div](search-request-scroll.html#scroll-search-context "Keeping the search context alive") so scrolls should be explicitly cleared as soon as the scroll is not being used anymore using the `clear-scroll` API:
+Search context are automatically removed when the `scroll` timeout has been exceeded. However keeping scrolls open has a cost, as discussed in the [previous div](search-request-scroll.html#scroll-search-context) so scrolls should be explicitly cleared as soon as the scroll is not being used anymore using the `clear-scroll` API:
     
     
     DELETE /_search/scroll

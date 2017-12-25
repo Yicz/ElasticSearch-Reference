@@ -1,6 +1,6 @@
 ## cat pending tasks
 
-`pending_tasks` provides the same information as the [`/_cluster/pending_tasks`](cluster-pending.html "Pending cluster tasks") API in a convenient tabular format. For example:
+`pending_tasks` provides the same information as the [`/_cluster/pending_tasks`](cluster-pending.html) API in a convenient tabular format. For example:
     
     
     GET /_cat/pending_tasks?v

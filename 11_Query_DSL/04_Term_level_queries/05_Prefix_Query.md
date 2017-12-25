@@ -27,4 +27,4 @@ Or with the `prefix` [5.0.0] Deprecated in 5.0.0. Use `value` syntax:
       }
     }
 
-This multi term query allows you to control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html "Multi Term Query Rewrite") parameter.
+This multi term query allows you to control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html) parameter.

@@ -8,7 +8,7 @@ Allocation IDs assign unique identifiers to shard copies. This allows the cluste
 
 ### Indices Shard Stores command
 
-By using allocation IDs instead of version numbers to identify shard copies for primary shard allocation, the former versioning scheme has become obsolete. This is reflected in the [Indices Shard Stores API](indices-shards-stores.html "Indices Shard Stores").
+By using allocation IDs instead of version numbers to identify shard copies for primary shard allocation, the former versioning scheme has become obsolete. This is reflected in the [Indices Shard Stores API](indices-shards-stores.html).
 
 A new `allocation_id` field replaces the former `version` field in the result of the Indices Shard Stores command. This field is available for all shard copies that have been either created with the current version of Elasticsearch or have been active in a cluster running a current version of Elasticsearch. For legacy shard copies that have not been active in a current version of Elasticsearch, a `legacy_version` field is available instead (equivalent to the former `version` field).
 

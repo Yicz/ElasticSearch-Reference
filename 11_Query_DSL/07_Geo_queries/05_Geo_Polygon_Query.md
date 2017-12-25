@@ -131,7 +131,7 @@ Format in `lat,lon`.
 
 #### geo_point Type
 
-The query **requires** the [`geo_point`](geo-point.html "Geo-point datatype") type to be set on the relevant field.
+The query **requires** the [`geo_point`](geo-point.html) type to be set on the relevant field.
 
 #### Ignore Unmapped
 

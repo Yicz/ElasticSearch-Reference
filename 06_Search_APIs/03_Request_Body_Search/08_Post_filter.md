@@ -27,7 +27,7 @@ Imagine that you are selling shirts that have the following properties:
 
 Imagine a user has specified two filters:
 
-`color:red` and `brand:gucci`. You only want to show them red shirts made by Gucci in the search results. Normally you would do this with a [`bool` query](query-dsl-bool-query.html "Bool Query"):
+`color:red` and `brand:gucci`. You only want to show them red shirts made by Gucci in the search results. Normally you would do this with a [`bool` query](query-dsl-bool-query.html):
     
     
     GET /shirts/_search
@@ -44,7 +44,7 @@ Imagine a user has specified two filters:
 
 However, you would also like to use _faceted navigation_ to display a list of other options that the user could click on. Perhaps you have a `model` field that would allow the user to limit their search results to red Gucci `t-shirts` or `dress-shirts`.
 
-This can be done with a [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation"):
+This can be done with a [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html):
     
     
     GET /shirts/_search

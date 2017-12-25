@@ -13,9 +13,9 @@ You can use Painless anywhere a script can be used in Elasticsearch. It is the d
 ## Painless Features
 
   * Fast performance: [several times faster](https://benchmarks.elastic.co/index.html#search_qps_scripts) than the alternatives. 
-  * Safety: Fine-grained whitelist with method call/field granularity. See [Appendix A, _Painless API Reference_](painless-api-reference.html "Appendix A. Painless API Reference") for a complete list of available classes and methods. 
+  * Safety: Fine-grained whitelist with method call/field granularity. See [Appendix A, _Painless API Reference_](painless-api-reference.html) for a complete list of available classes and methods. 
   * Optional typing: Variables and parameters can use explicit types or the dynamic `def` type. 
-  * Syntax: Extends Java’s syntax with a subset of Groovy for ease of use. See the [Syntax Overview](modules-scripting-painless-syntax.html "Painless Syntax"). 
+  * Syntax: Extends Java’s syntax with a subset of Groovy for ease of use. See the [Syntax Overview](modules-scripting-painless-syntax.html). 
   * Optimizations: Designed specifically for Elasticsearch scripting. 
 
 
@@ -263,7 +263,7 @@ Or you can use the `CharSequence.replaceFirst` to make the first vowel in their 
       }
     }
 
-Note: all of the `_update_by_query` examples above could really do with a `query` to limit the data that they pull back. While you **could** use a [Script Query](query-dsl-script-query.html "Script Query") it wouldn’t be as efficient as using any other query because script queries aren’t able to use the inverted index to limit the documents that they have to check.
+Note: all of the `_update_by_query` examples above could really do with a `query` to limit the data that they pull back. While you **could** use a [Script Query](query-dsl-script-query.html) it wouldn’t be as efficient as using any other query because script queries aren’t able to use the inverted index to limit the documents that they have to check.
 
 ### How painless dispatches functions
 

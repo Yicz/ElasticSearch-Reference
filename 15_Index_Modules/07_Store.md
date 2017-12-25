@@ -34,6 +34,6 @@ The following divs lists all the different storage types supported.
 `niofs`
      The NIO FS type stores the shard index on the file system (maps to Lucene `NIOFSDirectory`) using NIO. It allows multiple threads to read from the same file concurrently. It is not recommended on Windows because of a bug in the SUN Java implementation. 
 `mmapfs`
-     The MMap FS type stores the shard index on the file system (maps to Lucene `MMapDirectory`) by mapping a file into memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size of the file being mapped. Before using this class, be sure you have allowed plenty of [virtual address space](vm-max-map-count.html "Virtual memory"). 
+     The MMap FS type stores the shard index on the file system (maps to Lucene `MMapDirectory`) by mapping a file into memory (mmap). Memory mapping uses up a portion of the virtual memory address space in your process equal to the size of the file being mapped. Before using this class, be sure you have allowed plenty of [virtual address space](vm-max-map-count.html). 
 `default_fs` [5.0.0] Deprecated in 5.0.0. The `default_fs` store type is deprecated - use `fs` instead 
      The `default` type is deprecated and is aliased to `fs` for backward compatibility. 

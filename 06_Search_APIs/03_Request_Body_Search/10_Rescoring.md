@@ -1,6 +1,6 @@
 ## Rescoring
 
-Rescoring can help to improve precision by reordering just the top (eg 100 - 500) documents returned by the [`query`](search-request-query.html "Query") and [`post_filter`](search-request-post-filter.html "Post filter") phases, using a secondary (usually more costly) algorithm, instead of applying the costly algorithm to all documents in the index.
+Rescoring can help to improve precision by reordering just the top (eg 100 - 500) documents returned by the [`query`](search-request-query.html) and [`post_filter`](search-request-post-filter.html) phases, using a secondary (usually more costly) algorithm, instead of applying the costly algorithm to all documents in the index.
 
 A `rescore` request is executed on each shard before it returns its results to be sorted by the node handling the overall search request.
 
@@ -8,7 +8,7 @@ Currently the rescore API has only one implementation: the query rescorer, which
 
 ![Note](images/icons/note.png)
 
-the `rescore` phase is not executed when [`sort`](search-request-sort.html "Sort") is used.
+the `rescore` phase is not executed when [`sort`](search-request-sort.html) is used.
 
 ![Note](images/icons/note.png)
 
@@ -16,7 +16,7 @@ when exposing pagination to your users, you should not change `window_size` as y
 
 ### Query rescorer
 
-The query rescorer executes a second query only on the Top-K results returned by the [`query`](search-request-query.html "Query") and [`post_filter`](search-request-post-filter.html "Post filter") phases. The number of docs which will be examined on each shard can be controlled by the `window_size` parameter, which defaults to [`from` and `size`](search-request-from-size.html "From / Size").
+The query rescorer executes a second query only on the Top-K results returned by the [`query`](search-request-query.html) and [`post_filter`](search-request-post-filter.html) phases. The number of docs which will be examined on each shard can be controlled by the `window_size` parameter, which defaults to [`from` and `size`](search-request-from-size.html).
 
 By default the scores from the original query and the rescore query are combined linearly to produce the final `_score` for each document. The relative importance of the original query and of the rescore query can be controlled with the `query_weight` and `rescore_query_weight` respectively. Both default to `1`.
 
@@ -65,7 +65,7 @@ Add the original score and the rescore query score. The default.
 
 | 
 
-Multiply the original score by the rescore query score. Useful for [`function query`](query-dsl-function-score-query.html "Function Score Query") rescores.  
+Multiply the original score by the rescore query score. Useful for [`function query`](query-dsl-function-score-query.html) rescores.  
   
 `avg`
 

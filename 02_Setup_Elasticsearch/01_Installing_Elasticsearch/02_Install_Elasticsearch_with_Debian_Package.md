@@ -1,6 +1,6 @@
 ## Install Elasticsearch with Debian Package
 
-The Debian package for Elasticsearch can be [downloaded from our website](deb.html#install-deb "Download and install the Debian package manually") or from our [APT repository](deb.html#deb-repo "Installing from the APT repository"). It can be used to install Elasticsearch on any Debian-based system such as Debian and Ubuntu.
+The Debian package for Elasticsearch can be [downloaded from our website](deb.html#install-deb) or from our [APT repository](deb.html#deb-repo). It can be used to install Elasticsearch on any Debian-based system such as Debian and Ubuntu.
 
 The latest stable version of Elasticsearch can be found on the [Download Elasticsearch](/downloads/elasticsearch) page. Other versions can be found on the [Past Releases page](/downloads/past-releases).
 
@@ -166,7 +166,7 @@ which should give you a response something like this:
 
 ### Configuring Elasticsearch
 
-Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html "Configuring Elasticsearch").
+Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html).
 
 The Debian package also has a system configuration file (`/etc/default/elasticsearch`), which allows you to set the following parameters:
 
@@ -240,7 +240,7 @@ Configure restart on package upgrade, defaults to `false`. This means you will h
   
 ![Note](images/icons/note.png)
 
-Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd "Systemd configuration") for more information.
+Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd) for more information.
 
 ### Directory layout of Debian package
 
@@ -373,8 +373,8 @@ Location of script files.
 
 You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
 
-  * Learn how to [configure Elasticsearch](settings.html "Configuring Elasticsearch"). 
-  * Configure [important Elasticsearch settings](important-settings.html "Important Elasticsearch configuration"). 
-  * Configure [important system settings](system-config.html "Important System Configuration"). 
+  * Learn how to [configure Elasticsearch](settings.html). 
+  * Configure [important Elasticsearch settings](important-settings.html). 
+  * Configure [important system settings](system-config.html). 
 
 

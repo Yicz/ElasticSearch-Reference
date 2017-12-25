@@ -5,11 +5,11 @@
 
 在投入生产之前**必须**解决以下设置：
 
-  * [Set JVM heap size](heap-size.html "Set JVM heap size via jvm.options") JVM堆栈大小
-  * [Disable swapping](setup-configuration-memory.html "Disable swapping") 禁用内存交换
-  * [Increase file descriptors](file-descriptors.html "File Descriptors") 增加文件描述
-  * [Ensure sufficient virtual memory](vm-max-map-count.html "Virtual memory") 增加虚拟内存
-  * [Ensure sufficient threads](max-number-of-threads.html "Number of threads") 增加线程数
+  * [Set JVM heap size](heap-size.html) JVM堆栈大小
+  * [Disable swapping](setup-configuration-memory.html) 禁用内存交换
+  * [Increase file descriptors](file-descriptors.html) 增加文件描述
+  * [Ensure sufficient virtual memory](vm-max-map-count.html) 增加虚拟内存
+  * [Ensure sufficient threads](max-number-of-threads.html) 增加线程数
 
 ### 开发环境 vs 生产环境
 

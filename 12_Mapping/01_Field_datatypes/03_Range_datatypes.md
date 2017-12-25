@@ -119,7 +119,7 @@ The result produced by the above query.
 
 | 
 
-`date_range` types accept the same field parameters defined by the [`date`](date.html "Date datatype") type.   
+`date_range` types accept the same field parameters defined by the [`date`](date.html) type.   
   
 ---|---  
   
@@ -133,31 +133,31 @@ Example indexing a meeting with 10 to 20 attendees.
 
 | 
 
-Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates "Ranges on date fields").   
+Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates).   
   
 ![](images/icons/callouts/4.png)
 
 | 
 
-Example date range using date time stamp. This also accepts [date math](common-options.html#date-math "Date Mathedit") formatting, or "now" for system time.   
+Example date range using date time stamp. This also accepts [date math](common-options.html#date-math) formatting, or "now" for system time.   
   
 ![](images/icons/callouts/1.png)
 
 | 
 
-Range queries work the same as described in [range query](query-dsl-range-query.html "Range Query").   
+Range queries work the same as described in [range query](query-dsl-range-query.html).   
   
 ![](images/icons/callouts/2.png)
 
 | 
 
-Range queries over range [fields](mapping-types.html "Field datatypes") support a `relation` parameter which can be one of `WITHIN`, `CONTAINS`, `INTERSECTS` (default).   
+Range queries over range [fields](mapping-types.html) support a `relation` parameter which can be one of `WITHIN`, `CONTAINS`, `INTERSECTS` (default).   
   
 ### Parameters for range fields
 
 The following parameters are accepted by range types:
 
-[`coerce`](coerce.html "coerce")
+[`coerce`](coerce.html)
 
 | 
 
@@ -165,26 +165,26 @@ Try to convert strings to numbers and truncate fractions for integers. Accepts `
   
 ---|---  
   
-[`boost`](mapping-boost.html "boost")
+[`boost`](mapping-boost.html)
 
 | 
 
 Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
   
-[`include_in_all`](include-in-all.html "include_in_all")
+[`include_in_all`](include-in-all.html)
 
 | 
 
-Whether or not the field value should be included in the [`_all`](mapping-all-field.html "_all field") field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html "index") is set to `false`, or if a parent [`object`](object.html "Object datatype") field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
+Whether or not the field value should be included in the [`_all`](mapping-all-field.html) field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html) is set to `false`, or if a parent [`object`](object.html) field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
   
-[`index`](mapping-index.html "index")
+[`index`](mapping-index.html)
 
 | 
 
 Should the field be searchable? Accepts `true` (default) and `false`.   
   
-[`store`](mapping-store.html "store")
+[`store`](mapping-store.html)
 
 | 
 
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default). 
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

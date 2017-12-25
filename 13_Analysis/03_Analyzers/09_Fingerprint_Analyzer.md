@@ -11,17 +11,17 @@ It consists of:
 Tokenizer 
     
 
-  * [Standard Tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer")
+  * [Standard Tokenizer](analysis-standard-tokenizer.html)
 
 
 
 Token Filters (in order) 
     
 
-  1. [Lower Case Token Filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter")
-  2. [ASCII Folding Token Filter](analysis-asciifolding-tokenfilter.html "ASCII Folding Token Filter")
-  3. [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") (disabled by default) 
-  4. [Fingerprint Token Filter](analysis-fingerprint-tokenfilter.html "Fingerprint Token Filter")
+  1. [Lower Case Token Filter](analysis-lowercase-tokenfilter.html)
+  2. [ASCII Folding Token Filter](analysis-asciifolding-tokenfilter.html)
+  3. [Stop Token Filter](analysis-stop-tokenfilter.html) (disabled by default) 
+  4. [Fingerprint Token Filter](analysis-fingerprint-tokenfilter.html)
 
 
 
@@ -69,7 +69,7 @@ A pre-defined stop words list like `_english_` or an array containing a list of 
 
 The path to a file containing stop words.   
   
-See the [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter") for more information about stop word configuration.
+See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 
 ### Example configuration
 

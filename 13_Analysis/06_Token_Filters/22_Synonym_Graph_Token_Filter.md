@@ -10,7 +10,7 @@ In order to properly handle multi-word synonyms this token filter creates a "gra
 
 ![Note](images/icons/note.png)
 
-This token filter is designed to be used as part of a search analyzer only. If you want to apply synonyms during indexing please use the standard [synonym token filter](analysis-synonym-tokenfilter.html "Synonym Token Filter").
+This token filter is designed to be used as part of a search analyzer only. If you want to apply synonyms during indexing please use the standard [synonym token filter](analysis-synonym-tokenfilter.html).
 
 Synonyms are configured using a configuration file. Here is an example:
     

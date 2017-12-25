@@ -69,7 +69,7 @@ The `user` field is missing completely.
   
 #### `null_value` mapping
 
-If the field mapping includes the [`null_value`](null-value.html "null_value") setting then explicit `null` values are replaced with the specified `null_value`. For instance, if the `user` field were mapped as follows:
+If the field mapping includes the [`null_value`](null-value.html) setting then explicit `null` values are replaced with the specified `null_value`. For instance, if the `user` field were mapped as follows:
     
     
       "user": {

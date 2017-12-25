@@ -85,7 +85,7 @@ Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitud
 
 | 
 
-Set to one of `indexed` or `memory` to defines whether this filter will be executed in memory or indexed. See [Type](query-dsl-geo-bounding-box-query.html#geo-bbox-type "Typeedit") below for further details Default is `memory`.  
+Set to one of `indexed` or `memory` to defines whether this filter will be executed in memory or indexed. See [Type](query-dsl-geo-bounding-box-query.html#geo-bbox-type) below for further details Default is `memory`.  
   
 #### Accepted Formats
 

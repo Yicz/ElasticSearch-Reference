@@ -15,19 +15,19 @@ The clause (query) must appear in matching documents and will contribute to the 
 
 | 
 
-The clause (query) must appear in matching documents. However unlike `must` the score of the query will be ignored. Filter clauses are executed in [filter context](query-filter-context.html "Query and filter context"), meaning that scoring is ignored and clauses are considered for caching.  
+The clause (query) must appear in matching documents. However unlike `must` the score of the query will be ignored. Filter clauses are executed in [filter context](query-filter-context.html), meaning that scoring is ignored and clauses are considered for caching.  
   
 `should`
 
 | 
 
-The clause (query) should appear in the matching document. If the `bool` query is in a [query context](query-filter-context.html "Query and filter context") and has a `must` or `filter` clause then a document will match the `bool` query even if none of the `should` queries match. In this case these clauses are only used to influence the score. If the `bool` query is a [filter context](query-filter-context.html "Query and filter context") or has neither `must` or `filter` then at least one of the `should` queries must match a document for it to match the `bool` query. This behavior may be explicitly controlled by settings the [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") parameter.  
+The clause (query) should appear in the matching document. If the `bool` query is in a [query context](query-filter-context.html) and has a `must` or `filter` clause then a document will match the `bool` query even if none of the `should` queries match. In this case these clauses are only used to influence the score. If the `bool` query is a [filter context](query-filter-context.html) or has neither `must` or `filter` then at least one of the `should` queries must match a document for it to match the `bool` query. This behavior may be explicitly controlled by settings the [`minimum_should_match`](query-dsl-minimum-should-match.html) parameter.  
   
 `must_not`
 
 | 
 
-The clause (query) must not appear in the matching documents. Clauses are executed in [filter context](query-filter-context.html "Query and filter context") meaning that scoring is ignored and clauses are considered for caching. Because scoring is ignored, a score of `0` for all documents is returned.  
+The clause (query) must not appear in the matching documents. Clauses are executed in [filter context](query-filter-context.html) meaning that scoring is ignored and clauses are considered for caching. Because scoring is ignored, a score of `0` for all documents is returned.  
   
 ![Important](images/icons/important.png)
 
@@ -122,4 +122,4 @@ This `constant_score` query behaves in exactly the same way as the second exampl
 
 ### Using named queries to see which clauses matched
 
-If you need to know which of the clauses in the bool query matched the documents returned from the query, you can use [named queries](search-request-named-queries-and-filters.html "Named Queries") to assign a name to each clause.
+If you need to know which of the clauses in the bool query matched the documents returned from the query, you can use [named queries](search-request-named-queries-and-filters.html) to assign a name to each clause.

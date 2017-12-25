@@ -4,7 +4,7 @@
 
 ### Deprecated in 5.0.0. 
 
-Use the [_Search Template_](search-template.html "Search Template") API 
+Use the [_Search Template_](search-template.html) API 
 
 A query that accepts a query template and a map of key/value pairs to fill in template parameters. Templating is based on Mustache. For simple token substitution all you provide is a query containing some variable that you want to substitute and the actual values:
     
@@ -112,4 +112,4 @@ Name of the query template in `config/scripts/`, i.e., `my_template.mustache`.
   
 ---|---  
   
-There is also a dedicated `template` endpoint, allows you to template an entire search request. Please see [_Search Template_](search-template.html "Search Template") for more details.
+There is also a dedicated `template` endpoint, allows you to template an entire search request. Please see [_Search Template_](search-template.html) for more details.

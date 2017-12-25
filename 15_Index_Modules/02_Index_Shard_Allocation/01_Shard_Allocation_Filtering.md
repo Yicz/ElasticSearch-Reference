@@ -4,7 +4,7 @@ Shard allocation filtering allows you to specify which nodes are allowed to host
 
 ![Note](images/icons/note.png)
 
-The per-index shard allocation filters explained below work in conjunction with the cluster-wide allocation filters explained in [Cluster Level Shard Allocation](shards-allocation.html "Cluster Level Shard Allocation").
+The per-index shard allocation filters explained below work in conjunction with the cluster-wide allocation filters explained in [Cluster Level Shard Allocation](shards-allocation.html).
 
 It is possible to assign arbitrary metadata attributes to each node at startup. For instance, nodes could be assigned a `rack` and a `size` attribute as follows:
     

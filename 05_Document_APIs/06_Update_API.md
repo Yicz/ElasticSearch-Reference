@@ -58,7 +58,7 @@ Or remove a field from the document:
     
     POST test/type1/1/_update
     {
-        "script" : "ctx._source.remove(\"new_field\")"
+       )"
     }
 
 And, we can even change the operation that is executed. This example deletes the doc if the `tags` field contain `green`, otherwise it does nothing (`noop`):
@@ -215,7 +215,7 @@ Timeout waiting for a shard to become available.
 
 | 
 
-The number of shard copies required to be active before proceeding with the update operation. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for details.   
+The number of shard copies required to be active before proceeding with the update operation. See [here](docs-index_.html#index-wait-for-active-shards) for details.   
   
 `refresh`
 
@@ -227,7 +227,7 @@ Control when the changes made by this request are visible to search. See [_`?ref
 
 | 
 
-Allows to control if and how the updated source should be returned in the response. By default the updated source is not returned. See [`source filtering`](search-request-source-filtering.html "Source filtering") for details.   
+Allows to control if and how the updated source should be returned in the response. By default the updated source is not returned. See [`source filtering`](search-request-source-filtering.html) for details.   
   
 `version` & `version_type`
 
@@ -239,4 +239,4 @@ The update API uses the Elasticsearch’s versioning support internally to make 
 
 ### The update API does not support external versioning
 
-External versioning (version types `external` & `external_gte`) is not supported by the update API as it would result in Elasticsearch version numbers being out of sync with the external system. Use the [`index` API](docs-index_.html "Index API") instead.
+External versioning (version types `external` & `external_gte`) is not supported by the update API as it would result in Elasticsearch version numbers being out of sync with the external system. Use the [`index` API](docs-index_.html) instead.

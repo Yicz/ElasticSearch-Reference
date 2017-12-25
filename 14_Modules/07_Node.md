@@ -1,18 +1,18 @@
 ## Node
 
-Any time that you start an instance of Elasticsearch, you are starting a _node_. A collection of connected nodes is called a [cluster](modules-cluster.html "Cluster"). If you are running a single node of Elasticsearch, then you have a cluster of one node.
+Any time that you start an instance of Elasticsearch, you are starting a _node_. A collection of connected nodes is called a [cluster](modules-cluster.html). If you are running a single node of Elasticsearch, then you have a cluster of one node.
 
-Every node in the cluster can handle [HTTP](modules-http.html "HTTP") and [Transport](modules-transport.html "Transport") traffic by default. The transport layer is used exclusively for communication between nodes and the [Java `TransportClient`](https://www.elastic.co/guide/en/elasticsearch/client/java-api/5.4/transport-client.html); the HTTP layer is used only by external REST clients.
+Every node in the cluster can handle [HTTP](modules-http.html) and [Transport](modules-transport.html) traffic by default. The transport layer is used exclusively for communication between nodes and the [Java `TransportClient`](https://www.elastic.co/guide/en/elasticsearch/client/java-api/5.4/transport-client.html); the HTTP layer is used only by external REST clients.
 
 All nodes know about all the other nodes in the cluster and can forward client requests to the appropriate node. Besides that, each node serves one or more purpose:
 
-[Master-eligible node](modules-node.html#master-node "Master Eligible Nodeedit")
-     A node that has `node.master` set to `true` (default), which makes it eligible to be [elected as the _master_ node](modules-discovery-zen.html "Zen Discovery"), which controls the cluster. 
-[Data node](modules-node.html#data-node "Data Nodeedit")
+[Master-eligible node](modules-node.html#master-node)
+     A node that has `node.master` set to `true` (default), which makes it eligible to be [elected as the _master_ node](modules-discovery-zen.html), which controls the cluster. 
+[Data node](modules-node.html#data-node)
      A node that has `node.data` set to `true` (default). Data nodes hold data and perform data related operations such as CRUD, search, and aggregations. 
-[Ingest node](ingest.html "Ingest Node")
-     A node that has `node.ingest` set to `true` (default). Ingest nodes are able to apply an [ingest pipeline](pipeline.html "Pipeline Definition") to a document in order to transform and enrich the document before indexing. With a heavy ingest load, it makes sense to use dedicated ingest nodes and to mark the master and data nodes as `node.ingest: false`. 
-[Tribe node](modules-tribe.html "Tribe node")
+[Ingest node](ingest.html)
+     A node that has `node.ingest` set to `true` (default). Ingest nodes are able to apply an [ingest pipeline](pipeline.html) to a document in order to transform and enrich the document before indexing. With a heavy ingest load, it makes sense to use dedicated ingest nodes and to mark the master and data nodes as `node.ingest: false`. 
+[Tribe node](modules-tribe.html)
      A tribe node, configured via the `tribe.*` settings, is a special type of coordinating only node that can connect to multiple clusters and perform search and other operations across all connected clusters. 
 
 By default a node is a master-eligible node and a data node, plus it can pre-process documents through ingest pipelines. This is very convenient for small clusters but, as the cluster grows, it becomes important to consider separating dedicated master-eligible nodes from dedicated data nodes.
@@ -31,7 +31,7 @@ Every node is implicitly a coordinating node. This means that a node that has al
 
 The master node is responsible for lightweight cluster-wide actions such as creating or deleting an index, tracking which nodes are part of the cluster, and deciding which shards to allocate to which nodes. It is important for cluster health to have a stable master node.
 
-Any master-eligible node (all nodes by default) may be elected to become the master node by the [master election process](modules-discovery-zen.html "Zen Discovery").
+Any master-eligible node (all nodes by default) may be elected to become the master node by the [master election process](modules-discovery-zen.html).
 
 ![Important](images/icons/important.png)
 
@@ -39,7 +39,7 @@ Master nodes must have access to the `data/` directory (just like `data` nodes) 
 
 Indexing and searching your data is CPU-, memory-, and I/O-intensive work which can put pressure on a node’s resources. To ensure that your master node is stable and not under pressure, it is a good idea in a bigger cluster to split the roles between dedicated master-eligible nodes and dedicated data nodes.
 
-While master nodes can also behave as [coordinating nodes](modules-node.html#coordinating-node "Coordinating node") and route search and indexing requests from clients to data nodes, it is better _not_ to use dedicated master nodes for this purpose. It is important for the stability of the cluster that master-eligible nodes do as little work as possible.
+While master nodes can also behave as [coordinating nodes](modules-node.html#coordinating-node) and route search and indexing requests from clients to data nodes, it is better _not_ to use dedicated master nodes for this purpose. It is important for the stability of the cluster that master-eligible nodes do as little work as possible.
 
 To create a standalone master-eligible node, set:
     
@@ -94,7 +94,7 @@ Defaults to `1`.
   
 ---|---  
   
-This setting can also be changed dynamically on a live cluster with the [cluster update settings API](cluster-update-settings.html "Cluster Update Settings"):
+This setting can also be changed dynamically on a live cluster with the [cluster update settings API](cluster-update-settings.html):
     
     
     PUT _cluster/settings
@@ -183,7 +183,7 @@ Disable cross-cluster search (enabled by default).
 
 If you take away the ability to be able to handle master duties, to hold data, and pre-process documents, then you are left with a _coordinating_ node that can only route requests, handle the search reduce phase, and distribute bulk indexing. Essentially, coordinating only nodes behave as smart load balancers.
 
-Coordinating only nodes can benefit large clusters by offloading the coordinating node role from data and master-eligible nodes. They join the cluster and receive the full [cluster state](cluster-state.html "Cluster State"), like every other node, and they use the cluster state to route requests directly to the appropriate place(s).
+Coordinating only nodes can benefit large clusters by offloading the coordinating node role from data and master-eligible nodes. They join the cluster and receive the full [cluster state](cluster-state.html), like every other node, and they use the cluster state to route requests directly to the appropriate place(s).
 
 ![Warning](images/icons/warning.png)
 
@@ -243,7 +243,7 @@ When using the `.zip` or `.tar.gz` distributions, the `path.data` setting should
 
 ### `node.max_local_storage_nodes`
 
-The [data path](modules-node.html#data-path "path.dataedit") can be shared by multiple nodes, even by nodes from different clusters. This is very useful for testing failover and different configurations on your development machine. In production, however, it is recommended to run only one node of Elasticsearch per server.
+The [data path](modules-node.html#data-path) can be shared by multiple nodes, even by nodes from different clusters. This is very useful for testing failover and different configurations on your development machine. In production, however, it is recommended to run only one node of Elasticsearch per server.
 
 By default, Elasticsearch is configured to prevent more than one node from sharing the same data path. To allow for more than one node (e.g., on your development machine), use the setting `node.max_local_storage_nodes` and set this to a positive integer larger than one.
 
@@ -253,4 +253,4 @@ Never run different node types (i.e. master, data) from the same data directory.
 
 ## Other node settings
 
-More node settings can be found in [Modules](modules.html "Modules"). Of particular note are the [`cluster.name`](important-settings.html#cluster.name "cluster.nameedit"), the [`node.name`](important-settings.html#node.name "node.nameedit") and the [network settings](modules-network.html "Network Settings").
+More node settings can be found in [Modules](modules.html). Of particular note are the [`cluster.name`](important-settings.html#cluster.name), the [`node.name`](important-settings.html#node.name) and the [network settings](modules-network.html).

@@ -59,7 +59,7 @@ Set to `true` to enable compression (LZF) between all nodes. Defaults to `false`
 
 Schedule a regular ping message to ensure that connections are kept alive. Defaults to `5s` in the transport client and `-1` (disabled) elsewhere.  
   
-It also uses the common [network settings](modules-network.html "Network Settings").
+It also uses the common [network settings](modules-network.html).
 
 #### TCP Transport Profiles
 

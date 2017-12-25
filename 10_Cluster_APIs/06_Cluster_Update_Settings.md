@@ -71,4 +71,4 @@ Transient cluster settings take precedence over persistent cluster settings, whi
 
 For this reason it is preferrable to use the `elasticsearch.yml` file only for local configurations, and set all cluster-wider settings with the `settings` API.
 
-A list of dynamically updatable settings can be found in the [Modules](modules.html "Modules") documentation.
+A list of dynamically updatable settings can be found in the [Modules](modules.html) documentation.

@@ -53,11 +53,11 @@ The msearch’s `max_concurrent_searches` request parameter can be used to contr
 
 ### Security
 
-See [_URL-based access control_](url-access-control.html "URL-based access control")
+See [_URL-based access control_](url-access-control.html)
 
 ### Template support
 
-Much like described in [_Search Template_](search-template.html "Search Template") for the _search resource, _msearch also provides support for templates. Submit them like follows:
+Much like described in [_Search Template_](search-template.html) for the _search resource, _msearch also provides support for templates. Submit them like follows:
     
     
     GET _msearch/template

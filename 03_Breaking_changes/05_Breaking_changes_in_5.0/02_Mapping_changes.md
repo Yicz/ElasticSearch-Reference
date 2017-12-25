@@ -32,9 +32,9 @@ This allows to perform full-text search on the original field name and to sort a
 
 Numeric fields are now indexed with a completely different data-structure, called BKD tree, that is expected to require less disk space and be faster for range queries than the previous way that numerics were indexed.
 
-Term queries will return constant scores now, while they used to return higher scores for rare terms due to the contribution of the document frequency, which this new BKD structure does not record. If scoring is needed, then it is advised to map the numeric fields as [`keyword`s](keyword.html "Keyword datatype") too.
+Term queries will return constant scores now, while they used to return higher scores for rare terms due to the contribution of the document frequency, which this new BKD structure does not record. If scoring is needed, then it is advised to map the numeric fields as [`keyword`s](keyword.html) too.
 
-Note that this [`keyword`](keyword.html "Keyword datatype") mapping do not need to replace the numeric mapping. For instance if you need both sorting and scoring on your numeric field, you could map it both as a number and a `keyword` using [`fields`](multi-fields.html "fields"):
+Note that this [`keyword`](keyword.html) mapping do not need to replace the numeric mapping. For instance if you need both sorting and scoring on your numeric field, you could map it both as a number and a `keyword` using [`fields`](multi-fields.html):
     
     
     PUT my_index

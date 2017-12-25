@@ -7,20 +7,20 @@ ES提供了如下的安装包格式：
 
  `zip`或`tar.gz` 是ES在任何系统最容易安装的格式
 
- [使用`zip`或`tar.gz`安装ES](zip-targz.html "Install Elasticsearch with .zip or .tar.gz")
+ [使用`zip`或`tar.gz`安装ES](zip-targz.html)
 
- [在Windows是安装ES](windows.html "Install Elasticsearch on Windows")  
+ [在Windows是安装ES](windows.html)  
   
 ###`deb`
 
  `deb` 安装包是给Debain,Ubuntu和其他Debain系的系统使用。可以在ES官网和Debain仓库中获取。
-[使用deb安装ES](deb.html "Install Elasticsearch with Debian Package")  
+[使用deb安装ES](deb.html)  
   
 ###`rpm`
 
 `rpm`安装包是给红帽系列的系统，如Red Hat,Centos,SLES,OpenSuSE等等系统使用。RPMs安装包可以在ES官网和我们的RPM仓库中获取。
 
-[使用rpm安装ES](rpm.html "Install Elasticsearch with RPM")  
+[使用rpm安装ES](rpm.html)  
   
 ###`docker`
 

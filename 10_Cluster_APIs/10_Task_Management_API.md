@@ -125,7 +125,7 @@ might look like:
       }
     }
 
-The new `description` field contains human readable text that identifies the particular request that the task is performing such as identifying the search request being performed by a search task like the example above. Other kinds of task have have different descriptions, like [`_reindex`](docs-reindex.html "Reindex API") which has the search and the destination, or [`_bulk`](docs-bulk.html "Bulk API") which just has the number of requests and the destination indices. Many requests will only have an empty description because more detailed information about the request is not easily available or particularly helpful in identifying the request.
+The new `description` field contains human readable text that identifies the particular request that the task is performing such as identifying the search request being performed by a search task like the example above. Other kinds of task have have different descriptions, like [`_reindex`](docs-reindex.html) which has the search and the destination, or [`_bulk`](docs-bulk.html) which just has the number of requests and the destination indices. Many requests will only have an empty description because more detailed information about the request is not easily available or particularly helpful in identifying the request.
 
 The task API can also be used to wait for completion of a particular task. The following call will block for 10 seconds or until the task with id `oTUltX4IQMOUUVeiohTt8A:12345` is completed.
     

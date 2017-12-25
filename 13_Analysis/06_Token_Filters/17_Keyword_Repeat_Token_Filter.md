@@ -71,4 +71,4 @@ And it’d respond:
       ]
     }
 
-Which preserves both the `cat` and `cats` tokens. Compare this to the example on the [Keyword Marker Token Filter](analysis-keyword-marker-tokenfilter.html "Keyword Marker Token Filter").
+Which preserves both the `cat` and `cats` tokens. Compare this to the example on the [Keyword Marker Token Filter](analysis-keyword-marker-tokenfilter.html).

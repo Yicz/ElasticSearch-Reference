@@ -2,7 +2,7 @@
 
 A special single bucket aggregation that enables aggregating from buckets on parent document types to buckets on child documents.
 
-This aggregation relies on the [_parent field](mapping-parent-field.html "_parent field") in the mapping. This aggregation has a single option:
+This aggregation relies on the [_parent field](mapping-parent-field.html) in the mapping. This aggregation has a single option:
 
   * `type` \- The child type that the buckets in the parent space should be mapped to. 
 

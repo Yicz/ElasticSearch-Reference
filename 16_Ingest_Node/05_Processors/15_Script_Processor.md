@@ -2,7 +2,7 @@
 
 Allows inline, stored, and file scripts to be executed within ingest pipelines.
 
-See [How to use scripts](modules-scripting-using.html "How to use scripts") to learn more about writing scripts. The Script Processor leverages caching of compiled scripts for improved performance. Since the script specified within the processor is potentially re-compiled per document, it is important to understand how script caching works. To learn more about caching see [Script Caching](modules-scripting-using.html#modules-scripting-using-caching "Script Cachingedit").
+See [How to use scripts](modules-scripting-using.html) to learn more about writing scripts. The Script Processor leverages caching of compiled scripts for improved performance. Since the script specified within the processor is potentially re-compiled per document, it is important to understand how script caching works. To learn more about caching see [Script Caching](modules-scripting-using.html#modules-scripting-using-caching).
 
  **Table 28. Script Options**
 

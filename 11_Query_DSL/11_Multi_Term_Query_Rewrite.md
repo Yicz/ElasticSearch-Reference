@@ -1,6 +1,6 @@
 ## Multi Term Query Rewrite
 
-Multi term queries, like [wildcard](query-dsl-wildcard-query.html "Wildcard Query") and [prefix](query-dsl-prefix-query.html "Prefix Query") are called multi term queries and end up going through a process of rewrite. This also happens on the [query_string](query-dsl-query-string-query.html "Query String Query"). All of those queries allow to control how they will get rewritten using the `rewrite` parameter:
+Multi term queries, like [wildcard](query-dsl-wildcard-query.html) and [prefix](query-dsl-prefix-query.html) are called multi term queries and end up going through a process of rewrite. This also happens on the [query_string](query-dsl-query-string-query.html). All of those queries allow to control how they will get rewritten using the `rewrite` parameter:
 
   * `constant_score` (default): A rewrite method that performs like `constant_score_boolean` when there are few matching terms and otherwise visits all matching terms in sequence and marks documents for that term. Matching documents are assigned a constant score equal to the query’s boost. 
   * `scoring_boolean`: A rewrite method that first translates each term into a should clause in a boolean query, and keeps the scores as computed by the query. Note that typically such scores are meaningless to the user, and require non-trivial CPU to compute, so it’s almost always better to use `constant_score_auto`. This rewrite method will hit too many clauses failure if it exceeds the boolean query limit (defaults to `1024`). 

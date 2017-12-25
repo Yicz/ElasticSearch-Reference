@@ -37,7 +37,7 @@ The Base64 encoded binary value must not have embedded newlines `\n`.
 
 The following parameters are accepted by `binary` fields:
 
-[`doc_values`](doc-values.html "doc_values")
+[`doc_values`](doc-values.html)
 
 | 
 
@@ -45,8 +45,8 @@ Should the field be stored on disk in a column-stride fashion, so that it can la
   
 ---|---  
   
-[`store`](mapping-store.html "store")
+[`store`](mapping-store.html)
 
 | 
 
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default). 
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

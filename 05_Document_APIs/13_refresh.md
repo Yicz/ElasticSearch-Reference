@@ -1,11 +1,11 @@
 ## `?refresh`
 
-The [Index](docs-index_.html "Index API"), [Update](docs-update.html "Update API"), [Delete](docs-delete.html "Delete API"), and [Bulk](docs-bulk.html "Bulk API") APIs support setting `refresh` to control when changes made by this request are made visible to search. These are the allowed values:
+The [Index](docs-index_.html), [Update](docs-update.html), [Delete](docs-delete.html), and [Bulk](docs-bulk.html) APIs support setting `refresh` to control when changes made by this request are made visible to search. These are the allowed values:
 
 Empty string or `true`
      Refresh the relevant primary and replica shards (not the whole index) immediately after the operation occurs, so that the updated document appears in search results immediately. This should **ONLY** be done after careful thought and verification that it does not lead to poor performance, both from an indexing and a search standpoint. 
 `wait_for`
-     Wait for the changes made by the request to be made visible by a refresh before replying. This doesn’t force an immediate refresh, rather, it waits for a refresh to happen. Elasticsearch automatically refreshes shards that have changed every `index.refresh_interval` which defaults to one second. That setting is [dynamic](index-modules.html#dynamic-index-settings "Dynamic index settingsedit"). Calling the [_Refresh_](indices-refresh.html "Refresh") API or setting `refresh` to `true` on any of the APIs that support it will also cause a refresh, in turn causing already running requests with `refresh=wait_for` to return. 
+     Wait for the changes made by the request to be made visible by a refresh before replying. This doesn’t force an immediate refresh, rather, it waits for a refresh to happen. Elasticsearch automatically refreshes shards that have changed every `index.refresh_interval` which defaults to one second. That setting is [dynamic](index-modules.html#dynamic-index-settings). Calling the [_Refresh_](indices-refresh.html) API or setting `refresh` to `true` on any of the APIs that support it will also cause a refresh, in turn causing already running requests with `refresh=wait_for` to return. 
 `false` (the default) 
      Take no refresh related actions. The changes made by this request will be made visible at some point after the request returns. 
 

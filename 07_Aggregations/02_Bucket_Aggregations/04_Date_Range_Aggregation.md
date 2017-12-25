@@ -1,6 +1,6 @@
 ## Date Range Aggregation
 
-A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal [range](search-aggregations-bucket-range-aggregation.html "Range Aggregation") aggregation is that the `from` and `to` values can be expressed in [Date Math](common-options.html#date-math "Date Mathedit") expressions, and it is also possible to specify a date format by which the `from` and `to` response fields will be returned. Note that this aggregation includes the `from` value and excludes the `to` value for each range.
+A range aggregation that is dedicated for date values. The main difference between this aggregation and the normal [range](search-aggregations-bucket-range-aggregation.html) aggregation is that the `from` and `to` values can be expressed in [Date Math](common-options.html#date-math) expressions, and it is also possible to specify a date format by which the `from` and `to` response fields will be returned. Note that this aggregation includes the `from` value and excludes the `to` value for each range.
 
 Example:
     

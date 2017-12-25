@@ -7,7 +7,7 @@ Query context
 
 A query clause used in query context answers the question “ _How well does this document match this query clause?_ ” Besides deciding whether or not the document matches, the query clause also calculates a `_score` representing how well the document matches, relative to other documents.
 
-Query context is in effect whenever a query clause is passed to a `query` parameter, such as the `query` parameter in the [`search`](search-request-query.html "Query") API.
+Query context is in effect whenever a query clause is passed to a `query` parameter, such as the `query` parameter in the [`search`](search-request-query.html) API.
 
 Filter context 
     
@@ -21,7 +21,7 @@ In _filter_ context, a query clause answers the question “ _Does this document
 
 Frequently used filters will be cached automatically by Elasticsearch, to speed up performance.
 
-Filter context is in effect whenever a query clause is passed to a `filter` parameter, such as the `filter` or `must_not` parameters in the [`bool`](query-dsl-bool-query.html "Bool Query") query, the `filter` parameter in the [`constant_score`](query-dsl-constant-score-query.html "Constant Score Query") query, or the [`filter`](search-aggregations-bucket-filter-aggregation.html "Filter Aggregation") aggregation.
+Filter context is in effect whenever a query clause is passed to a `filter` parameter, such as the `filter` or `must_not` parameters in the [`bool`](query-dsl-bool-query.html) query, the `filter` parameter in the [`constant_score`](query-dsl-constant-score-query.html) query, or the [`filter`](search-aggregations-bucket-filter-aggregation.html) aggregation.
 
 Below is an example of query clauses being used in query and filter context in the `search` API. This query will match documents where all of the following conditions are met:
 

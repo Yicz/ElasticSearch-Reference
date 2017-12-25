@@ -1,6 +1,6 @@
 ## UAX URL Email Tokenizer
 
-The `uax_url_email` tokenizer is like the [`standard` tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer") except that it recognises URLs and email addresses as single tokens.
+The `uax_url_email` tokenizer is like the [`standard` tokenizer](analysis-standard-tokenizer.html) except that it recognises URLs and email addresses as single tokens.
 
 ### Example output
     

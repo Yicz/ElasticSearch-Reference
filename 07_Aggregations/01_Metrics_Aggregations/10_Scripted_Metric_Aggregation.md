@@ -92,7 +92,7 @@ script parameters for `init`, `map` and `combine` scripts must be specified in a
 
 if you specify script parameters then you must specify `"_agg": {}`.   
   
-For more details on specifying scripts see [script documentation](modules-scripting.html "Scripting").
+For more details on specifying scripts see [script documentation](modules-scripting.html).
 
 ### Allowed return types
 

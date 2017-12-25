@@ -2,7 +2,7 @@
 
 ![Warning](images/icons/warning.png)
 
-The `stored_fields` parameter is about fields that are explicitly marked as stored in the mapping, which is off by default and generally not recommended. Use [source filtering](search-request-source-filtering.html "Source filtering") instead to select subsets of the original source document to be returned.
+The `stored_fields` parameter is about fields that are explicitly marked as stored in the mapping, which is off by default and generally not recommended. Use [source filtering](search-request-source-filtering.html) instead to select subsets of the original source document to be returned.
 
 Allows to selectively load specific stored fields for each document represented by a search hit.
     
@@ -51,4 +51,4 @@ To disable the stored fields (and metadata fields) entirely use: `_none_`:
 
 ![Note](images/icons/note.png)
 
-[`_source`](search-request-source-filtering.html "Source filtering") and [`version`](search-request-version.html "Version") parameters cannot be activated if `_none_` is used.
+[`_source`](search-request-source-filtering.html) and [`version`](search-request-version.html) parameters cannot be activated if `_none_` is used.

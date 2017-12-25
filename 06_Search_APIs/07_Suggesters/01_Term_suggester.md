@@ -2,7 +2,7 @@
 
 ![Note](images/icons/note.png)
 
-In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html "Suggesters") page first.
+In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
 
 The `term` suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. The suggested terms are provided per analyzed suggest text token. The `term` suggester doesn’t take the query into account that is part of request.
 

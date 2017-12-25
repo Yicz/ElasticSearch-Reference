@@ -43,7 +43,7 @@ In the above example, the "/opt/data/my_index" path is a shared filesystem that 
 
 The `data_path` does not have to contain the index name, in this case, "my_index" was used but it could easily also have been "/opt/data/"
 
-An index that has been created with the `index.shadow_replicas` setting set to "true" will not replicate document operations to any of the replica shards, instead, it will only continually refresh. Once segments are available on the filesystem where the shadow replica resides (after an Elasticsearch "flush"), a regular refresh (governed by the `index.refresh_interval`) can be used to make the new data searchable.
+An index that has been created with the `index.shadow_replicas` setting set to), a regular refresh (governed by the `index.refresh_interval`) can be used to make the new data searchable.
 
 ![Note](images/icons/note.png)
 

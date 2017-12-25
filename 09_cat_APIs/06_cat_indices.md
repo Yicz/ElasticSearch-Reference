@@ -17,7 +17,7 @@ We can tell quickly how many shards make up an index, the number of docs, delete
  **Notes:**
 
   1. As the number of documents and deleted documents shown in this are at the lucene level, it includes all the hidden documents (e.g. from nested documents) as well. 
-  2. To get actual count of documents at the elasticsearch level, the recommended way is to use either the [_cat count_](cat-count.html "cat count") or the [_Count API_](search-count.html "Count API")
+  2. To get actual count of documents at the elasticsearch level, the recommended way is to use either the [_cat count_](cat-count.html) or the [_Count API_](search-count.html)
 
 
 

@@ -13,15 +13,15 @@ In Elasticsearch, there is no dedicated `array` type. Any field can contain zero
 
 ### Arrays of objects
 
-Arrays of objects do not work as you would expect: you cannot query each object independently of the other objects in the array. If you need to be able to do this then you should use the [`nested`](nested.html "Nested datatype") datatype instead of the [`object`](object.html "Object datatype") datatype.
+Arrays of objects do not work as you would expect: you cannot query each object independently of the other objects in the array. If you need to be able to do this then you should use the [`nested`](nested.html) datatype instead of the [`object`](object.html) datatype.
 
-This is explained in more detail in [Nested datatype](nested.html "Nested datatype").
+This is explained in more detail in [Nested datatype](nested.html).
 
-When adding a field dynamically, the first value in the array determines the field `type`. All subsequent values must be of the same datatype or it must at least be possible to [coerce](coerce.html "coerce") subsequent values to the same datatype.
+When adding a field dynamically, the first value in the array determines the field `type`. All subsequent values must be of the same datatype or it must at least be possible to [coerce](coerce.html) subsequent values to the same datatype.
 
 Arrays with a mixture of datatypes are _not_ supported: [ `10`, `"some string"` ]
 
-An array may contain `null` values, which are either replaced by the configured [`null_value`](null-value.html "null_value") or skipped entirely. An empty array `[]` is treated as a missing field — a field with no values.
+An array may contain `null` values, which are either replaced by the configured [`null_value`](null-value.html) or skipped entirely. An empty array `[]` is treated as a missing field — a field with no values.
 
 Nothing needs to be pre-configured in order to use arrays in documents, they are supported out of the box:
     

@@ -1,6 +1,6 @@
 ## `term_vector`
 
-Term vectors contain information about the terms produced by the [analysis](analysis.html "Analysis") process, including:
+Term vectors contain information about the terms produced by the [analysis](analysis.html) process, including:
 
   * a list of terms. 
   * the position (or order) of each term. 

@@ -1,6 +1,6 @@
 ## IP Range Aggregation
 
-Just like the dedicated [date](search-aggregations-bucket-daterange-aggregation.html "Date Range Aggregation") range aggregation, there is also a dedicated range aggregation for IP typed fields:
+Just like the dedicated [date](search-aggregations-bucket-daterange-aggregation.html) range aggregation, there is also a dedicated range aggregation for IP typed fields:
 
 Example:
     

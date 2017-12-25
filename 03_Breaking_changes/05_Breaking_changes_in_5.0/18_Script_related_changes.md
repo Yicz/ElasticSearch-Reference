@@ -4,7 +4,7 @@
 
 The default scripting language for Elasticsearch is now Painless. Painless is a custom-built language with syntax similar to Groovy designed to be fast as well as secure. Many Groovy scripts will be identitical to Painless scripts to help make the transition between languages as simple as possible.
 
-Documentation for Painless can be found at [Painless Scripting Language](modules-scripting-painless.html "Painless Scripting Language")
+Documentation for Painless can be found at [Painless Scripting Language](modules-scripting-painless.html)
 
 One common difference to note between Groovy and Painless is the use of parameters — all parameters in Painless must be prefixed with `params.` now. The following example shows the difference:
 
@@ -198,7 +198,7 @@ and instead the following syntax should be used:
 
 ### Indexed scripts and templates
 
-Indexed scripts and templates have been replaced by [stored scripts](modules-scripting-using.html#modules-scripting-stored-scripts "Stored Scriptsedit") which stores the scripts and templates in the cluster state instead of a dedicate `.scripts` index.
+Indexed scripts and templates have been replaced by [stored scripts](modules-scripting-using.html#modules-scripting-stored-scripts) which stores the scripts and templates in the cluster state instead of a dedicate `.scripts` index.
 
 For the size of stored scripts there is a soft limit of 65535 bytes. If scripts exceed that size then the `script.max_size_in_bytes` setting can be added to elasticsearch.yml to change the soft limit to a higher value. If scripts are really large, other options like native scripts should be considered.
 
@@ -275,7 +275,7 @@ The `TemplateQueryBuilder` has been moved to the `lang-mustache` module. Therefo
     
     
     TransportClient transportClient = TransportClient.builder()
-            .settings(Settings.builder().put("node.name", "node"))
+            .settings(Settings.builder().put("node.name",))
             .addPlugin(MustachePlugin.class)
             .build();
     transportClient.addTransportAddress(
@@ -318,4 +318,4 @@ If you compile too many unique scripts within a small amount of time, Elasticsea
 
 You should watch out for this if you are hard-coding values into your scripts.
 
-Elasticsearch recommends the usage of parameters for efficient script handling. See details [here](modules-scripting-using.html#prefer-params "Prefer parameters").
+Elasticsearch recommends the usage of parameters for efficient script handling. See details [here](modules-scripting-using.html#prefer-params).

@@ -89,7 +89,7 @@ If the old name doesn’t match this pattern then you must specify the name for 
 
 ### Using date math with the rollover API
 
-It can be useful to use [date math](date-math-index-names.html "Date math support in index names") to name the rollover index according to the date that the index rolled over, e.g. `logstash-2016.02.03`. The rollover API supports date math, but requires the index name to end with a dash followed by a number, e.g. `logstash-2016.02.03-1` which is incremented every time the index is rolled over. For instance:
+It can be useful to use [date math](date-math-index-names.html) to name the rollover index according to the date that the index rolled over, e.g. `logstash-2016.02.03`. The rollover API supports date math, but requires the index name to end with a dash followed by a number, e.g. `logstash-2016.02.03-1` which is incremented every time the index is rolled over. For instance:
     
     
     # PUT /<logs-{now/d}-1> with URI encoding:
@@ -130,7 +130,7 @@ Creates an index named with today’s date (e.g.) `logs-2016.10.31-1`
 
 Rolls over to a new index with today’s date, e.g. `logs-2016.10.31-000002` if run immediately, or `logs-2016.11.01-000002` if run after 24 hours   
   
-These indices can then be referenced as described in the [date math documentation](date-math-index-names.html "Date math support in index names"). For example, to search over indices created in the last three days, you could do the following:
+These indices can then be referenced as described in the [date math documentation](date-math-index-names.html). For example, to search over indices created in the last three days, you could do the following:
     
     
     # GET /<logs-{now/d}-*>,<logs-{now/d-1d}-*>,<logs-{now/d-2d}-*>/_search
@@ -138,7 +138,7 @@ These indices can then be referenced as described in the [date math documentatio
 
 ### Defining the new index
 
-The settings, mappings, and aliases for the new index are taken from any matching [index templates](indices-templates.html "Index Templates"). Additionally, you can specify `settings`, `mappings`, and `aliases` in the body of the request, just like the [create index](indices-create-index.html "Create Index") API. Values specified in the request override any values set in matching index templates. For example, the following `rollover` request overrides the `index.number_of_shards` setting:
+The settings, mappings, and aliases for the new index are taken from any matching [index templates](indices-templates.html). Additionally, you can specify `settings`, `mappings`, and `aliases` in the body of the request, just like the [create index](indices-create-index.html) API. Values specified in the request override any values set in matching index templates. For example, the following `rollover` request overrides the `index.number_of_shards` setting:
     
     
     PUT /logs-000001
@@ -181,4 +181,4 @@ The rollover API supports `dry_run` mode, where request conditions can be checke
 
 ### Wait For Active Shards
 
-Because the rollover operation creates a new index to rollover to, the [`wait_for_active_shards`](indices-create-index.html#create-index-wait-for-active-shards "Wait For Active Shardsedit") setting on index creation applies to the rollover action as well.
+Because the rollover operation creates a new index to rollover to, the [`wait_for_active_shards`](indices-create-index.html#create-index-wait-for-active-shards) setting on index creation applies to the rollover action as well.

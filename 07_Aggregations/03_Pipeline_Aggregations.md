@@ -11,7 +11,7 @@ _Parent_
 _Sibling_
      Pipeline aggregations that are provided with the output of a sibling aggregation and are able to compute a new aggregation which will be at the same level as the sibling aggregation. 
 
-Pipeline aggregations can reference the aggregations they need to perform their computation by using the `buckets_path` parameter to indicate the paths to the required metrics. The syntax for defining these paths can be found in the [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax "buckets_path Syntaxedit") div below.
+Pipeline aggregations can reference the aggregations they need to perform their computation by using the `buckets_path` parameter to indicate the paths to the required metrics. The syntax for defining these paths can be found in the [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) div below.
 
 Pipeline aggregations cannot have sub-aggregations but depending on the type it can reference another pipeline in the `buckets_path` allowing pipeline aggregations to be chained. For example, you can chain together two derivatives to calculate the second derivative (i.e. a derivative of a derivative).
 
@@ -177,7 +177,7 @@ By using `_bucket_count` instead of a metric name, we can filter out `histo` buc
   
 ### Dealing with dots in agg names
 
-An alternate syntax is supported to cope with aggregations or metrics which have dots in the name, such as the `99.9`th [percentile](search-aggregations-metrics-percentile-aggregation.html "Percentiles Aggregation"). This metric may be referred to as:
+An alternate syntax is supported to cope with aggregations or metrics which have dots in the name, such as the `99.9`th [percentile](search-aggregations-metrics-percentile-aggregation.html). This metric may be referred to as:
     
     
     "buckets_path": "my_percentile[99.9]"

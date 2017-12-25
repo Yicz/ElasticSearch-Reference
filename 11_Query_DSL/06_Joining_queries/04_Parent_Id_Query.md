@@ -39,7 +39,7 @@ The `parent_id` query can be used to find child documents which belong to a part
         }
     }
 
-The above is functionally equivalent to using the following [`has_parent`](query-dsl-has-parent-query.html "Has Parent Query") query, but performs better as it does not need to do a join:
+The above is functionally equivalent to using the following [`has_parent`](query-dsl-has-parent-query.html) query, but performs better as it does not need to do a join:
     
     
     GET /my_index/_search

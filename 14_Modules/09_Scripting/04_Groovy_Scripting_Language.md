@@ -4,13 +4,13 @@
 
 ### Deprecated in 5.0.0. 
 
-Groovy will be replaced by the new scripting language [`Painless`](modules-scripting-painless.html "Painless Scripting Language")
+Groovy will be replaced by the new scripting language [`Painless`](modules-scripting-painless.html)
 
-Groovy is available in Elasticsearch by default. Although limited by the [Java Security Manager](modules-scripting-security.html#java-security-manager "Java Security Manageredit"), it is not a sandboxed language and only `file` scripts may be used by default.
+Groovy is available in Elasticsearch by default. Although limited by the [Java Security Manager](modules-scripting-security.html#java-security-manager), it is not a sandboxed language and only `file` scripts may be used by default.
 
 Enabling `inline` or `stored` Groovy scripting is a security risk and should only be considered if your Elasticsearch cluster is protected from the outside world. Even a simple `while (true) { }` loop could behave as a denial-of- service attack on your cluster.
 
-See [Scripting and Security](modules-scripting-security.html "Scripting and security") for details on security issues with scripts, including how to customize class whitelisting.
+See [Scripting and Security](modules-scripting-security.html) for details on security issues with scripts, including how to customize class whitelisting.
 
 ### Doc value properties and methods
 

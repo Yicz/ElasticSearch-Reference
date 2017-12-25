@@ -1,8 +1,8 @@
 ## `normalizer`
 
-The `normalizer` property of [`keyword`](keyword.html "Keyword datatype") fields is similar to [`analyzer`](analyzer.html "analyzer") except that it guarantees that the analysis chain produces a single token.
+The `normalizer` property of [`keyword`](keyword.html) fields is similar to [`analyzer`](analyzer.html) except that it guarantees that the analysis chain produces a single token.
 
-The `normalizer` is applied prior to indexing the keyword, as well as at search-time when the `keyword` field is searched via a query parser such as the [`match`](query-dsl-match-query.html "Match Query") query.
+The `normalizer` is applied prior to indexing the keyword, as well as at search-time when the `keyword` field is searched via a query parser such as the [`match`](query-dsl-match-query.html) query.
     
     
     PUT index

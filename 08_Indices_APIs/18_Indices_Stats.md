@@ -80,7 +80,7 @@ Merge statistics.
 
 | 
 
-[Shard request cache](shard-request-cache.html "Shard request cache") statistics.   
+[Shard request cache](shard-request-cache.html) statistics.   
   
 `refresh`
 

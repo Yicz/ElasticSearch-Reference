@@ -1,6 +1,6 @@
 ## Doc value Fields
 
-Allows to return the [doc value](doc-values.html "doc_values") representation of a field for each hit, for example:
+Allows to return the [doc value](doc-values.html) representation of a field for each hit, for example:
     
     
     GET /_search

@@ -12,7 +12,7 @@ Statistics are returned in a format suitable for humans (eg `"exists_time": "1h"
 
 ### Date Math
 
-Most parameters which accept a formatted date value — such as `gt` and `lt` in [range queries](query-dsl-range-query.html "Range Query") `range` queries, or `from` and `to` in [`daterange` aggregations](search-aggregations-bucket-daterange-aggregation.html "Date Range Aggregation") — understand date maths.
+Most parameters which accept a formatted date value — such as `gt` and `lt` in [range queries](query-dsl-range-query.html) `range` queries, or `from` and `to` in [`daterange` aggregations](search-aggregations-bucket-daterange-aggregation.html) — understand date maths.
 
 The expression starts with an anchor date, which can either be `now`, or a date string ending with `||`. This anchor date can optionally be followed by one or more maths expressions:
 
@@ -22,7 +22,7 @@ The expression starts with an anchor date, which can either be `now`, or a date 
 
 
 
-The supported time units differ than those supported by [time units](common-options.html#time-units "Time unitsedit") for durations. The supported units are:
+The supported time units differ than those supported by [time units](common-options.html#time-units) for durations. The supported units are:
 
 `y`| years     
 ---|---    
@@ -129,7 +129,7 @@ Responds:
       }
     }
 
-Note that elasticsearch sometimes returns directly the raw value of a field, like the `_source` field. If you want to filter `_source` fields, you should consider combining the already existing `_source` parameter (see [Get API](docs-get.html#get-source-filtering "Source filteringedit") for more details) with the `filter_path` parameter like this:
+Note that elasticsearch sometimes returns directly the raw value of a field, like the `_source` field. If you want to filter `_source` fields, you should consider combining the already existing `_source` parameter (see [Get API](docs-get.html#get-source-filtering) for more details) with the `filter_path` parameter like this:
     
     
     POST /library/book?refresh
@@ -262,7 +262,7 @@ If one of these quantities is large we’ll print it out like 10m for 10,000,000
   
 ### Distance Units
 
-Wherever distances need to be specified, such as the `distance` parameter in the [Geo Distance Query](query-dsl-geo-distance-query.html "Geo Distance Query")), the default unit if none is specified is the meter. Distances can be specified in other units, such as `"1km"` or `"2mi"` (2 miles).
+Wherever distances need to be specified, such as the `distance` parameter in the [Geo Distance Query](query-dsl-geo-distance-query.html)), the default unit if none is specified is the meter. Distances can be specified in other units, such as `"1km"` or `"2mi"` (2 miles).
 
 The full list of units is listed below:
 

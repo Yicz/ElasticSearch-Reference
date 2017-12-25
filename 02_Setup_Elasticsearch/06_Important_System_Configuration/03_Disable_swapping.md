@@ -44,7 +44,7 @@ Linux系统上的另一个选项是确保sysctl值`vm.swappiness`被设置为`1`
     使用root用户设置[`ulimit -l unlimited`](setting-system-settings.html#ulimit) , 或者在[`/etc/security/limits.conf`](setting-system-settings.html#limits.conf)文件设置`memlock`为`unlimited` 
 `RPM` 或 `Debian` 安装方式
 
-    在[系统配置文件](setting-system-settings.html#sysconfig "Sysconfig file") (或使用`systemd`的查看下面的选项)配置`MAX_LOCKED_MEMORY`为`unlimited`
+    在[系统配置文件](setting-system-settings.html#sysconfig) (或使用`systemd`的查看下面的选项)配置`MAX_LOCKED_MEMORY`为`unlimited`
 使用`systemd`的系统
 
     在[systemd 配置](setting-system-settings.html#systemd)配置 `LimitMEMLOCK` 为 `infinity`

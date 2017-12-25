@@ -4,7 +4,7 @@
 
 Numeric fields have been refactored to use a different data structure that performs better for range queries. However, since this data structure does not record document frequencies, numeric fields need to fall back to running queries in order to estimate the number of matching documents in the background set, which may incur a performance degradation.
 
-It is recommended to use [`keyword`](keyword.html "Keyword datatype") fields instead, either directly or through a [multi-field](multi-fields.html "fields") if the numeric representation is still needed for sorting, range queries or numeric aggregations like [`stats` aggregations](search-aggregations-metrics-stats-aggregation.html "Stats Aggregation").
+It is recommended to use [`keyword`](keyword.html) fields instead, either directly or through a [multi-field](multi-fields.html) if the numeric representation is still needed for sorting, range queries or numeric aggregations like [`stats` aggregations](search-aggregations-metrics-stats-aggregation.html).
 
 ### `ip_range` aggregations
 

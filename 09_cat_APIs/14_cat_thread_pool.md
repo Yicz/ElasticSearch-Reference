@@ -72,7 +72,7 @@ The cat thread pool API accepts a `thread_pool_patterns` URL parameter for speci
 
 Here the host columns and the active, rejected and completed suggest thread pool statistics are displayed.
 
-All [built-in thread pools](modules-threadpool.html "Thread Pool") and custom thread pools are available.
+All [built-in thread pools](modules-threadpool.html) and custom thread pools are available.
 
 #### Thread Pool Fields
 

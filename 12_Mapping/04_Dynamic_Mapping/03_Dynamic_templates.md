@@ -2,9 +2,9 @@
 
 Dynamic templates allow you to define custom mappings that can be applied to dynamically added fields based on:
 
-  * the [datatype](dynamic-mapping.html "Dynamic Mapping") detected by Elasticsearch, with [`match_mapping_type`](dynamic-templates.html#match-mapping-type "match_mapping_type"). 
-  * the name of the field, with [`match` and `unmatch`](dynamic-templates.html#match-unmatch "match and unmatch") or [`match_pattern`](dynamic-templates.html#match-pattern "match_pattern"). 
-  * the full dotted path to the field, with [`path_match` and `path_unmatch`](dynamic-templates.html#path-match-unmatch "path_match and path_unmatch"). 
+  * the [datatype](dynamic-mapping.html) detected by Elasticsearch, with [`match_mapping_type`](dynamic-templates.html#match-mapping-type). 
+  * the name of the field, with [`match` and `unmatch`](dynamic-templates.html#match-unmatch) or [`match_pattern`](dynamic-templates.html#match-pattern). 
+  * the full dotted path to the field, with [`path_match` and `path_unmatch`](dynamic-templates.html#path-match-unmatch). 
 
 
 
@@ -47,11 +47,11 @@ The match conditions can include any of : `match_mapping_type`, `match`, `match_
 
 The mapping that the matched field should use.   
   
-Templates are processed in order — the first matching template wins. New templates can be appended to the end of the list with the [PUT mapping](indices-put-mapping.html "Put Mapping") API. If a new template has the same name as an existing template, it will replace the old version.
+Templates are processed in order — the first matching template wins. New templates can be appended to the end of the list with the [PUT mapping](indices-put-mapping.html) API. If a new template has the same name as an existing template, it will replace the old version.
 
 ### `match_mapping_type`
 
-The `match_mapping_type` matches on the datatype detected by [dynamic field mapping](dynamic-field-mapping.html "Dynamic field mapping"), in other words, the datatype that Elasticsearch thinks the field should have. Only the following datatypes can be automatically detected: `boolean`, `date`, `double`, `long`, `object`, `string`. It also accepts `*` to match all datatypes.
+The `match_mapping_type` matches on the datatype detected by [dynamic field mapping](dynamic-field-mapping.html), in other words, the datatype that Elasticsearch thinks the field should have. Only the following datatypes can be automatically detected: `boolean`, `date`, `double`, `long`, `object`, `string`. It also accepts `*` to match all datatypes.
 
 For example, if we wanted to map all integer fields as `integer` instead of `long`, and all `string` fields as both `text` and `keyword`, we could use the following template:
     
@@ -106,7 +106,7 @@ The `my_integer` field is mapped as an `integer`.
 
 | 
 
-The `my_string` field is mapped as a `text`, with a `keyword` [multi field](multi-fields.html "fields").   
+The `my_string` field is mapped as a `text`, with a `keyword` [multi field](multi-fields.html).   
   
 ### `match` and `unmatch`
 
@@ -201,7 +201,7 @@ This example copies the values of any fields in the `name` object to the top-lev
 
 ### `{name}` and `{dynamic_type}`
 
-The `{name}` and `{dynamic_type}` placeholders are replaced in the `mapping` with the field name and detected dynamic type. The following example sets all string fields to use an [`analyzer`](analyzer.html "analyzer") with the same name as the field, and disables [`doc_values`](doc-values.html "doc_values") for all non-string fields:
+The `{name}` and `{dynamic_type}` placeholders are replaced in the `mapping` with the field name and detected dynamic type. The following example sets all string fields to use an [`analyzer`](analyzer.html) with the same name as the field, and disables [`doc_values`](doc-values.html) for all non-string fields:
     
     
     PUT my_index

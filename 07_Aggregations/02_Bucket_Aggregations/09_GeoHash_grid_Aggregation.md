@@ -84,7 +84,7 @@ Response:
 
 ### High-precision requests
 
-When requesting detailed buckets (typically for displaying a "zoomed in" map) a filter like [geo_bounding_box](query-dsl-geo-bounding-box-query.html "Geo Bounding Box Query") should be applied to narrow the subject area otherwise potentially millions of buckets will be created and returned.
+When requesting detailed buckets (typically for displaying a) should be applied to narrow the subject area otherwise potentially millions of buckets will be created and returned.
     
     
     POST /museums/_search?size=0

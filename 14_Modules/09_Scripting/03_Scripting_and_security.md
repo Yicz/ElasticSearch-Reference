@@ -8,19 +8,19 @@ First and foremost, never run Elasticsearch as the `root` user as this would all
 
 ### Do not expose Elasticsearch directly to users
 
-Do not expose Elasticsearch directly to users, instead have an application make requests on behalf of users. If this is not possible, have an application to sanitize requests from users. If **that** is not possible then have some mechanism to track which users did what. Understand that it is quite possible to write a [`_search`](search.html "Search APIs") that overwhelms Elasticsearch and brings down the cluster. All such searches should be considered bugs and the Elasticsearch contributors make an effort to prevent this but they are still possible.
+Do not expose Elasticsearch directly to users, instead have an application make requests on behalf of users. If this is not possible, have an application to sanitize requests from users. If **that** is not possible then have some mechanism to track which users did what. Understand that it is quite possible to write a [`_search`](search.html) that overwhelms Elasticsearch and brings down the cluster. All such searches should be considered bugs and the Elasticsearch contributors make an effort to prevent this but they are still possible.
 
 ### Do not expose Elasticsearch directly to the Internet
 
 Do not expose Elasticsearch to the Internet, instead have an application make requests on behalf of the Internet. Do not entertain the thought of having an application "sanitize" requests to Elasticsearch. Understand that it is possible for a sufficiently determined malicious user to write searches that overwhelm the Elasticsearch cluster and bring it down. For example:
 
-Good: * Users type text into a search box and the text is sent directly to a [Match Query](query-dsl-match-query.html "Match Query"), [Match Phrase Query](query-dsl-match-query-phrase.html "Match Phrase Query"), [Simple Query String Query](query-dsl-simple-query-string-query.html "Simple Query String Query"), or any of the [_Suggesters_](search-suggesters.html "Suggesters"). * Running a script with any of the above queries that was written as part of the application development process. * Running a script with `params` provided by users. * User actions makes documents with a fixed structure.
+Good: * Users type text into a search box and the text is sent directly to a [Match Query](query-dsl-match-query.html), [Match Phrase Query](query-dsl-match-query-phrase.html), [Simple Query String Query](query-dsl-simple-query-string-query.html), or any of the [_Suggesters_](search-suggesters.html). * Running a script with any of the above queries that was written as part of the application development process. * Running a script with `params` provided by users. * User actions makes documents with a fixed structure.
 
 Bad: * Users can write arbitrary scripts, queries, `_search` requests. * User actions make documents with structure defined by users.
 
 ### Do not weaken script security settings
 
-By default Elasticsearch will run inline, stored, and filesystem scripts for sandboxed languages, namely the scripting language Painless, the template language Mustache, and the expression language Expressions. These **ought** to be safe to expose to trusted users and to your application servers because they have strong security sandboxes. By default Elasticsearch will only run filesystem scripts for non-sandboxed languages and enabling them is a poor choice because: 1\. This drops a layer of security, leaving only Elasticsearch’s builtin [security layers](modules-scripting-security.html#modules-scripting-other-layers "Other security layersedit"). 2\. Non-sandboxed scripts have unchecked access to Elasticsearch’s internals and can cause all kinds of trouble if misused.
+By default Elasticsearch will run inline, stored, and filesystem scripts for sandboxed languages, namely the scripting language Painless, the template language Mustache, and the expression language Expressions. These **ought** to be safe to expose to trusted users and to your application servers because they have strong security sandboxes. By default Elasticsearch will only run filesystem scripts for non-sandboxed languages and enabling them is a poor choice because: 1\. This drops a layer of security, leaving only Elasticsearch’s builtin [security layers](modules-scripting-security.html#modules-scripting-other-layers). 2\. Non-sandboxed scripts have unchecked access to Elasticsearch’s internals and can cause all kinds of trouble if misused.
 
 ### Other security layers
 
@@ -63,7 +63,7 @@ Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb)
   
 ![Note](images/icons/note.png)
 
-These settings override the defaults mentioned [above](modules-scripting-security.html#modules-scripting-security-do-no-weaken "Do not weaken script security settingsedit"). Recreating the defaults requires more fine grained settings described [below](modules-scripting-security.html#security-script-fine "Fine-grained script settingsedit").
+These settings override the defaults mentioned [above](modules-scripting-security.html#modules-scripting-security-do-no-weaken). Recreating the defaults requires more fine grained settings described [below](modules-scripting-security.html#security-script-fine).
 
 ### Script context settings
 
@@ -227,7 +227,7 @@ The classloader whitelist can be customised by tweaking the local Java Security 
 
   * system wide: `$JAVA_HOME/lib/security/java.policy`, 
   * for just the `elasticsearch` user: `/home/elasticsearch/.java.policy`
-  * by adding a system property to the [jvm.options](setting-system-settings.html#jvm-options "Setting JVM options") configuration: `-Djava.security.policy=someURL`, or 
+  * by adding a system property to the [jvm.options](setting-system-settings.html#jvm-options) configuration: `-Djava.security.policy=someURL`, or 
   * via the `ES_JAVA_OPTS` environment variable with `-Djava.security.policy=someURL`: 
     
         export ES_JAVA_OPTS="${ES_JAVA_OPTS} -Djava.security.policy=file:///path/to/my.policy`

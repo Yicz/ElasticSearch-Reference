@@ -45,7 +45,7 @@ Response:
 
 | 
 
-an upper bound of the error on the document counts for each term, see [below](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts "Document counts are approximate")  
+an upper bound of the error on the document counts for each term, see [below](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts)  
   
 ---|---  
   
@@ -59,7 +59,7 @@ when there are lots of unique terms, elasticsearch only returns the top terms; t
 
 | 
 
-the list of the top buckets, the meaning of `top` being defined by the [order](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order "Order")  
+the list of the top buckets, the meaning of `top` being defined by the [order](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order)  
   
 By default, the `terms` aggregation will return the buckets for the top ten terms ordered by the `doc_count`. One can change this default behaviour by setting the `size` parameter.
 
@@ -415,7 +415,7 @@ The order of the buckets can be customized by setting the `order` parameter. By 
 
 ![Warning](images/icons/warning.png)
 
-Sorting by ascending `_count` or by sub aggregation is discouraged as it increases the [error](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts "Document counts are approximate") on document counts. It is fine when a single shard is queried, or when the field that is being aggregated was used as a routing key at index time: in these cases results will be accurate since shards have disjoint values. However otherwise, errors are unbounded. One particular case that could still be useful is sorting by [`min`](search-aggregations-metrics-min-aggregation.html "Min Aggregation") or [`max`](search-aggregations-metrics-max-aggregation.html "Max Aggregation") aggregation: counts will not be accurate but at least the top buckets will be correctly picked.
+Sorting by ascending `_count` or by sub aggregation is discouraged as it increases the [error](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts) on document counts. It is fine when a single shard is queried, or when the field that is being aggregated was used as a routing key at index time: in these cases results will be accurate since shards have disjoint values. However otherwise, errors are unbounded. One particular case that could still be useful is sorting by [`min`](search-aggregations-metrics-min-aggregation.html) or [`max`](search-aggregations-metrics-max-aggregation.html) aggregation: counts will not be accurate but at least the top buckets will be correctly picked.
 
 Ordering the buckets by their doc `_count` in an ascending manner:
     
@@ -483,7 +483,7 @@ Ordering the buckets by multi value metrics sub-aggregation (identified by the a
 
 ### Pipeline aggs cannot be used for sorting
 
-[Pipeline aggregations](search-aggregations-pipeline.html "Pipeline Aggregations") are run during the reduce phase after all other aggregations have already completed. For this reason, they cannot be used for ordering.
+[Pipeline aggregations](search-aggregations-pipeline.html) are run during the reduce phase after all other aggregations have already completed. For this reason, they cannot be used for ordering.
 
 It is also possible to order the buckets based on a "deeper" aggregation in the hierarchy. This is supported as long as the aggregations path are of a single-bucket type, where the last aggregation in the path may either be a single-bucket one or a metrics one. If it’s a single-bucket type, the order will be defined by the number of docs in the bucket (i.e. `doc_count`), in case it’s a metrics one, the same rules as above apply (where the path must indicate the metric name to sort by in case of a multi-value metrics aggregation, and in case of a single-value metrics aggregation the sort will be applied on that value).
 
@@ -656,7 +656,7 @@ It is possible to filter the values for which buckets will be created. This can 
 
 In the above example, buckets will be created for all the tags that has the word `sport` in them, except those starting with `water_` (so the tag `water_sports` will no be aggregated). The `include` regular expression will determine what values are "allowed" to be aggregated, while the `exclude` determines the values that should not be aggregated. When both are defined, the `exclude` has precedence, meaning, the `include` is evaluated first and only then the `exclude`.
 
-The syntax is the same as [regexp queries](query-dsl-regexp-query.html#regexp-syntax "Regular expression syntax").
+The syntax is the same as [regexp queries](query-dsl-regexp-query.html#regexp-syntax).
 
 #### Filtering Values with exact values
 
@@ -733,13 +733,13 @@ Ultimately this is a balancing act between managing the elasticsearch resources 
 
 ### Multi-field terms aggregation
 
-The `terms` aggregation does not support collecting terms from multiple fields in the same document. The reason is that the `terms` agg doesn’t collect the string term values themselves, but rather uses [global ordinals](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-execution-hint "Execution hint") to produce a list of all of the unique values in the field. Global ordinals results in an important performance boost which would not be possible across multiple fields.
+The `terms` aggregation does not support collecting terms from multiple fields in the same document. The reason is that the `terms` agg doesn’t collect the string term values themselves, but rather uses [global ordinals](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-execution-hint) to produce a list of all of the unique values in the field. Global ordinals results in an important performance boost which would not be possible across multiple fields.
 
 There are two approaches that you can use to perform a `terms` agg across multiple fields:
 
-[Script](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-script "Script")
+[Script](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-script)
      Use a script to retrieve terms from multiple fields. This disables the global ordinals optimization and will be slower than collecting terms from a single field, but it gives you the flexibility to implement this option at search time. 
-[`copy_to` field](copy-to.html "copy_to")
+[`copy_to` field](copy-to.html)
      If you know ahead of time that you want to collect the terms from two or more fields, then use `copy_to` in your mapping to create a new dedicated field at index time which contains the values from both fields. You can aggregate on this single field, which will benefit from the global ordinals optimization. 
 
 ### Collect mode

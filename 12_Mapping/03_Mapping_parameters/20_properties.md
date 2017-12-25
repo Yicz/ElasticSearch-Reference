@@ -1,10 +1,10 @@
 ## `properties`
 
-Type mappings, [`object` fields](object.html "Object datatype") and [`nested` fields](nested.html "Nested datatype") contain sub-fields, called `properties`. These properties may be of any [datatype](mapping-types.html "Field datatypes"), including `object` and `nested`. Properties can be added:
+Type mappings, [`object` fields](object.html) and [`nested` fields](nested.html) contain sub-fields, called `properties`. These properties may be of any [datatype](mapping-types.html), including `object` and `nested`. Properties can be added:
 
-  * explicitly by defining them when [creating an index](indices-create-index.html "Create Index"). 
-  * explicitly by defining them when adding or updating a mapping type with the [PUT mapping](indices-put-mapping.html "Put Mapping") API. 
-  * [dynamically](dynamic-mapping.html "Dynamic Mapping") just by indexing documents containing new fields. 
+  * explicitly by defining them when [creating an index](indices-create-index.html). 
+  * explicitly by defining them when adding or updating a mapping type with the [PUT mapping](indices-put-mapping.html) API. 
+  * [dynamically](dynamic-mapping.html) just by indexing documents containing new fields. 
 
 
 
@@ -81,7 +81,7 @@ An example document which corresponds to the above mapping.
   
 ![Tip](images/icons/tip.png)
 
-The `properties` setting is allowed to have different settings for fields of the same name in the same index. New properties can be added to existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `properties` setting is allowed to have different settings for fields of the same name in the same index. New properties can be added to existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 ### Dot notation
 

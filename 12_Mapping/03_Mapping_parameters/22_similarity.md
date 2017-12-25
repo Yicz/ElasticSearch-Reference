@@ -2,9 +2,9 @@
 
 Elasticsearch allows you to configure a scoring algorithm or _similarity_ per field. The `similarity` setting provides a simple way of choosing a similarity algorithm other than the default `BM25`, such as `TF/IDF`.
 
-Similarities are mostly useful for [`text`](text.html "Text datatype") fields, but can also apply to other field types.
+Similarities are mostly useful for [`text`](text.html) fields, but can also apply to other field types.
 
-Custom similarities can be configured by tuning the parameters of the built-in similarities. For more details about this expert options, see the [similarity module](index-modules-similarity.html "Similarity module").
+Custom similarities can be configured by tuning the parameters of the built-in similarities. For more details about this expert options, see the [similarity module](index-modules-similarity.html).
 
 The only similarities which can be used out of the box, without any further configuration are:
 

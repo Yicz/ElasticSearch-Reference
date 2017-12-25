@@ -138,7 +138,7 @@ Log messages go to the console and are handled by the configured Docker logging 
 
 ### Configuring Elasticsearch with Docker
 
-Elasticsearch loads its configuration from files under `/usr/share/elasticsearch/config/`. These configuration files are documented in [_Configuring Elasticsearch_](settings.html "Configuring Elasticsearch") and [Setting JVM options](setting-system-settings.html#jvm-options "Setting JVM options").
+Elasticsearch loads its configuration from files under `/usr/share/elasticsearch/config/`. These configuration files are documented in [_Configuring Elasticsearch_](settings.html) and [Setting JVM options](setting-system-settings.html#jvm-options).
 
 The image offers several methods for configuring Elasticsearch settings with the conventional approach being to provide customized files, that is to say, `elasticsearch.yml`. It’s also possible to use environment variables to set options:
 
@@ -189,8 +189,8 @@ We have collected a number of best practices for production use.
 
 Any Docker parameters mentioned below assume the use of `docker run`.
 
-  1. Elasticsearch runs inside the container as user `elasticsearch` using uid:gid `1000:1000`. If you are bind-mounting a local directory or file, ensure it is readable by this user, while the [data and log dirs](important-settings.html#path-settings "path.data and path.logsedit") additionally require write access. 
-  2. It is important to ensure increased ulimits for [nofile](setting-system-settings.html "Configuring system settings") and [nproc](max-number-threads-check.html "Maximum number of threads check") are available for the Elasticsearch containers. Verify the [init system](https://github.com/moby/moby/tree/ea4d1243953e6b652082305a9c3cda8656edab26/contrib/init) for the Docker daemon is already setting those to acceptable values and, if needed, adjust them in the Daemon, or override them per container, for example using `docker run`: 
+  1. Elasticsearch runs inside the container as user `elasticsearch` using uid:gid `1000:1000`. If you are bind-mounting a local directory or file, ensure it is readable by this user, while the [data and log dirs](important-settings.html#path-settings) additionally require write access. 
+  2. It is important to ensure increased ulimits for [nofile](setting-system-settings.html) and [nproc](max-number-threads-check.html) are available for the Elasticsearch containers. Verify the [init system](https://github.com/moby/moby/tree/ea4d1243953e6b652082305a9c3cda8656edab26/contrib/init) for the Docker daemon is already setting those to acceptable values and, if needed, adjust them in the Daemon, or override them per container, for example using `docker run`: 
     
         --ulimit nofile=65536:65536
 
@@ -200,14 +200,14 @@ One way of checking the Docker daemon defaults for the aforementioned ulimits is
     
         docker run --rm centos:7 /bin/bash -c 'ulimit -Hn && ulimit -Sn && ulimit -Hu && ulimit -Su'
 
-  3. Swapping needs to be disabled for performance and node stability. This can be achieved through any of the methods mentioned in the [Elasticsearch docs](setup-configuration-memory.html "Disable swapping"). If you opt for the `bootstrap.memory_lock: true` approach, apart from defining it through any of the [configuration methods](docker.html#docker-configuration-methods "Configuring Elasticsearch with Docker"), you will additionally need the `memlock: true` ulimit, either defined in the [Docker Daemon](https://docs.docker.com/engine/reference/commandline/dockerd/#default-ulimits) or specifically set for the container. This has been demonstrated earlier in the [docker-compose.yml](docker.html#docker-prod-cluster-composefile), or using `docker run`: 
+  3. Swapping needs to be disabled for performance and node stability. This can be achieved through any of the methods mentioned in the [Elasticsearch docs](setup-configuration-memory.html). If you opt for the `bootstrap.memory_lock: true` approach, apart from defining it through any of the [configuration methods](docker.html#docker-configuration-methods), you will additionally need the `memlock: true` ulimit, either defined in the [Docker Daemon](https://docs.docker.com/engine/reference/commandline/dockerd/#default-ulimits) or specifically set for the container. This has been demonstrated earlier in the [docker-compose.yml](docker.html#docker-prod-cluster-composefile), or using `docker run`: 
     
         -e "bootstrap_memory_lock=true" --ulimit memlock=-1:-1
 
   4. The image [exposes](https://docs.docker.com/engine/reference/builder/#/expose) TCP ports 9200 and 9300. For clusters it is recommended to randomize the published ports with `--publish-all`, unless you are pinning one container per host. 
   5. Use the `ES_JAVA_OPTS` environment variable to set heap size. For example, to use 16GB, use `-e ES_JAVA_OPTS="-Xms16g -Xmx16g"` with `docker run`. It is also recommended to set a [memory limit](https://docs.docker.com/engine/reference/run/#user-memory-constraints) for the container. 
   6. Pin your deployments to a specific version of the Elasticsearch Docker image. For example, `docker.elastic.co/elasticsearch/elasticsearch:5.4.3`. 
-  7. Always use a volume bound on `/usr/share/elasticsearch/data`, as shown in the [production example](docker.html#docker-cli-run-prod-mode "Production mode"), for the following reasons: 
+  7. Always use a volume bound on `/usr/share/elasticsearch/data`, as shown in the [production example](docker.html#docker-cli-run-prod-mode), for the following reasons: 
 
     1. The data of your elasticsearch node won’t be lost if the container is killed 
     2. Elasticsearch is I/O sensitive and the Docker storage driver is not ideal for fast I/O 
@@ -222,8 +222,8 @@ One way of checking the Docker daemon defaults for the aforementioned ulimits is
 
 You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you must do some additional setup:
 
-  * Learn how to [configure Elasticsearch](settings.html "Configuring Elasticsearch"). 
-  * Configure [important Elasticsearch settings](important-settings.html "Important Elasticsearch configuration"). 
-  * Configure [important system settings](system-config.html "Important System Configuration"). 
+  * Learn how to [configure Elasticsearch](settings.html). 
+  * Configure [important Elasticsearch settings](important-settings.html). 
+  * Configure [important system settings](system-config.html). 
 
 

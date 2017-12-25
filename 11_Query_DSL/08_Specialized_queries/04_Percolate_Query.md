@@ -29,7 +29,7 @@ Create an index with two mappings:
 
 The `doctype` mapping is the mapping used to preprocess the document defined in the `percolator` query before it gets indexed into a temporary index.
 
-The `queries` mapping is the mapping used for indexing the query documents. The `query` field will hold a json object that represents an actual Elasticsearch query. The `query` field has been configured to use the [percolator field type](percolator.html "Percolator type"). This field type understands the query dsl and stored the query in such a way that it can be used later on to match documents defined on the `percolate` query.
+The `queries` mapping is the mapping used for indexing the query documents. The `query` field will hold a json object that represents an actual Elasticsearch query. The `query` field has been configured to use the [percolator field type](percolator.html). This field type understands the query dsl and stored the query in such a way that it can be used later on to match documents defined on the `percolate` query.
 
 Register a query in the percolator:
     
@@ -345,7 +345,7 @@ Instead of the query in the search request highlighting the percolator hits, the
 
 #### How it Works Under the Hood
 
-When indexing a document into an index that has the [percolator field type](percolator.html "Percolator type") mapping configured, the query part of the document gets parsed into a Lucene query and is stored into the Lucene index. A binary representation of the query gets stored, but also the query’s terms are analyzed and stored into an indexed field.
+When indexing a document into an index that has the [percolator field type](percolator.html) mapping configured, the query part of the document gets parsed into a Lucene query and is stored into the Lucene index. A binary representation of the query gets stored, but also the query’s terms are analyzed and stored into an indexed field.
 
 At search time, the document specified in the request gets parsed into a Lucene document and is stored in a in-memory temporary Lucene index. This in-memory index can just hold this one document and it is optimized for that. After this a special query is built based on the terms in the in-memory index that select candidate percolator queries based on their indexed query terms. These queries are then evaluated by the in-memory index if they actually match.
 

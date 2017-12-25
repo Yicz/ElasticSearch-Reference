@@ -16,7 +16,7 @@ The `html_strip` character filter strips HTML elements from the text and replace
 
 | 
 
-The [`keyword` tokenizer](analysis-keyword-tokenizer.html "Keyword Tokenizer") returns a single term.   
+The [`keyword` tokenizer](analysis-keyword-tokenizer.html) returns a single term.   
   
 ---|---  
   

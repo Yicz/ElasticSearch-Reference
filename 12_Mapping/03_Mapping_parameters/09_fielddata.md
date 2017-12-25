@@ -1,10 +1,10 @@
 ## `fielddata`
 
-Most fields are [indexed](mapping-index.html "index") by default, which makes them searchable. Sorting, aggregations, and accessing field values in scripts, however, requires a different access pattern from search.
+Most fields are [indexed](mapping-index.html) by default, which makes them searchable. Sorting, aggregations, and accessing field values in scripts, however, requires a different access pattern from search.
 
 Search needs to answer the question _"Which documents contain this term?"_ , while sorting and aggregations need to answer a different question: _"What is the value of this field for **this** document?"_.
 
-Most fields can use index-time, on-disk [`doc_values`](doc-values.html "doc_values") for this data access pattern, but [`text`](text.html "Text datatype") fields do not support `doc_values`.
+Most fields can use index-time, on-disk [`doc_values`](doc-values.html) for this data access pattern, but [`text`](text.html) fields do not support `doc_values`.
 
 Instead, `text` fields use a query-time **in-memory** data structure called `fielddata`. This data structure is built on demand the first time that a field is used for aggregations, sorting, or in a script. It is built by reading the entire inverted index for each segment from disk, inverting the term ↔︎ document relationship, and storing the result in memory, in the JVM heap.
 
@@ -22,7 +22,7 @@ Before you enable fielddata, consider why you are using a `text` field for aggre
 
 A text field is analyzed before indexing so that a value like `New York` can be found by searching for `new` or for `york`. A `terms` aggregation on this field will return a `new` bucket and a `york` bucket, when you probably want a single bucket called `New York`.
 
-Instead, you should have a `text` field for full text searches, and an unanalyzed [`keyword`](keyword.html "Keyword datatype") field with [`doc_values`](doc-values.html "doc_values") enabled for aggregations, as follows:
+Instead, you should have a `text` field for full text searches, and an unanalyzed [`keyword`](keyword.html) field with [`doc_values`](doc-values.html) enabled for aggregations, as follows:
     
     
     PUT my_index
@@ -59,7 +59,7 @@ Use the `my_field.keyword` field for aggregations, sorting, or in scripts.
   
 ### Enabling fielddata on `text` fields
 
-You can enable fielddata on an existing `text` field using the [PUT mapping API](indices-put-mapping.html "Put Mapping") as follows:
+You can enable fielddata on an existing `text` field using the [PUT mapping API](indices-put-mapping.html) as follows:
     
     
     PUT my_index/_mapping/my_type
@@ -82,11 +82,11 @@ The mapping that you specify for `my_field` should consist of the existing mappi
   
 ![Tip](images/icons/tip.png)
 
-The `fielddata.*` parameter must have the same settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `fielddata.*` parameter must have the same settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
  **Global ordinals**
 
-Global ordinals is a data-structure on top of fielddata and doc values, that maintains an incremental numbering for each unique term in a lexicographic order. Each term has a unique number and the number of term _A_ is lower than the number of term _B_. Global ordinals are only supported on [`text`](text.html "Text datatype") and [`keyword`](keyword.html "Keyword datatype") fields.
+Global ordinals is a data-structure on top of fielddata and doc values, that maintains an incremental numbering for each unique term in a lexicographic order. Each term has a unique number and the number of term _A_ is lower than the number of term _B_. Global ordinals are only supported on [`text`](text.html) and [`keyword`](keyword.html) fields.
 
 Fielddata and doc values also have ordinals, which is a unique numbering for all terms in a particular segment and field. Global ordinals just build on top of this, by providing a mapping between the segment ordinals and the global ordinals, the latter being unique across the entire shard.
 

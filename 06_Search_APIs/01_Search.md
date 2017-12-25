@@ -1,10 +1,10 @@
 ## Search
 
-The search API allows you to execute a search query and get back search hits that match the query. The query can either be provided using a simple [query string as a parameter](search-uri-request.html "URI Search"), or using a [request body](search-request-body.html "Request Body Search").
+The search API allows you to execute a search query and get back search hits that match the query. The query can either be provided using a simple [query string as a parameter](search-uri-request.html), or using a [request body](search-request-body.html).
 
 ### Multi-Index, Multi-Type
 
-All search APIs can be applied across multiple types within an index, and across multiple indices with support for the [multi index syntax](multi-index.html "Multiple Indices"). For example, we can search on all documents across all types within the twitter index:
+All search APIs can be applied across multiple types within an index, and across multiple indices with support for the [multi index syntax](multi-index.html). For example, we can search on all documents across all types within the twitter index:
     
     
     GET /twitter/_search?q=user:kimchy

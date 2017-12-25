@@ -8,7 +8,7 @@ The cluster nodes stats API allows to retrieve one or more (or all) of the clust
     GET /_nodes/stats
     GET /_nodes/nodeId1,nodeId2/stats
 
-The first command retrieves stats of all the nodes in the cluster. The second command selectively retrieves nodes stats of only `nodeId1` and `nodeId2`. All the nodes selective options are explained [here](cluster.html#cluster-nodes "Node specificationedit").
+The first command retrieves stats of all the nodes in the cluster. The second command selectively retrieves nodes stats of only `nodeId1` and `nodeId2`. All the nodes selective options are explained [here](cluster.html#cluster-nodes).
 
 By default, all stats are returned. You can limit this by combining any of `indices`, `os`, `process`, `jvm`, `transport`, `http`, `fs`, `breaker` and `thread_pool`. For example:
 
@@ -24,7 +24,7 @@ Indices stats about size, document count, indexing and deletion times, search ti
 
 | 
 
-File system information, data path, free disk space, read/write stats (see [FS information](cluster-nodes-stats.html#fs-info "FS informationedit"))   
+File system information, data path, free disk space, read/write stats (see [FS information](cluster-nodes-stats.html#fs-info))   
   
 `http`
 
@@ -42,13 +42,13 @@ JVM stats, memory pool information, garbage collection, buffer pools, number of 
 
 | 
 
-Operating system stats, load average, mem, swap (see [OS statistics](cluster-nodes-stats.html#os-stats "Operating System statisticsedit"))   
+Operating system stats, load average, mem, swap (see [OS statistics](cluster-nodes-stats.html#os-stats))   
   
 `process`
 
 | 
 
-Process statistics, memory consumption, cpu usage, open file descriptors (see [Process statistics](cluster-nodes-stats.html#process-stats "Process statisticsedit"))   
+Process statistics, memory consumption, cpu usage, open file descriptors (see [Process statistics](cluster-nodes-stats.html#process-stats))   
   
 `thread_pool`
 

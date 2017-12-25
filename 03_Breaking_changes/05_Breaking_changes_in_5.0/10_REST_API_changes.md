@@ -50,15 +50,15 @@ The `filters` and `char_filters` parameters have been renamed `filter` and `char
 
 ### `DELETE /_query` endpoint removed
 
-The `DELETE /_query` endpoint provided by the Delete-By-Query plugin has been removed and replaced by the [Delete By Query API](docs-delete-by-query.html "Delete By Query API").
+The `DELETE /_query` endpoint provided by the Delete-By-Query plugin has been removed and replaced by the [Delete By Query API](docs-delete-by-query.html).
 
 ### Create stored script endpoint removed
 
-The `PUT /_scripts/{lang}/{id}/_create` endpoint that previously allowed to create indexed scripts has been removed. Indexed scripts have been replaced by [stored scripts](modules-scripting-using.html#modules-scripting-stored-scripts "Stored Scriptsedit").
+The `PUT /_scripts/{lang}/{id}/_create` endpoint that previously allowed to create indexed scripts has been removed. Indexed scripts have been replaced by [stored scripts](modules-scripting-using.html#modules-scripting-stored-scripts).
 
 ### Create stored template endpoint removed
 
-The `PUT /_search/template/{id}/_create` endpoint that previously allowed to create indexed template has been removed. Indexed templates have been replaced by [Pre-registered templates](search-template.html#pre-registered-templates "Pre-registered templateedit").
+The `PUT /_search/template/{id}/_create` endpoint that previously allowed to create indexed template has been removed. Indexed templates have been replaced by [Pre-registered templates](search-template.html#pre-registered-templates).
 
 ### Remove properties support
 

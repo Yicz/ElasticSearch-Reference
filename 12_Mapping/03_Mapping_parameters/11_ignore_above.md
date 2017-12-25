@@ -66,7 +66,7 @@ Search returns both documents, but only the first is present in the terms aggreg
   
 ![Tip](images/icons/tip.png)
 
-The `ignore_above` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `ignore_above` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 This option is also useful for protecting against Lucene’s term byte-length limit of `32766`.
 

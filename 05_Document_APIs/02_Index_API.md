@@ -39,13 +39,13 @@ The index operation is successful in the case `successful` is at least 1.
 
 ![Note](images/icons/note.png)
 
-Replica shards may not all be started when an indexing operation successfully returns (by default, only the primary is required, but this behavior can be [changed](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit")). In that case, `total` will be equal to the total shards based on the `number_of_replicas` setting and `successful` will be equal to the number of shards started (primary plus replicas). If there were no failures, the `failed` will be 0.
+Replica shards may not all be started when an indexing operation successfully returns (by default, only the primary is required, but this behavior can be [changed](docs-index_.html#index-wait-for-active-shards)). In that case, `total` will be equal to the total shards based on the `number_of_replicas` setting and `successful` will be equal to the number of shards started (primary plus replicas). If there were no failures, the `failed` will be 0.
 
 ### Automatic Index Creation
 
-The index operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html "Create Index") for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if one has not yet been created (check out the [put mapping](indices-put-mapping.html "Put Mapping") API for manually creating a type mapping).
+The index operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html) for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if one has not yet been created (check out the [put mapping](indices-put-mapping.html) API for manually creating a type mapping).
 
-The mapping itself is very flexible and is schema-free. New fields and objects will automatically be added to the mapping definition of the type specified. Check out the [mapping](mapping.html "Mapping") div for more information on mapping definitions.
+The mapping itself is very flexible and is schema-free. New fields and objects will automatically be added to the mapping definition of the type specified. Check out the [mapping](mapping.html) div for more information on mapping definitions.
 
 Automatic index creation can be disabled by setting `action.auto_create_index` to `false` in the config file of all nodes. Automatic mapping creation can be disabled by setting `index.mapper.dynamic` to `false` per-index as an index setting.
 
@@ -67,7 +67,7 @@ By default, internal versioning is used that starts at 1 and increments with eac
 
 ![Warning](images/icons/warning.png)
 
-External versioning supports the value 0 as a valid version number. This allows the version to be in sync with an external versioning system where version numbers start from zero instead of one. It has the side effect that documents with version number equal to zero cannot neither be updated using the [Update-By-Query API](docs-update-by-query.html "Update By Query API") nor be deleted using the [Delete By Query API](docs-delete-by-query.html "Delete By Query API") as long as their version number is equal to zero.
+External versioning supports the value 0 as a valid version number. This allows the version to be in sync with an external versioning system where version numbers start from zero instead of one. It has the side effect that documents with version number equal to zero cannot neither be updated using the [Update-By-Query API](docs-update-by-query.html) nor be deleted using the [Delete By Query API](docs-delete-by-query.html) as long as their version number is equal to zero.
 
 A nice side effect is that there is no need to maintain strict ordering of async indexing operations executed as a result of changes to a source database, as long as version numbers from the source database are used. Even the simple case of updating the elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations are out of order for whatever reason.
 

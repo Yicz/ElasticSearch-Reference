@@ -4,7 +4,7 @@
 
 #### System call bootstrap check
 
-Elasticsearch has attempted to install a system call filter since version 2.1.0. On some systems, installing this system call filter could fail. Previous versions of Elasticsearch would log a warning, but would otherwise continue executing potentially leaving the end-user unaware of this situation. Starting in Elasticsearch 5.2.0, there is now a [bootstrap check](bootstrap-checks.html "Bootstrap Checks") for success of installing the system call filter. If you encounter an issue starting Elasticsearch due to this bootstrap check, you need to either fix your configuration so that the system call filter can be installed, or **at your own risk** disable the [system call filter check](system-call-filter-check.html "System call filter check").
+Elasticsearch has attempted to install a system call filter since version 2.1.0. On some systems, installing this system call filter could fail. Previous versions of Elasticsearch would log a warning, but would otherwise continue executing potentially leaving the end-user unaware of this situation. Starting in Elasticsearch 5.2.0, there is now a [bootstrap check](bootstrap-checks.html) for success of installing the system call filter. If you encounter an issue starting Elasticsearch due to this bootstrap check, you need to either fix your configuration so that the system call filter can be installed, or **at your own risk** disable the [system call filter check](system-call-filter-check.html).
 
 ### Settings changes
 

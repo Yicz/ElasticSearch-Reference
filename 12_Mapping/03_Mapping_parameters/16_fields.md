@@ -76,11 +76,11 @@ Multi-fields do not change the original `_source` field.
 
 ![Tip](images/icons/tip.png)
 
-The `fields` setting is allowed to have different settings for fields of the same name in the same index. New multi-fields can be added to existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `fields` setting is allowed to have different settings for fields of the same name in the same index. New multi-fields can be added to existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 ### Multi-fields with multiple analyzers
 
-Another use case of multi-fields is to analyze the same field in different ways for better relevance. For instance we could index a field with the [`standard` analyzer](analysis-standard-analyzer.html "Standard Analyzer") which breaks text up into words, and again with the [`english` analyzer](analysis-lang-analyzer.html#english-analyzer "english analyzer") which stems words into their root form:
+Another use case of multi-fields is to analyze the same field in different ways for better relevance. For instance we could index a field with the [`standard` analyzer](analysis-standard-analyzer.html) which breaks text up into words, and again with the [`english` analyzer](analysis-lang-analyzer.html#english-analyzer) which stems words into their root form:
     
     
     PUT my_index

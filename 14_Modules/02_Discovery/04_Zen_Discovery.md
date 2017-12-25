@@ -2,7 +2,7 @@
 
 The zen discovery is the built in discovery module for elasticsearch and the default. It provides unicast discovery, but can be extended to support cloud environments and other forms of discovery.
 
-The zen discovery is integrated with other modules, for example, all communication between nodes is done using the [transport](modules-transport.html "Transport") module.
+The zen discovery is integrated with other modules, for example, all communication between nodes is done using the [transport](modules-transport.html) module.
 
 It is separated into several sub modules, which are explained below:
 
@@ -29,9 +29,9 @@ Either an array setting or a comma delimited setting. Each value should be in th
 
 | 
 
-The amount of time to wait for DNS lookups on each round of pinging. Specified as [time units](common-options.html#time-units "Time unitsedit"). Defaults to 5s.  
+The amount of time to wait for DNS lookups on each round of pinging. Specified as [time units](common-options.html#time-units). Defaults to 5s.  
   
-The unicast discovery uses the [transport](modules-transport.html "Transport") module to perform the discovery.
+The unicast discovery uses the [transport](modules-transport.html) module to perform the discovery.
 
 #### Master Election
 
@@ -45,7 +45,7 @@ Nodes can be excluded from becoming a master by setting `node.master` to `false`
 
 The `discovery.zen.minimum_master_nodes` sets the minimum number of master eligible nodes that need to join a newly elected master in order for an election to complete and for the elected node to accept its mastership. The same setting controls the minimum number of active master eligible nodes that should be a part of any active cluster. If this requirement is not met the active master node will step down and a new master election will be begin.
 
-This setting must be set to a [quorum](important-settings.html#minimum_master_nodes "discovery.zen.minimum_master_nodesedit") of your master eligible nodes. It is recommended to avoid having only two master eligible nodes, since a quorum of two is two. Therefore, a loss of either master eligible node will result in an inoperable cluster.
+This setting must be set to a [quorum](important-settings.html#minimum_master_nodes) of your master eligible nodes. It is recommended to avoid having only two master eligible nodes, since a quorum of two is two. Therefore, a loss of either master eligible node will result in an inoperable cluster.
 
 #### Fault Detection
 
@@ -78,7 +78,7 @@ How many ping failures / timeouts cause a node to be considered failed. Defaults
 
 The master node is the only node in a cluster that can make changes to the cluster state. The master node processes one cluster state update at a time, applies the required changes and publishes the updated cluster state to all the other nodes in the cluster. Each node receives the publish message, acknowledges it, but does **not** yet apply it. If the master does not receive acknowledgement from at least `discovery.zen.minimum_master_nodes` nodes within a certain time (controlled by the `discovery.zen.commit_timeout` setting and defaults to 30 seconds) the cluster state change is rejected.
 
-Once enough nodes have responded, the cluster state is committed and a message will be sent to all the nodes. The nodes then proceed to apply the new cluster state to their internal state. The master node waits for all nodes to respond, up to a timeout, before going ahead processing the next updates in the queue. The `discovery.zen.publish_timeout` is set by default to 30 seconds and is measured from the moment the publishing started. Both timeout settings can be changed dynamically through the [cluster update settings api](cluster-update-settings.html "Cluster Update Settings")
+Once enough nodes have responded, the cluster state is committed and a message will be sent to all the nodes. The nodes then proceed to apply the new cluster state to their internal state. The master node waits for all nodes to respond, up to a timeout, before going ahead processing the next updates in the queue. The `discovery.zen.publish_timeout` is set by default to 30 seconds and is measured from the moment the publishing started. Both timeout settings can be changed dynamically through the [cluster update settings api](cluster-update-settings.html)
 
 #### No master block
 

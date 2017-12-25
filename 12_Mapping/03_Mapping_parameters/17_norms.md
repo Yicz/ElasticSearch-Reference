@@ -6,9 +6,9 @@ Although useful for scoring, norms also require quite a lot of disk (typically i
 
 ![Tip](images/icons/tip.png)
 
-The `norms` setting must have the same setting for fields of the same name in the same index. Norms can be disabled on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `norms` setting must have the same setting for fields of the same name in the same index. Norms can be disabled on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
-Norms can be disabled (but not reenabled) after the fact, using the [PUT mapping API](indices-put-mapping.html "Put Mapping") like so:
+Norms can be disabled (but not reenabled) after the fact, using the [PUT mapping API](indices-put-mapping.html) like so:
     
     
     PUT my_index/_mapping/my_type

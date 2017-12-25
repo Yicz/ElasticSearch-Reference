@@ -72,7 +72,7 @@ Indexing a document with `"true"`, which is interpreted as `true`.
 
 Searching for documents with a JSON `true`.   
   
-Aggregations like the [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html "Terms Aggregation") use `1` and `0` for the `key`, and the strings `"true"` and `"false"` for the `key_as_string`. Boolean fields when used in scripts, return `1` and `0`:
+Aggregations like the [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html) use `1` and `0` for the `key`, and the strings `"true"` and `"false"` for the `key_as_string`. Boolean fields when used in scripts, return `1` and `0`:
     
     
     POST my_index/my_type/1
@@ -108,7 +108,7 @@ Aggregations like the [`terms` aggregation](search-aggregations-bucket-terms-agg
 
 The following parameters are accepted by `boolean` fields:
 
-[`boost`](mapping-boost.html "boost")
+[`boost`](mapping-boost.html)
 
 | 
 
@@ -116,26 +116,26 @@ Mapping field-level query time boosting. Accepts a floating point number, defaul
   
 ---|---  
   
-[`doc_values`](doc-values.html "doc_values")
+[`doc_values`](doc-values.html)
 
 | 
 
 Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations, or scripting? Accepts `true` (default) or `false`.   
   
-[`index`](mapping-index.html "index")
+[`index`](mapping-index.html)
 
 | 
 
 Should the field be searchable? Accepts `true` (default) and `false`.   
   
-[`null_value`](null-value.html "null_value")
+[`null_value`](null-value.html)
 
 | 
 
 Accepts any of the true or false values listed above. The value is substituted for any explicit `null` values. Defaults to `null`, which means the field is treated as missing.   
   
-[`store`](mapping-store.html "store")
+[`store`](mapping-store.html)
 
 | 
 
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default). 
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

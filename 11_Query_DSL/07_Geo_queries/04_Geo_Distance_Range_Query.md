@@ -26,7 +26,7 @@ Filters documents that exists within a range from a specific point:
         }
     }
 
-Supports the same point location parameter and query options as the [geo_distance](query-dsl-geo-distance-query.html "Geo Distance Query") filter. And also support the common parameters for range (lt, lte, gt, gte, from, to, include_upper and include_lower).
+Supports the same point location parameter and query options as the [geo_distance](query-dsl-geo-distance-query.html) filter. And also support the common parameters for range (lt, lte, gt, gte, from, to, include_upper and include_lower).
 
 #### Ignore Unmapped
 

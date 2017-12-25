@@ -12,7 +12,7 @@ Percolator and multi percolate APIs have been deprecated and will be removed in 
 
 The `.percolator` type can no longer be used to index percolator queries.
 
-Instead a [percolator field type](percolator.html "Percolator type") must be configured prior to indexing percolator queries.
+Instead a [percolator field type](percolator.html) must be configured prior to indexing percolator queries.
 
 Indices with a `.percolator` type created on a version before 5.0.0 can still be used, but new indices no longer accept the `.percolator` type.
 
@@ -52,7 +52,7 @@ The percolator is no longer part of the core elasticsearch dependency. It has mo
     
     
     TransportClient transportClient = TransportClient.builder()
-            .settings(Settings.builder().put("node.name", "node"))
+            .settings(Settings.builder().put("node.name",))
             .addPlugin(PercolatorPlugin.class)
             .build();
     transportClient.addTransportAddress(

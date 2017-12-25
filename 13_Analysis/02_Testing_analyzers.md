@@ -1,6 +1,6 @@
 ## Testing analyzers
 
-The [`analyze` API](indices-analyze.html "Analyze") is an invaluable tool for viewing the terms produced by an analyzer. A built-in analyzer (or combination of built-in tokenizer, token filters, and character filters) can be specified inline in the request:
+The [`analyze` API](indices-analyze.html) is an invaluable tool for viewing the terms produced by an analyzer. A built-in analyzer (or combination of built-in tokenizer, token filters, and character filters) can be specified inline in the request:
     
     
     POST _analyze
@@ -20,7 +20,7 @@ The [`analyze` API](indices-analyze.html "Analyze") is an invaluable tool for vi
 
 As can be seen from the output of the `analyze` API, analyzers not only convert words into terms, they also record the order or relative _positions_ of each term (used for phrase queries or word proximity queries), and the start and end _character offsets_ of each term in the original text (used for highlighting search snippets).
 
-Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html "Custom Analyzer") can be referred to when running the `analyze` API on a specific index:
+Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be referred to when running the `analyze` API on a specific index:
     
     
     PUT my_index

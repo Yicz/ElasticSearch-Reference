@@ -1,6 +1,6 @@
 ## Standard Token Filter
 
-A token filter of type `standard` that normalizes tokens extracted with the [Standard Tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer").
+A token filter of type `standard` that normalizes tokens extracted with the [Standard Tokenizer](analysis-standard-tokenizer.html).
 
 ![Tip](images/icons/tip.png)
 

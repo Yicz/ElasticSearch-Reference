@@ -2,13 +2,13 @@
 
 ES有时候需要小部分的配置，下面的配置需要手动配置，并在进行生产环境的时候要明确匹配：
 
-  * [`path.data` and `path.logs`](important-settings.html#path-settings "path.data and path.logsedit")
-  * [`cluster.name`](important-settings.html#cluster.name "cluster.nameedit")
-  * [`node.name`](important-settings.html#node.name "node.nameedit")
-  * [`bootstrap.memory_lock`](important-settings.html#bootstrap.memory_lock "bootstrap.memory_lockedit")
-  * [`network.host`](important-settings.html#network.host "network.hostedit")
-  * [`discovery.zen.ping.unicast.hosts`](important-settings.html#unicast.hosts "discovery.zen.ping.unicast.hostsedit")
-  * [`discovery.zen.minimum_master_nodes`](important-settings.html#minimum_master_nodes "discovery.zen.minimum_master_nodesedit")
+  * [`path.data` and `path.logs`](important-settings.html#path-settings)
+  * [`cluster.name`](important-settings.html#cluster.name)
+  * [`node.name`](important-settings.html#node.name)
+  * [`bootstrap.memory_lock`](important-settings.html#bootstrap.memory_lock)
+  * [`network.host`](important-settings.html#network.host)
+  * [`discovery.zen.ping.unicast.hosts`](important-settings.html#unicast.hosts)
+  * [`discovery.zen.minimum_master_nodes`](important-settings.html#minimum_master_nodes)
 
 
 
@@ -52,13 +52,13 @@ path.data可以配置多个路径，也就会保存多份一致的数据。
 
 ### `bootstrap.memory_lock`
 
-这是一个jvmk跟磁盘交换的一个重要指标，并显示着节点的健康状态。设置`bootstrap.memory_lock=true`,要系统配置支持。[更多关于启用`bootstrap.memory_lock`的详情](setup-configuration-memory.html#mlockall "Enable bootstrap.memory_lock") 
+这是一个jvmk跟磁盘交换的一个重要指标，并显示着节点的健康状态。设置`bootstrap.memory_lock=true`,要系统配置支持。[更多关于启用`bootstrap.memory_lock`的详情](setup-configuration-memory.html#mlockall) 
 
 ### `network.host`
 
 默认地ES配置绑定了回环地址 `127.0.0.1` and `[::1]`. 这个配置只对单节点服务生效。事实上在同一台机器上可以启动多个节点，不推荐在产生环境上使用。
 
-为了集群之间的节点可以交流，我们要配置一个非回环地址。 [更多网络配置详情](modules-network.html "Network Settings")
+为了集群之间的节点可以交流，我们要配置一个非回环地址。 [更多网络配置详情](modules-network.html)
     
     network.host: 192.168.1.10
 

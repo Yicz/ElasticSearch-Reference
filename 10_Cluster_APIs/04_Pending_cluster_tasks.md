@@ -4,7 +4,7 @@ The pending cluster tasks API returns a list of any cluster-level changes (e.g. 
 
 ![Note](images/icons/note.png)
 
-This API returns a list of any pending updates to the cluster state. These are distinct from the tasks reported by the [Task Management API](tasks.html "Task Management API") which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests. However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
+This API returns a list of any pending updates to the cluster state. These are distinct from the tasks reported by the [Task Management API](tasks.html) which include periodic tasks and tasks initiated by the user, such as node stats, search queries, or create index requests. However, if a user-initiated task such as a create index command causes a cluster state update, the activity of this task might be reported by both task api and pending cluster tasks API.
     
     
     $ curl -XGET 'http://localhost:9200/_cluster/pending_tasks'

@@ -40,7 +40,7 @@ Assuming the following index mapping:
 
 ![Note](images/icons/note.png)
 
-`_doc` has no real use-case besides being the most efficient sort order. So if you don’t care about the order in which documents are returned, then you should sort by `_doc`. This especially helps when [scrolling](search-request-scroll.html "Scroll").
+`_doc` has no real use-case besides being the most efficient sort order. So if you don’t care about the order in which documents are returned, then you should sort by `_doc`. This especially helps when [scrolling](search-request-scroll.html).
 
 ### Sort Values
 

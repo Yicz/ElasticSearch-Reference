@@ -1,6 +1,6 @@
 ## Script Fields
 
-Allows to return a [script evaluation](modules-scripting.html "Scripting") (based on different fields) for each hit, for example:
+Allows to return a [script evaluation](modules-scripting.html) (based on different fields) for each hit, for example:
     
     
     GET /_search

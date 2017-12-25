@@ -1,8 +1,8 @@
 ## `search_analyzer`
 
-Usually, the same [analyzer](analyzer.html "analyzer") should be applied at index time and at search time, to ensure that the terms in the query are in the same format as the terms in the inverted index.
+Usually, the same [analyzer](analyzer.html) should be applied at index time and at search time, to ensure that the terms in the query are in the same format as the terms in the inverted index.
 
-Sometimes, though, it can make sense to use a different analyzer at search time, such as when using the [`edge_ngram`](analysis-edgengram-tokenizer.html "Edge NGram Tokenizer") tokenizer for autocomplete.
+Sometimes, though, it can make sense to use a different analyzer at search time, such as when using the [`edge_ngram`](analysis-edgengram-tokenizer.html) tokenizer for autocomplete.
 
 By default, queries will use the `analyzer` defined in the field mapping, but this can be overridden with the `search_analyzer` setting:
     
@@ -90,4 +90,4 @@ See [Index time search-as-you- type](https://www.elastic.co/guide/en/elasticsear
 
 ![Tip](images/icons/tip.png)
 
-The `search_analyzer` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `search_analyzer` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

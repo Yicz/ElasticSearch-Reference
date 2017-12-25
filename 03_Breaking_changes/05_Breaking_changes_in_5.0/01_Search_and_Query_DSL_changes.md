@@ -149,11 +149,11 @@ In the response for profiling queries, the `query_type` has been renamed to `typ
 
 ### Search preferences
 
-The [search preference](search-request-preference.html "Preference") `_only_node` has been removed. The same behavior can be achieved by using `_only_nodes` and specifying a single node ID.
+The [search preference](search-request-preference.html) `_only_node` has been removed. The same behavior can be achieved by using `_only_nodes` and specifying a single node ID.
 
-The [search preference](search-request-preference.html "Preference") `_prefer_node` has been superseded by `_prefer_nodes`. By specifying a single node, `_prefer_nodes` provides the same functionality as `_prefer_node` but also supports specifying multiple nodes.
+The [search preference](search-request-preference.html) `_prefer_node` has been superseded by `_prefer_nodes`. By specifying a single node, `_prefer_nodes` provides the same functionality as `_prefer_node` but also supports specifying multiple nodes.
 
-The [search preference](search-request-preference.html "Preference") `_shards` accepts a secondary preference, for example `_primary` to specify the primary copy of the specified shards. The separator previously used to separate the `_shards` portion of the parameter from the secondary preference was `;`. However, this is also an acceptable separator between query string parameters which means that unless the `;` was escaped, the secondary preference was never observed. The separator has been changed to `|` and does not need to be escaped.
+The [search preference](search-request-preference.html) `_shards` accepts a secondary preference, for example `_primary` to specify the primary copy of the specified shards. The separator previously used to separate the `_shards` portion of the parameter from the secondary preference was `;`. However, this is also an acceptable separator between query string parameters which means that unless the `;` was escaped, the secondary preference was never observed. The separator has been changed to `|` and does not need to be escaped.
 
 ### Scoring changes
 

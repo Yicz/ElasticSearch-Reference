@@ -1,6 +1,6 @@
 ## Update By Query API
 
-The simplest usage of `_update_by_query` just performs an update on every document in the index without changing the source. This is useful to [pick up a new property](docs-update-by-query.html#picking-up-a-new-property "Pick up a new propertyedit") or some other online mapping change. Here is the API:
+The simplest usage of `_update_by_query` just performs an update on every document in the index without changing the source. This is useful to [pick up a new property](docs-update-by-query.html#picking-up-a-new-property) or some other online mapping change. Here is the API:
     
     
     POST twitter/_update_by_query?conflicts=proceed
@@ -42,7 +42,7 @@ Back to the API format, you can limit `_update_by_query` to a single type. This 
     
     POST twitter/tweet/_update_by_query?conflicts=proceed
 
-You can also limit `_update_by_query` using the [Query DSL](query-dsl.html "Query DSL"). This will update all documents from the `twitter` index for the user `kimchy`:
+You can also limit `_update_by_query` using the [Query DSL](query-dsl.html). This will update all documents from the `twitter` index for the user `kimchy`:
     
     
     POST twitter/_update_by_query?conflicts=proceed
@@ -58,11 +58,11 @@ You can also limit `_update_by_query` using the [Query DSL](query-dsl.html "Quer
 
 | 
 
-The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html "Search"). You can also use the `q` parameter in the same way as the search api.   
+The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html). You can also use the `q` parameter in the same way as the search api.   
   
 ---|---  
   
-So far we’ve only been updating documents without changing their source. That is genuinely useful for things like [picking up new properties](docs-update-by-query.html#picking-up-a-new-property "Pick up a new propertyedit") but it’s only half the fun. `_update_by_query` supports a `script` object to update the document. This will increment the `likes` field on all of kimchy’s tweets:
+So far we’ve only been updating documents without changing their source. That is genuinely useful for things like [picking up new properties](docs-update-by-query.html#picking-up-a-new-property) but it’s only half the fun. `_update_by_query` supports a `script` object to update the document. This will increment the `likes` field on all of kimchy’s tweets:
     
     
     POST twitter/_update_by_query
@@ -78,12 +78,12 @@ So far we’ve only been updating documents without changing their source. That 
       }
     }
 
-Just as in [Update API](docs-update.html "Update API") you can set `ctx.op` to change the operation that is executed:
+Just as in [Update API](docs-update.html) you can set `ctx.op` to change the operation that is executed:
 
 `noop`
-     Set `ctx.op = "noop"` if your script decides that it doesn’t have to make any changes. That will cause `_update_by_query` to omit that document from its updates. This no operation will be reported in the `noop` counter in the [response body](docs-update-by-query.html#docs-update-by-query-response-body "Response bodyedit"). 
+     Set `ctx.op =). 
 `delete`
-     Set `ctx.op = "delete"` if your script decides that the document must be deleted. The deletion will be reported in the `deleted` counter in the [response body](docs-update-by-query.html#docs-update-by-query-response-body "Response bodyedit"). 
+     Set `ctx.op =). 
 
 Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
 
@@ -106,7 +106,7 @@ By default `_update_by_query` uses scroll batches of 1000. You can change the ba
     
     POST twitter/_update_by_query?scroll_size=100
 
-`_update_by_query` can also use the [Ingest Node](ingest.html "Ingest Node") feature by specifying a `pipeline` like this:
+`_update_by_query` can also use the [Ingest Node](ingest.html) feature by specifying a `pipeline` like this:
     
     
     PUT _ingest/pipeline/set-foo
@@ -127,9 +127,9 @@ In addition to the standard parameters like `pretty`, the Update By Query API al
 
 Sending the `refresh` will update all shards in the index being updated when the request completes. This is different than the Index API’s `refresh` parameter which causes just the shard that received the new data to be indexed.
 
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api "Works with the Task APIedit") to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
+If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
 
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html "Bulk API").
+`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
 
 `requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the update-by-query issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
 
@@ -168,7 +168,7 @@ The JSON response looks like this:
 
 ### Works with the Task API
 
-You can fetch the status of all running update-by-query requests with the [Task API](tasks.html "Task Management API"):
+You can fetch the status of all running update-by-query requests with the [Task API](tasks.html):
     
     
     GET _tasks?detailed=true&actions=*byquery
@@ -231,7 +231,7 @@ The advantage of this API is that it integrates with `wait_for_completion=false`
 
 ### Works with the Cancel Task API
 
-Any Update By Query can be canceled using the [Task Cancel API](tasks.html "Task Management API"):
+Any Update By Query can be canceled using the [Task Cancel API](tasks.html):
     
     
     POST _tasks/task_id:1/_cancel
@@ -253,7 +253,7 @@ Just like when setting it on the `_update_by_query` API `requests_per_second` ca
 
 #### Manual slicing
 
-Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll") allowing you to manually parallelize the process relatively easily:
+Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll) allowing you to manually parallelize the process relatively easily:
     
     
     POST twitter/_update_by_query
@@ -294,7 +294,7 @@ Which results in a sensible `total` like this one:
 
 ### Automatic slicing
 
-You can also let update-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll") to slice on `_uid`:
+You can also let update-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
     
     
     POST twitter/_update_by_query?refresh&slices=5
@@ -320,7 +320,7 @@ Which results in a sensible `total` like this one:
 
 Adding `slices` to `_update_by_query` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
 
-  * You can see these requests in the [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api "Works with the Task APIedit"). These sub-requests are "child" tasks of the task for the request with `slices`. 
+  * You can see these requests in the [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
   * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
   * These sub-requests are individually addressable for things like cancellation and rethrottling. 
   * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 

@@ -1,6 +1,6 @@
 ## Request Body Search
 
-The search request can be executed with a search DSL, which includes the [Query DSL](query-dsl.html "Query DSL"), within its body. Here is an example:
+The search request can be executed with a search DSL, which includes the [Query DSL](query-dsl.html), within its body. Here is an example:
     
     
     GET /twitter/tweet/_search
@@ -67,13 +67,13 @@ The number of hits to return. Defaults to `10`. If you do not care about getting
 
 | 
 
-The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html "Search Type") for more.   
+The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more.   
   
 `request_cache`
 
 | 
 
-Set to `true` or `false` to enable or disable the caching of search results for requests where `size` is 0, ie aggregations and suggestions (no top hits returned). See [Shard request cache](shard-request-cache.html "Shard request cache").   
+Set to `true` or `false` to enable or disable the caching of search results for requests where `size` is 0, ie aggregations and suggestions (no top hits returned). See [Shard request cache](shard-request-cache.html).   
   
 `terminate_after`
 

@@ -1,6 +1,6 @@
 ## Full cluster restart upgrade
 
-Elasticsearch requires a full cluster restart when upgrading across major versions. Rolling upgrades are not supported across major versions. Consult this [table](setup-upgrade.html "Upgrading Elasticsearch") to verify that a full cluster restart is required.
+Elasticsearch requires a full cluster restart when upgrading across major versions. Rolling upgrades are not supported across major versions. Consult this [table](setup-upgrade.html) to verify that a full cluster restart is required.
 
 The process to perform an upgrade with a full cluster restart is as follows:
 
@@ -17,7 +17,7 @@ When you shut down a node, the allocation process will immediately try to replic
 
   2. **Perform a synced flush**
 
-Shard recovery will be much faster if you stop indexing and issue a [synced-flush](indices-synced-flush.html "Synced Flush") request:
+Shard recovery will be much faster if you stop indexing and issue a [synced-flush](indices-synced-flush.html) request:
     
         POST _flush/synced
 
@@ -35,7 +35,7 @@ Elasticsearch plugins must be upgraded when upgrading a node. Use the `elasticse
 
 If you have dedicated master nodes — nodes with `node.master` set to `true`(the default) and `node.data` set to `false` —  then it is a good idea to start them first. Wait for them to form a cluster and to elect a master before proceeding with the data nodes. You can check progress by looking at the logs.
 
-As soon as the [minimum number of master-eligible nodes](modules-discovery-zen.html#master-election "Master Electionedit") have discovered each other, they will form a cluster and elect a master. From that point on, the [`_cat/health`](cat-health.html "cat health") and [`_cat/nodes`](cat-nodes.html "cat nodes") APIs can be used to monitor nodes joining the cluster:
+As soon as the [minimum number of master-eligible nodes](modules-discovery-zen.html#master-election) have discovered each other, they will form a cluster and elect a master. From that point on, the [`_cat/health`](cat-health.html) and [`_cat/nodes`](cat-nodes.html) APIs can be used to monitor nodes joining the cluster:
     
         GET _cat/health
     
@@ -45,7 +45,7 @@ Use these APIs to check that all nodes have successfully joined the cluster.
 
   6. **Wait for yellow**
 
-As soon as each node has joined the cluster, it will start to recover any primary shards that are stored locally. Initially, the [`_cat/health`](cat-health.html "cat health") request will report a `status` of `red`, meaning that not all primary shards have been allocated.
+As soon as each node has joined the cluster, it will start to recover any primary shards that are stored locally. Initially, the [`_cat/health`](cat-health.html) request will report a `status` of `red`, meaning that not all primary shards have been allocated.
 
 Once each node has recovered its local shards, the `status` will become `yellow`, meaning all primary shards have been recovered, but not all replica shards are allocated. This is to be expected because allocation is still disabled.
 
@@ -62,7 +62,7 @@ Delaying the allocation of replicas until all nodes have joined the cluster allo
 
 The cluster will now start allocating replica shards to all data nodes. At this point it is safe to resume indexing and searching, but your cluster will recover more quickly if you can delay indexing and searching until all shards have recovered.
 
-You can monitor progress with the [`_cat/health`](cat-health.html "cat health") and [`_cat/recovery`](cat-recovery.html "cat recovery") APIs:
+You can monitor progress with the [`_cat/health`](cat-health.html) and [`_cat/recovery`](cat-recovery.html) APIs:
     
         GET _cat/health
     

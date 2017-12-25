@@ -22,7 +22,7 @@ Parameter | Description
 
 | 
 
-The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax "Query string syntax").  
+The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax).  
   
 `default_field`
 
@@ -106,7 +106,7 @@ Limit on how many automaton states regexp queries are allowed to create. This pr
 
 | 
 
-A value controlling how many "should" clauses in the resulting boolean query should match. It can be an absolute value (`2`), a percentage (`30%`) or a [combination of both](query-dsl-minimum-should-match.html "Minimum Should Match").  
+A value controlling how many).  
   
 `lenient`
 
@@ -124,7 +124,7 @@ Time Zone to be applied to any range query related to dates. See also [JODA time
 
 | 
 
-A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming "Mixing exact search with stemmingedit") for a comprehensive example.  
+A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensive example.  
   
 `split_on_whitespace`
 
@@ -138,7 +138,7 @@ Whether query text should be split on whitespace prior to analysis. Instead the 
 
 Perform the query on all fields detected in the mapping that can be queried. Will be used by default when the `_all` field is disabled and no `default_field` is specified (either in the index settings or in the request body) and no `fields` are specified.  
   
-When a multi term query is being generated, one can control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html "Multi Term Query Rewrite") parameter.
+When a multi term query is being generated, one can control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html) parameter.
 
 #### Default Field
 
@@ -258,7 +258,7 @@ The fields parameter can also include pattern based field names, allowing to aut
 
 ### Query string syntax
 
-The query string “mini-language” is used by the [Query String Query](query-dsl-query-string-query.html "Query String Query") and by the `q` query string parameter in the [`search` API](search-search.html "Search").
+The query string “mini-language” is used by the [Query String Query](query-dsl-query-string-query.html) and by the `q` query string parameter in the [`search` API](search-search.html).
 
 The query string is parsed into a series of _terms_ and _operators_. A term can be a single word — `quick` or `brown` — or a phrase, surrounded by double quotes — `"quick brown"` — which searches for all the words in the phrase, in the same order.
 
@@ -266,7 +266,7 @@ Operators allow you to customize the search — the available options are ex
 
 #### Field names
 
-As mentioned in [Query String Query](query-dsl-query-string-query.html "Query String Query"), the `default_field` is searched for the search terms, but it is possible to specify other fields in the query syntax:
+As mentioned in [Query String Query](query-dsl-query-string-query.html), the `default_field` is searched for the search terms, but it is possible to specify other fields in the query syntax:
 
   * where the `status` field contains `active`
     
@@ -316,7 +316,7 @@ Regular expression patterns can be embedded in the query string by wrapping them
     
     name:/joh?n(ath[oa]n)/
 
-The supported regular expression syntax is explained in [Regular expression syntax](query-dsl-regexp-query.html#regexp-syntax "Regular expression syntax").
+The supported regular expression syntax is explained in [Regular expression syntax](query-dsl-regexp-query.html#regexp-syntax).
 
 ![Warning](images/icons/warning.png)
 
@@ -402,7 +402,7 @@ To combine an upper and lower bound with the simplified syntax, you would need t
     age:(>=10 AND <20)
     age:(+>=10 +<20)
 
-The parsing of ranges in query strings can be complex and error prone. It is much more reliable to use an explicit [`range` query](query-dsl-range-query.html "Range Query").
+The parsing of ranges in query strings can be complex and error prone. It is much more reliable to use an explicit [`range` query](query-dsl-range-query.html).
 
 #### Boosting
 
@@ -446,7 +446,7 @@ Rewriting the above query using `AND`, `OR` and `NOT` demonstrates the complexit
 `((quick AND fox) OR (brown AND fox) OR fox) AND NOT news`
      This form now replicates the logic from the original query correctly, but the relevance scoring bears little resemblance to the original. 
 
-In contrast, the same query rewritten using the [`match` query](query-dsl-match-query.html "Match Query") would look like this:
+In contrast, the same query rewritten using the [`match` query](query-dsl-match-query.html) would look like this:
     
     
     {

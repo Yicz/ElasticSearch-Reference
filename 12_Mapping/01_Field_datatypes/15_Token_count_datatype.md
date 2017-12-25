@@ -1,6 +1,6 @@
 ## Token count datatype
 
-A field of type `token_count` is really an [`integer`](number.html "Numeric datatypes") field which accepts string values, analyzes them, then indexes the number of tokens in the string.
+A field of type `token_count` is really an [`integer`](number.html) field which accepts string values, analyzes them, then indexes the number of tokens in the string.
 
 For instance:
     
@@ -51,7 +51,7 @@ The `name` field is an analyzed string field which uses the default `standard` a
 
 | 
 
-The `name.length` field is a `token_count` [multi-field](multi-fields.html "fields") which will index the number of tokens in the `name` field.   
+The `name.length` field is a `token_count` [multi-field](multi-fields.html) which will index the number of tokens in the `name` field.   
   
 ![](images/icons/callouts/3.png)
 
@@ -67,46 +67,46 @@ Technically the `token_count` type sums position increments rather than counting
 
 The following parameters are accepted by `token_count` fields:
 
-[`analyzer`](analyzer.html "analyzer")
+[`analyzer`](analyzer.html)
 
 | 
 
-The [analyzer](analysis.html "Analysis") which should be used to analyze the string value. Required. For best performance, use an analyzer without token filters.   
+The [analyzer](analysis.html) which should be used to analyze the string value. Required. For best performance, use an analyzer without token filters.   
   
 ---|---  
   
-[`boost`](mapping-boost.html "boost")
+[`boost`](mapping-boost.html)
 
 | 
 
 Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
   
-[`doc_values`](doc-values.html "doc_values")
+[`doc_values`](doc-values.html)
 
 | 
 
 Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations, or scripting? Accepts `true` (default) or `false`.   
   
-[`index`](mapping-index.html "index")
+[`index`](mapping-index.html)
 
 | 
 
 Should the field be searchable? Accepts `not_analyzed` (default) and `no`.   
   
-[`include_in_all`](include-in-all.html "include_in_all")
+[`include_in_all`](include-in-all.html)
 
 | 
 
-Whether or not the field value should be included in the [`_all`](mapping-all-field.html "_all field") field? Accepts `true` or `false`. Defaults to `false`. Note: if `true`, it is the string value that is added to `_all`, not the calculated token count.   
+Whether or not the field value should be included in the [`_all`](mapping-all-field.html) field? Accepts `true` or `false`. Defaults to `false`. Note: if `true`, it is the string value that is added to `_all`, not the calculated token count.   
   
-[`null_value`](null-value.html "null_value")
+[`null_value`](null-value.html)
 
 | 
 
 Accepts a numeric value of the same `type` as the field which is substituted for any explicit `null` values. Defaults to `null`, which means the field is treated as missing.   
   
-[`store`](mapping-store.html "store")
+[`store`](mapping-store.html)
 
 | 
 
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html "_source field") field. Accepts `true` or `false` (default). 
+Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

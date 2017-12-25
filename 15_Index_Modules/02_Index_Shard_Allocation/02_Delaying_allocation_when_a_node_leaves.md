@@ -10,7 +10,7 @@ When a node leaves the cluster for whatever reason, intentional or otherwise, th
 
 These actions are intended to protect the cluster against data loss by ensuring that every shard is fully replicated as soon as possible.
 
-Even though we throttle concurrent recoveries both at the [node level](recovery.html "Indices Recovery") and at the [cluster level](shards-allocation.html "Cluster Level Shard Allocation"), this “shard-shuffle” can still put a lot of extra load on the cluster which may not be necessary if the missing node is likely to return soon. Imagine this scenario:
+Even though we throttle concurrent recoveries both at the [node level](recovery.html) and at the [cluster level](shards-allocation.html), this “shard-shuffle” can still put a lot of extra load on the cluster which may not be necessary if the missing node is likely to return soon. Imagine this scenario:
 
   * Node 5 loses network connectivity. 
   * The master promotes a replica shard to primary for each primary that was on Node 5. 
@@ -22,7 +22,7 @@ Even though we throttle concurrent recoveries both at the [node level](recovery.
 
 
 
-If the master had just waited for a few minutes, then the missing shards could have been re-allocated to Node 5 with the minimum of network traffic. This process would be even quicker for idle shards (shards not receiving indexing requests) which have been automatically [sync-flushed](indices-synced-flush.html "Synced Flush").
+If the master had just waited for a few minutes, then the missing shards could have been re-allocated to Node 5 with the minimum of network traffic. This process would be even quicker for idle shards (shards not receiving indexing requests) which have been automatically [sync-flushed](indices-synced-flush.html).
 
 The allocation of replica shards which become unassigned because a node has left can be delayed with the `index.unassigned.node_left.delayed_timeout` dynamic setting, which defaults to `1m`.
 
@@ -59,7 +59,7 @@ For this reason, the default `timeout` is set to just one minute: even if shard 
 
 ### Monitoring delayed unassigned shards
 
-The number of shards whose allocation has been delayed by this timeout setting can be viewed with the [cluster health API](cluster-health.html "Cluster Health"):
+The number of shards whose allocation has been delayed by this timeout setting can be viewed with the [cluster health API](cluster-health.html):
     
     
     GET _cluster/health ![](images/icons/callouts/1.png)

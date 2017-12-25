@@ -9,7 +9,7 @@ It consists of:
 Tokenizer 
     
 
-  * [Keyword Tokenizer](analysis-keyword-tokenizer.html "Keyword Tokenizer")
+  * [Keyword Tokenizer](analysis-keyword-tokenizer.html)
 
 
 

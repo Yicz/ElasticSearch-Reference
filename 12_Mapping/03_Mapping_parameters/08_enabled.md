@@ -2,7 +2,7 @@
 
 Elasticsearch tries to index all of the fields you give it, but sometimes you want to just store the field without indexing it. For instance, imagine that you are using Elasticsearch as a web session store. You may want to index the session ID and last update time, but you don’t need to query or run aggregations on the session data itself.
 
-The `enabled` setting, which can be applied only to the mapping type and to [`object`](object.html "Object datatype") fields, causes Elasticsearch to skip parsing of the contents of the field entirely. The JSON can still be retrieved from the [`_source`](mapping-source-field.html "_source field") field, but it is not searchable or stored in any other way:
+The `enabled` setting, which can be applied only to the mapping type and to [`object`](object.html) fields, causes Elasticsearch to skip parsing of the contents of the field entirely. The JSON can still be retrieved from the [`_source`](mapping-source-field.html) field, but it is not searchable or stored in any other way:
     
     
     PUT my_index
@@ -62,7 +62,7 @@ Any arbitrary data can be passed to the `session_data` field as it will be entir
 
 The `session_data` will also ignore values that are not JSON objects.   
   
-The entire mapping type may be disabled as well, in which case the document is stored in the [`_source`](mapping-source-field.html "_source field") field, which means it can be retrieved, but none of its contents are indexed in any way:
+The entire mapping type may be disabled as well, in which case the document is stored in the [`_source`](mapping-source-field.html) field, which means it can be retrieved, but none of its contents are indexed in any way:
     
     
     PUT my_index
@@ -111,4 +111,4 @@ Checking the mapping reveals that no fields have been added.
   
 ![Tip](images/icons/tip.png)
 
-The `enabled` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html "Put Mapping").
+The `enabled` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

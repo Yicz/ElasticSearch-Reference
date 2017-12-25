@@ -75,7 +75,7 @@ Cloud GCE plugin has been renamed to [Discovery GCE plugin](https://www.elastic.
 
 ### Delete-By-Query plugin removed
 
-The Delete-By-Query plugin has been removed in favor of a new [Delete By Query API](docs-delete-by-query.html "Delete By Query API") implementation in core. It now supports throttling, retries and cancellation but no longer supports timeouts. Instead use the [cancel API](docs-delete-by-query.html#docs-delete-by-query-cancel-task-api "Works with the Cancel Task APIedit") to cancel deletes that run too long.
+The Delete-By-Query plugin has been removed in favor of a new [Delete By Query API](docs-delete-by-query.html) implementation in core. It now supports throttling, retries and cancellation but no longer supports timeouts. Instead use the [cancel API](docs-delete-by-query.html#docs-delete-by-query-cancel-task-api) to cancel deletes that run too long.
 
 ### Mapper Attachments plugin deprecated
 

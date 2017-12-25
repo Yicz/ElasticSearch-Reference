@@ -98,7 +98,7 @@ This will yield the same result as the previous request.
 
 | 
 
-Set to `true` to retrieve the `_source` of the document explained. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see [Get API](docs-get.html#get-source-filtering "Source filteringedit") for more details)   
+Set to `true` to retrieve the `_source` of the document explained. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see [Get API](docs-get.html#get-source-filtering) for more details)   
   
 ---|---  
   

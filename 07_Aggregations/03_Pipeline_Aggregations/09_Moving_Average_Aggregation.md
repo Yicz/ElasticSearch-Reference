@@ -54,7 +54,7 @@ Default Value
 
 | 
 
-Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax "buckets_path Syntaxedit") for more details
+Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) for more details
 
 | 
 
@@ -108,7 +108,7 @@ Optional
 
 | 
 
-If the model should be algorithmically minimized. See [Minimization](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer "Minimization") for more details
+If the model should be algorithmically minimized. See [Minimization](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer) for more details
 
 | 
 
@@ -256,11 +256,11 @@ In contrast, a `linear` moving average with larger window (`"window": 100`) will
 
 ### EWMA (Exponentially Weighted)
 
-The `ewma` model (aka "single-exponential") is similar to the `linear` model, except older data-points become exponentially less important, rather than linearly less important. The speed at which the importance decays can be controlled with an `alpha` setting. Small values make the weight decay slowly, which provides greater smoothing and takes into account a larger portion of the window. Larger valuers make the weight decay quickly, which reduces the impact of older values on the moving average. This tends to make the moving average track the data more closely but with less smoothing.
+The `ewma` model (aka) is similar to the `linear` model, except older data-points become exponentially less important, rather than linearly less important. The speed at which the importance decays can be controlled with an `alpha` setting. Small values make the weight decay slowly, which provides greater smoothing and takes into account a larger portion of the window. Larger valuers make the weight decay quickly, which reduces the impact of older values on the moving average. This tends to make the moving average track the data more closely but with less smoothing.
 
 The default value of `alpha` is `0.3`, and the setting accepts any float from 0-1 inclusive.
 
-The EWMA model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer "Minimization")
+The EWMA model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer)
     
     
     {
@@ -291,7 +291,7 @@ The EWMA model can be [Minimized](search-aggregations-pipeline-movavg-aggregatio
 
 ### Holt-Linear
 
-The `holt` model (aka "double exponential") incorporates a second exponential term which tracks the data’s trend. Single exponential does not perform well when the data has an underlying linear trend. The double exponential model calculates two values internally: a "level" and a "trend".
+The `holt` model (aka) incorporates a second exponential term which tracks the data’s trend. Single exponential does not perform well when the data has an underlying linear trend. The double exponential model calculates two values internally: a "level" and a "trend".
 
 The level calculation is similar to `ewma`, and is an exponentially weighted view of the data. The difference is that the previously smoothed value is used instead of the raw value, which allows it to stay close to the original series. The trend calculation looks at the difference between the current and last value (e.g. the slope, or trend, of the smoothed data). The trend value is also exponentially weighted.
 
@@ -299,7 +299,7 @@ Values are produced by multiplying the level and trend components.
 
 The default value of `alpha` is `0.3` and `beta` is `0.1`. The settings accept any float from 0-1 inclusive.
 
-The Holt-Linear model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer "Minimization")
+The Holt-Linear model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer)
     
     
     {
@@ -333,7 +333,7 @@ In practice, the `alpha` value behaves very similarly in `holt` as `ewma`: small
 
 ### Holt-Winters
 
-The `holt_winters` model (aka "triple exponential") incorporates a third exponential term which tracks the seasonal aspect of your data. This aggregation therefore smooths based on three components: "level", "trend" and "seasonality".
+The `holt_winters` model (aka) incorporates a third exponential term which tracks the seasonal aspect of your data. This aggregation therefore smooths based on three components: "level", "trend" and "seasonality".
 
 The level and trend calculation is identical to `holt` The seasonal calculation looks at the difference between the current point, and the point one period earlier.
 
@@ -360,7 +360,7 @@ Additive seasonality is the default; it can also be specified by setting `"type"
 
 The default values of `alpha` and `gamma` are `0.3` while `beta` is `0.1`. The settings accept any float from 0-1 inclusive. The default value of `period` is `1`.
 
-The additive Holt-Winters model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer "Minimization")
+The additive Holt-Winters model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer)
     
     
     {
@@ -392,7 +392,7 @@ Multiplicative is specified by setting `"type": "mult"`. This variety is preferr
 
 The default values of `alpha` and `gamma` are `0.3` while `beta` is `0.1`. The settings accept any float from 0-1 inclusive. The default value of `period` is `1`.
 
-The multiplicative Holt-Winters model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer "Minimization")
+The multiplicative Holt-Winters model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer)
 
 ![Warning](images/icons/warning.png)
 

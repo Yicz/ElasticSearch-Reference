@@ -47,7 +47,7 @@ class Elastic:
 		with open("SUMMARY.md.bak", "w") as file:
 			file.write(html2text.html2text(str(toc_ul[0])))
 
-		with open("SUMMARY.md", "aw") as file:
+		with open("SUMMARY.md",) as file:
 			file.write("#SUMMARY\n\n\n\n")
 		self.mk_ul(toc_ul[0])
 
@@ -87,11 +87,11 @@ class Elastic:
 
 			if len(article) != 0:
 				html2text.config.BODY_WIDTH = 0
-				article_html = str(article[0]).replace("section", "div")
+				article_html = str(article[0]).replace("section",)
 				text = html2text.html2text(article_html)
 				re_edit = re.compile('\[edit\]\(.*\)')
 				text = re.sub(re_edit, "", text)
-				with open(file_name, "aw+") as file:
+				with open(file_name,) as file:
 					file.writelines(text)
 			else:
 				print specific__format
@@ -109,7 +109,7 @@ class Elastic:
 				path_file = "{dir}{name}".format(dir=dir, name=turn_md(preIndex(index) + "_" + title))
 				self.dict[path_file] = url
 
-				with open("SUMMARY.md", "aw") as file:
+				with open("SUMMARY.md",) as file:
 					file.write(
 						"{space}* [{title}]({name})\n".format(space=turn_level(level), title=title, name=path_file))
 
@@ -134,9 +134,9 @@ def turn_md(name):
 
 
 def escape_name(name):
-	return str(name.strip()).replace(" ", "_").replace("/", "_").replace("?", "").replace("&", "and").replace("___",
+	return str(name.strip()).replace(" ",).replace("?", "").replace("&",).replace("___",
 	                                                                                                          "_").replace(
-		"__", "_")
+	)
 
 
 def preIndex(index):

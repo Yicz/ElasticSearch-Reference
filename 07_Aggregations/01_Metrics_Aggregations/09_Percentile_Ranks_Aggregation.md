@@ -4,7 +4,7 @@ A `multi-value` metrics aggregation that calculates one or more percentile ranks
 
 ![Note](images/icons/note.png)
 
-Please see [Percentiles are (usually) approximate](search-aggregations-metrics-percentile-aggregation.html#search-aggregations-metrics-percentile-aggregation-approximation "Percentiles are \(usually\) approximate") and [Compression](search-aggregations-metrics-percentile-aggregation.html#search-aggregations-metrics-percentile-aggregation-compression "Compression") for advice regarding approximation and memory use of the percentile ranks aggregation
+Please see [Percentiles are (usually) approximate](search-aggregations-metrics-percentile-aggregation.html#search-aggregations-metrics-percentile-aggregation-approximation) and [Compression](search-aggregations-metrics-percentile-aggregation.html#search-aggregations-metrics-percentile-aggregation-compression) for advice regarding approximation and memory use of the percentile ranks aggregation
 
 Percentile rank show the percentage of observed values which are below certain value. For example, if a value is greater than or equal to 95% of the observed values it is said to be at the 95th percentile rank.
 

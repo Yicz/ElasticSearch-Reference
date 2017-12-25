@@ -52,7 +52,7 @@ Restricts the operation to the specified shards. (`2` and `3` in this case). Thi
 
 | 
 
-Restricts the operation to nodes specified in [node specification](cluster.html "Cluster APIs")  
+Restricts the operation to nodes specified in [node specification](cluster.html)  
   
 Custom (string) value 
 

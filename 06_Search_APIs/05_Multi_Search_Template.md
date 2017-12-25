@@ -2,7 +2,7 @@
 
 The multi search template API allows to execute several search template requests within the same API using the `_msearch/template` endpoint.
 
-The format of the request is similar to the [Multi Search API](search-multi-search.html "Multi Search API") format:
+The format of the request is similar to the [Multi Search API](search-multi-search.html) format:
     
     
     header\n

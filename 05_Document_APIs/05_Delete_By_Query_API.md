@@ -16,7 +16,7 @@ The simplest usage of `_delete_by_query` just performs a deletion on every docum
 
 | 
 
-The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html "Search"). You can also use the `q` parameter in the same way as the search api.   
+The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html). You can also use the `q` parameter in the same way as the search api.   
   
 ---|---  
   
@@ -103,9 +103,9 @@ In addition to the standard parameters like `pretty`, the Delete By Query API al
 
 Sending the `refresh` will refresh all shards involved in the delete by query once the request completes. This is different than the Delete API’s `refresh` parameter which causes just the shard that received the delete request to be refreshed.
 
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api "Works with the Task APIedit") to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
+If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
 
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards "Wait For Active Shardsedit") for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html "Bulk API").
+`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
 
 `requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the delete-by-query issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
 
@@ -141,7 +141,7 @@ The JSON response looks like this:
 
 ### Works with the Task API
 
-You can fetch the status of any running delete-by-query requests with the [Task API](tasks.html "Task Management API"):
+You can fetch the status of any running delete-by-query requests with the [Task API](tasks.html):
     
     
     GET _tasks?detailed=true&actions=*/delete/byquery
@@ -201,7 +201,7 @@ The advantage of this API is that it integrates with `wait_for_completion=false`
 
 ### Works with the Cancel Task API
 
-Any Delete By Query can be canceled using the [Task Cancel API](tasks.html "Task Management API"):
+Any Delete By Query can be canceled using the [Task Cancel API](tasks.html):
     
     
     POST _tasks/task_id:1/_cancel
@@ -223,7 +223,7 @@ Just like when setting it on the `_delete_by_query` API `requests_per_second` ca
 
 ### Manually slicing
 
-Delete-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll") allowing you to manually parallelize the process relatively easily:
+Delete-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll) allowing you to manually parallelize the process relatively easily:
     
     
     POST twitter/_delete_by_query
@@ -281,7 +281,7 @@ Which results in a sensible `total` like this one:
 
 ### Automatic slicing
 
-You can also let delete-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll "Sliced Scroll") to slice on `_uid`:
+You can also let delete-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
     
     
     POST twitter/_delete_by_query?refresh&slices=5
@@ -320,7 +320,7 @@ Which results in a sensible `total` like this one:
 
 Adding `slices` to `_delete_by_query` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
 
-  * You can see these requests in the [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api "Works with the Task APIedit"). These sub-requests are "child" tasks of the task for the request with `slices`. 
+  * You can see these requests in the [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
   * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
   * These sub-requests are individually addressable for things like cancellation and rethrottling. 
   * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 

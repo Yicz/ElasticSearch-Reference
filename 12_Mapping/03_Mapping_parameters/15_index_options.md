@@ -20,15 +20,15 @@ Doc number and term frequencies are indexed. Term frequencies are used to score 
 
 | 
 
-Doc number, term frequencies, and term positions (or order) are indexed. Positions can be used for [proximity or phrase queries](query-dsl-match-query-phrase.html "Match Phrase Query").   
+Doc number, term frequencies, and term positions (or order) are indexed. Positions can be used for [proximity or phrase queries](query-dsl-match-query-phrase.html).   
   
 `offsets`
 
 | 
 
-Doc number, term frequencies, positions, and start and end character offsets (which map the term back to the original string) are indexed. Offsets are used by the [postings highlighter](search-request-highlighting.html#postings-highlighter "Postings highlighter").   
+Doc number, term frequencies, positions, and start and end character offsets (which map the term back to the original string) are indexed. Offsets are used by the [postings highlighter](search-request-highlighting.html#postings-highlighter).   
   
-[Analyzed](mapping-index.html "index") string fields use `positions` as the default, and all other fields use `docs` as the default.
+[Analyzed](mapping-index.html) string fields use `positions` as the default, and all other fields use `docs` as the default.
     
     
     PUT my_index

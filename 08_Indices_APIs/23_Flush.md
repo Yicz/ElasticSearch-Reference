@@ -1,6 +1,6 @@
 ## Flush
 
-The flush API allows to flush one or more indices through an API. The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal [transaction log](index-modules-translog.html "Translog"). By default, Elasticsearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.
+The flush API allows to flush one or more indices through an API. The flush process of an index basically frees memory from the index by flushing data to the index storage and clearing the internal [transaction log](index-modules-translog.html). By default, Elasticsearch uses memory heuristics in order to automatically trigger flush operations as required in order to clear memory.
     
     
     POST twitter/_flush

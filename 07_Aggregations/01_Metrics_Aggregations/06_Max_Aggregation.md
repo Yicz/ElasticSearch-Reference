@@ -48,7 +48,7 @@ The `max` aggregation can also calculate the maximum of a script. The example be
         }
     }
 
-This will use the [Painless](modules-scripting-painless.html "Painless Scripting Language") scripting language and no script parameters. To use a file script use the following syntax:
+This will use the [Painless](modules-scripting-painless.html) scripting language and no script parameters. To use a file script use the following syntax:
     
     
     POST /sales/_search

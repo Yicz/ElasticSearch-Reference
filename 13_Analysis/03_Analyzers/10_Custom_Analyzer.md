@@ -2,9 +2,9 @@
 
 When the built-in analyzers do not fulfill your needs, you can create a `custom` analyzer which uses the appropriate combination of:
 
-  * zero or more [character filters](analysis-charfilters.html "Character Filters")
-  * a [tokenizer](analysis-tokenizers.html "Tokenizers")
-  * zero or more [token filters](analysis-tokenfilters.html "Token Filters"). 
+  * zero or more [character filters](analysis-charfilters.html)
+  * a [tokenizer](analysis-tokenizers.html)
+  * zero or more [token filters](analysis-tokenfilters.html). 
 
 
 
@@ -16,7 +16,7 @@ The `custom` analyzer accepts the following parameters:
 
 | 
 
-A built-in or customised [tokenizer](analysis-tokenizers.html "Tokenizers"). (Required)   
+A built-in or customised [tokenizer](analysis-tokenizers.html). (Required)   
   
 ---|---  
   
@@ -24,19 +24,19 @@ A built-in or customised [tokenizer](analysis-tokenizers.html "Tokenizers"). (Re
 
 | 
 
-An optional array of built-in or customised [character filters](analysis-charfilters.html "Character Filters").   
+An optional array of built-in or customised [character filters](analysis-charfilters.html).   
   
 `filter`
 
 | 
 
-An optional array of built-in or customised [token filters](analysis-tokenfilters.html "Token Filters").   
+An optional array of built-in or customised [token filters](analysis-tokenfilters.html).   
   
 `position_increment_gap`
 
 | 
 
-When indexing an array of text values, Elasticsearch inserts a fake "gap" between the last term of one value and the first term of the next value to ensure that a phrase query doesn’t match two terms from different array elements. Defaults to `100`. See [`position_increment_gap`](position-increment-gap.html "position_increment_gap") for more.   
+When indexing an array of text values, Elasticsearch inserts a fake) for more.   
   
 ### Example configuration
 
@@ -45,22 +45,22 @@ Here is an example that combines the following:
 Character Filter 
     
 
-  * [HTML Strip Character Filter](analysis-htmlstrip-charfilter.html "HTML Strip Char Filter")
+  * [HTML Strip Character Filter](analysis-htmlstrip-charfilter.html)
 
 
 
 Tokenizer 
     
 
-  * [Standard Tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer")
+  * [Standard Tokenizer](analysis-standard-tokenizer.html)
 
 
 
 Token Filters 
     
 
-  * [Lowercase Token Filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter")
-  * [ASCII-Folding Token Filter](analysis-asciifolding-tokenfilter.html "ASCII Folding Token Filter")
+  * [Lowercase Token Filter](analysis-lowercase-tokenfilter.html)
+  * [ASCII-Folding Token Filter](analysis-asciifolding-tokenfilter.html)
 
 
     
@@ -104,22 +104,22 @@ Here is a more complicated example that combines the following:
 Character Filter 
     
 
-  * [Mapping Character Filter](analysis-mapping-charfilter.html "Mapping Char Filter"), configured to replace `:)` with `_happy_` and `:(` with `_sad_`
+  * [Mapping Character Filter](analysis-mapping-charfilter.html), configured to replace `:)` with `_happy_` and `:(` with `_sad_`
 
 
 
 Tokenizer 
     
 
-  * [Pattern Tokenizer](analysis-pattern-tokenizer.html "Pattern Tokenizer"), configured to split on punctuation characters 
+  * [Pattern Tokenizer](analysis-pattern-tokenizer.html), configured to split on punctuation characters 
 
 
 
 Token Filters 
     
 
-  * [Lowercase Token Filter](analysis-lowercase-tokenfilter.html "Lowercase Token Filter")
-  * [Stop Token Filter](analysis-stop-tokenfilter.html "Stop Token Filter"), configured to use the pre-defined list of English stop words 
+  * [Lowercase Token Filter](analysis-lowercase-tokenfilter.html)
+  * [Stop Token Filter](analysis-stop-tokenfilter.html), configured to use the pre-defined list of English stop words 
 
 
 

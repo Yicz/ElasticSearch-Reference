@@ -1,6 +1,6 @@
 ## Thai Tokenizer
 
-The `thai` tokenizer segments Thai text into words, using the Thai segmentation algorithm included with Java. Text in other languages in general will be treated the same as the [`standard` tokenizer](analysis-standard-tokenizer.html "Standard Tokenizer").
+The `thai` tokenizer segments Thai text into words, using the Thai segmentation algorithm included with Java. Text in other languages in general will be treated the same as the [`standard` tokenizer](analysis-standard-tokenizer.html).
 
 ![Warning](images/icons/warning.png)
 

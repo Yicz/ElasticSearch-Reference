@@ -8,7 +8,7 @@ Normalizers are similar to analyzers except that they may only emit a single tok
 
 ### Custom normalizers
 
-Elasticsearch does not ship with built-in normalizers so far, so the only way to get one is by building a custom one. Custom normalizers take a list of char [character filters](analysis-charfilters.html "Character Filters") and a list of [token filters](analysis-tokenfilters.html "Token Filters").
+Elasticsearch does not ship with built-in normalizers so far, so the only way to get one is by building a custom one. Custom normalizers take a list of char [character filters](analysis-charfilters.html) and a list of [token filters](analysis-tokenfilters.html).
     
     
     PUT index

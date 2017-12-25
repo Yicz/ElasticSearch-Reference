@@ -19,7 +19,7 @@ This setting could also be specified in the `elasticsearch.yml` config file.
   
 ---|---  
   
-Now, we need to setup _shard allocation awareness_ by telling Elasticsearch which attributes to use. This can be configured in the `elasticsearch.yml` file on **all** master-eligible nodes, or it can be set (and changed) with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API.
+Now, we need to setup _shard allocation awareness_ by telling Elasticsearch which attributes to use. This can be configured in the `elasticsearch.yml` file on **all** master-eligible nodes, or it can be set (and changed) with the [cluster-update-settings](cluster-update-settings.html) API.
 
 For our example, we’ll set the value in the config file:
     
@@ -71,4 +71,4 @@ We must list all possible values that the `zone` attribute can have.
   
 Now, if we start 2 nodes with `node.attr.zone` set to `zone1` and create an index with 5 shards and 1 replica. The index will be created, but only the 5 primary shards will be allocated (with no replicas). Only when we start more nodes with `node.attr.zone` set to `zone2` will the replicas be allocated.
 
-The `cluster.routing.allocation.awareness.*` settings can all be updated dynamically on a live cluster with the [cluster-update-settings](cluster-update-settings.html "Cluster Update Settings") API.
+The `cluster.routing.allocation.awareness.*` settings can all be updated dynamically on a live cluster with the [cluster-update-settings](cluster-update-settings.html) API.

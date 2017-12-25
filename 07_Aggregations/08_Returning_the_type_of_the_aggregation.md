@@ -2,7 +2,7 @@
 
 Sometimes you need to know the exact type of an aggregation in order to parse its results. The `typed_keys` parameter can be used to change the aggregation’s name in the response so that it will be prefixed by its internal type.
 
-Considering the following [`date_histogram` aggregation](search-aggregations-bucket-datehistogram-aggregation.html "Date Histogram Aggregation") named `tweets_over_time` which has a sub ['top_hits` aggregation](search-aggregations-metrics-top-hits-aggregation.html "Top hits Aggregation") named `top_users`:
+Considering the following [`date_histogram` aggregation](search-aggregations-bucket-datehistogram-aggregation.html) named `tweets_over_time` which has a sub ['top_hits` aggregation](search-aggregations-metrics-top-hits-aggregation.html) named `top_users`:
     
     
     GET /twitter/tweet/_search?typed_keys

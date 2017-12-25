@@ -1,6 +1,6 @@
 ## Configuring built-in analyzers
 
-The built-in analyzers can be used directly without any configuration. Some of them, however, support configuration options to alter their behaviour. For instance, the [`standard` analyzer](analysis-standard-analyzer.html "Standard Analyzer") can be configured to support a list of stop words:
+The built-in analyzers can be used directly without any configuration. Some of them, however, support configuration options to alter their behaviour. For instance, the [`standard` analyzer](analysis-standard-analyzer.html) can be configured to support a list of stop words:
     
     
     PUT my_index

@@ -1,6 +1,6 @@
 ## Term Vectors
 
-Returns information and statistics on terms in the fields of a particular document. The document could be stored in the index or artificially provided by the user. Term vectors are [realtime](docs-get.html#realtime "Realtimeedit") by default, not near realtime. This can be changed by setting `realtime` parameter to `false`.
+Returns information and statistics on terms in the fields of a particular document. The document could be stored in the index or artificially provided by the user. Term vectors are [realtime](docs-get.html#realtime) by default, not near realtime. This can be changed by setting `realtime` parameter to `false`.
     
     
     GET /twitter/tweet/1/_termvectors
@@ -10,7 +10,7 @@ Optionally, you can specify the fields for which the information is retrieved ei
     
     GET /twitter/tweet/1/_termvectors?fields=message
 
-or by adding the requested fields in the request body (see example below). Fields can also be specified with wildcards in similar way to the [multi match query](query-dsl-multi-match-query.html "Multi Match Query")
+or by adding the requested fields in the request body (see example below). Fields can also be specified with wildcards in similar way to the [multi match query](query-dsl-multi-match-query.html)
 
 ![Warning](images/icons/warning.png)
 
@@ -58,7 +58,7 @@ Setting `field_statistics` to `false` (default is `true`) will omit :
 
 #### Terms Filtering
 
-With the parameter `filter`, the terms returned could also be filtered based on their tf-idf scores. This could be useful in order find out a good characteristic vector of a document. This feature works in a similar manner to the [second phase](query-dsl-mlt-query.html#mlt-query-term-selection "Term Selection Parametersedit") of the [More Like This Query](query-dsl-mlt-query.html "More Like This Query"). See [example 5](docs-termvectors.html#docs-termvectors-terms-filtering "Example: Terms filteringedit") for usage.
+With the parameter `filter`, the terms returned could also be filtered based on their tf-idf scores. This could be useful in order find out a good characteristic vector of a document. This feature works in a similar manner to the [second phase](query-dsl-mlt-query.html#mlt-query-term-selection) of the [More Like This Query](query-dsl-mlt-query.html). See [example 5](docs-termvectors.html#docs-termvectors-terms-filtering) for usage.
 
 The following sub-parameters are supported:
 

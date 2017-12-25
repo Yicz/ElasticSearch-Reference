@@ -1,6 +1,6 @@
 ## Inner hits
 
-The [parent/child](mapping-parent-field.html "_parent field") and [nested](nested.html "Nested datatype") features allow the return of documents that have matches in a different scope. In the parent/child case, parent documents are returned based on matches in child documents or child documents are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
+The [parent/child](mapping-parent-field.html) and [nested](nested.html) features allow the return of documents that have matches in a different scope. In the parent/child case, parent documents are returned based on matches in child documents or child documents are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
 
 In both cases, the actual matches in the different scopes that caused a document to be returned is hidden. In many cases, it’s very useful to know which inner nested objects (in the case of nested) or children/parent documents (in the case of parent/child) caused certain information to be returned. The inner hits feature can be used for this. This feature returns per search hit in the search response additional nested hits that caused a search hit to match in a different scope.
 
@@ -73,12 +73,12 @@ The name to be used for the particular inner hit definition in the response. Use
   
 Inner hits also supports the following per document features:
 
-  * [Highlighting](search-request-highlighting.html "Highlighting")
-  * [Explain](search-request-explain.html "Explain")
-  * [Source filtering](search-request-source-filtering.html "Source filtering")
-  * [Script fields](search-request-script-fields.html "Script Fields")
-  * [Doc value fields](search-request-docvalue-fields.html "Doc value Fields")
-  * [Include versions](search-request-version.html "Version")
+  * [Highlighting](search-request-highlighting.html)
+  * [Explain](search-request-explain.html)
+  * [Source filtering](search-request-source-filtering.html)
+  * [Script fields](search-request-script-fields.html)
+  * [Doc value fields](search-request-docvalue-fields.html)
+  * [Include versions](search-request-version.html)
 
 
 

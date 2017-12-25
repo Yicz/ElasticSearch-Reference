@@ -59,7 +59,7 @@ Specify when shard rebalancing is allowed:
 
 
 `cluster.routing.allocation.cluster_concurrent_rebalance`
-     Allow to control how many concurrent shard rebalances are allowed cluster wide. Defaults to `2`. Note that this setting only controls the number of concurrent shard relocations due to imbalances in the cluster. This setting does not limit shard relocations due to [allocation filtering](allocation-filtering.html "Shard Allocation Filtering") or [forced awareness](allocation-awareness.html#forced-awareness "Forced Awarenessedit"). 
+     Allow to control how many concurrent shard rebalances are allowed cluster wide. Defaults to `2`. Note that this setting only controls the number of concurrent shard relocations due to imbalances in the cluster. This setting does not limit shard relocations due to [allocation filtering](allocation-filtering.html) or [forced awareness](allocation-awareness.html#forced-awareness). 
 
 ### Shard Balancing Heuristics
 

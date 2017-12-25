@@ -1,6 +1,6 @@
 ## Date Histogram Aggregation
 
-A multi-bucket aggregation similar to the [histogram](search-aggregations-bucket-histogram-aggregation.html "Histogram Aggregation") except it can only be applied on date values. Since dates are represented in elasticsearch internally as long values, it is possible to use the normal `histogram` on dates as well, though accuracy will be compromised. The reason for this is in the fact that time based intervals are not fixed (think of leap years and on the number of days in a month). For this reason, we need special support for time based data. From a functionality perspective, this histogram supports the same features as the normal [histogram](search-aggregations-bucket-histogram-aggregation.html "Histogram Aggregation"). The main difference is that the interval can be specified by date/time expressions.
+A multi-bucket aggregation similar to the [histogram](search-aggregations-bucket-histogram-aggregation.html) except it can only be applied on date values. Since dates are represented in elasticsearch internally as long values, it is possible to use the normal `histogram` on dates as well, though accuracy will be compromised. The reason for this is in the fact that time based intervals are not fixed (think of leap years and on the number of days in a month). For this reason, we need special support for time based data. From a functionality perspective, this histogram supports the same features as the normal [histogram](search-aggregations-bucket-histogram-aggregation.html). The main difference is that the interval can be specified by date/time expressions.
 
 Requesting bucket intervals of a month.
     
@@ -19,7 +19,7 @@ Requesting bucket intervals of a month.
 
 Available expressions for interval: `year`, `quarter`, `month`, `week`, `day`, `hour`, `minute`, `second`
 
-Time values can also be specified via abbreviations supported by [time units](common-options.html#time-units "Time unitsedit") parsing. Note that fractional time values are not supported, but you can address this by shifting to another time unit (e.g., `1.5h` could instead be specified as `90m`).
+Time values can also be specified via abbreviations supported by [time units](common-options.html#time-units) parsing. Note that fractional time values are not supported, but you can address this by shifting to another time unit (e.g., `1.5h` could instead be specified as `90m`).
     
     
     POST /sales/_search?size=0
@@ -40,7 +40,7 @@ Internally, a date is represented as a 64 bit number representing a timestamp in
 
 ![Tip](images/icons/tip.png)
 
-If no `format` is specified, then it will use the first date [format](mapping-date-format.html "format") specified in the field mapping.
+If no `format` is specified, then it will use the first date [format](mapping-date-format.html) specified in the field mapping.
     
     
     POST /sales/_search?size=0
@@ -60,7 +60,7 @@ If no `format` is specified, then it will use the first date [format](mapping-da
 
 | 
 
-Supports expressive date [format pattern](search-aggregations-bucket-daterange-aggregation.html#date-format-pattern "Date Format/Pattern")  
+Supports expressive date [format pattern](search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)  
   
 ---|---  
   
@@ -298,7 +298,7 @@ Response:
 
 ### Scripts
 
-Like with the normal [histogram](search-aggregations-bucket-histogram-aggregation.html "Histogram Aggregation"), both document level scripts and value level scripts are supported. It is also possible to control the order of the returned buckets using the `order` settings and filter the returned buckets based on a `min_doc_count` setting (by default all buckets between the first bucket that matches documents and the last one are returned). This histogram also supports the `extended_bounds` setting, which enables extending the bounds of the histogram beyond the data itself (to read more on why you’d want to do that please refer to the explanation [here](search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds)).
+Like with the normal [histogram](search-aggregations-bucket-histogram-aggregation.html), both document level scripts and value level scripts are supported. It is also possible to control the order of the returned buckets using the `order` settings and filter the returned buckets based on a `min_doc_count` setting (by default all buckets between the first bucket that matches documents and the last one are returned). This histogram also supports the `extended_bounds` setting, which enables extending the bounds of the histogram beyond the data itself (to read more on why you’d want to do that please refer to the explanation [here](search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds)).
 
 ### Missing value
 

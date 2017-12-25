@@ -16,7 +16,7 @@ Note, `message` is the name of a field, you can substitute the name of any field
 
 ### match
 
-The `match` query is of type `boolean`. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The `operator` flag can be set to `or` or `and` to control the boolean clauses (defaults to `or`). The minimum number of optional `should` clauses to match can be set using the [`minimum_should_match`](query-dsl-minimum-should-match.html "Minimum Should Match") parameter.
+The `match` query is of type `boolean`. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The `operator` flag can be set to `or` or `and` to control the boolean clauses (defaults to `or`). The minimum number of optional `should` clauses to match can be set using the [`minimum_should_match`](query-dsl-minimum-should-match.html) parameter.
 
 The `analyzer` can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer.
 
@@ -26,7 +26,7 @@ The `lenient` parameter can be set to `true` to ignore exceptions caused by data
 
 `fuzziness` allows _fuzzy matching_ based on the type of field being queried. See [Fuzziness for allowed settings.
 
-The `prefix_length` and `max_expansions` can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its [rewrite method](query-dsl-multi-term-rewrite.html "Multi Term Query Rewrite") the `fuzzy_rewrite` parameter allows to control how the query will get rewritten.
+The `prefix_length` and `max_expansions` can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its [rewrite method](query-dsl-multi-term-rewrite.html) the `fuzzy_rewrite` parameter allows to control how the query will get rewritten.
 
 Fuzzy transpositions (`ab` → `ba`) are allowed by default but can be disabled by setting `fuzzy_transpositions` to `false`.
 

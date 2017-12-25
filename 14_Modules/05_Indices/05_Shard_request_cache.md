@@ -6,7 +6,7 @@ The shard-level request cache module caches the local results on each shard. Thi
 
 ![Important](images/icons/important.png)
 
-By default, the requests cache will only cache the results of search requests where `size=0`, so it will not cache `hits`, but it will cache `hits.total`, [aggregations](search-aggregations.html "Aggregations"), and [suggestions](search-suggesters.html "Suggesters").
+By default, the requests cache will only cache the results of search requests where `size=0`, so it will not cache `hits`, but it will cache `hits.total`, [aggregations](search-aggregations.html), and [suggestions](search-suggesters.html).
 
 Most queries that use `now` (see [Date Math cannot be cached.
 
@@ -18,7 +18,7 @@ Cached results are invalidated automatically whenever the shard refreshes, but o
 
 The longer the refresh interval, the longer that cached entries will remain valid. If the cache is full, the least recently used cache keys will be evicted.
 
-The cache can be expired manually with the [`clear-cache` API](indices-clearcache.html "Clear Cache"):
+The cache can be expired manually with the [`clear-cache` API](indices-clearcache.html):
     
     
     POST /kimchy,elasticsearch/_cache/clear?request=true
@@ -35,7 +35,7 @@ The cache is enabled by default, but can be disabled when creating a new index a
       }
     }
 
-It can also be enabled or disabled dynamically on an existing index with the [`update-settings`](indices-update-settings.html "Update Indices Settings") API:
+It can also be enabled or disabled dynamically on an existing index with the [`update-settings`](indices-update-settings.html) API:
     
     
     PUT /my_index/_settings
@@ -83,12 +83,12 @@ Also, you can use the `indices.requests.cache.expire` setting to specify a TTL f
 
 #### Monitoring cache usage
 
-The size of the cache (in bytes) and the number of evictions can be viewed by index, with the [`indices-stats`](indices-stats.html "Indices Stats") API:
+The size of the cache (in bytes) and the number of evictions can be viewed by index, with the [`indices-stats`](indices-stats.html) API:
     
     
     GET /_stats/request_cache?human
 
-or by node with the [`nodes-stats`](cluster-nodes-stats.html "Nodes Stats") API:
+or by node with the [`nodes-stats`](cluster-nodes-stats.html) API:
     
     
     GET /_nodes/stats/indices/request_cache?human

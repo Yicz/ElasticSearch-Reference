@@ -91,4 +91,4 @@
 
 在放弃分配一个失败的分片之前，集群会尝试`index.allocation.max_retries`(默认5)次，导致这个情况发生的原因可能是，分片使用的停用词文件不存在。
 
-问题发生后，可以尝试[`reroute`](05_Cluster_Reroute.md "Cluster Reroute") API带`?retry_failed`参数进行手动重试分配，重试一次。
+问题发生后，可以尝试[`reroute`](05_Cluster_Reroute.md) API带`?retry_failed`参数进行手动重试分配，重试一次。

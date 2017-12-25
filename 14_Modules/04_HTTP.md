@@ -133,8 +133,8 @@ The maximum number of events to be queued up in memory before a HTTP connection 
 
 Enables or disables strict checking and usage of the `Content-Type` header for all requests with content, defaults to `false`.  
   
-It also uses the common [network settings](modules-network.html "Network Settings").
+It also uses the common [network settings](modules-network.html).
 
 ### Disable HTTP
 
-The http module can be completely disabled and not started by setting `http.enabled` to `false`. Elasticsearch nodes (and Java clients) communicate internally using the [transport interface](modules-transport.html "Transport"), not HTTP. It might make sense to disable the `http` layer entirely on nodes which are not meant to serve REST requests directly. For instance, you could disable HTTP on [data-only nodes](modules-node.html "Node") if you also have [client nodes](modules-node.html "Node") which are intended to serve all REST requests. Be aware, however, that you will not be able to send any REST requests (eg to retrieve node stats) directly to nodes which have HTTP disabled.
+The http module can be completely disabled and not started by setting `http.enabled` to `false`. Elasticsearch nodes (and Java clients) communicate internally using the [transport interface](modules-transport.html), not HTTP. It might make sense to disable the `http` layer entirely on nodes which are not meant to serve REST requests directly. For instance, you could disable HTTP on [data-only nodes](modules-node.html) if you also have [client nodes](modules-node.html) which are intended to serve all REST requests. Be aware, however, that you will not be able to send any REST requests (eg to retrieve node stats) directly to nodes which have HTTP disabled.

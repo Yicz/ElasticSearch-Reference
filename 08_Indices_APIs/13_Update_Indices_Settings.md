@@ -12,7 +12,7 @@ The REST endpoint is `/_settings` (to update all indices) or `{index}/_settings`
         }
     }
 
-The list of per-index settings which can be updated dynamically on live indices can be found in [Index Modules](index-modules.html "Index Modules"). To preserve existing settings from being updated, the `preserve_existing` request parameter can be set to `true`.
+The list of per-index settings which can be updated dynamically on live indices can be found in [Index Modules](index-modules.html). To preserve existing settings from being updated, the `preserve_existing` request parameter can be set to `true`.
 
 ### Bulk Indexing Usage
 
@@ -45,7 +45,7 @@ And, a force merge should be called:
 
 ### Updating Index Analysis
 
-It is also possible to define new [analyzers](analysis.html "Analysis") for the index. But it is required to [close](indices-open-close.html "Open / Close Index API") the index first and [open](indices-open-close.html "Open / Close Index API") it after the changes are made.
+It is also possible to define new [analyzers](analysis.html) for the index. But it is required to [close](indices-open-close.html) the index first and [open](indices-open-close.html) it after the changes are made.
 
 For example if `content` analyzer hasn’t been defined on `myindex` yet you can use the following commands to add it:
     

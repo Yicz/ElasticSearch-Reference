@@ -122,7 +122,7 @@ When the pattern is specified in JSON, the `"` and `\` characters need to be esc
           "tokenizer": {
             "my_tokenizer": {
               "type": "pattern",
-              "pattern": "\"((?:\\\\\"|[^\"]|\\\\\")+)\"",
+             )+)\"",
               "group": 1
             }
           }

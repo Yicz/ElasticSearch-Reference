@@ -87,7 +87,7 @@ Defines a `geo` context named _location_ where the categories are read from the 
   
 ![Note](images/icons/note.png)
 
-Adding context mappings increases the index size for completion field. The completion index is entirely heap resident, you can monitor the completion field index size using [_Indices Stats_](indices-stats.html "Indices Stats").
+Adding context mappings increases the index size for completion field. The completion index is entirely heap resident, you can monitor the completion field index size using [_Indices Stats_](indices-stats.html).
 
 #### Category Context
 

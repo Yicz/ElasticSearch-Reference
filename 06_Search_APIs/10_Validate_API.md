@@ -77,7 +77,7 @@ The query may also be sent in the request body:
 
 ![Note](images/icons/note.png)
 
-The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html "Search") works
+The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html) works
 
 If the query is invalid, `valid` will be `false`. Here the query is invalid because Elasticsearch knows the post_date field should be a date due to dynamic mapping, and _foo_ does not correctly parse into a date:
     
@@ -177,13 +177,13 @@ Response:
           "index": "twitter",
           "shard": 0,
           "valid": true,
-          "explanation": "+MatchNoDocsQuery(\"empty BooleanQuery\") #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
+         ) #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
         },
         {
           "index": "twitter",
           "shard": 1,
           "valid": true,
-          "explanation": "+MatchNoDocsQuery(\"empty BooleanQuery\") #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
+         ) #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
         },
         {
           "index": "twitter",
@@ -201,7 +201,7 @@ Response:
           "index": "twitter",
           "shard": 4,
           "valid": true,
-          "explanation": "+MatchNoDocsQuery(\"empty BooleanQuery\") #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
+         ) #ConstantScore(MatchNoDocsQuery(\"empty BooleanQuery\"))"
         }
       ]
     }

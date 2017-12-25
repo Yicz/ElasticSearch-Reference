@@ -14,7 +14,7 @@ Similarly to sizing bulk requests, only testing can tell what the optimal number
 
 ### Increase the refresh interval
 
-The default [`index.refresh_interval`](index-modules.html#dynamic-index-settings "Dynamic index settingsedit") is `1s`, which forces Elasticsearch to create a new segment every second. Increasing this value (to say, `30s`) will allow larger segments to flush and decreases future merge pressure.
+The default [`index.refresh_interval`](index-modules.html#dynamic-index-settings) is `1s`, which forces Elasticsearch to create a new segment every second. Increasing this value (to say, `30s`) will allow larger segments to flush and decreases future merge pressure.
 
 ### Disable refresh and replicas for initial loads
 
@@ -22,7 +22,7 @@ If you need to load a large amount of data at once, you should disable refresh b
 
 ### Disable swapping
 
-You should make sure that the operating system is not swapping out the java process by [disabling swapping](setup-configuration-memory.html "Disable swapping").
+You should make sure that the operating system is not swapping out the java process by [disabling swapping](setup-configuration-memory.html).
 
 ### Give memory to the filesystem cache
 
@@ -36,14 +36,14 @@ When indexing a document that has an explicit id, elasticsearch needs to check w
 
 If indexing is I/O bound, you should investigate giving more memory to the filesystem cache (see above) or buying faster drives. In particular SSD drives are known to perform better than spinning disks. Always use local storage, remote filesystems such as `NFS` or `SMB` should be avoided. Also beware of virtualized storage such as Amazon’s `Elastic Block Storage`. Virtualized storage works very well with Elasticsearch, and it is appealing since it is so fast and simple to set up, but it is also unfortunately inherently slower on an ongoing basis when compared to dedicated local storage. If you put an index on `EBS`, be sure to use provisioned IOPS otherwise operations could be quickly throttled.
 
-Stripe your index across multiple SSDs by configuring a RAID 0 array. Remember that it will increase the risk of failure since the failure of any one SSD destroys the index. However this is typically the right tradeoff to make: optimize single shards for maximum performance, and then add replicas across different nodes so there’s redundancy for any node failures. You can also use [snapshot and restore](modules-snapshots.html "Snapshot And Restore") to backup the index for further insurance.
+Stripe your index across multiple SSDs by configuring a RAID 0 array. Remember that it will increase the risk of failure since the failure of any one SSD destroys the index. However this is typically the right tradeoff to make: optimize single shards for maximum performance, and then add replicas across different nodes so there’s redundancy for any node failures. You can also use [snapshot and restore](modules-snapshots.html) to backup the index for further insurance.
 
 ### Indexing buffer size
 
-If your node is doing only heavy indexing, be sure [`indices.memory.index_buffer_size`](indexing-buffer.html "Indexing Buffer") is large enough to give at most 512 MB indexing buffer per shard doing heavy indexing (beyond that indexing performance does not typically improve). Elasticsearch takes that setting (a percentage of the java heap or an absolute byte-size), and uses it as a shared buffer across all active shards. Very active shards will naturally use this buffer more than shards that are performing lightweight indexing.
+If your node is doing only heavy indexing, be sure [`indices.memory.index_buffer_size`](indexing-buffer.html) is large enough to give at most 512 MB indexing buffer per shard doing heavy indexing (beyond that indexing performance does not typically improve). Elasticsearch takes that setting (a percentage of the java heap or an absolute byte-size), and uses it as a shared buffer across all active shards. Very active shards will naturally use this buffer more than shards that are performing lightweight indexing.
 
 The default is `10%` which is often plenty: for example, if you give the JVM 10GB of memory, it will give 1GB to the index buffer, which is enough to host two shards that are heavily indexing.
 
 ### Additional optimizations
 
-Many of the strategies outlined in [_Tune for disk usage_](tune-for-disk-usage.html "Tune for disk usage") also provide an improvement in the speed of indexing.
+Many of the strategies outlined in [_Tune for disk usage_](tune-for-disk-usage.html) also provide an improvement in the speed of indexing.

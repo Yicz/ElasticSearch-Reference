@@ -2,7 +2,7 @@
 
 ### `?refresh` no longer supports truthy and falsy values
 
-The `?refresh` request parameter used to accept any value other than `false`, `0`, `off`, and `no` to mean "make the changes from this request visible for search immediately." Now it only accepts `?refresh` and `?refresh=true` to mean that. You can set it to `?refresh=false` and the request will take no refresh-related action. The same is true if you leave `refresh` off of the url entirely. If you add `?refresh=wait_for` Elasticsearch will wait for the changes to become visible before replying to the request but won’t take any immediate refresh related action. See [_`?refresh`_](docs-refresh.html "?refresh").
+The `?refresh` request parameter used to accept any value other than `false`, `0`, `off`, and `no` to mean).
 
 ### `created` field deprecated in the Index API
 

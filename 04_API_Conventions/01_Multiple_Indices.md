@@ -19,4 +19,4 @@
 上述参数的默认设置取决于正在使用的api。
 
 The defaults settings for the above parameters depend on the api being used.
-单索引APIs如 [Document APIs](docs.html "Document APIs")和[single-index `alias` APIs](indices-aliases.html "Index Aliases") 不支持多索引操作
+单索引APIs如 [Document APIs](docs.html)和[single-index `alias` APIs](indices-aliases.html) 不支持多索引操作

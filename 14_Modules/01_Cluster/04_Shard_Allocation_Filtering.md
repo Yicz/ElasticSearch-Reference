@@ -1,6 +1,6 @@
 ## Shard Allocation Filtering
 
-While [_Index Shard Allocation_](index-modules-allocation.html "Index Shard Allocation") provides **per-index** settings to control the allocation of shards to nodes, cluster-level shard allocation filtering allows you to allow or disallow the allocation of shards from **any** index to particular nodes.
+While [_Index Shard Allocation_](index-modules-allocation.html) provides **per-index** settings to control the allocation of shards to nodes, cluster-level shard allocation filtering allows you to allow or disallow the allocation of shards from **any** index to particular nodes.
 
 The typical use case for cluster-wide shard allocation filtering is when you want to decommission a node, and you would like to move the shards from that node to other nodes in the cluster before shutting it down.
 
@@ -18,7 +18,7 @@ For instance, we could decommission a node using its IP address as follows:
 
 Shards will only be relocated if it is possible to do so without breaking another routing constraint, such as never allocating a primary and replica shard to the same node.
 
-Cluster-wide shard allocation filtering works in the same way as index-level shard allocation filtering (see [_Index Shard Allocation_](index-modules-allocation.html "Index Shard Allocation") for details).
+Cluster-wide shard allocation filtering works in the same way as index-level shard allocation filtering (see [_Index Shard Allocation_](index-modules-allocation.html) for details).
 
 The available _dynamic_ cluster settings are as follows, where `{attribute}` refers to an arbitrary node attribute.:
 

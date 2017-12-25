@@ -4,6 +4,6 @@
 
 ## Testing:
 
-  * [_Java Testing Framework_](testing-framework.html "Java Testing Framework")
+  * [_Java Testing Framework_](testing-framework.html)
 
 
