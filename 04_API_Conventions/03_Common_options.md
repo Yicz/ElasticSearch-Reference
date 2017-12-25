@@ -56,7 +56,7 @@ curl -XGET 'localhost:9200/_search?q=elasticsearch&filter_path=took,hits.hits._i
 }
 ```
 
-可以使用*通配符来匹配任何字段或一部分名字
+可以使用\*通配符来匹配任何字段或一部分名字
 
 ```sh
 curl -XGET 'localhost:9200/_cluster/state?filter_path=metadata.indices.*.stat*&pretty'
@@ -70,7 +70,7 @@ curl -XGET 'localhost:9200/_cluster/state?filter_path=metadata.indices.*.stat*&p
 }
 ```
 
-和**通配符可以用于包括字段不知道的具体路径。例如,我们可以返回的Lucene版本与此请求每一段:
+和\*\*通配符可以用于包括字段不知道的具体路径。例如,我们可以返回的Lucene版本与此请求每一段:
 
 ```sh
 curl -XGET 'localhost:9200/_cluster/state?filter_path=routing_table.indices.**.state&pretty'

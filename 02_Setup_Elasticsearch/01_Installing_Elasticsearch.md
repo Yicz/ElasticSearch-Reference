@@ -1,4 +1,4 @@
-## Installing Elasticsearch
+## 安装ES Installing Elasticsearch
 
 ES提供了如下的安装包格式：
 

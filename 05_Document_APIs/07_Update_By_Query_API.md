@@ -1,12 +1,10 @@
-## Update By Query API
+## 查询更新API Update By Query API
 
-The simplest usage of `_update_by_query` just performs an update on every document in the index without changing the source. This is useful to [pick up a new property](docs-update-by-query.html#picking-up-a-new-property) or some other online mapping change. Here is the API:
-    
+`_update_by_query`最简单有效的用法是通过查询更新匹配的每一个文档的数据没有修改源。对[新增一个属性pick up a new property](docs-update-by-query.html#picking-up-a-new-property)或在线修改映射关系，非常有用，这是一个demo:
     
     POST twitter/_update_by_query?conflicts=proceed
 
-That will return something like this:
-    
+会返回类似如下的内容:
     
     {
       "took" : 147,
@@ -27,13 +25,16 @@ That will return something like this:
       "failures" : [ ]
     }
 
-`_update_by_query` gets a snapshot of the index when it starts and indexes what it finds using `internal` versioning. That means that you’ll get a version conflict if the document changes between the time when the snapshot was taken and when the index request is processed. When the versions match the document is updated and the version number is incremented.
+`_update_by_query` 发出请求的时候会得到一个使用ES内部版本控制的索引快照。这就意味着，请求在快照上进行处理的时候，可以会与实时索引之间产生版本冲突。当版本不冲突的时候，文档进行更新并会增加版本号（+1）。
 
 ![Note](images/icons/note.png)
 
-Since `internal` versioning does not support the value 0 as a valid version number, documents with version equal to zero cannot be updated using `_update_by_query` and will fail the request.
+内部版本控制并不支持使用0作为一个有效的版本号。文档使用了0作版本号的，并不能使用使用`_update_by_query`,如果使用了，请求会失败。
 
-All update and query failures cause the `_update_by_query` to abort and are returned in the `failures` of the response. The updates that have been performed still stick. In other words, the process is not rolled back, only aborted. While the first failure causes the abort, all failures that are returned by the failing bulk request are returned in the `failures` element; therefore it’s possible for there to be quite a few failed entities.
+`_update_by_query`请求中产生的更新或查询子请求的失败都会返回在响应体中的`failures`.但剩余的子句会断续执行，总结就是请求过程不会进行回滚，只会中断。当第一个失败出现的导致中断的时候，全部失败的子请求会在`faliures`属性中进行展示。
+因此他可以包含多个实体。
+
+如果想统计因为版本冲突而导致的中断，你可以设置`conflicts=proceed`查询字符串，或者在请求体中添加`"conflicts::proceed`,上面的例子就做了相应的配置，
 
 If you want to simply count version conflicts not cause the `_update_by_query` to abort you can set `conflicts=proceed` on the url or `"conflicts": "proceed"` in the request body. The first example does this because it is just trying to pick up an online mapping change and a version conflict simply means that the conflicting document was updated between the start of the `_update_by_query` and the time when it attempted to update the document. This is fine because that update will have picked up the online mapping update.
 
@@ -81,9 +82,9 @@ So far we’ve only been updating documents without changing their source. That 
 Just as in [Update API](docs-update.html) you can set `ctx.op` to change the operation that is executed:
 
 `noop`
-     Set `ctx.op =). 
+     Set `ctx.op =)`. 
 `delete`
-     Set `ctx.op =). 
+     Set `ctx.op =)`. 
 
 Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
 

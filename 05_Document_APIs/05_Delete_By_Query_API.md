@@ -35,7 +35,7 @@ curl -XPOST 'localhost:9200/twitter/_delete_by_query?pretty' -H 'Content-Type: a
 
 `_delete_by_query`使用的原理是采用了一个快照的模式进行了处理，当请求开始时，给索引作一个快照作为查询处理，这意味着有可能产生一个版本的冲突，因为在生成快照的同时一个delete的请求也进行了执行，这时候版本就已经发生了变化。
 
-> 因为内部版本不支持0作为一个有效的版本号,文件版本等于零时不能使用_delete_by_query进行删除，_delete_by_query请求将失败。
+> 因为内部版本不支持0作为一个有效的版本号,文件版本等于零时不能使用_delete_by_query进行删除，\_delete\_by\_query请求将失败。
 
 在`_delete_by_query`执行的时候，会发出一批有序的search请求，去查询匹配的文档，当发现匹配的文档的时候，再一个批量的delete请求，如果search或delete请求被拒绝的时候，`_delete_by_query`会根据默认的尝试策略再去请求一次（最高的重试次数是10），当达到10次的时候，`_delete_by_query `请求会终止并将失败的结果放入到响应内容`failures`中,因止`_delete_by_query `请求有可以返回一部分失败的结果。
 
