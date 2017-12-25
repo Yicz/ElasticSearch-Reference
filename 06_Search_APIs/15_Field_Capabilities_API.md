@@ -30,49 +30,13 @@ This is equivalent to the previous request.
 
 Supported request options:
 
-`fields`
-
-| 
-
-A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.   
-  
----|---  
-  
-### Field Capabilities
-
-The field capabilities api returns the following information per field:
-
-`searchable`
-
-| 
-
-Whether this field is indexed for search on all indices.   
-  
----|---  
-  
-`aggregatable`
-
-| 
-
-Whether this field can be aggregated on all indices.   
-  
-`indices`
-
-| 
-
-The list of indices where this field has the same type, or null if all indices have the same type for the field.   
-  
-`non_searchable_indices`
-
-| 
-
-The list of indices where this field is not searchable, or null if all indices have the same definition for the field.   
-  
-`non_aggregatable_indices`
-
-| 
-
-The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.   
+`fields`| A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.     
+---|---   
+`searchable`| Whether this field is indexed for search on all indices.     ---|---    
+`aggregatable`| Whether this field can be aggregated on all indices.     
+`indices`| The list of indices where this field has the same type, or null if all indices have the same type for the field.     
+`non_searchable_indices`| The list of indices where this field is not searchable, or null if all indices have the same definition for the field.     
+`non_aggregatable_indices`| The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.   
   
 ### Response format
 

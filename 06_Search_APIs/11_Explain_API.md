@@ -94,76 +94,16 @@ This will yield the same result as the previous request.
 
 ### All parameters:
 
-`_source`
-
-| 
-
-Set to `true` to retrieve the `_source` of the document explained. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see [Get API](docs-get.html#get-source-filtering) for more details)   
-  
----|---  
-  
-`stored_fields`
-
-| 
-
-Allows to control which stored fields to return as part of the document explained.   
-  
-`routing`
-
-| 
-
-Controls the routing in the case the routing was used during indexing.   
-  
-`parent`
-
-| 
-
-Same effect as setting the routing parameter.   
-  
-`preference`
-
-| 
-
-Controls on which shard the explain is executed.   
-  
-`source`
-
-| 
-
-Allows the data of the request to be put in the query string of the url.   
-  
-`q`
-
-| 
-
-The query string (maps to the query_string query).   
-  
-`df`
-
-| 
-
-The default field to use when no field prefix is defined within the query. Defaults to _all field.   
-  
-`analyzer`
-
-| 
-
-The analyzer name to be used when analyzing the query string. Defaults to the analyzer of the _all field.   
-  
-`analyze_wildcard`
-
-| 
-
-Should wildcard and prefix queries be analyzed or not. Defaults to false.   
-  
-`lenient`
-
-| 
-
-If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.   
-  
-`default_operator`
-
-| 
-
-The default operator to be used, can be AND or OR. Defaults to OR. 
+`_source`| Set to `true` to retrieve the `_source` of the document explained. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see [Get API](docs-get.html#get-source-filtering) for more details)     
+---|---    
+`stored_fields`| Allows to control which stored fields to return as part of the document explained.     
+`routing`| Controls the routing in the case the routing was used during indexing.     
+`parent`| Same effect as setting the routing parameter.     
+`preference`| Controls on which shard the explain is executed.     
+`source`| Allows the data of the request to be put in the query string of the url.     
+`q`| The query string (maps to the query_string query).     
+`df`| The default field to use when no field prefix is defined within the query. Defaults to _all field.     
+`analyzer`| The analyzer name to be used when analyzing the query string. Defaults to the analyzer of the _all field.     
+`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to false.     
+`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.     
+`default_operator`| The default operator to be used, can be AND or OR. Defaults to OR. 

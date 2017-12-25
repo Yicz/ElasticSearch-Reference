@@ -229,37 +229,12 @@ Suggestions that share the longest prefix to the query `prefix` will be scored h
 
 The fuzzy query can take specific fuzzy parameters. The following parameters are supported:
 
-`fuzziness`
-
-| 
-
-The fuzziness factor, defaults to `AUTO`. See [Fuzziness for allowed settings.   
-  
----|---  
-  
-`transpositions`
-
-| 
-
-if set to `true`, transpositions are counted as one change instead of two, defaults to `true`  
-  
-`min_length`
-
-| 
-
-Minimum length of the input before fuzzy suggestions are returned, defaults `3`  
-  
-`prefix_length`
-
-| 
-
-Minimum length of the input, which is not checked for fuzzy alternatives, defaults to `1`  
-  
-`unicode_aware`
-
-| 
-
-If `true`, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes. This is slightly slower than raw bytes, so it is set to `false` by default.   
+`fuzziness`| The fuzziness factor, defaults to `AUTO`. See [Fuzziness for allowed settings.     
+---|---    
+`transpositions`| if set to `true`, transpositions are counted as one change instead of two, defaults to `true`    
+`min_length`| Minimum length of the input before fuzzy suggestions are returned, defaults `3`    
+`prefix_length`| Minimum length of the input, which is not checked for fuzzy alternatives, defaults to `1`    
+`unicode_aware`| If `true`, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes. This is slightly slower than raw bytes, so it is set to `false` by default.   
   
 ![Note](images/icons/note.png)
 
@@ -284,16 +259,6 @@ The completion suggester also supports regex queries meaning you can express a p
 
 The regex query can take specific regex parameters. The following parameters are supported:
 
-`flags`
-
-| 
-
-Possible flags are `ALL` (default), `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`. See [regexp-syntax](query-dsl-regexp-query.html) for their meaning   
-  
----|---  
-  
-`max_determinized_states`
-
-| 
-
-Regular expressions are dangerous because it’s easy to accidentally create an innocuous looking one that requires an exponential number of internal determinized automaton states (and corresponding RAM and CPU) for Lucene to execute. Lucene prevents these using the `max_determinized_states` setting (defaults to 10000). You can raise this limit to allow more complex regular expressions to execute. 
+`flags`| Possible flags are `ALL` (default), `ANYSTRING`, `COMPLEMENT`, `EMPTY`, `INTERSECTION`, `INTERVAL`, or `NONE`. See [regexp-syntax](query-dsl-regexp-query.html) for their meaning     
+---|---    
+`max_determinized_states`| Regular expressions are dangerous because it’s easy to accidentally create an innocuous looking one that requires an exponential number of internal determinized automaton states (and corresponding RAM and CPU) for Lucene to execute. Lucene prevents these using the `max_determinized_states` setting (defaults to 10000). You can raise this limit to allow more complex regular expressions to execute. 

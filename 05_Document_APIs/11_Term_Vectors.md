@@ -62,49 +62,14 @@ With the parameter `filter`, the terms returned could also be filtered based on 
 
 The following sub-parameters are supported:
 
-`max_num_terms`
-
-| 
-
-Maximum number of terms that must be returned per field. Defaults to `25`.   
-  
----|---  
-  
-`min_term_freq`
-
-| 
-
-Ignore words with less than this frequency in the source doc. Defaults to `1`.   
-  
-`max_term_freq`
-
-| 
-
-Ignore words with more than this frequency in the source doc. Defaults to unbounded.   
-  
-`min_doc_freq`
-
-| 
-
-Ignore terms which do not occur in at least this many docs. Defaults to `1`.   
-  
-`max_doc_freq`
-
-| 
-
-Ignore words which occur in more than this many docs. Defaults to unbounded.   
-  
-`min_word_length`
-
-| 
-
-The minimum word length below which words will be ignored. Defaults to `0`.   
-  
-`max_word_length`
-
-| 
-
-The maximum word length above which words will be ignored. Defaults to unbounded (`0`).   
+`max_num_terms`| Maximum number of terms that must be returned per field. Defaults to `25`.     
+---|---    
+`min_term_freq`| Ignore words with less than this frequency in the source doc. Defaults to `1`.     
+`max_term_freq`| Ignore words with more than this frequency in the source doc. Defaults to unbounded.     
+`min_doc_freq`| Ignore terms which do not occur in at least this many docs. Defaults to 
+`1`.     `max_doc_freq`| Ignore words which occur in more than this many docs. Defaults to unbounded.     
+`min_word_length`| The minimum word length below which words will be ignored. Defaults to `0`.     
+`max_word_length`| The maximum word length above which words will be ignored. Defaults to unbounded (`0`).   
   
 ### Behaviour
 

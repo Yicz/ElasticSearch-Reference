@@ -45,31 +45,11 @@ If `inner_hits` is defined on a query that supports it then each search hit will
 
 Inner hits support the following options:
 
-`from`
-
-| 
-
-The offset from where the first hit to fetch for each `inner_hits` in the returned regular search hits.   
-  
----|---  
-  
-`size`
-
-| 
-
-The maximum number of hits to return per `inner_hits`. By default the top three matching hits are returned.   
-  
-`sort`
-
-| 
-
-How the inner hits should be sorted per `inner_hits`. By default the hits are sorted by the score.   
-  
-`name`
-
-| 
-
-The name to be used for the particular inner hit definition in the response. Useful when multiple inner hits have been defined in a single search request. The default depends in which query the inner hit is defined. For `has_child` query and filter this is the child type, `has_parent` query and filter this is the parent type and the nested query and filter this is the nested path.   
+`from`| The offset from where the first hit to fetch for each `inner_hits` in the returned regular search hits.     
+---|---    
+`size`| The maximum number of hits to return per `inner_hits`. By default the top three matching hits are returned.     
+`sort`| How the inner hits should be sorted per `inner_hits`. By default the hits are sorted by the score.     
+`name`| The name to be used for the particular inner hit definition in the response. Useful when multiple inner hits have been defined in a single search request. The default depends in which query the inner hit is defined. For `has_child` query and filter this is the child type, `has_parent` query and filter this is the parent type and the nested query and filter this is the nested path.   
   
 Inner hits also supports the following per document features:
 

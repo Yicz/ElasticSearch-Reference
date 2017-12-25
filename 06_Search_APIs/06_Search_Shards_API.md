@@ -123,22 +123,7 @@ This time the search will only be executed against two of the shards, because ro
 
 ### All parameters:
 
-`routing`
-
-| 
-
-A comma-separated list of routing values to take into account when determining which shards a request would be executed against.   
-  
----|---  
-  
-`preference`
-
-| 
-
-Controls a `preference` of which shard replicas to execute the search request on. By default, the operation is randomized between the shard replicas. See the [preference](search-request-preference.html) documentation for a list of all acceptable values.   
-  
-`local`
-
-| 
-
-A boolean value whether to read the cluster state locally in order to determine where shards are allocated instead of using the Master node’s cluster state. 
+`routing`| A comma-separated list of routing values to take into account when determining which shards a request would be executed against.     
+---|---    
+`preference`| Controls a `preference` of which shard replicas to execute the search request on. By default, the operation is randomized between the shard replicas. See the [preference](search-request-preference.html) documentation for a list of all acceptable values.     
+`local`| A boolean value whether to read the cluster state locally in order to determine where shards are allocated instead of using the Master node’s cluster state. 

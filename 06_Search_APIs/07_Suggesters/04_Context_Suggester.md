@@ -317,39 +317,11 @@ Suggestions that are within an area represented by a geohash can also be boosted
             }
         }
     }
-
-![](images/icons/callouts/1.png)
-
-| 
-
-The context query filters for suggestions that fall under the geo location represented by a geohash of _(43.662, -79.380)_ with a precision of _2_ and boosts suggestions that fall under the geohash representation of _(43.6624803, -79.3863353)_ with a default precision of _6_ by a factor of `2`  
-  
----|---  
-  
-In addition to accepting context values, a context query can be composed of multiple context clauses. The following parameters are supported for a `category` context clause:
-
-`context`
-
-| 
-
-A geo point object or a geo hash string to filter or boost the suggestion by. This is mandatory.   
-  
----|---  
-  
-`boost`
-
-| 
-
-The factor by which the score of the suggestion should be boosted, the score is computed by multiplying the boost with the suggestion weight, defaults to `1`  
-  
-`precision`
-
-| 
-
-The precision of the geohash to encode the query geo point. This can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to index time precision level.   
-  
-`neighbours`
-
-| 
-
-Accepts an array of precision values at which neighbouring geohashes should be taken into account. precision value can be a distance value (`5m`, `10km` etc.) or a raw geohash precision (`1`..`12`). Defaults to generating neighbours for index time precision level. 
+![](images/icons/callouts/1.png)| The context query filters for suggestions that fall under the geo location represented by a geohash of _(43.662, -79.380)_ with a precision of _2_ and boosts suggestions that fall under the geohash representation of _(43.6624803, -79.3863353)_ with a default precision of _6_ by a factor of `2`   
+ ---|---    In addition to accepting context values, a context query can be composed of multiple context clauses. The following parameters are supported for a `category` context clause:
+ 
+ `context`| A geo point object or a geo hash string to filter or boost the suggestion by. This is mandatory.     
+---|---    
+`boost`| The factor by which the score of the suggestion should be boosted, the score is computed by multiplying the boost with the suggestion weight, defaults to `1`    
+`precision`| The precision of the geohash to encode the query geo point. This can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to index time precision level.     
+`neighbours`| Accepts an array of precision values at which neighbouring geohashes should be taken into account. precision value can be a distance value (`5m`, `10km` etc.) or a raw geohash precision (`1`..`12`). Defaults to generating neighbours for index time precision level. 

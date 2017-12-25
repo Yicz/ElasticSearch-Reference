@@ -50,19 +50,9 @@ The sort values for each document returned are also returned as part of the resp
 
 The `order` option can have the following values:
 
-`asc`
-
-| 
-
-Sort in ascending order   
-  
----|---  
-  
-`desc`
-
-| 
-
-Sort in descending order   
+`asc`| Sort in ascending order     
+---|---    
+`desc`| Sort in descending order   
   
 The order defaults to `desc` when sorting on the `_score`, and defaults to `asc` when sorting on anything else.
 
@@ -70,37 +60,12 @@ The order defaults to `desc` when sorting on the `_score`, and defaults to `asc`
 
 Elasticsearch supports sorting by array or multi-valued fields. The `mode` option controls what array value is picked for sorting the document it belongs to. The `mode` option can have the following values:
 
-`min`
-
-| 
-
-Pick the lowest value.   
-  
----|---  
-  
-`max`
-
-| 
-
-Pick the highest value.   
-  
-`sum`
-
-| 
-
-Use the sum of all values as sort value. Only applicable for number based array fields.   
-  
-`avg`
-
-| 
-
-Use the average of all values as sort value. Only applicable for number based array fields.   
-  
-`median`
-
-| 
-
-Use the median of all values as sort value. Only applicable for number based array fields.   
+`min`| Pick the lowest value.     
+---|---    
+`max`| Pick the highest value.     
+`sum`| Use the sum of all values as sort value. Only applicable for number based array fields.     
+`avg`| Use the average of all values as sort value. Only applicable for number based array fields.     
+`median`| Use the median of all values as sort value. Only applicable for number based array fields.   
   
 #### Sort mode example usage
 

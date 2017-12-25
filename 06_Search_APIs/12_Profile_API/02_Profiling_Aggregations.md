@@ -93,34 +93,8 @@ The meaning of the stats are as follows:
 
 #### All parameters:
 
-`initialise`
-
-| 
-
-This times how long it takes to create and initialise the aggregation before starting to collect documents.   
-  
----|---  
-  
-`collect`
-
-| 
-
-This represents the cumulative time spent in the collect phase of the aggregation. This is where matching documents are passed to the aggregation and the state of the aggregator is updated based on the information contained in the documents.   
-  
-`build_aggregation`
-
-| 
-
-This represents the time spent creating the shard level results of the aggregation ready to pass back to the reducing node after the collection of documents is finished.   
-  
-`reduce`
-
-| 
-
-This is not currently used and will always report `0`. Currently aggregation profiling only times the shard level parts of the aggregation execution. Timing of the reduce phase will be added later.   
-  
-`*_count`
-
-| 
-
-Records the number of invocations of the particular method. For example, `"collect_count": 2,` means the `collect()` method was called on two different documents. 
+`initialise`| This times how long it takes to create and initialise the aggregation before starting to collect documents.     
+---|---    
+`collect`| This represents the cumulative time spent in the collect phase of the aggregation. This is where matching documents are passed to the aggregation and the state of the aggregator is updated based on the information contained in the documents.     
+`build_aggregation`| This represents the time spent creating the shard level results of the aggregation ready to pass back to the reducing node after the collection of documents is finished.     
+`reduce`| This is not currently used and will always report `0`. Currently aggregation profiling only times the shard level parts of the aggregation execution. Timing of the reduce phase will be added later.     `*_count`| Records the number of invocations of the particular method. For example, `"collect_count": 2,` means the `collect()` method was called on two different documents. 

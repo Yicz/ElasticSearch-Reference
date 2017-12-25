@@ -44,43 +44,13 @@ The count API can be applied to [multiple types in multiple indices](search-sear
 When executing count using the query parameter `q`, the query passed is a query string using Lucene query parser. There are additional parameters that can be passed:
 
 Name | Description  
----|---  
-  
-`df`
-
-| 
-
-The default field to use when no field prefix is defined within the query.  
-  
-`analyzer`
-
-| 
-
-The analyzer name to be used when analyzing the query string.  
-  
-`default_operator`
-
-| 
-
-The default operator to be used, can be `AND` or `OR`. Defaults to `OR`.  
-  
-`lenient`
-
-| 
-
-If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.  
-  
-`analyze_wildcard`
-
-| 
-
-Should wildcard and prefix queries be analyzed or not. Defaults to `false`.  
-  
-`terminate_after`
-
-| 
-
-The maximum count for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.  
+---|---    
+`df`| The default field to use when no field prefix is defined within the query.    
+`analyzer`| The analyzer name to be used when analyzing the query string.    
+`default_operator`| The default operator to be used, can be `AND` or `OR`. Defaults to `OR`.    
+`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.    
+`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to `false`.    
+`terminate_after`| The maximum count for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.  
   
 ### Request Body
 

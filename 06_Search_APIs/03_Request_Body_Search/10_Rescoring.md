@@ -54,36 +54,11 @@ The way the scores are combined can be controlled with the `score_mode`:
 
 Score Mode | Description  
 ---|---  
-  
-`total`
-
-| 
-
-Add the original score and the rescore query score. The default.  
-  
-`multiply`
-
-| 
-
-Multiply the original score by the rescore query score. Useful for [`function query`](query-dsl-function-score-query.html) rescores.  
-  
-`avg`
-
-| 
-
-Average the original score and the rescore query score.  
-  
-`max`
-
-| 
-
-Take the max of original score and the rescore query score.  
-  
-`min`
-
-| 
-
-Take the min of the original score and the rescore query score.  
+`total`| Add the original score and the rescore query score. The default.    
+`multiply`| Multiply the original score by the rescore query score. Useful for [`function query`](query-dsl-function-score-query.html) rescores.    
+`avg`| Average the original score and the rescore query score.    
+`max`| Take the max of original score and the rescore query score.    
+`min`| Take the min of the original score and the rescore query score.  
   
 ### Multiple Rescores
 

@@ -43,49 +43,13 @@ And here is a sample response:
 
 ### Parameters
 
-`timeout`
-
-| 
-
-A search timeout, bounding the search request to be executed within the specified time value and bail with the hits accumulated up to that point when expired. Defaults to no timeout. See [Time units.   
-  
----|---  
-  
-`from`
-
-| 
-
-To retrieve hits from a certain offset. Defaults to `0`.   
-  
-`size`
-
-| 
-
-The number of hits to return. Defaults to `10`. If you do not care about getting some hits back but only about the number of matches and/or aggregations, setting the value to `0` will help performance.   
-  
-`search_type`
-
-| 
-
-The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more.   
-  
-`request_cache`
-
-| 
-
-Set to `true` or `false` to enable or disable the caching of search results for requests where `size` is 0, ie aggregations and suggestions (no top hits returned). See [Shard request cache](shard-request-cache.html).   
-  
-`terminate_after`
-
-| 
-
-The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.   
-  
-`batched_reduce_size`
-
-| 
-
-The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.   
+`timeout`| A search timeout, bounding the search request to be executed within the specified time value and bail with the hits accumulated up to that point when expired. Defaults to no timeout. See [Time units.     ---|---    
+`from`| To retrieve hits from a certain offset. Defaults to `0`.     
+`size`| The number of hits to return. Defaults to `10`. If you do not care about getting some hits back but only about the number of matches and/or aggregations, setting the value to `0` will help performance.     
+`search_type`| The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more.     
+`request_cache`| Set to `true` or `false` to enable or disable the caching of search results for requests where `size` is 0, ie aggregations and suggestions (no top hits returned). See [Shard request cache](shard-request-cache.html).     
+`terminate_after`| The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.     
+`batched_reduce_size`| The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.   
   
 Out of the above, the `search_type` and the `request_cache` must be passed as query-string parameters. The rest of the search request should be passed within the body itself. The body content can also be passed as a REST parameter named `source`.
 

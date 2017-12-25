@@ -26,19 +26,9 @@ Specific indices:
 
 Supported request options:
 
-`fields`
-
-| 
-
-A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.   
-  
----|---  
-  
-`level`
-
-| 
-
-Defines if field stats should be returned on a per index level or on a cluster wide level. Valid values are `indices` and `cluster` (default).   
+`fields`| A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.     
+---|---    
+`level`| Defines if field stats should be returned on a per index level or on a cluster wide level. Valid values are `indices` and `cluster` (default).   
   
 Alternatively the `fields` option can also be defined in the request body:
     
@@ -54,37 +44,12 @@ This is equivalent to the previous request.
 
 The field stats api is supported on string based, number based and date based fields and can return the following statistics per field:
 
-`max_doc`
-
-| 
-
-The total number of documents.   
-  
----|---  
-  
-`doc_count`
-
-| 
-
-The number of documents that have at least one term for this field, or -1 if this measurement isn’t available on one or more shards.   
-  
-`density`
-
-| 
-
-The percentage of documents that have at least one value for this field. This is a derived statistic and is based on the `max_doc` and `doc_count`.   
-  
-`sum_doc_freq`
-
-| 
-
-The sum of each term’s document frequency in this field, or -1 if this measurement isn’t available on one or more shards. Document frequency is the number of documents containing a particular term.   
-  
-`sum_total_term_freq`
-
-| 
-
-The sum of the term frequencies of all terms in this field across all documents, or -1 if this measurement isn’t available on one or more shards. Term frequency is the total number of occurrences of a term in a particular document and field.   
+`max_doc`| The total number of documents.     
+---|---    
+`doc_count`| The number of documents that have at least one term for this field, or -1 if this measurement isn’t available on one or more shards.     
+`density`| The percentage of documents that have at least one value for this field. This is a derived statistic and is based on the `max_doc` and `doc_count`.     
+`sum_doc_freq`| The sum of each term’s document frequency in this field, or -1 if this measurement isn’t available on one or more shards. Document frequency is the number of documents containing a particular term.     
+`sum_total_term_freq`| The sum of the term frequencies of all terms in this field across all documents, or -1 if this measurement isn’t available on one or more shards. Term frequency is the total number of occurrences of a term in a particular document and field.   
   
 `is_searchable`
 
@@ -343,31 +308,11 @@ Index constraints on the `max_value` and `min_value` property of a field statist
   
 For a field, index constraints can be defined on the `min_value` statistic, `max_value` statistic or both. Each index constraint support the following comparisons:
 
-`gte`
-
-| 
-
-Greater-than or equal to   
-  
----|---  
-  
-`gt`
-
-| 
-
-Greater-than   
-  
-`lte`
-
-| 
-
-Less-than or equal to   
-  
-`lt`
-
-| 
-
-Less-than   
+`gte`| Greater-than or equal to     
+---|---    
+`gt`| Greater-than     
+lte`| Less-than or equal to     
+`lt`| Less-than   
   
 Field stats index constraints on date fields optionally accept a `format` option, used to parse the constraint’s value. If missing, the format configured in the field’s mapping is used.
     
