@@ -18,37 +18,12 @@ Matches documents with fields that have terms within a certain range. The type o
 
 The `range` query accepts the following parameters:
 
-`gte`
-
-| 
-
-Greater-than or equal to   
-  
----|---  
-  
-`gt`
-
-| 
-
-Greater-than   
-  
-`lte`
-
-| 
-
-Less-than or equal to   
-  
-`lt`
-
-| 
-
-Less-than   
-  
-`boost`
-
-| 
-
-Sets the boost value of the query, defaults to `1.0`  
+`gte`| Greater-than or equal to    
+ ---|---    
+`gt`| Greater-than     
+`lte`| Less-than or equal to     
+`lt`| Less-than     
+`boost`| Sets the boost value of the query, defaults to `1.0`  
   
 ### Ranges on date fields
 
@@ -73,31 +48,11 @@ When using [date math](common-options.html#date-math) to round dates to the near
 
 Rounding up moves to the last millisecond of the rounding scope, and rounding down to the first millisecond of the rounding scope. For example:
 
-`gt`
-
-| 
-
-Greater than the date rounded up: `2014-11-18||/M` becomes `2014-11-30T23:59:59.999`, ie excluding the entire month.   
-  
----|---  
-  
-`gte`
-
-| 
-
-Greater than or equal to the date rounded down: `2014-11-18||/M` becomes `2014-11-01`, ie including the entire month.   
-  
-`lt`
-
-| 
-
-Less than the date rounded down: `2014-11-18||/M` becomes `2014-11-01`, ie excluding the entire month.   
-  
-`lte`
-
-| 
-
-Less than or equal to the date rounded up: `2014-11-18||/M` becomes `2014-11-30T23:59:59.999`, ie including the entire month.   
+`gt`| Greater than the date rounded up: `2014-11-18||/M` becomes `2014-11-30T23:59:59.999`, ie excluding the entire month.     
+---|---    
+`gte`| Greater than or equal to the date rounded down: `2014-11-18||/M` becomes `2014-11-01`, ie including the entire month     
+`lt`| Less than the date rounded down: `2014-11-18||/M` becomes `2014-11-01`, ie excluding the entire month.     
+`lte`| Less than or equal to the date rounded up: `2014-11-18||/M` becomes `2014-11-30T23:59:59.999`, ie including the entire month.   
   
 #### Date format in range queries
 

@@ -2,49 +2,14 @@
 
 The `matrix_stats` aggregation is a numeric aggregation that computes the following statistics over a set of document fields:
 
-`count`
-
-| 
-
-Number of per field samples included in the calculation.   
-  
----|---  
-  
-`mean`
-
-| 
-
-The average value for each field.   
-  
-`variance`
-
-| 
-
-Per field Measurement for how spread out the samples are from the mean.   
-  
-`skewness`
-
-| 
-
-Per field measurement quantifying the asymmetric distribution around the mean.   
-  
-`kurtosis`
-
-| 
-
-Per field measurement quantifying the shape of the distribution.   
-  
-`covariance`
-
-| 
-
-A matrix that quantitatively describes how changes in one field are associated with another.   
-  
-`correlation`
-
-| 
-
-The covariance matrix scaled to a range of -1 to 1, inclusive. Describes the relationship between field distributions.   
+`count`| Number of per field samples included in the calculation.     
+---|---    
+`mean`| The average value for each field.     
+`variance`| Per field Measurement for how spread out the samples are from the mean.     
+`skewness`| Per field measurement quantifying the asymmetric distribution around the mean.     
+`kurtosis`| Per field measurement quantifying the shape of the distribution.     
+`covariance`| A matrix that quantitatively describes how changes in one field are associated with another.     
+`correlation`| The covariance matrix scaled to a range of -1 to 1, inclusive. Describes the relationship between field distributions   
   
 The following example demonstrates the use of matrix stats to describe the relationship between income and poverty.
     
@@ -105,37 +70,12 @@ The aggregation type is `matrix_stats` and the `fields` setting defines the set 
 
 The `matrix_stats` aggregation treats each document field as an independent sample. The `mode` parameter controls what array value the aggregation will use for array or multi-valued fields. This parameter can take one of the following:
 
-`avg`
-
-| 
-
-(default) Use the average of all values.   
-  
----|---  
-  
-`min`
-
-| 
-
-Pick the lowest value.   
-  
-`max`
-
-| 
-
-Pick the highest value.   
-  
-`sum`
-
-| 
-
-Use the sum of all values.   
-  
-`median`
-
-| 
-
-Use the median of all values.   
+`avg`| (default) Use the average of all values.     
+---|---    
+`min`| Pick the lowest value.     
+`max`| Pick the highest value.     
+`sum`| Use the sum of all values.     
+`median`| Use the median of all values.   
   
 ### Missing Values
 

@@ -16,62 +16,12 @@ A `derivative` aggregation looks like this in isolation:
     }
 
  **Table 2. `derivative` Parameters**
-
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`buckets_path`
-
-| 
-
-The path to the buckets we wish to find the derivative for (see [`buckets_path` Syntax
-
-| 
-
-Required
-
-|   
-  
-`gap_policy`
-
-| 
-
-The policy to apply when gaps are found in the data (see [Dealing with gaps in the data
-
-| 
-
-Optional
-
-| 
-
-`skip`  
-  
-`format`
-
-| 
-
-format to apply to the output value of this aggregation
-
-| 
-
-Optional
-
-| 
-
-`null`  
+ 
+Parameter Name| Description| Required| Default Value    
+---|---|---|---    
+`buckets_path`| The path to the buckets we wish to find the derivative for (see [`buckets_path` Syntax| Required|     
+`gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| `skip`    
+`format`| format to apply to the output value of this aggregation| Optional| `null`  
   
   
 

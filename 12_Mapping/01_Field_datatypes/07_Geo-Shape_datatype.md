@@ -10,76 +10,13 @@ The geo_shape mapping maps geo_json geometry objects to the geo_shape type. To e
 
 Option | Description|  Default  
 ---|---|---  
-  
-`tree`
-
-| 
-
-Name of the PrefixTree implementation to be used: `geohash` for GeohashPrefixTree and `quadtree` for QuadPrefixTree.
-
-| 
-
-`geohash`  
-  
-`precision`
-
-| 
-
-This parameter may be used instead of `tree_levels` to set an appropriate value for the `tree_levels` parameter. The value specifies the desired precision and Elasticsearch will calculate the best tree_levels value to honor this precision. The value should be a number followed by an optional distance unit. Valid distance units include: `in`, `inch`, `yd`, `yard`, `mi`, `miles`, `km`, `kilometers`, `m`,`meters`, `cm`,`centimeters`, `mm`, `millimeters`.
-
-| 
-
-`meters`  
-  
-`tree_levels`
-
-| 
-
-Maximum number of layers to be used by the PrefixTree. This can be used to control the precision of shape representations and therefore how many terms are indexed. Defaults to the default value of the chosen PrefixTree implementation. Since this parameter requires a certain level of understanding of the underlying implementation, users may use the `precision` parameter instead. However, Elasticsearch only uses the tree_levels parameter internally and this is what is returned via the mapping API even if you use the precision parameter.
-
-| 
-
-`50m`  
-  
-`strategy`
-
-| 
-
-The strategy parameter defines the approach for how to represent shapes at indexing and search time. It also influences the capabilities available so it is recommended to let Elasticsearch set this parameter automatically. There are two strategies available: `recursive` and `term`. Term strategy supports point types only (the `points_only` parameter will be automatically set to true) while Recursive strategy supports all shape types. (IMPORTANT: see [Prefix trees](geo-shape.html#prefix-trees) for more detailed information)
-
-| 
-
-`recursive`  
-  
-`distance_error_pct`
-
-| 
-
-Used as a hint to the PrefixTree about how precise it should be. Defaults to 0.025 (2.5%) with 0.5 as the maximum supported value. PERFORMANCE NOTE: This value will default to 0 if a `precision` or `tree_level` definition is explicitly defined. This guarantees spatial precision at the level defined in the mapping. This can lead to significant memory usage for high resolution shapes with low error (e.g., large shapes at 1m with < 0.001 error). To improve indexing performance (at the cost of query accuracy) explicitly define `tree_level` or `precision` along with a reasonable `distance_error_pct`, noting that large shapes will have greater false positives.
-
-| 
-
-`0.025`  
-  
-`orientation`
-
-| 
-
-Optionally define how to interpret vertex order for polygons / multipolygons. This parameter defines one of two coordinate system rules (Right-hand or Left-hand) each of which can be specified in three different ways. 1. Right-hand rule: `right`, `ccw`, `counterclockwise`, 2\. Left-hand rule: `left`, `cw`, `clockwise`. The default orientation (`counterclockwise`) complies with the OGC standard which defines outer ring vertices in counterclockwise order with inner ring(s) vertices (holes) in clockwise order. Setting this parameter in the geo_shape mapping explicitly sets vertex order for the coordinate list of a geo_shape field but can be overridden in each individual GeoJSON document.
-
-| 
-
-`ccw`  
-  
-`points_only`
-
-| 
-
-Setting this option to `true` (defaults to `false`) configures the `geo_shape` field type for point shapes only (NOTE: Multi-Points are not yet supported). This optimizes index and search performance for the `geohash` and `quadtree` when it is known that only points will be indexed. At present geo_shape queries can not be executed on `geo_point` field types. This option bridges the gap by improving point performance on a `geo_shape` field so that `geo_shape` queries are optimal on a point only field.
-
-| 
-
-`false`  
+`tree`| Name of the PrefixTree implementation to be used: `geohash` for GeohashPrefixTree and `quadtree` for QuadPrefixTree.| `geohash`    
+`precision`| This parameter may be used instead of `tree_levels` to set an appropriate value for the `tree_levels` parameter. Thevalue specifies the desired precision and Elasticsearch will calculate the best tree_levels value to honor thisprecision. The value should be a number followed by an optional distance unit. Valid distance units include: `in`, inch`, `yd`, `yard`, `mi`, `miles`, `km`, `kilometers`, `m`,`meters`, `cm`,`centimeters`, `mm`, `millimeters`.| `meters`    
+`tree_levels`| Maximum number of layers to be used by the PrefixTree. This can be used to control the precision of shaperepresentations and therefore how many terms are indexed. Defaults to the default value of the chosen PrefixTree implementation. Since this parameter requires a certain level of understanding of the underlying implementation, users may use the `precision` parameter instead. However, Elasticsearch only uses the tree_levels parameter internally and this is what is returned via the mapping API even if you use the precision parameter.| `50m`    
+`strategy`| The strategy parameter defines the approach for how to represent shapes at indexing and search time. It alsoinfluences the capabilities available so it is recommended to let Elasticsearch set this parameter automatically.There are two strategies available: `recursive` and `term`. Term strategy supports point types only (the `points_only`parameter will be automatically set to true) while Recursive strategy supports all shape types. (IMPORTANT: see Prefix trees](geo-shape.html#prefix-trees) for more detailed information)| `recursive`    
+`distance_error_pct`| Used as a hint to the PrefixTree about how precise it should be. Defaults to 0.025 (2.5%) with 0.5 as the maximumsupported value. PERFORMANCE NOTE: This value will default to 0 if a `precision` or `tree_level` definition isexplicitly defined. This guarantees spatial precision at the level defined in the mapping. This can lead tosignificant memory usage for high resolution shapes with low error (e.g., large shapes at 1m with < 0.001 error). Toimprove indexing performance (at the cost of query accuracy) explicitly define `tree_level` or `precision` along witha reasonable `distance_error_pct`, noting that large shapes will have greater false positives.| `0.025`    
+`orientation`| Optionally define how to interpret vertex order for polygons / multipolygons. This parameter defines one of twocoordinate system rules (Right-hand or Left-hand) each of which can be specified in three different ways. 1.Right-hand rule: `right`, `ccw`, `counterclockwise`, 2\. Left-hand rule: `left`, `cw`, `clockwise`. The defaultorientation (`counterclockwise`) complies with the OGC standard which defines outer ring vertices in counterclockwiseorder with inner ring(s) vertices (holes) in clockwise order. Setting this parameter in the geo_shape mappingexplicitly sets vertex order for the coordinate list of a geo_shape field but can be overridden in each individualGeoJSON document.| `ccw`    
+`points_only`| Setting this option to `true` (defaults to `false`) configures the `geo_shape` field type for point shapes only (NOTE:Multi-Points are not yet supported). This optimizes index and search performance for the `geohash` and `quadtree` whenit is known that only points will be indexed. At present geo_shape queries can not be executed on `geo_point` fieldtypes. This option bridges the gap by improving point performance on a `geo_shape` field so that `geo_shape` queriesare optimal on a point only field.| `false`  
   
 #### Prefix trees
 
@@ -106,34 +43,8 @@ The following Strategy implementations (with corresponding capabilities) are pro
 
 Strategy | Supported Shapes | Supported Queries | Multiple Shapes  
 ---|---|---|---  
-  
-`recursive`
-
-| 
-
-[All](geo-shape.html#input-structure)
-
-| 
-
-`INTERSECTS`, `DISJOINT`, `WITHIN`, `CONTAINS`
-
-| 
-
-Yes  
-  
-`term`
-
-| 
-
-[Points](geo-shape.html#point)
-
-| 
-
-`INTERSECTS`
-
-| 
-
-Yes  
+`recursive`| [All](geo-shape.html#input-structure)| `INTERSECTS`, `DISJOINT`, `WITHIN`, `CONTAINS`| Yes    
+`term`| [Points](geo-shape.html#point)| `INTERSECTS`| Yes  
   
 ##### Accuracy
 
@@ -171,96 +82,15 @@ The [GeoJSON](http://www.geojson.org) format is used to represent [shapes](http:
 
 GeoJSON Type | Elasticsearch Type | Description  
 ---|---|---  
-  
-`Point`
-
-| 
-
-`point`
-
-| 
-
-A single geographic coordinate.  
-  
-`LineString`
-
-| 
-
-`linestring`
-
-| 
-
-An arbitrary line given two or more points.  
-  
-`Polygon`
-
-| 
-
-`polygon`
-
-| 
-
-A _closed_ polygon whose first and last point must match, thus requiring `n + 1` vertices to create an `n`-sided polygon and a minimum of `4` vertices.  
-  
-`MultiPoint`
-
-| 
-
-`multipoint`
-
-| 
-
-An array of unconnected, but likely related points.  
-  
-`MultiLineString`
-
-| 
-
-`multilinestring`
-
-| 
-
-An array of separate linestrings.  
-  
-`MultiPolygon`
-
-| 
-
-`multipolygon`
-
-| 
-
-An array of separate polygons.  
-  
-`GeometryCollection`
-
-| 
-
-`geometrycollection`
-
-| 
-
-A GeoJSON shape similar to the `multi*` shapes except that multiple types can coexist (e.g., a Point and a LineString).  
-  
-`N/A`
-
-| 
-
-`envelope`
-
-| 
-
-A bounding rectangle, or envelope, specified by specifying only the top left and bottom right points.  
-  
-`N/A`
-
-| 
-
-`circle`
-
-| 
-
-A circle specified by a center point and radius with units, which default to `METERS`.  
+`Point`| `point`| A single geographic coordinate.    
+`LineString`| `linestring`| An arbitrary line given two or more points.    
+`Polygon`| `polygon`| A _closed_ polygon whose first and last point must match, thus requiring `n + 1` vertices to create an `n`-sidedpolygon and a minimum of `4` vertices.    
+`MultiPoint`| `multipoint`| An array of unconnected, but likely related points.    
+`MultiLineString`| `multilinestring`| An array of separate linestrings.    
+`MultiPolygon`| `multipolygon`| An array of separate polygons.    
+`GeometryCollection`| `geometrycollection`| A GeoJSON shape similar to the `multi*` shapes except that multiple types can coexist (e.g., a Point and a LineString).
+`N/A`| `envelope`| A bounding rectangle, or envelope, specified by specifying only the top left and bottom right points.    
+`N/A`| `circle`| A circle specified by a center point and radius with units, which default to `METERS`.  
   
 ![Note](images/icons/note.png)
 

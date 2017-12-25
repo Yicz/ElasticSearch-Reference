@@ -62,30 +62,10 @@ Then the following simple query can be executed with a `geo_bounding_box` filter
 
 Option | Description  
 ---|---  
-  
-`_name`
-
-| 
-
-Optional name field to identify the filter  
-  
-`ignore_malformed`
-
-| 
-
-[5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitude or longitude (default is `false`).  
-  
-`validation_method`
-
-| 
-
-Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, set to `COERCE` to also try to infer correct latitude or longitude. (default is `STRICT`).  
-  
-`type`
-
-| 
-
-Set to one of `indexed` or `memory` to defines whether this filter will be executed in memory or indexed. See [Type](query-dsl-geo-bounding-box-query.html#geo-bbox-type) below for further details Default is `memory`.  
+`_name`| Optional name field to identify the filter    
+`ignore_malformed`| [5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitudeor longitude (default is `false`).    
+`validation_method`| Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, set to `COERCE` to also try toinfer correct latitude or longitude. (default is `STRICT`).    
+`type`| Set to one of `indexed` or `memory` to defines whether this filter will be executed in memory or indexed. See [Type](query-dsl-geo-bounding-box-query.html#geo-bbox-type) below for further details Default is `memory`.  
   
 #### Accepted Formats
 

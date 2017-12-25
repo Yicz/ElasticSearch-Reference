@@ -10,42 +10,9 @@ Given filters named `A`, `B` and `C` the response would return buckets with the 
 
 | A | B | C  
 ---|---|---|---  
-  
- **A**
-
-| 
-
-A
-
-| 
-
-A&B
-
-| 
-
-A&C  
-  
- **B**
-
-| 
-
-| 
-
-B
-
-| 
-
-B&C  
-  
- **C**
-
-| 
-
-| 
-
-| 
-
-C  
+**A**| A| A&B| A&C     
+**B**| | B| B&C     
+**C**| | | C  
   
 The intersecting buckets e.g `A&C` are labelled using a combination of the two filter names separated by the ampersand character. Note that the response does not also include a "C&A" bucket as this would be the same set of documents as "A&C". The matrix is said to be _symmetric_ so we only return half of it. To do this we sort the filter name strings and always use the lowest of a pair as the value to the left of the " &" separator.
 

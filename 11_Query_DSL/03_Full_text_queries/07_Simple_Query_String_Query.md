@@ -19,66 +19,16 @@ The `simple_query_string` top level parameters include:
 
 Parameter | Description  
 ---|---  
-  
-`query`
-
-| 
-
-The actual query to be parsed. See below for syntax.  
-  
-`fields`
-
-| 
-
-The fields to perform the parsed query against. Defaults to the `index.query.default_field` index settings, which in turn defaults to `_all`.  
-  
-`default_operator`
-
-| 
-
-The default operator used if no explicit operator is specified. For example, with a default operator of `OR`, the query `capital of Hungary` is translated to `capital OR of OR Hungary`, and with default operator of `AND`, the same query is translated to `capital AND of AND Hungary`. The default value is `OR`.  
-  
-`analyzer`
-
-| 
-
-The analyzer used to analyze each term of the query when creating composite queries.  
-  
-`flags`
-
-| 
-
-Flags specifying which features of the `simple_query_string` to enable. Defaults to `ALL`.  
-  
-`analyze_wildcard`
-
-| 
-
-Whether terms of prefix queries should be automatically analyzed or not. If `true` a best effort will be made to analyze the prefix. However, some analyzers will be not able to provide a meaningful results based just on the prefix of a term. Defaults to `false`.  
-  
-`lenient`
-
-| 
-
-If set to `true` will cause format based failures (like providing text to a numeric field) to be ignored.  
-  
-`minimum_should_match`
-
-| 
-
-The minimum number of clauses that must match for a document to be returned. See the [`minimum_should_match`](query-dsl-minimum-should-match.html) documentation for the full list of options.  
-  
-`quote_field_suffix`
-
-| 
-
-A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensive example.  
-  
-`all_fields`
-
-| 
-
-Perform the query on all fields detected in the mapping that can be queried. Will be used by default when the `_all` field is disabled and no `default_field` is specified index settings, and no `fields` are specified.  
+`query`| The actual query to be parsed. See below for syntax.    
+`fields`| The fields to perform the parsed query against. Defaults to the `index.query.default_field` index settings, which inturn defaults to `_all`.    
+`default_operator`| The default operator used if no explicit operator is specified. For example, with a default operator of `OR`, thequery `capital of Hungary` is translated to `capital OR of OR Hungary`, and with default operator of `AND`, the samequery is translated to `capital AND of AND Hungary`. The default value is `OR`.    
+`analyzer`| The analyzer used to analyze each term of the query when creating composite queries.    
+`flags`| Flags specifying which features of the `simple_query_string` to enable. Defaults to `ALL`.    
+`analyze_wildcard`| Whether terms of prefix queries should be automatically analyzed or not. If `true` a best effort will be made toanalyze the prefix. However, some analyzers will be not able to provide a meaningful results based just on the prefixof a term. Defaults to `false`.    
+`lenient`| If set to `true` will cause format based failures (like providing text to a numeric field) to be ignored.    
+`minimum_should_match`| The minimum number of clauses that must match for a document to be returned. See the [`minimum_should_match`]query-dsl-minimum-should-match.html) documentation for the full list of options.    
+`quote_field_suffix`| A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a differentanalysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensiveexample.    
+`all_fields`| Perform the query on all fields detected in the mapping that can be queried. Will be used by default when the `_all` field is disabled and no `default_field` is specified index settings, and no `fields` are specified.  
   
 ##### Simple Query String Syntax
 

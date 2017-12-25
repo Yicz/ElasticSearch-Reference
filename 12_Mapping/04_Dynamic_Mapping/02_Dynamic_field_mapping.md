@@ -3,56 +3,15 @@
 By default, when a previously unseen field is found in a document, Elasticsearch will add the new field to the type mapping. This behaviour can be disabled, both at the document and at the [`object`](object.html) level, by setting the [`dynamic`](dynamic.html) parameter to `false` (to ignore new fields) or to `strict` (to throw an exception if an unknown field is encountered).
 
 Assuming `dynamic` field mapping is enabled, some simple rules are used to determine which datatype the field should have:
-
-**JSON datatype**
-
-| 
-
-**Elasticsearch datatype**  
-  
----|---  
-  
-`null`
-
-| 
-
-No field is added.   
-  
-`true` or `false`
-
-| 
-
-[`boolean`](boolean.html) field   
-  
-floating point number 
-
-| 
-
-[`float`](number.html) field   
-  
-integer 
-
-| 
-
-[`long`](number.html) field   
-  
-object 
-
-| 
-
-[`object`](object.html) field   
-  
-array 
-
-| 
-
-Depends on the first non-`null` value in the array.   
-  
-string 
-
-| 
-
-Either a [`date`](date.html) field (if the value passes [date detection](dynamic-field-mapping.html#date-detection)), a [`double`](number.html) or [`long`](number.html) field (if the value passes [numeric detection](dynamic-field-mapping.html#numeric-detection)) or a [`text`](text.html) field, with a [`keyword`](keyword.html) sub-field.   
+**JSON datatype**| **Elasticsearch datatype**    
+---|---    
+`null`| No field is added.     
+`true` or `false`| [`boolean`](boolean.html) field     
+floating point number | [`float`](number.html) field    
+integer | [`long`](number.html) field     
+object | [`object`](object.html) field     
+array | Depends on the first non-`null` value in the array.     
+string | Either a [`date`](date.html) field (if the value passes [date detection](dynamic-field-mapping.html#date-detection)),a [`double`](number.html) or [`long`](number.html) field (if the value passes [numeric detection](dynamic-field-mapping.html#numeric-detection)) or a [`text`](text.html) field, with a [`keyword`](keyword.html) sub-field.   
   
 These are the only [field datatypes](mapping-types.html) that are dynamically detected. All other datatypes must be mapped explicitly.
 

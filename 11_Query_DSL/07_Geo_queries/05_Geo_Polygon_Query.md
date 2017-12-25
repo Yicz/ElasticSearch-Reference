@@ -29,24 +29,9 @@ A query allowing to include hits that only fall within a polygon of points. Here
 
 Option | Description  
 ---|---  
-  
-`_name`
-
-| 
-
-Optional name field to identify the filter  
-  
-`ignore_malformed`
-
-| 
-
-[5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitude or longitude (default is `false`).  
-  
-`validation_method`
-
-| 
-
-Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, `COERCE` to try and infer correct latitude or longitude, or `STRICT` (default is `STRICT`).  
+`_name`| Optional name field to identify the filter    
+`ignore_malformed`| [5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitudeor longitude (default is `false`).    
+`validation_method`| Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, `COERCE` to try and infer correctlatitude or longitude, or `STRICT` (default is `STRICT`).  
   
 #### Allowed Formats
 

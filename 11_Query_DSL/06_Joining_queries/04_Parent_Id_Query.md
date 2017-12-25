@@ -60,22 +60,7 @@ The above is functionally equivalent to using the following [`has_parent`](query
 
 This query has two required parameters:
 
-`type`
-
-| 
-
-The **child** type. This must be a type with `_parent` field.   
-  
----|---  
-  
-`id`
-
-| 
-
-The required parent id select documents must referrer to.   
-  
-`ignore_unmapped`
-
-| 
-
-When set to `true` this will ignore an unmapped `type` and will not match any documents for this query. This can be useful when querying multiple indexes which might have different mappings. When set to `false` (the default value) the query will throw an exception if the `type` is not mapped. 
+`type`| The **child** type. This must be a type with `_parent` field.     
+---|---    
+`id`| The required parent id select documents must referrer to.     
+`ignore_unmapped`| When set to `true` this will ignore an unmapped `type` and will not match any documents for this query. This can be useful when querying multiple indexes which might have different mappings. When set to `false` (the default value) the query will throw an exception if the `type` is not mapped. 

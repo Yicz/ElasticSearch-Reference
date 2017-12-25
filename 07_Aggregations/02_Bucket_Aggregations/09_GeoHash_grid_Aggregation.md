@@ -114,111 +114,23 @@ When requesting detailed buckets (typically for displaying a) should be applied 
 ### Cell dimensions at the equator
 
 The table below shows the metric dimensions for cells covered by various string lengths of geohash. Cell dimensions vary with latitude and so the table is for the worst-case scenario at the equator.
+**GeoHash length**| **Area width x height**    
+---|---    
+1 | 5,009.4km x 4,992.6km     
+2 | 1,252.3km x 624.1km     
+3 | 156.5km x 156km     
+4 | 39.1km x 19.5km     
+5 | 4.9km x 4.9km     
+6 | 1.2km x 609.4m     
+7 | 152.9m x 152.4m     
+8 | 38.2m x 19m     
+9 | 4.8m x 4.8m     1
+0 | 1.2m x 59.5cm     1
+1 | 14.9cm x 14.9cm     1
+2 | 3.7cm x 1.9cm     
 
-**GeoHash length**
-
-| 
-
-**Area width x height**  
-  
----|---  
-  
-1 
-
-| 
-
-5,009.4km x 4,992.6km   
-  
-2 
-
-| 
-
-1,252.3km x 624.1km   
-  
-3 
-
-| 
-
-156.5km x 156km   
-  
-4 
-
-| 
-
-39.1km x 19.5km   
-  
-5 
-
-| 
-
-4.9km x 4.9km   
-  
-6 
-
-| 
-
-1.2km x 609.4m   
-  
-7 
-
-| 
-
-152.9m x 152.4m   
-  
-8 
-
-| 
-
-38.2m x 19m   
-  
-9 
-
-| 
-
-4.8m x 4.8m   
-  
-10 
-
-| 
-
-1.2m x 59.5cm   
-  
-11 
-
-| 
-
-14.9cm x 14.9cm   
-  
-12 
-
-| 
-
-3.7cm x 1.9cm   
-  
-### Options
-
-field 
-
-| 
-
-Mandatory. The name of the field indexed with GeoPoints.   
-  
----|---  
-  
-precision 
-
-| 
-
-Optional. The string length of the geohashes used to define cells/buckets in the results. Defaults to 5.   
-  
-size 
-
-| 
-
-Optional. The maximum number of geohash buckets to return (defaults to 10,000). When results are trimmed, buckets are prioritised based on the volumes of documents they contain.   
-  
-shard_size 
-
-| 
-
-Optional. To allow for more accurate counting of the top cells returned in the final result the aggregation defaults to returning `max(10,(size x number-of-shards))` buckets from each shard. If this heuristic is undesirable, the number considered from each shard can be over-ridden using this parameter. 
+Optionsfield | Mandatory. The name of the field indexed with GeoPoints.   
+---|---    
+precision | Optional. The string length of the geohashes used to define cells/buckets in the results. Defaults to 5.    
+size | Optional. The maximum number of geohash buckets to return (defaults to 10,000). When results are trimmed, buckets areprioritised based on the volumes of documents they contain.    
+shard_size | Optional. To allow for more accurate counting of the top cells returned in the final result the aggregation defaults to returning `max(10,(size x number-of-shards))` buckets from each shard. If this heuristic is undesirable, the number considered from each shard can be over-ridden using this parameter. 

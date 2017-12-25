@@ -36,25 +36,10 @@ Or with more advanced settings:
 
 ##### Parameters
 
-`fuzziness`
-
-| 
-
-The maximum edit distance. Defaults to `AUTO`. See [Fuzziness.   
-  
----|---  
-  
-`prefix_length`
-
-| 
-
-The number of initial characters which will not be “fuzzified”. This helps to reduce the number of terms which must be examined. Defaults to `0`.   
-  
-`max_expansions`
-
-| 
-
-The maximum number of terms that the `fuzzy` query will expand to. Defaults to `50`.   
+`fuzziness`| The maximum edit distance. Defaults to `AUTO`. See [Fuzziness.     
+---|---    
+`prefix_length`| The number of initial characters which will not be “fuzzified”. This helps to reduce the number of terms which must beexamined. Defaults to `0`.     
+`max_expansions`| The maximum number of terms that the `fuzzy` query will expand to. Defaults to `50`.   
   
 ![Warning](images/icons/warning.png)
 

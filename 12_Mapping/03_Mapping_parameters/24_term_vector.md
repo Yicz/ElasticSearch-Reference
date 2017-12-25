@@ -12,37 +12,12 @@ These term vectors can be stored so that they can be retrieved for a particular 
 
 The `term_vector` setting accepts:
 
-`no`
-
-| 
-
-No term vectors are stored. (default)   
-  
----|---  
-  
-`yes`
-
-| 
-
-Just the terms in the field are stored.   
-  
-`with_positions`
-
-| 
-
-Terms and positions are stored.   
-  
-`with_offsets`
-
-| 
-
-Terms and character offsets are stored.   
-  
-`with_positions_offsets`
-
-| 
-
-Terms, positions, and character offsets are stored.   
+`no`| No term vectors are stored. (default)     
+---|---    
+`yes`| Just the terms in the field are stored.     
+`with_positions`| Terms and positions are stored.     
+`with_offsets`| Terms and character offsets are stored.     
+`with_positions_offsets`| Terms, positions, and character offsets are stored.   
   
 The fast vector highlighter requires `with_positions_offsets`. The term vectors API can retrieve whatever is stored.
 

@@ -98,31 +98,11 @@ You are not required to set the field `type` to `object` explicitly, as this is 
 
 The following parameters are accepted by `object` fields:
 
-[`dynamic`](dynamic.html)
-
-| 
-
-Whether or not new `properties` should be added dynamically to an existing object. Accepts `true` (default), `false` and `strict`.   
-  
----|---  
-  
-[`enabled`](enabled.html)
-
-| 
-
-Whether the JSON value given for the object field should be parsed and indexed (`true`, default) or completely ignored (`false`).   
-  
-[`include_in_all`](include-in-all.html)
-
-| 
-
-Sets the default `include_in_all` value for all the `properties` within the object. The object itself is not added to the `_all` field.   
-  
-[`properties`](properties.html)
-
-| 
-
-The fields within the object, which can be of any [datatype](mapping-types.html), including `object`. New properties may be added to an existing object.   
+[`dynamic`](dynamic.html)| Whether or not new `properties` should be added dynamically to an existing object. Accepts `true` (default), `false`and `strict`.     
+---|---    
+[`enabled`](enabled.html)| Whether the JSON value given for the object field should be parsed and indexed (`true`, default) or completely ignored(`false`).     
+[`include_in_all`](include-in-all.html)| Sets the default `include_in_all` value for all the `properties` within the object. The object itself is not added tothe `_all` field.     
+[`properties`](properties.html)| The fields within the object, which can be of any [datatype](mapping-types.html), including `object`. New properties may be added to an existing object.   
   
 ![Important](images/icons/important.png)
 

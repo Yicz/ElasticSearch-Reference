@@ -1,6 +1,6 @@
 ## Ids Query
 
-Filters documents that only have the provided ids. Note, this query uses the [_uid](mapping-uid-field.html) field.
+Filters documents that only have the provided ids. Note, this query uses the [\_uid](mapping-uid-field.html) field.
     
     
     GET /_search

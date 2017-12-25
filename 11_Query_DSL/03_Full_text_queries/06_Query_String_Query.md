@@ -17,126 +17,26 @@ The `query_string` top level parameters include:
 
 Parameter | Description  
 ---|---  
-  
-`query`
-
-| 
-
-The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax).  
-  
-`default_field`
-
-| 
-
-The default field for query terms if no prefix field is specified. Defaults to the `index.query.default_field` index settings, which in turn defaults to `_all`.  
-  
-`default_operator`
-
-| 
-
-The default operator used if no explicit operator is specified. For example, with a default operator of `OR`, the query `capital of Hungary` is translated to `capital OR of OR Hungary`, and with default operator of `AND`, the same query is translated to `capital AND of AND Hungary`. The default value is `OR`.  
-  
-`analyzer`
-
-| 
-
-The analyzer name used to analyze the query string.  
-  
-`allow_leading_wildcard`
-
-| 
-
-When set, `*` or `?` are allowed as the first character. Defaults to `true`.  
-  
-`enable_position_increments`
-
-| 
-
-Set to `true` to enable position increments in result queries. Defaults to `true`.  
-  
-`fuzzy_max_expansions`
-
-| 
-
-Controls the number of terms fuzzy queries will expand to. Defaults to `50`  
-  
-`fuzziness`
-
-| 
-
-Set the fuzziness for fuzzy queries. Defaults to `AUTO`. See [Fuzziness for allowed settings.  
-  
-`fuzzy_prefix_length`
-
-| 
-
-Set the prefix length for fuzzy queries. Default is `0`.  
-  
-`phrase_slop`
-
-| 
-
-Sets the default slop for phrases. If zero, then exact phrase matches are required. Default value is `0`.  
-  
-`boost`
-
-| 
-
-Sets the boost value of the query. Defaults to `1.0`.  
-  
-`auto_generate_phrase_queries`
-
-| 
-
-Defaults to `false`.  
-  
-`analyze_wildcard`
-
-| 
-
-By default, wildcards terms in a query string are not analyzed. By setting this value to `true`, a best effort will be made to analyze those as well.  
-  
-`max_determinized_states`
-
-| 
-
-Limit on how many automaton states regexp queries are allowed to create. This protects against too-difficult (e.g. exponentially hard) regexps. Defaults to 10000.  
-  
-`minimum_should_match`
-
-| 
-
-A value controlling how many).  
-  
-`lenient`
-
-| 
-
-If set to `true` will cause format based failures (like providing text to a numeric field) to be ignored.  
-  
-`time_zone`
-
-| 
-
-Time Zone to be applied to any range query related to dates. See also [JODA timezone](http://www.joda.org/joda-time/apidocs/org/joda/time/DateTimeZone.html).  
-  
-`quote_field_suffix`
-
-| 
-
-A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a different analysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensive example.  
-  
-`split_on_whitespace`
-
-| 
-
-Whether query text should be split on whitespace prior to analysis. Instead the queryparser would parse around only real _operators_. Defaults to `true`. It is not allowed to set this option to `false` if `auto_generate_phrase_queries` is already set to `true`.  
-  
-`all_fields`
-
-| 
-
-Perform the query on all fields detected in the mapping that can be queried. Will be used by default when the `_all` field is disabled and no `default_field` is specified (either in the index settings or in the request body) and no `fields` are specified.  
+`query`| The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax).   
+`default_field`| The default field for query terms if no prefix field is specified. Defaults to the `index.query.default_field` indexsettings, which in turn defaults to `_all`.    
+`default_operator`| The default operator used if no explicit operator is specified. For example, with a default operator of `OR`, thequery `capital of Hungary` is translated to `capital OR of OR Hungary`, and with default operator of `AND`, the samequery is translated to `capital AND of AND Hungary`. The default value is `OR`.    
+`analyzer`| The analyzer name used to analyze the query string.    
+`allow_leading_wildcard`| When set, `*` or `?` are allowed as the first character. Defaults to `true`.    
+`enable_position_increments`| Set to `true` to enable position increments in result queries. Defaults to `true`.    
+`fuzzy_max_expansions`| Controls the number of terms fuzzy queries will expand to. Defaults to `50`    
+`fuzziness`| Set the fuzziness for fuzzy queries. Defaults to `AUTO`. See [Fuzziness for allowed settings.    
+`fuzzy_prefix_length`| Set the prefix length for fuzzy queries. Default is `0`.    
+`phrase_slop`| Sets the default slop for phrases. If zero, then exact phrase matches are required. Default value is `0`.    
+`boost`| Sets the boost value of the query. Defaults to `1.0`.    
+`auto_generate_phrase_queries`| Defaults to `false`.    
+`analyze_wildcard`| By default, wildcards terms in a query string are not analyzed. By setting this value to `true`, a best effort will be made to analyze those as well.  
+`max_determinized_states`| Limit on how many automaton states regexp queries are allowed to create. This protects against too-difficult (e.g.exponentially hard) regexps. Defaults to 10000.    
+`minimum_should_match`| A value controlling how many).    
+`lenient`| If set to `true` will cause format based failures (like providing text to a numeric field) to be ignored.    
+`time_zone`| Time Zone to be applied to any range query related to dates. See also [JODA timezone](http://www.joda.org/joda-timeapidocs/org/joda/time/DateTimeZone.html).  
+`quote_field_suffix`| A suffix to append to fields for quoted parts of the query string. This allows to use a field that has a differentanalysis chain for exact matching. Look [here](recipes.html#mixing-exact-search-with-stemming) for a comprehensiveexample.    
+`split_on_whitespace`| Whether query text should be split on whitespace prior to analysis. Instead the queryparser would parse around onlyreal _operators_. Defaults to `true`. It is not allowed to set this option to `false` if `auto_generate_phrase_queries is already set to `true`.    
+`all_fields`| Perform the query on all fields detected in the mapping that can be queried. Will be used by default when the `_all`field is disabled and no `default_field` is specified (either in the index settings or in the request body) and no `fields` are specified.  
   
 When a multi term query is being generated, one can control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html) parameter.
 
@@ -229,18 +129,8 @@ When running the `query_string` query against multiple fields, the following add
 
 Parameter | Description  
 ---|---  
-  
-`use_dis_max`
-
-| 
-
-Should the queries be combined using `dis_max` (set it to `true`), or a `bool` query (set it to `false`). Defaults to `true`.  
-  
-`tie_breaker`
-
-| 
-
-When using `dis_max`, the disjunction max tie breaker. Defaults to `0`.  
+`use_dis_max`| Should the queries be combined using `dis_max` (set it to `true`), or a `bool` query (set it to `false`). Defaults to true`.   
+`tie_breaker`| When using `dis_max`, the disjunction max tie breaker. Defaults to `0`.  
   
 The fields parameter can also include pattern based field names, allowing to automatically expand to the relevant fields (dynamically introduced fields included). For example:
     

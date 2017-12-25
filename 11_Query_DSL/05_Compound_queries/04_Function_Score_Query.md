@@ -77,43 +77,12 @@ If no filter is given with a function this is equivalent to specifying `"match_a
 
 First, each document is scored by the defined functions. The parameter `score_mode` specifies how the computed scores are combined:
 
-`multiply`
-
-| 
-
-scores are multiplied (default)   
-  
----|---  
-  
-`sum`
-
-| 
-
-scores are summed   
-  
-`avg`
-
-| 
-
-scores are averaged   
-  
-`first`
-
-| 
-
-the first function that has a matching filter is applied   
-  
-`max`
-
-| 
-
-maximum score is used   
-  
-`min`
-
-| 
-
-minimum score is used   
+`multiply`| scores are multiplied (default)     ---|---    
+`sum`| scores are summed     
+`avg`| scores are averaged     
+`first`| the first function that has a matching filter is applied     
+`max`| maximum score is used     
+`min`| minimum score is used   
   
 Because scores can be on different scales (for example, between 0 and 1 for decay functions but arbitrary for `field_value_factor`) and also because sometimes a different impact of functions on the score is desirable, the score of each function can be adjusted with a user defined `weight`. The `weight` can be defined per function in the `functions` array (example above) and is multiplied with the score computed by the respective function. If weight is given without any other function declaration, `weight` acts as a function that simply returns the `weight`.
 
@@ -123,43 +92,13 @@ The new score can be restricted to not exceed a certain limit by setting the `ma
 
 The newly computed score is combined with the score of the query. The parameter `boost_mode` defines how:
 
-`multiply`
-
-| 
-
-query score and function score is multiplied (default)   
-  
----|---  
-  
-`replace`
-
-| 
-
-only function score is used, the query score is ignored   
-  
-`sum`
-
-| 
-
-query score and function score are added   
-  
-`avg`
-
-| 
-
-average   
-  
-`max`
-
-| 
-
-max of query score and function score   
-  
-`min`
-
-| 
-
-min of query score and function score   
+`multiply`| query score and function score is multiplied (default)     
+---|---    
+`replace`| only function score is used, the query score is ignored     
+`sum`| query score and function score are added     
+`avg`| average     
+`max`| max of query score and function score     
+`min`| min of query score and function score   
   
 By default, modifying the score does not change which documents match. To exclude documents that do not meet a certain score threshold the `min_score` parameter can be set to the desired score threshold.
 
@@ -279,88 +218,22 @@ Which will translate into the following formula for scoring:
 
 There are a number of options for the `field_value_factor` function:
 
-`field`
-
-| 
-
-Field to be extracted from the document.   
-  
----|---  
-  
-`factor`
-
-| 
-
-Optional factor to multiply the field value with, defaults to `1`.   
-  
-`modifier`
-
-| 
-
-Modifier to apply to the field value, can be one of: `none`, `log`, `log1p`, `log2p`, `ln`, `ln1p`, `ln2p`, `square`, `sqrt`, or `reciprocal`. Defaults to `none`.   
+`field`| Field to be extracted from the document.     ---|---    
+`factor`| Optional factor to multiply the field value with, defaults to `1`.     
+`modifier`| Modifier to apply to the field value, can be one of: `none`, `log`, `log1p`, `log2p`, `ln`, `ln1p`, `ln2p`, `square`, `sqrt`, or `reciprocal`. Defaults to `none`.   
   
 Modifier |  Meaning  
 ---|---  
-  
-`none`
-
-| 
-
-Do not apply any multiplier to the field value  
-  
-`log`
-
-| 
-
-Take the [logarithm](https://en.wikipedia.org/wiki/Logarithm) of the field value  
-  
-`log1p`
-
-| 
-
-Add 1 to the field value and take the logarithm  
-  
-`log2p`
-
-| 
-
-Add 2 to the field value and take the logarithm  
-  
-`ln`
-
-| 
-
-Take the [natural logarithm](https://en.wikipedia.org/wiki/Natural_logarithm) of the field value  
-  
-`ln1p`
-
-| 
-
-Add 1 to the field value and take the natural logarithm  
-  
-`ln2p`
-
-| 
-
-Add 2 to the field value and take the natural logarithm  
-  
-`square`
-
-| 
-
-Square the field value (multiply it by itself)  
-  
-`sqrt`
-
-| 
-
-Take the [square root](https://en.wikipedia.org/wiki/Square_root) of the field value  
-  
-`reciprocal`
-
-| 
-
-[Reciprocate](https://en.wikipedia.org/wiki/Multiplicative_inverse) the field value, same as `1/x` where `x` is the field’s value  
+`none`| Do not apply any multiplier to the field value    
+`log`| Take the [logarithm](https://en.wikipedia.org/wiki/Logarithm) of the field value    
+`log1p`| Add 1 to the field value and take the logarithm    
+`log2p`| Add 2 to the field value and take the logarithm    
+`ln`| Take the [natural logarithm](https://en.wikipedia.org/wiki/Natural_logarithm) of the field value    
+`ln1p`| Add 1 to the field value and take the natural logarithm    
+`ln2p`| Add 2 to the field value and take the natural logarithm    
+`square`| Square the field value (multiply it by itself)    
+`sqrt`| Take the [square root](https://en.wikipedia.org/wiki/Square_root) of the field value    
+`reciprocal`| [Reciprocate](https://en.wikipedia.org/wiki/Multiplicative_inverse) the field value, same as `1/x` where `x` is the field’s value  
   
 `missing`
     
@@ -431,38 +304,12 @@ The date format of the origin depends on the [`format`](mapping-date-format.html
 ---|---  
   
 ![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png)
-
-| 
-
-The `offset` and `decay` parameters are optional. 
-
-| 
-
-`origin`
-
-| 
-
-The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fields and geo point for geo fields. Required for geo and numeric field. For date fields the default is `now`. Date math (for example `now-1h`) is supported for origin.   
-  
----|---  
-  
-`scale`
-
-| 
-
-Required for all types. Defines the distance from origin + offset at which the computed score will equal `decay` parameter. For geo fields: Can be defined as number+unit (1km, 12m,…). Default unit is meters. For date fields: Can to be defined as a number+unit ("1h", "10d",…). Default unit is milliseconds. For numeric field: Any number.   
-  
-`offset`
-
-| 
-
-If an `offset` is defined, the decay function will only compute the decay function for documents with a distance greater that the defined `offset`. The default is 0.   
-  
-`decay`
-
-| 
-
-The `decay` parameter defines how documents are scored at the distance given at `scale`. If no `decay` is defined, documents at the distance `scale` will be scored 0.5.   
+| The `offset` and `decay` parameters are optional. | 
+`origin`| The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fieldsand geo point for geo fields. Required for geo and numeric field. For date fields the default is `now`. Date math (forexample `now-1h`) is supported for origin.     
+---|---    
+`scale`| Required for all types. Defines the distance from origin + offset at which the computed score will equal `decay`parameter. For geo fields: Can be defined as number+unit (1km, 12m,…). Default unit is meters. For date fields: Can tobe defined as a number+unit ("1h", "10d",…). Default unit is milliseconds. For numeric field: Any number.     
+`offset`| If an `offset` is defined, the decay function will only compute the decay function for documents with a distancegreater that the defined `offset`. The default is 0.     
+`decay`| The `decay` parameter defines how documents are scored at the distance given at `scale`. If no `decay` is defined, documents at the distance `scale` will be scored 0.5.   
   
 In the first example, your documents might represents hotels and contain a geo location field. You want to compute a decay function depending on how far the hotel is from a given location. You might not immediately see what scale to choose for the gauss function, but you can say something like: "At a distance of 2km from the desired location, the score should be reduced to one third." The parameter "scale" will then be adjusted automatically to assure that the score function computes a score of 0.33 for hotels that are 2km away from the desired location.
 
@@ -519,31 +366,10 @@ For single functions the three decay functions together with their parameters ca
 
 If a field used for computing the decay contains multiple values, per default the value closest to the origin is chosen for determining the distance. This can be changed by setting `multi_value_mode`.
 
-`min`
-
-| 
-
-Distance is the minimum distance   
-  
----|---  
-  
-`max`
-
-| 
-
-Distance is the maximum distance   
-  
-`avg`
-
-| 
-
-Distance is the average distance   
-  
-`sum`
-
-| 
-
-Distance is the sum of all distances   
+`min`| Distance is the minimum distance     ---|---    
+`max`| Distance is the maximum distance     
+`avg`| Distance is the average distance     
+`sum`| Distance is the sum of all distances   
   
 Example:
     

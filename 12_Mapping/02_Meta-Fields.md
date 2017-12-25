@@ -4,31 +4,11 @@ Each document has metadata associated with it, such as the `_index`, mapping [`_
 
 ### Identity meta-fields
 
-[`_index`](mapping-index-field.html)
-
-| 
-
-The index to which the document belongs.   
-  
----|---  
-  
-[`_uid`](mapping-uid-field.html)
-
-| 
-
-A composite field consisting of the `_type` and the `_id`.   
-  
-[`_type`](mapping-type-field.html)
-
-| 
-
-The document’s [mapping type](mapping.html#mapping-type).   
-  
-[`_id`](mapping-id-field.html)
-
-| 
-
-The document’s ID.   
+[`_index`](mapping-index-field.html)| The index to which the document belongs.     
+---|---    
+[`_uid`](mapping-uid-field.html)| A composite field consisting of the `_type` and the `_id`.     
+[`_type`](mapping-type-field.html)| The document’s [mapping type](mapping.html#mapping-type).     
+[`_id`](mapping-id-field.html)| The document’s ID.   
   
 ### Document source meta-fields
 

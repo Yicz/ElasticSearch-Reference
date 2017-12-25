@@ -120,114 +120,21 @@ The only required parameter is `like`, all other parameters have sensible defaul
 
 #### Document Input Parameters
 
-`like`
-
-| 
-
-The only **required** parameter of the MLT query is `like` and follows a versatile syntax, in which the user can specify free form text and/or a single or multiple documents (see examples above). The syntax to specify documents is similar to the one used by the [Multi GET API](docs-multi-get.html). When specifying documents, the text is fetched from `fields` unless overridden in each document request. The text is analyzed by the analyzer at the field, but could also be overridden. The syntax to override the analyzer at the field follows a similar syntax to the `per_field_analyzer` parameter of the [Term Vectors API](docs-termvectors.html#docs-termvectors-per-field-analyzer). Additionally, to provide documents not necessarily present in the index, [artificial documents](docs-termvectors.html#docs-termvectors-artificial-doc) are also supported.   
-  
----|---  
-  
-`unlike`
-
-| 
-
-The `unlike` parameter is used in conjunction with `like` in order not to select terms found in a chosen set of documents. In other words, we could ask for documents `like: "Apple"`, but `unlike: "cake crumble tree"`. The syntax is the same as `like`.   
-  
-`fields`
-
-| 
-
-A list of fields to fetch and analyze the text from. Defaults to the `_all` field for free text and to all possible fields for document inputs.   
-  
-`like_text`
-
-| 
-
-The text to find documents like it.   
-  
-`ids` or `docs`
-
-| 
-
-A list of documents following the same syntax as the [Multi GET API](docs-multi-get.html).   
-  
-#### Term Selection Parameters
-
-`max_query_terms`
-
-| 
-
-The maximum number of query terms that will be selected. Increasing this value gives greater accuracy at the expense of query execution speed. Defaults to `25`.   
-  
----|---  
-  
-`min_term_freq`
-
-| 
-
-The minimum term frequency below which the terms will be ignored from the input document. Defaults to `2`.   
-  
-`min_doc_freq`
-
-| 
-
-The minimum document frequency below which the terms will be ignored from the input document. Defaults to `5`.   
-  
-`max_doc_freq`
-
-| 
-
-The maximum document frequency above which the terms will be ignored from the input document. This could be useful in order to ignore highly frequent words such as stop words. Defaults to unbounded (`0`).   
-  
-`min_word_length`
-
-| 
-
-The minimum word length below which the terms will be ignored. The old name `min_word_len` is deprecated. Defaults to `0`.   
-  
-`max_word_length`
-
-| 
-
-The maximum word length above which the terms will be ignored. The old name `max_word_len` is deprecated. Defaults to unbounded (`0`).   
-  
-`stop_words`
-
-| 
-
-An array of stop words. Any word in this set is considered "uninteresting" and ignored. If the analyzer allows for stop words, you might want to tell MLT to explicitly ignore them, as for the purposes of document similarity it seems reasonable to assume that "a stop word is never interesting".   
-  
-`analyzer`
-
-| 
-
-The analyzer that is used to analyze the free form text. Defaults to the analyzer associated with the first field in `fields`.   
-  
-#### Query Formation Parameters
-
-`minimum_should_match`
-
-| 
-
-After the disjunctive query has been formed, this parameter controls the number of terms that must match. The syntax is the same as the [minimum should match](query-dsl-minimum-should-match.html). (Defaults to `"30%"`).   
-  
----|---  
-  
-`boost_terms`
-
-| 
-
-Each term in the formed query could be further boosted by their tf-idf score. This sets the boost factor to use when using this feature. Defaults to deactivated (`0`). Any other positive value activates terms boosting with the given boost factor.   
-  
-`include`
-
-| 
-
-Specifies whether the input documents should also be included in the search results returned. Defaults to `false`.   
-  
-`boost`
-
-| 
-
-Sets the boost value of the whole query. Defaults to `1.0`. 
+`like`| The only **required** parameter of the MLT query is `like` and follows a versatile syntax, in which the user canspecify free form text and/or a single or multiple documents (see examples above). The syntax to specify documents issimilar to the one used by the [Multi GET API](docs-multi-get.html). When specifying documents, the text is fetchedfrom `fields` unless overridden in each document request. The text is analyzed by the analyzer at the field, but couldalso be overridden. The syntax to override the analyzer at the field follows a similar syntax to the per_field_analyzer` parameter of the [Term Vectors API](docs-termvectors.html#docs-termvectors-per-field-analyzer).Additionally, to provide documents not necessarily present in the index, [artificial documents]docs-termvectors.html#docs-termvectors-artificial-doc) are also supported.     
+---|---    
+`unlike`| The `unlike` parameter is used in conjunction with `like` in order not to select terms found in a chosen set ofdocuments. In other words, we could ask for documents `like: "Apple"`, but `unlike: "cake crumble tree"`. The syntaxis the same as `like`.     
+`fields`| A list of fields to fetch and analyze the text from. Defaults to the `_all` field for free text and to all possiblefields for document inputs.     
+`like_text`| The text to find documents like it.     `ids` or 
+`docs`| A list of documents following the same syntax as the [Multi GET API](docs-multi-get.html).     #### Term Selection Parameters
+`max_query_terms`| The maximum number of query terms that will be selected. Increasing this value gives greater accuracy at the expenseof query execution speed. Defaults to `25`.     ---|---    
+`min_term_freq`| The minimum term frequency below which the terms will be ignored from the input document. Defaults to `2`.     
+`min_doc_freq`| The minimum document frequency below which the terms will be ignored from the input document. Defaults to `5`.     
+`max_doc_freq`| The maximum document frequency above which the terms will be ignored from the input document. This could be useful inorder to ignore highly frequent words such as stop words. Defaults to unbounded (`0`).     
+`min_word_length`| The minimum word length below which the terms will be ignored. The old name `min_word_len` is deprecated. Defaults to 0`.     
+`max_word_length`| The maximum word length above which the terms will be ignored. The old name `max_word_len` is deprecated. Defaults tounbounded (`0`).     
+`stop_words`| An array of stop words. Any word in this set is considered "uninteresting" and ignored. If the analyzer allows forstop words, you might want to tell MLT to explicitly ignore them, as for the purposes of document similarity it seemsreasonable to assume that "a stop word is never interesting".     
+`analyzer`| The analyzer that is used to analyze the free form text. Defaults to the analyzer associated with the first field in fields`.     #### Query Formation Parameters
+`minimum_should_match`| After the disjunctive query has been formed, this parameter controls the number of terms that must match. The syntaxis the same as the [minimum should match](query-dsl-minimum-should-match.html). (Defaults to `"30%"`).     ---|---    
+`boost_terms`| Each term in the formed query could be further boosted by their tf-idf score. This sets the boost factor to use whenusing this feature. Defaults to deactivated (`0`). Any other positive value activates terms boosting with the givenboost factor.     
+`include`| Specifies whether the input documents should also be included in the search results returned. Defaults to `false`.     
+`boost`| Sets the boost value of the whole query. Defaults to `1.0`. 

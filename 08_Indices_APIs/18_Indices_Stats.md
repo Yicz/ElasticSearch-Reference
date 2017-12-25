@@ -14,113 +14,24 @@ Specific index stats can be retrieved using:
 
 By default, all stats are returned, returning only specific stats can be specified as well in the URI. Those stats can be any of:
 
-`docs`
-
-| 
-
-The number of docs / deleted docs (docs not yet merged out). Note, affected by refreshing the index.   
-  
----|---  
-  
-`store`
-
-| 
-
-The size of the index.   
-  
-`indexing`
-
-| 
-
-Indexing statistics, can be combined with a comma separated list of `types` to provide document type level stats.   
-  
-`get`
-
-| 
-
-Get statistics, including missing stats.   
-  
-`search`
-
-| 
-
-Search statistics including suggest statistics. You can include statistics for custom groups by adding an extra `groups` parameter (search operations can be associated with one or more groups). The `groups` parameter accepts a comma separated list of group names. Use `_all` to return statistics for all groups.   
-  
-`segments`
-
-| 
-
-Retrieve the memory use of the open segments. Optionally, setting the `include_segment_file_sizes` flag, report the aggregated disk usage of each one of the Lucene index files.   
-  
-`completion`
-
-| 
-
-Completion suggest statistics.   
-  
-`fielddata`
-
-| 
-
-Fielddata statistics.   
-  
-`flush`
-
-| 
-
-Flush statistics.   
-  
-`merge`
-
-| 
-
-Merge statistics.   
-  
-`request_cache`
-
-| 
-
-[Shard request cache](shard-request-cache.html) statistics.   
-  
-`refresh`
-
-| 
-
-Refresh statistics.   
-  
-`warmer`
-
-| 
-
-Warmer statistics.   
-  
-`translog`
-
-| 
-
-Translog statistics.   
-  
-Some statistics allow per field granularity which accepts a list comma-separated list of included fields. By default all fields are included:
-
-`fields`
-
-| 
-
-List of fields to be included in the statistics. This is used as the default list unless a more specific field list is provided (see below).   
-  
----|---  
-  
-`completion_fields`
-
-| 
-
-List of fields to be included in the Completion Suggest statistics.   
-  
-`fielddata_fields`
-
-| 
-
-List of fields to be included in the Fielddata statistics.   
+`docs`| The number of docs / deleted docs (docs not yet merged out). Note, affected by refreshing the index.     
+---|---    
+`store`| The size of the index.     
+`indexing`| Indexing statistics, can be combined with a comma separated list of `types` to provide document type level stats.     
+`get`| Get statistics, including missing stats.     
+`search`| Search statistics including suggest statistics. You can include statistics for custom groups by adding an extra `group` parameter (search operations can be associated with one or more groups). The `groups` parameter accepts a comma separated list of group names. Use `_all` to return statistics for all groups.   
+`segments`| Retrieve the memory use of the open segments. Optionally, setting the `include_segment_file_sizes` flag, report theaggregated disk usage of each one of the Lucene index files.     
+`completion`| Completion suggest statistics.     
+`fielddata`| Fielddata statistics.     
+`flush`| Flush statistics.     
+`merge`| Merge statistics.     
+`request_cache`| [Shard request cache](shard-request-cache.html) statistics.     
+`refresh`| Refresh statistics.     
+`warmer`| Warmer statistics.     
+`translog`| Translog statistics.     Some statistics allow per field granularity which accepts a list comma-separated list of included fields. By defaultall fields are included:
+`fields`| List of fields to be included in the statistics. This is used as the default list unless a more specific field list isprovided (see below).     ---|---    
+`completion_fields`| List of fields to be included in the Completion Suggest statistics.     
+`fielddata_fields`| List of fields to be included in the Fielddata statistics.   
   
 Here are some samples:
     

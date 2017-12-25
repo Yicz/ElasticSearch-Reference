@@ -2,55 +2,15 @@
 
 The following numeric types are supported:
 
-`long`
-
-| 
-
-A signed 64-bit integer with a minimum value of `-263` and a maximum value of `263-1`.   
-  
----|---  
-  
-`integer`
-
-| 
-
-A signed 32-bit integer with a minimum value of `-231` and a maximum value of `231-1`.   
-  
-`short`
-
-| 
-
-A signed 16-bit integer with a minimum value of `-32,768` and a maximum value of `32,767`.   
-  
-`byte`
-
-| 
-
-A signed 8-bit integer with a minimum value of `-128` and a maximum value of `127`.   
-  
-`double`
-
-| 
-
-A double-precision 64-bit IEEE 754 floating point.   
-  
-`float`
-
-| 
-
-A single-precision 32-bit IEEE 754 floating point.   
-  
-`half_float`
-
-| 
-
-A half-precision 16-bit IEEE 754 floating point.   
-  
-`scaled_float`
-
-| 
-
-A floating point that is backed by a `long` and a fixed scaling factor.   
+`long`| A signed 64-bit integer with a minimum value of `-263` and a maximum value of `263-1`.     
+---|---    
+`integer`| A signed 32-bit integer with a minimum value of `-231` and a maximum value of `231-1`.     
+`short`| A signed 16-bit integer with a minimum value of `-32,768` and a maximum value of `32,767`.     
+`byte`| A signed 8-bit integer with a minimum value of `-128` and a maximum value of `127`.     
+`double`| A double-precision 64-bit IEEE 754 floating point.     
+`float`| A single-precision 32-bit IEEE 754 floating point.     
+`half_float`| A half-precision 16-bit IEEE 754 floating point.     
+`scaled_float`| A floating point that is backed by a `long` and a fixed scaling factor.   
   
 Below is an example of configuring a mapping with numeric fields:
     
@@ -89,102 +49,27 @@ If `scaled_float` is not a good fit, then you should pick the smallest type that
 
 Type | Minimum value | Maximum value | Significant bits / digits  
 ---|---|---|---  
-  
-`double`
-
-| 
-
-`2-1074`
-
-| 
-
-`(2-2-52)·21023`
-
-| 
-
-`53` / `15.95`  
-  
-`float`
-
-| 
-
-`2-149`
-
-| 
-
-`(2-2-23)·2127`
-
-| 
-
-`24` / `7.22`  
-  
-`half_float`
-
-| 
-
-`2-24`
-
-| 
-
-`65504`
-
-| 
-
-`11` / `3.31`  
+`double`| `2-1074`| `(2-2-52)·21023`| `53` / `15.95`    
+`float`| `2-149`| `(2-2-23)·2127`| `24` / `7.22`    
+`half_float`| `2-24`| `65504`| `11` / `3.31`  
   
 ### Parameters for numeric fields
 
 The following parameters are accepted by numeric types:
 
-[`coerce`](coerce.html)
-
-| 
-
-Try to convert strings to numbers and truncate fractions for integers. Accepts `true` (default) and `false`.   
-  
----|---  
-  
-[`boost`](mapping-boost.html)
-
-| 
-
-Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
-  
-[`doc_values`](doc-values.html)
-
-| 
-
-Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations, or scripting? Accepts `true` (default) or `false`.   
-  
-[`ignore_malformed`](ignore-malformed.html)
-
-| 
-
-If `true`, malformed numbers are ignored. If `false` (default), malformed numbers throw an exception and reject the whole document.   
-  
-[`include_in_all`](include-in-all.html)
-
-| 
-
-Whether or not the field value should be included in the [`_all`](mapping-all-field.html) field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html) is set to `false`, or if a parent [`object`](object.html) field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
-  
-[`index`](mapping-index.html)
-
-| 
-
-Should the field be searchable? Accepts `true` (default) and `false`.   
-  
-[`null_value`](null-value.html)
-
-| 
-
-Accepts a numeric value of the same `type` as the field which is substituted for any explicit `null` values. Defaults to `null`, which means the field is treated as missing.   
-  
-[`store`](mapping-store.html)
-
-| 
-
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default).   
+[`coerce`](coerce.html)| Try to convert strings to numbers and truncate fractions for integers. Accepts `true` (default) and `false`.     
+---|---    
+[`boost`](mapping-boost.html)| Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.     
+[`doc_values`](doc-values.html)| Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations,or scripting? Accepts `true` (default) or `false`.     
+[`ignore_malformed`](ignore-malformed.html)| If `true`, malformed numbers are ignored. If `false` (default), malformed numbers throw an exception and reject thewhole document.     
+[`include_in_all`](include-in-all.html)| Whether or not the field value should be included in the 
+[`_all`](mapping-all-field.html) field? Accepts `true` or false`. Defaults to `false` if 
+[`index`](mapping-index.html) is set to `false`, or if a parent 
+[`object`](object.html)field sets `include_in_all` to `false`. Otherwise defaults to `true`.     
+[`index`](mapping-index.html)| Should the field be searchable? Accepts `true` (default) and `false`.     
+[`null_value`](null-value.html)| Accepts a numeric value of the same `type` as the field which is substituted for any explicit `null` values. Defaultsto `null`, which means the field is treated as missing.     
+[`store`](mapping-store.html)| Whether the field value should be stored and retrievable separately from the 
+[`_source`](mapping-source-field.html)field. Accepts `true` or `false` (default).   
   
 ### Parameters for `scaled_float`
 

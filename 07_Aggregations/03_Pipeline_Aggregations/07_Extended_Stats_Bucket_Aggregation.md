@@ -20,76 +20,13 @@ A `extended_stats_bucket` aggregation looks like this in isolation:
     }
 
  **Table 7. `extended_stats_bucket` Parameters**
-
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`buckets_path`
-
-| 
-
-The path to the buckets we wish to calculate stats for (see [`buckets_path` Syntax
-
-| 
-
-Required
-
-|   
-  
-`gap_policy`
-
-| 
-
-The policy to apply when gaps are found in the data (see [Dealing with gaps in the data
-
-| 
-
-Optional
-
-| 
-
-`skip`  
-  
-`format`
-
-| 
-
-format to apply to the output value of this aggregation
-
-| 
-
-Optional
-
-| 
-
-`null`  
-  
-`sigma`
-
-| 
-
-The number of standard deviations above/below the mean to display
-
-| 
-
-Optional
-
-| 
-
-2  
+ 
+Parameter Name| Description| Required| Default Value   
+ ---|---|---|---    
+`buckets_path`| The path to the buckets we wish to calculate stats for (see [`buckets_path` Syntax| Required|     
+`gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| 
+`skip` `format`| format to apply to the output value of this aggregation| Optional| `null`    
+`sigma`| The number of standard deviations above/below the mean to display| Optional| 2  
   
   
 

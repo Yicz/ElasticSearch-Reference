@@ -31,73 +31,12 @@ Here, `my_var1` is the name of the variable for this buckets path to use in the 
   
 **Table 11. `bucket_script` Parameters**
 
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`script`
-
-| 
-
-The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_](modules-scripting.html) for more details)
-
-| 
-
-Required
-
-|   
-  
-`buckets_path`
-
-| 
-
-A map of script variables and their associated path to the buckets we wish to use for the variable (see [`buckets_path` Syntax
-
-| 
-
-Required
-
-|   
-  
-`gap_policy`
-
-| 
-
-The policy to apply when gaps are found in the data (see [Dealing with gaps in the data
-
-| 
-
-Optional
-
-| 
-
-`skip`  
-  
-`format`
-
-| 
-
-format to apply to the output value of this aggregation
-
-| 
-
-Optional
-
-| 
-
-`null`  
+Parameter Name| Description| Required| Default Value   
+---|---|---|---    
+`script`| The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_]modules-scripting.html) for more details)| Required|     
+`buckets_path`| A map of script variables and their associated path to the buckets we wish to use for the variable (see [`buckets_path Syntax| Required|     
+`gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| `skip`    
+`format`| format to apply to the output value of this aggregation| Optional| `null`  
   
   
 

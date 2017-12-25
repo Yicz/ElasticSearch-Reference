@@ -79,117 +79,18 @@ All [built-in thread pools](modules-threadpool.html) and custom thread pools are
 For each thread pool, you can load details about it by using the field names in the table below.
 
 Field Name | Alias | Description  
----|---|---  
-  
-`type`
-
-| 
-
-`t`
-
-| 
-
-The current (*) type of thread pool (`fixed` or `scaling`)  
-  
-`active`
-
-| 
-
-`a`
-
-| 
-
-The number of active threads in the current thread pool  
-  
-`size`
-
-| 
-
-`s`
-
-| 
-
-The number of threads in the current thread pool  
-  
-`queue`
-
-| 
-
-`q`
-
-| 
-
-The number of tasks in the queue for the current thread pool  
-  
-`queue_size`
-
-| 
-
-`qs`
-
-| 
-
-The maximum number of tasks permitted in the queue for the current thread pool  
-  
-`rejected`
-
-| 
-
-`r`
-
-| 
-
-The number of tasks rejected by the thread pool executor  
-  
-`largest`
-
-| 
-
-`l`
-
-| 
-
-The highest number of active threads in the current thread pool  
-  
-`completed`
-
-| 
-
-`c`
-
-| 
-
-The number of tasks completed by the thread pool executor  
-  
-`min`
-
-| 
-
-`mi`
-
-| 
-
-The configured minimum number of active threads allowed in the current thread pool  
-  
-`max`
-
-| 
-
-`ma`
-
-| 
-
-The configured maximum number of active threads allowed in the current thread pool  
-  
-`keep_alive`
-
-| 
-
-`k`
-
-| 
-
-The configured keep alive time for threads  
+---|---|---    
+`type`| `t`| The current (\*) type of thread pool (`fixed` or `scaling`)    
+`active`| `a`| The number of active threads in the current thread pool    
+`size`| `s`| The number of threads in the current thread pool    
+`queue`| `q`| The number of tasks in the queue for the current thread pool    
+`queue_size`| `qs`| The maximum number of tasks permitted in the queue for the current thread pool    
+`rejected`| `r`| The number of tasks rejected by the thread pool executor    
+`largest`| `l`| The highest number of active threads in the current thread pool    
+`completed`| `c`| The number of tasks completed by the thread pool executor    
+`min`| `mi`| The configured minimum number of active threads allowed in the current thread pool    
+`max`| `ma`| The configured maximum number of active threads allowed in the current thread pool    
+`keep_alive`| `k`| The configured keep alive time for threads  
   
 ### Other Fields
 
@@ -197,63 +98,9 @@ In addition to details about each thread pool, it is also convenient to get an u
 
 Field Name | Alias | Description  
 ---|---|---  
-  
-`node_id`
-
-| 
-
-`id`
-
-| 
-
-The unique node ID  
-  
-`ephemeral_id`
-
-| 
-
-`eid`
-
-| 
-
-The ephemeral node ID  
-  
-`pid`
-
-| 
-
-`p`
-
-| 
-
-The process ID of the running node  
-  
-`host`
-
-| 
-
-`h`
-
-| 
-
-The hostname for the current node  
-  
-`ip`
-
-| 
-
-`i`
-
-| 
-
-The IP address for the current node  
-  
-`port`
-
-| 
-
-`po`
-
-| 
-
-The bound transport port for the current node
+`node_id`| `id`| The unique node ID    
+`ephemeral_id`| `eid`| The ephemeral node ID    
+`pid`| `p`| The process ID of the running node    
+`host`| `h`| The hostname for the current node    
+`ip`| `i`| The IP address for the current node    
+`port`| `po`| The bound transport port for the current node

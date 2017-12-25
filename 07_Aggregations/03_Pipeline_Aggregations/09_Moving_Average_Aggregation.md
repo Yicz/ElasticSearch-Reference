@@ -34,101 +34,14 @@ A `moving_avg` aggregation looks like this in isolation:
 
  **Table 9. `moving_avg` Parameters**
 
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`buckets_path`
-
-| 
-
-Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) for more details
-
-| 
-
-Required
-
-|   
-  
-`model`
-
-| 
-
-The moving average weighting model that we wish to use
-
-| 
-
-Optional
-
-| 
-
-`simple`  
-  
-`gap_policy`
-
-| 
-
-Determines what should happen when a gap in the data is encountered.
-
-| 
-
-Optional
-
-| 
-
-`insert_zeros`  
-  
-`window`
-
-| 
-
-The size of window to "slide" across the histogram.
-
-| 
-
-Optional
-
-| 
-
-`5`  
-  
-`minimize`
-
-| 
-
-If the model should be algorithmically minimized. See [Minimization](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer) for more details
-
-| 
-
-Optional
-
-| 
-
-`false` for most models  
-  
-`settings`
-
-| 
-
-Model-specific settings, contents which differ depending on the model specified.
-
-| 
-
-Optional
-
-|   
+Parameter Name| Description| Required| Default Value    
+---|---|---|---    
+`buckets_path`| Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) formore details| Required|     
+`model`| The moving average weighting model that we wish to use| Optional| `simple`    
+`gap_policy`| Determines what should happen when a gap in the data is encountered.| Optional| `insert_zeros`    
+`window`| The size of window to "slide" across the histogram.| Optional| `5`    
+`minimize`| If the model should be algorithmically minimized. See [Minimization]search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer) for more details| Optional| `false` for most models    
+`settings`| Model-specific settings, contents which differ depending on the model specified.| Optional|   
   
   
 

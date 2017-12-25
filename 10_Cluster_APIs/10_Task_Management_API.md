@@ -137,7 +137,7 @@ You can also wait for all tasks for certain action types to finish. This command
     
     GET _tasks?actions=*reindex&wait_for_completion=true&timeout=10s
 
-Tasks can be also listed using _cat version of the list tasks command, which accepts the same arguments as the standard list tasks command.
+Tasks can be also listed using \_cat version of the list tasks command, which accepts the same arguments as the standard list tasks command.
     
     
     GET _cat/tasks

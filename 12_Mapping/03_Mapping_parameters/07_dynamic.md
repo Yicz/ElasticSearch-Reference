@@ -57,25 +57,10 @@ The details of how new fields are detected and added to the mapping is explained
 
 The `dynamic` setting controls whether new fields can be added dynamically or not. It accepts three settings:
 
-`true`
-
-| 
-
-Newly detected fields are added to the mapping. (default)   
-  
----|---  
-  
-`false`
-
-| 
-
-Newly detected fields are ignored. New fields must be added explicitly.   
-  
-`strict`
-
-| 
-
-If new fields are detected, an exception is thrown and the document is rejected.   
+`true`| Newly detected fields are added to the mapping. (default)     
+---|---    
+`false`| Newly detected fields are ignored. New fields must be added explicitly.     
+`strict`| If new fields are detected, an exception is thrown and the document is rejected.   
   
 The `dynamic` setting may be set at the mapping type level, and on each [inner object](object.html). Inner objects inherit the setting from their parent object or from the mapping type. For instance:
     

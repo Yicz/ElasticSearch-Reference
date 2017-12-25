@@ -12,73 +12,18 @@ The first command retrieves stats of all the nodes in the cluster. The second co
 
 By default, all stats are returned. You can limit this by combining any of `indices`, `os`, `process`, `jvm`, `transport`, `http`, `fs`, `breaker` and `thread_pool`. For example:
 
-`indices`
-
-| 
-
-Indices stats about size, document count, indexing and deletion times, search times, field cache size, merges and flushes   
-  
----|---  
-  
-`fs`
-
-| 
-
-File system information, data path, free disk space, read/write stats (see [FS information](cluster-nodes-stats.html#fs-info))   
-  
-`http`
-
-| 
-
-HTTP connection information   
-  
-`jvm`
-
-| 
-
-JVM stats, memory pool information, garbage collection, buffer pools, number of loaded/unloaded classes   
-  
-`os`
-
-| 
-
-Operating system stats, load average, mem, swap (see [OS statistics](cluster-nodes-stats.html#os-stats))   
-  
-`process`
-
-| 
-
-Process statistics, memory consumption, cpu usage, open file descriptors (see [Process statistics](cluster-nodes-stats.html#process-stats))   
-  
-`thread_pool`
-
-| 
-
-Statistics about each thread pool, including current size, queue and rejected tasks   
-  
-`transport`
-
-| 
-
-Transport statistics about sent and received bytes in cluster communication   
-  
-`breaker`
-
-| 
-
-Statistics about the field data circuit breaker   
-  
-`discovery`
-
-| 
-
-Statistics about the discovery   
-  
-`ingest`
-
-| 
-
-Statistics about ingest preprocessing   
+`indices`| Indices stats about size, document count, indexing and deletion times, search times, field cache size, merges andflushes     
+---|---    
+`fs`| File system information, data path, free disk space, read/write stats (see [FS information]cluster-nodes-stats.html#fs-info))     
+`http`| HTTP connection information     
+`jvm`| JVM stats, memory pool information, garbage collection, buffer pools, number of loaded/unloaded classes     
+`os`| Operating system stats, load average, mem, swap (see [OS statistics](cluster-nodes-stats.html#os-stats))     
+`process`| Process statistics, memory consumption, cpu usage, open file descriptors (see [Process statistics]cluster-nodes-stats.html#process-stats))     
+`thread_pool`| Statistics about each thread pool, including current size, queue and rejected tasks     
+`transport`| Transport statistics about sent and received bytes in cluster communication     
+`breaker`| Statistics about the field data circuit breaker     
+`discovery`| Statistics about the discovery     
+`ingest`| Statistics about ingest preprocessing   
       
     
     # return just indices

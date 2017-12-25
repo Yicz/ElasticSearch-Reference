@@ -103,67 +103,22 @@ The query with id `1` matches our document.
 
 The following parameters are required when percolating a document:
 
-`field`
-
-| 
-
-The field of type `percolator` that holds the indexed queries. This is a required parameter.   
-  
----|---  
-  
-`document_type`
-
-| 
-
-The type / mapping of the document being percolated. This is a required parameter.   
-  
-`document`
-
-| 
-
-The source of the document being percolated.   
+`field`| The field of type `percolator` that holds the indexed queries. This is a required parameter.     
+---|---    
+`document_type`| The type / mapping of the document being percolated. This is a required parameter.     
+`document`| The source of the document being percolated.   
   
 Instead of specifying the source of the document being percolated, the source can also be retrieved from an already stored document. The `percolate` query will then internally execute a get request to fetch that document.
 
 In that case the `document` parameter can be substituted with the following parameters:
 
-`index`
-
-| 
-
-The index the document resides in. This is a required parameter.   
-  
----|---  
-  
-`type`
-
-| 
-
-The type of the document to fetch. This is a required parameter.   
-  
-`id`
-
-| 
-
-The id of the document to fetch. This is a required parameter.   
-  
-`routing`
-
-| 
-
-Optionally, routing to be used to fetch document to percolate.   
-  
-`preference`
-
-| 
-
-Optionally, preference to be used to fetch document to percolate.   
-  
-`version`
-
-| 
-
-Optionally, the expected version of the document to be fetched.   
+`index`| The index the document resides in. This is a required parameter.     
+---|---    
+`type`| The type of the document to fetch. This is a required parameter.     
+`id`| The id of the document to fetch. This is a required parameter.     
+`routing`| Optionally, routing to be used to fetch document to percolate.     
+`preference`| Optionally, preference to be used to fetch document to percolate.     
+`version`| Optionally, the expected version of the document to be fetched.   
   
 #### Percolating an Existing Document
 

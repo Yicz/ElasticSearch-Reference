@@ -1,20 +1,9 @@
 ## Boolean datatype
 
 Boolean fields accept JSON `true` and `false` values, but can also accept strings and numbers which are interpreted as either true or false:
-
-False values 
-
-| 
-
-`false`, `"false"`, `"off"`, `"no"`, `"0"`, `""` (empty string), `0`, `0.0`  
-  
----|---  
-  
-True values 
-
-| 
-
-Anything that isn’t false.   
+False values | `false`, `"false"`, `"off"`, `"no"`, `"0"`, `""` (empty string), `0`, `0.0`    
+---|---    
+True values | Anything that isn’t false.   
   
 ![Warning](images/icons/warning.png)
 
@@ -108,34 +97,10 @@ Aggregations like the [`terms` aggregation](search-aggregations-bucket-terms-agg
 
 The following parameters are accepted by `boolean` fields:
 
-[`boost`](mapping-boost.html)
-
-| 
-
-Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
-  
----|---  
-  
-[`doc_values`](doc-values.html)
-
-| 
-
-Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations, or scripting? Accepts `true` (default) or `false`.   
-  
-[`index`](mapping-index.html)
-
-| 
-
-Should the field be searchable? Accepts `true` (default) and `false`.   
-  
-[`null_value`](null-value.html)
-
-| 
-
-Accepts any of the true or false values listed above. The value is substituted for any explicit `null` values. Defaults to `null`, which means the field is treated as missing.   
-  
-[`store`](mapping-store.html)
-
-| 
-
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 
+[`boost`](mapping-boost.html)| Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.     
+---|---    
+[`doc_values`](doc-values.html)| Should the field be stored on disk in a column-stride fashion, so that it can later be used for sorting, aggregations,or scripting? Accepts `true` (default) or `false`.     
+[`index`](mapping-index.html)| Should the field be searchable? Accepts `true` (default) and `false`.     
+[`null_value`](null-value.html)| Accepts any of the true or false values listed above. The value is substituted for any explicit `null` values.Defaults to `null`, which means the field is treated as missing.     
+[`store`](mapping-store.html)| Whether the field value should be stored and retrievable separately from the 
+[`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

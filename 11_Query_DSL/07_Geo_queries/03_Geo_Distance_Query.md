@@ -148,43 +148,13 @@ Format in `lat,lon`.
 
 The following are options allowed on the filter:
 
-`distance`
-
-| 
-
-The radius of the circle centred on the specified location. Points which fall into this circle are considered to be matches. The `distance` can be specified in various units. See [Distance Units.   
-  
----|---  
-  
-`distance_type`
-
-| 
-
-How to compute the distance. Can either be `arc` (default), or `plane` (faster, but inaccurate on long distances and close to the poles).   
-  
-`optimize_bbox`
-
-| 
-
-Whether to use the optimization of first running a bounding box check before the distance check. Defaults to `memory` which will do in memory checks. Can also have values of `indexed` to use indexed value check (make sure the `geo_point` type index lat lon in this case), or `none` which disables bounding box optimization.  [2.2] Deprecated in 2.2.   
-  
-`_name`
-
-| 
-
-Optional name field to identify the query   
-  
-`ignore_malformed`
-
-| 
-
-[5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitude or longitude (default is `false`).   
-  
-`validation_method`
-
-| 
-
-Set to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, set to `COERCE` to additionally try and infer correct coordinates (default is `STRICT`).   
+`distance`| The radius of the circle centred on the specified location. Points which fall into this circle are considered to bematches. The `distance` can be specified in various units. See [Distance Units.     
+---|---    
+`distance_type`| How to compute the distance. Can either be `arc` (default), or `plane` (faster, but inaccurate on long distances andclose to the poles).     
+`optimize_bbox`| Whether to use the optimization of first running a bounding box check before the distance check. Defaults to `memory`which will do in memory checks. Can also have values of `indexed` to use indexed value check (make sure the `geo_point type index lat lon in this case), or `none` which disables bounding box optimization.  [2.2] Deprecated in 2.2.     
+`_name`| Optional name field to identify the query     
+`ignore_malformed`| [5.0.0] Deprecated in 5.0.0. Use `validation_method` instead  Set to `true` to accept geo points with invalid latitude or longitude (default is `false`).   
+`validation_methoSet to `IGNORE_MALFORMED` to accept geo points with invalid latitude or longitude, set to `COERCE` to additionally try and infer correct coordinates (default is `STRICT`).   
   
 #### geo_point Type
 

@@ -22,37 +22,12 @@ When it’s needed to specify a `terms` filter with a lot of terms it can be ben
 
 The terms lookup mechanism supports the following options:
 
-`index`
-
-| 
-
-The index to fetch the term values from. Defaults to the current index.   
-  
----|---  
-  
-`type`
-
-| 
-
-The type to fetch the term values from.   
-  
-`id`
-
-| 
-
-The id of the document to fetch the term values from.   
-  
-`path`
-
-| 
-
-The field specified as path to fetch the actual values for the `terms` filter.   
-  
-`routing`
-
-| 
-
-A custom routing value to be used when retrieving the external terms doc.   
+`index`| The index to fetch the term values from. Defaults to the current index.     
+---|---    
+`type`| The type to fetch the term values from.     
+`id`| The id of the document to fetch the term values from.     
+`path`| The field specified as path to fetch the actual values for the `terms` filter.     
+`routing`| A custom routing value to be used when retrieving the external terms doc.   
   
 The values for the `terms` filter will be fetched from a field in a document with the specified id in the specified type and index. Internally a get request is executed to fetch the values from the specified path. At the moment for this feature to work the `_source` needs to be stored.
 

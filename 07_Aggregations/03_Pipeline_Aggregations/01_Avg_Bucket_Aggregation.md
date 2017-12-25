@@ -18,62 +18,12 @@ An `avg_bucket` aggregation looks like this in isolation:
     }
 
  **Table 1. `avg_bucket` Parameters**
-
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`buckets_path`
-
-| 
-
-The path to the buckets we wish to find the average for (see [`buckets_path` Syntax
-
-| 
-
-Required
-
-|   
-  
-`gap_policy`
-
-| 
-
-The policy to apply when gaps are found in the data (see [Dealing with gaps in the data
-
-| 
-
-Optional
-
-| 
-
-`skip`  
-  
-`format`
-
-| 
-
-format to apply to the output value of this aggregation
-
-| 
-
-Optional
-
-| 
-
-`null`  
+ 
+Parameter Name| Description| Required| Default Value    
+---|---|---|---    
+`buckets_path`| The path to the buckets we wish to find the average for (see [`buckets_path` Syntax| Required|     
+`gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| `skip`    
+`format`| format to apply to the output value of this aggregation| Optional| `null`  
   
   
 

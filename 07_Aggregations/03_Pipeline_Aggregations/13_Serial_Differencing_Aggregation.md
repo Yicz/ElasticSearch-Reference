@@ -44,76 +44,12 @@ A `serial_diff` aggregation looks like this in isolation:
 
  **Table 13. `serial_diff` Parameters**
 
-Parameter Name
-
-| 
-
-Description
-
-| 
-
-Required
-
-| 
-
-Default Value  
-  
----|---|---|---  
-  
-`buckets_path`
-
-| 
-
-Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) for more details
-
-| 
-
-Required
-
-|   
-  
-`lag`
-
-| 
-
-The historical bucket to subtract from the current value. E.g. a lag of 7 will subtract the current value from the value 7 buckets ago. Must be a positive, non-zero integer
-
-| 
-
-Optional
-
-| 
-
-`1`  
-  
-`gap_policy`
-
-| 
-
-Determines what should happen when a gap in the data is encountered.
-
-| 
-
-Optional
-
-| 
-
-`insert_zero`  
-  
-`format`
-
-| 
-
-Format to apply to the output value of this aggregation
-
-| 
-
-Optional
-
-| 
-
-`null`  
-  
+Parameter Name| Description| Required| Default Value    
+---|---|---|---    
+`buckets_path`| Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) formore details| Required|     
+`lag`| The historical bucket to subtract from the current value. E.g. a lag of 7 will subtract the current value from thevalue 7 buckets ago. Must be a positive, non-zero integer| Optional| `1`    
+`gap_policy`| Determines what should happen when a gap in the data is encountered.| Optional| `insert_zero`    
+`format`| Format to apply to the output value of this aggregation| Optional| `null`    
   
 
 

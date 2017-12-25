@@ -30,22 +30,7 @@ In the above example all documents with the term hoya are filtered except the on
 
 Other top level options:
 
-`pre`
-
-| 
-
-If set the amount of tokens before the include span can’t have overlap with the exclude span.   
-  
----|---  
-  
-`post`
-
-| 
-
-If set the amount of tokens after the include span can’t have overlap with the exclude span.   
-  
-`dist`
-
-| 
-
-If set the amount of tokens from within the include span can’t have overlap with the exclude span. Equivalent of setting both `pre` and `post`. 
+`pre`| If set the amount of tokens before the include span can’t have overlap with the exclude span.     
+---|---    
+`post`| If set the amount of tokens after the include span can’t have overlap with the exclude span.     
+`dist`| If set the amount of tokens from within the include span can’t have overlap with the exclude span. Equivalent of setting both `pre` and `post`. 

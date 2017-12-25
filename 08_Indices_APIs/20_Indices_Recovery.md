@@ -167,113 +167,22 @@ Note that the above listing indicates that the recovery is in stage "done". All 
 
 Here is a complete list of options:
 
-`detailed`
+`detailed`| Display a detailed view. This is primarily useful for viewing the recovery of physical index files. Default: false.     
+---|---    
+`active_only`| Display only those recoveries that are currently on-going. Default: false.     Description of output 
 
-| 
+fields:
 
-Display a detailed view. This is primarily useful for viewing the recovery of physical index files. Default: false.   
-  
----|---  
-  
-`active_only`
-
-| 
-
-Display only those recoveries that are currently on-going. Default: false.   
-  
-Description of output fields:
-
-`id`
-
-| 
-
-Shard ID   
-  
----|---  
-  
-`type`
-
-| 
-
-Recovery type: 
-
-  * store 
-  * snapshot 
-  * replica 
-  * relocating 
-
-  
-  
-`stage`
-
-| 
-
-Recovery stage: 
-
-  * init: Recovery has not started 
-  * index: Reading index meta-data and copying bytes from source to destination 
-  * start: Starting the engine; opening the index for use 
-  * translog: Replaying transaction log 
-  * finalize: Cleanup 
-  * done: Complete 
-
-  
-  
-`primary`
-
-| 
-
-True if shard is primary, false otherwise   
-  
-`start_time`
-
-| 
-
-Timestamp of recovery start   
-  
-`stop_time`
-
-| 
-
-Timestamp of recovery finish   
-  
-`total_time_in_millis`
-
-| 
-
-Total time to recover shard in milliseconds   
-  
-`source`
-
-| 
-
-Recovery source: 
-
-  * repository description if recovery is from a snapshot 
-  * description of source node otherwise 
-
-  
-  
-`target`
-
-| 
-
-Destination node   
-  
-`index`
-
-| 
-
-Statistics about physical index recovery   
-  
-`translog`
-
-| 
-
-Statistics about translog recovery   
-  
-`start`
-
-| 
-
-Statistics about time to open and start the index 
+`id`| Shard ID     
+---|---    
+`type`| Recovery type:   * store   * snapshot   * replica   * relocating     
+`stage`| Recovery stage:   * init: Recovery has not started   * index: Reading index meta-data and copying bytes from source to destination   * start: Starting the engine; opening the index for use   * translog: Replaying transaction log   * finalize: Cleanup   * done: Complete     
+`primary`| True if shard is primary, false otherwise     
+`start_time`| Timestamp of recovery start     
+`stop_time`| Timestamp of recovery finish     
+`total_time_in_millis`| Total time to recover shard in milliseconds     
+`source`| Recovery source:   * repository description if recovery is from a snapshot   * description of source node otherwise     
+`target`| Destination node     
+`index`| Statistics about physical index recovery     
+`translog`| Statistics about translog recovery     
+`start`| Statistics about time to open and start the index 

@@ -70,76 +70,16 @@ The reason for an unassigned shard will be listed as the last field
 
 These are the possible reasons for a shard to be in a unassigned state:
 
-`INDEX_CREATED`
-
-| 
-
-Unassigned as a result of an API creation of an index.   
-  
----|---  
-  
-`CLUSTER_RECOVERED`
-
-| 
-
-Unassigned as a result of a full cluster recovery.   
-  
-`INDEX_REOPENED`
-
-| 
-
-Unassigned as a result of opening a closed index.   
-  
-`DANGLING_INDEX_IMPORTED`
-
-| 
-
-Unassigned as a result of importing a dangling index.   
-  
-`NEW_INDEX_RESTORED`
-
-| 
-
-Unassigned as a result of restoring into a new index.   
-  
-`EXISTING_INDEX_RESTORED`
-
-| 
-
-Unassigned as a result of restoring into a closed index.   
-  
-`REPLICA_ADDED`
-
-| 
-
-Unassigned as a result of explicit addition of a replica.   
-  
-`ALLOCATION_FAILED`
-
-| 
-
-Unassigned as a result of a failed allocation of the shard.   
-  
-`NODE_LEFT`
-
-| 
-
-Unassigned as a result of the node hosting it leaving the cluster.   
-  
-`REROUTE_CANCELLED`
-
-| 
-
-Unassigned as a result of explicit cancel reroute command.   
-  
-`REINITIALIZED`
-
-| 
-
-When a shard moves from started back to initializing, for example, with shadow replicas.   
-  
-`REALLOCATED_REPLICA`
-
-| 
-
-A better replica location is identified and causes the existing replica allocation to be cancelled. 
+`INDEX_CREATED`| Unassigned as a result of an API creation of an index.     
+---|---    
+`CLUSTER_RECOVERED`| Unassigned as a result of a full cluster recovery.     
+`INDEX_REOPENED`| Unassigned as a result of opening a closed index.     
+`DANGLING_INDEX_IMPORTED`| Unassigned as a result of importing a dangling index.     
+`NEW_INDEX_RESTORED`| Unassigned as a result of restoring into a new index.     
+`EXISTING_INDEX_RESTORED`| Unassigned as a result of restoring into a closed index.     
+`REPLICA_ADDED`| Unassigned as a result of explicit addition of a replica.     
+`ALLOCATION_FAILED`| Unassigned as a result of a failed allocation of the shard.     
+`NODE_LEFT`| Unassigned as a result of the node hosting it leaving the cluster.     
+`REROUTE_CANCELLED`| Unassigned as a result of explicit cancel reroute command.     
+`REINITIALIZED`| When a shard moves from started back to initializing, for example, with shadow replicas.     
+`REALLOCATED_REPLICA`| A better replica location is identified and causes the existing replica allocation to be cancelled. 

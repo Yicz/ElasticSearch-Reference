@@ -70,42 +70,13 @@ Individual fields can be boosted with the caret (`^`) notation:
 The `subject` field is three times as important as the `message` field.   
   
 ---|---  
-  
-#### Types of `multi_match` query:
+#### Types of `multi_match` query:The way the `multi_match` query is executed internally depends on the `type` parameter, which can be set to:`best_fields`| ( **default** ) Finds documents which match any field, but uses the `_score` from the best field. See [`best_fields`]query-dsl-multi-match-query.html#type-best-fields).    
 
-The way the `multi_match` query is executed internally depends on the `type` parameter, which can be set to:
-
-`best_fields`
-
-| 
-
-( **default** ) Finds documents which match any field, but uses the `_score` from the best field. See [`best_fields`](query-dsl-multi-match-query.html#type-best-fields).   
-  
----|---  
-  
-`most_fields`
-
-| 
-
-Finds documents which match any field and combines the `_score` from each field. See [`most_fields`](query-dsl-multi-match-query.html#type-most-fields).   
-  
-`cross_fields`
-
-| 
-
-Treats fields with the same `analyzer` as though they were one big field. Looks for each word in **any** field. See [`cross_fields`](query-dsl-multi-match-query.html#type-cross-fields).   
-  
-`phrase`
-
-| 
-
-Runs a `match_phrase` query on each field and combines the `_score` from each field. See [`phrase` and `phrase_prefix`](query-dsl-multi-match-query.html#type-phrase).   
-  
-`phrase_prefix`
-
-| 
-
-Runs a `match_phrase_prefix` query on each field and combines the `_score` from each field. See [`phrase` and `phrase_prefix`](query-dsl-multi-match-query.html#type-phrase).   
+ ---|---    
+ `most_fields`| Finds documents which match any field and combines the `_score` from each field. See [`most_fields`]query-dsl-multi-match-query.html#type-most-fields).     
+ `cross_fields`| Treats fields with the same `analyzer` as though they were one big field. Looks for each word in **any** field. See [cross_fields`](query-dsl-multi-match-query.html#type-cross-fields).     
+ `phrase`| Runs a `match_phrase` query on each field and combines the `_score` from each field. See [`phrase` and `phrase_prefix`(query-dsl-multi-match-query.html#type-phrase).     
+`phrase_prefix`| Runs a `match_phrase_prefix` query on each field and combines the `_score` from each field. See [`phrase` and phrase_prefix`](query-dsl-multi-match-query.html#type-phrase).   
   
 ### `best_fields`
 
@@ -425,26 +396,9 @@ which will be executed as:
 #### `tie_breaker`
 
 By default, each per-term `blended` query will use the best score returned by any field in a group, then these scores are added together to give the final score. The `tie_breaker` parameter can change the default behaviour of the per-term `blended` queries. It accepts:
-
-`0.0`
-
-| 
-
-Take the single best score out of (eg) `first_name:will` and `last_name:will` ( **default** )   
-  
----|---  
-  
-`1.0`
-
-| 
-
-Add together the scores for (eg) `first_name:will` and `last_name:will`  
-  
-`0.0 < n < 1.0`
-
-| 
-
-Take the single best score plus `tie_breaker` multiplied by each of the scores from other matching fields.   
+`0.0`| Take the single best score out of (eg) `first_name:will` and `last_name:will` ( **default** )     
+---|---    `1.0`| Add together the scores for (eg) `first_name:will` and `last_name:will`    
+`0.0 < n < 1.0`| Take the single best score plus `tie_breaker` multiplied by each of the scores from other matching fields.   
   
 ![Important](images/icons/important.png)
 

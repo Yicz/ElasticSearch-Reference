@@ -289,19 +289,9 @@ The rest endpoint is: `/{index}/_alias/{name}`
 
 where
 
-`index`
-
-| 
-
-`* | _all | glob pattern | name1, name2, …`  
-  
----|---  
-  
-`name`
-
-| 
-
-`* | _all | glob pattern | name1, name2, …`  
+`index`| `* | _all | glob pattern | name1, name2, …`    
+---|---    
+`name`| `* | _all | glob pattern | name1, name2, …`  
   
 Alternatively you can use the plural `_aliases`. Example:
     
@@ -314,25 +304,10 @@ The get index alias API allows to filter by alias name and index name. This api 
 
 Possible options:
 
-`index`
-
-| 
-
-The index name to get aliases for. Partial names are supported via wildcards, also multiple index names can be specified separated with a comma. Also the alias name for an index can be used.   
-  
----|---  
-  
-`alias`
-
-| 
-
-The name of alias to return in the response. Like the index option, this option supports wildcards and the option the specify multiple alias names separated by a comma.   
-  
-`ignore_unavailable`
-
-| 
-
-What to do if an specified index name doesn’t exist. If set to `true` then those indices are ignored.   
+`index`| The index name to get aliases for. Partial names are supported via wildcards, also multiple index names can bespecified separated with a comma. Also the alias name for an index can be used.     
+---|---    
+`alias`| The name of alias to return in the response. Like the index option, this option supports wildcards and the option thespecify multiple alias names separated by a comma.     
+`ignore_unavailable`| What to do if an specified index name doesn’t exist. If set to `true` then those indices are ignored.   
   
 The rest endpoint is: `/{index}/_alias/{alias}`.
 

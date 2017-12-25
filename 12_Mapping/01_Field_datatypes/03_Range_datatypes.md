@@ -2,37 +2,12 @@
 
 The following range types are supported:
 
-`integer_range`
-
-| 
-
-A range of signed 32-bit integers with a minimum value of `-231` and maximum of `231-1`.   
-  
----|---  
-  
-`float_range`
-
-| 
-
-A range of single-precision 32-bit IEEE 754 floating point values.   
-  
-`long_range`
-
-| 
-
-A range of signed 64-bit integers with a minimum value of `-263` and maximum of `263-1`.   
-  
-`double_range`
-
-| 
-
-A range of double-precision 64-bit IEEE 754 floating point values.   
-  
-`date_range`
-
-| 
-
-A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.   
+`integer_range`| A range of signed 32-bit integers with a minimum value of `-231` and maximum of `231-1`.     
+---|---    
+`float_range`| A range of single-precision 32-bit IEEE 754 floating point values.     
+`long_range`| A range of signed 64-bit integers with a minimum value of `-263` and maximum of `263-1`.     
+`double_range`| A range of double-precision 64-bit IEEE 754 floating point values.     
+`date_range`| A range of date values represented as unsigned 64-bit integer milliseconds elapsed since system epoch.   
   
 Below is an example of configuring a mapping with various range fields followed by an example that indexes several range types.
     
@@ -119,7 +94,8 @@ The result produced by the above query.
 
 | 
 
-`date_range` types accept the same field parameters defined by the [`date`](date.html) type.   
+`date_range` types accept the same field parameters defined by the 
+[`date`](date.html) type.   
   
 ---|---  
   
@@ -157,34 +133,9 @@ Range queries over range [fields](mapping-types.html) support a `relation` param
 
 The following parameters are accepted by range types:
 
-[`coerce`](coerce.html)
-
-| 
-
-Try to convert strings to numbers and truncate fractions for integers. Accepts `true` (default) and `false`.   
-  
----|---  
-  
-[`boost`](mapping-boost.html)
-
-| 
-
-Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.   
-  
-[`include_in_all`](include-in-all.html)
-
-| 
-
-Whether or not the field value should be included in the [`_all`](mapping-all-field.html) field? Accepts `true` or `false`. Defaults to `false` if [`index`](mapping-index.html) is set to `false`, or if a parent [`object`](object.html) field sets `include_in_all` to `false`. Otherwise defaults to `true`.   
-  
-[`index`](mapping-index.html)
-
-| 
-
-Should the field be searchable? Accepts `true` (default) and `false`.   
-  
-[`store`](mapping-store.html)
-
-| 
-
-Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 
+[`coerce`](coerce.html)| Try to convert strings to numbers and truncate fractions for integers. Accepts `true` (default) and `false`.     ---|---    
+[`boost`](mapping-boost.html)| Mapping field-level query time boosting. Accepts a floating point number, defaults to `1.0`.     
+[`include_in_all`](include-in-all.html)| Whether or not the field value should be included in the 
+[`_all`](mapping-all-field.html) field? Accepts `true` or false`. Defaults to `false` if [`index`](mapping-index.html) is set to `false`, or if a parent [`object`](object.html)field sets `include_in_all` to `false`. Otherwise defaults to `true`.     
+[`index`](mapping-index.html)| Should the field be searchable? Accepts `true` (default) and `false`.     
+[`store`](mapping-store.html)| Whether the field value should be stored and retrievable separately from the [`_source`](mapping-source-field.html) field. Accepts `true` or `false` (default). 

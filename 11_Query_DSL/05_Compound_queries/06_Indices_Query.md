@@ -4,7 +4,7 @@
 
 ### Deprecated in 5.0.0. 
 
-Search on the __index_ field instead 
+Search on the \__index_ field instead 
 
 The `indices` query is useful in cases where a search is executed across multiple indices. It allows to specify a list of index names and an inner query that is only executed for indices matching names on that list. For other indices that are searched, but that don’t match entries on the list, the alternative `no_match_query` is executed.
     
