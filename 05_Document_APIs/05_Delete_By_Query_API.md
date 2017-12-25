@@ -1,344 +1,115 @@
-## Delete By Query API
+# Delete By Query API
+`_delete_by_query`是通过滤查询结果，批量地将匹配到的内容进行删除。它的用法是：
 
-The simplest usage of `_delete_by_query` just performs a deletion on every document that match a query. Here is the API:
-    
-    
-    POST twitter/_delete_by_query
-    {
-      "query": { ![](images/icons/callouts/1.png)
-        "match": {
-          "message": "some message"
+```sh
+curl -XPOST 'localhost:9200/twitter/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": { 
+    "match": {
+      "message": "some message"
+    }
+  }
+}
+'
+# 上面的DSL结构跟search API的格式一致，并且还可以采用url上的参数`q`来实现一样的作用。
+# 返回结果
+{
+  "took" : 147,
+  "timed_out": false,
+  "deleted": 119,
+  "batches": 1,
+  "version_conflicts": 0,
+  "noops": 0,
+  "retries": {
+    "bulk": 0,
+    "search": 0
+  },
+  "throttled_millis": 0,
+  "requests_per_second": -1.0,
+  "throttled_until_millis": 0,
+  "total": 119,
+  "failures" : [ ]
+}
+
+```
+
+`_delete_by_query`使用的原理是采用了一个快照的模式进行了处理，当请求开始时，给索引作一个快照作为查询处理，这意味着有可能产生一个版本的冲突，因为在生成快照的同时一个delete的请求也进行了执行，这时候版本就已经发生了变化。
+
+> 因为内部版本不支持0作为一个有效的版本号,文件版本等于零时不能使用_delete_by_query进行删除，_delete_by_query请求将失败。
+
+在`_delete_by_query`执行的时候，会发出一批有序的search请求，去查询匹配的文档，当发现匹配的文档的时候，再一个批量的delete请求，如果search或delete请求被拒绝的时候，`_delete_by_query`会根据默认的尝试策略再去请求一次（最高的重试次数是10），当达到10次的时候，`_delete_by_query `请求会终止并将失败的结果放入到响应内容`failures`中,因止`_delete_by_query `请求有可以返回一部分失败的结果。
+
+如果你想计算版本冲突,而不是使他们中止，在url添加`conflict=process`或者在请求主体中添加`“conflict”:“process”`。
+
+上面的栗子是删除一个索引下，能匹配的内容，我们还可以设置他只删除索引下一个文档类型的内容：
+
+```sh
+# 指定一个索引中的一个文档类型进行匹配删除
+curl -XPOST 'localhost:9200/twitter/tweet/_delete_by_query?conflicts=proceed&pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match_all": {}
+  }
+}
+'
+```
+
+当还可以进行多个索引，多个文档类型内容的匹配删除：
+
+```sh
+curl -XPOST 'localhost:9200/twitter,blog/tweet,post/_delete_by_query?pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match_all": {}
+  }
+}
+'
+
+```
+
+当我们删除曾经强制指定routing参数的索引内容的时候，我们也要指定相同的routing参数，才能将这个文档进行删除。
+
+```sh
+curl -XPOST 'localhost:9200/twitter/_delete_by_query?routing=1&pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "range" : {
+        "age" : {
+           "gte" : 10
         }
-      }
     }
+  }
+}
+'
+```
 
-![](images/icons/callouts/1.png)
+`_delete_by_query` 默认设置批量的大小是1000，通过指定`scroll_size`进行修改这个大小：
 
-| 
-
-The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html). You can also use the `q` parameter in the same way as the search api.   
-  
----|---  
-  
-That will return something like this:
-    
-    
-    {
-      "took" : 147,
-      "timed_out": false,
-      "deleted": 119,
-      "batches": 1,
-      "version_conflicts": 0,
-      "noops": 0,
-      "retries": {
-        "bulk": 0,
-        "search": 0
-      },
-      "throttled_millis": 0,
-      "requests_per_second": -1.0,
-      "throttled_until_millis": 0,
-      "total": 119,
-      "failures" : [ ]
+```sh
+curl -XPOST 'localhost:9200/twitter/_delete_by_query?scroll_size=5000&pretty' -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "term": {
+      "user": "kimchy"
     }
+  }
+}
+'
 
-`_delete_by_query` gets a snapshot of the index when it starts and deletes what it finds using `internal` versioning. That means that you’ll get a version conflict if the document changes between the time when the snapshot was taken and when the delete request is processed. When the versions match the document is deleted.
+```
 
-![Note](images/icons/note.png)
+### URL 参数
 
-Since `internal` versioning does not support the value 0 as a valid version number, documents with version equal to zero cannot be deleted using `_delete_by_query` and will fail the request.
+`_delete_by_query`还支持标准的参数`pretty`,还有`refresh`, `wait_for_completion`, `wait_for_active_shards`, and `timeout`.
 
-During the `_delete_by_query` execution, multiple search requests are sequentially executed in order to find all the matching documents to delete. Every time a batch of documents is found, a corresponding bulk request is executed to delete all these documents. In case a search or bulk request got rejected, `_delete_by_query` relies on a default policy to retry rejected requests (up to 10 times, with exponential back off). Reaching the maximum retries limit causes the `_delete_by_query` to abort and all failures are returned in the `failures` of the response. The deletions that have been performed still stick. In other words, the process is not rolled back, only aborted. While the first failure causes the abort, all failures that are returned by the failing bulk request are returned in the `failures` element; therefore it’s possible for there to be quite a few failed entities.
+`refresh`参数将刷新所有分片，区别于`delete` api 中只会刷新修改过内容的分片。
 
-If you’d like to count version conflicts rather than cause them to abort then set `conflicts=proceed` on the url or `"conflicts": "proceed"` in the request body.
+`wait_for_completion=false`参数会让请求直接回返一个task_id(任务的id),可以通过[Task API](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-delete-by-query.html#docs-delete-by-query-task-api)去取消或者查看这个任务的状态。ElasticSearch会在`.tasks/task/${taskId}`建立一个文档。你可以根据你的喜好进行删除它，当然为了节省磁盘空间，最好选择是删除它。
 
-Back to the API format, you can limit `_delete_by_query` to a single type. This will only delete `tweet` documents from the `twitter` index:
-    
-    
-    POST twitter/tweet/_delete_by_query?conflicts=proceed
-    {
-      "query": {
-        "match_all": {}
-      }
-    }
+`wait_for_active_shards`要求它在至少存在多少个活跃的分片才进行处理请求。[查看详情](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-index_.html#index-wait-for-active-shards)
 
-It’s also possible to delete documents of multiple indexes and multiple types at once, just like the search API:
-    
-    
-    POST twitter,blog/tweet,post/_delete_by_query
-    {
-      "query": {
-        "match_all": {}
-      }
-    }
+`timeout`设置请求的至多等待时间。
 
-If you provide `routing` then the routing is copied to the scroll query, limiting the process to the shards that match that routing value:
-    
-    
-    POST twitter/_delete_by_query?routing=1
-    {
-      "query": {
-        "range" : {
-            "age" : {
-               "gte" : 10
-            }
-        }
-      }
-    }
-
-By default `_delete_by_query` uses scroll batches of 1000. You can change the batch size with the `scroll_size` URL parameter:
-    
-    
-    POST twitter/_delete_by_query?scroll_size=5000
-    {
-      "query": {
-        "term": {
-          "user": "kimchy"
-        }
-      }
-    }
-
-### URL Parameters
-
-In addition to the standard parameters like `pretty`, the Delete By Query API also supports `refresh`, `wait_for_completion`, `wait_for_active_shards`, and `timeout`.
-
-Sending the `refresh` will refresh all shards involved in the delete by query once the request completes. This is different than the Delete API’s `refresh` parameter which causes just the shard that received the delete request to be refreshed.
-
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
-
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
-
-`requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the delete-by-query issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
-
-### Response body
-
-The JSON response looks like this:
-    
-    
-    {
-      "took" : 639,
-      "deleted": 0,
-      "batches": 1,
-      "version_conflicts": 2,
-      "retries": 0,
-      "throttled_millis": 0,
-      "failures" : [ ]
-    }
-
-`took`
-     The number of milliseconds from start to end of the whole operation. 
-`deleted`
-     The number of documents that were successfully deleted. 
-`batches`
-     The number of scroll responses pulled back by the the delete by query. 
-`version_conflicts`
-     The number of version conflicts that the delete by query hit. 
-`retries`
-     The number of retries that the delete by query did in response to a full queue. 
-`throttled_millis`
-     Number of milliseconds the request slept to conform to `requests_per_second`. 
-`failures`
-     Array of all indexing failures. If this is non-empty then the request aborted because of those failures. See `conflicts` for how to prevent version conflicts from aborting the operation. 
-
-### Works with the Task API
-
-You can fetch the status of any running delete-by-query requests with the [Task API](tasks.html):
-    
-    
-    GET _tasks?detailed=true&actions=*/delete/byquery
-
-The responses looks like:
-    
-    
-    {
-      "nodes" : {
-        "r1A2WoRbTwKZ516z6NEs5A" : {
-          "name" : "r1A2WoR",
-          "transport_address" : "127.0.0.1:9300",
-          "host" : "127.0.0.1",
-          "ip" : "127.0.0.1:9300",
-          "attributes" : {
-            "testattr" : "test",
-            "portsfile" : "true"
-          },
-          "tasks" : {
-            "r1A2WoRbTwKZ516z6NEs5A:36619" : {
-              "node" : "r1A2WoRbTwKZ516z6NEs5A",
-              "id" : 36619,
-              "type" : "transport",
-              "action" : "indices:data/write/delete/byquery",
-              "status" : {    ![](images/icons/callouts/1.png)
-                "total" : 6154,
-                "updated" : 0,
-                "created" : 0,
-                "deleted" : 3500,
-                "batches" : 36,
-                "version_conflicts" : 0,
-                "noops" : 0,
-                "retries": 0,
-                "throttled_millis": 0
-              },
-              "description" : ""
-            }
-          }
-        }
-      }
-    }
-
-![](images/icons/callouts/1.png)
-
-| 
-
-this object contains the actual status. It is just like the response json with the important addition of the `total` field. `total` is the total number of operations that the reindex expects to perform. You can estimate the progress by adding the `updated`, `created`, and `deleted` fields. The request will finish when their sum is equal to the `total` field.   
-  
----|---  
-  
-With the task id you can look up the task directly:
-    
-    
-    GET /_tasks/taskId:1
-
-The advantage of this API is that it integrates with `wait_for_completion=false` to transparently return the status of completed tasks. If the task is completed and `wait_for_completion=false` was set on it then it’ll come back with `results` or an `error` field. The cost of this feature is the document that `wait_for_completion=false` creates at `.tasks/task/${taskId}`. It is up to you to delete that document.
-
-### Works with the Cancel Task API
-
-Any Delete By Query can be canceled using the [Task Cancel API](tasks.html):
-    
-    
-    POST _tasks/task_id:1/_cancel
-
-The `task_id` can be found using the tasks API above.
-
-Cancellation should happen quickly but might take a few seconds. The task status API above will continue to list the task until it is wakes to cancel itself.
-
-### Rethrottling
-
-The value of `requests_per_second` can be changed on a running delete by query using the `_rethrottle` API:
-    
-    
-    POST _delete_by_query/task_id:1/_rethrottle?requests_per_second=-1
-
-The `task_id` can be found using the tasks API above.
-
-Just like when setting it on the `_delete_by_query` API `requests_per_second` can be either `-1` to disable throttling or any decimal number like `1.7` or `12` to throttle to that level. Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query will take effect on after completing the current batch. This prevents scroll timeouts.
-
-### Manually slicing
-
-Delete-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll) allowing you to manually parallelize the process relatively easily:
-    
-    
-    POST twitter/_delete_by_query
-    {
-      "slice": {
-        "id": 0,
-        "max": 2
-      },
-      "query": {
-        "range": {
-          "likes": {
-            "lt": 10
-          }
-        }
-      }
-    }
-    POST twitter/_delete_by_query
-    {
-      "slice": {
-        "id": 1,
-        "max": 2
-      },
-      "query": {
-        "range": {
-          "likes": {
-            "lt": 10
-          }
-        }
-      }
-    }
-
-Which you can verify works with:
-    
-    
-    GET _refresh
-    POST twitter/_search?size=0&filter_path=hits.total
-    {
-      "query": {
-        "range": {
-          "likes": {
-            "lt": 10
-          }
-        }
-      }
-    }
-
-Which results in a sensible `total` like this one:
-    
-    
-    {
-      "hits": {
-        "total": 0
-      }
-    }
-
-### Automatic slicing
-
-You can also let delete-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
-    
-    
-    POST twitter/_delete_by_query?refresh&slices=5
-    {
-      "query": {
-        "range": {
-          "likes": {
-            "lt": 10
-          }
-        }
-      }
-    }
-
-Which you also can verify works with:
-    
-    
-    POST twitter/_search?size=0&filter_path=hits.total
-    {
-      "query": {
-        "range": {
-          "likes": {
-            "lt": 10
-          }
-        }
-      }
-    }
-
-Which results in a sensible `total` like this one:
-    
-    
-    {
-      "hits": {
-        "total": 0
-      }
-    }
-
-Adding `slices` to `_delete_by_query` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
-
-  * You can see these requests in the [Tasks APIs](docs-delete-by-query.html#docs-delete-by-query-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
-  * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
-  * These sub-requests are individually addressable for things like cancellation and rethrottling. 
-  * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 
-  * Canceling the request with `slices` will cancel each sub-request. 
-  * Due to the nature of `slices` each sub-request won’t get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution. 
-  * Parameters like `requests_per_second` and `size` on a request with `slices` are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that the using `size` with `slices` might not result in exactly `size` documents being `_delete_by_query`ed. 
-  * Each sub-requests gets a slightly different snapshot of the source index though these are all taken at approximately the same time. 
-
-
-
-### Picking the number of slices
-
-At this point we have a few recommendations around the number of `slices` to use (the `max` parameter in the slice API if manually parallelizing):
-
-  * Don’t use large numbers. `500` creates fairly massive CPU thrash. 
-  * It is more efficient from a query performance standpoint to use some multiple of the number of shards in the source index. 
-  * Using exactly as many shards as are in the source index is the most efficient from a query performance standpoint. 
-  * Indexing performance should scale linearly across available resources with the number of `slices`. 
-  * Whether indexing or query performance dominates that process depends on lots of factors like the documents being reindexed and the cluster doing the reindexing. 
+**`缺少部分`**
 
 

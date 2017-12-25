@@ -1,69 +1,46 @@
-## Delete API
+# Delete API
+Delete API 允诉我们指定一个ID进行删除一个文档。
 
-The delete API allows to delete a typed JSON document from a specific index based on its id. The following example deletes the JSON document from an index called twitter, under a type called tweet, with id valued 1:
-    
-    
-    $ curl -XDELETE 'http://localhost:9200/twitter/tweet/1'
+这时有一个粟子：删除了twitter索引下类型为type且ID=1的文档
+```sh
+$ curl -XDELETE 'http://localhost:9200/twitter/tweet/1'
+# 响应结果
+{
+    "_shards" : {
+        "total" : 10,
+        "failed" : 0,
+        "successful" : 10
+    },
+    "found" : true,
+    "_index" : "twitter",
+    "_type" : "tweet",
+    "_id" : "1",
+    "_version" : 2,
+    "result": "deleted"
+}
+```
 
-The result of the above delete operation is:
-    
-    
-    {
-        "_shards" : {
-            "total" : 10,
-            "failed" : 0,
-            "successful" : 10
-        },
-        "found" : true,
-        "_index" : "twitter",
-        "_type" : "tweet",
-        "_id" : "1",
-        "_version" : 2,
-        "result": "deleted"
-    }
+# 版本控制
+每个文档索引都有自己的版本。当删除一个文档时,可以指定它的版本,以确保我们正在试图删除的相关文件实际上是被删除了，还是没有变化的。每一个写操作上执行文档,包括删除,导致其版本递增。
 
-### Versioning
+# routing
+一个文档是由我们指定路由参数进行分片的时候，我们进行删除的时候也的指定相同的routing参数，否则我们将删除文档失败。
+# 父关系
 
-Each document indexed is versioned. When deleting a document, the `version` can be specified to make sure the relevant document we are trying to delete is actually being deleted and it has not changed in the meantime. Every write operation executed on a document, deletes included, causes its version to be incremented.
+# 自动索引创建
+当我们进行删除一个之前没有建立的索引文档的时候，elasticsearch会建立一个文档，并会动态映射它的类型。
 
-### Routing
+# 分发
+删除操作被散列到一个特定的分片。然后被重定向到主分片和复制分片进行删除内容。
 
-When indexing using the ability to control the routing, in order to delete a document, the routing value should also be provided. For example:
-    
-    
-    $ curl -XDELETE 'http://localhost:9200/twitter/tweet/1?routing=kimchy'
+# 刷新
+`refresh`参数，会让当前执行的操作立刻可见。
 
-The above will delete a tweet with id 1, but will be routed based on the user. Note, issuing a delete without the correct routing, will cause the document to not be deleted.
+# 超时
+任何的操作都可能会发现网络超时的情况，我们可以设置一个超时时长，如果超过了这个时长，就说明了该操作失败。
 
-When the `_routing` mapping is set as `required` and no routing value is specified, the delete api will throw a `RoutingMissingException` and reject the request.
+```sh
+curl -XDELETE 'http://localhost:9200/twitter/tweet/1?timeout=5m'
+```
 
-### Parent
 
-The `parent` parameter can be set, which will basically be the same as setting the routing parameter.
-
-Note that deleting a parent document does not automatically delete its children. One way of deleting all child documents given a parent’s id is to use the [Delete By Query API](docs-delete-by-query.html) to perform a index with the automatically generated (and indexed) field _parent, which is in the format parent_type#parent_id.
-
-When deleting a child document its parent id must be specified, otherwise the delete request will be rejected and a `RoutingMissingException` will be thrown instead.
-
-### Automatic index creation
-
-The delete operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html) for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if it has not been created before (check out the [put mapping](indices-put-mapping.html) API for manually creating type mapping).
-
-### Distributed
-
-The delete operation gets hashed into a specific shard id. It then gets redirected into the primary shard within that id group, and replicated (if needed) to shard replicas within that id group.
-
-### Wait For Active Shards
-
-When making delete requests, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the delete request. See [here](docs-index_.html#index-wait-for-active-shards) for further details and a usage example.
-
-### Refresh
-
-Control when the changes made by this request are visible to search. See [_`?refresh`_](docs-refresh.html "?refresh").
-
-### Timeout
-
-The primary shard assigned to perform the delete operation might not be available when the delete operation is executed. Some reasons for this might be that the primary shard is currently recovering from a store or undergoing relocation. By default, the delete operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error. The `timeout` parameter can be used to explicitly specify how long it waits. Here is an example of setting it to 5 minutes:
-    
-    
-    $ curl -XDELETE 'http://localhost:9200/twitter/tweet/1?timeout=5m'

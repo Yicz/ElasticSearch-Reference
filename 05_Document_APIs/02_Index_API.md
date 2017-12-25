@@ -1,223 +1,205 @@
-## Index API
+# Index API
+Index API 可以添加或更新一个json类型的文档到一个指定的索引中，使它可以被搜索。下面的粟子，是插入了一个josn数据到"twitter"索引中，并且它的类型是"tweet":
 
-The index API adds or updates a typed JSON document in a specific index, making it searchable. The following example inserts the JSON document into the "twitter" index, under a type called "tweet" with an id of 1:
-    
-    
-    PUT twitter/tweet/1
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
+```sh
+curl -XPUT 'localhost:9200/twitter/tweet/1?pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
+#响应
+{
+    "_shards" : {
+        "total" : 2,
+        "failed" : 0,
+        "successful" : 2
+    },
+    "_index" : "twitter",
+    "_type" : "tweet",
+    "_id" : "1",
+    "_version" : 1,
+    "created" : true,
+    "result" : created
+}
+```
 
-The result of the above index operation is:
-    
-    
-    {
-        "_shards" : {
-            "total" : 2,
-            "failed" : 0,
-            "successful" : 2
-        },
-        "_index" : "twitter",
-        "_type" : "tweet",
-        "_id" : "1",
-        "_version" : 1,
-        "created" : true,
-        "result" : created
-    }
+对响应内的说明：
 
-The `_shards` header provides information about the replication process of the index operation.
+shards部分说明了建立索引操作中的全部分片信息
 
-  * `total` \- Indicates to how many shard copies (primary and replica shards) the index operation should be executed on. 
-  * `successful`\- Indicates the number of shard copies the index operation succeeded on. 
-  * `failed` \- An array that contains replication related errors in the case an index operation failed on a replica shard. 
+* total   
+ 在建立索引的过程中总共有多少个分片(包括主分片和复制分片)应该执行
+* faild  
+ 建立索引过程中，失败的分片数
+* successful  
+建立索引过程上，成功的分片数
 
+执行成功的定义successful不为0
 
+# 自动索引创建
+如果尚未创建索引，建立索引操作会自动创建一个索引（查看[创建索引API]()以手动创建索引），如果尚未创建类型，也会为指定类型，自动创建动态类型映射（查看[put mapping API]()手动创建类型映射）。
 
-The index operation is successful in the case `successful` is at least 1.
+映射本身非常灵活，无模式。新的字段和对象将自动添加到指定类型的映射定义中。查看[映射部分]()了解映射定义的更多信息。
 
-![Note](images/icons/note.png)
+**通过在所有节点的配置文件中将action.auto_create_index设置为false，可以禁用索引自动创建。**
 
-Replica shards may not all be started when an indexing operation successfully returns (by default, only the primary is required, but this behavior can be [changed](docs-index_.html#index-wait-for-active-shards)). In that case, `total` will be equal to the total shards based on the `number_of_replicas` setting and `successful` will be equal to the number of shards started (primary plus replicas). If there were no failures, the `failed` will be 0.
+**通过将index.mapper.dynamic设置为false\可以禁用映射自动创建。**
 
-### Automatic Index Creation
+自动索引创建可以包括基于模式的白/黑名单，例如设置 action.auto_create_index为+aaa*， -bbb*，+ccc*， -*（+意思是允许的，而-意思是不允许的）。
 
-The index operation automatically creates an index if it has not been created before (check out the [create index API](indices-create-index.html) for manually creating an index), and also automatically creates a dynamic type mapping for the specific type if one has not yet been created (check out the [put mapping](indices-put-mapping.html) API for manually creating a type mapping).
+# 版本控制
+每个索引文档都有一个版本号。 关联的版本号作为对索引API请求的响应的一部分返回。 当指定版本参数时，索引API可选地允许进行[乐观并发控制]()。 这将控制操作执行的文档的版本。 版本控制用例的一个很好的例子就是执行一个事务性的read-then-update。 从初始读取的文档中指定一个版本可确保在此期间没有发生变化（阅读时为了更新，建议将首选项设置为_primary）。 例如：
 
-The mapping itself is very flexible and is schema-free. New fields and objects will automatically be added to the mapping definition of the type specified. Check out the [mapping](mapping.html) div for more information on mapping definitions.
+```sh
+curl -XPUT 'localhost:9200/twitter/tweet/1?version=2&pretty' -H 'Content-Type: application/json' -d'
+{
+    "message" : "elasticsearch now has versioning support, double cool!"
+}
+'
+```
+注：版本控制是完全实时的，不受搜索操作的近实时方面的影响。如果没有提供版本，则操作在没有任何版本检查的情况下执行。
 
-Automatic index creation can be disabled by setting `action.auto_create_index` to `false` in the config file of all nodes. Automatic mapping creation can be disabled by setting `index.mapper.dynamic` to `false` per-index as an index setting.
+默认情况下，使用内部版本控制，从1开始，每增加一个更新，包括删除。可选地，版本号可以用外部值补充（例如，如果保存在数据库中）。要启用此功能，version_type应设置为外部。提供的值必须是数字，长整数值大于或等于0，小于大约9.2e + 18。当使用外部版本类型时，系统将检查传递给索引请求的版本号是否大于当前存储的文档的版本，而不是检查匹配的版本号。如果为true，则将文档编入索引并使用新的版本号。如果提供的值小于或等于存储文档的版本号，则会发生版本冲突，索引操作将失败。
 
-Automatic index creation can include a pattern based white/black list, for example, set `action.auto_create_index` to `+aaa*,-bbb*,+ccc*,-*` (+ meaning allowed, and - meaning disallowed).
+> ### 警告
+> 外部版本支持的值0作为一个有效的版本号。这允许版本与外部同步版本控制系统版本号从0开始,而不是一个地方。它有副作用,文档版本号等于零不能使用Update-By-Query API和使用Delete删除查询API,只要他们的版本号等于零。
 
-### Versioning
+# 版本类型
+除上面解释的内部（internal）和外部(external)版本类型外，Elasticsearch还支持其他类型的特定用例。以下是不同版本类型及其语义的概述。
 
-Each indexed document is given a version number. The associated `version` number is returned as part of the response to the index API request. The index API optionally allows for [optimistic concurrency control](http://en.wikipedia.org/wiki/Optimistic_concurrency_control) when the `version` parameter is specified. This will control the version of the document the operation is intended to be executed against. A good example of a use case for versioning is performing a transactional read-then-update. Specifying a `version` from the document initially read ensures no changes have happened in the meantime (when reading in order to update, it is recommended to set `preference` to `_primary`). For example:
-    
-    
-    PUT twitter/tweet/1?version=2
-    {
-        "message" : "elasticsearch now has versioning support, double cool!"
-    }
+* **internal**  
+如果给定版本与存储文档的版本相同，则只索引文档。
+* **external或external\_gt**  
+如果给定的版本严格高于存储的文档的版本或者没有存在的文档，则只索引文档。给定的版本将被用作新版本，并将与新文档一起存储。提供的版本必须是非负数的长整数。
+* **external\_gte**  
+如果给定版本等于或高于存储文档的版本，则只索引文档。如果没有现有的文件，操作也会成功。给定的版本将被用作新版本，并将与新文档一起存储。提供的版本必须是非负数的长整数。
 
- **NOTE:** versioning is completely real time, and is not affected by the near real time aspects of search operations. If no version is provided, then the operation is executed without any version checks.
+注意：external\_gte版本类型是为特殊用途而设计的，应谨慎使用。如果使用不当，可能会导致数据丢失。还有另一个选项force，由于可能会导致主分片和副本分片分歧，因此不推荐使用。
 
-By default, internal versioning is used that starts at 1 and increments with each update, deletes included. Optionally, the version number can be supplemented with an external value (for example, if maintained in a database). To enable this functionality, `version_type` should be set to `external`. The value provided must be a numeric, long value greater or equal to 0, and less than around 9.2e+18. When using the external version type, instead of checking for a matching version number, the system checks to see if the version number passed to the index request is greater than the version of the currently stored document. If true, the document will be indexed and the new version number used. If the value provided is less than or equal to the stored document’s version number, a version conflict will occur and the index operation will fail.
+# 操作类型
 
-![Warning](images/icons/warning.png)
+建立索引的操作，可以添加一个`op_type`的参数，去强制执行一个建立操作。当`op_type=create`的时候，如果目标文档的id已经存在，则会操作失败。
 
-External versioning supports the value 0 as a valid version number. This allows the version to be in sync with an external versioning system where version numbers start from zero instead of one. It has the side effect that documents with version number equal to zero cannot neither be updated using the [Update-By-Query API](docs-update-by-query.html) nor be deleted using the [Delete By Query API](docs-delete-by-query.html) as long as their version number is equal to zero.
+这里有一个粟子：
 
-A nice side effect is that there is no need to maintain strict ordering of async indexing operations executed as a result of changes to a source database, as long as version numbers from the source database are used. Even the simple case of updating the elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations are out of order for whatever reason.
+```sh
+curl -XPUT 'localhost:9200/twitter/tweet/1?op_type=create&pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
+# 可以转成REST APIs 风格的形式
+curl -XPUT 'localhost:9200/twitter/tweet/1/_create?pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
+```
+# 主键（ID）
 
-#### Version types
+索引操作可以不指定id执行。在这种情况下,将自动生成一个ID。此外,op_type将自动设置为create。这里有一个例子(注意请求方式POST代替PUT):
 
-Next to the `internal` & `external` version types explained above, Elasticsearch also supports other types for specific use cases. Here is an overview of the different version types and their semantics.
+```sh
+curl -XPOST 'localhost:9200/twitter/tweet/?pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
+# 返回的结果
+{
+    "_shards" : {
+        "total" : 2,
+        "failed" : 0,
+        "successful" : 2
+    },
+    "_index" : "twitter",
+    "_type" : "tweet",
+    "_id" : "6a8ca01c-7896-48e9-81cc-9f70661fcb32",
+    "_version" : 1,
+    "created" : true,
+    "result": "created"
+}
+```
 
-`internal`
-     only index the document if the given version is identical to the version of the stored document. 
-`external` or `external_gt`
-     only index the document if the given version is strictly higher than the version of the stored document **or** if there is no existing document. The given version will be used as the new version and will be stored with the new document. The supplied version must be a non-negative long number. 
-`external_gte`
-     only index the document if the given version is **equal** or higher than the version of the stored document. If there is no existing document the operation will succeed as well. The given version will be used as the new version and will be stored with the new document. The supplied version must be a non-negative long number. 
+# 路由（Routing）
+默认情况下，分片放置或路由是通过文档的id值的散列来控制的。 为了更明确的控制，路由使用的哈希函数的值可以直接使用参数进行指定一个文档字段进行使用。 例如：
 
-**NOTE** : The `external_gte` version type is meant for special use cases and should be used with care. If used incorrectly, it can result in loss of data. There is another option, `force`, which is deprecated because it can cause primary and replica shards to diverge.
+```sh
+curl -XPOST 'localhost:9200/twitter/tweet?routing=kimchy&pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
+```
 
-### Operation Type
+在上面的例子中，“tweet”类型的文档设置了“routing=kimchy”，它将会基于kimcky字段的值来计算hash值确定分片位置。
+设置显式映射时，可以选择使用_routing字段来指导索引操作从文档本身提取路由值。 这确实是以一个额外的文档解析过程（非常小的成本）来实现的。 如果_routing映射被定义并被设置为必需的，那么如果没有提供或提取路由选择值，则索引操作将失败。
 
-The index operation also accepts an `op_type` that can be used to force a `create` operation, allowing for "put-if-absent" behavior. When `create` is used, the index operation will fail if a document by that id already exists in the index.
+# 父子关系
+在进行索引的时候可以为一个文档指定一个父关系映射
 
-Here is an example of using the `op_type` parameter:
-    
-    
-    PUT twitter/tweet/1?op_type=create
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
-
-Another option to specify `create` is to use the following uri:
-    
-    
-    PUT twitter/tweet/1/_create
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
-
-### Automatic ID Generation
-
-The index operation can be executed without specifying the id. In such a case, an id will be generated automatically. In addition, the `op_type` will automatically be set to `create`. Here is an example (note the **POST** used instead of **PUT** ):
-    
-    
-    POST twitter/tweet/
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
-
-The result of the above index operation is:
-    
-    
-    {
-        "_shards" : {
-            "total" : 2,
-            "failed" : 0,
-            "successful" : 2
-        },
-        "_index" : "twitter",
-        "_type" : "tweet",
-        "_id" : "6a8ca01c-7896-48e9-81cc-9f70661fcb32",
-        "_version" : 1,
-        "created" : true,
-        "result": "created"
-    }
-
-### Routing
-
-By default, shard placement — or `routing` — is controlled by using a hash of the document’s id value. For more explicit control, the value fed into the hash function used by the router can be directly specified on a per-operation basis using the `routing` parameter. For example:
-    
-    
-    POST twitter/tweet?routing=kimchy
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
-
-In the example above, the "tweet" document is routed to a shard based on the `routing` parameter provided: "kimchy".
-
-When setting up explicit mapping, the `_routing` field can be optionally used to direct the index operation to extract the routing value from the document itself. This does come at the (very minimal) cost of an additional document parsing pass. If the `_routing` mapping is defined and set to be `required`, the index operation will fail if no routing value is provided or extracted.
-
-### Parents & Children
-
-A child document can be indexed by specifying its parent when indexing. For example:
-    
-    
-    PUT blogs
-    {
-      "mappings": {
-        "tag_parent": {},
-        "blog_tag": {
-          "_parent": {
-            "type": "tag_parent"
-          }
-        }
+```sh
+curl -XPUT 'localhost:9200/blogs?pretty' -H 'Content-Type: application/json' -d'
+{
+  "mappings": {
+    "tag_parent": {},
+    "blog_tag": {
+      "_parent": {
+        "type": "tag_parent"
       }
     }
-    
-    PUT blogs/blog_tag/1122?parent=1111
-    {
-        "tag" : "something"
-    }
+  }
+}
+'
+curl -XPUT 'localhost:9200/blogs/blog_tag/1122?parent=1111&pretty' -H 'Content-Type: application/json' -d'
+{
+    "tag" : "something"
+}
+'
+```
 
-When indexing a child document, the routing value is automatically set to be the same as its parent, unless the routing value is explicitly specified using the `routing` parameter.
+# 分发
 
-### Distributed
+由[路由部分]()实现了主分片的定位，当主分片建立好索引后，在必要的条件下，它会负责向其实复制分片请求更新索引。
 
-The index operation is directed to the primary shard based on its route (see the Routing div above) and performed on the actual node containing this shard. After the primary shard completes the operation, if needed, the update is distributed to applicable replicas.
+为了提高写入系统的性能，索引操作可以配置为在继续操作之前等待一定数量的活动分片副本。如果所需数量的活动分片副本不可用，则写入操作必须等待并重试，直到必要的分片副本已启动或发生超时。默认情况下，写入操作只能等待主分片在进行之前处于活动状态（即`wait_for_active_shards = 1`）。可以通过设置`index.write.wait_for_active_shards`动态地在索引设置中重写此默认值。要改变每个操作的这种行为，可以使用wait_for_active_shards请求参数。
 
-### Wait For Active Shards
+有效值是任何正整数，直到索引中每个分片的配置副本总数（即number_of_replicas + 1）。指定负值或大于分片数量的数字将引发错误。
 
-To improve the resiliency of writes to the system, indexing operations can be configured to wait for a certain number of active shard copies before proceeding with the operation. If the requisite number of active shard copies are not available, then the write operation must wait and retry, until either the requisite shard copies have started or a timeout occurs. By default, write operations only wait for the primary shards to be active before proceeding (i.e. `wait_for_active_shards=1`). This default can be overridden in the index settings dynamically by setting `index.write.wait_for_active_shards`. To alter this behavior per operation, the `wait_for_active_shards` request parameter can be used.
+例如，假设我们有一个由三个节点A，B和C组成的群集，并且我们创建了一个索引索引，其副本数量设置为3（导致4个分片副本，比节点多一个副本）。如果我们尝试索引操作，默认情况下操作只会确保每个分片的主要副本可用，然后才能继续。这意味着，即使B和C发生故障，并且A托管了主分片副本，索引操作仍将继续进行，只有一个数据副本。如果请求中的wait_for_active_shards设置为3（并且所有3个节点都在运行），那么索引操作在继续之前将需要3个活动分片副本，这是一个需要满足的要求，因为集群中有3个活动节点，碎片的副本。但是，如果我们将wait_for_active_shards设置为all（或者设置为4，则相同），索引操作将不会继续，因为索引中没有每个分片的所有4个副本都处于活动状态。该操作将超时，除非在集群中引入新节点来托管分片的第四个副本。
 
-Valid values are `all` or any positive integer up to the total number of configured copies per shard in the index (which is `number_of_replicas+1`). Specifying a negative value or a number greater than the number of shard copies will throw an error.
+需要注意的是，这种设置大大降低了写操作不写入所需数量的分片副本的可能性，但是这并不能完全消除这种可能性，因为在写操作开始之前发生这种检查。一旦写入操作正在进行，仍然有可能复制在任何数量的分片副本上失败，但是仍然可以在主分区上成功。写操作响应的_shards部分显示复制成功/失败的分片副本的数量。
 
-For example, suppose we have a cluster of three nodes, `A`, `B`, and `C` and we create an index `index` with the number of replicas set to 3 (resulting in 4 shard copies, one more copy than there are nodes). If we attempt an indexing operation, by default the operation will only ensure the primary copy of each shard is available before proceeding. This means that even if `B` and `C` went down, and `A` hosted the primary shard copies, the indexing operation would still proceed with only one copy of the data. If `wait_for_active_shards` is set on the request to `3` (and all 3 nodes are up), then the indexing operation will require 3 active shard copies before proceeding, a requirement which should be met because there are 3 active nodes in the cluster, each one holding a copy of the shard. However, if we set `wait_for_active_shards` to `all` (or to `4`, which is the same), the indexing operation will not proceed as we do not have all 4 copies of each shard active in the index. The operation will timeout unless a new node is brought up in the cluster to host the fourth copy of the shard.
+# 刷新
+请查阅[刷新]()
 
-It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation commences. Once the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary. The `_shards` div of the write operation’s response reveals the number of shard copies on which replication succeeded/failed.
-    
-    
-    {
-        "_shards" : {
-            "total" : 2,
-            "failed" : 0,
-            "successful" : 2
-        }
-    }
+# 无变更更新
 
-### Refresh
+使用索引api更新文档时，即使文档没有更改，总是会创建新版本的文档。 如果这是不可接受的，则使用带有detect_noop的_update api设置为true。 这个选项在索引api上不可用，因为索引api没有获取旧的源，也无法将它与新的源进行比较。
 
-Control when the changes made by this request are visible to search. See [refresh](docs-refresh.html "?refresh").
+当noop更新不可接受时，并没有一个硬性规定。 这是很多因素的组合，例如数据源发送更新的频率实际上是否是noops，以及elasticsearch在接收更新时每秒运行多少个查询。
 
-### Noop Updates
+# 索引超时
 
-When updating a document using the index api a new version of the document is always created even if the document hasn’t changed. If this isn’t acceptable use the `_update` api with `detect_noop` set to true. This option isn’t available on the index api because the index api doesn’t fetch the old source and isn’t able to compare it against the new source.
+当索引操作正在进行时，主分片可能并不是有有效的运行状态，一些原因（网关或正在重定位）可能会导致主分片当时不可用。默认的索引操作等待一个主分片可用的时间是1分钟，当超过1分钟的时候会失败并返回一个带错误信息的响应内容。明确指定一个超时参数可以设置它的等待时长，如于举了个等待时长5分钟的粟子：
 
-There isn’t a hard and fast rule about when noop updates aren’t acceptable. It’s a combination of lots of factors like how frequently your data source sends updates that are actually noops and how many queries per second elasticsearch runs on the shard with receiving the updates.
+```sh
+curl -XPUT 'localhost:9200/twitter/tweet/1?timeout=5m&pretty' -H 'Content-Type: application/json' -d'
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+'
 
-### Timeout
-
-The primary shard assigned to perform the index operation might not be available when the index operation is executed. Some reasons for this might be that the primary shard is currently recovering from a gateway or undergoing relocation. By default, the index operation will wait on the primary shard to become available for up to 1 minute before failing and responding with an error. The `timeout` parameter can be used to explicitly specify how long it waits. Here is an example of setting it to 5 minutes:
-    
-    
-    PUT twitter/tweet/1?timeout=5m
-    {
-        "user" : "kimchy",
-        "post_date" : "2009-11-15T14:12:12",
-        "message" : "trying out Elasticsearch"
-    }
+```

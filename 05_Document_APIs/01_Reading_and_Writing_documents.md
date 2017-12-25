@@ -1,77 +1,67 @@
-## Reading and Writing documents
+# 读取和写入文档
 
-### Introduction
+Elasticsearch中的每个索引都被[分成分片（shards）](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/gs-basic-concepts.html#getting-started-shards-and-replicas) ，每个分片可以有多个副本（copy/replicas）。这些复制被称为复制组(replication group)，并且在添加或删除文档时必须保持同步。如果我们不这样做，将导致从一个复制分片读的取结果比另一个分片读取的会不同的。保持分片复制同步并从中读取数据的过程就是我们所说的**数据复制模型**。
 
-Each index in Elasticsearch is [divided into shards](gs-basic-concepts.html#getting-started-shards-and-replicas) and each shard can have multiple copies. These copies are known as a _replication group_ and must be kept in sync when documents are added or removed. If we fail to do so, reading from one copy will result in very different results than reading from another. The process of keeping the shard copies in sync and serving reads from them is what we call the _data replication model_.
+Elasticsearch的数据复制模型基于主备份(primary-backup,也叫master/slave)模型，在微软研究院的[PacificA论文]()中有很好的描述 。该模型基于具有充当主分片（primary-shard）的复制组的单个副本，其他复制称为复制分片。主分片主要作为所有建立索引操作的主要入口点。它负责验证它们并确保它们是正确的。一旦主服务器接受了索引操作，主服务器也负责将操作主分片到其他复制分片。
 
-Elasticsearch’s data replication model is based on the _primary-backup model_ and is described very well in the [PacificA paper](https://www.microsoft.com/en-us/research/publication/pacifica-replication-in-log-based-distributed-storage-systems/) of Microsoft Research. That model is based on having a single copy from the replication group that acts as the primary shard. The other copies are called _replica shards_. The primary serves as the main entry point for all indexing operations. It is in charge of validating them and making sure they are correct. Once an index operation has been accepted by the primary, the primary is also responsible for replicating the operation to the other copies.
+本章节的目的是对Elasticsearch复制模型进行高度概述，并讨论其对写入和读取操作之间的各种交互的影响。
 
-This purpose of this div is to give a high level overview of the Elasticsearch replication model and discuss the implications it has for various interactions between write and read operations.
+# 基本写入模型
 
-### Basic write model
+Elasticsearch中的每个索引操作首先使用[路由]()，通常基于文档ID解析为复制组位置。一旦确定了复制组位置，操作就会在内部转发到复制组的当前主分片。主分片负责验证操作并将其转发给其他副本。由于副本可以脱机，因此主服务器不需要复制到所有副本。相反，Elasticsearch维护应接收操作的分片副本列表。该列表被称为同步副本并由主节点维护。顾名思义，这是一组“好”的分片副本，保证已经处理了所有已经被用户确认的索引的建立和删除操作。主分片要负责维护数据一致，因此必须将所有操作复制到这个分片副本列表中的每个副本。
 
-Every indexing operation in Elasticsearch is first resolved to a replication group using [routing](docs-index_.html#index-routing), typically based on the document ID. Once the replication group has been determined, the operation is forwarded internally to the current _primary shard_ of the group. The primary shard is responsible for validating the operation and forwarding it to the other replicas. Since replicas can be offline, the primary is not required to replicate to all replicas. Instead, Elasticsearch maintains a list of shard copies that should receive the operation. This list is called the _in-sync copies_ and is maintained by the master node. As the name implies, these are the set of "good" shard copies that are guaranteed to have processed all of the index and delete operations that have been acknowledged to the user. The primary is responsible for maintaining this invariant and thus has to replicate all operations to each copy in this set.
+主分片遵循这个基本流程：
 
-The primary shard follows this basic flow:
+1. 验证传入的操作，并在结构无效的情况下拒绝它（例如：有一个对象字段，其中数字是预期的）
+2. 在本地执行操作即索引或删除相关文档。这也将验证字段的内容，并在需要时拒绝（例如：在Lucene中索引的关键字值太长）。
+3. 将操作转发到当前同步副本列表（in-sync list）中的每个副本。如果有多个副本，这是并行完成的。
+4. 一旦所有副本都成功执行操作并响应主要操作，则主要确认向客户端成功完成请求。
 
-  1. Validate incoming operation and reject it if structurally invalid (Example: have an object field where a number is expected) 
-  2. Execute the operation locally i.e. indexing or deleting the relevant document. This will also validate the content of fields and reject if needed (Example: a keyword value is too long for indexing in Lucene). 
-  3. Forward the operation to each replica in the current in-sync copies set. If there are multiple replicas, this is done in parallel. 
-  4. Once all replicas have successfully performed the operation and responded to the primary, the primary acknowledges the successful completion of the request to the client. 
+## 失败处理
 
+在建立索引期间很多事情可能会出错 --- 磁盘可能损坏，节点可能互相断开连接，或者某些配置错误可能导致副本上的操作失败，尽管在主节点上成功。这些并不常见，但主要是要对它们负责。
 
+在主分片本身发生故障的情况下，托管主分片的节点将向主服务器（master节点）发送关于它的消息。索引操作将等待（[默认情况]()下最多1分钟），以便主服务器（master 节点）将其中一个副本提升为新的主分片。该操作将被转发到新的主分片进行处理。请注意，主服务器（master 节点）还监视所有节点的健康状况，并可能决定主动降级主分片。当存在网络问题将持有主分片的节点与群集隔离时，通常会发生前面主动降级情况。在[这里]()看到更多的细节。
 
-#### Failure handling
+在主分片上成功执行操作后，主分片在副本分片上执行操作时必须处理潜在的故障。 这可能是由副本上的实际故障或由于网络问题导致操作无法到达副本（或阻止副本响应）所致。 所有这些问题的最终结果都相同：复制分片作为同步副本集（in-sync list）一部分的副本未命中即将被确认的操作。 为了避免违反一致性，主分片发送一条消息给master主机，请求将有问题的分片从同步副本集中移除。 只有主服务器（master）确认移除有问题的分片后，主分片才确认操作。 请注意，主服务器（master）还将指示另一个节点开始构建新的分片副本，以便将系统恢复到健康状态。
 
-Many things can go wrong during indexing — disks can get corrupted, nodes can be disconnected from each other, or some configuration mistake could cause an operation to fail on a replica despite it being successful on the primary. These are infrequent but the primary has to respond to them.
+在将操作转发到副本时，主分片将使用副本来验证它仍然是活动的主分片。如果主分片由于网络中断（或长GC）而被隔离，则可能会继续处理传入索引操作，然后才意识到其已降级。从老旧的主分片来的操作将被复制分片拒绝。因为它不再是主分片，它将会收到来自副本的拒绝请求的响应，，那么它将与主服务器联系，并且将知道它已被替换。然后被当作复制分片路由到新的主分片。
 
-In the case that the primary itself fails, the node hosting the primary will send a message to the master about it. The indexing operation will wait (up to 1 minute, by [default](index-modules.html#dynamic-index-settings)) for the master to promote one of the replicas to be a new primary. The operation will then be forwarded to the new primary for processing. Note that the master also monitors the health of the nodes and may decide to proactively demote a primary. This typically happens when the node holding the primary is isolated from the cluster by a networking issue. See [here](docs-replication.html#demoted-primary) for more details.
+> ### 当没有分片时，会发生什么事情？
+> 这是由于索引配置或仅因为所有副本都失败而可能发生的有效方案。在这种情况下，主分片会在没有任何外部验证条件下处理索引操作，这可能看起来有问题。另一方面，主分片不能自行破坏其他的碎片请求，而是要求主节点代表它去处理。这意味着主服务（master节点）知道主分片(primary)是唯一的一个好的副本。因此，我们保证，主服务器不会将任何其他（过时的）分片副本推广为新的主分片，并且索引到主分片的任何操作都不会丢失。当然，从那时起，我们只运行单个数据副本，物理硬件问题可能会导致数据丢失。请参阅[等待活动碎片]()编辑可以缓解选项。
 
-Once the operation has been successfully performed on the primary, the primary has to deal with potential failures when executing it on the replica shards. This may be caused by an actual failure on the replica or due to a network issue preventing the operation from reaching the replica (or preventing the replica from responding). All of these share the same end result: a replica which is part of the in-sync replica set misses an operation that is about to be acknowledged. In order to avoid violating the invariant, the primary sends a message to the master requesting that the problematic shard be removed from the in-sync replica set. Only once removal of the shard has been acknowledged by the master does the primary acknowledge the operation. Note that the master will also instruct another node to start building a new shard copy in order to restore the system to a healthy state.
+# 基本读取模型
+在Elasticsearch中读取可以通过ID进行非常轻量级的查找，也可以通过使用复杂聚合的沉重搜索请求来实现，而这些请求将占用不重要的CPU资源。主备份模式（primary-backup/master-salve）的一个优点是它保持所有碎片副本一致（除正在执行操作外）。因此，单个同步副本足以满足读取请求。
 
-While forwarding an operation to the replicas, the primary will use the replicas to validate that it is still the active primary. If the primary has been isolated due to a network partition (or a long GC) it may continue to process incoming indexing operations before realising that it has been demoted. Operations that come from a stale primary will be rejected by the replicas. When the primary receives a response from the replica rejecting its request because it is no longer the primary then it will reach out to the master and will learn that it has been replaced. The operation is then routed to the new primary.
+当一个节点接收到读请求时，该节点负责将其转发到保存相关分片的节点，整理响应并响应客户端。我们称该节点为该请求的**协调节点**。基本流程如下：
 
- **What happens if there are no replicas?**
+1. 将读取请求解析到相关的分片。请注意，由于大多数搜索将被发送到一个或多个索引，它们通常需要从多个分片读取，每个分片代表不同的数据子集。
+2. 从分片复制组中选择每个相关分片的活动副本。这可以是主分片的或复制分片。默认情况下，Elasticsearch只是在分片之间轮询（round robin）。
+3. 发送分片级读取请求到选定的副本。
+4. 合并结果并作出回应。请注意，在通过ID查找的情况下，只有一个分片是相关的，并且这个步骤可以被跳过。
 
-This is a valid scenario that can happen due to index configuration or simply because all the replicas have failed. In that case the primary is processing operations without any external validation, which may seem problematic. On the other hand, the primary cannot fail other shards on its own but request the master to do so on its behalf. This means that the master knows that the primary is the only single good copy. We are therefore guaranteed that the master will not promote any other (out-of-date) shard copy to be a new primary and that any operation indexed into the primary will not be lost. Of course, since at that point we are running with only single copy of the data, physical hardware issues can cause data loss. See [Wait For Active Shards for some mitigation options.
+### 失败处理
 
-### Basic read model
+当分片无法响应读取请求时，协调节点将从同一个复制组中选择另一个副本，并将碎片级别搜索请求发送到该副本。重复性故障可能导致没有分片副本可用。在某些情况下，比如**_search**，Elasticsearch会倾向于快速响应，虽然只有部响应结果也作出了响应，而不是等待问题解决（部分结果_shards会在响应头中明确指出）。
 
-Reads in Elasticsearch can be very lightweight lookups by ID or a heavy search request with complex aggregations that take non-trivial CPU power. One of the beauties of the primary-backup model is that it keeps all shard copies identical (with the exception of in-flight operations). As such, a single in-sync copy is sufficient to serve read requests.
+## 一些简单的含意
 
-When a read request is received by a node, that node is responsible for forwarding it to the nodes that hold the relevant shards, collating the responses, and responding to the client. We call that node the _coordinating node_ for that request. The basic flow is as follows:
+这些基本流程中的每一个都说明了Elasticsearch是一个读写系统。而且，由于读取和写入请求可以同时执行，这两个基本流程可以相互交互。这有一些内在的含义：
 
-  1. Resolve the read requests to the relevant shards. Note that since most searches will be sent to one or more indices, they typically need to read from multiple shards, each representing a different subset of the data. 
-  2. Select an active copy of each relevant shard, from the shard replication group. This can be either the primary or a replica. By default, Elasticsearch will simply round robin between the shard copies. 
-  3. Send shard level read requests to the selected copies. 
-  4. Combine the results and respond. Note that in the case of get by ID look up, only one shard is relevant and this step can be skipped. 
+* 有效的读取  
+在正常操作下，每个相关复制组执行一次读取操作。只有在失败情况下，同一个分片的多个副本才能执行相同的搜索。
+* 阅读未确认   
+由于分片首先在本地建立索引，然后给复制分片请求，所以并发读取可能在确认之前就已经看到了更改。
+* 默认两份  
+这个模型可以是容错的，同时只保留两个数据副本。这与基于法定人数的系统相反，其中容错的副本的最小数量是3。
 
+# 失败
+在失败的情况下，以下是可能的：
 
+* 一个碎片会减慢索引  
+由于主分片在每个操作期间等待在同步副本中设置所有副本，因此一个慢分片可能会减慢整个复制组的速度。这是我们为上述读取效率付出的代价。当然，单个缓慢的分片也会减慢已经发送给它的搜索（route）。
+* 脏读  
+一个孤立的主分片可以暴露还没有被确认的写入。这是由于一个孤立的主分片只有在向副本发送请求或向主服务器（master）发送请求时才会被隔离。此时操作已经被索引到主数据库中，并可以通过并行读取来读取。Elasticsearch通过每秒（在默认情况下）对主服务器（master）进行ping操作，并在没有主服务器的情况下拒绝索引操作来减轻这种风险。
 
-#### Failure handling
-
-When a shard fails to respond to a read request, the coordinating node will select another copy from the same replication group and send the shard level search request to that copy instead. Repetitive failures can result in no shard copies being available. In some cases, such as `_search`, Elasticsearch will prefer to respond fast, albeit with partial results, instead of waiting for the issue to be resolved (partial results are indicated in the `_shards` header of the response).
-
-### A few simple implications
-
-Each of these basic flows determines how Elasticsearch behaves as a system for both reads and writes. Furthermore, since read and write requests can be executed concurrently, these two basic flows interact with each other. This has a few inherent implications:
-
-Efficient reads 
-     Under normal operation each read operation is performed once for each relevant replication group. Only under failure conditions do multiple copies of the same shard execute the same search. 
-Read unacknowledged 
-     Since the primary first indexes locally and then replicates the request, it is possible for a concurrent read to already see the change before it has been acknowledged. 
-Two copies by default 
-     This model can be fault tolerant while maintaining only two copies of the data. This is in contrast to quorum-based system where the minimum number of copies for fault tolerance is 3. 
-
-### Failures
-
-Under failures, the following is possible:
-
-A single shard can slow down indexing 
-     Because the primary waits for all replicas in the in-sync copies set during each operation, a single slow shard can slow down the entire replication group. This is the price we pay for the read efficiency mentioned above. Of course a single slow shard will also slow down unlucky searches that have been routed to it. 
-Dirty reads 
-     An isolated primary can expose writes that will not be acknowledged. This is caused by the fact that an isolated primary will only realize that it is isolated once it sends requests to its replicas or when reaching out to the master. At that point the operation is already indexed into the primary and can be read by a concurrent read. Elasticsearch mitigates this risk by pinging the master every second (by default) and rejecting indexing operations if no master is known. 
-
-### The Tip of the Iceberg
-
-This document provides a high level overview of how Elasticsearch deals with data. Of course, there is much much more going on under the hood. Things like primary terms, cluster state publishing and master election all play a role in keeping this system behaving correctly. This document also doesn’t cover known and important bugs (both closed and open). We recognize that [GitHub is hard to keep up with](https://github.com/elastic/elasticsearch/issues?q=label%3Aresiliency). To help people stay on top of those and we maintain a dedicated [resiliency page](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html) on our website. We strongly advise reading it.
+> ### Tips
+> 本文档提供了Elasticsearch如何处理数据的高级概述。当然，还有很多事情要做。诸如terms，集群状态发布和主选举之类的事情都起着保持这个系统正常运转的作用。我们认识到在GitHub很难跟上已知和重要的错误（包括关闭和打开）。为了帮助人们保持最佳状态，我们在我们的网站上维护一个专门的弹性页面。我们强烈建议[阅读](https://www.elastic.co/guide/en/elasticsearch/resiliency/current/index.html)。
