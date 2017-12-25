@@ -34,7 +34,7 @@ A `moving_avg` aggregation looks like this in isolation:
 
  **Table 9. `moving_avg` Parameters**
 
-Parameter Name| Description| Required| Default Value    
+ 参数名|描述|是否必需|默认值    
 ---|---|---|---    
 `buckets_path`| Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) formore details| Required|     
 `model`| The moving average weighting model that we wish to use| Optional| `simple`    

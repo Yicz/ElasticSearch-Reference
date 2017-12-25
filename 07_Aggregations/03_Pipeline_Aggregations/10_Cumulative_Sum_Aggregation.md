@@ -19,7 +19,7 @@ A `cumulative_sum` aggregation looks like this in isolation:
 
  **Table 10. `cumulative_sum` Parameters**
 
-Parameter Name| Description| Required| Default Value   
+ 参数名|描述|是否必需|默认值   
 ---|---|---|---    
 `buckets_path`| The path to the buckets we wish to find the cumulative sum for (see [`buckets_path` Syntax| Required|  `format`| format to apply to the output value of this aggregation| Optional| `null`  
   

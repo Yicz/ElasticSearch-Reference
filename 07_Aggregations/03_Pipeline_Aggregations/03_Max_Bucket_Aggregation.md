@@ -19,7 +19,7 @@ A `max_bucket` aggregation looks like this in isolation:
 
  **Table 3. `max_bucket` Parameters**
  
-Parameter Name| Description| Required| Default Value    
+参数名|描述|是否必需|默认值    
 ---|---|---|---    
 `buckets_path`| The path to the buckets we wish to find the maximum for (see [`buckets_path` Syntax| Required|     
 `gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| `skip`    

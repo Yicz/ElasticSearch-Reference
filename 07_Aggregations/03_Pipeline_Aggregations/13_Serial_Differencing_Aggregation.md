@@ -44,7 +44,7 @@ A `serial_diff` aggregation looks like this in isolation:
 
  **Table 13. `serial_diff` Parameters**
 
-Parameter Name| Description| Required| Default Value    
+ 参数名|描述|是否必需|默认值    
 ---|---|---|---    
 `buckets_path`| Path to the metric of interest (see [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) formore details| Required|     
 `lag`| The historical bucket to subtract from the current value. E.g. a lag of 7 will subtract the current value from thevalue 7 buckets ago. Must be a positive, non-zero integer| Optional| `1`    

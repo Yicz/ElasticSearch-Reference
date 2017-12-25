@@ -33,7 +33,7 @@ Here, `my_var1` is the name of the variable for this buckets path to use in the 
   
 **Table 12. `bucket_selector` Parameters**
 
-Parameter Name| Description| Required| Default Value    
+参数名|描述|是否必需|默认值    
 ---|---|---|---    
 `script`| The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_]modules-scripting.html) for more details)| Required|     
 `buckets_path`| A map of script variables and their associated path to the buckets we wish to use for the variable (see [`buckets_path Syntax
