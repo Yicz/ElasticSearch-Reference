@@ -1,4 +1,4 @@
-## 关闭ES  Stopping Elasticsearch
+## 关闭ES Stopping Elasticsearch
 
 Elasticsearch的有序关闭确保Elasticsearch有机会清理并关闭使用的资源。 例如，有序关闭的节点将从集群中删除节点信息，同步超时日志到磁盘，并执行其他相关的清理活动。 您可以通过正确的方式来停止Elasticsearch来帮助确保其有序关闭。
 
