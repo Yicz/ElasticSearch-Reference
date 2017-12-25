@@ -144,23 +144,27 @@ The `.zip` package is entirely self-contained. All files and directories are, by
 
 This is very convenient because you don’t have to create any directories to start using Elasticsearch, and uninstalling Elasticsearch is as easy as removing the `%ES_HOME%` directory. However, it is advisable to change the default locations of the config directory, the data directory, and the logs directory so that you do not delete important data later on.
 
-Type |  Description |  Default Location |  Setting  
----|---|---|---     
-**home**| Elasticsearch home directory or `%ES_HOME%`| Directory created by unpacking the archive| ``     
-**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `%ES_HOME%\bin`|      
-**conf**| Configuration files including `elasticsearch.yml`| `%ES_HOME%\config`| `path.conf`     
-**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `%ES_HOME%\data`| `path.data`     
-**logs**| Log files location.| `%ES_HOME%\logs`| `path.logs`     
-**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `%ES_HOME%\plugins`| ``     
-**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
-**script**| Location of script files.| `%ES_HOME%\scripts`| `path.scripts`  
+
+RPM软件包将配置文件，日志和数据目录放置在基于RPM的系统的适当位置：
+
+类型| 说明| 默认位置| 设置
+:---:|:---|:---|:---
+**home**| ES的主目录 `%ES_HOME%`| 解压文件夹的所有位置|      
+**bin**| 二进制脚本包括`elasticsearch`启动节点，`elasticsearch-plugin`安装插件| ***`%ES_HOME%\bin`***|      
+**conf**| 配置文件包括`elasticsearch.yml`和 `log4j2.properties`| ***`%ES_HOME%\conf`***| `path.conf`     
+**data**| 在节点上分配的每个索引/分片的数据文件的位置。 可以容纳多个地点.| ***`%ES_HOME%\data`***| `path.data`     
+**logs**| 日志文件存放位置.| ***`%ES_HOME/logs%`***| `path.logs`     
+**plugins**| 插件安装位置,每个插件都会是一个子目录.|  ***`%ES_HOME%\plugins`***| ``     
+**repo**| 共享文件系统存储库位置。 可以容纳多个地点。 文件系统存储库可以放置在此处指定的任何目录的任何子目录中.|没有配置| `path.repo`     
+**script**| 脚本文件存放目录.| ***`%ES_HOME%\scripts`***| `path.scripts`  
+
   
 ### Next steps
 
-You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
+### 接下来
 
-  * Learn how to [configure Elasticsearch](settings.html). 
-  * Configure [important Elasticsearch settings](important-settings.html). 
-  * Configure [important system settings](system-config.html). 
+您现在已经设置了一个测试Elasticsearch环境。 在您开始认真开发或者使用Elasticsearch进行生产之前，您需要进行一些额外的设置：
 
-
+  * [配置ES](settings.html). 
+  * [配置ES重要的设置](important-settings.html). 
+  * [配置系统设置](system-config.html). 

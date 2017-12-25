@@ -1,154 +1,135 @@
-## Install Elasticsearch with Debian Package
+## 使用`deb`包进行安装 Install Elasticsearch with Debian Package
 
-The Debian package for Elasticsearch can be [downloaded from our website](deb.html#install-deb) or from our [APT repository](deb.html#deb-repo). It can be used to install Elasticsearch on any Debian-based system such as Debian and Ubuntu.
+`deb`包可以使用在debian系列的操作系统上，如：Debian和Ubuntu.安装包可以到[下载下面下载]((deb
+.html#install-deb))或者使用[API 仓库](deb.html#deb-repo)。
 
-The latest stable version of Elasticsearch can be found on the [Download Elasticsearch](/downloads/elasticsearch) page. Other versions can be found on the [Past Releases page](/downloads/past-releases).
+ES的最新版本可以在[下载页面](/downloads/elasticsearch)直接找到,旧版本可以到[过去发布版本]
+(/downloads/past-releases)进行查找.
 
 ![Note](images/icons/note.png)
 
-Elasticsearch requires Java 8 or later. Use the [official Oracle distribution](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or an open-source distribution such as [OpenJDK](http://openjdk.java.net).
+ES要求使用Java8+的环境,可以使用[Oracle 官方 JDK](http://www.oracle
+.com/technetwork/java/javase/downloads/index.html) 或者[OpenJDK](http://openjdk
+.java.net).
 
-### Import the Elasticsearch PGP Key
+### 导入ES PGP密钥 Import the Elasticsearch PGP Key
 
-We sign all of our packages with the Elasticsearch Signing Key (PGP key [D88E42B4](https://pgp.mit.edu/pks/lookup?op=vindex&search=0xD27D666CD88E42B4), available from <https://pgp.mit.edu>) with fingerprint:
-    
+安装包签属了(PGP 密钥 [D88E42B4](https://pgp.mit
+.edu/pks/lookup?op=vindex&search=0xD27D666CD88E42B4), 从 <https://pgp.mit
+.edu>)获取可用的指纹:
     
     4609 5ACC 8548 582C 1A26 99A9 D27D 666C D88E 42B4
 
-Download and install the public signing key:
-    
-    
+下载并安装公钥:
+```sh
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+```
 
-### Installing from the APT repository
+### 从APT仓库安装
 
-You may need to install the `apt-transport-https` package on Debian before proceeding:
-    
+在进行使用`deb`包安装前,首先要安装`apt-transport-https`包:
     
     sudo apt-get install apt-transport-https
 
-Save the repository definition to `/etc/apt/sources.list.d/elastic-5.x.list`:
-    
+在源文件中定义仓库: `/etc/apt/sources.list.d/elastic-5.x.list`:
     
     echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
 
 ![Note](images/icons/note.png)
 
-These instructions do not use `add-apt-repository` for several reasons:
+这些步骤不使用`add-apt-repository` 命令的理由:
 
-  1. `add-apt-repository` adds entries to the system `/etc/apt/sources.list` file rather than a clean per-repository file in `/etc/apt/sources.list.d`
-  2. `add-apt-repository` is not part of the default install on many distributions and requires a number of non-default dependencies. 
-  3. Older versions of `add-apt-repository` always add a `deb-src` entry which will cause errors because we do not provide a source package. If you have added the `deb-src` entry, you will see an error like the following until you delete the `deb-src` line: 
+  1. `add-apt-repository`直接操作`/etc/apt/sources.list` 文件, 而`/etc/apt/sources.list.d`文件夹保留不对系统造成坏的影响.
+  2. `add-apt-repository`不是许多发行版默认安装的一部分，需要一些非默认的依赖关系。 
+  3. 旧版本的`add-apt-repository`总是添加一个`deb-src`条目，这会导致错误，因为我们不提供源代码包。 如果添加了`deb-src`项，直到删除`deb-src`这一行前，你将看到如下的错误：
     
-        Unable to find expected entry 'main/source/Sources' in Release file
-    (Wrong sources.list entry or malformed file)
+       无法在发布文件中找到预期的条目“main/source/Sources”（错误的sources.list条目或格式错误的文件）
 
-
-
-
-You can install the Elasticsearch Debian package with:
-    
-    
+您可以安装Elasticsearch Debian软件包：
+        
     sudo apt-get update && sudo apt-get install elasticsearch
 
 ![Warning](images/icons/warning.png)
 
-If two entries exist for the same Elasticsearch repository, you will see an error like this during `apt-get update`:
+如果同一个Elasticsearch存储库中存在两个条目，则在`apt-get update`中会看到类似这样的错误：    
     
-    
-    Duplicate sources.list entry https://artifacts.elastic.co/packages/5.x/apt/ ...`
+    `Duplicate sources.list entry https://artifacts.elastic.co/packages/5.x/apt/ ...`
 
-Examine `/etc/apt/sources.list.d/elasticsearch-5.x.list` for the duplicate entry or locate the duplicate entry amongst the files in `/etc/apt/sources.list.d/` and the `/etc/apt/sources.list` file.
+检查 `/etc/apt/sources.list.d/elasticsearch-5.x.list` 是否在 `/etc/apt/sources.list.d/` 和 `/etc/apt/sources.list` 文件存在多个.
 
 ![Note](images/icons/note.png)
 
-On systemd-based distributions, the installation scripts will attempt to set kernel parameters (e.g., `vm.max_map_count`); you can skip this by setting the environment variable `ES_SKIP_SET_KERNEL_PARAMETERS` to `true`.
+在基于systemd的发行系统上，安装脚本将尝试设置内核参数（例如`vm.max_map_count`）; 您可以通过将环境变量`ES_SKIP_SET_KERNEL_PARAMETERS`设置为`true`来跳过此操作。
 
-### Download and install the Debian package manually
+### 下载并手动安装Debian软件包
 
-The Debian package for Elasticsearch v5.4.3 can be downloaded from the website and installed as follows:
-    
-    
-    wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.deb
-    sha1sum elasticsearch-5.4.3.deb ![](images/icons/callouts/1.png)
-    sudo dpkg -i elasticsearch-5.4.3.deb
-
-![](images/icons/callouts/1.png)
-
-| 
-
-Compare the SHA produced by `sha1sum` or `shasum` with the [published SHA](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.deb.sha1).   
-  
----|---  
+Elasticsearch v5.4.3的Debian软件包可以从网站下载并安装如下：
+```sh 
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.deb
+sha1sum elasticsearch-5.4.3.deb 
+sudo dpkg -i elasticsearch-5.4.3.deb
+```    
   
 ### SysV `init` vs `systemd`
 
-Elasticsearch is not started automatically after installation. How to start and stop Elasticsearch depends on whether your system uses SysV `init` or `systemd` (used by newer distributions). You can tell which is being used by running this command:
-    
+Elasticsearch安装后不会自动启动。 如何启动和停止Elasticsearch取决于您的系统是否使用SysV`init`或`systemd`（由更新的发行版使用）服务管理。 你可以通过运行这个命令来判断使用的服务管理：
     
     ps -p 1
 
-### Running Elasticsearch with SysV `init`
+### 使用 SysV `init` 运行ES
 
-Use the `update-rc.d` command to configure Elasticsearch to start automatically when the system boots up:
-    
+使用`update-rc.d`命令将ES配置为在系统启动时自启动：    
     
     sudo update-rc.d elasticsearch defaults 95 10
 
-Elasticsearch can be started and stopped using the `service` command:
-    
+可以使用`service`命令启动和停止ES：    
     
     sudo -i service elasticsearch start
     sudo -i service elasticsearch stop
 
-If Elasticsearch fails to start for any reason, it will print the reason for failure to STDOUT. Log files can be found in `/var/log/elasticsearch/`.
+如果Elasticsearch由于任何原因而无法启动，将会打印失败的原因。 日志文件可以在 `/var/log/elasticsearch/`中找到。
 
-### Running Elasticsearch with `systemd`
+### 使用`systemd`运行ES
 
-To configure Elasticsearch to start automatically when the system boots up, run the following commands:
-    
+要将Elasticsearch配置为在系统启动时自启动，请运行以下命令：    
     
     sudo /bin/systemctl daemon-reload
     sudo /bin/systemctl enable elasticsearch.service
 
-Elasticsearch can be started and stopped as follows:
-    
+可以使用如下命令启动和停止ES：     
     
     sudo systemctl start elasticsearch.service
     sudo systemctl stop elasticsearch.service
 
-These commands provide no feedback as to whether Elasticsearch was started successfully or not. Instead, this information will be written in the log files located in `/var/log/elasticsearch/`.
+这些命令没有提供有关Elasticsearch是否成功启动的反馈。 但是, 日志文件可以在 `/var/log/elasticsearch/`中找到
 
-By default the Elasticsearch service doesn’t log information in the `systemd` journal. To enable `journalctl` logging, the `--quiet` option must be removed from the `ExecStart` command line in the `elasticsearch.service` file.
+默认情况下，Elasticsearch服务不会在“systemd”日志中记录信息。 为了启用`journalctl`日志记录，必须从`elasticsearch.service`文件的`ExecStart`命令行中删除`--quiet`选项。
 
-When `systemd` logging is enabled, the logging information are available using the `journalctl` commands:
+当`systemd`日志被启用时，日志信息可以使用'journalctl`命令：
 
-To tail the journal:
+从后查看日志:
     
     
     sudo journalctl -f
 
-To list journal entries for the elasticsearch service:
-    
+只列出elasticsearch服务的日志：    
     
     sudo journalctl --unit elasticsearch
 
-To list journal entries for the elasticsearch service starting from a given time:
-    
+
+指定定时间开始列出elasticsearch服务的日志，请执行以下操作：    
     
     sudo journalctl --unit elasticsearch --since  "2016-10-30 18:17:16"
 
-Check `man journalctl` or <https://www.freedesktop.org/software/systemd/man/journalctl.html> for more command line options.
+查看 `man journalctl` or <https://www.freedesktop.org/software/systemd/man/journalctl.html> 获取合金信息
 
-### Checking that Elasticsearch is running
+### 查检ES的运行状态
 
-You can test that your Elasticsearch node is running by sending an HTTP request to port `9200` on `localhost`:
-    
+你可以通过发送一个HTTP请求到`localhost`上的端口`9200`来测试你的Elasticsearch节点是否正在运行：    
     
     GET /
 
-which should give you a response something like this:
-    
+可能得到的响应:    
     
     {
       "name" : "Cp8oag6",
@@ -164,54 +145,51 @@ which should give you a response something like this:
       "tagline" : "You Know, for Search"
     }
 
-### Configuring Elasticsearch
+### 配置ES
 
-Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html).
+ES默认从`/etc/elasticsearch/elasticsearch.yml`文件加载配置,配置的格式详情可以在[_Configuring Elasticsearch_](settings.html)查阅.
 
-The Debian package also has a system configuration file (`/etc/default/elasticsearch`), which allows you to set the following parameters:
+Debian软件包也有一个系统配置文件（`/ etc / default / elasticsearch`），它允许你设置下列参数：
 
-
-`ES_USER`| The user to run as, defaults to `elasticsearch`.    
+`ES_USER`| ES的运行用户,默认是: `elasticsearch`.    
 ---|--- 
-`ES_GROUP`| The group to run as, defaults to `elasticsearch`.     
-`JAVA_HOME`| Set a custom Java path to be used.     
-`MAX_OPEN_FILES`| Maximum number of open files, defaults to `65536`.     
-`MAX_LOCKED_MEMORY`| Maximum locked memory size. Set to `unlimited` if you use the `bootstrap.memory_lock` option in elasticsearch.yml.     
-`MAX_MAP_COUNT`| Maximum number of memory map areas a process may have. If you use `mmapfs` as index store type, make sure this is set to a high value. For more information, check the [linux kernel documentation](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/vm.txt) about `max_map_count`. This is set via `sysctl` before starting elasticsearch. Defaults to `262144`.     
-`LOG_DIR`| Log directory, defaults to `/var/log/elasticsearch`.     
-`DATA_DIR`| Data directory, defaults to `/var/lib/elasticsearch`.     
-`CONF_DIR`| Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `/etc/elasticsearch`.     
-`ES_JAVA_OPTS`| Any additional JVM system properties you may want to apply.     
-`RESTART_ON_UPGRADE`| 
-
-Configure restart on package upgrade, defaults to `false`. This means you will have to restart your elasticsearch instance after installing a package manually. The reason for this is to ensure, that upgrades in a cluster do not result in a continuous shard reallocation resulting in high network traffic and reducing the response times of your cluster.   
+`ES_GROUP`| ES的运行用户组,默认是: `elasticsearch`.     
+`JAVA_HOME`| 自定义JAVA环境.     
+`MAX_OPEN_FILES`| 文件打开数数,默认是: `65536`.     
+`MAX_LOCKED_MEMORY`|最大内存锁大小.  如果配置了使用内存锁`bootstrap.memory_lock`,可以配置`unlimited`让最大锁内存为无限.   
+`MAX_MAP_COUNT`| 进程可能具有的最大内存映射区域数量。 如果使用`mmapfs`作为索引存储类型，请确保将其设置为较高的值。 有关更多信息，请查看关于`max_map_count`的[linux内核文档](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/vm.txt)。 在启动elasticsearch之前，这是通过`sysctl`设置的。 默认为“262144”。
+`LOG_DIR`| 日志存放目录,默认: `/var/log/elasticsearch`.     
+`DATA_DIR`| 日志存放目录,默认: `/var/lib/elasticsearch`.     
+`CONF_DIR`| 配置文件存放目录 (必须包含 `elasticsearch.yml` 和 `log4j2.properties` 文件), 默认: `/etc/elasticsearch`.     
+`ES_JAVA_OPTS`| JVM的额外运行优化参数  
+`RESTART_ON_UPGRADE`| 配置软件包升级重启，默认为“false”。 这意味着您必须在手动安装包后重新启动elasticsearch实例。 其原因是为了确保集群中的升级不会导致连续的碎片重新分配，从而导致高网络流量并缩短集群的响应时间。
   
 ![Note](images/icons/note.png)
 
-Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd) for more information.
+使用`systemd`的分发需要通过`systemd`而不是`/etc/sysconfig/elasticsearch`文件来配置系统资源限制。 有关更多信息，请参阅[Systemd配置](setting-system-settings.html#systemd).
 
-### Directory layout of Debian package
+### `deb`包的安装结构
 
-The Debian package places config files, logs, and the data directory in the appropriate locations for a Debian-based system:
+Debian软件包将配置文件，日志和数据目录放置在基于Debian的系统的适当位置：
 
-Type |  Description |  Default Location |  Setting  
----|---|---|---
-**home**| Elasticsearch home directory or `$ES_HOME`| `/usr/share/elasticsearch`|      
-**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `/usr/share/elasticsearch/bin`|      
-**conf**| Configuration files including `elasticsearch.yml`| `/etc/elasticsearch`| `path.conf`     
-**conf**| Environment variables including heap size, file descriptors.| `/etc/default/elasticsearch`|      
-**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `/var/lib/elasticsearch`| `path.data`     
-**logs**| Log files location.| `/var/log/elasticsearch`| `path.logs`     
-**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `/usr/share/elasticsearch/plugins`| ``     
-**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
-**script**| Location of script files.| `/etc/elasticsearch/scripts`| `path.scripts`  
+类型| 说明| 默认位置| 设置
+:---:|:---|:---|:---
+**home**| ES的主目录 `$ES_HOME`| `/usr/share/elasticsearch`|      
+**bin**| 二进制脚本包括`elasticsearch`启动节点，`elasticsearch-plugin`安装插件| `/usr/share/elasticsearch/bin`|      
+**conf**| 配置文件包括`elasticsearch.yml`和 `log4j2.properties`| `/etc/elasticsearch`| `path.conf`     
+**conf**|环境变量包括堆大小，文件描述符|  ***`/etc/default/elasticsearch`***|      
+**data**| 在节点上分配的每个索引/分片的数据文件的位置。 可以容纳多个地点.| `/var/lib/elasticsearch`| `path.data`     
+**logs**| 日志文件存放位置.| `/var/log/elasticsearch`| `path.logs`     
+**plugins**| 插件安装位置,每个插件都会是一个子目录.| `/usr/share/elasticsearch/plugins`| ``     
+**repo**| 共享文件系统存储库位置。 可以容纳多个地点。 文件系统存储库可以放置在此处指定的任何目录的任何子目录中.|没有配置| `path.repo`     
+**script**| 脚本文件存放目录.| `/etc/elasticsearch/scripts`| `path.scripts`  
   
-### Next steps
+### 接下来
 
-You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
+您现在已经设置了一个测试Elasticsearch环境。 在您开始认真开发或者使用Elasticsearch进行生产之前，您需要进行一些额外的设置：
 
-  * Learn how to [configure Elasticsearch](settings.html). 
-  * Configure [important Elasticsearch settings](important-settings.html). 
-  * Configure [important system settings](system-config.html). 
+  * [配置ES](settings.html). 
+  * [配置ES重要的设置](important-settings.html). 
+  * [配置系统设置](system-config.html). 
 
 

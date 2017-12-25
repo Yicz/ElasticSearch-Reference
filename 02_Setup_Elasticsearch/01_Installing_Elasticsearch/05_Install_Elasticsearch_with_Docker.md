@@ -219,12 +219,11 @@ One way of checking the Docker daemon defaults for the aforementioned ulimits is
 
 
 
-### Next steps
+### 接下来
 
-You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you must do some additional setup:
+您现在已经设置了一个测试Elasticsearch环境。 在您开始认真开发或者使用Elasticsearch进行生产之前，您需要进行一些额外的设置：
 
-  * Learn how to [configure Elasticsearch](settings.html). 
-  * Configure [important Elasticsearch settings](important-settings.html). 
-  * Configure [important system settings](system-config.html). 
-
+  * [配置ES](settings.html). 
+  * [配置ES重要的设置](important-settings.html). 
+  * [配置系统设置](system-config.html). 
 

@@ -198,26 +198,26 @@ Distributions that use `systemd` require that system resource limits be configur
 
 ### Directory layout of RPM
 
-The RPM places config files, logs, and the data directory in the appropriate locations for an RPM-based system:
+RPM软件包将配置文件，日志和数据目录放置在基于RPM的系统的适当位置：
 
-Type |  Description |  Default Location |  Setting  
----|---|---|---     
-**home**| Elasticsearch home directory or `$ES_HOME`| `/usr/share/elasticsearch`|      
-**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `/usr/share/elasticsearch/bin`|      
-**conf**| Configuration files including `elasticsearch.yml`| `/etc/elasticsearch`| `path.conf`     
-**conf**| Environment variables including heap size, file descriptors.| `/etc/sysconfig/elasticsearch`|      
-**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `/var/lib/elasticsearch`| `path.data`     
-**logs**| Log files location.| `/var/log/elasticsearch`| `path.logs`     
-**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `/usr/share/elasticsearch/plugins`| ``     
-**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
-**script**| Location of script files.| `/etc/elasticsearch/scripts`| `path.scripts`  
+类型| 说明| 默认位置| 设置
+:---:|:---|:---|:---
+**home**| ES的主目录 `$ES_HOME`| `/usr/share/elasticsearch`|      
+**bin**| 二进制脚本包括`elasticsearch`启动节点，`elasticsearch-plugin`安装插件| `/usr/share/elasticsearch/bin`|      
+**conf**| 配置文件包括`elasticsearch.yml`和 `log4j2.properties`| `/etc/elasticsearch`| `path.conf`     
+**conf**| 环境变量包括堆大小，文件描述符.| ***`/etc/sysconfig/elasticsearch`***|      
+**data**| 在节点上分配的每个索引/分片的数据文件的位置。 可以容纳多个地点.| `/var/lib/elasticsearch`| `path.data`     
+**logs**| 日志文件存放位置.| `/var/log/elasticsearch`| `path.logs`     
+**plugins**| 插件安装位置,每个插件都会是一个子目录.| `/usr/share/elasticsearch/plugins`| ``     
+**repo**| 共享文件系统存储库位置。 可以容纳多个地点。 文件系统存储库可以放置在此处指定的任何目录的任何子目录中.|没有配置| `path.repo`     
+**script**| 脚本文件存放目录.| `/etc/elasticsearch/scripts`| `path.scripts`  
   
-### Next steps
+### 接下来
 
-You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
+您现在已经设置了一个测试Elasticsearch环境。 在您开始认真开发或者使用Elasticsearch进行生产之前，您需要进行一些额外的设置：
 
-  * Learn how to [configure Elasticsearch](settings.html). 
-  * Configure [important Elasticsearch settings](important-settings.html). 
-  * Configure [important system settings](system-config.html). 
+  * [配置ES](settings.html). 
+  * [配置ES重要的设置](important-settings.html). 
+  * [配置系统设置](system-config.html). 
 
 
