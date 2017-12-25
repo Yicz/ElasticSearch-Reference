@@ -1,4 +1,4 @@
-## 5.0 的版本变更  Breaking changes in 5.0
+##  5.0的版本变更
 
 This div discusses the changes that you need to be aware of when migrating your application to Elasticsearch 5.0.
 

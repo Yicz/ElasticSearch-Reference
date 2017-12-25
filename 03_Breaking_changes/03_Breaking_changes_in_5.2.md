@@ -1,4 +1,4 @@
-## 5.2 的版本变更 Breaking changes in 5.2
+## 5.2的版本变更
 
 ### Packaging changes
 
