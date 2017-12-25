@@ -1,4 +1,4 @@
-## Multiple Indices
+## 支持多索引操作 Multiple Indices
 
 
 大多数引用`index`参数的API支持跨越多个索引执行，使用简单的`test1，test2，test3`表示法（或所有索引的`_all`）。它也支持通配符，例如`test *`或`* test`或`te * t`或`* test *`，并且能够“添加”（`+`）和“remove”（``` ），例如：`+ test *， - test3`。
