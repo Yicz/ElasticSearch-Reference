@@ -1,6 +1,6 @@
 ## Install Elasticsearch with Debian Package
 
-The Debian package for Elasticsearch can be [downloaded from our website](deb.html#install-deb "Download and install the Debian package manually") or from our [APT repository](deb.html#deb-repo "Installing from the APT repository"). It can be used to install Elasticsearch on any Debian-based system such as Debian and Ubuntu.
+The Debian package for Elasticsearch can be [downloaded from our website](deb.html#install-deb) or from our [APT repository](deb.html#deb-repo). It can be used to install Elasticsearch on any Debian-based system such as Debian and Ubuntu.
 
 The latest stable version of Elasticsearch can be found on the [Download Elasticsearch](/downloads/elasticsearch) page. Other versions can be found on the [Past Releases page](/downloads/past-releases).
 
@@ -166,215 +166,52 @@ which should give you a response something like this:
 
 ### Configuring Elasticsearch
 
-Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html "Configuring Elasticsearch").
+Elasticsearch loads its configuration from the `/etc/elasticsearch/elasticsearch.yml` file by default. The format of this config file is explained in [_Configuring Elasticsearch_](settings.html).
 
 The Debian package also has a system configuration file (`/etc/default/elasticsearch`), which allows you to set the following parameters:
 
-`ES_USER`
 
-| 
-
-The user to run as, defaults to `elasticsearch`.   
-  
----|---  
-  
-`ES_GROUP`
-
-| 
-
-The group to run as, defaults to `elasticsearch`.   
-  
-`JAVA_HOME`
-
-| 
-
-Set a custom Java path to be used.   
-  
-`MAX_OPEN_FILES`
-
-| 
-
-Maximum number of open files, defaults to `65536`.   
-  
-`MAX_LOCKED_MEMORY`
-
-| 
-
-Maximum locked memory size. Set to `unlimited` if you use the `bootstrap.memory_lock` option in elasticsearch.yml.   
-  
-`MAX_MAP_COUNT`
-
-| 
-
-Maximum number of memory map areas a process may have. If you use `mmapfs` as index store type, make sure this is set to a high value. For more information, check the [linux kernel documentation](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/vm.txt) about `max_map_count`. This is set via `sysctl` before starting elasticsearch. Defaults to `262144`.   
-  
-`LOG_DIR`
-
-| 
-
-Log directory, defaults to `/var/log/elasticsearch`.   
-  
-`DATA_DIR`
-
-| 
-
-Data directory, defaults to `/var/lib/elasticsearch`.   
-  
-`CONF_DIR`
-
-| 
-
-Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `/etc/elasticsearch`.   
-  
-`ES_JAVA_OPTS`
-
-| 
-
-Any additional JVM system properties you may want to apply.   
-  
-`RESTART_ON_UPGRADE`
-
-| 
+`ES_USER`| The user to run as, defaults to `elasticsearch`.    
+---|--- 
+`ES_GROUP`| The group to run as, defaults to `elasticsearch`.     
+`JAVA_HOME`| Set a custom Java path to be used.     
+`MAX_OPEN_FILES`| Maximum number of open files, defaults to `65536`.     
+`MAX_LOCKED_MEMORY`| Maximum locked memory size. Set to `unlimited` if you use the `bootstrap.memory_lock` option in elasticsearch.yml.     
+`MAX_MAP_COUNT`| Maximum number of memory map areas a process may have. If you use `mmapfs` as index store type, make sure this is set to a high value. For more information, check the [linux kernel documentation](https://github.com/torvalds/linux/blob/master/Documentation/sysctl/vm.txt) about `max_map_count`. This is set via `sysctl` before starting elasticsearch. Defaults to `262144`.     
+`LOG_DIR`| Log directory, defaults to `/var/log/elasticsearch`.     
+`DATA_DIR`| Data directory, defaults to `/var/lib/elasticsearch`.     
+`CONF_DIR`| Configuration file directory (which needs to include `elasticsearch.yml` and `log4j2.properties` files), defaults to `/etc/elasticsearch`.     
+`ES_JAVA_OPTS`| Any additional JVM system properties you may want to apply.     
+`RESTART_ON_UPGRADE`| 
 
 Configure restart on package upgrade, defaults to `false`. This means you will have to restart your elasticsearch instance after installing a package manually. The reason for this is to ensure, that upgrades in a cluster do not result in a continuous shard reallocation resulting in high network traffic and reducing the response times of your cluster.   
   
 ![Note](images/icons/note.png)
 
-Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd "Systemd configuration") for more information.
+Distributions that use `systemd` require that system resource limits be configured via `systemd` rather than via the `/etc/sysconfig/elasticsearch` file. See [Systemd configuration](setting-system-settings.html#systemd) for more information.
 
 ### Directory layout of Debian package
 
 The Debian package places config files, logs, and the data directory in the appropriate locations for a Debian-based system:
 
 Type |  Description |  Default Location |  Setting  
----|---|---|---  
-  
- **home**
-
-| 
-
-Elasticsearch home directory or `$ES_HOME`
-
-| 
-
-`/usr/share/elasticsearch`
-
-|   
-  
- **bin**
-
-| 
-
-Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins
-
-| 
-
-`/usr/share/elasticsearch/bin`
-
-|   
-  
- **conf**
-
-| 
-
-Configuration files including `elasticsearch.yml`
-
-| 
-
-`/etc/elasticsearch`
-
-| 
-
-`path.conf`  
-  
- **conf**
-
-| 
-
-Environment variables including heap size, file descriptors.
-
-| 
-
-`/etc/default/elasticsearch`
-
-|   
-  
- **data**
-
-| 
-
-The location of the data files of each index / shard allocated on the node. Can hold multiple locations.
-
-| 
-
-`/var/lib/elasticsearch`
-
-| 
-
-`path.data`  
-  
- **logs**
-
-| 
-
-Log files location.
-
-| 
-
-`/var/log/elasticsearch`
-
-| 
-
-`path.logs`  
-  
- **plugins**
-
-| 
-
-Plugin files location. Each plugin will be contained in a subdirectory.
-
-| 
-
-`/usr/share/elasticsearch/plugins`
-
-| 
-
-``  
-  
- **repo**
-
-| 
-
-Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.
-
-| 
-
-Not configured
-
-| 
-
-`path.repo`  
-  
- **script**
-
-| 
-
-Location of script files.
-
-| 
-
-`/etc/elasticsearch/scripts`
-
-| 
-
-`path.scripts`  
+---|---|---|---
+**home**| Elasticsearch home directory or `$ES_HOME`| `/usr/share/elasticsearch`|      
+**bin**| Binary scripts including `elasticsearch` to start a node and `elasticsearch-plugin` to install plugins| `/usr/share/elasticsearch/bin`|      
+**conf**| Configuration files including `elasticsearch.yml`| `/etc/elasticsearch`| `path.conf`     
+**conf**| Environment variables including heap size, file descriptors.| `/etc/default/elasticsearch`|      
+**data**| The location of the data files of each index / shard allocated on the node. Can hold multiple locations.| `/var/lib/elasticsearch`| `path.data`     
+**logs**| Log files location.| `/var/log/elasticsearch`| `path.logs`     
+**plugins**| Plugin files location. Each plugin will be contained in a subdirectory.| `/usr/share/elasticsearch/plugins`| ``     
+**repo**| Shared file system repository locations. Can hold multiple locations. A file system repository can be placed in to any subdirectory of any directory specified here.| Not configured| `path.repo`     
+**script**| Location of script files.| `/etc/elasticsearch/scripts`| `path.scripts`  
   
 ### Next steps
 
 You now have a test Elasticsearch environment set up. Before you start serious development or go into production with Elasticsearch, you will need to do some additional setup:
 
-  * Learn how to [configure Elasticsearch](settings.html "Configuring Elasticsearch"). 
-  * Configure [important Elasticsearch settings](important-settings.html "Important Elasticsearch configuration"). 
-  * Configure [important system settings](system-config.html "Important System Configuration"). 
+  * Learn how to [configure Elasticsearch](settings.html). 
+  * Configure [important Elasticsearch settings](important-settings.html). 
+  * Configure [important system settings](system-config.html). 
 
 
