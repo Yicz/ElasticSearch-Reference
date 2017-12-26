@@ -31,40 +31,30 @@
 
 内部版本控制并不支持使用0作为一个有效的版本号。文档使用了0作版本号的，并不能使用使用`_update_by_query`,如果使用了，请求会失败。
 
-`_update_by_query`请求中产生的更新或查询子请求的失败都会返回在响应体中的`failures`.但剩余的子句会断续执行，总结就是请求过程不会进行回滚，只会中断。当第一个失败出现的导致中断的时候，全部失败的子请求会在`faliures`属性中进行展示。
-因此他可以包含多个实体。
+所有更新和查询失败都会导致`_update_by_query`中止，并在响应失败时返回。 已执行的更新保持不变。 换句话说，过程不回滚，只能中止。 当第一个失败导致中止时，由失败的批量请求返回的所有失败都返回到失败元素; 因此可能有相当多的失败实体。
 
-如果想统计因为版本冲突而导致的中断，你可以设置`conflicts=proceed`查询字符串，或者在请求体中添加`"conflicts::proceed`,上面的例子就做了相应的配置，
+如果想统计因为版本冲突而导致的中断，你可以设置`conflicts=proceed`查询字符串，或者在请求体中添加`"conflicts":proceed`,上面的例子就做了相应的配置，因为它只是试图获取一个在线映射的变化，而版本冲突只是意味着冲突的文档在`_update_by_query`的开始和尝试更新文档的时间之间被更新了。 这很好，因为这个更新会提取在线映射更新。
 
-If you want to simply count version conflicts not cause the `_update_by_query` to abort you can set `conflicts=proceed` on the url or `"conflicts": "proceed"` in the request body. The first example does this because it is just trying to pick up an online mapping change and a version conflict simply means that the conflicting document was updated between the start of the `_update_by_query` and the time when it attempted to update the document. This is fine because that update will have picked up the online mapping update.
-
-Back to the API format, you can limit `_update_by_query` to a single type. This will only update `tweet` documents from the `twitter` index:
-    
+回到API格式，您可以将`_update_by_query`限制为单一类型。 这只会更新`twitter`索引中的`tweet`文件：    
     
     POST twitter/tweet/_update_by_query?conflicts=proceed
 
-You can also limit `_update_by_query` using the [Query DSL](query-dsl.html). This will update all documents from the `twitter` index for the user `kimchy`:
+您还可以使用[Query DSL](query-dsl.html)来限制`_update_by_query`。 这将更新索引中的所有用户`kimchy`的`twitter`文档：
     
     
     POST twitter/_update_by_query?conflicts=proceed
     {
-      "query": { ![](images/icons/callouts/1.png)
+      "query": {   #1
         "term": {
           "user": "kimchy"
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The query must be passed as a value to the `query` key, in the same way as the [Search API](search-search.html). You can also use the `q` parameter in the same way as the search api.   
-  
+![](images/icons/callouts/1.png)| 查询必须以与[Search API](search-search.html)相同的方式作为值传递给`query`键。 您也可以像搜索api一样使用`q`参数。    
 ---|---  
-  
-So far we’ve only been updating documents without changing their source. That is genuinely useful for things like [picking up new properties](docs-update-by-query.html#picking-up-a-new-property) but it’s only half the fun. `_update_by_query` supports a `script` object to update the document. This will increment the `likes` field on all of kimchy’s tweets:
-    
+
+到目前为止，我们只是在不更改源文件的情况下更新文档。 这对于[新增的属性](docs-update-by-query.html#picking-up-a-new-property)这样的东西是真正有用的，但它只是一半的乐趣。 `_update_by_query`支持`脚本(script)`对象来更新文档。 这将增加所有kimchy的tweets上的`likes`字段：    
     
     POST twitter/_update_by_query
     {
@@ -79,35 +69,35 @@ So far we’ve only been updating documents without changing their source. That 
       }
     }
 
-Just as in [Update API](docs-update.html) you can set `ctx.op` to change the operation that is executed:
+就像[更新API](docs-update.html)一样，您可以设置`ctx.op`来更改执行的操作：
 
 `noop`
-     Set `ctx.op =)`. 
+
+    如果你的脚本决定不需要做任何改变,可以设置`ctx.op ="noop"`。 这将导致`_update_by_query`从其更新中忽略该文档。 这个没有任何操作会在响应主体的noop计数器中报告。
+
 `delete`
-     Set `ctx.op =)`. 
 
-Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
+    如果您的脚本决定删除文档，请设置`ctx.op ="delete"`。 删除将在响应主体的删除计数器中报告。
 
-Note that we stopped specifying `conflicts=proceed`. In this case we want a version conflict to abort the process so we can handle the failure.
+将`ctx.op`设置为其他任何内容都是错误的。 在`ctx`中设置任何其他字段是一个错误。
 
-This API doesn’t allow you to move the documents it touches, just modify their source. This is intentional! We’ve made no provisions for removing the document from its original location.
+请注意，我们停止指定`conflicts=proceed`。 在这种情况下，我们想要一个版本冲突来中止这个过程，所以我们可以处理这个失败。
 
-It’s also possible to do this whole thing on multiple indexes and multiple types at once, just like the search API:
-    
+这个API不允许你移动它接触到的文档，只是修改它的源代码。 这是特意设置的！ 我们没有设计将文档从原始位置删除。
+
+也可以一次完成多个索引和多个类型的请求，就像搜索API一样：    
     
     POST twitter,blog/tweet,post/_update_by_query
 
-If you provide `routing` then the routing is copied to the scroll query, limiting the process to the shards that match that routing value:
-    
+如果你提供了`routing`，那么路由被复制到滚动查询中，将进程限制在匹配路由值的分片上：    
     
     POST twitter/_update_by_query?routing=1
 
-By default `_update_by_query` uses scroll batches of 1000. You can change the batch size with the `scroll_size` URL parameter:
-    
+默认情况下，`_update_by_query`使用滚动批量为1000.您可以使用`scroll_size` URL参数更改批量大小：    
     
     POST twitter/_update_by_query?scroll_size=100
 
-`_update_by_query` can also use the [Ingest Node](ingest.html) feature by specifying a `pipeline` like this:
+`_update_by_query`也可以使用[摄取结节 Ingest Node](ingest.html)特性，通过指定一个`pipeline`如下：
     
     
     PUT _ingest/pipeline/set-foo
@@ -122,22 +112,21 @@ By default `_update_by_query` uses scroll batches of 1000. You can change the ba
     }
     POST twitter/_update_by_query?pipeline=set-foo
 
-### URL Parameters
+### URL参数 URL Parameters
 
-In addition to the standard parameters like `pretty`, the Update By Query API also supports `refresh`, `wait_for_completion`, `wait_for_active_shards`, and `timeout`.
+除了`pretty`这样的标准参数外，Update By Query API还支持`refresh`，`wait_for_completion`，`wait_for_active_shards`和`timeout`。
 
-Sending the `refresh` will update all shards in the index being updated when the request completes. This is different than the Index API’s `refresh` parameter which causes just the shard that received the new data to be indexed.
+当请求完成时，发送`refresh`将更新正在更新的索引中的所有分片。 这与Index API的`refresh`参数不同，这个参数只会导致接收到新数据的索引分片。
 
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
+如果请求包含`wait_for_completion = false`，那么ES将执行一些预检查后再启动请求，然后返回可用于[Tasks APIs]的任务(docs-update-by-query.html#docs-update-by-query-task-api)用来取消或获取任务的状态。 ES也会在`.tasks/task/${taskId}`中创建这个任务的记录。由你决定它的存留。当你完成它，删除它，方便ES可以回收它使用的空间。
 
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the request. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
+`wait_for_active_shards`控制一个分片的多少个副本在继续请求之前必须被激活。有关详细信息，请[查看](docs-index_.html#index-wait-for-active-shards)。 `timeout`控制每个写请求等待不可用分片变得可用的时间。两参数在[Bulk API](docs-bulk.html)中的工作方式完全相同。
 
-`requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the update-by-query issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
+`request_per_second`可以设置为任意正数（`1.4`，`6`，`1000`等），并且可以限制每秒查询次数，或者可以设置为`-1`禁用节流。节流是在批量批量之间等待，以便它可以操纵滚动超时。等待时间是批次完成所需的时间与`request_per_second * requests_in_the_batch`时间之间的时间差。由于批处理没有被分解为多个批量请求，因此大批量处理会导致Elasticsearch创建很多请求，然后等待一段时间再开始下一个批处理。这是“突发”代替“流畅”。默认是`-1`。
 
-### Response body
+### 响应内容 Response body
 
-The JSON response looks like this:
-    
+返回如下类似的JSON内容:
     
     {
       "took" : 639,
@@ -153,29 +142,28 @@ The JSON response looks like this:
     }
 
 `took`
-     The number of milliseconds from start to end of the whole operation. 
+     整个操作从开始到结束的毫秒数。
 `updated`
-     The number of documents that were successfully updated. 
+     成功更新的文档数。
 `batches`
-     The number of scroll responses pulled back by the the update by query. 
+     通过查询更新拉回滚动响应的数量。
 `version_conflicts`
-     The number of version conflicts that the update by query hit. 
+     查询更新的版本冲突次数。 
 `retries`
-     The number of retries attempted by update-by-query. `bulk` is the number of bulk actions retried and `search` is the number of search actions retried. 
+     通过查询更新尝试的重试次数。 `bulk`是重试批量操作的次数，`search`是重试的搜索操作的次数。 
 `throttled_millis`
-     Number of milliseconds the request slept to conform to `requests_per_second`. 
+     请求以符合`requests_per_second`的毫秒数。 
 `failures`
-     Array of all indexing failures. If this is non-empty then the request aborted because of those failures. See `conflicts` for how to prevent version conflicts from aborting the operation. 
+     所有索引失败的数组。 如果这是非空的，则请求由于这些故障而中止。 有关如何防止版本冲突终止操作的信息，请参阅[冲突]()。 
 
-### Works with the Task API
+### 写任务API协作
 
-You can fetch the status of all running update-by-query requests with the [Task API](tasks.html):
+您可以使用[任务API](tasks.html)获取所有正在运行的逐个查询请求的状态:
     
     
     GET _tasks?detailed=true&actions=*byquery
 
-The responses looks like:
-    
+返回如下类似的JSON内容：    
     
     {
       "nodes" : {
@@ -194,7 +182,7 @@ The responses looks like:
               "id" : 36619,
               "type" : "transport",
               "action" : "indices:data/write/update/byquery",
-              "status" : {    ![](images/icons/callouts/1.png)
+              "status" : {    #1
                 "total" : 6154,
                 "updated" : 3500,
                 "created" : 0,
@@ -215,44 +203,37 @@ The responses looks like:
       }
     }
 
-![](images/icons/callouts/1.png)
+![](images/icons/callouts/1.png)| 该对象包含实际状态。 这就像"total”字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过添加"updated"，"created"和"deleted"字段来估计进度。 当他们的总和等于'total'字段时，请求将完成。
+ 
+---|---    
 
-| 
-
-this object contains the actual status. It is just like the response json with the important addition of the `total` field. `total` is the total number of operations that the reindex expects to perform. You can estimate the progress by adding the `updated`, `created`, and `deleted` fields. The request will finish when their sum is equal to the `total` field.   
-  
----|---  
-  
-With the task id you can look up the task directly:
-    
+使用任务ID，您可以直接查找任务：    
     
     GET /_tasks/taskId:1
 
-The advantage of this API is that it integrates with `wait_for_completion=false` to transparently return the status of completed tasks. If the task is completed and `wait_for_completion=false` was set on it them it’ll come back with a `results` or an `error` field. The cost of this feature is the document that `wait_for_completion=false` creates at `.tasks/task/${taskId}`. It is up to you to delete that document.
+这个API的优点是它与`wait_for_completion = false`集成，透明地返回已完成任务的状态。 如果任务完成，并且wait_for_completion = false被设置，那么它会返回一个`results`或`error`字段。 这个特性的成本是在 `.tasks/task/${taskId}`创建`wait_for_completion = false`的文件。 删除该文件由您决定。
 
 ### Works with the Cancel Task API
 
-Any Update By Query can be canceled using the [Task Cancel API](tasks.html):
-    
+任何通过查询更新可以使用[任务取消API](tasks.html)取消：
     
     POST _tasks/task_id:1/_cancel
 
-The `task_id` can be found using the tasks API above.
+可以使用上面的任务API找到`task_id`。
 
-Cancellation should happen quickly but might take a few seconds. The task status API above will continue to list the task until it is wakes to cancel itself.
+取消应该很快，但可能需要几秒钟。 上面的任务状态API将继续列出任务，直到它被唤醒以取消自己。
 
-### Rethrottling
+### 重节流 Rethrottling
 
-The value of `requests_per_second` can be changed on a running update by query using the `_rethrottle` API:
-    
+`request_per_second`的值可以在正在运行的更新中通过使用`_rethrottle` API进行查询来更改：    
     
     POST _update_by_query/task_id:1/_rethrottle?requests_per_second=-1
 
-The `task_id` can be found using the tasks API above.
+可以使用上面的任务API找到`task_id`。
 
-Just like when setting it on the `_update_by_query` API `requests_per_second` can be either `-1` to disable throttling or any decimal number like `1.7` or `12` to throttle to that level. Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query will take effect on after completing the current batch. This prevents scroll timeouts.
+就像在`_update_by_query` API上设置`request_per_second`一样，可以使用'-1'来禁用节流，或者使用'1.7'或'12'等十进制数来节流。 加快查询速度的重新生效会立即生效，但是在完成当前批次后，重新生成查询会减慢查询生效。 这可以防止滚动超时。
 
-#### Manual slicing
+#### 手动分页 Manual slicing 
 
 Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll) allowing you to manually parallelize the process relatively easily:
     
@@ -278,13 +259,13 @@ Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scrol
       }
     }
 
-Which you can verify works with:
+你也可以验证效果：    
     
     
     GET _refresh
     POST twitter/_search?size=0&q=extra:test&filter_path=hits.total
 
-Which results in a sensible `total` like this one:
+结果就像这样一个合理的`total`：    
     
     
     {
@@ -295,8 +276,8 @@ Which results in a sensible `total` like this one:
 
 ### Automatic slicing
 
-You can also let update-by-query automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
-    
+通过查询更新支持[切片滚动](search-request-scroll.html#sliced-scroll)，使您可以相对简单地手动并行化进程：
+
     
     POST twitter/_update_by_query?refresh&slices=5
     {
@@ -305,13 +286,11 @@ You can also let update-by-query automatically parallelize using [Sliced Scroll]
       }
     }
 
-Which you also can verify works with:
-    
+你也可以验证效果：    
     
     POST twitter/_search?size=0&q=extra:test&filter_path=hits.total
 
-Which results in a sensible `total` like this one:
-    
+结果就像这样一个合理的`total`：    
     
     {
       "hits": {
@@ -319,41 +298,36 @@ Which results in a sensible `total` like this one:
       }
     }
 
-Adding `slices` to `_update_by_query` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
+在`_update_by_query`中添加`slices`只是自动执行上面div中的手动过程，创建子请求，这意味着它有一些怪癖：
 
-  * You can see these requests in the [Tasks APIs](docs-update-by-query.html#docs-update-by-query-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
-  * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
-  * These sub-requests are individually addressable for things like cancellation and rethrottling. 
-  * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 
-  * Canceling the request with `slices` will cancel each sub-request. 
-  * Due to the nature of `slices` each sub-request won’t get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution. 
-  * Parameters like `requests_per_second` and `size` on a request with `slices` are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that the using `size` with `slices` might not result in exactly `size` documents being `_update_by_query`ed. 
-  * Each sub-requests gets a slightly different snapshot of the source index though these are all taken at approximately the same time. 
+  *您可以在[任务API](docs-update-by-query.html#docs-update-by-query-task-api)中看到这些请求。这些子请求是“切片”请求任务的“子”任务。
+  *用“切片”获取请求任务的状态只包含已完成切片的状态。
+  *这些子请求可单独解决，如取消和重节流（rethrottling）。
+  *使用`slices`重新调整请求将按比例重新调整未完成的子请求。
+  *用“切片”取消请求将取消每个子请求。
+  *由于“切片”的性质，每个子请求将不会获得完全平坦的文档部分。所有的文件将被解决，但一些切片可能比其他切片大。期待更大的切片有更均匀的分布。
+  *带有`slices`的请求中的`requests_per_second`和`size`参数按比例分配给每个子请求。结合上面关于分布不均匀的观点，你应该得出结论：使用带'slices'的`size`可能不会导致正确的`size`文件被`_update_by_query`ed。
+  *每个子请求都会得到一个略有不同的源索引快照，尽管这些都是在大约同一时间进行的。
 
+### 选择切片的数量 Picking the number of slices
 
+在这一点上，我们提供了一些围绕要使用的"slices"数量的建议（如果手动并行化，则切片API中的“max”参数）：
 
-### Picking the number of slices
+   *不要使用大数字。 `500`创建相当庞大的CPU垃圾。
+   *从查询性能角度来看，使用源索引中多个分片的数量会更有效率。
+   *从查询性能的角度来看，使用与源索引完全一样多的分片是最有效的。
+   *索引性能应该以可用资源与“切片”的数量成线性比例。
+   *索引或查询性能在这个过程中占主要地位取决于很多因素，比如重新索引的文档和重新索引的集群。
 
-At this point we have a few recommendations around the number of `slices` to use (the `max` parameter in the slice API if manually parallelizing):
+### 设置一个新的属性 Pick up a new property
 
-  * Don’t use large numbers. `500` creates fairly massive CPU thrash. 
-  * It is more efficient from a query performance standpoint to use some multiple of the number of shards in the source index. 
-  * Using exactly as many shards as are in the source index is the most efficient from a query performance standpoint. 
-  * Indexing performance should scale linearly across available resources with the number of `slices`. 
-  * Whether indexing or query performance dominates that process depends on lots of factors like the documents being reindexed and the cluster doing the reindexing. 
-
-
-
-### Pick up a new property
-
-Say you created an index without dynamic mapping, filled it with data, and then added a mapping value to pick up more fields from the data:
-    
+假设您创建了一个没有动态映射的索引，并填充了数据，然后添加了一个映射值来从数据中获取更多的字段：    
     
     PUT test
     {
       "mappings": {
         "test": {
-          "dynamic": false,   ![](images/icons/callouts/1.png)
+          "dynamic": false,   #1
           "properties": {
             "text": {"type": "text"}
           }
@@ -371,7 +345,7 @@ Say you created an index without dynamic mapping, filled it with data, and then 
       "text": "words words",
       "flag": "foo"
     }
-    PUT test/_mapping/test   ![](images/icons/callouts/2.png)
+    PUT test/_mapping/test   #2
     {
       "properties": {
         "text": {"type": "text"},
@@ -379,21 +353,11 @@ Say you created an index without dynamic mapping, filled it with data, and then 
       }
     }
 
-![](images/icons/callouts/1.png)
+![](images/icons/callouts/1.png)| 这意味着新字段不会被索引，只是存储在`_source`中。    
+---|---    
+![](images/icons/callouts/2.png)| 这会更新映射以添加新的“flag”字段。 要拿起新的领域，你必须重新索引所有的文件。
 
-| 
-
-This means that new fields won’t be indexed, just stored in `_source`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This updates the mapping to add the new `flag` field. To pick up the new field you have to reindex all documents with it.   
-  
-Searching for the data won’t find anything:
+搜索数据将找不到任何内容：
     
     
     POST test/_search?filter_path=hits.total
@@ -412,8 +376,7 @@ Searching for the data won’t find anything:
       }
     }
 
-But you can issue an `_update_by_query` request to pick up the new mapping:
-    
+但是你可以发出一个`_update_by_query`请求来获取新的映射：    
     
     POST test/_update_by_query?refresh&conflicts=proceed
     POST test/_search?filter_path=hits.total
@@ -432,4 +395,4 @@ But you can issue an `_update_by_query` request to pick up the new mapping:
       }
     }
 
-You can do the exact same thing when adding a field to a multifield.
+将字段添加到多字段时，可以做同样的事情。
