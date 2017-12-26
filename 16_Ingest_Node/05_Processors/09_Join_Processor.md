@@ -6,34 +6,8 @@ Joins each element of an array into a single string using a separator character 
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to be separated  
-  
-`separator`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The separator character  
+`field`| yes| -| The field to be separated  
+`separator`| yes| -| The separator character  
   
   
 

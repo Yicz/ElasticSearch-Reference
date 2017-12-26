@@ -35,77 +35,12 @@ You may know that the message in the example is a number followed by an IP addre
  **Table 20. Grok Options**
 
 Name |  Required |  Default |  Description  
----|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to use for grok expression parsing  
-  
-`patterns`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-An ordered list of grok expression to match and extract named captures with. Returns on the first expression in the list that matches.  
-  
-`pattern_definitions`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor. Patterns matching existing names will override the pre-existing definition.  
-  
-`trace_match`
-
-| 
-
-no
-
-| 
-
-false
-
-| 
-
-when true, `_ingest._grok_match_index` will be inserted into your matched document’s metadata with the index into the pattern found in `patterns` that matched.  
-  
-`ignore_missing`
-
-| 
-
-no
-
-| 
-
-false
-
-| 
-
-If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document  
+---|---|---|---    
+`field`| yes| -| The field to use for grok expression parsing    
+`patterns`| yes| -| An ordered list of grok expression to match and extract named captures with. Returns on the first expression in the list that matches.    
+`pattern_definitions`| no| -| A map of pattern-name and pattern tuples defining custom patterns to be used by the current processor. Patterns matching existing names will override the pre-existing definition.    
+`trace_match`| no| false| when true, `_ingest._grok_match_index` will be inserted into your matched document’s metadata with the index into the pattern found in `patterns` that matched.    
+`ignore_missing`| no| false| If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document  
   
   
 

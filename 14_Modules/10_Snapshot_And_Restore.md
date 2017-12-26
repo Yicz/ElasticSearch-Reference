@@ -96,56 +96,21 @@ If the repository location is specified as a relative path this path will be res
 
 The following settings are supported:
 
-`location`
 
-| 
-
-Location of the snapshots. Mandatory.   
-  
----|---  
-  
-`compress`
-
-| 
-
-Turns on compression of the snapshot files. Compression is applied only to metadata files (index mapping and settings). Data files are not compressed. Defaults to `true`.   
-  
-`chunk_size`
-
-| 
-
-Big files can be broken down into chunks during snapshotting if needed. The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k. Defaults to `null` (unlimited chunk size).   
-  
-`max_restore_bytes_per_sec`
-
-| 
-
-Throttles per node restore rate. Defaults to `40mb` per second.   
-  
-`max_snapshot_bytes_per_sec`
-
-| 
-
-Throttles per node snapshot rate. Defaults to `40mb` per second.   
-  
-`readonly`
-
-| 
-
-Makes repository read-only. Defaults to `false`.   
+`location`| Location of the snapshots. Mandatory.     
+---|---    
+`compress`| Turns on compression of the snapshot files. Compression is applied only to metadata files (index mapping and settings). Data files are not compressed. Defaults to `true`.     
+`chunk_size`| Big files can be broken down into chunks during snapshotting if needed. The chunk size can be specified in bytes or by using size value notation, i.e. 1g, 10m, 5k. Defaults to `null` (unlimited chunk size).     
+`max_restore_bytes_per_sec`| Throttles per node restore rate. Defaults to `40mb` per second.     
+`max_snapshot_bytes_per_sec`| Throttles per node snapshot rate. Defaults to `40mb` per second.     
+`readonly`| Makes repository read-only. Defaults to `false`.   
   
 ##### Read-only URL Repository
 
 The URL repository (`"type": "url"`) can be used as an alternative read-only way to access data created by the shared file system repository. The URL specified in the `url` parameter should point to the root of the shared filesystem repository. The following settings are supported:
 
-`url`
-
-| 
-
-Location of the snapshots. Mandatory.   
-  
----|---  
-  
+`url`| Location of the snapshots. Mandatory.     
+---|---    
 URL Repository supports the following protocols: "http", "https", "ftp", "file" and "jar". URL repositories with `http:`, `https:`, and `ftp:` URLs has to be whitelisted by specifying allowed URLs in the `repositories.url.allowed_urls` setting. This setting supports wildcards in the place of host, path, query, and fragment. For example:
     
     
@@ -219,37 +184,12 @@ Once a snapshot is created information about this snapshot can be obtained using
 
 This command returns basic information about the snapshot including start and end time, version of elasticsearch that created the snapshot, the list of included indices, the current state of the snapshot and the list of failures that occurred during the snapshot. The snapshot `state` can be
 
-`IN_PROGRESS`
-
-| 
-
-The snapshot is currently running.   
-  
+`IN_PROGRESS`| The snapshot is currently running.   
 ---|---  
-  
-`SUCCESS`
-
-| 
-
-The snapshot finished and all shards were stored successfully.   
-  
-`FAILED`
-
-| 
-
-The snapshot finished with an error and failed to store any data.   
-  
-`PARTIAL`
-
-| 
-
-The global cluster state was stored, but data of at least one shard wasn’t stored successfully. The `failure` div in this case should contain more detailed information about shards that were not processed correctly.   
-  
-`INCOMPATIBLE`
-
-| 
-
-The snapshot was created with an old version of elasticsearch and therefore is incompatible with the current version of the cluster.   
+`SUCCESS`| The snapshot finished and all shards were stored successfully.   
+`FAILED`| The snapshot finished with an error and failed to store any data.   
+`PARTIAL`| The global cluster state was stored, but data of at least one shard wasn’t stored successfully. The `failure` div in this case should contain more detailed information about shards that were not processed correctly.   
+`INCOMPATIBLE`| The snapshot was created with an old version of elasticsearch and therefore is incompatible with the current version of the cluster.   
   
 Similar as for repositories, information about multiple snapshots can be queried in one go, supporting wildcards as well:
     

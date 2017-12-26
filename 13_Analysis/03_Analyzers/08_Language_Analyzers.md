@@ -1,6 +1,73 @@
 ## Language Analyzers
 
-A set of analyzers aimed at analyzing specific language text. The following types are supported: [`arabic`](analysis-lang-analyzer.html#arabic-analyzer), [`armenian`](analysis-lang-analyzer.html#armenian-analyzer), [`basque`](analysis-lang-analyzer.html#basque-analyzer), [`brazilian`](analysis-lang-analyzer.html#brazilian-analyzer), [`bulgarian`](analysis-lang-analyzer.html#bulgarian-analyzer), [`catalan`](analysis-lang-analyzer.html#catalan-analyzer), [`cjk`](analysis-lang-analyzer.html#cjk-analyzer), [`czech`](analysis-lang-analyzer.html#czech-analyzer), [`danish`](analysis-lang-analyzer.html#danish-analyzer), [`dutch`](analysis-lang-analyzer.html#dutch-analyzer), [`english`](analysis-lang-analyzer.html#english-analyzer), [`finnish`](analysis-lang-analyzer.html#finnish-analyzer), [`french`](analysis-lang-analyzer.html#french-analyzer), [`galician`](analysis-lang-analyzer.html#galician-analyzer), [`german`](analysis-lang-analyzer.html#german-analyzer), [`greek`](analysis-lang-analyzer.html#greek-analyzer), [`hindi`](analysis-lang-analyzer.html#hindi-analyzer), [`hungarian`](analysis-lang-analyzer.html#hungarian-analyzer), [`indonesian`](analysis-lang-analyzer.html#indonesian-analyzer), [`irish`](analysis-lang-analyzer.html#irish-analyzer), [`italian`](analysis-lang-analyzer.html#italian-analyzer), [`latvian`](analysis-lang-analyzer.html#latvian-analyzer), [`lithuanian`](analysis-lang-analyzer.html#lithuanian-analyzer), [`norwegian`](analysis-lang-analyzer.html#norwegian-analyzer), [`persian`](analysis-lang-analyzer.html#persian-analyzer), [`portuguese`](analysis-lang-analyzer.html#portuguese-analyzer), [`romanian`](analysis-lang-analyzer.html#romanian-analyzer), [`russian`](analysis-lang-analyzer.html#russian-analyzer), [`sorani`](analysis-lang-analyzer.html#sorani-analyzer), [`spanish`](analysis-lang-analyzer.html#spanish-analyzer), [`swedish`](analysis-lang-analyzer.html#swedish-analyzer), [`turkish`](analysis-lang-analyzer.html#turkish-analyzer), [`thai`](analysis-lang-analyzer.html#thai-analyzer).
+A set of analyzers aimed at analyzing specific language text. The following types are supported: 
+
+[`arabic`](analysis-lang-analyzer.html#arabic-analyzer)
+ 
+[`armenian`](analysis-lang-analyzer.html#armenian-analyzer)
+ 
+[`basque`](analysis-lang-analyzer.html#basque-analyzer)
+ 
+[`brazilian`](analysis-lang-analyzer.html#brazilian-analyzer)
+ 
+[`bulgarian`](analysis-lang-analyzer.html#bulgarian-analyzer)
+ 
+[`catalan`](analysis-lang-analyzer.html#catalan-analyzer)
+ 
+[`cjk`](analysis-lang-analyzer.html#cjk-analyzer)
+ 
+[`czech`](analysis-lang-analyzer.html#czech-analyzer)
+ 
+[`danish`](analysis-lang-analyzer.html#danish-analyzer)
+ 
+[`dutch`](analysis-lang-analyzer.html#dutch-analyzer)
+ 
+[`english`](analysis-lang-analyzer.html#english-analyzer)
+ 
+[`finnish`](analysis-lang-analyzer.html#finnish-analyzer)
+ 
+[`french`](analysis-lang-analyzer.html#french-analyzer)
+ 
+[`galician`](analysis-lang-analyzer.html#galician-analyzer)
+ 
+[`german`](analysis-lang-analyzer.html#german-analyzer)
+ 
+[`greek`](analysis-lang-analyzer.html#greek-analyzer)
+ 
+[`hindi`](analysis-lang-analyzer.html#hindi-analyzer)
+ 
+[`hungarian`](analysis-lang-analyzer.html#hungarian-analyzer)
+ 
+[`indonesian`](analysis-lang-analyzer.html#indonesian-analyzer)
+ 
+[`irish`](analysis-lang-analyzer.html#irish-analyzer)
+ 
+[`italian`](analysis-lang-analyzer.html#italian-analyzer)
+ 
+[`latvian`](analysis-lang-analyzer.html#latvian-analyzer)
+ 
+[`lithuanian`](analysis-lang-analyzer.html#lithuanian-analyzer)
+ 
+[`norwegian`](analysis-lang-analyzer.html#norwegian-analyzer)
+ 
+[`persian`](analysis-lang-analyzer.html#persian-analyzer)
+ 
+[`portuguese`](analysis-lang-analyzer.html#portuguese-analyzer)
+ 
+[`romanian`](analysis-lang-analyzer.html#romanian-analyzer)
+ 
+[`russian`](analysis-lang-analyzer.html#russian-analyzer)
+ 
+[`sorani`](analysis-lang-analyzer.html#sorani-analyzer)
+ 
+[`spanish`](analysis-lang-analyzer.html#spanish-analyzer)
+ 
+[`swedish`](analysis-lang-analyzer.html#swedish-analyzer)
+ 
+[`turkish`](analysis-lang-analyzer.html#turkish-analyzer)
+ 
+[`thai`](analysis-lang-analyzer.html#thai-analyzer)
+
 
 ### Configuring language analyzers
 

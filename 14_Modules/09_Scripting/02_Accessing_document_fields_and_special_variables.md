@@ -6,25 +6,11 @@ Depending on where a script is used, it will have access to certain special vari
 
 A script used in the [update](docs-update.html), [update-by-query](docs-update-by-query.html), or [reindex](docs-reindex.html) API will have access to the `ctx` variable which exposes:
 
-`ctx._source`
 
-| 
-
-Access to the document [`_source` field](mapping-source-field.html).   
-  
----|---  
-  
-`ctx.op`
-
-| 
-
-The operation that should be applied to the document: `index` or `delete`.   
-  
-`ctx._index` etc 
-
-| 
-
-Access to [document meta-fields](mapping-fields.html), some of which may be read-only.   
+`ctx._source`| Access to the document [`_source` field](mapping-source-field.html).     
+---|---    
+`ctx.op`| The operation that should be applied to the document: `index` or `delete`.     
+`ctx._index` etc | Access to [document meta-fields](mapping-fields.html), some of which may be read-only.   
   
 ## Search and Aggregation scripts
 

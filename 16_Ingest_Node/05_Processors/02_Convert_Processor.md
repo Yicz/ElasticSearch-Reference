@@ -12,62 +12,10 @@ Specifying `auto` will attempt to convert the string-valued `field` into the clo
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field whose value is to be converted  
-  
-`target_field`
-
-| 
-
-no
-
-| 
-
-`field`
-
-| 
-
-The field to assign the converted value to, by default `field` is updated in-place  
-  
-`type`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The type to convert the existing value to  
-  
-`ignore_missing`
-
-| 
-
-no
-
-| 
-
-`false`
-
-| 
-
-If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document  
+`field`| yes| -| The field whose value is to be converted    
+`target_field`| no| `field`| The field to assign the converted value to, by default `field` is updated in-place    
+`type`| yes| -| The type to convert the existing value to    
+`ignore_missing`| no| `false`| If `true` and `field` does not exist or is `null`, the processor quietly exits without modifying the document  
   
   
 

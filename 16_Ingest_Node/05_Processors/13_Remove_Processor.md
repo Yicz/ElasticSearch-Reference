@@ -6,20 +6,7 @@ Removes an existing field. If the field doesn’t exist, an exception will be th
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to be removed  
+`field`| yes| -| The field to be removed  
   
   
 

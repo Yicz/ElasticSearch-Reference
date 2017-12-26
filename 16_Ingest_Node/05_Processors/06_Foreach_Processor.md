@@ -16,35 +16,8 @@ If the `foreach` processor fails to process an element inside the array, and no 
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The array field  
-  
-`processor`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The processor to execute against each field  
-  
+`field`| yes| -| The array field    
+`processor`| yes| -| The processor to execute against each field    
   
 
 

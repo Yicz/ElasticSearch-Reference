@@ -3,19 +3,9 @@
 Limits the number of tokens that are indexed per document and field.
 
 Setting | Description  
----|---  
-  
-`max_token_count`
-
-| 
-
-The maximum number of tokens that should be indexed per document and field. The default is `1`  
-  
-`consume_all_tokens`
-
-| 
-
-If set to `true` the filter exhaust the stream even if `max_token_count` tokens have been consumed already. The default is `false`.  
+---|---    
+`max_token_count`| The maximum number of tokens that should be indexed per document and field. The default is `1`    
+`consume_all_tokens`| If set to `true` the filter exhaust the stream even if `max_token_count` tokens have been consumed already. The default is `false`.  
   
 Here is an example:
     

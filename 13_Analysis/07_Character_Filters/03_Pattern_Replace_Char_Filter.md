@@ -16,25 +16,10 @@ Read more about [pathological regular expressions and how to avoid them](http://
 
 The `pattern_replace` character filter accepts the following parameters:
 
-`pattern`
-
-| 
-
-A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html). Required.   
-  
----|---  
-  
-`replacement`
-
-| 
-
-The replacement string, which can reference capture groups using the `$1`..`$9` syntax, as explained [here](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html#appendReplacement-java.lang.StringBuffer-java.lang.String-).   
-  
-`flags`
-
-| 
-
-Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). Flags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.   
+`pattern`| A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html). Required.     
+---|---    
+`replacement`| The replacement string, which can reference capture groups using the `$1`..`$9` syntax, as explained [here](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html#appendReplacement-java.lang.StringBuffer-java.lang.String-).     
+`flags`| Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). Flags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.   
   
 ### Example configuration
 

@@ -6,48 +6,9 @@ Converts a string field by applying a regular expression and a replacement. If t
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to apply the replacement to  
-  
-`pattern`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The pattern to be replaced  
-  
-`replacement`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The string to replace the matching patterns with  
+`field`| yes| -| The field to apply the replacement to    
+`pattern`| yes| -| The pattern to be replaced    
+`replacement`| yes| -| The string to replace the matching patterns with  
   
   
 

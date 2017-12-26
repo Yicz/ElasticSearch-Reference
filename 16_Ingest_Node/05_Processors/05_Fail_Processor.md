@@ -5,21 +5,8 @@ Raises an exception. This is useful for when you expect a pipeline to fail and w
  **Table 18. Fail Options**
 
 Name |  Required |  Default |  Description  
----|---|---|---  
-  
-`message`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The error message of the `FailException` thrown by the processor  
+---|---|---|---    
+`message`| yes| -| The error message of the `FailException` thrown by the processor  
   
   
 

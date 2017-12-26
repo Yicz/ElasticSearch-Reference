@@ -5,20 +5,10 @@ Overrides stemming algorithms, by applying a custom mapping, then protecting the
 Rules are separated by `=>`
 
 Setting | Description  
----|---  
-  
-`rules`
+---|---    
+`rules`| A list of mapping rules to use.    
+`rules_path`| A path (either relative to `config` location, or absolute) to a list of mappings.    
 
-| 
-
-A list of mapping rules to use.  
-  
-`rules_path`
-
-| 
-
-A path (either relative to `config` location, or absolute) to a list of mappings.  
-  
 Here is an example:
     
     

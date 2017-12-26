@@ -17,19 +17,10 @@ Unicast discovery requires a list of hosts to use that will act as gossip router
 Unicast discovery provides the following settings with the `discovery.zen.ping.unicast` prefix:
 
 Setting | Description  
----|---  
-  
-`hosts`
+---|---    
 
-| 
 
-Either an array setting or a comma delimited setting. Each value should be in the form of `host:port` or `host` (where `port` defaults to the setting `transport.profiles.default.port` falling back to `transport.tcp.port` if not set). Note that IPv6 hosts must be bracketed. Defaults to `127.0.0.1, [::1]`  
-  
-`hosts.resolve_timeout`
-
-| 
-
-The amount of time to wait for DNS lookups on each round of pinging. Specified as [time units](common-options.html#time-units). Defaults to 5s.  
+`hosts`| Either an array setting or a comma delimited setting. Each value should be in the form of `host:port` or `host` (where `port` defaults to the setting `transport.profiles.default.port` falling back to `transport.tcp.port` if not set). Note that IPv6 hosts must be bracketed. Defaults to `127.0.0.1, [::1]`    `hosts.resolve_timeout`| The amount of time to wait for DNS lookups on each round of pinging. Specified as [time units](common-options.html#time-units). Defaults to 5s.  
   
 The unicast discovery uses the [transport](modules-transport.html) module to perform the discovery.
 
@@ -54,25 +45,10 @@ There are two fault detection processes running. The first is by the master, to 
 The following settings control the fault detection process using the `discovery.zen.fd` prefix:
 
 Setting | Description  
----|---  
-  
-`ping_interval`
-
-| 
-
-How often a node gets pinged. Defaults to `1s`.  
-  
-`ping_timeout`
-
-| 
-
-How long to wait for a ping response, defaults to `30s`.  
-  
-`ping_retries`
-
-| 
-
-How many ping failures / timeouts cause a node to be considered failed. Defaults to `3`.  
+---|---    
+`ping_interval`| How often a node gets pinged. Defaults to `1s`.    
+`ping_timeout`| How long to wait for a ping response, defaults to `30s`.    
+`ping_retries`| How many ping failures / timeouts cause a node to be considered failed. Defaults to `3`.  
   
 #### Cluster state updates
 
@@ -86,18 +62,9 @@ For the cluster to be fully operational, it must have an active master and the n
 
 The `discovery.zen.no_master_block` setting has two valid options:
 
-`all`
 
-| 
-
-All operations on the node—i.e. both read & writes—will be rejected. This also applies for api cluster state read or write operations, like the get index settings, put mapping and cluster state api.   
-  
----|---  
-  
-`write`
-
-| 
-
-(default) Write operations will be rejected. Read operations will succeed, based on the last known cluster configuration. This may result in partial reads of stale data as this node may be isolated from the rest of the cluster.   
+`all`| All operations on the node—i.e. both read & writes—will be rejected. This also applies for api cluster state read or write operations, like the get index settings, put mapping and cluster state api.     
+---|---    
+`write`| (default) Write operations will be rejected. Read operations will succeed, based on the last known cluster configuration. This may result in partial reads of stale data as this node may be isolated from the rest of the cluster.   
   
 The `discovery.zen.no_master_block` setting doesn’t apply to nodes-based apis (for example cluster stats, node info and node stats apis). Requests to these apis will not be blocked and can run on any available node.

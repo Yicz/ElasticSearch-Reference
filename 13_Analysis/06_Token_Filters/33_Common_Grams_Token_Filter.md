@@ -11,31 +11,11 @@ For example, the query "the quick brown is a fox" will be tokenized as "the_quic
 The following are settings that can be set:
 
 Setting | Description  
----|---  
-  
-`common_words`
-
-| 
-
-A list of common words to use.  
-  
-`common_words_path`
-
-| 
-
-A path (either relative to `config` location, or absolute) to a list of common words. Each word should be in its own "line" (separated by a line break). The file must be UTF-8 encoded.  
-  
-`ignore_case`
-
-| 
-
-If true, common words matching will be case insensitive (defaults to `false`).  
-  
-`query_mode`
-
-| 
-
-Generates bigrams then removes common words and single terms followed by a common word (defaults to `false`).  
+---|---    
+`common_words`| A list of common words to use.    
+`common_words_path`| A path (either relative to `config` location, or absolute) to a list of common words. Each word should be in its own "line" (separated by a line break). The file must be UTF-8 encoded.    
+`ignore_case`| If true, common words matching will be case insensitive (defaults to `false`).    
+`query_mode`| Generates bigrams then removes common words and single terms followed by a common word (defaults to `false`).  
   
 Note, `common_words` or `common_words_path` field is required.
 

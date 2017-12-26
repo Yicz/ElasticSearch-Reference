@@ -32,25 +32,10 @@ These default gram lengths are almost entirely useless. You need to configure th
 
 The `edge_ngram` tokenizer accepts the following parameters:
 
-`min_gram`
-
-| 
-
-Minimum length of characters in a gram. Defaults to `1`.   
-  
----|---  
-  
-`max_gram`
-
-| 
-
-Maximum length of characters in a gram. Defaults to `2`.   
-  
-`token_chars`
-
-| 
-
-Character classes that should be included in a token. Elasticsearch will split on characters that don’t belong to the classes specified. Defaults to `[]` (keep all characters). 
+`min_gram`| Minimum length of characters in a gram. Defaults to `1`.     
+---|---    
+`max_gram`| Maximum length of characters in a gram. Defaults to `2`.     
+`token_chars`| Character classes that should be included in a token. Elasticsearch will split on characters that don’t belong to the classes specified. Defaults to `[]` (keep all characters). 
 
 Character classes may be any of the following:
 

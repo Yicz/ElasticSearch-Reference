@@ -49,35 +49,12 @@ The above sentence would produce the following terms:
 
 The `pattern` analyzer accepts the following parameters:
 
-`pattern`
-
-| 
-
-A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html), defaults to `\W+`.   
-  
----|---  
-  
-`flags`
-
-| 
-
-Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). Flags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.   
-  
-`lowercase`
-
-| 
-
-Should terms be lowercased or not. Defaults to `true`.   
-  
-`stopwords`
-
-| 
-
-A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.   
-  
-`stopwords_path`
-
-| 
+`pattern`| A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html), defaults to `\W+`.     
+---|---    
+`flags`| Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). Flags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.     
+`lowercase`| Should terms be lowercased or not. Defaults to `true`.     
+`stopwords`| A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.     
+`stopwords_path`| 
 
 The path to a file containing stop words.   
   
@@ -108,15 +85,8 @@ In this example, we configure the `pattern` analyzer to split email addresses on
       "analyzer": "my_email_analyzer",
       "text": "John_Smith@foo-bar.com"
     }
-
-![](images/icons/callouts/1.png)
-
-| 
-
-The backslashes in the pattern need to be escaped when specifying the pattern as a JSON string.   
-  
----|---  
-  
+![](images/icons/callouts/1.png)| The backslashes in the pattern need to be escaped when specifying the pattern as a JSON string.     
+---|---    
 The above example produces the following terms:
     
     

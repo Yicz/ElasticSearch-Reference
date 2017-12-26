@@ -42,31 +42,11 @@ Defaults to `9300-9400`.
 
 The following special values may be passed to `network.host`:
 
-`_[networkInterface]_`
-
-| 
-
-Addresses of a network interface, for example `_en0_`.   
-  
----|---  
-  
-`_local_`
-
-| 
-
-Any loopback addresses on the system, for example `127.0.0.1`.   
-  
-`_site_`
-
-| 
-
-Any site-local addresses on the system, for example `192.168.0.1`.   
-  
-`_global_`
-
-| 
-
-Any globally-scoped addresses on the system, for example `8.8.8.8`.   
+`_[networkInterface]_`| Addresses of a network interface, for example `_en0_`.     
+---|---    
+`_local_`| Any loopback addresses on the system, for example `127.0.0.1`.     
+`_site_`| Any site-local addresses on the system, for example `192.168.0.1`.     
+`_global_`| Any globally-scoped addresses on the system, for example `8.8.8.8`.   
   
 #### IPv4 vs IPv6
 
@@ -93,37 +73,12 @@ Both of the above settings can be configured just like `network.host` — th
 
 Any component that uses TCP (like the [HTTP](modules-http.html) and [Transport](modules-transport.html) modules) share the following settings:
 
-`network.tcp.no_delay`
-
-| 
-
-Enable or disable the [TCP no delay](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) setting. Defaults to `true`.   
-  
----|---  
-  
-`network.tcp.keep_alive`
-
-| 
-
-Enable or disable [TCP keep alive](https://en.wikipedia.org/wiki/Keepalive). Defaults to `true`.   
-  
-`network.tcp.reuse_address`
-
-| 
-
-Should an address be reused or not. Defaults to `true` on non-windows machines.   
-  
-`network.tcp.send_buffer_size`
-
-| 
-
-The size of the TCP send buffer (specified with [size units](common-options.html#size-units)). By default not explicitly set.   
-  
-`network.tcp.receive_buffer_size`
-
-| 
-
-The size of the TCP receive buffer (specified with [size units](common-options.html#size-units)). By default not explicitly set.   
+`network.tcp.no_delay`| Enable or disable the [TCP no delay](https://en.wikipedia.org/wiki/Nagle%27s_algorithm) setting. Defaults to `true`.     
+---|---    
+`network.tcp.keep_alive`| Enable or disable [TCP keep alive](https://en.wikipedia.org/wiki/Keepalive). Defaults to `true`.     
+`network.tcp.reuse_address`| Should an address be reused or not. Defaults to `true` on non-windows machines.     
+`network.tcp.send_buffer_size`| The size of the TCP send buffer (specified with [size units](common-options.html#size-units)). By default not explicitly set.     
+`network.tcp.receive_buffer_size`| The size of the TCP receive buffer (specified with [size units](common-options.html#size-units)). By default not explicitly set.   
   
 ### Transport and HTTP protocols
 

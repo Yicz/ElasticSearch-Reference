@@ -6,76 +6,11 @@ Parses dates from fields, and then uses the date or timestamp as the timestamp f
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to get the date from.  
-  
-`target_field`
-
-| 
-
-no
-
-| 
-
-@timestamp
-
-| 
-
-The field that will hold the parsed date.  
-  
-`formats`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-An array of the expected date formats. Can be a Joda pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.  
-  
-`timezone`
-
-| 
-
-no
-
-| 
-
-UTC
-
-| 
-
-The timezone to use when parsing the date.  
-  
-`locale`
-
-| 
-
-no
-
-| 
-
-ENGLISH
-
-| 
-
-The locale to use when parsing the date, relevant when parsing month names or week days.  
+`field`| yes| -| The field to get the date from.    
+`target_field`| no| @timestamp| The field that will hold the parsed date.    
+`formats`| yes| -| An array of the expected date formats. Can be a Joda pattern or one of the following formats: ISO8601, UNIX, UNIX_MS, or TAI64N.    
+`timezone`| no| UTC| The timezone to use when parsing the date.    
+`locale`| no| ENGLISH| The locale to use when parsing the date, relevant when parsing month names or week days.  
   
   
 

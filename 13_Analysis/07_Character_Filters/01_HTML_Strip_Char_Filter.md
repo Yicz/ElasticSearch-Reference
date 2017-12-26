@@ -34,12 +34,7 @@ The same example with the `standard` tokenizer would return the following terms:
 
 The `html_strip` character filter accepts the following parameter:
 
-`escaped_tags`
-
-| 
-
-An array of HTML tags which should not be stripped from the original text.   
-  
+`escaped_tags`| An array of HTML tags which should not be stripped from the original text.     
 ---|---  
   
 ### Example configuration

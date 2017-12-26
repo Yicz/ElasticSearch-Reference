@@ -6,48 +6,9 @@ Splits a field into an array using a separator character. Only works on string f
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to split  
-  
-`separator`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-A regex which matches the separator, eg `,` or `\s+`  
-  
-`ignore_missing`
-
-| 
-
-no
-
-| 
-
-`false`
-
-| 
-
-If `true` and `field` does not exist, the processor quietly exits without modifying the document  
+`field`| yes| -| The field to split    
+`separator`| yes| -| A regex which matches the separator, eg `,` or `\s+`    
+`ignore_missing`| no| `false`| If `true` and `field` does not exist, the processor quietly exits without modifying the document  
   
   
 
@@ -60,10 +21,5 @@ If `true` and `field` does not exist, the processor quietly exits without modify
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Treat all consecutive whitespace characters as a single separator   
-  
+![](images/icons/callouts/1.png)| Treat all consecutive whitespace characters as a single separator     
 ---|---

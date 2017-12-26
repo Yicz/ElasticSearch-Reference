@@ -5,35 +5,9 @@ Appends one or more values to an existing array if the field already exists and 
  **Table 14. Append Options**
 
 Name |  Required |  Default |  Description  
----|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to be appended to  
-  
-`value`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The value to be appended  
+---|---|---|---    
+`field`| yes| -| The field to be appended to    
+`value`| yes| -| The value to be appended  
   
   
 

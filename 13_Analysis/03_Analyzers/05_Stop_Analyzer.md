@@ -38,19 +38,9 @@ The above sentence would produce the following terms:
 
 The `stop` analyzer accepts the following parameters:
 
-`stopwords`
-
-| 
-
-A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `_english_`.   
-  
----|---  
-  
-`stopwords_path`
-
-| 
-
-The path to a file containing stop words. This path is relative to the Elasticsearch `config` directory.   
+`stopwords`| A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `_english_`.     
+---|---    
+`stopwords_path`| The path to a file containing stop words. This path is relative to the Elasticsearch `config` directory.   
   
 See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 

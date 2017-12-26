@@ -6,34 +6,8 @@ Sorts the elements of an array ascending or descending. Homogeneous arrays of nu
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to be sorted  
-  
-`order`
-
-| 
-
-no
-
-| 
-
-`"asc"`
-
-| 
-
-The sort order to use. Accepts `"asc"` or `"desc"`.  
+`field`| yes| -| The field to be sorted    
+`order`| no| `"asc"`| The sort order to use. Accepts `"asc"` or `"desc"`.  
   
   
 

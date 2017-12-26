@@ -69,31 +69,12 @@ These settings override the defaults mentioned [above](modules-scripting-securit
 
 Scripting may also be enabled or disabled in different contexts in the Elasticsearch API. The supported contexts are:
 
-`aggs`
 
-| 
-
-Aggregations   
-  
----|---  
-  
-`search`
-
-| 
-
-Search api, Percolator API and Suggester API   
-  
-`update`
-
-| 
-
-Update api   
-  
-`plugin`
-
-| 
-
-Any plugin that makes use of scripts under the generic `plugin` category   
+`aggs`| Aggregations     
+---|---    
+`search`| Search api, Percolator API and Suggester API     
+`update`| Update api     
+`plugin`| Any plugin that makes use of scripts under the generic `plugin` category   
   
 Plugins can also define custom operations that they use scripts for instead of using the generic `plugin` category. Those operations can be referred to in the following form: `${pluginName}_${operation}`.
 

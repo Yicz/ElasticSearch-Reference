@@ -6,34 +6,8 @@ Expands a field with dots into an object field. This processor allows fields wit
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to expand into an object field  
-  
-`path`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-The field that contains the field to expand. Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.  
+`field`| yes| -| The field to expand into an object field    
+`path`| no| -| The field that contains the field to expand. Only required if the field to expand is part another object field, because the `field` option can only understand leaf fields.  
   
   
 

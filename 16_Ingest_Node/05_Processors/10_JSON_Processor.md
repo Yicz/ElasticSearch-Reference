@@ -5,49 +5,10 @@ Converts a JSON string into a structured JSON object.
  **Table 23. Json Options**
 
 Name |  Required |  Default |  Description  
----|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to be parsed  
-  
-`target_field`
-
-| 
-
-no
-
-| 
-
-`field`
-
-| 
-
-The field to insert the converted structured object into  
-  
-`add_to_root`
-
-| 
-
-no
-
-| 
-
-false
-
-| 
-
-Flag that forces the serialized json to be injected into the top level of the document. `target_field` must not be set when this option is chosen.  
+---|---|---|---    
+`field`| yes| -| The field to be parsed    
+`target_field`| no| `field`| The field to insert the converted structured object into    
+`add_to_root`| no| false| Flag that forces the serialized json to be injected into the top level of the document. `target_field` must not be set when this option is chosen.  
   
   
 

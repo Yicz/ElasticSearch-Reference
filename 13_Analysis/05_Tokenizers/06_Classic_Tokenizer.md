@@ -26,12 +26,7 @@ The above sentence would produce the following terms:
 
 The `classic` tokenizer accepts the following parameters:
 
-`max_token_length`
-
-| 
-
-The maximum token length. If a token is seen that exceeds this length then it is split at `max_token_length` intervals. Defaults to `255`.   
-  
+`max_token_length`| The maximum token length. If a token is seen that exceeds this length then it is split at `max_token_length` intervals. Defaults to `255`.     
 ---|---  
   
 ### Example configuration

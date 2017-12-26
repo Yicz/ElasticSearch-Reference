@@ -9,55 +9,16 @@ The transport mechanism is completely asynchronous in nature, meaning that there
 The TCP transport is an implementation of the transport module using TCP. It allows for the following settings:
 
 Setting | Description  
----|---  
-  
-`transport.tcp.port`
-
-| 
-
-A bind port range. Defaults to `9300-9400`.  
-  
-`transport.publish_port`
-
-| 
-
-The port that other nodes in the cluster should use when communicating with this node. Useful when a cluster node is behind a proxy or firewall and the `transport.tcp.port` is not directly addressable from the outside. Defaults to the actual port assigned via `transport.tcp.port`.  
-  
-`transport.bind_host`
-
-| 
-
-The host address to bind the transport service to. Defaults to `transport.host` (if set) or `network.bind_host`.  
-  
-`transport.publish_host`
-
-| 
-
-The host address to publish for nodes in the cluster to connect to. Defaults to `transport.host` (if set) or `network.publish_host`.  
-  
-`transport.host`
-
-| 
-
-Used to set the `transport.bind_host` and the `transport.publish_host` Defaults to `transport.host` or `network.host`.  
-  
-`transport.tcp.connect_timeout`
-
-| 
-
-The socket connect timeout setting (in time setting format). Defaults to `30s`.  
-  
-`transport.tcp.compress`
-
-| 
-
-Set to `true` to enable compression (LZF) between all nodes. Defaults to `false`.  
-  
-`transport.ping_schedule`
-
-| 
-
-Schedule a regular ping message to ensure that connections are kept alive. Defaults to `5s` in the transport client and `-1` (disabled) elsewhere.  
+---|---    
+`transport.tcp.port`| A bind port range. Defaults to `9300-9400`.    
+`transport.publish_port`| The port that other nodes in the cluster should use when communicating with this node. Useful when a cluster node is behind a proxy or firewall and the 
+`transport.tcp.port` is not directly addressable from the outside. Defaults to the actual port assigned via `transport.tcp.port`.    
+`transport.bind_host`| The host address to bind the transport service to. Defaults to `transport.host` (if set) or `network.bind_host`.    
+`transport.publish_host`| The host address to publish for nodes in the cluster to connect to. Defaults to `transport.host` (if set) or `network.publish_host`.    
+`transport.host`| Used to set the `transport.bind_host` and the `transport.publish_host` Defaults to `transport.host` or `network.host`.    
+`transport.tcp.connect_timeout`| The socket connect timeout setting (in time setting format). Defaults to `30s`.    
+`transport.tcp.compress`| Set to `true` to enable compression (LZF) between all nodes. Defaults to `false`.    
+`transport.ping_schedule`| Schedule a regular ping message to ensure that connections are kept alive. Defaults to `5s` in the transport client and `-1` (disabled) elsewhere.  
   
 It also uses the common [network settings](modules-network.html).
 

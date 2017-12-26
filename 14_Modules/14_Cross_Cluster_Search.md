@@ -77,12 +77,7 @@ A remote cluster can be deleted from the cluster settings by setting its seeds t
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`cluster_one` would be removed from the cluster settings, leaving `cluster_two` intact.   
-  
+![](images/icons/callouts/1.png)| `cluster_one` would be removed from the cluster settings, leaving `cluster_two` intact.     
 ---|---  
   
 ### Using cross cluster search

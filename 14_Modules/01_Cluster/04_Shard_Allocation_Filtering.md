@@ -31,25 +31,10 @@ The available _dynamic_ cluster settings are as follows, where `{attribute}` ref
 
 These special attributes are also supported:
 
-`_name`
-
-| 
-
-Match nodes by node name   
-  
----|---  
-  
-`_ip`
-
-| 
-
-Match nodes by IP address (the IP address associated with the hostname)   
-  
-`_host`
-
-| 
-
-Match nodes by hostname   
+`_name`| Match nodes by node name     
+---|---    
+`_ip`| Match nodes by IP address (the IP address associated with the hostname)     
+`_host`| Match nodes by hostname   
   
 All attribute values can be specified with wildcards, eg:
     

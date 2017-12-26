@@ -20,10 +20,5 @@ The above sentence would produce the following term:
 
 The `keyword` tokenizer accepts the following parameters:
 
-`buffer_size`
-
-| 
-
-The number of characters read into the term buffer in a single pass. Defaults to `256`. The term buffer will grow by this size until all the text has been consumed. It is advisable not to change this setting.   
-  
+`buffer_size`| The number of characters read into the term buffer in a single pass. Defaults to `256`. The term buffer will grow by this size until all the text has been consumed. It is advisable not to change this setting.     
 ---|---

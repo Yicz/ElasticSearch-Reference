@@ -35,25 +35,10 @@ Here we configure the DFRSimilarity so it can be referenced as `my_similarity` i
 
 TF/IDF based similarity that has built-in tf normalization and is supposed to work better for short fields (like names). See [Okapi_BM25](http://en.wikipedia.org/wiki/Okapi_BM25) for more details. This similarity has the following options:
 
-`k1`
-
-| 
-
-Controls non-linear term frequency normalization (saturation). The default value is `1.2`.   
-  
----|---  
-  
-`b`
-
-| 
-
-Controls to what degree document length normalizes tf values. The default value is `0.75`.   
-  
-`discount_overlaps`
-
-| 
-
-Determines whether overlap tokens (Tokens with 0 position increment) are ignored when computing norm. By default this is true, meaning overlap tokens do not count when computing norms.   
+`k1`| Controls non-linear term frequency normalization (saturation). The default value is `1.2`.     
+---|---    
+`b`| Controls to what degree document length normalizes tf values. The default value is `0.75`.     
+`discount_overlaps`| Determines whether overlap tokens (Tokens with 0 position increment) are ignored when computing norm. By default this is true, meaning overlap tokens do not count when computing norms.   
   
 Type name: `BM25`
 
@@ -70,25 +55,10 @@ Type name: `classic`
 
 Similarity that implements the [divergence from randomness](http://lucene.apache.org/core/5_2_1/core/org/apache/lucene/search/similarities/DFRSimilarity.html) framework. This similarity has the following options:
 
-`basic_model`
-
-| 
-
-Possible values: `be`, `d`, `g`, `if`, `in`, `ine` and `p`.   
-  
----|---  
-  
-`after_effect`
-
-| 
-
-Possible values: `no`, `b` and `l`.   
-  
-`normalization`
-
-| 
-
-Possible values: `no`, `h1`, `h2`, `h3` and `z`.   
+`basic_model`| Possible values: `be`, `d`, `g`, `if`, `in`, `ine` and `p`.     
+---|---    
+`after_effect`| Possible values: `no`, `b` and `l`.     
+`normalization`| Possible values: `no`, `h1`, `h2`, `h3` and `z`.   
   
 All options but the first option need a normalization value.
 
@@ -98,39 +68,18 @@ Type name: `DFR`
 
 Similarity that implements the [divergence from independence](http://trec.nist.gov/pubs/trec21/papers/irra.web.nb.pdf) model. This similarity has the following options:
 
-`independence_measure`
-
-| 
-
-Possible values `standardized`, `saturated`, `chisquared`.   
-  
----|---  
-  
+`independence_measure`| Possible values `standardized`, `saturated`, `chisquared`.     
+---|---    
 Type name: `DFI`
 
 #### IB similarity.
 
 [Information based model](http://lucene.apache.org/core/5_2_1/core/org/apache/lucene/search/similarities/IBSimilarity.html) . The algorithm is based on the concept that the information content in any symbolic _distribution_ sequence is primarily determined by the repetitive usage of its basic elements. For written texts this challenge would correspond to comparing the writing styles of different authors. This similarity has the following options:
 
-`distribution`
-
-| 
-
-Possible values: `ll` and `spl`.   
-  
+`distribution`| Possible values: `ll` and `spl`.   
 ---|---  
-  
-`lambda`
-
-| 
-
-Possible values: `df` and `ttf`.   
-  
-`normalization`
-
-| 
-
-Same as in `DFR` similarity.   
+`lambda`| Possible values: `df` and `ttf`.   
+`normalization`| Same as in `DFR` similarity.   
   
 Type name: `IB`
 
@@ -138,12 +87,7 @@ Type name: `IB`
 
 [LM Dirichlet similarity](http://lucene.apache.org/core/5_2_1/core/org/apache/lucene/search/similarities/LMDirichletSimilarity.html) . This similarity has the following options:
 
-`mu`
-
-| 
-
-Default to `2000`.   
-  
+`mu`| Default to `2000`.     
 ---|---  
   
 Type name: `LMDirichlet`
@@ -152,12 +96,7 @@ Type name: `LMDirichlet`
 
 [LM Jelinek Mercer similarity](http://lucene.apache.org/core/5_2_1/core/org/apache/lucene/search/similarities/LMJelinekMercerSimilarity.html) . The algorithm attempts to capture important patterns in the text, while leaving out noise. This similarity has the following options:
 
-`lambda`
-
-| 
-
-The optimal value depends on both the collection and the query. The optimal value is around `0.1` for title queries and `0.7` for long queries. Default to `0.1`. When value approaches `0`, documents that match more query terms will be ranked higher than those that match fewer terms.   
-  
+`lambda`| The optimal value depends on both the collection and the query. The optimal value is around `0.1` for title queries and `0.7` for long queries. Default to `0.1`. When value approaches `0`, documents that match more query terms will be ranked higher than those that match fewer terms.     
 ---|---  
   
 Type name: `LMJelinekMercer`

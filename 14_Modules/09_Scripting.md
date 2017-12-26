@@ -9,96 +9,21 @@ The default scripting language is [`Painless`](modules-scripting-painless.html).
 These languages can be used for any purpose in the scripting APIs, and give the most flexibility.
 
 Language | Sandboxed | Required plugin  
----|---|---  
-  
-[`painless`](modules-scripting-painless.html)
-
-| 
-
-yes
-
-| 
-
-built-in  
-  
-[`groovy`](modules-scripting-groovy.html)
-
-| 
-
-[no](modules-scripting-security.html)
-
-| 
-
-built-in  
-  
-[`javascript`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-javascript.html)
-
-| 
-
-[no](modules-scripting-security.html)
-
-| 
-
-[`lang-javascript`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-javascript.html)  
-  
-[`python`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-python.html)
-
-| 
-
-[no](modules-scripting-security.html)
-
-| 
-
-[`lang-python`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-python.html)  
+---|---|---    
+[`painless`](modules-scripting-painless.html)| yes| built-in    
+[`groovy`](modules-scripting-groovy.html)| [no](modules-scripting-security.html)| built-in    
+[`javascript`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-javascript.html)| [no](modules-scripting-security.html)| [`lang-javascript`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-javascript.html)    
+[`python`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-python.html)| [no](modules-scripting-security.html)| [`lang-python`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/lang-python.html)  
   
 ### Special-purpose languages:
 
 These languages are less flexible, but typically have higher performance for certain tasks.
 
 Language | Sandboxed | Required plugin | Purpose  
----|---|---|---  
-  
-[`expression`](modules-scripting-expression.html)
-
-| 
-
-yes
-
-| 
-
-built-in
-
-| 
-
-fast custom ranking and sorting  
-  
-[`mustache`](search-template.html)
-
-| 
-
-yes
-
-| 
-
-built-in
-
-| 
-
-templates  
-  
-[`java`](modules-scripting-native.html)
-
-| 
-
-n/a
-
-| 
-
-you write it!
-
-| 
-
-expert API  
+---|---|---|---    
+[`expression`](modules-scripting-expression.html)| yes| built-in| fast custom ranking and sorting    
+[`mustache`](search-template.html)| yes| built-in| templates    
+[`java`](modules-scripting-native.html)| n/a| you write it!| expert API  
   
 ![Warning](images/icons/warning.png)
 

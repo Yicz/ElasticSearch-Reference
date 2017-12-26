@@ -11,12 +11,7 @@ It is possible to assign arbitrary metadata attributes to each node at startup. 
     
     bin/elasticsearch -Enode.attr.rack=rack1 -Enode.attr.size=big  ![](images/icons/callouts/1.png)
 
-![](images/icons/callouts/1.png)
-
-| 
-
-These attribute settings can also be specified in the `elasticsearch.yml` config file.   
-  
+![](images/icons/callouts/1.png)| These attribute settings can also be specified in the `elasticsearch.yml` config file.     
 ---|---  
   
 These metadata attributes can be used with the `index.routing.allocation.*` settings to allocate an index to a particular group of nodes. For instance, we can move the index `test` to either `big` or `medium` nodes as follows:
@@ -59,37 +54,12 @@ The following settings are _dynamic_ , allowing live indices to be moved from on
 
 These special attributes are also supported:
 
-`_name`
-
-| 
-
-Match nodes by node name   
-  
----|---  
-  
-`_host_ip`
-
-| 
-
-Match nodes by host IP address (IP associated with hostname)   
-  
-`_publish_ip`
-
-| 
-
-Match nodes by publish IP address   
-  
-`_ip`
-
-| 
-
-Match either `_host_ip` or `_publish_ip`  
-  
-`_host`
-
-| 
-
-Match nodes by hostname   
+`_name`| Match nodes by node name     
+---|---    
+`_host_ip`| Match nodes by host IP address (IP associated with hostname)     
+`_publish_ip`| Match nodes by publish IP address     
+`_ip`| Match either `_host_ip` or `_publish_ip`    
+`_host`| Match nodes by hostname   
   
 All attribute values can be specified with wildcards, eg:
     

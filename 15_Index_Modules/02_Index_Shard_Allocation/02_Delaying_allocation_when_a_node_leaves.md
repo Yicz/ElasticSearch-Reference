@@ -64,12 +64,7 @@ The number of shards whose allocation has been delayed by this timeout setting c
     
     GET _cluster/health ![](images/icons/callouts/1.png)
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This request will return a `delayed_unassigned_shards` value.   
-  
+![](images/icons/callouts/1.png)| This request will return a `delayed_unassigned_shards` value.     
 ---|---  
   
 ### Removing a node permanently

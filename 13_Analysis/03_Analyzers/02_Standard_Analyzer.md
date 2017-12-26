@@ -40,25 +40,10 @@ The above sentence would produce the following terms:
 
 The `standard` analyzer accepts the following parameters:
 
-`max_token_length`
-
-| 
-
-The maximum token length. If a token is seen that exceeds this length then it is split at `max_token_length` intervals. Defaults to `255`.   
-  
----|---  
-  
-`stopwords`
-
-| 
-
-A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.   
-  
-`stopwords_path`
-
-| 
-
-The path to a file containing stop words.   
+`max_token_length`| The maximum token length. If a token is seen that exceeds this length then it is split at `max_token_length` intervals. Defaults to `255`.     
+---|---    
+`stopwords`| A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.     
+`stopwords_path`| The path to a file containing stop words.   
   
 See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 

@@ -4,19 +4,9 @@ The `hyphenation_decompounder` and `dictionary_decompounder` token filters can d
 
 Both token filters require a dictionary of word parts, which can be provided as:
 
-`word_list`
-
-| 
-
-An array of words, specified inline in the token filter configuration, or   
-  
----|---  
-  
-`word_list_path`
-
-| 
-
-The path (either absolute or relative to the `config` directory) to a UTF-8 encoded file containing one word per line.   
+`word_list`| An array of words, specified inline in the token filter configuration, or     
+---|---    
+`word_list_path`| The path (either absolute or relative to the `config` directory) to a UTF-8 encoded file containing one word per line.   
   
 ### Hyphenation decompounder
 
@@ -32,55 +22,15 @@ The `dictionary_decompounder` uses a brute force approach in conjunction with on
 
 The following parameters can be used to configure a compound word token filter:
 
-`type`
-
-| 
-
-Either `dictionary_decompounder` or `hyphenation_decompounder`.   
-  
----|---  
-  
-`word_list`
-
-| 
-
-A array containing a list of words to use for the word dictionary.   
-  
-`word_list_path`
-
-| 
-
-The path (either absolute or relative to the `config` directory) to the word dictionary.   
-  
-`hyphenation_patterns_path`
-
-| 
-
-The path (either absolute or relative to the `config` directory) to a FOP XML hyphenation pattern file. (required for hyphenation)   
-  
-`min_word_size`
-
-| 
-
-Minimum word size. Defaults to 5.   
-  
-`min_subword_size`
-
-| 
-
-Minimum subword size. Defaults to 2.   
-  
-`max_subword_size`
-
-| 
-
-Maximum subword size. Defaults to 15.   
-  
-`only_longest_match`
-
-| 
-
-Whether to include only the longest matching subword or not. Defaults to `false`  
+`type`| Either `dictionary_decompounder` or `hyphenation_decompounder`.     
+---|---    
+`word_list`| A array containing a list of words to use for the word dictionary.     
+`word_list_path`| The path (either absolute or relative to the `config` directory) to the word dictionary.     
+`hyphenation_patterns_path`| The path (either absolute or relative to the `config` directory) to a FOP XML hyphenation pattern file. (required for hyphenation)     
+`min_word_size`| Minimum word size. Defaults to 5.     
+`min_subword_size`| Minimum subword size. Defaults to 2.     
+`max_subword_size`| Maximum subword size. Defaults to 15.     
+`only_longest_match`| Whether to include only the longest matching subword or not. Defaults to `false`  
   
 Here is an example:
     

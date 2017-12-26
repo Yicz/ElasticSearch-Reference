@@ -32,25 +32,10 @@ The above sentence would produce the following terms:
 
 The `pattern` tokenizer accepts the following parameters:
 
-`pattern`
-
-| 
-
-A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html), defaults to `\W+`.   
-  
----|---  
-  
-`flags`
-
-| 
-
-Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). lags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.   
-  
-`group`
-
-| 
-
-Which capture group to extract as tokens. Defaults to `-1` (split).   
+`pattern`| A [Java regular expression](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html), defaults to `\W+`.     
+---|---    
+`flags`| Java regular expression [flags](http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#field.summary). lags should be pipe-separated, eg `"CASE_INSENSITIVE|COMMENTS"`.     
+`group`| Which capture group to extract as tokens. Defaults to `-1` (split).   
   
 ### Example configuration
 

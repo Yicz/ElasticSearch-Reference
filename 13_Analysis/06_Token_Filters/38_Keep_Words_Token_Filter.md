@@ -4,25 +4,10 @@ A token filter of type `keep` that only keeps tokens with text contained in a pr
 
 ### Options
 
-keep_words 
-
-| 
-
-a list of words to keep   
-  
----|---  
-  
-keep_words_path 
-
-| 
-
-a path to a words file   
-  
-keep_words_case 
-
-| 
-
-a boolean indicating whether to lower case the words (defaults to `false`)   
+keep_words | a list of words to keep     
+---|---    
+keep_words_path | a path to a words file     
+keep_words_case | a boolean indicating whether to lower case the words (defaults to `false`)   
   
 ### Settings example
     

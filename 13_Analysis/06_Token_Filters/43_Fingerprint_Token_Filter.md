@@ -7,19 +7,9 @@ For example, the tokens `["the", "quick", "quick", "brown", "fox", "was", "very"
 The following are settings that can be set for a `fingerprint` token filter type:
 
 Setting | Description  
----|---  
-  
-`separator`
-
-| 
-
-Defaults to a space.  
-  
-`max_output_size`
-
-| 
-
-Defaults to `255`.  
+---|---    
+`separator`| Defaults to a space.    
+`max_output_size`| Defaults to `255`.  
   
 ### Maximum token size
 

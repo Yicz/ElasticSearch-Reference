@@ -4,31 +4,11 @@ A token filter of type `stop` that removes stop words from token streams.
 
 The following are settings that can be set for a `stop` token filter type:
 
-`stopwords`
-
-| 
-
-A list of stop words to use. Defaults to `_english_` stop words.   
-  
----|---  
-  
-`stopwords_path`
-
-| 
-
-A path (either relative to `config` location, or absolute) to a stopwords file configuration. Each stop word should be in its own "line" (separated by a line break). The file must be UTF-8 encoded.   
-  
-`ignore_case`
-
-| 
-
-Set to `true` to lower case all words first. Defaults to `false`.   
-  
-`remove_trailing`
-
-| 
-
-Set to `false` in order to not ignore the last term of a search if it is a stop word. This is very useful for the completion suggester as a query like `green a` can be extended to `green apple` even though you remove stop words in general. Defaults to `true`.   
+`stopwords`| A list of stop words to use. Defaults to `_english_` stop words.     
+---|---    
+`stopwords_path`| A path (either relative to `config` location, or absolute) to a stopwords file configuration. Each stop word should be in its own "line" (separated by a line break). The file must be UTF-8 encoded.     
+`ignore_case`| Set to `true` to lower case all words first. Defaults to `false`.     
+`remove_trailing`| Set to `false` in order to not ignore the last term of a search if it is a stop word. This is very useful for the completion suggester as a query like `green a` can be extended to `green apple` even though you remove stop words in general. Defaults to `true`.   
   
 The `stopwords` parameter accepts either an array of stopwords:
     

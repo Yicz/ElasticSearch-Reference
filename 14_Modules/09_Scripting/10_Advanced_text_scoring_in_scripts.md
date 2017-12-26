@@ -8,25 +8,11 @@ Text features, such as term or document frequency for a specific term can be acc
 
 ### Nomenclature:
 
-`df`
 
-| 
-
-document frequency. The number of documents a term appears in. Computed per field.   
-  
----|---  
-  
-`tf`
-
-| 
-
-term frequency. The number times a term appears in a field in one specific document.   
-  
-`ttf`
-
-| 
-
-total term frequency. The number of times this term appears in all documents, that is, the sum of `tf` over all documents. Computed per field.   
+`df`| document frequency. The number of documents a term appears in. Computed per field.     
+---|---    
+`tf`| term frequency. The number times a term appears in a field in one specific document.     
+`ttf`| total term frequency. The number of times this term appears in all documents, that is, the sum of `tf` over all documents. Computed per field.   
   
 `df` and `ttf` are computed per shard and therefore these numbers can vary depending on the shard the current document resides in.
 
@@ -67,31 +53,11 @@ Term statistics for a field can be accessed with a subscript operator like this:
 
 If you need information on the positions of terms in a field, call `_index['FIELD'].get('TERM', flag)` where flag can be
 
-`_POSITIONS`
-
-| 
-
-if you need the positions of the term   
-  
----|---  
-  
-`_OFFSETS`
-
-| 
-
-if you need the offsets of the term   
-  
-`_PAYLOADS`
-
-| 
-
-if you need the payloads of the term   
-  
-`_CACHE`
-
-| 
-
-if you need to iterate over all positions several times   
+`_POSITIONS`| if you need the positions of the term     
+---|---    
+`_OFFSETS`| if you need the offsets of the term     
+`_PAYLOADS`| if you need the payloads of the term     
+`_CACHE`| if you need to iterate over all positions several times   
   
 The iterator uses the underlying lucene classes to iterate over positions. For efficiency reasons, you can only iterate over positions once. If you need to iterate over the positions several times, set the `_CACHE` flag.
 

@@ -63,34 +63,9 @@ Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be refer
       "text":  "Is this déjà vu?"
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Define a `custom` analyzer called `std_folded`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The field `my_text` uses the `std_folded` analyzer.   
-  
-![](images/icons/callouts/3.png) ![](images/icons/callouts/5.png)
-
-| 
-
-To refer to this analyzer, the `analyze` API must specify the index name.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Refer to the analyzer by name.   
-  
-![](images/icons/callouts/6.png)
-
-| 
-
-Refer to the analyzer used by field `my_text`. 
+![](images/icons/callouts/1.png)| Define a `custom` analyzer called `std_folded`.     
+---|---    
+![](images/icons/callouts/2.png)| The field `my_text` uses the `std_folded` analyzer.     ![](images/icons/callouts/3.png) 
+![](images/icons/callouts/5.png)| To refer to this analyzer, the `analyze` API must specify the index name.     
+![](images/icons/callouts/4.png)| Refer to the analyzer by name.     
+![](images/icons/callouts/6.png)| Refer to the analyzer used by field `my_text`. 

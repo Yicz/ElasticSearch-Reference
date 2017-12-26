@@ -6,48 +6,9 @@ Sets one field and associates it with the specified value. If the field already 
 
 Name |  Required |  Default |  Description  
 ---|---|---|---  
-  
-`field`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The field to insert, upsert, or update  
-  
-`value`
-
-| 
-
-yes
-
-| 
-
--
-
-| 
-
-The value to be set for the field  
-  
-`override`
-
-| 
-
-no
-
-| 
-
-true
-
-| 
-
-If processor will update fields with pre-existing non-null-valued field. When set to `false`, such fields will not be touched.  
+`field`| yes| -| The field to insert, upsert, or update    
+`value`| yes| -| The value to be set for the field    
+`override`| no| true| If processor will update fields with pre-existing non-null-valued field. When set to `false`, such fields will not be touched.  
   
   
 

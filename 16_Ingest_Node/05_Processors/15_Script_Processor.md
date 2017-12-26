@@ -7,77 +7,12 @@ See [How to use scripts](modules-scripting-using.html) to learn more about writi
  **Table 28. Script Options**
 
 Name |  Required |  Default |  Description  
----|---|---|---  
-  
-`lang`
-
-| 
-
-no
-
-| 
-
-"painless"
-
-| 
-
-The scripting language  
-  
-`file`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-The script file to refer to  
-  
-`id`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-The stored script id to refer to  
-  
-`inline`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-An inline script to be executed  
-  
-`params`
-
-| 
-
-no
-
-| 
-
--
-
-| 
-
-Script Parameters  
+---|---|---|---    
+`lang`| no| "painless"| The scripting language    
+`file`| no| -| The script file to refer to    
+`id`| no| -| The stored script id to refer to    
+`inline`| no| -| An inline script to be executed    
+`params`| no| -| Script Parameters  
   
   
 

@@ -12,31 +12,11 @@ When the built-in analyzers do not fulfill your needs, you can create a `custom`
 
 The `custom` analyzer accepts the following parameters:
 
-`tokenizer`
-
-| 
-
-A built-in or customised [tokenizer](analysis-tokenizers.html). (Required)   
-  
----|---  
-  
-`char_filter`
-
-| 
-
-An optional array of built-in or customised [character filters](analysis-charfilters.html).   
-  
-`filter`
-
-| 
-
-An optional array of built-in or customised [token filters](analysis-tokenfilters.html).   
-  
-`position_increment_gap`
-
-| 
-
-When indexing an array of text values, Elasticsearch inserts a fake) for more.   
+`tokenizer`| A built-in or customised [tokenizer](analysis-tokenizers.html). (Required)     
+---|---    
+`char_filter`| An optional array of built-in or customised [character filters](analysis-charfilters.html).     
+`filter`| An optional array of built-in or customised [token filters](analysis-tokenfilters.html).     
+`position_increment_gap`| When indexing an array of text values, Elasticsearch inserts a fake) for more.   
   
 ### Example configuration
 

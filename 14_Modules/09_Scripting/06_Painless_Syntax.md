@@ -76,87 +76,15 @@ Patterns can only be created via this mechanism. This ensures fast performance, 
 You can define flags on patterns in Painless by adding characters after the trailing `/` like `/foo/i` or `/foo \w #comment/iUx`. Painless exposes all the flags from [Java’s Pattern class](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) using these characters:
 
 Character |  Java Constant |  Example  
----|---|---  
-  
-`c`
-
-| 
-
-CANON_EQ
-
-| 
-
-`'å' ==~ /å/c` (open in hex editor to see)  
-  
-`i`
-
-| 
-
-CASE_INSENSITIVE
-
-| 
-
-`'A' ==~ /a/i`  
-  
-`l`
-
-| 
-
-LITERAL
-
-| 
-
-`'[a]' ==~ /[a]/l`  
-  
-`m`
-
-| 
-
-MULTILINE
-
-| 
-
-`'a\nb\nc' =~ /^b$/m`  
-  
-`s`
-
-| 
-
-DOTALL (aka single line)
-
-| 
-
-`'a\nb\nc' =~ /.b./s`  
-  
-`U`
-
-| 
-
-UNICODE_CHARACTER_CLASS
-
-| 
-
-`'Ɛ' ==~ /\\w/U`  
-  
-`u`
-
-| 
-
-UNICODE_CASE
-
-| 
-
-`'Ɛ' ==~ /ɛ/iu`  
-  
-`x`
-
-| 
-
-COMMENTS (aka extended)
-
-| 
-
-`'a' ==~ /a #comment/x`  
+---|---|---    
+`c`| CANON_EQ| 
+`'å' ==~ /å/c` (open in hex editor to see)    `i`| CASE_INSENSITIVE| 
+`'A' ==~ /a/i`    `l`| LITERAL| 
+`'[a]' ==~ /[a]/l`    `m`| MULTILINE| 
+`'a\nb\nc' =~ /^b$/m`    `s`| DOTALL (aka single line)| 
+`'a\nb\nc' =~ /.b./s`    `U`| UNICODE_CHARACTER_CLASS| 
+`'Ɛ' ==~ /\\w/U`    `u`| UNICODE_CASE| 
+`'Ɛ' ==~ /ɛ/iu`    `x`| COMMENTS (aka extended)| `'a' ==~ /a #comment/x`  
   
 ### Dereferences
 

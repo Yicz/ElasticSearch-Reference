@@ -3,31 +3,11 @@
 Protects words from being modified by stemmers. Must be placed before any stemming filters.
 
 Setting | Description  
----|---  
-  
-`keywords`
-
-| 
-
-A list of words to use.  
-  
-`keywords_path`
-
-| 
-
-A path (either relative to `config` location, or absolute) to a list of words.  
-  
-`keywords_pattern`
-
-| 
-
-A regular expression pattern to match against words in the text.  
-  
-`ignore_case`
-
-| 
-
-Set to `true` to lower case all words first. Defaults to `false`.  
+---|---    
+`keywords`| A list of words to use.    
+`keywords_path`| A path (either relative to `config` location, or absolute) to a list of words.    
+`keywords_pattern`| A regular expression pattern to match against words in the text.    
+`ignore_case`| Set to `true` to lower case all words first. Defaults to `false`.  
   
 You can configure it like:
     

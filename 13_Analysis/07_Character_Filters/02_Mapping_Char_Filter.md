@@ -8,19 +8,9 @@ Matching is greedy; the longest pattern matching at a given point wins. Replacem
 
 The `mapping` character filter accepts the following parameters:
 
-`mappings`
-
-| 
-
-A array of mappings, with each element having the form `key => value`.   
-  
----|---  
-  
-`mappings_path`
-
-| 
-
-A path, either absolute or relative to the `config` directory, to a UTF-8 encoded text mappings file containing a `key => value` mapping per line.   
+`mappings`| A array of mappings, with each element having the form `key => value`.     
+---|---    
+`mappings_path`| A path, either absolute or relative to the `config` directory, to a UTF-8 encoded text mappings file containing a `key => value` mapping per line.   
   
 Either the `mappings` or `mappings_path` parameter must be provided.
 

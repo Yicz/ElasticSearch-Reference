@@ -15,97 +15,22 @@ The next step is to convert your test using static test data into a test using r
 
 So, how can you create random data. The most important thing to know is, that you never should instantiate your own `Random` instance, but use the one provided in the `RandomizedTest`, from which all elasticsearch dependent test classes inherit from.
 
-`getRandom()`
-
-| 
-
-Returns the random instance, which can recreated when calling the test with specific parameters   
-  
----|---  
-  
-`randomBoolean()`
-
-| 
-
-Returns a random boolean   
-  
-`randomByte()`
-
-| 
-
-Returns a random byte   
-  
-`randomShort()`
-
-| 
-
-Returns a random short   
-  
-`randomInt()`
-
-| 
-
-Returns a random integer   
-  
-`randomLong()`
-
-| 
-
-Returns a random long   
-  
-`randomFloat()`
-
-| 
-
-Returns a random float   
-  
-`randomDouble()`
-
-| 
-
-Returns a random double   
-  
-`randomInt(max)`
-
-| 
-
-Returns a random integer between 0 and max   
-  
-`between()`
-
-| 
-
-Returns a random between the supplied range   
-  
-`atLeast()`
-
-| 
-
-Returns a random integer of at least the specified integer   
-  
-`atMost()`
-
-| 
-
-Returns a random integer of at most the specified integer   
-  
-`randomLocale()`
-
-| 
-
-Returns a random locale   
-  
-`randomTimeZone()`
-
-| 
-
-Returns a random timezone   
-  
-`randomFrom()`
-
-| 
-
-Returns a random element from a list/array   
+`getRandom()`| Returns the random instance, which can recreated when calling the test with specific parameters     
+---|---    
+`randomBoolean()`| Returns a random boolean     
+`randomByte()`| Returns a random byte     
+`randomShort()`| Returns a random short     
+`randomInt()`| Returns a random integer     
+`randomLong()`| Returns a random long     
+`randomFloat()`| Returns a random float     
+`randomDouble()`| Returns a random double     
+`randomInt(max)`| Returns a random integer between 0 and max     
+`between()`| Returns a random between the supplied range     
+`atLeast()`| Returns a random integer of at least the specified integer     
+`atMost()`| Returns a random integer of at most the specified integer     
+`randomLocale()`| Returns a random locale     
+`randomTimeZone()`| Returns a random timezone     
+`randomFrom()`| Returns a random element from a list/array   
   
 In addition, there are a couple of helper methods, allowing you to create random ASCII and Unicode strings, see methods beginning with `randomAscii`, `randomUnicode`, and `randomRealisticUnicode` in the random test class. The latter one tries to create more realistic unicode string by not being arbitrary random.
 

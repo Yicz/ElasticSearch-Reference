@@ -12,133 +12,33 @@ The number of shards used for indices created during integration tests is random
 
 There are a couple of helper methods in `ESIntegTestCase`, which will make your tests shorter and more concise.
 
-`refresh()`
-
-| 
-
-Refreshes all indices in a cluster   
-  
----|---  
-  
-`ensureGreen()`
-
-| 
-
-Ensures a green health cluster state, waiting for relocations. Waits the default timeout of 30 seconds before failing.   
-  
-`ensureYellow()`
-
-| 
-
-Ensures a yellow health cluster state, also waits for 30 seconds before failing.   
-  
-`createIndex(name)`
-
-| 
-
-Creates an index with the specified name   
-  
-`flush()`
-
-| 
-
-Flushes all indices in a cluster   
-  
-`flushAndRefresh()`
-
-| 
-
-Combines `flush()` and `refresh()` calls   
-  
-`forceMerge()`
-
-| 
-
-Waits for all relocations and force merges all indices in the cluster to one segment.   
-  
-`indexExists(name)`
-
-| 
-
-Checks if given index exists   
-  
-`admin()`
-
-| 
-
-Returns an `AdminClient` for administrative tasks   
-  
-`clusterService()`
-
-| 
-
-Returns the cluster service java class   
-  
-`cluster()`
-
-| 
-
-Returns the test cluster class, which is explained in the next paragraphs   
+`refresh()`| Refreshes all indices in a cluster   
+---|--- 
+`ensureGreen()`| Ensures a green health cluster state, waiting for relocations. Waits the default timeout of 30 seconds before failing.  
+`ensureYellow()`| Ensures a yellow health cluster state, also waits for 30 seconds before failing.  
+`createIndex(name)`| Creates an index with the specified name  
+`flush()`| Flushes all indices in a cluster  
+`flushAndRefresh()`| Combines `flush()` and `refresh()` calls   
+`forceMerge()`| Waits for all relocations and force merges all indices in the cluster to one segment.  
+`indexExists(name)`| Checks if given index exists  
+`admin()`| Returns an `AdminClient` for administrative tasks   
+`clusterService()`| Returns the cluster service java class  
+`cluster()`| Returns the test cluster class, which is explained in the next paragraphs   
   
 ### test cluster methods
 
 The `InternalTestCluster` class is the heart of the cluster functionality in a randomized test and allows you to configure a specific setting or replay certain types of outages to check, how your custom code reacts.
 
-`ensureAtLeastNumNodes(n)`
-
-| 
-
-Ensure at least the specified number of nodes is running in the cluster   
-  
----|---  
-  
-`ensureAtMostNumNodes(n)`
-
-| 
-
-Ensure at most the specified number of nodes is running in the cluster   
-  
-`getInstance()`
-
-| 
-
-Get a guice instantiated instance of a class from a random node   
-  
-`getInstanceFromNode()`
-
-| 
-
-Get a guice instantiated instance of a class from a specified node   
-  
-`stopRandomNode()`
-
-| 
-
-Stop a random node in your cluster to mimic an outage   
-  
-`stopCurrentMasterNode()`
-
-| 
-
-Stop the current master node to force a new election   
-  
-`stopRandomNonMaster()`
-
-| 
-
-Stop a random non master node to mimic an outage   
-  
-`buildNode()`
-
-| 
-
-Create a new elasticsearch node   
-  
-`startNode(settings)`
-
-| 
-
-Create and start a new elasticsearch node   
+`ensureAtLeastNumNodes(n)`| Ensure at least the specified number of nodes is running in the cluster     
+---|---   
+`ensureAtMostNumNodes(n)`| Ensure at most the specified number of nodes is running in the cluster    
+`getInstance()`| Get a guice instantiated instance of a class from a random node    
+`getInstanceFromNode()`| Get a guice instantiated instance of a class from a specified node    
+`stopRandomNode()`| Stop a random node in your cluster to mimic an outage    
+`stopCurrentMasterNode()`| Stop the current master node to force a new election    
+`stopRandomNonMaster()`| Stop a random non master node to mimic an outage    
+`buildNode()`| Create a new elasticsearch node    
+`startNode(settings)`| Create and start a new elasticsearch node   
   
 ### Changing node settings
 
@@ -161,42 +61,13 @@ If you want to ensure a certain configuration for the nodes, which are started a
 In order to execute any actions, you have to use a client. You can use the `ESIntegTestCase.client()` method to get back a random client. This client can be a `TransportClient` or a `NodeClient` \- and usually you do not need to care as long as the action gets executed. There are several more methods for client selection inside of the `InternalTestCluster` class, which can be accessed using the `ESIntegTestCase.internalCluster()` method.
 
 `iterator()`
-
-| 
-
-An iterator over all available clients   
-  
----|---  
-  
-`masterClient()`
-
-| 
-
-Returns a client which is connected to the master node   
-  
-`nonMasterClient()`
-
-| 
-
-Returns a client which is not connected to the master node   
-  
-`clientNodeClient()`
-
-| 
-
-Returns a client, which is running on a client node   
-  
-`client(String nodeName)`
-
-| 
-
-Returns a client to a given node   
-  
-`smartClient()`
-
-| 
-
-Returns a smart client   
+| An iterator over all available clients     
+---|---   
+`masterClient()`| Returns a client which is connected to the master node    
+`nonMasterClient()`| Returns a client which is not connected to the master node    
+`clientNodeClient()`| Returns a client, which is running on a client node    
+`client(String nodeName)`| Returns a client to a given node    
+`smartClient()`| Returns a smart client   
   
 ### Scoping
 

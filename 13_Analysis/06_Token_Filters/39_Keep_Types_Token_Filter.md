@@ -4,12 +4,7 @@ A token filter of type `keep_types` that only keeps tokens with a token type con
 
 ### Options
 
-types 
-
-| 
-
-a list of types to keep   
-  
+types | a list of types to keep     
 ---|---  
   
 ### Settings example

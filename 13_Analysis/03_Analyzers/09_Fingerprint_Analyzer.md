@@ -43,31 +43,11 @@ The above sentence would produce the following single term:
 
 The `fingerprint` analyzer accepts the following parameters:
 
-`separator`
-
-| 
-
-The character to use to concate the terms. Defaults to a space.   
-  
----|---  
-  
-`max_output_size`
-
-| 
-
-The maximum token size to emit. Defaults to `255`. Tokens larger than this size will be discarded.   
-  
-`stopwords`
-
-| 
-
-A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.   
-  
-`stopwords_path`
-
-| 
-
-The path to a file containing stop words.   
+`separator`| The character to use to concate the terms. Defaults to a space.     
+---|---    
+`max_output_size`| The maximum token size to emit. Defaults to `255`. Tokens larger than this size will be discarded.     
+`stopwords`| A pre-defined stop words list like `_english_` or an array containing a list of stop words. Defaults to `\_none_`.     
+`stopwords_path`| The path to a file containing stop words.   
   
 See the [Stop Token Filter](analysis-stop-tokenfilter.html) for more information about stop word configuration.
 
