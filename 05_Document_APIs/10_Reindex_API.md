@@ -2,9 +2,9 @@
 
 ![Important](images/icons/important.png)
 
-Reindex does not attempt to set up the destination index. It does not copy the settings of the source index. You should set up the destination index prior to running a `_reindex` action, including setting up mappings, shard counts, replicas, etc.
+Reindex不试图设置目标索引。它不复制源索引的设置。在运行`_reindex`操作之前，应该设置目标索引，包括设置映射、碎片计数、副本等。
 
-The most basic form of `_reindex` just copies documents from one index to another. This will copy documents from the `twitter` index into the `new_twitter` index:
+`_reindex`的最基本形式只是将文档从一个索引复制到另一个索引。这将把`twitter`索引中的文档复制到`new_twitter`索引中:
     
     
     POST _reindex
@@ -17,8 +17,7 @@ The most basic form of `_reindex` just copies documents from one index to anothe
       }
     }
 
-That will return something like this:
-    
+它会返回这样的内容:    
     
     {
       "took" : 147,
@@ -40,8 +39,7 @@ That will return something like this:
       "failures" : [ ]
     }
 
-Just like [`_update_by_query`](docs-update-by-query.html), `_reindex` gets a snapshot of the source index but its target must be a **different** index so version conflicts are unlikely. The `dest` element can be configured like the index API to control optimistic concurrency control. Just leaving out `version_type` (as above) or setting it to `internal` will cause Elasticsearch to blindly dump documents into the target, overwriting any that happen to have the same type and id:
-    
+就像[`_update_by_query`](docs-update-by-query.html)一样，`_reindex`获取源索引的快照，但它的目标必须是一个**不同的**索引，所以不太可能出现版本冲突。`dest`的元素可以配置成索引API来控制乐观并发控制。只留下`version_type`(如上)或将其设置为`internal `将导致ES索盲目地将文档转储到目标中，覆盖任何碰巧具有相同类型和id的文件:
     
     POST _reindex
     {
@@ -54,8 +52,7 @@ Just like [`_update_by_query`](docs-update-by-query.html), `_reindex` gets a sna
       }
     }
 
-Setting `version_type` to `external` will cause Elasticsearch to preserve the `version` from the source, create any documents that are missing, and update any documents that have an older version in the destination index than they do in the source index:
-    
+将`version_type`设置为`external`将导致ES从源中保存`version`，创建其没有的文档的任何文档，并更新在目标索引中有较老版本的文档，而不是源索引中的文档:
     
     POST _reindex
     {
@@ -68,7 +65,7 @@ Setting `version_type` to `external` will cause Elasticsearch to preserve the `v
       }
     }
 
-Settings `op_type` to `create` will cause `_reindex` to only create missing documents in the target index. All existing documents will cause a version conflict:
+设置`op_type`为`create`将导致`_reindex`只在目标索引中创建其没有的文档。所有现有文件将导致版本冲突:
     
     
     POST _reindex
@@ -82,7 +79,7 @@ Settings `op_type` to `create` will cause `_reindex` to only create missing docu
       }
     }
 
-By default version conflicts abort the `_reindex` process but you can just count them by settings `"conflicts": "proceed"` in the request body:
+默认情况下，冲突中止了`_reindex`进程，但是您可以通过设置`conflicts`来运行它们:
     
     
     POST _reindex
@@ -97,8 +94,7 @@ By default version conflicts abort the `_reindex` process but you can just count
       }
     }
 
-You can limit the documents by adding a type to the `source` or by adding a query. This will only copy `tweet`'s made by `kimchy` into `new_twitter`:
-    
+您可以通过向`source`添加类型（type）或添加查询(query)来限制文档。下面的例子会将`kimchy`的`tweet`复制到`new_twitter`中:    
     
     POST _reindex
     {
@@ -116,8 +112,7 @@ You can limit the documents by adding a type to the `source` or by adding a quer
       }
     }
 
-`index` and `type` in `source` can both be lists, allowing you to copy from lots of sources in one request. This will copy documents from the `tweet` and `post` types in the `twitter` and `blog` index. It’d include the `post` type in the `twitter` index and the `tweet` type in the `blog` index. If you want to be more specific you’ll need to use the `query`. It also makes no effort to handle ID collisions. The target index will remain valid but it’s not easy to predict which document will survive because the iteration order isn’t well defined.
-    
+`soucre`中的`index`和`type`都可以是列表，允许您在一个请求中复制大量的源。这将从`twitter`和`blog`索引中复制`tweet`和`post`类型的文档。它包括`twitter`索引中的`post`类型，以及`blog`索引中的`tweet`类型。如果想要更具体，就需要使用`query`。它也不费力处理ID冲突。目标索引仍然有效，但是由于迭代顺序没有很好地定义，所以很难预测哪个文档能够存活。
     
     POST _reindex
     {
@@ -130,7 +125,7 @@ You can limit the documents by adding a type to the `source` or by adding a quer
       }
     }
 
-It’s also possible to limit the number of processed documents by setting `size`. This will only copy a single document from `twitter` to `new_twitter`:
+还可以通过设置`size`来限制已处理文档的数量。这只会将`twitter`的一个文档复制到`new_twitter`:
     
     
     POST _reindex
@@ -144,7 +139,7 @@ It’s also possible to limit the number of processed documents by setting `size
       }
     }
 
-If you want a particular set of documents from the twitter index you’ll need to sort. Sorting makes the scroll less efficient but in some contexts it’s worth it. If possible, prefer a more selective query to `size` and `sort`. This will copy 10000 documents from `twitter` into `new_twitter`:
+如果您想要从twitter索引中获得一组特定的文档，您需要进行排序。排序使滚动变得低效，但在某些情况下，它是值得的。如果可能的话，选择`size`和`sort`的更有选择性的查询。这将从`推特`复制10000个文档到`new_twitter`:
     
     
     POST _reindex
@@ -159,8 +154,7 @@ If you want a particular set of documents from the twitter index you’ll need t
       }
     }
 
-The `source` div supports all the elements that are supported in a [search request](search-request-body.html). For instance only a subset of the fields from the original documents can be reindexed using source filtering as follows:
-    
+`source`部分支持[search request](search-request-body.html)中支持的所有元素。例如，只有原始文档中字段的一个子集可以使用源筛选来进行索引，如下所示:
     
     POST _reindex
     {
@@ -173,8 +167,7 @@ The `source` div supports all the elements that are supported in a [search reque
       }
     }
 
-Like `_update_by_query`, `_reindex` supports a script that modifies the document. Unlike `_update_by_query`, the script is allowed to modify the document’s metadata. This example bumps the version of the source document:
-    
+与`update_by_query`类似，`reindex`支持修改文档的脚本。与`_update_by_query`不同，该脚本可以修改文档的元数据。本例将对源文档的版本进行修改:
     
     POST _reindex
     {
@@ -191,16 +184,15 @@ Like `_update_by_query`, `_reindex` supports a script that modifies the document
       }
     }
 
-Just as in `_update_by_query`, you can set `ctx.op` to change the operation that is executed on the destination index:
-
+正如在`_update_by_query`中，您可以设置`ctx。op`更改目的地索引处执行的操作:
 `noop`
-     Set `ctx.op =). 
+     Set `ctx.op =)`. 
 `delete`
-     Set `ctx.op =). 
+     Set `ctx.op =)`. 
 
 Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
 
-Think of the possibilities! Just be careful! With great power…. You can change:
+可以修改的属性!只是小心些而已!你可以改变:
 
   * `_id`
   * `_type`
@@ -674,10 +666,9 @@ All documents from the previous metricbeat indices now can be found in the `*-1`
 
 The previous method can also be used in combination with [change the name of a field](docs-reindex.html#docs-reindex-change-name) to only load the existing data into the new index, but also rename fields if needed.
 
-### Extracting a random subset of an index
+###提取一个测试索引的随机子集  Extracting a random subset of an index
 
-Reindex can be used to extract a random subset of an index for testing:
-    
+Reindex可以用来提取一个测试索引的随机子集:    
     
     POST _reindex
     {
@@ -696,11 +687,5 @@ Reindex can be used to extract a random subset of an index for testing:
         "index": "random_twitter"
       }
     }
-
-![](images/icons/callouts/1.png)
-
-| 
-
-Reindex defaults to sorting by `_doc` so `random_score` won’t have any effect unless you override the sort to `_score`.   
-  
+#1| Reindex默认为按`_doc`排序，所以`random_score`不会有任何效果，除非你将sort值覆盖到`_score`
 ---|---
