@@ -41,29 +41,14 @@ Create a file called `elasticsearch.repo` in the `/etc/yum.repos.d/` directory f
 And your repository is ready for use. You can now install Elasticsearch with one of the following commands:
     
     
-    sudo yum install elasticsearch #1
-    sudo dnf install elasticsearch #2
-    sudo zypper install elasticsearch #3
+    sudo yum install elasticsearch <1>
+    sudo dnf install elasticsearch <2>
+    sudo zypper install elasticsearch <3>
 
-#1
-
-| 
-
-Use `yum` on CentOS and older Red Hat based distributions.   
-  
----|---  
-  
-#2
-
-| 
-
-Use `dnf` on Fedora and other newer Red Hat distributions.   
-  
-#3
-
-| 
-
-Use `zypper` on OpenSUSE based distributions   
+<1>| Use `yum` on CentOS and older Red Hat based distributions.     
+---|---    
+<2>| Use `dnf` on Fedora and other newer Red Hat distributions.     
+<3>| Use `zypper` on OpenSUSE based distributions   
   
 ### Download and install the RPM manually
 
@@ -71,15 +56,10 @@ The RPM for Elasticsearch v5.4.3 can be downloaded from the website and installe
     
     
     wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.rpm
-    sha1sum elasticsearch-5.4.3.rpm #1
+    sha1sum elasticsearch-5.4.3.rpm <1>
     sudo rpm --install elasticsearch-5.4.3.rpm
 
-#1
-
-| 
-
-Compare the SHA produced by `sha1sum` or `shasum` with the [published SHA](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.rpm.sha1).   
-  
+<1>| Compare the SHA produced by `sha1sum` or `shasum` with the [published SHA](https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.4.3.rpm.sha1).     
 ---|---  
   
 ![Note](images/icons/note.png)

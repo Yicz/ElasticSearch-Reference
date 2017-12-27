@@ -29,13 +29,13 @@ In the response, the aggregations names will be changed to respectively `date_hi
     
     {
         "aggregations": {
-            "date_histogram#tweets_over_time": { #1
+            "date_histogram#tweets_over_time": { <1>
                 "buckets" : [
                     {
                         "key_as_string" : "2009-01-01T00:00:00.000Z",
                         "key" : 1230768000000,
                         "doc_count" : 5,
-                        "top_hits#top_users" : {  #2
+                        "top_hits#top_users" : {  <2>
                             "hits" : {
                                 "total" : 5,
                                 "max_score" : 1.0,
@@ -62,9 +62,9 @@ In the response, the aggregations names will be changed to respectively `date_hi
         ...
     }
 
-#1| The name `tweets_over_time` now contains the `date_histogram` prefix.     
+<1>| The name `tweets_over_time` now contains the `date_histogram` prefix.     
 ---|---   
-#2| The name `top_users` now contains the `top_hits` prefix.   
+<2>| The name `top_users` now contains the `top_hits` prefix.   
   
 ![Note](images/icons/note.png)
 

@@ -114,23 +114,23 @@ Here is an example:
             "my_custom_analyzer": {
               "type": "custom",
               "char_filter": [
-                "emoticons" #1
+                "emoticons" <1>
               ],
-              "tokenizer": "punctuation", #2
+              "tokenizer": "punctuation", <2>
               "filter": [
                 "lowercase",
-                "english_stop" #3
+                "english_stop" <3>
               ]
             }
           },
           "tokenizer": {
-            "punctuation": { #4
+            "punctuation": { <4>
               "type": "pattern",
               "pattern": "[ .,!?]"
             }
           },
           "char_filter": {
-            "emoticons": { #5
+            "emoticons": { <5>
               "type": "mapping",
               "mappings": [
                 ":) => _happy_",
@@ -139,7 +139,7 @@ Here is an example:
             }
           },
           "filter": {
-            "english_stop": { #6
+            "english_stop": { <6>
               "type": "stop",
               "stopwords": "_english_"
             }
@@ -154,7 +154,7 @@ Here is an example:
       "text":     "I'm a :) person, and you?"
     }
 
-#1 #2 #3 #4 #5 #6| The `emoticon` character filter, `punctuation` tokenizer and `english_stop` token filter are custom implementations which are defined in the same index settings.     
+<1> <2> <3> <4> <5> <6>| The `emoticon` character filter, `punctuation` tokenizer and `english_stop` token filter are custom implementations which are defined in the same index settings.     
 ---|---  
   
 The above example produces the following terms:

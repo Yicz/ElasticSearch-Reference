@@ -31,17 +31,17 @@ For instance:
     
     PUT my_index/my_type/1
     {
-      "number_one": "10" #1
+      "number_one": "10" <1>
     }
     
     PUT my_index/my_type/2
     {
-      "number_two": "10" #2
+      "number_two": "10" <2>
     }
 
-#1| The `number_one` field will contain the integer `10`.     
+<1>| The `number_one` field will contain the integer `10`.     
 ---|---  
-#2| This document will be rejected because coercion is disabled.   
+<2>| This document will be rejected because coercion is disabled.   
   
 ![Tip](images/icons/tip.png)
 
@@ -73,11 +73,11 @@ The `index.mapping.coerce` setting can be set on the index level to disable coer
     }
     
     PUT my_index/my_type/1
-    { "number_one": "10" } #1
+    { "number_one": "10" } <1>
     
     PUT my_index/my_type/2
-    { "number_two": "10" } #2
+    { "number_two": "10" } <2>
 
-#1| The `number_one` field overrides the index level setting to enable coercion.     
+<1>| The `number_one` field overrides the index level setting to enable coercion.     
 ---|---    
-#2| This document will be rejected because the `number_two` field inherits the index-level coercion setting. 
+<2>| This document will be rejected because the `number_two` field inherits the index-level coercion setting. 

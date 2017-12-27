@@ -121,13 +121,13 @@ curl -XGET 'localhost:9200/_cluster/state?filter_path=metadata.indices.*.state,-
 
 ```sh
 curl -XPOST 'localhost:9200/library/book?refresh&pretty' -H 'Content-Type: application/json' -d'
-{"title": "Book #1", "rating": 200.1}
+{"title": "Book <1>", "rating": 200.1}
 '
 curl -XPOST 'localhost:9200/library/book?refresh&pretty' -H 'Content-Type: application/json' -d'
-{"title": "Book #2", "rating": 1.7}
+{"title": "Book <2>", "rating": 1.7}
 '
 curl -XPOST 'localhost:9200/library/book?refresh&pretty' -H 'Content-Type: application/json' -d'
-{"title": "Book #3", "rating": 0.1}
+{"title": "Book <3>", "rating": 0.1}
 '
 curl -XGET 'localhost:9200/_search?filter_path=hits.hits._source&_source=title&s\|t=rating:desc&pretty'
 
@@ -135,11 +135,11 @@ curl -XGET 'localhost:9200/_search?filter_path=hits.hits._source&_source=title&s
 {
   "hits" : {
     "hits" : [ {
-      "_source":{"title":"Book #1"}
+      "_source":{"title":"Book <1>"}
     }, {
-      "_source":{"title":"Book #2"}
+      "_source":{"title":"Book <2>"}
     }, {
-      "_source":{"title":"Book #3"}
+      "_source":{"title":"Book <3>"}
     } ]
   }
 }

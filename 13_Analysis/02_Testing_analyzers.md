@@ -28,7 +28,7 @@ Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be refer
       "settings": {
         "analysis": {
           "analyzer": {
-            "std_folded": { #1
+            "std_folded": { <1>
               "type": "custom",
               "tokenizer": "standard",
               "filter": [
@@ -44,28 +44,28 @@ Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be refer
           "properties": {
             "my_text": {
               "type": "text",
-              "analyzer": "std_folded" #2
+              "analyzer": "std_folded" <2>
             }
           }
         }
       }
     }
     
-    GET my_index/_analyze #3
+    GET my_index/_analyze <3>
     {
-      "analyzer": "std_folded", #4
+      "analyzer": "std_folded", <4>
       "text":     "Is this déjà vu?"
     }
     
-    GET my_index/_analyze #5
+    GET my_index/_analyze <5>
     {
-      "field": "my_text", #6
+      "field": "my_text", <6>
       "text":  "Is this déjà vu?"
     }
 
-#1| Define a `custom` analyzer called `std_folded`.     
+<1>| Define a `custom` analyzer called `std_folded`.     
 ---|---    
-#2| The field `my_text` uses the `std_folded` analyzer.     #3 
-#5| To refer to this analyzer, the `analyze` API must specify the index name.     
-#4| Refer to the analyzer by name.     
-#6| Refer to the analyzer used by field `my_text`. 
+<2>| The field `my_text` uses the `std_folded` analyzer.     <3> 
+<5>| To refer to this analyzer, the `analyze` API must specify the index name.     
+<4>| Refer to the analyzer by name.     
+<6>| Refer to the analyzer used by field `my_text`. 

@@ -34,7 +34,7 @@ The result from the above request includes an array of `sort values` for each do
                 "title" : "elasticsearch"
             }
         },
-        "search_after": [1463538857, "tweet#654323"],
+        "search_after": [1463538857, "tweet<6>54323"],
         "sort": [
             {"date": "asc"},
             {"_uid": "desc"}

@@ -14,16 +14,16 @@ For instance, these documents would all match the above query:
     
     
     { "user": "jane" }
-    { "user": "" } #1
-    { "user": "-" } #2
+    { "user": "" } <1>
+    { "user": "-" } <2>
     { "user": ["jane"] }
-    { "user": ["jane", null ] } #3
+    { "user": ["jane", null ] } <3>
 
-#1| An empty string is a non-`null` value.     
+<1>| An empty string is a non-`null` value.     
 ---|---  
-#2| Even though the `standard` analyzer would emit zero tokens, the original field is non-`null`.   
+<2>| Even though the `standard` analyzer would emit zero tokens, the original field is non-`null`.   
   
-#3
+<3>
 
 | 
 
@@ -33,14 +33,14 @@ These documents would **not** match the above query:
     
     
     { "user": null }
-    { "user": [] } #1
-    { "user": [null] } #2
-    { "foo":  "bar" } #3
+    { "user": [] } <1>
+    { "user": [null] } <2>
+    { "foo":  "bar" } <3>
 
-#1| This field has no values.     
+<1>| This field has no values.     
 ---|---  
-#2| At least one non-`null` value is required.     
-#3| The `user` field is missing completely.   
+<2>| At least one non-`null` value is required.     
+<3>| The `user` field is missing completely.   
   
 #### `null_value` mapping
 

@@ -23,20 +23,20 @@ The shard stores information is grouped by indices and shard ids.
     
     {
         ...
-       "0": { #1
-            "stores": [ #2
+       "0": { <1>
+            "stores": [ <2>
                 {
-                    "sPa3OgxLSYGvQ4oPs-Tajw": { #3
+                    "sPa3OgxLSYGvQ4oPs-Tajw": { <3>
                         "name": "node_t0",
                         "transport_address": "local[1]",
                         "attributes": {
                             "mode": "local"
                         }
                     },
-                    "allocation_id": "2iNySv_OQVePRX-yaRH_lQ", #4
-                    "legacy_version": 42, #5
-                    "allocation" : "primary" | "replica" | "unused", #6
-                    "store_exception": ... #7
+                    "allocation_id": "2iNySv_OQVePRX-yaRH_lQ", <4>
+                    "legacy_version": 42, <5>
+                    "allocation" : "primary" | "replica" | "unused", <6>
+                    "store_exception": ... <7>
                 },
                 ...
             ]
@@ -44,11 +44,11 @@ The shard stores information is grouped by indices and shard ids.
         ...
     }
 
-#1| The key is the corresponding shard id for the store information     
+<1>| The key is the corresponding shard id for the store information     
 ---|---    
-#2| A list of store information for all copies of the shard     
-#3| The node information that hosts a copy of the store, the key is the unique node id.     
-#4| The allocation id of the store copy     
-#5| The version of the store copy (available only for legacy shard copies that have not yet been active in a current version of Elasticsearch)    
-#6| The status of the store copy, whether it is used as a primary, replica or not used at all     
-#7| Any exception encountered while opening the shard index or from earlier engine failure 
+<2>| A list of store information for all copies of the shard     
+<3>| The node information that hosts a copy of the store, the key is the unique node id.     
+<4>| The allocation id of the store copy     
+<5>| The version of the store copy (available only for legacy shard copies that have not yet been active in a current version of Elasticsearch)    
+<6>| The status of the store copy, whether it is used as a primary, replica or not used at all     
+<7>| Any exception encountered while opening the shard index or from earlier engine failure 

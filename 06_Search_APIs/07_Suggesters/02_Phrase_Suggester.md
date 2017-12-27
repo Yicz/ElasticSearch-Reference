@@ -144,26 +144,26 @@ The response contains suggestions scored by the most likely spell correction fir
               "min_word_length" :  1
             } ],
             "collate": {
-              "query": { #1
+              "query": { <1>
                 "inline" : {
                   "match": {
-                    "{ {field_name} }" : "{ {suggestion} }" #2
+                    "{ {field_name} }" : "{ {suggestion} }" <2>
                   }
                 }
               },
-              "params": {"field_name" : "title"}, #3
-              "prune": true #4
+              "params": {"field_name" : "title"}, <3>
+              "prune": true <4>
             }
           }
         }
       }
     }
 
-#1| This query will be run once for every suggestion.     
+<1>| This query will be run once for every suggestion.     
 ---|---    
-#2| The `{ {suggestion} }` variable will be replaced by the text of each suggestion.     
-#3| An additional `field_name` variable has been specified in `params` and is used by the `match` query.     
-#4| All suggestions will be returned with an extra `collate_match` option indicating whether the generated phrase matched any document.   
+<2>| The `{ {suggestion} }` variable will be replaced by the text of each suggestion.     
+<3>| An additional `field_name` variable has been specified in `params` and is used by the `match` query.     
+<4>| All suggestions will be returned with an extra `collate_match` option indicating whether the generated phrase matched any document.   
   
 ### Smoothing Models
 

@@ -74,7 +74,7 @@ The above request will yield the following response:
         "total": 1,
         "max_score": 0.5716521,
         "hits": [
-          { #1
+          { <1>
             "_index": "my-index",
             "_type": "queries",
             "_id": "1",
@@ -91,7 +91,7 @@ The above request will yield the following response:
       }
     }
 
-#1| The query with id `1` matches our document.     
+<1>| The query with id `1` matches our document.     
 ---|---  
   
 #### Parameters
@@ -160,12 +160,12 @@ Percolating an existing document, using the index response as basis to build to 
                 "index" : "my-index",
                 "type" : "message",
                 "id" : "1",
-                "version" : 1 #1
+                "version" : 1 <1>
             }
         }
     }
 
-#1| The version is optional, but useful in certain cases. We can ensure that we are trying to percolate the document we just have indexed. A change may be made after we have indexed, and if that is the case the then the search request would fail with a version conflict error.     
+<1>| The version is optional, but useful in certain cases. We can ensure that we are trying to percolate the document we just have indexed. A change may be made after we have indexed, and if that is the case the then the search request would fail with a version conflict error.     
 ---|---  
   
 The search response returned is identical as in the previous example.
@@ -252,7 +252,7 @@ This will yield the following response.
             },
             "highlight": {
               "message": [
-                "The quick brown fox jumps over the <em>lazy</em> <em>dog</em>" #1
+                "The quick brown fox jumps over the <em>lazy</em> <em>dog</em>" <1>
               ]
             }
           },
@@ -270,7 +270,7 @@ This will yield the following response.
             },
             "highlight": {
               "message": [
-                "The quick <em>brown</em> <em>fox</em> jumps over the lazy dog" #2
+                "The quick <em>brown</em> <em>fox</em> jumps over the lazy dog" <2>
               ]
             }
           }
@@ -278,7 +278,7 @@ This will yield the following response.
       }
     }
 
-#1 #2| The terms from each query have been highlighted in the document.     
+<1> <2>| The terms from each query have been highlighted in the document.     
 ---|---  
   
 Instead of the query in the search request highlighting the percolator hits, the percolator queries are highlighting the document defined in the `percolate` query.

@@ -20,14 +20,14 @@ These two conditions can be achieved with the following request:
     PUT /my_source_index/_settings
     {
       "settings": {
-        "index.routing.allocation.require._name": "shrink_node_name", #1
-        "index.blocks.write": true #2
+        "index.routing.allocation.require._name": "shrink_node_name", <1>
+        "index.blocks.write": true <2>
       }
     }
 
-#1| Forces the relocation of a copy of each shard to the node with name `shrink_node_name`. See [Shard Allocation Filtering](shard-allocation-filtering.html) for more options.     
+<1>| Forces the relocation of a copy of each shard to the node with name `shrink_node_name`. See [Shard Allocation Filtering](shard-allocation-filtering.html) for more options.     
 ---|---    
-#2| Prevents write operations to this index while still allowing metadata changes like deleting the index.   
+<2>| Prevents write operations to this index while still allowing metadata changes like deleting the index.   
   
 It can take a while to relocate the source index. Progress can be tracked with the [`_cat recovery` API](cat-recovery.html), or the [`cluster health` API](cluster-health.html) can be used to wait until all shards have relocated with the `wait_for_no_relocating_shards` parameter.
 
@@ -59,17 +59,17 @@ The `_shrink` API is similar to the [`create index` API](indices-create-index.ht
     {
       "settings": {
         "index.number_of_replicas": 1,
-        "index.number_of_shards": 1, #1
-        "index.codec": "best_compression" #2
+        "index.number_of_shards": 1, <1>
+        "index.codec": "best_compression" <2>
       },
       "aliases": {
         "my_search_indices": {}
       }
     }
 
-#1| The number of shards in the target index. This must be a factor of the number of shards in the source index.     
+<1>| The number of shards in the target index. This must be a factor of the number of shards in the source index.     
 ---|---    
-#2| Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html) the shard to a single segment.   
+<2>| Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html) the shard to a single segment.   
   
 ![Note](images/icons/note.png)
 

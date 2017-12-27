@@ -11,10 +11,10 @@ For instance:
       "mappings": {
         "my_type": {
           "properties": {
-            "name": { #1
+            "name": { <1>
               "type": "text",
               "fields": {
-                "length": { #2
+                "length": { <2>
                   "type":     "token_count",
                   "analyzer": "standard"
                 }
@@ -35,12 +35,12 @@ For instance:
     {
       "query": {
         "term": {
-          "name.length": 3 #3
+          "name.length": 3 <3>
         }
       }
     }
 
-#1
+<1>
 
 | 
 
@@ -48,13 +48,13 @@ The `name` field is an analyzed string field which uses the default `standard` a
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 The `name.length` field is a `token_count` [multi-field](multi-fields.html) which will index the number of tokens in the `name` field.   
   
-#3
+<3>
 
 | 
 

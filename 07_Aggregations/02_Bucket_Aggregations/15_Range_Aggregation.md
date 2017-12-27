@@ -276,12 +276,12 @@ If a sub aggregation is also based on the same value source as the range aggrega
                 },
                 "aggs" : {
                     "price_stats" : {
-                        "stats" : {} #1
+                        "stats" : {} <1>
                     }
                 }
             }
         }
     }
 
-#1| We don’t need to specify the `price` as we "inherit" it by default from the parent `range` aggregation     
+<1>| We don’t need to specify the `price` as we "inherit" it by default from the parent `range` aggregation     
 ---|---

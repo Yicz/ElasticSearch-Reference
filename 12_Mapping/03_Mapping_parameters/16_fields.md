@@ -11,7 +11,7 @@ It is often useful to index the same field in different ways for different purpo
             "city": {
               "type": "text",
               "fields": {
-                "raw": { #1
+                "raw": { <1>
                   "type":  "keyword"
                 }
               }
@@ -35,25 +35,25 @@ It is often useful to index the same field in different ways for different purpo
     {
       "query": {
         "match": {
-          "city": "york" #2
+          "city": "york" <2>
         }
       },
       "sort": {
-        "city.raw": "asc" #3
+        "city.raw": "asc" <3>
       },
       "aggs": {
         "Cities": {
           "terms": {
-            "field": "city.raw" #4
+            "field": "city.raw" <4>
           }
         }
       }
     }
 
-#1| The `city.raw` field is a `keyword` version of the `city` field.     
+<1>| The `city.raw` field is a `keyword` version of the `city` field.     
 ---|---    
-#2| The `city` field can be used for full text search.     
-#3 #4| The `city.raw` field can be used for sorting and aggregations   
+<2>| The `city` field can be used for full text search.     
+<3> <4>| The `city.raw` field can be used for sorting and aggregations   
   
 ![Note](images/icons/note.png)
 
@@ -73,10 +73,10 @@ Another use case of multi-fields is to analyze the same field in different ways 
       "mappings": {
         "my_type": {
           "properties": {
-            "text": { #1
+            "text": { <1>
               "type": "text",
               "fields": {
-                "english": { #2
+                "english": { <2>
                   "type":     "text",
                   "analyzer": "english"
                 }
@@ -88,30 +88,30 @@ Another use case of multi-fields is to analyze the same field in different ways 
     }
     
     PUT my_index/my_type/1
-    { "text": "quick brown fox" } #3
+    { "text": "quick brown fox" } <3>
     
     PUT my_index/my_type/2
-    { "text": "quick brown foxes" } #4
+    { "text": "quick brown foxes" } <4>
     
     GET my_index/_search
     {
       "query": {
         "multi_match": {
           "query": "quick brown foxes",
-          "fields": [ #5
+          "fields": [ <5>
             "text",
             "text.english"
           ],
-          "type": "most_fields" #6
+          "type": "most_fields" <6>
         }
       }
     }
 
-#1| The `text` field uses the `standard` analyzer.     
+<1>| The `text` field uses the `standard` analyzer.     
 ---|---    
-#2| The `text.english` field uses the `english` analyzer.     
-#3 #4| Index two documents, one with `fox` and the other with `foxes`.     
-#5 #6| Query both the `text` and `text.english` fields and combine the scores.   
+<2>| The `text.english` field uses the `english` analyzer.     
+<3> <4>| Index two documents, one with `fox` and the other with `foxes`.     
+<5> <6>| Query both the `text` and `text.english` fields and combine the scores.   
   
 The `text` field contains the term `fox` in the first document and `foxes` in the second document. The `text.english` field contains `fox` for both documents, because `foxes` is stemmed to `fox`.
 

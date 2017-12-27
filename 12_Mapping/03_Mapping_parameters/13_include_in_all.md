@@ -10,13 +10,13 @@ This example demonstrates how to exclude the `date` field from the `_all` field:
       "mappings": {
         "my_type": {
           "properties": {
-            "title": { #1
+            "title": { <1>
               "type": "text"
             },
-            "content": { #2
+            "content": { <2>
               "type": "text"
             },
-            "date": { #3
+            "date": { <3>
               "type": "date",
               "include_in_all": false
             }
@@ -25,9 +25,9 @@ This example demonstrates how to exclude the `date` field from the `_all` field:
       }
     }
 
-#1 #2| The `title` and `content` fields will be included in the `_all` field.     
+<1> <2>| The `title` and `content` fields will be included in the `_all` field.     
 ---|---    
-#3| The `date` field will not be included in the `_all` field.   
+<3>| The `date` field will not be included in the `_all` field.   
   
 ![Tip](images/icons/tip.png)
 
@@ -40,11 +40,11 @@ The `include_in_all` parameter can also be set at the type level and on [`object
     {
       "mappings": {
         "my_type": {
-          "include_in_all": false, #1
+          "include_in_all": false, <1>
           "properties": {
             "title":          { "type": "text" },
             "author": {
-              "include_in_all": true, #2
+              "include_in_all": true, <2>
               "properties": {
                 "first_name": { "type": "text" },
                 "last_name":  { "type": "text" }
@@ -52,8 +52,8 @@ The `include_in_all` parameter can also be set at the type level and on [`object
             },
             "editor": {
               "properties": {
-                "first_name": { "type": "text" }, #3
-                "last_name":  { "type": "text", "include_in_all": true } #4
+                "first_name": { "type": "text" }, <3>
+                "last_name":  { "type": "text", "include_in_all": true } <4>
               }
             }
           }
@@ -61,10 +61,10 @@ The `include_in_all` parameter can also be set at the type level and on [`object
       }
     }
 
-#1| All fields in `my_type` are excluded from `_all`.     
+<1>| All fields in `my_type` are excluded from `_all`.     
 ---|---    
-#2| The `author.first_name` and `author.last_name` fields are included in `_all`.     
-#3 #4| Only the `editor.last_name` field is included in `_all`. The `editor.first_name` inherits the type-level setting and is excluded.   
+<2>| The `author.first_name` and `author.last_name` fields are included in `_all`.     
+<3> <4>| Only the `editor.last_name` field is included in `_all`. The `editor.first_name` inherits the type-level setting and is excluded.   
   
 ![Note](images/icons/note.png)
 

@@ -229,14 +229,14 @@ The `params` would look like:
     {
         "params": {
             "text":      "words to search for",
-            "line_no": { #1
-                "start": 10, #2
-                "end":   20  #3
+            "line_no": { <1>
+                "start": 10, <2>
+                "end":   20  <3>
             }
         }
     }
 
-#1 #2 #3| All three of these elements are optional.     
+<1> <2> <3>| All three of these elements are optional.     
 ---|---  
   
 We could write the query as:
@@ -247,20 +247,20 @@ We could write the query as:
         "bool": {
           "must": {
             "match": {
-              "line": "{ {text} }" #1
+              "line": "{ {text} }" <1>
             }
           },
           "filter": {
-            { {#line_no} } #2
+            { {#line_no} } <2>
               "range": {
                 "line_no": {
-                  { {#start} } #3
-                    "gte": "{ {start} }" #4
-                    { {#end} },{ {/end} } #5
-                  { {/start} } #6
-                  { {#end} } #7
-                    "lte": "{ {end} }" #8
-                  { {/end} } #9
+                  { {#start} } <3>
+                    "gte": "{ {start} }" <4>
+                    { {#end} },{ {/end} } <5>
+                  { {/start} } <6>
+                  { {#end} } <7>
+                    "lte": "{ {end} }" <8>
+                  { {/end} } <9>
                 }
               }
             { {/line_no} } ![](images/icons/callouts/10.png)
@@ -269,14 +269,14 @@ We could write the query as:
       }
     }
 
-#1| Fill in the value of param `text`    
+<1>| Fill in the value of param `text`    
 ---|---    
-#2 ![](images/icons/callouts/10.png)| Include the `range` filter only if `line_no` is specified     
-#3 #6| Include the `gte` clause only if `line_no.start` is specified     
-#4| Fill in the value of param `line_no.start`    
-#5| Add a comma after the `gte` clause only if `line_no.start` AND `line_no.end` are specified     
-#7 #9| Include the `lte` clause only if `line_no.end` is specified     
-#8| Fill in the value of param `line_no.end`  
+<2> ![](images/icons/callouts/10.png)| Include the `range` filter only if `line_no` is specified     
+<3> <6>| Include the `gte` clause only if `line_no.start` is specified     
+<4>| Fill in the value of param `line_no.start`    
+<5>| Add a comma after the `gte` clause only if `line_no.start` AND `line_no.end` are specified     
+<7> <9>| Include the `lte` clause only if `line_no.end` is specified     
+<8>| Fill in the value of param `line_no.end`  
   
 ![Note](images/icons/note.png)
 
@@ -327,13 +327,13 @@ You can register search templates by storing it in the `config/scripts` director
     
     GET _search/template
     {
-        "file": "storedTemplate", #1
+        "file": "storedTemplate", <1>
         "params": {
             "query_string": "search for these words"
         }
     }
 
-#1| Name of the query template in `config/scripts/`, i.e., `storedTemplate.mustache`.     
+<1>| Name of the query template in `config/scripts/`, i.e., `storedTemplate.mustache`.     
 ---|---    
 
 You can also register search templates by storing it in the cluster state. There are REST APIs to manage these indexed templates.
@@ -375,13 +375,13 @@ To use an indexed template at search time use:
     
     GET _search/template
     {
-        "id": "<templateName>", #1
+        "id": "<templateName>", <1>
         "params": {
             "query_string": "search for these words"
         }
     }
 
-#1| Name of the query template stored in the `.scripts` index.    
+<1>| Name of the query template stored in the `.scripts` index.    
 ---|---  
   
 #### Validating templates
@@ -406,7 +406,7 @@ This call will return the rendered template:
       "template_output": {
         "query": {
           "terms": {
-            "status": [ #1
+            "status": [ <1>
               "pending",
               "published"
             ]
@@ -415,7 +415,7 @@ This call will return the rendered template:
       }
     }
 
-#1| `status` array has been populated with values from the `params` object.     
+<1>| `status` array has been populated with values from the `params` object.     
 ---|---  
   
 File and indexed templates can also be rendered by replacing `inline` with `file` or `id` respectively. For example, to render a file template

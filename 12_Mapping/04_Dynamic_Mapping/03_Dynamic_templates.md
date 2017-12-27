@@ -19,18 +19,18 @@ Dynamic templates are specified as an array of named objects:
     
       "dynamic_templates": [
         {
-          "my_template_name": { #1
-            ...  match conditions ... #2
-            "mapping": { ... } #3
+          "my_template_name": { <1>
+            ...  match conditions ... <2>
+            "mapping": { ... } <3>
           }
         },
         ...
       ]
 
-#1| The template name can be any string value.     
+<1>| The template name can be any string value.     
 ---|---    
-#2| The match conditions can include any of : `match_mapping_type`, `match`, `match_pattern`, `unmatch`, `path_match`, `path_unmatch`.     
-#3| The mapping that the matched field should use.   
+<2>| The match conditions can include any of : `match_mapping_type`, `match`, `match_pattern`, `unmatch`, `path_match`, `path_unmatch`.     
+<3>| The mapping that the matched field should use.   
   
 Templates are processed in order — the first matching template wins. New templates can be appended to the end of the list with the [PUT mapping](indices-put-mapping.html) API. If a new template has the same name as an existing template, it will replace the old version.
 
@@ -75,13 +75,13 @@ For example, if we wanted to map all integer fields as `integer` instead of `lon
     
     PUT my_index/my_type/1
     {
-      "my_integer": 5, #1
-      "my_string": "Some string" #2
+      "my_integer": 5, <1>
+      "my_string": "Some string" <2>
     }
 
-#1| The `my_integer` field is mapped as an `integer`.     
+<1>| The `my_integer` field is mapped as an `integer`.     
 ---|---    
-#2| The `my_string` field is mapped as a `text`, with a `keyword` [multi field](multi-fields.html).   
+<2>| The `my_string` field is mapped as a `text`, with a `keyword` [multi field](multi-fields.html).   
   
 ### `match` and `unmatch`
 
@@ -112,13 +112,13 @@ The following example matches all `string` fields whose name starts with `long_`
     
     PUT my_index/my_type/1
     {
-      "long_num": "5", #1
-      "long_text": "foo" #2
+      "long_num": "5", <1>
+      "long_text": "foo" <2>
     }
 
-#1| The `long_num` field is mapped as a `long`.     
+<1>| The `long_num` field is mapped as a `long`.     
 ---|---    
-#2| The `long_text` field uses the default `string` mapping.   
+<2>| The `long_text` field uses the default `string` mapping.   
   
 ### `match_pattern`
 
@@ -200,13 +200,13 @@ The `{name}` and `{dynamic_type}` placeholders are replaced in the `mapping` wit
     
     PUT my_index/my_type/1
     {
-      "english": "Some English text", #1
-      "count":   5 #2
+      "english": "Some English text", <1>
+      "count":   5 <2>
     }
 
-#1| The `english` field is mapped as a `string` field with the `english` analyzer.     
+<1>| The `english` field is mapped as a `string` field with the `english` analyzer.     
 ---|---    
-#2| The `count` field is mapped as a `long` field with `doc_values` disabled   
+<2>| The `count` field is mapped as a `long` field with `doc_values` disabled   
   
 ### Template examples
 
@@ -313,7 +313,7 @@ When doing time series analysis with elasticsearch, it is common to have many nu
               "unindexed_doubles": {
                 "match_mapping_type": "double",
                 "mapping": {
-                  "type": "float", #1
+                  "type": "float", <1>
                   "index": false
                 }
               }
@@ -323,5 +323,5 @@ When doing time series analysis with elasticsearch, it is common to have many nu
       }
     }
 
-#1| Like the default dynamic mapping rules, doubles are mapped as floats, which are usually accurate enough, yet require half the disk space.     
+<1>| Like the default dynamic mapping rules, doubles are mapped as floats, which are usually accurate enough, yet require half the disk space.     
 ---|---

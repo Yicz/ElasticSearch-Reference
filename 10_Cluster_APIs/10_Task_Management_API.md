@@ -9,14 +9,14 @@ The Task Management API is new and should still be considered experimental. The 
 The task management API allows to retrieve information about the tasks currently executing on one or more nodes in the cluster.
     
     
-    GET _tasks #1
-    GET _tasks?nodes=nodeId1,nodeId2 #2
-    GET _tasks?nodes=nodeId1,nodeId2&actions=cluster:* #3
+    GET _tasks <1>
+    GET _tasks?nodes=nodeId1,nodeId2 <2>
+    GET _tasks?nodes=nodeId1,nodeId2&actions=cluster:* <3>
 
-#1| Retrieves all tasks currently running on all nodes in the cluster.     
+<1>| Retrieves all tasks currently running on all nodes in the cluster.     
 ---|---    
-#2| Retrieves all tasks running on nodes `nodeId1` and `nodeId2`. See [Node specification for more info about how to select individual nodes.     
-#3| Retrieves all cluster-related tasks running on nodes `nodeId1` and `nodeId2`.   
+<2>| Retrieves all tasks running on nodes `nodeId1` and `nodeId2`. See [Node specification for more info about how to select individual nodes.     
+<3>| Retrieves all cluster-related tasks running on nodes `nodeId1` and `nodeId2`.   
   
 The result will look similar to the following:
     
@@ -56,17 +56,17 @@ The result will look similar to the following:
 It is also possible to retrieve information for a particular task:
     
     
-    GET _tasks/task_id:1 #1
+    GET _tasks/task_id:1 <1>
 
-#1| This will return a 404 if the task isn’t found.     
+<1>| This will return a 404 if the task isn’t found.     
 ---|---  
   
 Or to retrieve all children of a particular task:
     
     
-    GET _tasks?parent_task_id=parentTaskId:1 #1
+    GET _tasks?parent_task_id=parentTaskId:1 <1>
 
-#1| This won’t return a 404 if the parent isn’t found.     
+<1>| This won’t return a 404 if the parent isn’t found.     
 ---|---  
   
 You can also use the `detailed` request parameter to get more information about the running tasks. This is useful for telling one task from another but is more costly to execute. For example, fetching all searches using the `detailed` request parameter:

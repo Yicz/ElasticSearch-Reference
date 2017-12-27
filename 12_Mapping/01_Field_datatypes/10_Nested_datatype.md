@@ -10,7 +10,7 @@ Arrays of inner [`object` fields](object.html) do not work the way you may expec
     PUT my_index/my_type/1
     {
       "group" : "fans",
-      "user" : [ #1
+      "user" : [ <1>
         {
           "first" : "John",
           "last" :  "Smith"
@@ -22,7 +22,7 @@ Arrays of inner [`object` fields](object.html) do not work the way you may expec
       ]
     }
 
-#1
+<1>
 
 | 
 
@@ -65,7 +65,7 @@ If you need to index arrays of objects and to maintain the independence of each 
         "my_type": {
           "properties": {
             "user": {
-              "type": "nested" #1
+              "type": "nested" <1>
             }
           }
         }
@@ -96,7 +96,7 @@ If you need to index arrays of objects and to maintain the independence of each 
             "bool": {
               "must": [
                 { "match": { "user.first": "Alice" } },
-                { "match": { "user.last":  "Smith" } } #2
+                { "match": { "user.last":  "Smith" } } <2>
               ]
             }
           }
@@ -113,11 +113,11 @@ If you need to index arrays of objects and to maintain the independence of each 
             "bool": {
               "must": [
                 { "match": { "user.first": "Alice" } },
-                { "match": { "user.last":  "White" } } #3
+                { "match": { "user.last":  "White" } } <3>
               ]
             }
           },
-          "inner_hits": { #4
+          "inner_hits": { <4>
             "highlight": {
               "fields": {
                 "user.first": {}
@@ -128,7 +128,7 @@ If you need to index arrays of objects and to maintain the independence of each 
       }
     }
 
-#1
+<1>
 
 | 
 
@@ -136,19 +136,19 @@ The `user` field is mapped as type `nested` instead of type `object`.
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 This query doesn’t match because `Alice` and `Smith` are not in the same nested object.   
   
-#3
+<3>
 
 | 
 
 This query matches because `Alice` and `White` are in the same nested object.   
   
-#4
+<4>
 
 | 
 

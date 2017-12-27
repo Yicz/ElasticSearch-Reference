@@ -22,10 +22,10 @@ The `binary` type accepts a binary value as a [Base64](https://en.wikipedia.org/
     PUT my_index/my_type/1
     {
       "name": "Some binary blob",
-      "blob": "U29tZSBiaW5hcnkgYmxvYg==" #1
+      "blob": "U29tZSBiaW5hcnkgYmxvYg==" <1>
     }
 
-#1
+<1>
 
 | 
 

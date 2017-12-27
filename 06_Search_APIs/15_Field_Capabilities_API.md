@@ -48,21 +48,21 @@ Request:
     
     {
         "fields": {
-            "rating": { #1
+            "rating": { <1>
                 "long": {
                     "searchable": true,
                     "aggregatable": false,
                     "indices": ["index1", "index2"],
-                    "non_aggregatable_indices": ["index1"] #2
+                    "non_aggregatable_indices": ["index1"] <2>
                 },
                 "keyword": {
                     "searchable": false,
                     "aggregatable": true,
                     "indices": ["index3", "index4"],
-                    "non_searchable_indices": ["index4"] #3
+                    "non_searchable_indices": ["index4"] <3>
                 }
             },
-            "title": { #4
+            "title": { <4>
                 "text": {
                     "searchable": true,
                     "aggregatable": false
@@ -72,8 +72,8 @@ Request:
         }
     }
 
-#1| The field `rating` is defined as a long in `index1` and `index2` and as a `keyword` in `index3` and `index4`.     
+<1>| The field `rating` is defined as a long in `index1` and `index2` and as a `keyword` in `index3` and `index4`.     
 ---|---    
-#2| The field `rating` is not aggregatable in `index1`.     
-#3| The field `rating` is not searchable in `index4`.     
-#4| The field `title` is defined as `text` in all indices. 
+<2>| The field `rating` is not aggregatable in `index1`.     
+<3>| The field `rating` is not searchable in `index4`.     
+<4>| The field `title` is defined as `text` in all indices. 

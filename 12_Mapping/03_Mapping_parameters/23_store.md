@@ -14,11 +14,11 @@ In certain situations it can make sense to `store` a field. For instance, if you
           "properties": {
             "title": {
               "type": "text",
-              "store": true #1
+              "store": true <1>
             },
             "date": {
               "type": "date",
-              "store": true #2
+              "store": true <2>
             },
             "content": {
               "type": "text"
@@ -37,12 +37,12 @@ In certain situations it can make sense to `store` a field. For instance, if you
     
     GET my_index/_search
     {
-      "stored_fields": [ "title", "date" ] #3
+      "stored_fields": [ "title", "date" ] <3>
     }
 
-#1 #2| The `title` and `date` fields are stored.     
+<1> <2>| The `title` and `date` fields are stored.     
 ---|---   
- #3| This request will retrieve the values of the `title` and `date` fields.   
+ <3>| This request will retrieve the values of the `title` and `date` fields.   
   
 ![Note](images/icons/note.png)
 

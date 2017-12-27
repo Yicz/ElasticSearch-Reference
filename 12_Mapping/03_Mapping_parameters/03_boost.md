@@ -10,7 +10,7 @@ Individual fields can be _boosted_ automatically — count more towards the 
           "properties": {
             "title": {
               "type": "text",
-              "boost": 2 #1
+              "boost": 2 <1>
             },
             "content": {
               "type": "text"
@@ -20,7 +20,7 @@ Individual fields can be _boosted_ automatically — count more towards the 
       }
     }
 
-#1| Matches on the `title` field will have twice the weight as those on the `content` field, which has the default `boost` of `1.0`.     
+<1>| Matches on the `title` field will have twice the weight as those on the `content` field, which has the default `boost` of `1.0`.     
 ---|---  
   
 ![Note](images/icons/note.png)

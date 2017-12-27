@@ -53,27 +53,27 @@ A `moving_avg` aggregation looks like this in isolation:
     {
         "size": 0,
         "aggs": {
-            "my_date_histo":{                #1
+            "my_date_histo":{                <1>
                 "date_histogram":{
                     "field":"timestamp",
                     "interval":"day"
                 },
                 "aggs":{
                     "the_sum":{
-                        "sum":{ "field": "lemmings" } #2
+                        "sum":{ "field": "lemmings" } <2>
                     },
                     "the_movavg":{
-                        "moving_avg":{ "buckets_path": "the_sum" } #3
+                        "moving_avg":{ "buckets_path": "the_sum" } <3>
                     }
                 }
             }
         }
     }
 
-#1| A `date_histogram` named "my_date_histo" is constructed on the "timestamp" field, with one-day intervals     
+<1>| A `date_histogram` named "my_date_histo" is constructed on the "timestamp" field, with one-day intervals     
 ---|---    
-#2| A `sum` metric is used to calculate the sum of a field. This could be any metric (sum, min, max, etc)     
-#3| Finally, we specify a `moving_avg` aggregation which uses "the_sum" metric as its input.   
+<2>| A `sum` metric is used to calculate the sum of a field. This could be any metric (sum, min, max, etc)     
+<3>| Finally, we specify a `moving_avg` aggregation which uses "the_sum" metric as its input.   
   
 Moving averages are built by first specifying a `histogram` or `date_histogram` over a field. You can then optionally add normal metrics, such as a `sum`, inside of that histogram. Finally, the `moving_avg` is embedded inside the histogram. The `buckets_path` parameter is then used to "point" at one of the sibling metrics inside of the histogram (see [`buckets_path` Syntax for a description of the syntax for `buckets_path`.
 
@@ -384,14 +384,14 @@ Minimization is enabled/disabled via the `minimize` parameter:
                 "buckets_path": "the_sum",
                 "model" : "holt_winters",
                 "window" : 30,
-                "minimize" : true,  #1
+                "minimize" : true,  <1>
                 "settings" : {
                     "period" : 7
                 }
             }
     }
 
-#1| Minimization is enabled with the `minimize` parameter     
+<1>| Minimization is enabled with the `minimize` parameter     
 ---|---  
   
 When enabled, minimization will find the optimal values for `alpha`, `beta` and `gamma`. The user should still provide appropriate values for `window`, `period` and `type`.

@@ -161,7 +161,7 @@ The output from the above is:
             },
             "highlight": {
               "text": [
-                "The foo<em>Ba</em>rBaz method" #1
+                "The foo<em>Ba</em>rBaz method" <1>
               ]
             }
           }
@@ -169,5 +169,5 @@ The output from the above is:
       }
     }
 
-#1| Note the incorrect highlight.     
+<1>| Note the incorrect highlight.     
 ---|---

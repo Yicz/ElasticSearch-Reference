@@ -89,7 +89,7 @@ Response:
           "failed": 0
        },
        "indices": {
-          "_all": { #1
+          "_all": { <1>
              "fields": {
                 "creation_date": {
                    "max_doc": 1326564,
@@ -140,7 +140,7 @@ Response:
        }
     }
 
-#1| The `_all` key indicates that it contains the field stats of all indices in the cluster.     
+<1>| The `_all` key indicates that it contains the field stats of all indices in the cluster.     
 ---|---  
   
 ![Note](images/icons/note.png)
@@ -194,7 +194,7 @@ Response:
           "failed": 0
        },
        "indices": {
-          "stack": { #1
+          "stack": { <1>
              "fields": {
                 "creation_date": {
                    "max_doc": 1326564,
@@ -245,7 +245,7 @@ Response:
        }
     }
 
-#1| The `stack` key means it contains all field stats for the `stack` index.     
+<1>| The `stack` key means it contains all field stats for the `stack` index.     
 ---|---  
   
 ### Field stats index constraints
@@ -257,24 +257,24 @@ For example index constraints can be useful to find out the min and max value of
     
     POST _field_stats?level=indices
     {
-       "fields" : ["answer_count"], #1
-       "index_constraints" : { #2
-          "creation_date" : { #3
-             "max_value" : { #4
+       "fields" : ["answer_count"], <1>
+       "index_constraints" : { <2>
+          "creation_date" : { <3>
+             "max_value" : { <4>
                 "gte" : "2014-01-01T00:00:00.000Z"
              },
-             "min_value" : { #5
+             "min_value" : { <5>
                 "lt" : "2015-01-01T00:00:00.000Z"
              }
           }
        }
     }
 
-#1| The fields to compute and return field stats for.     
+<1>| The fields to compute and return field stats for.     
 ---|---    
-#2| The set index constraints. Note that index constrains can be defined for fields that aren’t defined in the `fields` option.     
-#3| Index constraints for the field `creation_date`.     
-#4 #5| Index constraints on the `max_value` and `min_value` property of a field statistic.   
+<2>| The set index constraints. Note that index constrains can be defined for fields that aren’t defined in the `fields` option.     
+<3>| Index constraints for the field `creation_date`.     
+<4> <5>| Index constraints on the `max_value` and `min_value` property of a field statistic.   
   
 For a field, index constraints can be defined on the `min_value` statistic, `max_value` statistic or both. Each index constraint support the following comparisons:
 
@@ -294,7 +294,7 @@ Field stats index constraints on date fields optionally accept a `format` option
           "creation_date" : {
              "max_value" : {
                 "gte" : "2014-01-01",
-                "format" : "date_optional_time" #1
+                "format" : "date_optional_time" <1>
              },
              "min_value" : {
                 "lt" : "2015-01-01",
@@ -304,5 +304,5 @@ Field stats index constraints on date fields optionally accept a `format` option
        }
     }
 
-#1| Custom date format     
+<1>| Custom date format     
 ---|---

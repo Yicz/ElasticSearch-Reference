@@ -33,10 +33,10 @@ The easiest way to specify an analyzer for a particular field is to define it in
       "mappings": {
         "my_type": {
           "properties": {
-            "text": { #1
+            "text": { <1>
               "type": "text",
               "fields": {
-                "english": { #2
+                "english": { <2>
                   "type":     "text",
                   "analyzer": "english"
                 }
@@ -47,23 +47,23 @@ The easiest way to specify an analyzer for a particular field is to define it in
       }
     }
     
-    GET my_index/_analyze #3
+    GET my_index/_analyze <3>
     {
       "field": "text",
       "text": "The quick Brown Foxes."
     }
     
-    GET my_index/_analyze #4
+    GET my_index/_analyze <4>
     {
       "field": "text.english",
       "text": "The quick Brown Foxes."
     }
 
-#1| The `text` field uses the default `standard` analyzer`.     
+<1>| The `text` field uses the default `standard` analyzer`.     
 ---|---   
-#2| The `text.english` [multi-field](multi-fields.html) uses the `english` analyzer, which removes stop words and applies stemming.     
-#3| This returns the tokens: [ `the`, `quick`, `brown`, `foxes` ].     
-#4| This returns the tokens: [ `quick`, `brown`, `fox` ].   
+<2>| The `text.english` [multi-field](multi-fields.html) uses the `english` analyzer, which removes stop words and applies stemming.     
+<3>| This returns the tokens: [ `the`, `quick`, `brown`, `foxes` ].     
+<4>| This returns the tokens: [ `quick`, `brown`, `fox` ].   
   
 ### `search_quote_analyzer`
 
@@ -83,14 +83,14 @@ To disable stop words for phrases a field utilising three analyzer settings will
        "settings":{
           "analysis":{
              "analyzer":{
-                "my_analyzer":{ #1
+                "my_analyzer":{ <1>
                    "type":"custom",
                    "tokenizer":"standard",
                    "filter":[
                       "lowercase"
                    ]
                 },
-                "my_stop_analyzer":{ #2
+                "my_stop_analyzer":{ <2>
                    "type":"custom",
                    "tokenizer":"standard",
                    "filter":[
@@ -112,9 +112,9 @@ To disable stop words for phrases a field utilising three analyzer settings will
              "properties":{
                 "title": {
                    "type":"text",
-                   "analyzer":"my_analyzer", #3
-                   "search_analyzer":"my_stop_analyzer", #4
-                   "search_quote_analyzer":"my_analyzer" #5
+                   "analyzer":"my_analyzer", <3>
+                   "search_analyzer":"my_stop_analyzer", <4>
+                   "search_quote_analyzer":"my_analyzer" <5>
                 }
              }
           }
@@ -136,15 +136,15 @@ To disable stop words for phrases a field utilising three analyzer settings will
     {
        "query":{
           "query_string":{
-             "query":"\"the quick brown fox\"" #1
+             "query":"\"the quick brown fox\"" <1>
           }
        }
     }
 
-#1| `my_analyzer` analyzer which tokens all terms including stop words     
+<1>| `my_analyzer` analyzer which tokens all terms including stop words     
 ---|---    
-#2| `my_stop_analyzer` analyzer which removes stop words     
-#3| `analyzer` setting that points to the `my_analyzer` analyzer which will be used at index time     
-#4| `search_analyzer` setting that points to the `my_stop_analyzer` and removes stop words for non-phrase queries     
-#5| `search_quote_analyzer` setting that points to the `my_analyzer` analyzer and ensures that stop words are not removed from phrase queries     
-#1| Since the query is wrapped in quotes it is detected as a phrase query therefore the `search_quote_analyzer` kicks in and ensures the stop words are not removed from the query. The `my_analyzer` analyzer will then return the following tokens [`the`, `quick`, `brown`, `fox`] which will match one of the documents. Meanwhile term queries will be analyzed with the `my_stop_analyzer` analyzer which will filter out stop words. So a search for either `The quick brown fox` or `A quick brown fox` will return both documents since both documents contain the following tokens [`quick`, `brown`, `fox`]. Without the `search_quote_analyzer` it would not be possible to do exact matches for phrase queries as the stop words from phrase queries would be removed resulting in both documents matching. 
+<2>| `my_stop_analyzer` analyzer which removes stop words     
+<3>| `analyzer` setting that points to the `my_analyzer` analyzer which will be used at index time     
+<4>| `search_analyzer` setting that points to the `my_stop_analyzer` and removes stop words for non-phrase queries     
+<5>| `search_quote_analyzer` setting that points to the `my_analyzer` analyzer and ensures that stop words are not removed from phrase queries     
+<1>| Since the query is wrapped in quotes it is detected as a phrase query therefore the `search_quote_analyzer` kicks in and ensures the stop words are not removed from the query. The `my_analyzer` analyzer will then return the following tokens [`the`, `quick`, `brown`, `fox`] which will match one of the documents. Meanwhile term queries will be analyzed with the `my_stop_analyzer` analyzer which will filter out stop words. So a search for either `The quick brown fox` or `A quick brown fox` will return both documents since both documents contain the following tokens [`quick`, `brown`, `fox`]. Without the `search_quote_analyzer` it would not be possible to do exact matches for phrase queries as the stop words from phrase queries would be removed resulting in both documents matching. 

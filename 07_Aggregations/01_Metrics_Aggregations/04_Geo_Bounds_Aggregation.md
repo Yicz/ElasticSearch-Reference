@@ -40,16 +40,16 @@ Example:
         "aggs" : {
             "viewport" : {
                 "geo_bounds" : {
-                    "field" : "location", #1
-                    "wrap_longitude" : true #2
+                    "field" : "location", <1>
+                    "wrap_longitude" : true <2>
                 }
             }
         }
     }
 
-#1| The `geo_bounds` aggregation specifies the field to use to obtain the bounds     
+<1>| The `geo_bounds` aggregation specifies the field to use to obtain the bounds     
 ---|---    
-#2| `wrap_longitude` is an optional parameter which specifies whether the bounding box should be allowed to overlap the international date line. The default value is `true`  
+<2>| `wrap_longitude` is an optional parameter which specifies whether the bounding box should be allowed to overlap the international date line. The default value is `true`  
   
 The above aggregation demonstrates how one would compute the bounding box of the location field for all documents with a business type of shop
 

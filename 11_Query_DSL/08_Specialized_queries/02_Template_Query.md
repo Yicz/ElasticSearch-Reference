@@ -40,7 +40,7 @@ Alternatively passing the template as an escaped string works as well:
     {
         "query": {
             "template": {
-                "inline": "{ \"match\": { \"text\": \"{ {query_string} }\" } }", #1
+                "inline": "{ \"match\": { \"text\": \"{ {query_string} }\" } }", <1>
                 "params" : {
                     "query_string" : "all about search"
                 }
@@ -48,7 +48,7 @@ Alternatively passing the template as an escaped string works as well:
         }
     }
 
-#1| New line characters (`\n`) should be escaped as `\\n` or removed, and quotes (`"`) should be escaped as `\\"`.     
+<1>| New line characters (`\n`) should be escaped as `\\n` or removed, and quotes (`"`) should be escaped as `\\"`.     
 ---|---  
   
 ### Stored templates
@@ -60,7 +60,7 @@ You can register a template by storing it in the `config/scripts` directory, in 
     {
         "query": {
             "template": {
-                "file": "my_template", #1
+                "file": "my_template", <1>
                 "params" : {
                     "query_string" : "all about search"
                 }
@@ -68,7 +68,7 @@ You can register a template by storing it in the `config/scripts` directory, in 
         }
     }
 
-#1| Name of the query template in `config/scripts/`, i.e., `my_template.mustache`.     
+<1>| Name of the query template in `config/scripts/`, i.e., `my_template.mustache`.     
 ---|---  
   
 Alternatively, you can register a query template in the cluster state with:
@@ -86,7 +86,7 @@ and refer to it in the `template` query with the `id` parameter:
     {
         "query": {
             "template": {
-                "stored": "my_template", #1
+                "stored": "my_template", <1>
                 "params" : {
                     "query_string" : "all about search"
                 }
@@ -94,7 +94,7 @@ and refer to it in the `template` query with the `id` parameter:
         }
     }
 
-#1| Name of the query template in `config/scripts/`, i.e., `my_template.mustache`.     
+<1>| Name of the query template in `config/scripts/`, i.e., `my_template.mustache`.     
 ---|---  
   
 There is also a dedicated `template` endpoint, allows you to template an entire search request. Please see [_Search Template_](search-template.html) for more details.

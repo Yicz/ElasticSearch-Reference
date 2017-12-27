@@ -50,13 +50,13 @@ If no `format` is specified, then it will use the first date [format](mapping-da
                 "date_histogram" : {
                     "field" : "date",
                     "interval" : "1M",
-                    "format" : "yyyy-MM-dd" #1
+                    "format" : "yyyy-MM-dd" <1>
                 }
             }
         }
     }
 
-#1| Supports expressive date [format pattern](search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)    
+<1>| Supports expressive date [format pattern](search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)    
 ---|---  
   
 Response:
@@ -161,12 +161,12 @@ Now the first document falls into the bucket for 30 September 2015, while the se
         "by_day": {
           "buckets": [
             {
-              "key_as_string": "2015-09-30T00:00:00.000-01:00", #1
+              "key_as_string": "2015-09-30T00:00:00.000-01:00", <1>
               "key": 1443574800000,
               "doc_count": 1
             },
             {
-              "key_as_string": "2015-10-01T00:00:00.000-01:00", #2
+              "key_as_string": "2015-10-01T00:00:00.000-01:00", <2>
               "key": 1443661200000,
               "doc_count": 1
             }
@@ -175,7 +175,7 @@ Now the first document falls into the bucket for 30 September 2015, while the se
       }
     }
 
-#1 #2| The `key_as_string` value represents midnight on each day in the specified time zone.     
+<1> <2>| The `key_as_string` value represents midnight on each day in the specified time zone.     
 ---|---  
   
 ![Warning](images/icons/warning.png)
@@ -302,11 +302,11 @@ The `missing` parameter defines how documents that are missing a value should be
                  "date_histogram" : {
                      "field" : "date",
                      "interval": "year",
-                     "missing": "2000/01/01" #1
+                     "missing": "2000/01/01" <1>
                  }
              }
         }
     }
 
-#1| Documents without a value in the `publish_date` field will fall into the same bucket as documents that have the value `2000-01-01`.     
+<1>| Documents without a value in the `publish_date` field will fall into the same bucket as documents that have the value `2000-01-01`.     
 ---|---

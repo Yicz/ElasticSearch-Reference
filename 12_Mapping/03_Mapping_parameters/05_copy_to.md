@@ -10,11 +10,11 @@ The `copy_to` parameter allows you to create custom [`_all`](mapping-all-field.h
           "properties": {
             "first_name": {
               "type": "text",
-              "copy_to": "full_name" #1
+              "copy_to": "full_name" <1>
             },
             "last_name": {
               "type": "text",
-              "copy_to": "full_name" #2
+              "copy_to": "full_name" <2>
             },
             "full_name": {
               "type": "text"
@@ -34,7 +34,7 @@ The `copy_to` parameter allows you to create custom [`_all`](mapping-all-field.h
     {
       "query": {
         "match": {
-          "full_name": { #3
+          "full_name": { <3>
             "query": "John Smith",
             "operator": "and"
           }
@@ -42,9 +42,9 @@ The `copy_to` parameter allows you to create custom [`_all`](mapping-all-field.h
       }
     }
 
-#1 #2| The values of the `first_name` and `last_name` fields are copied to the `full_name` field.     
+<1> <2>| The values of the `first_name` and `last_name` fields are copied to the `full_name` field.     
 ---|---    
-#3| The `first_name` and `last_name` fields can still be queried for the first name and last name respectively, but the `full_name` field can be queried for both first and last names.   
+<3>| The `first_name` and `last_name` fields can still be queried for the first name and last name respectively, but the `full_name` field can be queried for both first and last names.   
   
 Some important points:
 

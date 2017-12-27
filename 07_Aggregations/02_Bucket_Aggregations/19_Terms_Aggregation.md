@@ -21,9 +21,9 @@ Response:
     
         "aggregations" : {
             "genres" : {
-                "doc_count_error_upper_bound": 0, #1
-                "sum_other_doc_count": 0, #2
-                "buckets" : [ #3
+                "doc_count_error_upper_bound": 0, <1>
+                "sum_other_doc_count": 0, <2>
+                "buckets" : [ <3>
                     {
                         "key" : "jazz",
                         "doc_count" : 10
@@ -552,7 +552,7 @@ The `breadth_first` is the default mode for fields with a cardinality bigger tha
                  "terms" : {
                      "field" : "actors",
                      "size" : 10,
-                     "collect_mode" : "breadth_first" #1
+                     "collect_mode" : "breadth_first" <1>
                  },
                 "aggs" : {
                     "costars" : {
@@ -566,7 +566,7 @@ The `breadth_first` is the default mode for fields with a cardinality bigger tha
         }
     }
 
-#1| the possible values are `breadth_first` and `depth_first`    
+<1>| the possible values are `breadth_first` and `depth_first`    
 ---|---  
   
 When using `breadth_first` mode the set of documents that fall into the uppermost buckets are cached for subsequent replay so there is a memory overhead in doing this which is linear with the number of matching documents. Note that the `order` parameter can still be used to refer to data from a child aggregation when using the `breadth_first` setting - the parent aggregation understands that this child aggregation will need to be called first before any of the other child aggregations.
@@ -606,13 +606,13 @@ Elasticsearch tries to have sensible defaults so this is something that generall
             "tags" : {
                  "terms" : {
                      "field" : "tags",
-                     "execution_hint": "map" #1
+                     "execution_hint": "map" <1>
                  }
              }
         }
     }
 
-#1| [experimental] This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. the possible values are `map`, `global_ordinals`, `global_ordinals_hash` and `global_ordinals_low_cardinality`    
+<1>| [experimental] This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. the possible values are `map`, `global_ordinals`, `global_ordinals_hash` and `global_ordinals_low_cardinality`    
 ---|---  
   
 Please note that Elasticsearch will ignore this execution hint if it is not applicable and that there is no backward compatibility guarantee on these hints.
@@ -627,11 +627,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "tags" : {
                  "terms" : {
                      "field" : "tags",
-                     "missing": "N/A" #1
+                     "missing": "N/A" <1>
                  }
              }
         }
     }
 
-#1| Documents without a value in the `tags` field will fall into the same bucket as documents that have the value `N/A`.  
+<1>| Documents without a value in the `tags` field will fall into the same bucket as documents that have the value `N/A`.  
 ---|---

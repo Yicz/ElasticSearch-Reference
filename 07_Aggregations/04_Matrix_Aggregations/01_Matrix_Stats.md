@@ -87,13 +87,13 @@ The `missing` parameter defines how documents that are missing a value should be
             "matrixstats": {
                 "matrix_stats": {
                     "fields": ["poverty", "income"],
-                    "missing": {"income" : 50000} #1
+                    "missing": {"income" : 50000} <1>
                 }
             }
         }
     }
 
-#1| Documents without a value in the `income` field will have the default value `50000`.     
+<1>| Documents without a value in the `income` field will have the default value `50000`.     
 ---|---  
   
 ### Script

@@ -35,25 +35,25 @@ Below is an example of query clauses being used in query and filter context in t
     
     GET /_search
     {
-      "query": { #1
-        "bool": { #2
+      "query": { <1>
+        "bool": { <2>
           "must": [
-            { "match": { "title":   "Search"        } }, #3
-            { "match": { "content": "Elasticsearch" } }  #4
+            { "match": { "title":   "Search"        } }, <3>
+            { "match": { "content": "Elasticsearch" } }  <4>
           ],
-          "filter": [ #5
-            { "term":  { "status": "published" } }, #6
-            { "range": { "publish_date": { "gte": "2015-01-01" } } } #7
+          "filter": [ <5>
+            { "term":  { "status": "published" } }, <6>
+            { "range": { "publish_date": { "gte": "2015-01-01" } } } <7>
           ]
         }
       }
     }
 
-#1| The `query` parameter indicates query context.     
+<1>| The `query` parameter indicates query context.     
 ---|---    
-#2 #3 #4| The `bool` and two `match` clauses are used in query context, which means that they are used to score how well each document matches.     
-#5| The `filter` parameter indicates filter context.     
-#6 #7| The `term` and `range` clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.   
+<2> <3> <4>| The `bool` and two `match` clauses are used in query context, which means that they are used to score how well each document matches.     
+<5>| The `filter` parameter indicates filter context.     
+<6> <7>| The `term` and `range` clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.   
   
 ![Tip](images/icons/tip.png)
 

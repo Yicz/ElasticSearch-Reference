@@ -17,7 +17,7 @@ The `query` div contains detailed timing of the query tree executed by Lucene on
            "description": "message:message message:number",
            "time": "1.873811000ms",
            "time_in_nanos": "1873811",
-           "breakdown": {...},               #1
+           "breakdown": {...},               <1>
            "children": [
               {
                  "type": "TermQuery",
@@ -37,7 +37,7 @@ The `query` div contains detailed timing of the query tree executed by Lucene on
         }
     ]
 
-#1| The breakdown timings are omitted for simplicity     
+<1>| The breakdown timings are omitted for simplicity     
 ---|---  
   
 Based on the profile structure, we can see that our `match` query was rewritten by Lucene into a BooleanQuery with two clauses (both holding a TermQuery). The `type` field displays the Lucene class name, and often aligns with the equivalent name in Elasticsearch. The `description` field displays the Lucene explanation text for the query, and is made available to help differentiating between parts of your query (e.g. both `message:search` and `message:test` are TermQuery’s and would appear identical otherwise.

@@ -3,7 +3,7 @@
 By default, fields can be added _dynamically_ to a document, or to [inner objects](object.html) within a document, just by indexing a document containing the new field. For instance:
     
     
-    PUT my_index/my_type/1 #1
+    PUT my_index/my_type/1 <1>
     {
       "username": "johnsmith",
       "name": {
@@ -12,9 +12,9 @@ By default, fields can be added _dynamically_ to a document, or to [inner object
       }
     }
     
-    GET my_index/_mapping #2
+    GET my_index/_mapping <2>
     
-    PUT my_index/my_type/2 #3
+    PUT my_index/my_type/2 <3>
     {
       "username": "marywhite",
       "email": "mary@white.com",
@@ -25,13 +25,13 @@ By default, fields can be added _dynamically_ to a document, or to [inner object
       }
     }
     
-    GET my_index/_mapping #4
+    GET my_index/_mapping <4>
 
-#1| This document introduces the string field `username`, the object field `name`, and two string fields under the `name` object which can be referred to as `name.first` and `name.last`.     
+<1>| This document introduces the string field `username`, the object field `name`, and two string fields under the `name` object which can be referred to as `name.first` and `name.last`.     
 ---|---    
-#2| Check the mapping to verify the above.     
-#3| This document adds two string fields: `email` and `name.middle`.     
-#4| Check the mapping to verify the changes.   
+<2>| Check the mapping to verify the above.     
+<3>| This document adds two string fields: `email` and `name.middle`.     
+<4>| Check the mapping to verify the changes.   
   
 The details of how new fields are detected and added to the mapping is explained in [_Dynamic Mapping_](dynamic-mapping.html).
 
@@ -49,14 +49,14 @@ The `dynamic` setting may be set at the mapping type level, and on each [inner o
     {
       "mappings": {
         "my_type": {
-          "dynamic": false, #1
+          "dynamic": false, <1>
           "properties": {
-            "user": { #2
+            "user": { <2>
               "properties": {
                 "name": {
                   "type": "text"
                 },
-                "social_networks": { #3
+                "social_networks": { <3>
                   "dynamic": true,
                   "properties": {}
                 }
@@ -67,10 +67,10 @@ The `dynamic` setting may be set at the mapping type level, and on each [inner o
       }
     }
 
-#1| Dynamic mapping is disabled at the type level, so no new top-level fields will be added dynamically.     
+<1>| Dynamic mapping is disabled at the type level, so no new top-level fields will be added dynamically.     
 ---|---    
-#2| The `user` object inherits the type-level setting.     
-#3| The `user.social_networks` object enables dynamic mapping, so new fields may be added to this inner object.   
+<2>| The `user` object inherits the type-level setting.     
+<3>| The `user.social_networks` object enables dynamic mapping, so new fields may be added to this inner object.   
   
 ![Tip](images/icons/tip.png)
 

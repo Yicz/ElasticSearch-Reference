@@ -16,8 +16,8 @@ Example:
         },
         "aggs" : {
             "all_products" : {
-                "global" : {}, #1
-                "aggs" : { #2
+                "global" : {}, <1>
+                "aggs" : { <2>
                     "avg_price" : { "avg" : { "field" : "price" } }
                 }
             },
@@ -25,9 +25,9 @@ Example:
         }
     }
 
-#1| The `global` aggregation has an empty body     
+<1>| The `global` aggregation has an empty body     
 ---|---    
-#2| The sub-aggregations that are registered for this `global` aggregation   
+<2>| The sub-aggregations that are registered for this `global` aggregation   
   
 The above aggregation demonstrates how one would compute aggregations (`avg_price` in this example) on all the documents in the search context, regardless of the query (in our example, it will compute the average price over all products in our catalog, not just on the).
 
@@ -38,18 +38,18 @@ The response for the above aggregation:
         ...
         "aggregations" : {
             "all_products" : {
-                "doc_count" : 7, #1
+                "doc_count" : 7, <1>
                 "avg_price" : {
-                    "value" : 140.71428571428572 #2
+                    "value" : 140.71428571428572 <2>
                 }
             },
             "t_shirts": {
-                "value" : 128.33333333333334 #3
+                "value" : 128.33333333333334 <3>
             }
         }
     }
 
-#1| The number of documents that were aggregated (in our case, all documents within the search context)     
+<1>| The number of documents that were aggregated (in our case, all documents within the search context)     
 ---|---    
-#2| The average price of all products in the index     
-#3| The average price of all t-shirts 
+<2>| The average price of all products in the index     
+<3>| The average price of all t-shirts 

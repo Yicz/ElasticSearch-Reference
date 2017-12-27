@@ -37,13 +37,13 @@ Example:
         "aggs" : {
             "centroid" : {
                 "geo_centroid" : {
-                    "field" : "location" #1
+                    "field" : "location" <1>
                 }
             }
         }
     }
 
-#1| The `geo_centroid` aggregation specifies the field to use for computing the centroid. (NOTE: field must be a [Geo-point datatype](geo-point.html) type)     
+<1>| The `geo_centroid` aggregation specifies the field to use for computing the centroid. (NOTE: field must be a [Geo-point datatype](geo-point.html) type)     
 ---|---  
   
 The above aggregation demonstrates how one would compute the centroid of the location field for all documents with a crime type of burglary

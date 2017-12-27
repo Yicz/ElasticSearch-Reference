@@ -72,7 +72,7 @@ In this example, we configure the `pattern` analyzer to split email addresses on
           "analyzer": {
             "my_email_analyzer": {
               "type":      "pattern",
-              "pattern":   "\\W|_", #1
+              "pattern":   "\\W|_", <1>
               "lowercase": true
             }
           }
@@ -85,7 +85,7 @@ In this example, we configure the `pattern` analyzer to split email addresses on
       "analyzer": "my_email_analyzer",
       "text": "John_Smith@foo-bar.com"
     }
-#1| The backslashes in the pattern need to be escaped when specifying the pattern as a JSON string.     
+<1>| The backslashes in the pattern need to be escaped when specifying the pattern as a JSON string.     
 ---|---    
 The above example produces the following terms:
     

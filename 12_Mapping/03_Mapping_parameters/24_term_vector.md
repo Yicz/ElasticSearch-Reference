@@ -54,10 +54,10 @@ Setting `with_positions_offsets` will double the size of a field’s index.
       },
       "highlight": {
         "fields": {
-          "text": {} #1
+          "text": {} <1>
         }
       }
     }
 
-#1| The fast vector highlighter will be used by default for the `text` field because term vectors are enabled.     
+<1>| The fast vector highlighter will be used by default for the `text` field because term vectors are enabled.     
 ---|---

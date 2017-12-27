@@ -45,19 +45,19 @@ Paths are relative from the position of the pipeline aggregation; they are not a
                 },
                 "aggs":{
                     "the_sum":{
-                        "sum":{ "field": "lemmings" } #1
+                        "sum":{ "field": "lemmings" } <1>
                     },
                     "the_movavg":{
-                        "moving_avg":{ "buckets_path": "the_sum" } #2
+                        "moving_avg":{ "buckets_path": "the_sum" } <2>
                     }
                 }
             }
         }
     }
 
-#1| The metric is called `"the_sum"`    
+<1>| The metric is called `"the_sum"`    
 ---|---    
-#2| The `buckets_path` refers to the metric via a relative path `"the_sum"`  
+<2>| The `buckets_path` refers to the metric via a relative path `"the_sum"`  
   
 `buckets_path` is also used for Sibling pipeline aggregations, where the aggregation is "next" to a series of buckets instead of embedded "inside" them. For example, the `max_bucket` aggregation uses the `buckets_path` to specify a metric embedded inside a sibling aggregation:
     
@@ -80,13 +80,13 @@ Paths are relative from the position of the pipeline aggregation; they are not a
             },
             "max_monthly_sales": {
                 "max_bucket": {
-                    "buckets_path": "sales_per_month>sales" #1
+                    "buckets_path": "sales_per_month>sales" <1>
                 }
             }
         }
     }
 
-#1| `buckets_path` instructs this max_bucket aggregation that we want the maximum value of the `sales` aggregation in the `sales_per_month` date histogram.     
+<1>| `buckets_path` instructs this max_bucket aggregation that we want the maximum value of the `sales` aggregation in the `sales_per_month` date histogram.     
 ---|---  
   
 ### Special Paths
@@ -104,14 +104,14 @@ Instead of pathing to a metric, `buckets_path` can use a special `"_count"` path
                 },
                 "aggs": {
                     "the_movavg": {
-                        "moving_avg": { "buckets_path": "_count" } #1
+                        "moving_avg": { "buckets_path": "_count" } <1>
                     }
                 }
             }
         }
     }
 
-#1| By using `_count` instead of a metric name, we can calculate the moving average of document counts in the histogram     
+<1>| By using `_count` instead of a metric name, we can calculate the moving average of document counts in the histogram     
 ---|---  
   
 The `buckets_path` can also use `"_bucket_count"` and path to a multi-bucket aggregation to use the number of buckets returned by that aggregation in the pipeline aggregation instead of a metric. for example a `bucket_selector` can be used here to filter out buckets which contain no buckets for an inner terms aggregation:
@@ -135,7 +135,7 @@ The `buckets_path` can also use `"_bucket_count"` and path to a multi-bucket agg
             "min_bucket_selector": {
               "bucket_selector": {
                 "buckets_path": {
-                  "count": "categories._bucket_count" #1
+                  "count": "categories._bucket_count" <1>
                 },
                 "script": {
                   "inline": "params.count != 0"
@@ -147,7 +147,7 @@ The `buckets_path` can also use `"_bucket_count"` and path to a multi-bucket agg
       }
     }
 
-#1| By using `_bucket_count` instead of a metric name, we can filter out `histo` buckets where they contain no buckets for the `categories` aggregation     
+<1>| By using `_bucket_count` instead of a metric name, we can filter out `histo` buckets where they contain no buckets for the `categories` aggregation     
 ---|---  
   
 ### Dealing with dots in agg names

@@ -1,6 +1,6 @@
 ## Standard Analyzer
 
-The `standard` analyzer is the default analyzer which is used if none is specified. It provides grammar based tokenization (based on the Unicode Text Segmentation algorithm, as specified in [Unicode Standard Annex #29](http://unicode.org/reports/tr29/)) and works well for most languages.
+The `standard` analyzer is the default analyzer which is used if none is specified. It provides grammar based tokenization (based on the Unicode Text Segmentation algorithm, as specified in [Unicode Standard Annex <2>9](http://unicode.org/reports/tr29/)) and works well for most languages.
 
 ### Definition
 

@@ -30,10 +30,10 @@ Instead, you should have a `text` field for full text searches, and an unanalyze
       "mappings": {
         "my_type": {
           "properties": {
-            "my_field": { #1
+            "my_field": { <1>
               "type": "text",
               "fields": {
-                "keyword": { #2
+                "keyword": { <2>
                   "type": "keyword"
                 }
               }
@@ -43,9 +43,9 @@ Instead, you should have a `text` field for full text searches, and an unanalyze
       }
     }
 
-#1| Use the `my_field` field for searches.     
+<1>| Use the `my_field` field for searches.     
 ---|---    
-#2| Use the `my_field.keyword` field for aggregations, sorting, or in scripts.   
+<2>| Use the `my_field.keyword` field for aggregations, sorting, or in scripts.   
   
 ### Enabling fielddata on `text` fields
 
@@ -55,14 +55,14 @@ You can enable fielddata on an existing `text` field using the [PUT mapping API]
     PUT my_index/_mapping/my_type
     {
       "properties": {
-        "my_field": { #1
+        "my_field": { <1>
           "type":     "text",
           "fielddata": true
         }
       }
     }
 
-#1| The mapping that you specify for `my_field` should consist of the existing mapping for that field, plus the `fielddata` parameter.     
+<1>| The mapping that you specify for `my_field` should consist of the existing mapping for that field, plus the `fielddata` parameter.     
 ---|---  
   
 ![Tip](images/icons/tip.png)

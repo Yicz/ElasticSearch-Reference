@@ -7,15 +7,15 @@ The `multi_match` query builds on the [`match` query](query-dsl-match-query.html
     {
       "query": {
         "multi_match" : {
-          "query":    "this is a test", #1
-          "fields": [ "subject", "message" ] #2
+          "query":    "this is a test", <1>
+          "fields": [ "subject", "message" ] <2>
         }
       }
     }
 
-#1| The query string.     
+<1>| The query string.     
 ---|---    
-#2| The fields to be queried.   
+<2>| The fields to be queried.   
   
 #### `fields` and per-field boosting
 
@@ -27,12 +27,12 @@ Fields can be specified with wildcards, eg:
       "query": {
         "multi_match" : {
           "query":    "Will Smith",
-          "fields": [ "title", "*_name" ] #1
+          "fields": [ "title", "*_name" ] <1>
         }
       }
     }
 
-#1| Query the `title`, `first_name` and `last_name` fields.     
+<1>| Query the `title`, `first_name` and `last_name` fields.     
 ---|---  
   
 Individual fields can be boosted with the caret (`^`) notation:
@@ -43,12 +43,12 @@ Individual fields can be boosted with the caret (`^`) notation:
       "query": {
         "multi_match" : {
           "query" : "this is a test",
-          "fields" : [ "subject^3", "message" ] #1
+          "fields" : [ "subject^3", "message" ] <1>
         }
       }
     }
 
-#1| The `subject` field is three times as important as the `message` field.     
+<1>| The `subject` field is three times as important as the `message` field.     
 ---|---  
 #### Types of `multi_match` query:The way the `multi_match` query is executed internally depends on the `type` parameter, which can be set to:`best_fields`| ( **default** ) Finds documents which match any field, but uses the `_score` from the best field. See [`best_fields`]query-dsl-multi-match-query.html#type-best-fields).    
 
@@ -118,12 +118,12 @@ Take this query for example:
           "query":      "Will Smith",
           "type":       "best_fields",
           "fields":     [ "first_name", "last_name" ],
-          "operator":   "and" #1
+          "operator":   "and" <1>
         }
       }
     }
 
-#1| All terms must be present.     
+<1>| All terms must be present.     
 ---|---  
   
 This query is executed as:
@@ -316,7 +316,7 @@ You can easily rewrite this query yourself as two separate `cross_fields` querie
                 "query":      "Will Smith",
                 "type":       "cross_fields",
                 "fields":     [ "first", "last" ],
-                "minimum_should_match": "50%" #1
+                "minimum_should_match": "50%" <1>
               }
             },
             {
@@ -331,7 +331,7 @@ You can easily rewrite this query yourself as two separate `cross_fields` querie
       }
     }
 
-#1| Either `will` or `smith` must be present in either of the `first` or `last` fields     
+<1>| Either `will` or `smith` must be present in either of the `first` or `last` fields     
 ---|---  
   
 You can force all fields into the same group by specifying the `analyzer` parameter in the query.
@@ -343,13 +343,13 @@ You can force all fields into the same group by specifying the `analyzer` parame
        "multi_match" : {
           "query":      "Jon",
           "type":       "cross_fields",
-          "analyzer":   "standard", #1
+          "analyzer":   "standard", <1>
           "fields":     [ "first", "last", "*.edge" ]
         }
       }
     }
 
-#1| Use the `standard` analyzer for all fields.     
+<1>| Use the `standard` analyzer for all fields.     
 ---|---  
   
 which will be executed as:

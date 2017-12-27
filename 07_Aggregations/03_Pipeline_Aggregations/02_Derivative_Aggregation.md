@@ -48,7 +48,7 @@ The following snippet calculates the derivative of the total monthly `sales`:
                     },
                     "sales_deriv": {
                         "derivative": {
-                            "buckets_path": "sales" #1
+                            "buckets_path": "sales" <1>
                         }
                     }
                 }
@@ -56,7 +56,7 @@ The following snippet calculates the derivative of the total monthly `sales`:
         }
     }
 
-#1| `buckets_path` instructs this derivative aggregation to use the output of the `sales` aggregation for the derivative     
+<1>| `buckets_path` instructs this derivative aggregation to use the output of the `sales` aggregation for the derivative     
 ---|---  
   
 And the following may be the response:
@@ -76,7 +76,7 @@ And the following may be the response:
                    "doc_count": 3,
                    "sales": {
                       "value": 550.0
-                   } #1
+                   } <1>
                 },
                 {
                    "key_as_string": "2015/02/01 00:00:00",
@@ -86,13 +86,13 @@ And the following may be the response:
                       "value": 60.0
                    },
                    "sales_deriv": {
-                      "value": -490.0 #2
+                      "value": -490.0 <2>
                    }
                 },
                 {
                    "key_as_string": "2015/03/01 00:00:00",
                    "key": 1425168000000,
-                   "doc_count": 2, #3
+                   "doc_count": 2, <3>
                    "sales": {
                       "value": 375.0
                    },
@@ -105,7 +105,7 @@ And the following may be the response:
        }
     }
 
-#1
+<1>
 
 | 
 
@@ -113,13 +113,13 @@ No derivative for the first bucket since we need at least 2 data points to calcu
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 Derivative value units are implicitly defined by the `sales` aggregation and the parent histogram so in this case the units would be $/month assuming the `price` field has units of $.   
   
-#3
+<3>
 
 | 
 
@@ -152,7 +152,7 @@ A second order derivative can be calculated by chaining the derivative pipeline 
                     },
                     "sales_2nd_deriv": {
                         "derivative": {
-                            "buckets_path": "sales_deriv" #1
+                            "buckets_path": "sales_deriv" <1>
                         }
                     }
                 }
@@ -160,7 +160,7 @@ A second order derivative can be calculated by chaining the derivative pipeline 
         }
     }
 
-#1
+<1>
 
 | 
 
@@ -185,7 +185,7 @@ And the following may be the response:
                    "doc_count": 3,
                    "sales": {
                       "value": 550.0
-                   } #1
+                   } <1>
                 },
                 {
                    "key_as_string": "2015/02/01 00:00:00",
@@ -196,7 +196,7 @@ And the following may be the response:
                    },
                    "sales_deriv": {
                       "value": -490.0
-                   } #2
+                   } <2>
                 },
                 {
                    "key_as_string": "2015/03/01 00:00:00",
@@ -217,7 +217,7 @@ And the following may be the response:
        }
     }
 
-#1 #2
+<1> <2>
 
 | 
 
@@ -248,7 +248,7 @@ The derivative aggregation allows the units of the derivative values to be speci
                     "sales_deriv": {
                         "derivative": {
                             "buckets_path": "sales",
-                            "unit": "day" #1
+                            "unit": "day" <1>
                         }
                     }
                 }
@@ -256,7 +256,7 @@ The derivative aggregation allows the units of the derivative values to be speci
         }
     }
 
-#1
+<1>
 
 | 
 
@@ -281,7 +281,7 @@ And the following may be the response:
                    "doc_count": 3,
                    "sales": {
                       "value": 550.0
-                   } #1
+                   } <1>
                 },
                 {
                    "key_as_string": "2015/02/01 00:00:00",
@@ -291,8 +291,8 @@ And the following may be the response:
                       "value": 60.0
                    },
                    "sales_deriv": {
-                      "value": -490.0, #2
-                      "normalized_value": -15.806451612903226 #3
+                      "value": -490.0, <2>
+                      "normalized_value": -15.806451612903226 <3>
                    }
                 },
                 {
@@ -312,7 +312,7 @@ And the following may be the response:
        }
     }
 
-#1 #2
+<1> <2>
 
 | 
 
@@ -320,7 +320,7 @@ And the following may be the response:
   
 ---|---  
   
-#3
+<3>
 
 | 
 

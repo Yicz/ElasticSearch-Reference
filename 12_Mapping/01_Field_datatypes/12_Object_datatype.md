@@ -4,18 +4,18 @@ JSON documents are hierarchical in nature: the document may contain inner object
     
     
     PUT my_index/my_type/1
-    { #1
+    { <1>
       "region": "US",
-      "manager": { #2
+      "manager": { <2>
         "age":     30,
-        "name": { #3
+        "name": { <3>
           "first": "John",
           "last":  "Smith"
         }
       }
     }
 
-#1
+<1>
 
 | 
 
@@ -23,13 +23,13 @@ The outer document is also a JSON object.
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 It contains an inner object called `manager`.   
   
-#3
+<3>
 
 | 
 
@@ -51,15 +51,15 @@ An explicit mapping for the above document could look like this:
     PUT my_index
     {
       "mappings": {
-        "my_type": { #1
+        "my_type": { <1>
           "properties": {
             "region": {
               "type": "keyword"
             },
-            "manager": { #2
+            "manager": { <2>
               "properties": {
                 "age":  { "type": "integer" },
-                "name": { #3
+                "name": { <3>
                   "properties": {
                     "first": { "type": "text" },
                     "last":  { "type": "text" }
@@ -72,7 +72,7 @@ An explicit mapping for the above document could look like this:
       }
     }
 
-#1
+<1>
 
 | 
 
@@ -80,13 +80,13 @@ The mapping type is a type of object, and has a `properties` field.
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 The `manager` field is an inner `object` field.   
   
-#3
+<3>
 
 | 
 

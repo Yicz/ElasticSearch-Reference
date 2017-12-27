@@ -147,19 +147,19 @@ mget API 允许`类型（type）`作为可选项，取全或者设置`_all`会�
     {
         "docs" : [
             {
-                "_id" : "1" #1
+                "_id" : "1" <1>
             },
             {
                 "_id" : "2",
-                "stored_fields" : ["field3", "field4"] #2
+                "stored_fields" : ["field3", "field4"] <2>
             }
         ]
     }
 ```
 
-#1 | Returns `field1` and `field2`    
+<1> | Returns `field1` and `field2`    
 ---|---    
-#2 | Returns `field3` and `field4`  
+<2> | Returns `field3` and `field4`  
   
 ### 生成字段 Generated fields
 

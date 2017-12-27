@@ -50,13 +50,13 @@ The following snippet calculates the sum of all the total monthly `sales` bucket
             },
             "sum_monthly_sales": {
                 "sum_bucket": {
-                    "buckets_path": "sales_per_month>sales" #1
+                    "buckets_path": "sales_per_month>sales" <1>
                 }
             }
         }
     }
 
-#1| `buckets_path` instructs this sum_bucket aggregation that we want the sum of the `sales` aggregation in the `sales_per_month` date histogram.     
+<1>| `buckets_path` instructs this sum_bucket aggregation that we want the sum of the `sales` aggregation in the `sales_per_month` date histogram.     
 ---|---  
   
 And the following may be the response:

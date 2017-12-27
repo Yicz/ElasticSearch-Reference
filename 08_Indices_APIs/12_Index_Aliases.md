@@ -73,20 +73,20 @@ It is an error to index to an alias which points to more than one index.
 It is also possible to swap an index with an alias in one operation:
     
     
-    PUT test     #1
-    PUT test_2   #2
+    PUT test     <1>
+    PUT test_2   <2>
     POST /_aliases
     {
         "actions" : [
             { "add":  { "index": "test_2", "alias": "test" } },
-            { "remove_index": { "index": "test" } }  #3
+            { "remove_index": { "index": "test" } }  <3>
         ]
     }
 
-#1| An index we’ve added by mistake     
+<1>| An index we’ve added by mistake     
 ---|---    
-#2| The index we should have added     
-#3| `remove_index` is just like [_Delete Index_](indices-delete-index.html)  
+<2>| The index we should have added     
+<3>| `remove_index` is just like [_Delete Index_](indices-delete-index.html)  
   
 ### Filtered Aliases
 

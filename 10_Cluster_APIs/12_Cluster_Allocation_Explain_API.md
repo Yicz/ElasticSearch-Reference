@@ -29,10 +29,10 @@ You may also specify an optional `current_node` request parameter to only explai
       "index": "myindex",
       "shard": 0,
       "primary": false,
-      "current_node": "nodeA"                         #1
+      "current_node": "nodeA"                         <1>
     }
 
-#1| The node where shard 0 currently has a replica on     
+<1>| The node where shard 0 currently has a replica on     
 ---|---  
   
 You can also have Elasticsearch explain the allocation of the first unassigned shard that it finds by sending an empty body for the request:
@@ -51,26 +51,26 @@ The API response for an unassigned shard:
       "index" : "idx",
       "shard" : 0,
       "primary" : true,
-      "current_state" : "unassigned",                 #1
+      "current_state" : "unassigned",                 <1>
       "unassigned_info" : {
-        "reason" : "INDEX_CREATED",                   #2
+        "reason" : "INDEX_CREATED",                   <2>
         "at" : "2017-01-04T18:08:16.600Z",
         "last_allocation_status" : "no"
       },
-      "can_allocate" : "no",                          #3
+      "can_allocate" : "no",                          <3>
       "allocate_explanation" : "cannot allocate because allocation is not permitted to any of the nodes",
       "node_allocation_decisions" : [
         {
           "node_id" : "8qt2rY-pT6KNZB3-hGfLnw",
           "node_name" : "node_t1",
           "transport_address" : "127.0.0.1:9401",
-          "node_decision" : "no",                     #4
+          "node_decision" : "no",                     <4>
           "weight_ranking" : 1,
           "deciders" : [
             {
-              "decider" : "filter",                   #5
+              "decider" : "filter",                   <5>
               "decision" : "NO",
-              "explanation" : "node does not match index setting [index.routing.allocation.include] filters [_name:\"non_existent_node\"]"  #6
+              "explanation" : "node does not match index setting [index.routing.allocation.include] filters [_name:\"non_existent_node\"]"  <6>
             }
           ]
         },
@@ -91,7 +91,7 @@ The API response for an unassigned shard:
       ]
     }
 
-#1
+<1>
 
 | 
 
@@ -99,31 +99,31 @@ The current state of the shard
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 The reason for the shard originally becoming unassigned   
   
-#3
+<3>
 
 | 
 
 Whether to allocate the shard   
   
-#4
+<4>
 
 | 
 
 Whether to allocate the shard to the particular node   
   
-#5
+<5>
 
 | 
 
 The decider which led to the `no` decision for the node   
   
-#6
+<6>
 
 | 
 
@@ -175,9 +175,9 @@ The API response output for a replica that is unassigned due to delayed allocati
       },
       "can_allocate" : "allocation_delayed",
       "allocate_explanation" : "cannot allocate because the cluster is still waiting 59.8s for the departed node holding a replica to rejoin, despite being allowed to allocate the shard to at least one other node",
-      "configured_delay" : "1m",                      #1
+      "configured_delay" : "1m",                      <1>
       "configured_delay_in_millis" : 60000,
-      "remaining_delay" : "59.8s",                    #2
+      "remaining_delay" : "59.8s",                    <2>
       "remaining_delay_in_millis" : 59824,
       "node_allocation_decisions" : [
         {
@@ -191,7 +191,7 @@ The API response output for a replica that is unassigned due to delayed allocati
           "node_name" : "node_t0",
           "transport_address" : "127.0.0.1:9400",
           "node_decision" : "no",
-          "store" : {                                 #3
+          "store" : {                                 <3>
             "matching_size" : "4.2kb",
             "matching_size_in_bytes" : 4325
           },
@@ -206,7 +206,7 @@ The API response output for a replica that is unassigned due to delayed allocati
       ]
     }
 
-#1
+<1>
 
 | 
 
@@ -214,13 +214,13 @@ The configured delay before allocating a replica shard that does not exist due t
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 The remaining delay before allocating the replica shard   
   
-#3
+<3>
 
 | 
 
@@ -239,15 +239,15 @@ The API response output for an assigned shard that is not allowed to remain on i
         "name" : "node_t1",
         "transport_address" : "127.0.0.1:9401"
       },
-      "can_remain_on_current_node" : "no",            #1
-      "can_remain_decisions" : [                      #2
+      "can_remain_on_current_node" : "no",            <1>
+      "can_remain_decisions" : [                      <2>
         {
           "decider" : "filter",
           "decision" : "NO",
           "explanation" : "node does not match index setting [index.routing.allocation.include] filters [_name:\"non_existent_node\"]"
         }
       ],
-      "can_move_to_other_node" : "no",                #3
+      "can_move_to_other_node" : "no",                <3>
       "move_explanation" : "cannot move shard to another node, even though it is not allowed to remain on its current node",
       "node_allocation_decisions" : [
         {
@@ -267,7 +267,7 @@ The API response output for an assigned shard that is not allowed to remain on i
       ]
     }
 
-#1
+<1>
 
 | 
 
@@ -275,13 +275,13 @@ Whether the shard is allowed to remain on its current node
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 The deciders that factored into the decision of why the shard is not allowed to remain on its current node   
   
-#3
+<3>
 
 | 
 
@@ -302,21 +302,21 @@ The API response output for an assigned shard that remains on its current node b
         "weight_ranking" : 1
       },
       "can_remain_on_current_node" : "yes",
-      "can_rebalance_cluster" : "yes",                #1
-      "can_rebalance_to_other_node" : "no",           #2
+      "can_rebalance_cluster" : "yes",                <1>
+      "can_rebalance_to_other_node" : "no",           <2>
       "rebalance_explanation" : "cannot rebalance as no target node exists that can both allocate this shard and improve the cluster balance",
       "node_allocation_decisions" : [
         {
           "node_id" : "oE3EGFc8QN-Tdi5FFEprIA",
           "node_name" : "node_t1",
           "transport_address" : "127.0.0.1:9401",
-          "node_decision" : "worse_balance",          #3
+          "node_decision" : "worse_balance",          <3>
           "weight_ranking" : 1
         }
       ]
     }
 
-#1
+<1>
 
 | 
 
@@ -324,13 +324,13 @@ Whether rebalancing is allowed on the cluster
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 Whether the shard can be rebalanced to another node   
   
-#3
+<3>
 
 | 
 

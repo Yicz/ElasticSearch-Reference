@@ -30,7 +30,7 @@ which returns something similar to:
                          "id": "te7zF7C4UsirqvL6jp/vUg==",
                          "generation": 2,
                          "user_data": {
-                            "sync_id": "AU2VU0meX-VX2aNbEUsD" #1,
+                            "sync_id": "AU2VU0meX-VX2aNbEUsD" <1>,
                             ...
                          },
                          "num_docs": 0
@@ -44,7 +44,7 @@ which returns something similar to:
        }
     }
 
-#1| the `sync id` marker     
+<1>| the `sync id` marker     
 ---|---  
   
 ### Synced Flush API

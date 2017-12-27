@@ -37,14 +37,14 @@ Below this we describe the security settings for scripts and how you can change 
 Which scripts Elasticsearch will execute where is controlled by settings starting with `scripts.`. The simplest settings allow scripts to be enabled or disabled based on where they are stored. For example:
     
     
-    script.inline: false  #1
-    script.stored: false  #2
-    script.file:   true   #3
+    script.inline: false  <1>
+    script.stored: false  <2>
+    script.file:   true   <3>
 
-#1| Refuse to run scripts provided inline in the API.     
+<1>| Refuse to run scripts provided inline in the API.     
 ---|---    
-#2| Refuse to run scripts stored using the API.     
-#3| Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb) or `config/scripts` (zip or tar).   
+<2>| Refuse to run scripts stored using the API.     
+<3>| Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb) or `config/scripts` (zip or tar).   
   
 ![Note](images/icons/note.png)
 
@@ -84,17 +84,17 @@ And
 For example:
     
     
-    script.inline: false #1
-    script.stored: false #2
-    script.file:   false #3
+    script.inline: false <1>
+    script.stored: false <2>
+    script.file:   false <3>
     
-    script.engine.painless.inline:          true #4
-    script.engine.painless.stored.search:   true #5
-    script.engine.painless.stored.aggs:     true #6
+    script.engine.painless.inline:          true <4>
+    script.engine.painless.stored.search:   true <5>
+    script.engine.painless.stored.aggs:     true <6>
     
-    script.engine.mustache.stored.search:   true #7
+    script.engine.mustache.stored.search:   true <7>
 
-#1 #2 #3
+<1> <2> <3>
 
 | 
 
@@ -102,19 +102,19 @@ Disable all scripting from any source.
   
 ---|---  
   
-#4
+<4>
 
 | 
 
 Allow inline Painless scripts for all operations.   
   
-#5 #6
+<5> <6>
 
 | 
 
 Allow stored Painless scripts to be used for search and aggregations.   
   
-#7
+<7>
 
 | 
 

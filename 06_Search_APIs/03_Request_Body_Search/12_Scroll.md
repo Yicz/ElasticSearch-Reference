@@ -33,17 +33,17 @@ In order to use scrolling, the initial search request should specify the `scroll
 The result from the above request includes a `_scroll_id`, which should be passed to the `scroll` API in order to retrieve the next batch of results.
     
     
-    POST #1 /_search/scroll #2
+    POST <1> /_search/scroll <2>
     {
-        "scroll" : "1m", #3
-        "scroll_id" : "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==" #4
+        "scroll" : "1m", <3>
+        "scroll_id" : "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==" <4>
     }
 
-#1| `GET` or `POST` can be used.     
+<1>| `GET` or `POST` can be used.     
 ---|---    
-#2| The URL should not include the `index` or `type` name — these are specified in the original `search` request instead.     
-#3| The `scroll` parameter tells Elasticsearch to keep the search context open for another `1m`.     
-#4| The `scroll_id` parameter   
+<2>| The URL should not include the `index` or `type` name — these are specified in the original `search` request instead.     
+<3>| The `scroll` parameter tells Elasticsearch to keep the search context open for another `1m`.     
+<4>| The `scroll_id` parameter   
   
 The `size` parameter allows you to configure the maximum number of hits to be returned with each batch of results. Each call to the `scroll` API returns the next batch of results until there are no more results left to return, ie the `hits` array is empty.
 
@@ -121,8 +121,8 @@ For scroll queries that return a lot of documents it is possible to split the sc
     GET /twitter/tweet/_search?scroll=1m
     {
         "slice": {
-            "id": 0, #1
-            "max": 2 #2
+            "id": 0, <1>
+            "max": 2 <2>
         },
         "query": {
             "match" : {
@@ -143,9 +143,9 @@ For scroll queries that return a lot of documents it is possible to split the sc
         }
     }
 
-#1| The id of the slice     
+<1>| The id of the slice     
 ---|---    
-#2| The maximum number of slices   
+<2>| The maximum number of slices   
   
 The result from the first request returned documents that belong to the first slice (id: 0) and the result from the second request returned documents that belong to the second slice. Since the maximum number of slices is set to 2 the union of the results of the two requests is equivalent to the results of a scroll query without slicing. By default the splitting is done on the shards first and then locally on each shard using the _uid field with the following formula: `slice(doc) = floorMod(hashCode(doc._uid), max)` For instance if the number of shards is equal to 2 and the user requested 4 slices then the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
 

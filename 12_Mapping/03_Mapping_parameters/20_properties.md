@@ -14,15 +14,15 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
     PUT my_index
     {
       "mappings": {
-        "my_type": { #1
+        "my_type": { <1>
           "properties": {
-            "manager": { #2
+            "manager": { <2>
               "properties": {
                 "age":  { "type": "integer" },
                 "name": { "type": "text"  }
               }
             },
-            "employees": { #3
+            "employees": { <3>
               "type": "nested",
               "properties": {
                 "age":  { "type": "integer" },
@@ -34,7 +34,7 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
       }
     }
     
-    PUT my_index/my_type/1 #4
+    PUT my_index/my_type/1 <4>
     {
       "region": "US",
       "manager": {
@@ -53,11 +53,11 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
       ]
     }
 
-#1| Properties under the `my_type` mapping type.     
+<1>| Properties under the `my_type` mapping type.     
 ---|---    
-#2| Properties under the `manager` object field.     
-#3| Properties under the `employees` nested field.     
-#4| An example document which corresponds to the above mapping.   
+<2>| Properties under the `manager` object field.     
+<3>| Properties under the `employees` nested field.     
+<4>| An example document which corresponds to the above mapping.   
   
 ![Tip](images/icons/tip.png)
 
@@ -72,7 +72,7 @@ Inner fields can be referred to in queries, aggregations, etc., using _dot notat
     {
       "query": {
         "match": {
-          "manager.name": "Alice White" #1
+          "manager.name": "Alice White" <1>
         }
       },
       "aggs": {
@@ -83,7 +83,7 @@ Inner fields can be referred to in queries, aggregations, etc., using _dot notat
           "aggs": {
             "Employee Ages": {
               "histogram": {
-                "field": "employees.age", #2
+                "field": "employees.age", <2>
                 "interval": 5
               }
             }

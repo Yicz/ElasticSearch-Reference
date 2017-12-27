@@ -180,7 +180,7 @@ If the histogram aggregation has a direct metrics sub-aggregation, the latter ca
                 "histogram" : {
                     "field" : "price",
                     "interval" : 50,
-                    "order" : { "price_stats.min" : "asc" } #1
+                    "order" : { "price_stats.min" : "asc" } <1>
                 },
                 "aggs" : {
                     "price_stats" : { "stats" : {"field" : "price"} }
@@ -189,7 +189,7 @@ If the histogram aggregation has a direct metrics sub-aggregation, the latter ca
         }
     }
 
-#1| The `{ "price_stats.min" : asc" }` will sort the buckets based on `min` value of their `price_stats` sub-aggregation.     
+<1>| The `{ "price_stats.min" : asc" }` will sort the buckets based on `min` value of their `price_stats` sub-aggregation.     
 ---|---  
   
 It is also possible to order the buckets based on a "deeper" aggregation in the hierarchy. This is supported as long as the aggregations path are of a single-bucket type, where the last aggregation in the path may either by a single-bucket one or a metrics one. If it’s a single-bucket type, the order will be defined by the number of docs in the bucket (i.e. `doc_count`), in case it’s a metrics one, the same rules as above apply (where the path must indicate the metric name to sort by in case of a multi-value metrics aggregation, and in case of a single-value metrics aggregation the sort will be applied on that value).
@@ -211,7 +211,7 @@ The path must be defined in the following form:
                 "histogram" : {
                     "field" : "price",
                     "interval" : 50,
-                    "order" : { "promoted_products>rating_stats.avg" : "desc" } #1
+                    "order" : { "promoted_products>rating_stats.avg" : "desc" } <1>
                 },
                 "aggs" : {
                     "promoted_products" : {
@@ -296,11 +296,11 @@ The `missing` parameter defines how documents that are missing a value should be
                  "histogram" : {
                      "field" : "quantity",
                      "interval": 10,
-                     "missing": 0 #1
+                     "missing": 0 <1>
                  }
              }
         }
     }
 
-#1 #1| Documents without a value in the `quantity` field will fall into the same bucket as documents that have the value `0`.     
+<1> <1>| Documents without a value in the `quantity` field will fall into the same bucket as documents that have the value `0`.     
 ---|---

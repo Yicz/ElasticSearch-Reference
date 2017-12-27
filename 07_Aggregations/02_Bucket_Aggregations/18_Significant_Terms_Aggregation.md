@@ -398,13 +398,13 @@ Elasticsearch tries to have sensible defaults so this is something that generall
             "tags" : {
                  "significant_terms" : {
                      "field" : "tags",
-                     "execution_hint": "map" #1
+                     "execution_hint": "map" <1>
                  }
              }
         }
     }
 
-#1| the possible values are `map`, `global_ordinals` and `global_ordinals_hash`    
+<1>| the possible values are `map`, `global_ordinals` and `global_ordinals_hash`    
 ---|---  
   
 Please note that Elasticsearch will ignore this execution hint if it is not applicable.

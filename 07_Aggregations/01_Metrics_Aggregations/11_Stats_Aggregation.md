@@ -112,11 +112,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "grades_stats" : {
                 "stats" : {
                     "field" : "grade",
-                    "missing": 0 #1
+                    "missing": 0 <1>
                 }
             }
         }
     }
 
-#1| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `0`.     
+<1>| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `0`.     
 ---|---

@@ -25,12 +25,12 @@ The `elasticsearch.yml` config file for a _cross cluster search_ node just needs
     
     search:
         remote:
-            cluster_one: #1
+            cluster_one: <1>
                 seeds: 127.0.0.1:9300
-            cluster_two: #2
+            cluster_two: <2>
                 seeds: 127.0.0.1:9301
 
-#1 #2| `cluster_one` and `cluster_two` are arbitrary cluster aliases representing the connection to each cluster. These names are subsequently used to distinguish between local and remote indices.     
+<1> <2>| `cluster_one` and `cluster_two` are arbitrary cluster aliases representing the connection to each cluster. These names are subsequently used to distinguish between local and remote indices.     
 ---|---  
   
 The equivalent example using the [cluster settings API](cluster-update-settings.html) to add remote clusters to all nodes in the cluster would look like the following:
@@ -65,14 +65,14 @@ A remote cluster can be deleted from the cluster settings by setting its seeds t
         "search": {
           "remote": {
             "cluster_one": {
-              "seeds": null #1
+              "seeds": null <1>
             }
           }
         }
       }
     }
 
-#1| `cluster_one` would be removed from the cluster settings, leaving `cluster_two` intact.     
+<1>| `cluster_one` would be removed from the cluster settings, leaving `cluster_two` intact.     
 ---|---  
   
 ### Using cross cluster search

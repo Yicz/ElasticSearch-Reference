@@ -105,11 +105,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "grade_min" : {
                 "min" : {
                     "field" : "grade",
-                    "missing": 10 #1
+                    "missing": 10 <1>
                 }
             }
         }
     }
 
-#1| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.     
+<1>| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.     
 ---|---

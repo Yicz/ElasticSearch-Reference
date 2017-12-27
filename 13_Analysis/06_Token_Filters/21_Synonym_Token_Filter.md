@@ -10,15 +10,15 @@ The `synonym` token filter allows to easily handle synonyms during the analysis 
                 "analysis" : {
                     "filter" : {
                         "synonym" : {
-                            "type" : "synonym", #1
+                            "type" : "synonym", <1>
                             "synonyms_path" : "analysis/synonym.txt",
-                            "tokenizer" : "whitespace" #2
+                            "tokenizer" : "whitespace" <2>
                         }
                     },
                     "analyzer" : {
                         "synonym" : {
                             "tokenizer" : "whitespace",
-                            "filter" : ["synonym"] #3
+                            "filter" : ["synonym"] <3>
                         }
                     }
                 }
@@ -26,10 +26,10 @@ The `synonym` token filter allows to easily handle synonyms during the analysis 
         }
     }
 
-#1| We configure a `synonym` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).     
+<1>| We configure a `synonym` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).     
 ---|---  
-#2| The `tokenizer` parameter controls the tokenizers that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).     
-#3| The `synonym` analyzer is then configured with the filter.   
+<2>| The `tokenizer` parameter controls the tokenizers that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).     
+<3>| The `synonym` analyzer is then configured with the filter.   
   
 Two synonym formats are supported: Solr, WordNet.
 

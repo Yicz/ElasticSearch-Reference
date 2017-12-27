@@ -76,7 +76,7 @@ The following request can be built that connects the two together:
           "aggs": {
             "to-answers": {
               "children": {
-                "type" : "answer" #1
+                "type" : "answer" <1>
               },
               "aggs": {
                 "top-names": {
@@ -92,7 +92,7 @@ The following request can be built that connects the two together:
       }
     }
 
-#1| The `type` points to type / mapping with the name `answer`.    
+<1>| The `type` points to type / mapping with the name `answer`.    
 ---|---  
   
 The above example returns the top question tags and per tag the top answer owners.
@@ -112,9 +112,9 @@ Possible response:
           "buckets": [
             {
               "key": "file-transfer",
-              "doc_count": 1, #1
+              "doc_count": 1, <1>
               "to-answers": {
-                "doc_count": 2, #2
+                "doc_count": 2, <2>
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -133,9 +133,9 @@ Possible response:
             },
             {
               "key": "windows-server-2003",
-              "doc_count": 1, #3
+              "doc_count": 1, <3>
               "to-answers": {
-                "doc_count": 2, #4
+                "doc_count": 2, <4>
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -154,9 +154,9 @@ Possible response:
             },
             {
               "key": "windows-server-2008",
-              "doc_count": 1, #5
+              "doc_count": 1, <5>
               "to-answers": {
-                "doc_count": 2, #6
+                "doc_count": 2, <6>
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -178,6 +178,6 @@ Possible response:
       }
     }
 
-#1 #3 #5| The number of question documents with the tag `file-transfer`, `windows-server-2003`, etc.     
+<1> <3> <5>| The number of question documents with the tag `file-transfer`, `windows-server-2003`, etc.     
 ---|---    
-#2 #4 #6| The number of answer documents that are related to question documents with the tag `file-transfer`, `windows-server-2003`, etc. 
+<2> <4> <6>| The number of answer documents that are related to question documents with the tag `file-transfer`, `windows-server-2003`, etc. 

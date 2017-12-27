@@ -48,8 +48,8 @@ The `has_child` query allows you to specify that a minimum and/or maximum number
             "has_child" : {
                 "type" : "blog_tag",
                 "score_mode" : "min",
-                "min_children": 2, #1
-                "max_children": 10, #2
+                "min_children": 2, <1>
+                "max_children": 10, <2>
                 "query" : {
                     "term" : {
                         "tag" : "something"
@@ -59,7 +59,7 @@ The `has_child` query allows you to specify that a minimum and/or maximum number
         }
     }
 
-#1 #2| Both `min_children` and `max_children` are optional.     
+<1> <2>| Both `min_children` and `max_children` are optional.     
 ---|---  
   
 The `min_children` and `max_children` parameters can be combined with the `score_mode` parameter.

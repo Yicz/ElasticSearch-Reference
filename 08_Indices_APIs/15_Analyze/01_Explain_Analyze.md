@@ -13,10 +13,10 @@ The format of the additional detail information is experimental and can change a
       "filter" : ["snowball"],
       "text" : "detailed output",
       "explain" : true,
-      "attributes" : ["keyword"] #1
+      "attributes" : ["keyword"] <1>
     }
 
-#1| Set "keyword" to output "keyword" attribute only     
+<1>| Set "keyword" to output "keyword" attribute only     
 ---|---  
   
 The request returns the following result:
@@ -50,20 +50,20 @@ The request returns the following result:
             "end_offset" : 8,
             "type" : "<ALPHANUM>",
             "position" : 0,
-            "keyword" : false #1
+            "keyword" : false <1>
           }, {
             "token" : "output",
             "start_offset" : 9,
             "end_offset" : 15,
             "type" : "<ALPHANUM>",
             "position" : 1,
-            "keyword" : false #2
+            "keyword" : false <2>
           } ]
         } ]
       }
     }
 
-#1 #2
+<1> <2>
 
 | 
 

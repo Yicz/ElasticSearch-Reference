@@ -419,7 +419,7 @@ Reindex支持从远程Elasticsearch集群重建索引：
               "id" : 36619,
               "type" : "transport",
               "action" : "indices:data/write/reindex",
-              "status" : {    #1
+              "status" : {    <1>
                 "total" : 6154,
                 "updated" : 3500,
                 "created" : 0,
@@ -440,7 +440,7 @@ Reindex支持从远程Elasticsearch集群重建索引：
       }
     }
     
-#1| 该对象包含实际状态。 这就像`total`字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过累加`updated`，`created`和`deleted`字段来估计进度。 当他们的总和等于`total`字段时，请求将完成。
+<1>| 该对象包含实际状态。 这就像`total`字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过累加`updated`，`created`和`deleted`字段来估计进度。 当他们的总和等于`total`字段时，请求将完成。
 ---|---  
   
 使用任务ID，您可以直接查找任务：    
@@ -664,12 +664,12 @@ Reindex可以用来提取一个测试索引的随机子集:
             "random_score" : {}
           }
         },
-        "sort": "_score"    #1
+        "sort": "_score"    <1>
       },
       "dest": {
         "index": "random_twitter"
       }
     }
     
-#1| Reindex默认为按`_doc`排序，所以`random_score`不会有任何效果，除非你将sort值覆盖到`_score`
+<1>| Reindex默认为按`_doc`排序，所以`random_score`不会有任何效果，除非你将sort值覆盖到`_score`
 ---|---

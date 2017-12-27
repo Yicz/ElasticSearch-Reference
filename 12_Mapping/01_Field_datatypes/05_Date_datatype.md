@@ -27,7 +27,7 @@ For instance:
         "my_type": {
           "properties": {
             "date": {
-              "type": "date" #1
+              "type": "date" <1>
             }
           }
         }
@@ -35,20 +35,20 @@ For instance:
     }
     
     PUT my_index/my_type/1
-    { "date": "2015-01-01" } #2
+    { "date": "2015-01-01" } <2>
     
     PUT my_index/my_type/2
-    { "date": "2015-01-01T12:10:30Z" } #3
+    { "date": "2015-01-01T12:10:30Z" } <3>
     
     PUT my_index/my_type/3
-    { "date": 1420070400001 } #4
+    { "date": 1420070400001 } <4>
     
     GET my_index/_search
     {
-      "sort": { "date": "asc"} #5
+      "sort": { "date": "asc"} <5>
     }
 
-#1
+<1>
 
 | 
 
@@ -56,25 +56,25 @@ The `date` field uses the default `format`.
   
 ---|---  
   
-#2
+<2>
 
 | 
 
 This document uses a plain date.   
   
-#3
+<3>
 
 | 
 
 This document includes a time.   
   
-#4
+<4>
 
 | 
 
 This document uses milliseconds-since-the-epoch.   
   
-#5
+<5>
 
 | 
 
