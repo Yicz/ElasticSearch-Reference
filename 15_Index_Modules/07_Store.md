@@ -21,7 +21,7 @@ It is a _static_ setting that can be set on a per-index basis at index creation 
       }
     }
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This is an expert-only setting and may be removed in the future 
 

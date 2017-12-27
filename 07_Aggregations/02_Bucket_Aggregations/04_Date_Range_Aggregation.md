@@ -54,7 +54,7 @@ Response:
 
 ### Date Format/Pattern
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 this information was copied from [JodaDate](http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html)
 

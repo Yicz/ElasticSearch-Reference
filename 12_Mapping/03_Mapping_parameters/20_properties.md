@@ -59,7 +59,7 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
 <3>| Properties under the `employees` nested field.     
 <4>| An example document which corresponds to the above mapping.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `properties` setting is allowed to have different settings for fields of the same name in the same index. New properties can be added to existing fields using the [PUT mapping API](indices-put-mapping.html).
 
@@ -92,6 +92,6 @@ Inner fields can be referred to in queries, aggregations, etc., using _dot notat
       }
     }
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 The full path to the inner field must be specified.

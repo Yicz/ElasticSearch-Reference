@@ -20,6 +20,6 @@ Or for a single index:
     epoch      timestamp count
     1475868259 15:24:20  120
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The document count indicates the number of live documents and does not include deleted documents which have not yet been cleaned up by the merge process.

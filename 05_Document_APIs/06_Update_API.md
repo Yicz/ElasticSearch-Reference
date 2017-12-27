@@ -190,7 +190,7 @@
 `_source`|允许控制是否以及如何在响应中返回更新的源代码。 默认情况下，更新的源不会被返回。 查看[`source filtering`](search-request-source-filtering.html) 
 `version` & `version_type`| 更新API在内部使用Elasticsearch的版本控制支持来确保文档在更新期间不会更改。 您可以使用`version`参数来指定文档只有在版本与指定版本匹配的情况下才能更新。 通过设置版本类型为`force`，您可以在更新后强制更新文档的新版本（小心使用！`force`，不保证文档没有变化）。
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### The update API does not support external versioning
 

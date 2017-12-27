@@ -1,6 +1,6 @@
 ## Painless Syntax
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The Painless scripting language is new and is still marked as experimental. The syntax or API may be changed in the future in non-backwards compatible ways if required. 
 
@@ -122,11 +122,11 @@ There are only a few minor differences and add-ons:
 
 The `?:` (aka Elvis) operator coalesces null values. So `x ?: 0` is `0` if `x` is `null` and whatever value `x` has otherwise. It is a convenient way to write default values like `doc['x'].value ?: 0` which is 0 if `x` is not in the document being processed. It can also work with null safe dereferences to efficiently handle null in chains. For example, `doc['foo.keyword'].value?.length() ?: 0` is 0 if the document being processed doesn’t have a `foo.keyword` field but is the length of that field if it does. Lastly, `?:` is lazy so the right hand side is not evaluated at all if the left hand side isn’t null.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Unlike Groovy, Painless' `?:` operator only coalesces ‘null`, not `false` or [falsy](http://groovy-lang.org/semantics.html#Groovy-Truth) values. Strictly speaking Painless’ `?:` is more like Kotlin’s `?:` than Groovy’s `?:`.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The result of `?.` and `?:` can’t be assigned to primitives. So `int[] someArray = null; int l = someArray?.length` and `int s = params.size ?: 100` don’t work. Do `def someArray = null; def l = someArray?.length` and `def s = params.size ?: 100` instead.
 

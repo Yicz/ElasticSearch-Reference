@@ -46,7 +46,7 @@ Which scripts Elasticsearch will execute where is controlled by settings startin
 <2>| Refuse to run scripts stored using the API.     
 <3>| Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb) or `config/scripts` (zip or tar).   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 These settings override the defaults mentioned [above](modules-scripting-security.html#modules-scripting-security-do-no-weaken). Recreating the defaults requires more fine grained settings described [below](modules-scripting-security.html#security-script-fine).
 
@@ -219,7 +219,7 @@ Here is an example of how to enable the `groovy.time.TimeCategory` class:
         permission org.elasticsearch.script.ClassPermission "groovy.time.TimeCategory";
     };
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 Before adding classes to the whitelist, consider the security impact that it will have on Elasticsearch. Do you really need an extra class or can your code be rewritten in a more secure way?
 

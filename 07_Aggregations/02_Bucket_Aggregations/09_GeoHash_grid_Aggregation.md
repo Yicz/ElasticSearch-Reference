@@ -9,7 +9,7 @@ A multi-bucket aggregation that works on `geo_point` fields and groups points in
 
 Geohashes used in this aggregation can have a choice of precision between 1 and 12.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The highest-precision geohash of length 12 produces cells that cover less than a square metre of land and so high-precision requests can be very costly in terms of RAM and result sizes. Please see the example below on how to first filter the aggregation to a smaller geographic area before requesting high-levels of detail.
 

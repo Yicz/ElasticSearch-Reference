@@ -1,6 +1,6 @@
 ## Advanced text scoring in scripts
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The functionality described on this page is considered experimental and may be changed or removed in a future release 
 

@@ -2,7 +2,7 @@
 
 Index templates allow you to define templates that will automatically be applied when new indices are created. The templates include both settings and mappings, and a simple pattern template that controls whether the template should be applied to the new index.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Templates are only applied at index creation time. Changing a template will have no impact on existing indices.
 
@@ -33,7 +33,7 @@ For example:
       }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Index templates provide C-style /* */ block comments. Comments are allowed everywhere in the JSON document except before the initial opening curly bracket.
 

@@ -41,6 +41,6 @@ Or with more advanced settings:
 `prefix_length`| The number of initial characters which will not be “fuzzified”. This helps to reduce the number of terms which must beexamined. Defaults to `0`.     
 `max_expansions`| The maximum number of terms that the `fuzzy` query will expand to. Defaults to `50`.   
   
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This query can be very heavy if `prefix_length` is set to `0` and if `max_expansions` is set to a high number. It could result in every term in the index being examined!

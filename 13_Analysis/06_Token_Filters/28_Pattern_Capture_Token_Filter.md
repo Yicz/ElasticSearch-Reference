@@ -2,7 +2,7 @@
 
 The `pattern_capture` token filter, unlike the `pattern` tokenizer, emits a token for every capture group in the regular expression. Patterns are not anchored to the beginning and end of the string, so each pattern can match multiple times, and matches are allowed to overlap.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Beware of Pathological Regular Expressions
 

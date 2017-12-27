@@ -72,6 +72,6 @@ The `position_increment_gap` can be specified in the mapping. For instance:
 ---|---    
 <2>| The phrase query matches our document which is weird, but its what we asked for in the mapping.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `position_increment_gap` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

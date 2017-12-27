@@ -35,6 +35,6 @@ ES_JAVA_OPTS="-Xms2g -Xmx2g" ./bin/elasticsearch
 ES_JAVA_OPTS="-Xms4000m -Xmx4000m" ./bin/elasticsearch 
 ``` 
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 为[Windows服务](windows.html#windows-service) 配置堆大小不同于上述内容。最初为Windows服务的值可以像上面那样配置，但在安装服务之后会有所不同。 有关更多详细信息，请参阅[Windows服务文档](windows.html#windows-service) 。

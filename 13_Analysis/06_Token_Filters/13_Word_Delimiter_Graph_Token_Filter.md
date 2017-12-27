@@ -1,6 +1,6 @@
 ## Word Delimiter Graph Token Filter
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -65,6 +65,6 @@ Advance settings include:
         # see http://en.wikipedia.org/wiki/Zero-width_joiner
         \\u200D => ALPHANUM
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Using a tokenizer like the `standard` tokenizer may interfere with the `catenate_*` and `preserve_original` parameters, as the original string may already have lost punctuation during tokenization. Instead, you may want to use the `whitespace` tokenizer.

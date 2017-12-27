@@ -4,7 +4,7 @@ The suggest feature suggests similar looking terms based on a provided text by u
 
 The suggest request part is defined alongside the query part in a `_search` request.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `_suggest` endpoint has been deprecated in favour of using suggest via `_search` endpoint. In 5.0, the `_search` endpoint has been optimized for suggest only search requests.
     

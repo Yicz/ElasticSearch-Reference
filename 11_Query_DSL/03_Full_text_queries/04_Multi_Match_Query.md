@@ -102,7 +102,7 @@ Normally the `best_fields` type uses the score of the **single** best matching f
 
 Also, accepts `analyzer`, `boost`, `operator`, `minimum_should_match`, `fuzziness`, `lenient`, `prefix_length`, `max_expansions`, `rewrite`, `zero_terms_query` and `cutoff_frequency`, as explained in [match query](query-dsl-match-query.html).
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 ### `operator` and `minimum_should_match`
 
@@ -209,7 +209,7 @@ would be executed as:
 
 Also, accepts `analyzer`, `boost`, `lenient`, `slop` and `zero_terms_query` as explained in [Match Query](query-dsl-match-query.html). Type `phrase_prefix` additionally accepts `max_expansions`.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 ### `phrase`, `phrase_prefix` and `fuzziness`
 
@@ -365,7 +365,7 @@ By default, each per-term `blended` query will use the best score returned by an
 ---|---    `1.0`| Add together the scores for (eg) `first_name:will` and `last_name:will`    
 `0.0 < n < 1.0`| Take the single best score plus `tie_breaker` multiplied by each of the scores from other matching fields.   
   
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 ### `cross_fields` and `fuzziness`
 

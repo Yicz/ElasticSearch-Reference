@@ -1,10 +1,10 @@
 ## Field stats API
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Deprecated in 5.4.0. 
 
@@ -68,7 +68,7 @@ True if any of the instances of the field is aggregatable, false otherwise.
 `max_value_as_string`
      The highest value in the field represented in a displayable form. All fields, but string fields returns this. (since string fields, represent values already as strings) 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Documents marked as deleted (but not yet removed by the merge process) still affect all the mentioned statistics.
 
@@ -143,7 +143,7 @@ Response:
 <1>| The `_all` key indicates that it contains the field stats of all indices in the cluster.     
 ---|---  
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 When using the cluster level field statistics it is possible to have conflicts if the same field is used in different indices with incompatible types. For instance a field of type `long` is not compatible with a field of type `float` or `string`. A div named `conflicts` is added to the response if one or more conflicts are raised. It contains all the fields with conflicts and the reason of the incompatibility.
     

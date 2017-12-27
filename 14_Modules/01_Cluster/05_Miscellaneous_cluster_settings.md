@@ -7,7 +7,7 @@ An entire cluster may be set to read-only with the following _dynamic_ setting:
 `cluster.blocks.read_only`
      Make the whole cluster read only (indices do not accept write operations), metadata is not allowed to be modified (create or delete indices). 
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Don’t rely on this setting to prevent changes to your cluster. Any user with access to the [cluster-update-settings](cluster-update-settings.html) API can make the cluster read-write again.
 

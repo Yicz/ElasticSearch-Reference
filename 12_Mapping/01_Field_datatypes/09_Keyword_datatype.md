@@ -46,6 +46,6 @@ The following parameters are accepted by `keyword` fields:
 [`similarity`](similarity.html)| Which scoring algorithm or _similarity_ should be used. Defaults to `BM25`.     
 [`normalizer`](normalizer.html)| [ experimental] This functionality is experimental and may be changed or removed completely in a future release.Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. How to pre-process the keyword prior to indexing. Defaults to `null`, meaning the keyword is kept as-is.   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Indexes imported from 2.x do not support `keyword`. Instead they will attempt to downgrade `keyword` into `string`. This allows you to merge modern mappings with legacy mappings. Long lived indexes will have to be recreated before upgrading to 6.x but mapping downgrade gives you the opportunity to do the recreation on your own schedule.

@@ -79,6 +79,6 @@ The entire mapping type may be disabled as well, in which case the document is s
 <2>| The document can be retrieved.     
 <3>| Checking the mapping reveals that no fields have been added.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `enabled` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

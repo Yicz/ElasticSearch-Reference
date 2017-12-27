@@ -16,6 +16,6 @@ The put pipeline API adds pipelines and updates existing pipelines in the cluste
       ]
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The put pipeline API also instructs all ingest nodes to reload their in-memory representation of pipelines, so that pipeline changes take effect immediately.

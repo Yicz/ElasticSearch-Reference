@@ -1,6 +1,6 @@
 ## Term suggester
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
 

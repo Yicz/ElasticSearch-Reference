@@ -2,7 +2,7 @@
 
 The `pattern_replace` token filter allows to easily handle string replacements based on a regular expression. The regular expression is defined using the `pattern` parameter, and the replacement string can be provided using the `replacement` parameter (supporting referencing the original text, as explained [here](http://docs.oracle.com/javase/6/docs/api/java/util/regex/Matcher.html#appendReplacement\(java.lang.StringBuffer,%20java.lang.String\))).
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Beware of Pathological Regular Expressions
 

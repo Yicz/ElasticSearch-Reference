@@ -7,7 +7,7 @@ The amount of memory used for the field data cache can be controlled using `indi
 `indices.fielddata.cache.size`
      The max size of the field data cache, eg `30%` of node heap space, or an absolute value, eg `12GB`. Defaults to unbounded. Also see [Field data circuit breaker. 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 These are static settings which must be configured on every data node in the cluster.
 

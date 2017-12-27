@@ -85,7 +85,7 @@ By far the fastest most efficient way to access a field value from a script is t
 
 Doc-values can only return "simple" field values like numbers, dates, geo- points, terms, etc, or arrays of these values if the field is multi-valued. It cannot return JSON objects.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Doc values and `text` fields
 
@@ -97,7 +97,7 @@ The `doc['field']` syntax can also be used for [analyzed `text` fields](text.htm
 
 The document [`_source`](mapping-source-field.html), which is really just a special stored field, can be accessed using the `_source.field_name` syntax. The `_source` is loaded as a map-of-maps, so properties within object fields can be accessed as, for example, `_source.name.first`.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 ### Prefer doc-values to stored fields
 
@@ -156,7 +156,7 @@ For instance:
 ---|---    
 <2>| The `title` field can still be accessed from the `_source`.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 ### Stored vs `_source`
 

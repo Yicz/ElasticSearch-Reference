@@ -29,7 +29,7 @@ This example demonstrates how to exclude the `date` field from the `_all` field:
 ---|---    
 <3>| The `date` field will not be included in the `_all` field.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `include_in_all` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
@@ -66,7 +66,7 @@ The `include_in_all` parameter can also be set at the type level and on [`object
 <2>| The `author.first_name` and `author.last_name` fields are included in `_all`.     
 <3> <4>| Only the `editor.last_name` field is included in `_all`. The `editor.first_name` inherits the type-level setting and is excluded.   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Multi-fields and `include_in_all`
 

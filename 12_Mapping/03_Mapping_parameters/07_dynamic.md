@@ -72,6 +72,6 @@ The `dynamic` setting may be set at the mapping type level, and on each [inner o
 <2>| The `user` object inherits the type-level setting.     
 <3>| The `user.social_networks` object enables dynamic mapping, so new fields may be added to this inner object.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `dynamic` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

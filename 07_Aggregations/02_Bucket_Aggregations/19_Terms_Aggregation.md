@@ -114,7 +114,7 @@ The higher the requested `size` is, the more accurate the results will be, but a
 
 The `shard_size` parameter can be used to minimize the extra work that comes with bigger requested `size`. When defined, it will determine how many terms the coordinating node will request from each shard. Once all the shards responded, the coordinating node will then reduce them to a final result which will be based on the `size` parameter - this way, one can increase the accuracy of the returned terms and avoid the overhead of streaming a big list of buckets back to the client.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `shard_size` cannot be smaller than `size` (as it doesn’t make much sense). When it is, elasticsearch will override it and reset it to be equal to `size`.
 
@@ -148,7 +148,7 @@ There are two error values which can be shown on the terms aggregation. The firs
 
 ### Per bucket document count error
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -184,7 +184,7 @@ These errors can only be calculated in this way when the terms are ordered by de
 
 The order of the buckets can be customized by setting the `order` parameter. By default, the buckets are ordered by their `doc_count` descending. It is possible to change this behaviour as documented below:
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Sorting by ascending `_count` or by sub aggregation is discouraged as it increases the [error](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts) on document counts. It is fine when a single shard is queried, or when the field that is being aggregated was used as a routing key at index time: in these cases results will be accurate since shards have disjoint values. However otherwise, errors are unbounded. One particular case that could still be useful is sorting by [`min`](search-aggregations-metrics-min-aggregation.html) or [`max`](search-aggregations-metrics-max-aggregation.html) aggregation: counts will not be accurate but at least the top buckets will be correctly picked.
 
@@ -250,7 +250,7 @@ Ordering the buckets by multi value metrics sub-aggregation (identified by the a
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Pipeline aggs cannot be used for sorting
 
@@ -313,7 +313,7 @@ Multiple criteria can be used to order the buckets by providing an array of orde
 
 The above will sort the artist’s countries buckets based on the average play count among the rock songs and then by their `doc_count` in descending order.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 In the event that two buckets share the same values for all order criteria the bucket’s term value is used as a tie-breaker in ascending alphabetical order to prevent non-deterministic ordering of buckets.
 
@@ -341,11 +341,11 @@ Terms are collected and ordered on a shard level and merged with the terms colle
 
 The parameter `shard_min_doc_count` regulates the _certainty_ a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`. Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`. If your dictionary contains many low frequent terms and you are not interested in those (for example misspellings), then you can set the `shard_min_doc_count` parameter to filter out candidate terms on a shard level that will with a reasonable certainty not reach the required `min_doc_count` even after merging the local counts. `shard_min_doc_count` is set to `0` per default and has no effect unless you explicitly set it.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Setting `min_doc_count`=`0` will also return buckets for terms that didn’t match any hit. However, some of the returned terms which have a document count of zero might only belong to deleted documents or documents from other types, so there is no warranty that a `match_all` query would find a positive document count for those terms.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 When NOT sorting on `doc_count` descending, high values of `min_doc_count` may return a number of buckets which is less than `size` because not enough data was gathered from the shards. Missing buckets can be back by increasing `shard_size`. Setting `shard_min_doc_count` too high will cause terms to be filtered out on a shard level. This value should be set much lower than `min_doc_count/#shards`.
 
@@ -385,7 +385,7 @@ This will interpret the `script` parameter as an `inline` script with the defaul
         }
     }
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 for indexed scripts replace the `file` parameter with an `id` parameter.
 
@@ -541,7 +541,7 @@ For fields with many unique terms and a small number of required results it can 
 
 Even though the number of actors may be comparatively small and we want only 50 result buckets there is a combinatorial explosion of buckets during calculation - a single actor can produce n² buckets where n is the number of actors. The sane option would be to first determine the 10 most popular actors and only then examine the top co-stars for these 10 actors. This alternative strategy is what we call the `breadth_first` collection mode as opposed to the `depth_first` mode.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The `breadth_first` is the default mode for fields with a cardinality bigger than the requested size or when the cardinality is unknown (numeric fields or scripts for instance). It is possible to override the default heuristic and to provide a collect mode directly in the request:
     
@@ -571,13 +571,13 @@ The `breadth_first` is the default mode for fields with a cardinality bigger tha
   
 When using `breadth_first` mode the set of documents that fall into the uppermost buckets are cached for subsequent replay so there is a memory overhead in doing this which is linear with the number of matching documents. Note that the `order` parameter can still be used to refer to data from a child aggregation when using the `breadth_first` setting - the parent aggregation understands that this child aggregation will need to be called first before any of the other child aggregations.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Nested aggregations such as `top_hits` which require access to score information under an aggregation that uses the `breadth_first` collection mode need to replay the query on the second pass but only for the documents belonging to the top buckets.
 
 ### Execution hint
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The automated execution optimization is experimental, so this parameter is provided temporarily as a way to override the default behaviour 
 

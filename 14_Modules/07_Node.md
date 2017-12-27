@@ -17,7 +17,7 @@ All nodes know about all the other nodes in the cluster and can forward client r
 
 By default a node is a master-eligible node and a data node, plus it can pre-process documents through ingest pipelines. This is very convenient for small clusters but, as the cluster grows, it becomes important to consider separating dedicated master-eligible nodes from dedicated data nodes.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Coordinating node
 
@@ -33,7 +33,7 @@ The master node is responsible for lightweight cluster-wide actions such as crea
 
 Any master-eligible node (all nodes by default) may be elected to become the master node by the [master election process](modules-discovery-zen.html).
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 Master nodes must have access to the `data/` directory (just like `data` nodes) as this is where the cluster state is persisted between node restarts.
 
@@ -83,7 +83,7 @@ This setting can also be changed dynamically on a live cluster with the [cluster
       }
     }
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 An advantage of splitting the master and data roles between dedicated nodes is that you can have just three master-eligible nodes and set `minimum_master_nodes` to `2`. You never have to change this setting, no matter how many dedicated data nodes you add to the cluster.
 
@@ -129,7 +129,7 @@ If you take away the ability to be able to handle master duties, to hold data, a
 
 Coordinating only nodes can benefit large clusters by offloading the coordinating node role from data and master-eligible nodes. They join the cluster and receive the full [cluster state](cluster-state.html), like every other node, and they use the cluster state to route requests directly to the appropriate place(s).
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Adding too many coordinating only nodes to a cluster can increase the burden on the entire cluster because the elected master node must await acknowledgement of cluster state updates from every node! The benefit of coordinating only nodes should not be overstated — data nodes can happily serve the same purpose.
 
@@ -161,7 +161,7 @@ Like all node settings, it can also be specified on the command line as:
     
     ./bin/elasticsearch -Epath.data=/var/elasticsearch/data
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 When using the `.zip` or `.tar.gz` distributions, the `path.data` setting should be configured to locate the data directory outside the Elasticsearch home directory, so that the home directory can be deleted without deleting your data! The RPM and Debian distributions do this for you already.
 
@@ -171,7 +171,7 @@ The [data path](modules-node.html#data-path) can be shared by multiple nodes, ev
 
 By default, Elasticsearch is configured to prevent more than one node from sharing the same data path. To allow for more than one node (e.g., on your development machine), use the setting `node.max_local_storage_nodes` and set this to a positive integer larger than one.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Never run different node types (i.e. master, data) from the same data directory. This can lead to unexpected data loss.
 

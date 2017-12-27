@@ -55,6 +55,6 @@ Below is an example of query clauses being used in query and filter context in t
 <5>| The `filter` parameter indicates filter context.     
 <6> <7>| The `term` and `range` clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.   
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 Use query clauses in query context for conditions which should affect the score of matching documents (i.e. how well does the document match), and use all other query clauses in filter context.

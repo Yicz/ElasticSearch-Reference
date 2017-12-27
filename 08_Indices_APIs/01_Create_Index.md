@@ -45,7 +45,7 @@ or more simplified
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 You do not have to explicitly specify `index` div inside the `settings` div.
 

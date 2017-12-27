@@ -104,6 +104,6 @@ The following parameters are accepted by `object` fields:
 [`include_in_all`](include-in-all.html)| Sets the default `include_in_all` value for all the `properties` within the object. The object itself is not added tothe `_all` field.     
 [`properties`](properties.html)| The fields within the object, which can be of any [datatype](mapping-types.html), including `object`. New properties may be added to an existing object.   
   
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 If you need to index arrays of objects instead of single objects, read [Nested datatype](nested.html) first.

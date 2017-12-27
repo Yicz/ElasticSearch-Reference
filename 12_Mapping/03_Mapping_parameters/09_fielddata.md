@@ -65,7 +65,7 @@ You can enable fielddata on an existing `text` field using the [PUT mapping API]
 <1>| The mapping that you specify for `my_field` should consist of the existing mapping for that field, plus the `fielddata` parameter.     
 ---|---  
   
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `fielddata.*` parameter must have the same settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 

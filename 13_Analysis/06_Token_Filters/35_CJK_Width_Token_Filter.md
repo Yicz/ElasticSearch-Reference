@@ -7,6 +7,6 @@ The `cjk_width` token filter normalizes CJK width differences:
 
 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 This token filter can be viewed as a subset of NFKC/NFKD Unicode normalization. See the [`analysis-icu` plugin](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/analysis-icu-normalization-charfilter.html) for full normalization support.

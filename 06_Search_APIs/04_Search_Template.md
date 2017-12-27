@@ -18,7 +18,7 @@ The `/_search/template` endpoint allows to use the mustache language to pre rend
 
 For more information on how Mustache templating and what kind of templating you can do with it check out the [online documentation of the mustache project](http://mustache.github.io/mustache.5.html).
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The mustache language is implemented in elasticsearch as a sandboxed scripting language, hence it obeys settings that may be used to enable or disable scripts per language, source and operation as described in the [scripting docs](modules-scripting-security.html#security-script-source)
 
@@ -278,7 +278,7 @@ We could write the query as:
 <7> <9>| Include the `lte` clause only if `line_no.end` is specified     
 <8>| Fill in the value of param `line_no.end`  
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 As written above, this template is not valid JSON because it includes the _div_ markers like `{ {#line_no} }`. For this reason, the template should either be stored in a file (see [Pre-registered template or, when used via the REST API, should be written as a string:
     

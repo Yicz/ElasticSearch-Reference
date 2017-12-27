@@ -10,7 +10,7 @@ The [`elasticsearch-migration` plugin](https://github.com/elastic/elasticsearch-
 
 Elasticsearch 5.0 can read indices created in version 2.0 or above. An Elasticsearch 5.0 node will not start in the presence of indices created in a version of Elasticsearch before 2.0.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 ### Reindex indices from Elasticseach 1.x or before
 

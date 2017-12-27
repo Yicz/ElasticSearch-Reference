@@ -64,7 +64,7 @@ The following defines types, each with two context mappings for a completion fie
 <3>| Defines a `category` context named _place_type_ where the categories are read from the `cat` field.     
 <4>| Defines a `geo` context named _location_ where the categories are read from the `loc` field.   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Adding context mappings increases the index size for completion field. The completion index is entirely heap resident, you can monitor the completion field index size using [_Indices Stats_](indices-stats.html).
 
@@ -100,7 +100,7 @@ If the mapping had a `path` then the following index request would be enough to 
 <1>| These suggestions will be associated with _cafe_ and _food_ category.     
 ---|---  
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 If context mapping references another field and the categories are explicitly indexed, the suggestions are indexed with both set of categories.
 
@@ -125,7 +125,7 @@ Suggestions can be filtered by one or more categories. The following filters sug
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 When no categories are provided at query-time, all indexed documents are considered. Querying with no categories on a category enabled completion field should be avoided, as it will degrade search performance.
 
@@ -174,7 +174,7 @@ In addition to the `path` setting, `geo` context mapping accepts the following s
 `precision`| This defines the precision of the geohash to be indexed and can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to a raw geohash precision value of `6`.     
 ---|---  
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The index time `precision` setting sets the maximum geohash precision that can be used at query time.
 
@@ -226,7 +226,7 @@ Suggestions can be filtered and boosted with respect to how close they are to on
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 When a location with a lower precision at query time is specified, all suggestions that fall within the area will be considered.
 

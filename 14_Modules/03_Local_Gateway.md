@@ -22,6 +22,6 @@ Once the `recover_after_time` duration has timed out, recovery will start as lon
 `gateway.recover_after_data_nodes`
      Recover as long as this many data nodes have joined the cluster. 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 These settings only take effect on a full cluster restart.

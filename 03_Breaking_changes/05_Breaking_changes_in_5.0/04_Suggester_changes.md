@@ -6,7 +6,7 @@ For indices created before Elasticsearch 5.0.0, `completion` fields and the comp
 
 It is strongly recommended to reindex indices containing 2.x `completion` fields in 5.x to take advantage of the new features listed below.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 You will need to change the structure of the completion field values when reindexing.
 
@@ -18,7 +18,7 @@ Previously, deleted suggestions could be included in results even after refreshi
 
 Suggestions are aware of the document they belong to. Now, associated documents (`_source`) are returned as part of `completion` suggestions.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 `_source` meta-field must be enabled, which is the default behavior, to enable returning `_source` with suggestions.
 

@@ -168,7 +168,7 @@ This will interpret the `script` parameter as an `inline` script with the `painl
         }
     }
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 for indexed scripts replace the `file` parameter with an `id` parameter.
 
@@ -196,7 +196,7 @@ It shows how precision is better for extreme percentiles. The reason why error d
 
 ### Compression
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The `compression` parameter is specific to the current internal implementation of percentiles, and may change in the future 
 
@@ -227,7 +227,7 @@ A "node" uses roughly 32 bytes of memory, so under worst-case scenarios (large a
 
 ### HDR Histogram
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 

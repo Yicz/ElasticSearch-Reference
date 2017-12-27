@@ -63,7 +63,7 @@ The hunspell token filter accepts four options:
 `longest_only`
      If only the longest term should be returned, set this to `true`. Defaults to `false`: all possible stems are returned. 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 As opposed to the snowball stemmers (which are algorithm based) this is a dictionary lookup based stemmer and therefore the quality of the stemming is determined by the quality of the dictionary.
 

@@ -203,7 +203,7 @@ Then you could delete all of the documents from before June 1st with:
       }
     }
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 Keep in mind that deleting documents from an index is very expensive compared to deleting whole indexes. That is why time based indexes are recommended over this sort of thing and why `_ttl` was deprecated in the first place.
 

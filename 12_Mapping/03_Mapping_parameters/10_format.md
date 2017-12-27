@@ -21,7 +21,7 @@ Besides the [built-in formats](mapping-date-format.html#built-in-date-formats), 
 
 Many APIs which support date values also support [date math](common-options.html#date-math) expressions, such as `now-1m/d` — the current time, minus one month, rounded down to the nearest day.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `format` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 

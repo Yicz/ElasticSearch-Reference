@@ -121,7 +121,7 @@ Another option is to provide the wildcard fields search in the query string itse
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Since `\` (backslash) is a special character in json strings, it needs to be escaped, hence the two backslashes in the above `query_string`.
 
@@ -191,7 +191,7 @@ Wildcard searches can be run on individual terms, using `?` to replace a single 
 
 Be aware that wildcard queries can use an enormous amount of memory and perform very badly — just think how many terms need to be queried to match the query string `"a* b* c*"`.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Allowing a wildcard at the beginning of a word (eg `"*ing"`) is particularly heavy, because all terms in the index need to be examined, just in case they match. Leading wildcards can be disabled by setting `allow_leading_wildcard` to `false`.
 
@@ -208,7 +208,7 @@ Regular expression patterns can be embedded in the query string by wrapping them
 
 The supported regular expression syntax is explained in [Regular expression syntax](query-dsl-regexp-query.html#regexp-syntax).
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The `allow_leading_wildcard` parameter does not have any control over regular expressions. A query string such as the following would force Elasticsearch to visit every term in the index:
     
@@ -284,7 +284,7 @@ Ranges with one side unbounded can use the following syntax:
     age:<10
     age:<=10
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 To combine an upper and lower bound with the simplified syntax, you would need to join two clauses with an `AND` operator:
     
@@ -367,7 +367,7 @@ The reserved characters are: `+ - = && || > < ! ( ) { } [ ] ^ " ~ * ? : \ /`
 
 Failing to escape these special characters correctly could lead to a syntax error which prevents your query from running.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `<` and `>` can’t be escaped at all. The only way to prevent them from attempting to create a range query is to remove them from the query string entirely.
 

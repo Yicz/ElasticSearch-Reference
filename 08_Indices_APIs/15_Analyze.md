@@ -39,7 +39,7 @@ Or by building a custom transient analyzer out of tokenizers, token filters and 
       "text" : "this is a <b>test</b>"
     }
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Deprecated in 5.0.0. 
 
@@ -83,7 +83,7 @@ Also, the analyzer can be derived based on a field mapping, for example:
 
 Will cause the analysis to happen based on the analyzer configured in the mapping for `obj1.field1` (and if not, the default index analyzer).
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Deprecated in 5.1.0 request parameters are deprecated and will be removed in the next major release. please use JSON params instead of request params. 
 
@@ -97,6 +97,6 @@ For backwards compatibility, we also accept the text parameter as the body of th
     
     curl -XGET 'localhost:9200/_analyze?tokenizer=keyword&filter=lowercase&char_filter=reverse' -d 'this is a test' -H 'Content-Type: text/plain'
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Deprecated in 5.1.0 the text parameter as the body of the request are deprecated and this feature will be removed in the next major release. please use JSON text param. 

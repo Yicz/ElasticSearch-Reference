@@ -23,7 +23,7 @@
 
 接下来是有趣的部分。由于每个分类有效地定义了一个文档集（属于分类的所有文档），因此可能会将存分类级别的聚合关联起来，这些存储将在该存储区的上下文内执行。 这是聚合的真正力量：**聚合可以嵌套！**
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 分类聚合可以拥有子聚合操作（分类聚合或度量聚合),将针对其父聚合生成的分类聚合计算的子集合。 嵌套聚合的级别/深度没有硬性限制（可以在“父级”聚合下嵌套聚合，这本身就是一个子聚合
 
@@ -49,7 +49,7 @@
 某些聚合操作是在聚合操作生成的文档上进行处理的。通常，这些值将从聚合生成文档的`feild`键设置的特定文档字段中提取。 还可以定义一个[`script`](modules-scripting.html)，用来生成值（每个文档）。当为聚合操作配置“field”和“script”设置时，`script`将被视为`value script`。虽然正常脚本是在文档级别上进行操作的（即脚本可以访问与文档相关的所有数据），但`value script`是在**值**级别上操作的。在这种模式下，值从聚合操作生成的的`field`中提取，`script`用于对这些值进行“变换”。
 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 使用脚本时，也可以定义`lang`和`params`设置。 前者定义了使用的脚本语言（假定Elasticsearch中有适当的语言，默认或插件）。后者可以将脚本中的所有“动态”表达式定义为参数，从而使脚本在调用之间保持静态（这将确保在Elasticsearch中使用缓存的编译脚本）。
 

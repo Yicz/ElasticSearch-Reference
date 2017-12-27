@@ -40,7 +40,7 @@ To shrink `my_source_index` into a new index called `my_target_index`, issue the
 
 The above request returns immediately once the target index has been added to the cluster state — it doesn’t wait for the shrink operation to start.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 Indices can only be shrunk if they satisfy the following requirements:
 
@@ -71,7 +71,7 @@ The `_shrink` API is similar to the [`create index` API](indices-create-index.ht
 ---|---    
 <2>| Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html) the shard to a single segment.   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Mappings may not be specified in the `_shrink` request, and all `index.analysis.*` and `index.similarity.*` settings will be overwritten with the settings from the source index.
 

@@ -23,7 +23,7 @@ Individual fields can be _boosted_ automatically — count more towards the 
 <1>| Matches on the `title` field will have twice the weight as those on the `content` field, which has the default `boost` of `1.0`.     
 ---|---  
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The boost is applied only for term queries (prefix, range and fuzzy queries are not _boosted_ ).
 
@@ -58,13 +58,13 @@ is equivalent to:
 
 The boost is also applied when it is copied with the value in the [`_all`](mapping-all-field.html) field. This means that, when querying the `_all` field, words that originated from the `title` field will have a higher score than words that originated in the `content` field. This functionality comes at a cost: queries on the `_all` field are slower when field boosting is used.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Deprecated in 5.0.0. 
 
 index time boost is deprecated. Instead, the field mapping boost is applied at query time. For indices created before 5.0.0 the boost will still be applied at index time. 
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Why index time boosting is a bad idea
 

@@ -17,7 +17,7 @@ Allows to highlight search results on one or more fields. The implementation use
 
 In the above case, the `content` field will be highlighted for each search hit (there will be another element in each search hit, called `highlight`, which includes the highlighted fields and the highlighted fragments).
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 In order to perform highlighting, the actual content of the field is required. If the field in question is stored (has `store` set to `true` in the mapping) it will be used, otherwise, the actual `_source` will be loaded and the relevant field will be extracted from it.
 
@@ -29,7 +29,7 @@ The field name supports wildcard notation. For example, using `comment_*` will c
 
 The default choice of highlighter is of type `plain` and uses the Lucene highlighter. It tries hard to reflect the query matching logic in terms of understanding word importance and any word positioning criteria in phrase queries.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 If you want to highlight a lot of fields in a lot of documents with complex queries this highlighter will not be fast. In its efforts to accurately reflect query logic it creates a tiny in-memory index and re-runs the original query criteria through Lucene’s query execution planner to get access to low-level match information on the current document. This is repeated for every field and every document that needs highlighting. If this presents a performance issue in your system consider using an alternative highlighter.
 
@@ -61,11 +61,11 @@ Here is an example of setting the `content` field in the index mapping to allow 
       }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Note that the postings highlighter is meant to perform simple query terms highlighting, regardless of their positions. That means that when used for instance in combination with a phrase query, it will highlight all the terms that the query is composed of, regardless of whether they are actually part of a query match, effectively ignoring their positions.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The postings highlighter doesn’t support highlighting some complex queries, like a `match` query with `type` set to `match_phrase_prefix`. No highlighted snippets will be returned in that case.
 
@@ -100,7 +100,7 @@ Here is an example of setting the `content` field to allow for highlighting usin
 
 ### Unified Highlighter
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -514,7 +514,7 @@ When highlighting a field using the unified highlighter or the fast vector highl
 
 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 When used with the `unified` highlighter, the `sentence` scanner splits sentence bigger than `fragment_size` at the first word boundary next to `fragment_size`. You can set `fragment_size` to 0 to never split any sentence.
 
@@ -590,11 +590,11 @@ The above highlights) is boosted.
 
 The above query wouldn’t highlight "run" or "scissor" but shows that it is just fine not to list the field to which the matches are combined (`content`) in the matched fields.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Technically it is also fine to add fields to `matched_fields` that don’t share the same underlying string as the field to which the matches are combined. The results might not make much sense and if one of the matches is off the end of the text then the whole query will fail.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 There is a small amount of overhead involved with setting `matched_fields` to a non-empty array so always prefer
     

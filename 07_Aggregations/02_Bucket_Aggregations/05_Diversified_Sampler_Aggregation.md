@@ -1,12 +1,12 @@
 ## Diversified Sampler Aggregation
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
 Like the ‘sampler` aggregation this is a filtering aggregation used to limit any sub aggregations’ processing to a sample of the top-scoring documents. The `diversified_sampler` aggregation adds the ability to limit the number of matches that share a common value such as an "author".
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Any good market researcher will tell you that when working with samples of data it is important that the sample represents a healthy variety of opinions rather than being skewed by any single voice. The same is true with aggregations and sampling with these diversify settings can offer a way to remove the bias in your content (an over-populated geography, a large spike in a timeline or an over-active forum spammer).
 

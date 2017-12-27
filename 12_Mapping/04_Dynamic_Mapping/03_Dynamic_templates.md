@@ -10,7 +10,7 @@ Dynamic templates allow you to define custom mappings that can be applied to dyn
 
 The original field name `{name}` and the detected datatype `{dynamic_type`} [template variables](dynamic-templates.html#template-variables "{name} and {dynamic_type}") can be used in the mapping specification as placeholders.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 Dynamic field mappings are only added when a field contains a concrete value — not `null` or an empty array. This means that if the `null_value` option is used in a `dynamic_template`, it will only be applied after the first document with a concrete value for the field has been indexed.
 

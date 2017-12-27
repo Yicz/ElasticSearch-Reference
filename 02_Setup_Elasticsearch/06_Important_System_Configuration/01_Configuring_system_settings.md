@@ -30,7 +30,7 @@
 
 这个只修改影响到`elasticsearch`新打开的会话。
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Ubuntu系统与`limits.conf`
 

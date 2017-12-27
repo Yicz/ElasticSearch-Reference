@@ -57,7 +57,7 @@ By default, the `extended_stats` metric will return an object called `std_deviat
 
 <1>| `sigma` controls how many standard deviations +/- from the mean should be displayed     ---|---    `sigma` can be any non-negative double, meaning you can request non-integer values such as `1.5`. A value of `0` is valid, but will simply return the average for both `upper` and `lower` bounds.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ### Standard Deviation and Bounds require normality
 
@@ -103,7 +103,7 @@ This will interpret the `script` parameter as an `inline` script with the `painl
         }
     }
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 for indexed scripts replace the `file` parameter with an `id` parameter.
 

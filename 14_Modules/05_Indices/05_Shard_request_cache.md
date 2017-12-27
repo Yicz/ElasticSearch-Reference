@@ -4,7 +4,7 @@ When a search request is run against an index or against many indices, each invo
 
 The shard-level request cache module caches the local results on each shard. This allows frequently used (and potentially heavy) search requests to return results almost instantly. The requests cache is a very good fit for the logging use case, where only the most recent index is being actively updated — results from older indices will be served directly from the cache.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 By default, the requests cache will only cache the results of search requests where `size=0`, so it will not cache `hits`, but it will cache `hits.total`, [aggregations](search-aggregations.html), and [suggestions](search-suggesters.html).
 
@@ -58,7 +58,7 @@ The `request_cache` query-string parameter can be used to enable or disable cach
       }
     }
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 If your query uses a script whose result is not deterministic (e.g. it uses a random function or references the current time) you should set the `request_cache` flag to `false` to disable caching for that request.
 
@@ -68,7 +68,7 @@ Requests `size` is greater than 0 will not be cached even if the request cache i
 
 The whole JSON body is used as the cache key. This means that if the JSON changes — for instance if keys are output in a different order — then the cache key will not be recognised.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 Most JSON libraries support a _canonical_ mode which ensures that JSON keys are always emitted in the same order. This canonical mode can be used in the application to ensure that a request is always serialized in the same way.
 

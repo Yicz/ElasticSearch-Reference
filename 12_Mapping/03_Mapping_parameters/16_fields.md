@@ -55,11 +55,11 @@ It is often useful to index the same field in different ways for different purpo
 <2>| The `city` field can be used for full text search.     
 <3> <4>| The `city.raw` field can be used for sorting and aggregations   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Multi-fields do not change the original `_source` field.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 The `fields` setting is allowed to have different settings for fields of the same name in the same index. New multi-fields can be added to existing fields using the [PUT mapping API](indices-put-mapping.html).
 

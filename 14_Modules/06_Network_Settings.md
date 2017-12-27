@@ -2,7 +2,7 @@
 
 Elasticsearch binds to localhost only by default. This is sufficient for you to run a local development server (or even a development cluster, if you start multiple nodes on the same machine), but you will need to configure some [basic network settings](modules-network.html#common-network-settings) in order to run a real production cluster across multiple servers.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Be careful with the network configuration!
 
@@ -52,7 +52,7 @@ The following special values may be passed to `network.host`:
 
 These special values will work over both IPv4 and IPv6 by default, but you can also limit this with the use of `:ipv4` of `:ipv6` specifiers. For example, `_en0:ipv4_` would only bind to the IPv4 addresses of interface `en0`.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 ### Discovery in the cloud
 

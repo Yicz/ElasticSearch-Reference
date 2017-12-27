@@ -2,7 +2,7 @@
 
 The `pattern_replace` character filter uses a regular expression to match characters which should be replaced with the specified replacement string. The replacement string can refer to capture groups in the regular expression.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 ### Beware of Pathological Regular Expressions
 
@@ -60,7 +60,7 @@ The above example produces the following term:
     
     [ My, credit, card, is 123_456_789 ]
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Using a replacement string that changes the length of the original text will work for search purposes, but will result in incorrect highlighting, as can be seen in the following example.
 

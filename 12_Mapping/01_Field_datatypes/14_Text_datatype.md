@@ -55,6 +55,6 @@ The following parameters are accepted by `text` fields:
 [`term_vector`](term-vector.html)| Whether term vectors should be stored for an 
 [`analyzed`](mapping-index.html) field. Defaults to `no`.   
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Indexes imported from 2.x do not support `text`. Instead they will attempt to downgrade `text` into `string`. This allows you to merge modern mappings with legacy mappings. Long lived indexes will have to be recreated before upgrading to 6.x but mapping downgrade gives you the opportunity to do the recreation on your own schedule.

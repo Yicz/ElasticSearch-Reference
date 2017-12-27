@@ -51,7 +51,7 @@ The query may also be sent in the request body:
       }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html) works
 

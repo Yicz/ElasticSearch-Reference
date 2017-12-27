@@ -6,7 +6,7 @@
 ES的最新版本可以在[下载页面](/downloads/elasticsearch)直接找到,旧版本可以到[过去发布版本]
 (/downloads/past-releases)进行查找.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 ES要求使用Java8+的环境,可以使用[Oracle 官方 JDK](http://www.oracle
 .com/technetwork/java/javase/downloads/index.html) 或者[OpenJDK](http://openjdk
@@ -35,7 +35,7 @@ ES要求使用Java8+的环境,可以使用[Oracle 官方 JDK](http://www.oracle
     
     echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 这些步骤不使用`add-apt-repository` 命令的理由:
 
@@ -49,7 +49,7 @@ ES要求使用Java8+的环境,可以使用[Oracle 官方 JDK](http://www.oracle
         
     sudo apt-get update && sudo apt-get install elasticsearch
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 如果同一个Elasticsearch存储库中存在两个条目，则在`apt-get update`中会看到类似这样的错误：    
     
@@ -57,7 +57,7 @@ ES要求使用Java8+的环境,可以使用[Oracle 官方 JDK](http://www.oracle
 
 检查 `/etc/apt/sources.list.d/elasticsearch-5.x.list` 是否在 `/etc/apt/sources.list.d/` 和 `/etc/apt/sources.list` 文件存在多个.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 在基于systemd的发行系统上，安装脚本将尝试设置内核参数（例如`vm.max_map_count`）; 您可以通过将环境变量`ES_SKIP_SET_KERNEL_PARAMETERS`设置为`true`来跳过此操作。
 
@@ -164,7 +164,7 @@ Debian软件包也有一个系统配置文件（`/ etc / default / elasticsearch
 `ES_JAVA_OPTS`| JVM的额外运行优化参数  
 `RESTART_ON_UPGRADE`| 配置软件包升级重启，默认为“false”。 这意味着您必须在手动安装包后重新启动elasticsearch实例。 其原因是为了确保集群中的升级不会导致连续的碎片重新分配，从而导致高网络流量并缩短集群的响应时间。
   
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 使用`systemd`的分发需要通过`systemd`而不是`/etc/sysconfig/elasticsearch`文件来配置系统资源限制。 有关更多信息，请参阅[Systemd配置](setting-system-settings.html#systemd).
 

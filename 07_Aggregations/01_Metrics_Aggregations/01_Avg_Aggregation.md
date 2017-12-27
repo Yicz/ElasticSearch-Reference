@@ -63,7 +63,7 @@ This will interpret the `script` parameter as an `inline` script with the `painl
         }
     }
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 for indexed scripts replace the `file` parameter with an `id` parameter.
 

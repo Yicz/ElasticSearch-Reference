@@ -2,7 +2,7 @@
 
 If you want to get more advanced details, set `explain` to `true` (defaults to `false`). It will output all token attributes for each token. You can filter token attributes you want to output by setting `attributes` option.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The format of the additional detail information is experimental and can change at any time 
     

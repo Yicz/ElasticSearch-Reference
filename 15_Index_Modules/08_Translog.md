@@ -41,7 +41,7 @@ In some cases (a bad drive, user error) the translog can become corrupted. When 
 
 If there is no copy of the data from which Elasticsearch can recover successfully, a user may want to recover the data that is part of the shard at the cost of losing the data that is currently contained in the translog. We provide a command-line tool for this, `elasticsearch-translog`.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The `elasticsearch-translog` tool should **not** be run while Elasticsearch is running, and you will permanently lose the documents that were contained only in the translog!
 

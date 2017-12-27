@@ -13,7 +13,7 @@ Perl
 Python 
      See [elasticsearch.helpers.*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 The results that are returned from a scroll request reflect the state of the index at the time that the initial `search` request was made, like a snapshot in time. Subsequent changes to documents (index, update or delete) will only affect later search requests.
 
@@ -47,15 +47,15 @@ The result from the above request includes a `_scroll_id`, which should be passe
   
 The `size` parameter allows you to configure the maximum number of hits to be returned with each batch of results. Each call to the `scroll` API returns the next batch of results until there are no more results left to return, ie the `hits` array is empty.
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 The initial search request and each subsequent scroll request returns a new `_scroll_id` — only the most recent `_scroll_id` should be used.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 If the request specifies aggregations, only the initial search response will contain the aggregations results.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Scroll requests have optimizations that make them faster when the sort order is `_doc`. If you want to iterate over all documents regardless of the order, this is the most efficient option:
     
@@ -73,7 +73,7 @@ The `scroll` parameter (passed to the `search` request and to every `scroll` req
 
 Normally, the background merge process optimizes the index by merging together smaller segments to create new bigger segments, at which time the smaller segments are deleted. This process continues during scrolling, but an open search context prevents the old segments from being deleted while they are still in use. This is how Elasticsearch is able to return the results of the initial search request, regardless of subsequent changes to documents.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
 Keeping older segments alive means that more file handles are needed. Ensure that you have configured your nodes to have ample free file handles. See [File Descriptors](file-descriptors.html).
 
@@ -151,7 +151,7 @@ The result from the first request returned documents that belong to the first sl
 
 Each scroll is independent and can be processed in parallel like any scroll request.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 If the number of slices is bigger than the number of shards the slice filter is very slow on the first calls, it has a complexity of O(N) and a memory cost equals to N bits per slice where N is the total number of documents in the shard. After few calls the filter should be cached and subsequent calls should be faster but you should limit the number of sliced query you perform in parallel to avoid the memory explosion.
 
@@ -182,6 +182,6 @@ To avoid this cost entirely it is possible to use the `doc_values` of another fi
 
 For append only time-based indices, the `timestamp` field can be used safely.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 By default the maximum number of slices allowed per scroll is limited to 1024. You can update the `index.max_slices_per_scroll` index setting to bypass this limit.

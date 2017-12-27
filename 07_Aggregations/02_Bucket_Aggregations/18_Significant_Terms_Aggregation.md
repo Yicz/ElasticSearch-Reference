@@ -2,7 +2,7 @@
 
 An aggregation that returns interesting or unusual occurrences of terms in a set.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 The `significant_terms` aggregation can be very heavy when run on large indices. Work is in progress to provide more lightweight sampling techniques. As a result, the API for this feature may change in non-backwards compatible ways 
 
@@ -174,7 +174,7 @@ The significant_terms aggregation can be used effectively on tokenized free-text
 
 
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Picking a free-text field as the subject of a significant terms analysis can be expensive! It will attempt to load every unique word into RAM. It is recommended to only use this on smaller indices.
 
@@ -184,7 +184,7 @@ You can spot mis-categorized content by first searching a structured field e.g. 
 
 The significance score from each term can also provide a useful `boost` setting to sort matches. Using the `minimum_should_match` setting of the `terms` query with the keywords will help control the balance of precision/recall in the result set i.e a high setting would have a small number of relevant results packed full of keywords and a setting of "1" would produce a more exhaustive results set with all documents containing _any_ keyword.
 
-![Tip](images/icons/tip.png)
+![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
 
  **Show significant_terms in context. ** Free-text significant_terms are much more easily understood when viewed in context. Take the results of `significant_terms` suggestions from a free-text field and use them in a `terms` query on the same field with a `highlight` clause to present users with example snippets of documents. When the terms are presented unstemmed, highlighted, with the right case, in the right order and with some context, their significance/meaning is more readily apparent.
 
@@ -311,7 +311,7 @@ To ensure better accuracy a multiple of the final `size` is used as the number o
 
 Low-frequency terms can turn out to be the most interesting ones once all results are combined so the significant_terms aggregation can produce higher-quality results when the `shard_size` parameter is set to values significantly higher than the `size` setting. This ensures that a bigger volume of promising candidate terms are given a consolidated review by the reducing node before the final selection. Obviously large candidate term lists will cause extra network traffic and RAM usage so this is quality/cost trade off that needs to be balanced. If `shard_size` is set to -1 (the default) then `shard_size` will be automatically estimated based on the number of shards and the `size` parameter.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `shard_size` cannot be smaller than `size` (as it doesn’t make much sense). When it is, elasticsearch will override it and reset it to be equal to `size`.
 
@@ -339,7 +339,7 @@ Terms that score highly will be collected on a shard level and merged with the t
 
 The parameter `shard_min_doc_count` regulates the _certainty_ a shard has if the term should actually be added to the candidate list or not with respect to the `min_doc_count`. Terms will only be considered if their local shard frequency within the set is higher than the `shard_min_doc_count`. If your dictionary contains many low frequent words and you are not interested in these (for example misspellings), then you can set the `shard_min_doc_count` parameter to filter out candidate terms on a shard level that will with a reasonable certainty not reach the required `min_doc_count` even after merging the local frequencies. `shard_min_doc_count` is set to `0` by default and has no effect unless you explicitly set it.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Setting `min_doc_count` to `1` is generally not advised as it tends to return terms that are typos or other bizarre curiosities. Finding more than one instance of a term helps reinforce that, while still rare, the term was not the result of a one-off accident. The default value of 3 is used to provide a minimum weight-of-evidence. Setting `shard_min_doc_count` too high will cause significant candidate terms to be filtered out on a shard level. This value should be set much lower than `min_doc_count/#shards`.
 
@@ -366,7 +366,7 @@ The default source of statistical information for background term frequencies is
 
 The above filter would help focus in on terms that were peculiar to the city of Madrid rather than revealing terms like "Spanish" that are unusual in the full index’s worldwide context but commonplace in the subset of documents containing the word "Spain".
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Use of background filters will slow the query as each term’s postings must be filtered to determine a frequency
 

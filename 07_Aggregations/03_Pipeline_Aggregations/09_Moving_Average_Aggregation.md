@@ -1,6 +1,6 @@
 ## Moving Average Aggregation
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -292,7 +292,7 @@ The default values of `alpha` and `gamma` are `0.3` while `beta` is `0.1`. The s
 
 The multiplicative Holt-Winters model can be [Minimized](search-aggregations-pipeline-movavg-aggregation.html#movavg-minimizer)
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Multiplicative Holt-Winters works by dividing each data point by the seasonal value. This is problematic if any of your data is zero, or if there are gaps in the data (since this results in a divid-by-zero). To combat this, the `mult` Holt-Winters pads all values by a very small amount (1*10-10) so that all values are non-zero. This affects the result, but only minimally. If your data is non-zero, or you prefer to see `NaN` when zero’s are encountered, you can disable this behavior with `pad: false`
     
@@ -396,7 +396,7 @@ Minimization is enabled/disabled via the `minimize` parameter:
   
 When enabled, minimization will find the optimal values for `alpha`, `beta` and `gamma`. The user should still provide appropriate values for `window`, `period` and `type`.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Minimization works by running a stochastic process called **simulated annealing**. This process will usually generate a good solution, but is not guaranteed to find the global optimum. It also requires some amount of additional computational power, since the model needs to be re-run multiple times as the values are tweaked. The run-time of minimization is linear to the size of the window being processed: excessively large windows may cause latency.
 

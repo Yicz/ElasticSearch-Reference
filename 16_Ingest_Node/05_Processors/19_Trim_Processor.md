@@ -2,7 +2,7 @@
 
 Trims whitespace from field.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 This only works on leading and trailing whitespace.
 

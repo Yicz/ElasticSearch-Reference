@@ -1,6 +1,6 @@
 ## Pre-loading data into the file system cache
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This is an expert-only setting and may be removed in the future 
 

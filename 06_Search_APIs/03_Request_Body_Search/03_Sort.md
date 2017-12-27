@@ -38,7 +38,7 @@ Assuming the following index mapping:
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `_doc` has no real use-case besides being the most efficient sort order. So if you don’t care about the order in which documents are returned, then you should sort by `_doc`. This especially helps when [scrolling](search-request-scroll.html).
 
@@ -140,7 +140,7 @@ For example:
         }
     }
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 If a nested inner object doesn’t match with the `nested_filter` then a missing value is used.
 
@@ -191,7 +191,7 @@ Allow to sort by `_geo_distance`. Here is an example, assuming `pin.location` is
 `unit`
      The unit to use when computing sort values. The default is `m` (meters). 
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 geo distance sorting does not support configurable missing values: the distance will always be considered equal to `Infinity` when a document does not have values for the field that is used for distance computation.
 

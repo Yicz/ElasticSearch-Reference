@@ -21,7 +21,7 @@ The `term_vector` setting accepts:
   
 The fast vector highlighter requires `with_positions_offsets`. The term vectors API can retrieve whatever is stored.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 Setting `with_positions_offsets` will double the size of a field’s index.
     

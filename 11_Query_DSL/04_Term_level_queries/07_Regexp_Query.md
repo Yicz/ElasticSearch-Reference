@@ -66,7 +66,7 @@ Regular expressions are dangerous because it’s easy to accidentally create an 
 
 Regular expression queries are supported by the `regexp` and the `query_string` queries. The Lucene regular expression engine is not Perl-compatible but supports a smaller range of operators.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 We will not attempt to explain regular expressions, but just explain the supported operators.
 

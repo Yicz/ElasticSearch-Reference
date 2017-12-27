@@ -4,11 +4,11 @@ Elasticsearch is also available as a Docker image. The image is built with [X-Pa
 
 ### Security note
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 [X-Pack](https://www.elastic.co/guide/en/x-pack/5.4/index.html) is preinstalled in this image. Please take a few minutes to familiarize yourself with [X-Pack Security](https://www.elastic.co/guide/en/x-pack/5.4/security-getting-started.html) and how to change default passwords. The default password for the `elastic` user is `changeme`.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 X-Pack includes a trial license for 30 days. After that, you can obtain one of the [available subscriptions](https://www.elastic.co/subscriptions) or [disable Security](https://www.elastic.co/guide/en/x-pack/5.4/security-settings.html). The Basic license is free and includes the [Monitoring](https://www.elastic.co/products/x-pack/monitoring) extension.
 
@@ -30,7 +30,7 @@ Elasticsearch can be quickly started for development or testing use with the fol
 
 #### Production mode
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 The `vm_max_map_count` kernel setting needs to be set to at least `262144` for production use. Depending on your platform:
 
@@ -68,7 +68,7 @@ The following example brings up a cluster comprising two Elasticsearch nodes. To
     
     docker-compose up
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 `docker-compose` is not pre-installed with Docker on Linux. Instructions for installing it can be found on the [docker-compose webpage](https://docs.docker.com/compose/install/#install-using-pip).
 
@@ -153,7 +153,7 @@ Create your custom config file and mount this over the image’s corresponding f
     
     -v full_path_to/custom_elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
-![Important](images/icons/important.png)
+![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
 
 The container **runs Elasticsearch as user`elasticsearch` using uid:gid `1000:1000`**. Bind mounted host directories and files, such as `custom_elasticsearch.yml` above, **need to be accessible by this user**. For the [data and log dirs](https://www.elastic.co/guide/en/elasticsearch/reference/current/important-settings.html#path-settings), such as `/usr/share/elasticsearch/data`, write access is required as well.
 
@@ -185,7 +185,7 @@ Options can be passed as command-line options to the Elasticsearch process by ov
 
 We have collected a number of best practices for production use.
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 Any Docker parameters mentioned below assume the use of `docker run`.
 
@@ -194,7 +194,7 @@ Any Docker parameters mentioned below assume the use of `docker run`.
     
         --ulimit nofile=65536:65536
 
-![Note](images/icons/note.png)
+![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
 
 One way of checking the Docker daemon defaults for the aforementioned ulimits is by running:
     

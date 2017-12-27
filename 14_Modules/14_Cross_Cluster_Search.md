@@ -1,6 +1,6 @@
 ## Cross Cluster Search
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This functionality is in beta and is subject to change. The design and code is considered to be less mature than official GA features. Elastic will take a best effort approach to fix any issues, but beta features are not subject to the support SLA of official GA features.
 
@@ -16,7 +16,7 @@ Remote clusters can be specified globally using [cluster settings](cluster-updat
 
 If a remote cluster is configured via `elasticsearch.yml` only the nodes with that configuration will be able to connect to the remote cluster. In other words, federated search requests will have to be sent specifically to those nodes. Remote clusters set via the [cluster settings API](cluster-update-settings.html) will be available on every node in the cluster.
 
-![Warning](images/icons/warning.png)
+![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
 
 This feature was added as Beta in Elasticsearch `v5.3` with further improvements made in 5.4 and 5.5. It requires gateway eligible nodes to be on `v5.5` onwards.
 
