@@ -1,84 +1,78 @@
-## Term Vectors
+## 词条向量 Term Vectors 
 
-Returns information and statistics on terms in the fields of a particular document. The document could be stored in the index or artificially provided by the user. Term vectors are [realtime](docs-get.html#realtime) by default, not near realtime. This can be changed by setting `realtime` parameter to `false`.
-    
+返回特定文档字段中的信息和统计数据。文档可以存储在索引中或由用户人为提供。词矢量 默认是[实时 realtime](docs-get.html#realtime)，不是近实时的。 这可以通过将`realtime`参数设置为false来改变。    
     
     GET /twitter/tweet/1/_termvectors
 
-Optionally, you can specify the fields for which the information is retrieved either with a parameter in the url
-    
+或者，您可以使用url中的参数指定要检索信息的字段    
     
     GET /twitter/tweet/1/_termvectors?fields=message
 
-or by adding the requested fields in the request body (see example below). Fields can also be specified with wildcards in similar way to the [multi match query](query-dsl-multi-match-query.html)
+或者通过在请求正文中添加请求的字段（请参见下面的示例）。 也可以使用与[多重匹配查询 multi match query](query-dsl-multi-match-query.html)类似的方式来指定字段
 
 ![Warning](/images/icons/warning.png)
 
-Note that the usage of `/_termvector` is deprecated in 2.0, and replaced by `/_termvectors`.
+请注意，`/ _termvector`的使用在2.0中被弃用，并被替换为`/ _termvectors`。
 
-### Return values
+### 返回值 Return values
 
-Three types of values can be requested: _term information_ , _term statistics_ and _field statistics_. By default, all term information and field statistics are returned for all fields but no term statistics.
-
-#### Term information
-
-  * term frequency in the field (always returned) 
-  * term positions (`positions` : true) 
-  * start and end offsets (`offsets` : true) 
-  * term payloads (`payloads` : true), as base64 encoded bytes 
+可以请求三种类型的值：_term information_，_term statistics_和_field statistics_。 默认情况下，所有字段的所有词信息和字段统计信息都会返回，但是没有任何术语统计。
 
 
+#### 词信息 Term information
 
-If the requested information wasn’t stored in the index, it will be computed on the fly if possible. Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
+   * 字段中的词频（总是返回）
+   * 词的位置（`positions`：true）
+   * 开始和结束偏移量（`offsets`：true）
+   * term有效载荷（`payloads`：true），是base64编码的字节
+
+如果所请求的信息没有存储在索引中，则将在可能的情况下即时计算。 另外，对于甚至不存在于索引中但是由用户提供的文档也可以计算词矢量。
 
 ![Warning](/images/icons/warning.png)
 
-Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
+开始和结束偏移假定正在使用UTF-16编码。 如果要使用这些偏移量来获取产生该令牌的原始文本，则应确保使用UTF-16编码的字符串也是使用子字符串编码的。
 
-#### Term statistics
+#### 词条统计信息 Term statistics
+
+将`term_statistics`设置为`true`（默认是`false`）
+
+   *全部词条频率（所有文档中词条的频率）
+   *文档频率（包含当前词条的文档数量）
+
+默认情况下，这些值不会被返回，因为词条统计可能会严重地影响性能。
 
 Setting `term_statistics` to `true` (default is `false`) will return
 
-  * total term frequency (how often a term occurs in all documents) 
-  * document frequency (the number of documents containing the current term) 
 
+#### Field statistics 字段统计信息
 
+将`field_statistics`设置为`false`（默认是`true`）会省略：
 
-By default these values are not returned since term statistics can have a serious performance impact.
+   *文档数量（多少个文档包含这个字段）
+   *文档频率总和（该字段中所有术语的文档频率总和）
+   *总学期频率总和（该领域每个学期的总学期频率之和）
+ 
+#### 词条过滤 Terms Filtering
+使用filter参数，返回的条件也可以根据它们的`tf-idf`分数进行过滤。 这可能是有用的，以便找出一个文档的一个很好的特征向量。 此功能与[More Like This Query](query-dsl-mlt-query.html)中的 [second phase](query-dsl-mlt-query.html#mlt-query-term-selection)。 有关使用情况，请参阅[示例5](docs-termvectors.html#docs-termvectors-terms-filtering)。
 
-#### Field statistics
+支持以下子参数：
 
-Setting `field_statistics` to `false` (default is `true`) will omit :
-
-  * document count (how many documents contain this field) 
-  * sum of document frequencies (the sum of document frequencies for all terms in this field) 
-  * sum of total term frequencies (the sum of total term frequencies of each term in this field) 
-
-
-
-#### Terms Filtering
-
-With the parameter `filter`, the terms returned could also be filtered based on their tf-idf scores. This could be useful in order find out a good characteristic vector of a document. This feature works in a similar manner to the [second phase](query-dsl-mlt-query.html#mlt-query-term-selection) of the [More Like This Query](query-dsl-mlt-query.html). See [example 5](docs-termvectors.html#docs-termvectors-terms-filtering) for usage.
-
-The following sub-parameters are supported:
-
-`max_num_terms`| Maximum number of terms that must be returned per field. Defaults to `25`.     
+`max_num_terms`| 每个字段必须返回的最大词条数。 默认为`25`。     
 ---|---    
-`min_term_freq`| Ignore words with less than this frequency in the source doc. Defaults to `1`.     
-`max_term_freq`| Ignore words with more than this frequency in the source doc. Defaults to unbounded.     
-`min_doc_freq`| Ignore terms which do not occur in at least this many docs. Defaults to 
-`1`.     `max_doc_freq`| Ignore words which occur in more than this many docs. Defaults to unbounded.     
-`min_word_length`| The minimum word length below which words will be ignored. Defaults to `0`.     
-`max_word_length`| The maximum word length above which words will be ignored. Defaults to unbounded (`0`).   
+`min_term_freq`| 在源文档中忽略小于这个频率的单词。 默认为`1`。     
+`max_term_freq`| 在源文件中忽略超过这个频率的单词。 默认不设置。     
+`min_doc_freq`| 忽略至少在这么多文档中没有出现的术语。 默认为`1`。
+`max_doc_freq`| 忽略在这么多文档中出现的单词。 默认为不设置。     
+`min_word_length`| 低于该字的最小字长将被忽略。 默认为`0`。     
+`max_word_length`| 多于该字的最大字长将被忽略。 默认为`0`即无界。   
   
-### Behaviour
+### 行为 Behaviour
 
-The term and field statistics are not accurate. Deleted documents are not taken into account. The information is only retrieved for the shard the requested document resides in. The term and field statistics are therefore only useful as relative measures whereas the absolute numbers have no meaning in this context. By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected. Use `routing` only to hit a particular shard.
+词条和字段的统计并不精确。 原因是删除的文件不被考虑在内。这些信息仅仅是被请求文档所在分片的检索信息。因此，词条和字段统计信息仅作为相对参考值使用，而绝对值在这种情况下没有意义。 默认情况下，当请求人工文档的词条向量时，随机选择一个从中获取统计信息的分片。 使用`routing`只会找特定的分片。
 
-#### Example: Returning stored term vectors
+####示例：返回存储的词条向量 Returning stored term vectors
 
-First, we create an index that stores term vectors, payloads etc. :
-    
+首先，我们创建一个存储词条向量，有效载荷等的索引：
     
     PUT /twitter/
     { "mappings": {
@@ -118,7 +112,7 @@ First, we create an index that stores term vectors, payloads etc. :
       }
     }
 
-Second, we add some documents:
+步骤二，我们添加一些文档:
     
     
     PUT /twitter/tweet/1
@@ -133,8 +127,7 @@ Second, we add some documents:
       "text" : "Another twitter test ..."
     }
 
-The following request returns all information and statistics for field `text` in document `1` (John Doe):
-    
+下面的请求返回文档'1'（John Doe）中字段“text”的所有信息和统计信息：    
     
     GET /twitter/tweet/1/_termvectors
     {
@@ -146,8 +139,7 @@ The following request returns all information and statistics for field `text` in
       "field_statistics" : true
     }
 
-Response:
-    
+响应:
     
     {
         "_id": "1",
@@ -207,10 +199,9 @@ Response:
         }
     }
 
-#### Example: Generating term vectors on the fly
+#### 示例：实时计算词条向量 Example: Generating term vectors on the fly
 
-Term vectors which are not explicitly stored in the index are automatically computed on the fly. The following request returns all information and statistics for the fields in document `1`, even though the terms haven’t been explicitly stored in the index. Note that for the field `text`, the terms are not re-generated.
-    
+未明确存储在索引中的词条向量将会实时计算。 以下请求将返回文档“1”中所有字段的信息和统计信息，即使这些字词尚未明确存储在索引中。 请注意，对于字段`text`，这些词条不会重新生成。
     
     GET /twitter/tweet/1/_termvectors
     {
@@ -221,12 +212,11 @@ Term vectors which are not explicitly stored in the index are automatically comp
       "field_statistics" : true
     }
 
-#### Example: Artificial documents
+#### 示例: 人工提供文档 Artificial documents
 
-Term vectors can also be generated for artificial documents, that is for documents not present in the index. For example, the following request would return the same results as in example 1. The mapping used is determined by the `index` and `type`.
+词条向量也可以为人造文档生成，也就是说文档不存在于索引中。 例如，以下请求将返回与示例1相同的结果。使用的映射由`index`和`type`确定。
 
- **If dynamic mapping is turned on (default), the document fields not in the original mapping will be dynamically created.**
-    
+**如果动态映射处于打开状态（默认），将不会动态创建原始映射中的文档字段。**
     
     GET /twitter/tweet/_termvectors
     {
@@ -236,10 +226,8 @@ Term vectors can also be generated for artificial documents, that is for documen
       }
     }
 
-##### Per-field analyzer
-
-Additionally, a different analyzer than the one at the field may be provided by using the `per_field_analyzer` parameter. This is useful in order to generate term vectors in any fashion, especially when using artificial documents. When providing an analyzer for a field that already stores term vectors, the term vectors will be re-generated.
-    
+##### 字段分词器 Per-field analyzer
+另外，通过使用`per_field_analyzer`参数可以提供不同的分词器。 这对于以任何方式生成词条向量都很有用，特别是在使用人造文档时。 当为已经存储了词条向量的字段提供分词器时，词条向量将被重新生成。
     
     GET /twitter/tweet/_termvectors
     {
@@ -253,7 +241,7 @@ Additionally, a different analyzer than the one at the field may be provided by 
       }
     }
 
-Response:
+响应:
     
     
     {
@@ -285,10 +273,9 @@ Response:
       }
     }
 
-#### Example: Terms filtering
+#### 示例：词条过滤 Terms filtering
 
-Finally, the terms returned could be filtered based on their tf-idf scores. In the example below we obtain the three most "interesting" keywords from the artificial document having the given "plot" field value. Notice that the keyword "Tony" or any stop words are not part of the response, as their tf-idf must be too low.
-    
+最后，返回的条款可以根据他们的`tf-idf`分数进行过滤。 在下面的例子中，我们从具有给定`plot`字段值的人造文档中获得三个最`interesting`的关键字。 请注意，关键字`Tony`或任何停用词不是响应的一部分，因为它们的`tf-idf`太低。
     
     GET /imdb/movies/_termvectors
     {
@@ -306,7 +293,7 @@ Finally, the terms returned could be filtered based on their tf-idf scores. In t
         }
     }
 
-Response:
+响应:
     
     
     {

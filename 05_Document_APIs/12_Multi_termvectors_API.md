@@ -1,9 +1,9 @@
-## Multi termvectors API
+## 多词条向量API Multi termvectors API
 
-Multi termvectors API allows to get multiple termvectors at once. The documents from which to retrieve the term vectors are specified by an index, type and id. But the documents could also be artificially provided in the request itself.
+多个词条向量API允许一次获取多个词条向量。 从中检索词条向量的文档由索引，类型和ID指定。 但是文档也可以在请求体中人为地提供。
 
-The response includes a `docs` array with all the fetched termvectors, each element having the structure provided by the [termvectors](docs-termvectors.html) API. Here is an example:
-    
+
+响应内容包括一个带有所有提取的词条向量的docs数组，每个数据元素都有由[termvectors](docs-termvectors.html)API提供的结构。 这里是一个例子： 
     
     POST /_mtermvectors
     {
@@ -25,10 +25,8 @@ The response includes a `docs` array with all the fetched termvectors, each elem
        ]
     }
 
-See the [termvectors](docs-termvectors.html) API for a description of possible parameters.
-
-The `_mtermvectors` endpoint can also be used against an index (in which case it is not required in the body):
-    
+请参阅[termvectors](docs-termvectors.html)API以获取可用参数的说明。
+`_mtermvectors`API也可以用于索引（在这种情况下，它不是必需的）：    
     
     POST /twitter/_mtermvectors
     {
@@ -48,7 +46,7 @@ The `_mtermvectors` endpoint can also be used against an index (in which case it
        ]
     }
 
-And type:
+还有文档类型:
     
     
     POST /twitter/tweet/_mtermvectors
@@ -67,8 +65,7 @@ And type:
        ]
     }
 
-If all requested documents are on same index and have same type and also the parameters are the same, the request can be simplified:
-    
+如果所有请求的文档都是相同的索引并且具有相同的类型，并且参数相同，则可以简化请求：
     
     POST /twitter/tweet/_mtermvectors
     {
@@ -81,8 +78,7 @@ If all requested documents are on same index and have same type and also the par
         }
     }
 
-Additionally, just like for the [termvectors](docs-termvectors.html) API, term vectors could be generated for user provided documents. The mapping used is determined by `_index` and `_type`.
-    
+此外，就像[termvectors](docs-termvectors.html)API一样，可以为用户提供的文档即时生成词条向量。 使用的映射是由`_index`和`_type`决定的。    
     
     POST /_mtermvectors
     {
