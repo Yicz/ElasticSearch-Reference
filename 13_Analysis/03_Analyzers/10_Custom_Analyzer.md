@@ -114,23 +114,23 @@ Here is an example:
             "my_custom_analyzer": {
               "type": "custom",
               "char_filter": [
-                "emoticons" ![](images/icons/callouts/1.png)
+                "emoticons" #1
               ],
-              "tokenizer": "punctuation", ![](images/icons/callouts/2.png)
+              "tokenizer": "punctuation", #2
               "filter": [
                 "lowercase",
-                "english_stop" ![](images/icons/callouts/3.png)
+                "english_stop" #3
               ]
             }
           },
           "tokenizer": {
-            "punctuation": { ![](images/icons/callouts/4.png)
+            "punctuation": { #4
               "type": "pattern",
               "pattern": "[ .,!?]"
             }
           },
           "char_filter": {
-            "emoticons": { ![](images/icons/callouts/5.png)
+            "emoticons": { #5
               "type": "mapping",
               "mappings": [
                 ":) => _happy_",
@@ -139,7 +139,7 @@ Here is an example:
             }
           },
           "filter": {
-            "english_stop": { ![](images/icons/callouts/6.png)
+            "english_stop": { #6
               "type": "stop",
               "stopwords": "_english_"
             }
@@ -154,12 +154,7 @@ Here is an example:
       "text":     "I'm a :) person, and you?"
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png) ![](images/icons/callouts/4.png) ![](images/icons/callouts/5.png) ![](images/icons/callouts/6.png)
-
-| 
-
-The `emoticon` character filter, `punctuation` tokenizer and `english_stop` token filter are custom implementations which are defined in the same index settings.   
-  
+#1 #2 #3 #4 #5 #6| The `emoticon` character filter, `punctuation` tokenizer and `english_stop` token filter are custom implementations which are defined in the same index settings.     
 ---|---  
   
 The above example produces the following terms:

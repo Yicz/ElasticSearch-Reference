@@ -11,25 +11,15 @@ Each index created can have specific settings associated with it.
     {
         "settings" : {
             "index" : {
-                "number_of_shards" : 3, ![](images/icons/callouts/1.png)
-                "number_of_replicas" : 2 ![](images/icons/callouts/2.png)
+                "number_of_shards" : 3, #1
+                "number_of_replicas" : 2 #2
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Default for `number_of_shards` is 5   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Default for `number_of_replicas` is 1 (ie one replica for each primary shard)   
+#1| Default for `number_of_shards` is 5     
+---|---    
+#2| Default for `number_of_replicas` is 1 (ie one replica for each primary shard)   
   
 The above second curl example shows how an index called `twitter` can be created with specific settings for it using [YAML](http://www.yaml.org). In this case, creating an index with 3 shards, each with 2 replicas. The index settings can also be defined with [JSON](http://www.json.org):
     

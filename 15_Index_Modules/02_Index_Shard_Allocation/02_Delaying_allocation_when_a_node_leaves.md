@@ -62,9 +62,9 @@ For this reason, the default `timeout` is set to just one minute: even if shard 
 The number of shards whose allocation has been delayed by this timeout setting can be viewed with the [cluster health API](cluster-health.html):
     
     
-    GET _cluster/health ![](images/icons/callouts/1.png)
+    GET _cluster/health #1
 
-![](images/icons/callouts/1.png)| This request will return a `delayed_unassigned_shards` value.     
+#1| This request will return a `delayed_unassigned_shards` value.     
 ---|---  
   
 ### Removing a node permanently

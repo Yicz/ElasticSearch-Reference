@@ -29,18 +29,13 @@ The `precision_threshold` option is specific to the current internal implementat
             "author_count" : {
                 "cardinality" : {
                     "field" : "author_hash",
-                    "precision_threshold": 100 ![](images/icons/callouts/1.png)
+                    "precision_threshold": 100 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `precision_threshold` options allows to trade memory for accuracy, and defines a unique count below which counts are expected to be close to accurate. Above this value, counts might become a bit more fuzzy. The maximum supported value is 40000, thresholds above this number will have the same effect as a threshold of 40000. The default values is `3000`.   
-  
+#1| The `precision_threshold` options allows to trade memory for accuracy, and defines a unique count below which counts are expected to be close to accurate. Above this value, counts might become a bit more fuzzy. The maximum supported value is 40000, thresholds above this number will have the same effect as a threshold of 40000. The default values is `3000`.     
 ---|---  
   
 ### Counts are approximate
@@ -122,16 +117,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "tag_cardinality" : {
                 "cardinality" : {
                     "field" : "tag",
-                    "missing": "N/A" ![](images/icons/callouts/1.png)
+                    "missing": "N/A" #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Documents without a value in the `tag` field will fall into the same bucket as documents that have the value `N/A`.   
-  
+#1| Documents without a value in the `tag` field will fall into the same bucket as documents that have the value `N/A`.     
 ---|---

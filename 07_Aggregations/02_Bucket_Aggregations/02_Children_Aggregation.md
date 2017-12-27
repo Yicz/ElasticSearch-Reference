@@ -76,7 +76,7 @@ The following request can be built that connects the two together:
           "aggs": {
             "to-answers": {
               "children": {
-                "type" : "answer" ![](images/icons/callouts/1.png)
+                "type" : "answer" #1
               },
               "aggs": {
                 "top-names": {
@@ -92,12 +92,7 @@ The following request can be built that connects the two together:
       }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/1.png)
-
-| 
-
-The `type` points to type / mapping with the name `answer`.   
-  
+#1| The `type` points to type / mapping with the name `answer`.    
 ---|---  
   
 The above example returns the top question tags and per tag the top answer owners.
@@ -117,9 +112,9 @@ Possible response:
           "buckets": [
             {
               "key": "file-transfer",
-              "doc_count": 1, ![](images/icons/callouts/1.png)
+              "doc_count": 1, #1
               "to-answers": {
-                "doc_count": 2, ![](images/icons/callouts/2.png)
+                "doc_count": 2, #2
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -138,9 +133,9 @@ Possible response:
             },
             {
               "key": "windows-server-2003",
-              "doc_count": 1, ![](images/icons/callouts/3.png)
+              "doc_count": 1, #3
               "to-answers": {
-                "doc_count": 2, ![](images/icons/callouts/4.png)
+                "doc_count": 2, #4
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -159,9 +154,9 @@ Possible response:
             },
             {
               "key": "windows-server-2008",
-              "doc_count": 1, ![](images/icons/callouts/5.png)
+              "doc_count": 1, #5
               "to-answers": {
-                "doc_count": 2, ![](images/icons/callouts/6.png)
+                "doc_count": 2, #6
                 "top-names": {
                   "doc_count_error_upper_bound": 0,
                   "sum_other_doc_count": 0,
@@ -183,16 +178,6 @@ Possible response:
       }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/3.png) ![](images/icons/callouts/5.png)
-
-| 
-
-The number of question documents with the tag `file-transfer`, `windows-server-2003`, etc.   
-  
----|---  
-  
-![](images/icons/callouts/2.png) ![](images/icons/callouts/4.png) ![](images/icons/callouts/6.png)
-
-| 
-
-The number of answer documents that are related to question documents with the tag `file-transfer`, `windows-server-2003`, etc. 
+#1 #3 #5| The number of question documents with the tag `file-transfer`, `windows-server-2003`, etc.     
+---|---    
+#2 #4 #6| The number of answer documents that are related to question documents with the tag `file-transfer`, `windows-server-2003`, etc. 

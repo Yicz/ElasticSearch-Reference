@@ -27,7 +27,7 @@ In the response, the suggester names will be changed to respectively `term#my-fi
     
     {
       "suggest": {
-        "term#my-first-suggester": [ ![](images/icons/callouts/1.png)
+        "term#my-first-suggester": [ #1
           {
             "text": "some",
             "offset": 0,
@@ -53,7 +53,7 @@ In the response, the suggester names will be changed to respectively `term#my-fi
             ]
           }
         ],
-        "phrase#my-second-suggester": [ ![](images/icons/callouts/2.png)
+        "phrase#my-second-suggester": [ #2
           {
             "text": "some test mssage",
             "offset": 0,
@@ -70,16 +70,6 @@ In the response, the suggester names will be changed to respectively `term#my-fi
       ...
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The name `my-first-suggester` now contains the `term` prefix.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The name `my-second-suggester` now contains the `phrase` prefix. 
+#1| The name `my-first-suggester` now contains the `term` prefix.     
+---|---    
+#2| The name `my-second-suggester` now contains the `phrase` prefix. 

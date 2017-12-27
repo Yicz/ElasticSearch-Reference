@@ -49,7 +49,7 @@ Response:
         ...
         "aggregations": {
             "sample": {
-                "doc_count": 1000,![](images/icons/callouts/1.png)
+                "doc_count": 1000,#1
                 "keywords": {
                     "doc_count": 1000,
                     "buckets": [
@@ -71,12 +71,7 @@ Response:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-1000 documents were sampled in total because we asked for a maximum of 200 from an index with 5 shards. The cost of performing the nested significant_terms aggregation was therefore limited rather than unbounded.   
-  
+#1| 1000 documents were sampled in total because we asked for a maximum of 200 from an index with 5 shards. The cost of performing the nested significant_terms aggregation was therefore limited rather than unbounded.     
 ---|---  
   
 Without the `sampler` aggregation the request query considers the full "long tail" of low-quality matches and therefore identifies less significant terms such as `jquery` and `angular` rather than focusing on the more insightful Kibana-related terms.

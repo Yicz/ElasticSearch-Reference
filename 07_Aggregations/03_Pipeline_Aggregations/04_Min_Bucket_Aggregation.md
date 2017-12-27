@@ -50,18 +50,13 @@ The following snippet calculates the minimum of the total monthly `sales`:
             },
             "min_monthly_sales": {
                 "min_bucket": {
-                    "buckets_path": "sales_per_month>sales" ![](images/icons/callouts/1.png)
+                    "buckets_path": "sales_per_month>sales" #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`buckets_path` instructs this min_bucket aggregation that we want the minimum value of the `sales` aggregation in the `sales_per_month` date histogram.   
-  
+#1| `buckets_path` instructs this min_bucket aggregation that we want the minimum value of the `sales` aggregation in the `sales_per_month` date histogram.     
 ---|---  
   
 And the following may be the response:
@@ -102,16 +97,11 @@ And the following may be the response:
              ]
           },
           "min_monthly_sales": {
-              "keys": ["2015/02/01 00:00:00"], ![](images/icons/callouts/1.png)
+              "keys": ["2015/02/01 00:00:00"], #1
               "value": 60.0
           }
        }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`keys` is an array of strings since the minimum value may be present in multiple buckets   
-  
+#1| `keys` is an array of strings since the minimum value may be present in multiple buckets     
 ---|---

@@ -185,12 +185,17 @@ Reindex不试图设置目标索引。它不复制源索引的设置。在运行`
     }
 
 正如在`_update_by_query`中，您可以设置`ctx。op`更改目的地索引处执行的操作:
-`noop`
-     Set `ctx.op =)`. 
-`delete`
-     Set `ctx.op =)`. 
 
-Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` is an error.
+`noop`
+
+    如果你的脚本决定不需要做任何改变,可以设置`ctx.op ="noop"`。 这将导致`_update_by_query`从其更新中忽略该文档。 这个没有任何操作会在响应主体的noop计数器中报告。
+
+`delete`
+
+    如果您的脚本决定删除文档，请设置`ctx.op ="delete"`。 删除将在响应主体的删除计数器中报告。
+
+
+将`ctx.op`设置为其他任何内容都是错误的。 在`ctx`中设置任何其他字段是一个错误。
 
 可以修改的属性!只是小心些而已!你可以改变:
 
@@ -202,20 +207,18 @@ Setting `ctx.op` to anything else is an error. Setting any other field in `ctx` 
   * `_parent`
 
 
+将`_version`设置为`null`或者从`ctx`映射中清除它就像不在索引请求中发送版本一样。 这会导致目标索引中的文档被覆盖，而不管目标上的版本或`_reindex`请求中使用的版本类型如何。
 
-Setting `_version` to `null` or clearing it from the `ctx` map is just like not sending the version in an indexing request. It will cause that document to be overwritten in the target index regardless of the version on the target or the version type you use in the `_reindex` request.
-
-By default if `_reindex` sees a document with routing then the routing is preserved unless it’s changed by the script. You can set `routing` on the `dest` request to change this:
+默认情况下，如果`_reindex`看到带有`routing`的文档，那么`routing`将被保留，除非它被脚本改变了。 你可以在`dest`请求上设置`routing`来改变这个：
 
 `keep`
-     Sets the routing on the bulk request sent for each match to the routing on the match. The default. 
+    将发送给每个匹配的批量请求的路由设置为匹配的路由。 默认。
 `discard`
-     Sets the routing on the bulk request sent for each match to null. 
+    将为每个匹配发送的批量请求的路由设置为空。
 `=<some text>`
-     Sets the routing on the bulk request sent for each match to all text after the `=`. 
-
-For example, you can use the following request to copy all documents from the `source` index with the company name `cat` into the `dest` index with routing set to `cat`.
+    将发送给每个匹配的批量请求的路由设置为`=`之后的所有文本。
     
+例如，您可以使用以下请求将公司名称为cat的`source`索引中的所有文档复制到路由设置为`cat`的`dest`索引中:    
     
     POST _reindex
     {
@@ -233,8 +236,7 @@ For example, you can use the following request to copy all documents from the `s
       }
     }
 
-By default `_reindex` uses scroll batches of 1000. You can change the batch size with the `size` field in the `source` element:
-    
+默认情况下`_reindex`使用滚动批量为1000.你可以用`source`元素中的`size`字段来改变批量大小：    
     
     POST _reindex
     {
@@ -248,7 +250,7 @@ By default `_reindex` uses scroll batches of 1000. You can change the batch size
       }
     }
 
-Reindex can also use the [Ingest Node](ingest.html) feature by specifying a `pipeline` like this:
+Reindex也可以通过像这样指定`pipeline'来使用[Ingest Node](ingest.html)特性：
     
     
     POST _reindex
@@ -262,14 +264,13 @@ Reindex can also use the [Ingest Node](ingest.html) feature by specifying a `pip
       }
     }
 
-### Reindex from Remote
+### 从远程重建索引 Reindex from Remote
 
 ![Warning](images/icons/warning.png)
 
-Reindex from remote is [broken](https://github.com/elastic/elasticsearch/issues/24520) in 5.4.0 and fixed in 5.4.1.
+来自远程的Reindex在5.4.0中是[broken](https://github.com/elastic/elasticsearch/issues/24520)，在5.4.1中是修复。
 
-Reindex supports reindexing from a remote Elasticsearch cluster:
-    
+Reindex支持从远程Elasticsearch集群重建索引：    
     
     POST _reindex
     {
@@ -291,17 +292,17 @@ Reindex supports reindexing from a remote Elasticsearch cluster:
       }
     }
 
-The `host` parameter must contain a scheme, host, and port (e.g. `https://otherhost:9200`). The `username` and `password` parameters are optional and when they are present reindex will connect to the remote Elasticsearch node using basic auth. Be sure to use `https` when using basic auth or the password will be sent in plain text.
 
-Remote hosts have to be explicitly whitelisted in elasticsearch.yaml using the `reindex.remote.whitelist` property. It can be set to a comma delimited list of allowed remote `host` and `port` combinations (e.g. `otherhost:9200, another:9200, 127.0.10.*:9200, localhost:*`). Scheme is ignored by the whitelist - only host and port are used.
+`host`参数必须包含`schema`，`host`和`port`（例如`https：// otherhost：9200`）。 “用户名(username)”和“密码(password)”参数是可选的，当它们出现时，reindex将使用基本身份验证连接到远程Elasticsearch节点。使用基本身份验证时一定要使用“https”，否则密码将以纯文本形式发送。
 
-This feature should work with remote clusters of any version of Elasticsearch you are likely to find. This should allow you to upgrade from any version of Elasticsearch to the current version by reindexing from a cluster of the old version.
+远程主机必须使用`reindex.remote.whitelist`属性在`elasticsearch.yaml`中显式列入白名单。它可以设置为允许的远程“主机”和“端口”组合的逗号分隔列表（例如`otherhost：9200，另一个：9200,127.0.10。*：9200，localhost：*`）。白名单忽略Scheme - 仅使用主机和端口。
 
-To enable queries sent to older versions of Elasticsearch the `query` parameter is sent directly to the remote host without validation or modification.
+这个功能应该适用于你可能找到的任何版本的Elasticsearch远程集群。这应该允许您从任何版本的Elasticsearch升级到当前版本，方法是从旧版本的集群中重新索引。
 
-Reindexing from a remote server uses an on-heap buffer that defaults to a maximum size of 100mb. If the remote index includes very large documents you’ll need to use a smaller batch size. The example below sets the batch size `10` which is very, very small.
-    
-    
+为了使查询发送到旧版本的Elasticsearch，`query`参数直接发送到远程主机而无需验证或修改。
+
+从远程服务器重新编译使用默认最大大小为100MB的堆缓冲区。如果远程索引包含非常大的文档，则需要使用较小的批量。下面的例子设置了非常非常小的批量“10”。
+
     POST _reindex
     {
       "source": {
@@ -321,8 +322,7 @@ Reindexing from a remote server uses an on-heap buffer that defaults to a maximu
       }
     }
 
-It is also possible to set the socket read timeout on the remote connection with the `socket_timeout` field and the connection timeout with the `connect_timeout` field. Both default to thirty seconds. This example sets the socket read timeout to one minute and the connection timeout to ten seconds:
-    
+也可以使用`socket_timeout`字段在远程连接上设置套接字读取超时，并使用`connect_timeout`字段设置连接超时。 两者都默认为三十秒。 此示例将套接字读取超时设置为一分钟，将连接超时设置为十秒：    
     
     POST _reindex
     {
@@ -346,20 +346,19 @@ It is also possible to set the socket read timeout on the remote connection with
 
 ### URL Parameters
 
-In addition to the standard parameters like `pretty`, the Reindex API also supports `refresh`, `wait_for_completion`, `wait_for_active_shards`, `timeout`, and `requests_per_second`.
+除了`pretty`这样的标准参数外，Reindex API还支持`refresh`，`wait_for_completion`，`wait_for_active_shards`和`timeout`、 `requests_per_second`.
 
-Sending the `refresh` url parameter will cause all indexes to which the request wrote to be refreshed. This is different than the Index API’s `refresh` parameter which causes just the shard that received the new data to be refreshed.
+当请求完成时，发送`refresh`将更新正在更新的索引中的所有分片。 这与Index API的`refresh`参数不同，这个参数只会导致接收到新数据的索引分片。
 
-If the request contains `wait_for_completion=false` then Elasticsearch will perform some preflight checks, launch the request, and then return a `task` which can be used with [Tasks APIs](docs-reindex.html#docs-reindex-task-api) to cancel or get the status of the task. Elasticsearch will also create a record of this task as a document at `.tasks/task/${taskId}`. This is yours to keep or remove as you see fit. When you are done with it, delete it so Elasticsearch can reclaim the space it uses.
+如果请求包含`wait_for_completion = false`，那么ES将执行一些预检查后再启动请求，然后返回可用于[Tasks APIs]的任务(docs-update-by-query.html#docs-update-by-query-task-api)用来取消或获取任务的状态。 ES也会在`.tasks/task/${taskId}`中创建这个任务的记录。由你决定它的存留。当你完成它，删除它，方便ES可以回收它使用的空间。
 
-`wait_for_active_shards` controls how many copies of a shard must be active before proceeding with the reindexing. See [here](docs-index_.html#index-wait-for-active-shards) for details. `timeout` controls how long each write request waits for unavailable shards to become available. Both work exactly how they work in the [Bulk API](docs-bulk.html).
+`wait_for_active_shards`控制一个分片的多少个副本在继续请求之前必须被激活。有关详细信息，请[查看](docs-index_.html#index-wait-for-active-shards)。 `timeout`控制每个写请求等待不可用分片变得可用的时间。两参数在[Bulk API](docs-bulk.html)中的工作方式完全相同。
 
-`requests_per_second` can be set to any positive decimal number (`1.4`, `6`, `1000`, etc) and throttles the number of requests per second that the reindex issues or it can be set to `-1` to disabled throttling. The throttling is done waiting between bulk batches so that it can manipulate the scroll timeout. The wait time is the difference between the time it took the batch to complete and the time `requests_per_second * requests_in_the_batch`. Since the batch isn’t broken into multiple bulk requests large batch sizes will cause Elasticsearch to create many requests and then wait for a while before starting the next set. This is "bursty" instead of "smooth". The default is `-1`.
+`request_per_second`可以设置为任意正数（`1.4`，`6`，`1000`等），并且可以限制每秒查询次数，或者可以设置为`-1`禁用节流。节流是在批量批量之间等待，以便它可以操纵滚动超时。等待时间是批次完成所需的时间与`request_per_second * requests_in_the_batch`时间之间的时间差。由于批处理没有被分解为多个批量请求，因此大批量处理会导致Elasticsearch创建很多请求，然后等待一段时间再开始下一个批处理。这是“突发”代替“流畅”。默认是`-1`。
 
-### Response body
+### 响应体 Response body
 
-The JSON response looks like this:
-    
+返回如下类似的JSON内容：    
     
     {
       "took" : 639,
@@ -376,30 +375,31 @@ The JSON response looks like this:
     }
 
 `took`
-     The number of milliseconds from start to end of the whole operation. 
+     整个操作从开始到结束的毫秒数。
 `updated`
-     The number of documents that were successfully updated. 
+     成功更新的文档数。
 `created`
-     The number of documents that were successfully created. 
+     成功创建的文档数. 
 `batches`
-     The number of scroll responses pulled back by the the reindex. 
+     通过查询更新拉回滚动响应的数量。
 `version_conflicts`
-     The number of version conflicts that reindex hit. 
+     查询更新的版本冲突次数。 
 `retries`
-     The number of retries attempted by reindex. `bulk` is the number of bulk actions retried and `search` is the number of search actions retried. 
+     通过查询更新尝试的重试次数。 `bulk`是重试批量操作的次数，`search`是重试的搜索操作的次数。 
 `throttled_millis`
-     Number of milliseconds the request slept to conform to `requests_per_second`. 
+     请求以符合`requests_per_second`的毫秒数。 
 `failures`
-     Array of all indexing failures. If this is non-empty then the request aborted because of those failures. See `conflicts` for how to prevent version conflicts from aborting the operation. 
+     所有索引失败的数组。 如果这是非空的，则请求由于这些故障而中止。 有关如何防止版本冲突终止操作的信息，请参阅[冲突]()。 
 
-### Works with the Task API
+与任务API协作
 
-You can fetch the status of all running reindex requests with the [Task API](tasks.html):
-    
+您可以使用[任务API](tasks.html)获取所有正在运行的逐个重建索引请求的状态:
+
+  
     
     GET _tasks?detailed=true&actions=*reindex
 
-The responses looks like:
+响应如下:
     
     
     {
@@ -419,7 +419,7 @@ The responses looks like:
               "id" : 36619,
               "type" : "transport",
               "action" : "indices:data/write/reindex",
-              "status" : {    ![](images/icons/callouts/1.png)
+              "status" : {    #1
                 "total" : 6154,
                 "updated" : 3500,
                 "created" : 0,
@@ -439,48 +439,40 @@ The responses looks like:
         }
       }
     }
-
-![](images/icons/callouts/1.png)
-
-| 
-
-this object contains the actual status. It is just like the response json with the important addition of the `total` field. `total` is the total number of operations that the reindex expects to perform. You can estimate the progress by adding the `updated`, `created`, and `deleted` fields. The request will finish when their sum is equal to the `total` field.   
-  
+    
+#1| 该对象包含实际状态。 这就像`total`字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过累加`updated`，`created`和`deleted`字段来估计进度。 当他们的总和等于`total`字段时，请求将完成。
 ---|---  
   
-With the task id you can look up the task directly:
-    
+使用任务ID，您可以直接查找任务：    
     
     GET /_tasks/taskId:1
 
-The advantage of this API is that it integrates with `wait_for_completion=false` to transparently return the status of completed tasks. If the task is completed and `wait_for_completion=false` was set on it them it’ll come back with a `results` or an `error` field. The cost of this feature is the document that `wait_for_completion=false` creates at `.tasks/task/${taskId}`. It is up to you to delete that document.
+这个API的优点是它与`wait_for_completion = false`集成，透明地返回已完成任务的状态。 如果任务完成，并且wait_for_completion = false被设置，那么它会返回一个`results`或`error`字段。 这个特性的成本是在 `.tasks/task/${taskId}`创建`wait_for_completion = false`的文件。 删除该文件由您决定。
 
-### Works with the Cancel Task API
+### 使用task API 取消任务  Works with the Cancel Task API
 
-Any Reindex can be canceled using the [Task Cancel API](tasks.html):
-    
+任何通过查询更新可以使用[任务取消API](tasks.html)取消：
     
     POST _tasks/task_id:1/_cancel
 
-The `task_id` can be found using the tasks API above.
+可以使用上面的任务API找到`task_id`。
 
-Cancelation should happen quickly but might take a few seconds. The task status API above will continue to list the task until it is wakes to cancel itself.
+取消应该很快，但可能需要几秒钟。 上面的任务状态API将继续列出任务，直到它被唤醒以取消自己。
 
-### Rethrottling
+### 重节流 Rethrottling
 
-The value of `requests_per_second` can be changed on a running reindex using the `_rethrottle` API:
+`request_per_second`的值可以在正在运行的更新中通过使用`_rethrottle` API进行查询来更改：    
     
-    
-    POST _reindex/task_id:1/_rethrottle?requests_per_second=-1
+    POST _update_by_query/task_id:1/_rethrottle?requests_per_second=-1
 
-The `task_id` can be found using the tasks API above.
+可以使用上面的任务API找到`task_id`。
 
-Just like when setting it on the `_reindex` API `requests_per_second` can be either `-1` to disable throttling or any decimal number like `1.7` or `12` to throttle to that level. Rethrottling that speeds up the query takes effect immediately but rethrotting that slows down the query will take effect on after completing the current batch. This prevents scroll timeouts.
+就像在`_update_by_query` API上设置`request_per_second`一样，可以使用'-1'来禁用节流，或者使用'1.7'或'12'等十进制数来节流。 加快查询速度的重新生效会立即生效，但是在完成当前批次后，重新生成查询会减慢查询生效。 这可以防止滚动超时。
 
-### Reindex to change the name of a field
+### 利用重建索引修改一个字段的名称 Reindex to change the name of a field
 
-`_reindex` can be used to build a copy of an index with renamed fields. Say you create an index containing documents that look like this:
-    
+`_reindex`可以用来建立索引的一个拷贝，包含重命名的字段。 假设你创建一个包含如下所示的文档的索引：
+
     
     POST test/test/1?refresh
     {
@@ -488,9 +480,8 @@ Just like when setting it on the `_reindex` API `requests_per_second` can be eit
       "flag": "foo"
     }
 
-But you don’t like the name `flag` and want to replace it with `tag`. `_reindex` can create the other index for you:
-    
-    
+但是你不喜欢`flag`这个名字，并且想用`tag`替换它。 `_reindex`可以为你创建另一个索引：
+   
     POST _reindex
     {
       "source": {
@@ -500,16 +491,15 @@ But you don’t like the name `flag` and want to replace it with `tag`. `_reinde
         "index": "test2"
       },
       "script": {
-       )"
+        "source": "ctx._source.tag = ctx._source.remove(\"flag\")"
       }
     }
 
-Now you can get the new document:
-    
+现在你可以等到一个新的文档类型:    
     
     GET test2/test/1
 
-and it’ll look like:
+内容如下:
     
     
     {
@@ -524,11 +514,11 @@ and it’ll look like:
       }
     }
 
-Or you can search by `tag` or whatever you want.
+或者你可以通过`tag`或任何你想要的搜索。
 
-#### Manual slicing
+#### 手动分页  Manual slicing
 
-Reindex supports [Sliced Scroll](search-request-scroll.html#sliced-scroll), allowing you to manually parallelize the process relatively easily:
+Reindex 支持[切片滚动](search-request-scroll.html#sliced-scroll)，使您可以相对容易地手动并行化进程：
     
     
     POST _reindex
@@ -558,14 +548,13 @@ Reindex supports [Sliced Scroll](search-request-scroll.html#sliced-scroll), allo
       }
     }
 
-Which you can verify works with:
+你可以使用如下的命令进行验证:
     
     
     GET _refresh
     POST new_twitter/_search?size=0&filter_path=hits.total
 
-Which results in a sensible `total` like this one:
-    
+结果就像这样一个合理的`total`：    
     
     {
       "hits": {
@@ -573,9 +562,10 @@ Which results in a sensible `total` like this one:
       }
     }
 
-### Automatic slicing
+### 自动分片 Automatic slicing
 
-You can also let reindex automatically parallelize using [Sliced Scroll](search-request-scroll.html#sliced-scroll) to slice on `_uid`:
+你也可以让reindex使用[Sliced Scroll](search-request-scroll.html#sliced-scroll)自动并行分割在`_uid`上：
+
     
     
     POST _reindex?slices=5&refresh
@@ -588,12 +578,12 @@ You can also let reindex automatically parallelize using [Sliced Scroll](search-
       }
     }
 
-Which you also can verify works with:
+你可以使用如下的命令进行验证:
     
     
     POST new_twitter/_search?size=0&filter_path=hits.total
 
-Which results in a sensible `total` like this one:
+结果就像这样一个合理的`total`：    
     
     
     {
@@ -602,48 +592,42 @@ Which results in a sensible `total` like this one:
       }
     }
 
-Adding `slices` to `_reindex` just automates the manual process used in the div above, creating sub-requests which means it has some quirks:
+在`_reindex`中添加`slices`只是自动执行上面内容中的手动过程，创建子请求，这意味着它的处理过程稍有不同：
 
-  * You can see these requests in the [Tasks APIs](docs-reindex.html#docs-reindex-task-api). These sub-requests are "child" tasks of the task for the request with `slices`. 
-  * Fetching the status of the task for the request with `slices` only contains the status of completed slices. 
-  * These sub-requests are individually addressable for things like cancellation and rethrottling. 
-  * Rethrottling the request with `slices` will rethrottle the unfinished sub-request proportionally. 
-  * Canceling the request with `slices` will cancel each sub-request. 
-  * Due to the nature of `slices` each sub-request won’t get a perfectly even portion of the documents. All documents will be addressed, but some slices may be larger than others. Expect larger slices to have a more even distribution. 
-  * Parameters like `requests_per_second` and `size` on a request with `slices` are distributed proportionally to each sub-request. Combine that with the point above about distribution being uneven and you should conclude that the using `size` with `slices` might not result in exactly `size` documents being `_reindex`ed. 
-  * Each sub-requests gets a slightly different snapshot of the source index though these are all taken at approximately the same time. 
+  *您可以在[任务API](docs-update-by-query.html#docs-update-by-query-task-api)中看到这些请求。这些子请求是“切片”请求任务的“子”任务。
+  *用“切片”获取请求任务的状态只包含已完成切片的状态。
+  *这些子请求可单独解决，如取消和重节流（rethrottling）。
+  *使用`slices`重新调整请求将按比例重新调整未完成的子请求。
+  *用“切片”取消请求将取消每个子请求。
+  *由于“切片”的性质，每个子请求将不会获得完全平坦的文档部分。所有的文件将被解决，但一些切片可能比其他切片大。期待更大的切片有更均匀的分布。
+  *带有`slices`的请求中的`requests_per_second`和`size`参数按比例分配给每个子请求。结合上面关于分布不均匀的观点，你应该得出结论：使用带'slices'的`size`可能不会导致正确的`size`文件被`_update_by_query`ed。
+  *每个子请求都会得到一个略有不同的源索引快照，尽管这些都是在大约同一时间进行的。
 
+### 选择切片的数量 Picking the number of slices
 
+在这一点上，我们提供了一些围绕要使用的"slices"数量的建议（如果手动并行化，则切片API中的“max”参数）：
 
-### Picking the number of slices
+   *不要使用大数字。 `500`创建相当庞大的CPU垃圾。
+   *从查询性能角度来看，使用源索引中多个分片的数量会更有效率。
+   *从查询性能的角度来看，使用与源索引完全一样多的分片是最有效的。
+   *索引性能应该以可用资源与`slices`的数量成线性比例。
+   *索引或查询性能在这个过程中占主要地位取决于很多因素，比如重新索引的文档和重新索引的集群。
 
-At this point we have a few recommendations around the number of `slices` to use (the `max` parameter in the slice API if manually parallelizing):
+### 重建每天的索引 Reindex daily indices
 
-  * Don’t use large numbers. `500` creates fairly massive CPU thrash. 
-  * It is more efficient from a query performance standpoint to use some multiple of the number of shards in the source index. 
-  * Using exactly as many shards as are in the source index is the most efficient from a query performance standpoint. 
-  * Indexing performance should scale linearly across available resources with the number of `slices`. 
-  * Whether indexing or query performance dominates that process depends on lots of factors like the documents being reindexed and the cluster doing the reindexing. 
+您可以将`_reindex`与[ 内置脚本语言 Painless](modules-scripting-painless.html)结合使用来重新索引每日索引以将新模板应用于现有文档。
 
+假设您的索引包含以下文档：
 
-
-### Reindex daily indices
-
-You can use `_reindex` in combination with [Painless](modules-scripting-painless.html) to reindex daily indices to apply a new template to the existing documents.
-
-Assuming you have indices consisting of documents as following:
-    
-    
     PUT metricbeat-2016.05.30/beat/1?refresh
     {"system.cpu.idle.pct": 0.908}
     PUT metricbeat-2016.05.31/beat/1?refresh
     {"system.cpu.idle.pct": 0.105}
 
-The new template for the `metricbeat-*` indices is already loaded into elasticsearch but it applies only to the newly created indices. Painless can be used to reindex the existing documents and apply the new template.
+`metricbeat-*`索引的新模板已经加载到elasticsearch中，但仅适用于新创建的索引。 `Painless`可用于重新索引现有文档并应用新模板。
 
-The script below extracts the date from the index name and creates a new index with `-1` appended. All data from `metricbeat-2016.05.31` will be reindex into `metricbeat-2016.05.31-1`.
-    
-    
+下面的脚本从索引名称中提取日期，并创建一个附加了`-1`的新索引。 所有来自`metricbeat-2016.05.31`的数据将被重新索引到`metricbeat-2016.05.31-1`。
+
     POST _reindex
     {
       "source": {
@@ -658,13 +642,12 @@ The script below extracts the date from the index name and creates a new index w
       }
     }
 
-All documents from the previous metricbeat indices now can be found in the `*-1` indices.
-    
+以前的度量标准索引中的所有文档现在都可以在`*-1`索引中找到。
     
     GET metricbeat-2016.05.30-1/beat/1
     GET metricbeat-2016.05.31-1/beat/1
 
-The previous method can also be used in combination with [change the name of a field](docs-reindex.html#docs-reindex-change-name) to only load the existing data into the new index, but also rename fields if needed.
+以前的方法也可以与[更改字段名称 change the name of a field](docs-reindex.html#docs-reindex-change-name)组合使用，只将现有数据加载到新索引中，但也可以根据需要重命名字段。
 
 ###提取一个测试索引的随机子集  Extracting a random subset of an index
 
@@ -681,11 +664,12 @@ Reindex可以用来提取一个测试索引的随机子集:
             "random_score" : {}
           }
         },
-        "sort": "_score"    ![](images/icons/callouts/1.png)
+        "sort": "_score"    #1
       },
       "dest": {
         "index": "random_twitter"
       }
     }
+    
 #1| Reindex默认为按`_doc`排序，所以`random_score`不会有任何效果，除非你将sort值覆盖到`_score`
 ---|---

@@ -46,7 +46,7 @@ The following snippet calculates the cumulative sum of the total monthly `sales`
                     },
                     "cumulative_sales": {
                         "cumulative_sum": {
-                            "buckets_path": "sales" ![](images/icons/callouts/1.png)
+                            "buckets_path": "sales" #1
                         }
                     }
                 }
@@ -54,12 +54,7 @@ The following snippet calculates the cumulative sum of the total monthly `sales`
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`buckets_path` instructs this cumulative sum aggregation to use the output of the `sales` aggregation for the cumulative sum   
-  
+#1| `buckets_path` instructs this cumulative sum aggregation to use the output of the `sales` aggregation for the cumulative sum     
 ---|---  
   
 And the following may be the response:

@@ -35,19 +35,19 @@ For example:
     
     POST my_index/my_type/1
     {
-      "is_published": "true" ![](images/icons/callouts/1.png)
+      "is_published": "true" #1
     }
     
     GET my_index/_search
     {
       "query": {
         "term": {
-          "is_published": true ![](images/icons/callouts/2.png)
+          "is_published": true #2
         }
       }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -55,7 +55,7 @@ Indexing a document with `"true"`, which is interpreted as `true`.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 

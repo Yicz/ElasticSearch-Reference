@@ -10,15 +10,15 @@ The `synonym` token filter allows to easily handle synonyms during the analysis 
                 "analysis" : {
                     "filter" : {
                         "synonym" : {
-                            "type" : "synonym", ![](images/icons/callouts/1.png)
+                            "type" : "synonym", #1
                             "synonyms_path" : "analysis/synonym.txt",
-                            "tokenizer" : "whitespace" ![](images/icons/callouts/2.png)
+                            "tokenizer" : "whitespace" #2
                         }
                     },
                     "analyzer" : {
                         "synonym" : {
                             "tokenizer" : "whitespace",
-                            "filter" : ["synonym"] ![](images/icons/callouts/3.png)
+                            "filter" : ["synonym"] #3
                         }
                     }
                 }
@@ -26,25 +26,10 @@ The `synonym` token filter allows to easily handle synonyms during the analysis 
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-We configure a `synonym` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).   
-  
+#1| We configure a `synonym` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `tokenizer` parameter controls the tokenizers that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `synonym` analyzer is then configured with the filter.   
+#2| The `tokenizer` parameter controls the tokenizers that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).     
+#3| The `synonym` analyzer is then configured with the filter.   
   
 Two synonym formats are supported: Solr, WordNet.
 

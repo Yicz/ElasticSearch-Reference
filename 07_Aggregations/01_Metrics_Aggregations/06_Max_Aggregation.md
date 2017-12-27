@@ -104,16 +104,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "grade_max" : {
                 "max" : {
                     "field" : "grade",
-                    "missing": 10 ![](images/icons/callouts/1.png)
+                    "missing": 10 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.   
-  
+#1| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.     
 ---|---

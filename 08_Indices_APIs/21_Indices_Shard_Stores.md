@@ -23,20 +23,20 @@ The shard stores information is grouped by indices and shard ids.
     
     {
         ...
-       "0": { ![](images/icons/callouts/1.png)
-            "stores": [ ![](images/icons/callouts/2.png)
+       "0": { #1
+            "stores": [ #2
                 {
-                    "sPa3OgxLSYGvQ4oPs-Tajw": { ![](images/icons/callouts/3.png)
+                    "sPa3OgxLSYGvQ4oPs-Tajw": { #3
                         "name": "node_t0",
                         "transport_address": "local[1]",
                         "attributes": {
                             "mode": "local"
                         }
                     },
-                    "allocation_id": "2iNySv_OQVePRX-yaRH_lQ", ![](images/icons/callouts/4.png)
-                    "legacy_version": 42, ![](images/icons/callouts/5.png)
-                    "allocation" : "primary" | "replica" | "unused", ![](images/icons/callouts/6.png)
-                    "store_exception": ... ![](images/icons/callouts/7.png)
+                    "allocation_id": "2iNySv_OQVePRX-yaRH_lQ", #4
+                    "legacy_version": 42, #5
+                    "allocation" : "primary" | "replica" | "unused", #6
+                    "store_exception": ... #7
                 },
                 ...
             ]
@@ -44,46 +44,11 @@ The shard stores information is grouped by indices and shard ids.
         ...
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The key is the corresponding shard id for the store information   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-A list of store information for all copies of the shard   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The node information that hosts a copy of the store, the key is the unique node id.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-The allocation id of the store copy   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-The version of the store copy (available only for legacy shard copies that have not yet been active in a current version of Elasticsearch)   
-  
-![](images/icons/callouts/6.png)
-
-| 
-
-The status of the store copy, whether it is used as a primary, replica or not used at all   
-  
-![](images/icons/callouts/7.png)
-
-| 
-
-Any exception encountered while opening the shard index or from earlier engine failure 
+#1| The key is the corresponding shard id for the store information     
+---|---    
+#2| A list of store information for all copies of the shard     
+#3| The node information that hosts a copy of the store, the key is the unique node id.     
+#4| The allocation id of the store copy     
+#5| The version of the store copy (available only for legacy shard copies that have not yet been active in a current version of Elasticsearch)    
+#6| The status of the store copy, whether it is used as a primary, replica or not used at all     
+#7| Any exception encountered while opening the shard index or from earlier engine failure 

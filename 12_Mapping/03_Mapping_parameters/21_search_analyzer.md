@@ -19,7 +19,7 @@ By default, queries will use the `analyzer` defined in the field mapping, but th
             }
           },
           "analyzer": {
-            "autocomplete": { ![](images/icons/callouts/1.png)
+            "autocomplete": { #1
               "type": "custom",
               "tokenizer": "standard",
               "filter": [
@@ -35,8 +35,8 @@ By default, queries will use the `analyzer` defined in the field mapping, but th
           "properties": {
             "text": {
               "type": "text",
-              "analyzer": "autocomplete", ![](images/icons/callouts/2.png)
-              "search_analyzer": "standard" ![](images/icons/callouts/3.png)
+              "analyzer": "autocomplete", #2
+              "search_analyzer": "standard" #3
             }
           }
         }
@@ -45,7 +45,7 @@ By default, queries will use the `analyzer` defined in the field mapping, but th
     
     PUT my_index/my_type/1
     {
-      "text": "Quick Brown Fox" ![](images/icons/callouts/4.png)
+      "text": "Quick Brown Fox" #4
     }
     
     GET my_index/_search
@@ -53,38 +53,18 @@ By default, queries will use the `analyzer` defined in the field mapping, but th
       "query": {
         "match": {
           "text": {
-            "query": "Quick Br", ![](images/icons/callouts/5.png)
+            "query": "Quick Br", #5
             "operator": "and"
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/1.png)
-
-| 
-
-Analysis settings to define the custom `autocomplete` analyzer.   
-  
----|---  
-  
-![](images/icons/callouts/2.png) ![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png)
-
-| 
-
-The `text` field uses the `autocomplete` analyzer at index time, but the `standard` analyzer at search time.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-This field is indexed as the terms: [ `q`, `qu`, `qui`, `quic`, `quick`, `b`, `br`, `bro`, `brow`, `brown`, `f`, `fo`, `fox` ]   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-The query searches for both of these terms: [ `quick`, `br` ]   
+#1 #1| Analysis settings to define the custom `autocomplete` analyzer.     
+---|---   
+#2 #2 #3| The `text` field uses the `autocomplete` analyzer at index time, but the `standard` analyzer at search time.     
+#4| This field is indexed as the terms: [ `q`, `qu`, `qui`, `quic`, `quick`, `b`, `br`, `bro`, `brow`, `brown`, `f`, `fo`, `fox` ]     
+#5| The query searches for both of these terms: [ `quick`, `br` ]   
   
 See [Index time search-as-you- type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html) for a full explanation of this example.
 

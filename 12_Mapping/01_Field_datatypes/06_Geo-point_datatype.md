@@ -28,7 +28,7 @@ There are four ways that a geo-point may be specified, as demonstrated below:
     PUT my_index/my_type/1
     {
       "text": "Geo-point as an object",
-      "location": { ![](images/icons/callouts/1.png)
+      "location": { #1
         "lat": 41.12,
         "lon": -71.34
       }
@@ -37,25 +37,25 @@ There are four ways that a geo-point may be specified, as demonstrated below:
     PUT my_index/my_type/2
     {
       "text": "Geo-point as a string",
-      "location": "41.12,-71.34" ![](images/icons/callouts/2.png)
+      "location": "41.12,-71.34" #2
     }
     
     PUT my_index/my_type/3
     {
       "text": "Geo-point as a geohash",
-      "location": "drm3btev3e86" ![](images/icons/callouts/3.png)
+      "location": "drm3btev3e86" #3
     }
     
     PUT my_index/my_type/4
     {
       "text": "Geo-point as an array",
-      "location": [ -71.34, 41.12 ] ![](images/icons/callouts/4.png)
+      "location": [ -71.34, 41.12 ] #4
     }
     
     GET my_index/_search
     {
       "query": {
-        "geo_bounding_box": { ![](images/icons/callouts/5.png)
+        "geo_bounding_box": { #5
           "location": {
             "top_left": {
               "lat": 42,
@@ -70,7 +70,7 @@ There are four ways that a geo-point may be specified, as demonstrated below:
       }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -78,25 +78,25 @@ Geo-point expressed as an object, with `lat` and `lon` keys.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
 Geo-point expressed as a string with the format: `"lat,lon"`.   
   
-![](images/icons/callouts/3.png)
+#3
 
 | 
 
 Geo-point expressed as a geohash.   
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 
 Geo-point expressed as an array with the format: [ `lon`, `lat`]   
   
-![](images/icons/callouts/5.png)
+#5
 
 | 
 

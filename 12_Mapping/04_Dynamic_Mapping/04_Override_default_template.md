@@ -8,32 +8,16 @@ For example, to disable the `_all` field by default for all types in all new ind
     PUT _template/disable_all_field
     {
       "order": 0,
-      "template": "*", ![](images/icons/callouts/1.png)
+      "template": "*", #1
       "mappings": {
-        "_default_": { ![](images/icons/callouts/2.png)
-          "_all": { ![](images/icons/callouts/3.png)
+        "_default_": { #2
+          "_all": { #3
             "enabled": false
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Applies the mappings to an `index` which matches the pattern `*`, in other words, all new indices.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Defines the `_default_` type mapping types within the index.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Disables the `_all` field by default. 
+#1| Applies the mappings to an `index` which matches the pattern `*`, in other words, all new indices.     
+---|---    #2| Defines the `_default_` type mapping types within the index.     
+#3| Disables the `_all` field by default. 

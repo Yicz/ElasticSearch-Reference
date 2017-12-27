@@ -33,14 +33,9 @@ For example:
       "create_date": "2015/09/02"
     }
     
-    GET my_index/_mapping ![](images/icons/callouts/1.png)
+    GET my_index/_mapping #1
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `create_date` field has been added as a [`date`](date.html) field with the [`format`](mapping-date-format.html): `"yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"`.   
-  
+#1| The `create_date` field has been added as a [`date`](date.html) field with the [`format`](mapping-date-format.html): `"yyyy/MM/dd HH:mm:ss Z||yyyy/MM/dd Z"`.     
 ---|---  
   
 #### Disabling date detection
@@ -57,17 +52,12 @@ Dynamic date detection can be disabled by setting `date_detection` to `false`:
       }
     }
     
-    PUT my_index/my_type/1 ![](images/icons/callouts/1.png)
+    PUT my_index/my_type/1 #1
     {
       "create": "2015/09/02"
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `create_date` field has been added as a [`text`](text.html) field.   
-  
+#1| The `create_date` field has been added as a [`text`](text.html) field.     
 ---|---  
   
 #### Customising detected date formats
@@ -105,20 +95,10 @@ While JSON has support for native floating point and integer datatypes, some app
     
     PUT my_index/my_type/1
     {
-      "my_float":   "1.0", ![](images/icons/callouts/1.png)
-      "my_integer": "1" ![](images/icons/callouts/2.png)
+      "my_float":   "1.0", #1
+      "my_integer": "1" #2
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `my_float` field is added as a [`double`](number.html) field.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `my_integer` field is added as a [`long`](number.html) field. 
+#1| The `my_float` field is added as a [`double`](number.html) field.     
+---|---    
+#2| The `my_integer` field is added as a [`long`](number.html) field. 

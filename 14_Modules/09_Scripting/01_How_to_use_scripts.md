@@ -4,30 +4,15 @@ Wherever scripting is supported in the Elasticsearch API, the syntax follows the
     
     
       "script": {
-        "lang":   "...",  ![](images/icons/callouts/1.png)
-        "inline" | "stored" | "file": "...", ![](images/icons/callouts/2.png)
-        "params": { ... } ![](images/icons/callouts/3.png)
+        "lang":   "...",  #1
+        "inline" | "stored" | "file": "...", #2
+        "params": { ... } #3
       }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The language the script is written in, which defaults to `painless`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The script itself which may be specified as `inline`, `stored`, or `file`.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Any named parameters that should be passed into the script.   
+#1| The language the script is written in, which defaults to `painless`.     
+---|---    
+#2| The script itself which may be specified as `inline`, `stored`, or `file`.     
+#3| Any named parameters that should be passed into the script.   
   
 For example, the following script is used in a search request to return a [scripted field](search-request-script-fields.html):
     
@@ -110,8 +95,8 @@ This script can be used as follows:
       "query": {
         "script": {
           "script": {
-            "lang":   "painless", ![](images/icons/callouts/1.png)
-            "file":   "calculate_score", ![](images/icons/callouts/2.png)
+            "lang":   "painless", #1
+            "file":   "calculate_score", #2
             "params": {
               "my_modifier": 2
             }
@@ -120,19 +105,9 @@ This script can be used as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The language of the script, which should correspond with the script file suffix.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The name of the script, which should be the name of the file.   
+#1| The language of the script, which should correspond with the script file suffix.     
+---|---    
+#2| The name of the script, which should be the name of the file.   
   
 The `script` directory may contain sub-directories, in which case the hierarchy of directories is flattened and concatenated with underscores. A script in `group1/group2/my_script.groovy` should use `group1_group2_myscript` as the `file` name.
 

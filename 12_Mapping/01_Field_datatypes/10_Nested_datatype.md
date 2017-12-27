@@ -10,7 +10,7 @@ Arrays of inner [`object` fields](object.html) do not work the way you may expec
     PUT my_index/my_type/1
     {
       "group" : "fans",
-      "user" : [ ![](images/icons/callouts/1.png)
+      "user" : [ #1
         {
           "first" : "John",
           "last" :  "Smith"
@@ -22,7 +22,7 @@ Arrays of inner [`object` fields](object.html) do not work the way you may expec
       ]
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -65,7 +65,7 @@ If you need to index arrays of objects and to maintain the independence of each 
         "my_type": {
           "properties": {
             "user": {
-              "type": "nested" ![](images/icons/callouts/1.png)
+              "type": "nested" #1
             }
           }
         }
@@ -96,7 +96,7 @@ If you need to index arrays of objects and to maintain the independence of each 
             "bool": {
               "must": [
                 { "match": { "user.first": "Alice" } },
-                { "match": { "user.last":  "Smith" } } ![](images/icons/callouts/2.png)
+                { "match": { "user.last":  "Smith" } } #2
               ]
             }
           }
@@ -113,11 +113,11 @@ If you need to index arrays of objects and to maintain the independence of each 
             "bool": {
               "must": [
                 { "match": { "user.first": "Alice" } },
-                { "match": { "user.last":  "White" } } ![](images/icons/callouts/3.png)
+                { "match": { "user.last":  "White" } } #3
               ]
             }
           },
-          "inner_hits": { ![](images/icons/callouts/4.png)
+          "inner_hits": { #4
             "highlight": {
               "fields": {
                 "user.first": {}
@@ -128,7 +128,7 @@ If you need to index arrays of objects and to maintain the independence of each 
       }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -136,19 +136,19 @@ The `user` field is mapped as type `nested` instead of type `object`.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
 This query doesn’t match because `Alice` and `Smith` are not in the same nested object.   
   
-![](images/icons/callouts/3.png)
+#3
 
 | 
 
 This query matches because `Alice` and `White` are in the same nested object.   
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 

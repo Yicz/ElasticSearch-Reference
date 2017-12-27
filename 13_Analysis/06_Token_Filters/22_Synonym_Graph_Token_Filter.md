@@ -21,16 +21,16 @@ Synonyms are configured using a configuration file. Here is an example:
             "index" : {
                 "analysis" : {
                     "filter" : {
-                        "graph_synonyms" : { ![](images/icons/callouts/1.png)
+                        "graph_synonyms" : { #1
                             "type" : "synonym_graph",
                             "synonyms_path" : "analysis/synonym.txt",
-                            "tokenizer": "whitespace" ![](images/icons/callouts/2.png)
+                            "tokenizer": "whitespace" #2
                         }
                     },
                     "analyzer" : {
                         "search_synonyms" : {
                             "tokenizer" : "whitespace",
-                            "filter" : ["graph_synonyms"] ![](images/icons/callouts/3.png)
+                            "filter" : ["graph_synonyms"] #3
                         }
                     }
                 }
@@ -38,25 +38,10 @@ Synonyms are configured using a configuration file. Here is an example:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-We configure a `graph_synonyms` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `tokenizer` parameter controls the tokenizer that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `search_synonyms` analyzer is then configured with the filter.   
+#1| We configure a `graph_synonyms` filter, with a path of `analysis/synonym.txt` (relative to the `config` location).     
+---|---    
+#2| The `tokenizer` parameter controls the tokenizer that will be used to tokenize the synonym, and defaults to the `whitespace` tokenizer. Additional settings are: `ignore_case` (defaults to `false`), and `expand` (defaults to `true`).     
+#3| The `search_synonyms` analyzer is then configured with the filter.   
   
 Two synonym formats are supported: Solr, WordNet.
 

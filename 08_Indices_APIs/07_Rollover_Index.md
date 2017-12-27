@@ -5,7 +5,7 @@ The rollover index API rolls an alias over to a new index when the existing inde
 The API accepts a single alias name and a list of `conditions`. The alias must point to a single index only. If the index satisfies the specified conditions then a new index is created and the alias is switched to point to the new index.
     
     
-    PUT /logs-000001 ![](images/icons/callouts/1.png)
+    PUT /logs-000001 #1
     {
       "aliases": {
         "logs_write": {}
@@ -14,7 +14,7 @@ The API accepts a single alias name and a list of `conditions`. The alias must p
     
     # Add > 1000 documents to logs-000001
     
-    POST /logs_write/_rollover ![](images/icons/callouts/2.png)
+    POST /logs_write/_rollover #2
     {
       "conditions": {
         "max_age":   "7d",
@@ -22,19 +22,9 @@ The API accepts a single alias name and a list of `conditions`. The alias must p
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Creates an index called `logs-0000001` with the alias `logs_write`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-If the index pointed to by `logs_write` was created 7 or more days ago, or contains 1,000 or more documents, then the `logs-000002` index is created and the `logs_write` alias is updated to point to `logs-000002`.   
+#1| Creates an index called `logs-0000001` with the alias `logs_write`.     
+---|---    
+#2| If the index pointed to by `logs_write` was created 7 or more days ago, or contains 1,000 or more documents, then the `logs-000002` index is created and the `logs_write` alias is updated to point to `logs-000002`.   
   
 The above request might return the following response:
     
@@ -44,33 +34,18 @@ The above request might return the following response:
       "shards_acknowledged": true,
       "old_index": "logs-000001",
       "new_index": "logs-000002",
-      "rolled_over": true, ![](images/icons/callouts/1.png)
-      "dry_run": false, ![](images/icons/callouts/2.png)
-      "conditions": { ![](images/icons/callouts/3.png)
+      "rolled_over": true, #1
+      "dry_run": false, #2
+      "conditions": { #3
         "[max_age: 7d]": false,
         "[max_docs: 1000]": true
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Whether the index was rolled over.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Whether the rollover was dry run.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The result of each condition.   
+#1| Whether the index was rolled over.     
+---|---    
+#2| Whether the rollover was dry run.     
+#3| The result of each condition.   
   
 ### Naming the new index
 
@@ -93,7 +68,7 @@ It can be useful to use [date math](date-math-index-names.html) to name the roll
     
     
     # PUT /<logs-{now/d}-1> with URI encoding:
-    PUT /%3Clogs-%7Bnow%2Fd%7D-1%3E ![](images/icons/callouts/1.png)
+    PUT /%3Clogs-%7Bnow%2Fd%7D-1%3E #1
     {
       "aliases": {
         "logs_write": {}
@@ -109,26 +84,16 @@ It can be useful to use [date math](date-math-index-names.html) to name the roll
     
     # Wait for a day to pass
     
-    POST /logs_write/_rollover ![](images/icons/callouts/2.png)
+    POST /logs_write/_rollover #2
     {
       "conditions": {
         "max_docs":   "1"
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Creates an index named with today’s date (e.g.) `logs-2016.10.31-1`  
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Rolls over to a new index with today’s date, e.g. `logs-2016.10.31-000002` if run immediately, or `logs-2016.11.01-000002` if run after 24 hours   
+#1| Creates an index named with today’s date (e.g.) `logs-2016.10.31-1`    
+---|---    
+#2| Rolls over to a new index with today’s date, e.g. `logs-2016.10.31-000002` if run immediately, or `logs-2016.11.01-000002` if run after 24 hours   
   
 These indices can then be referenced as described in the [date math documentation](date-math-index-names.html). For example, to search over indices created in the last three days, you could do the following:
     

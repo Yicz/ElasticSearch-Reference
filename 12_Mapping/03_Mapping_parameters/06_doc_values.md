@@ -14,10 +14,10 @@ All fields which support doc values have them enabled by default. If you are sur
       "mappings": {
         "my_type": {
           "properties": {
-            "status_code": { ![](images/icons/callouts/1.png)
+            "status_code": { #1
               "type":       "keyword"
             },
-            "session_id": { ![](images/icons/callouts/2.png)
+            "session_id": { #2
               "type":       "keyword",
               "doc_values": false
             }
@@ -26,16 +26,6 @@ All fields which support doc values have them enabled by default. If you are sur
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `status_code` field has `doc_values` enabled by default.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `session_id` has `doc_values` disabled, but can still be queried. 
+#1| The `status_code` field has `doc_values` enabled by default.     
+---|---    
+#2| The `session_id` has `doc_values` disabled, but can still be queried. 

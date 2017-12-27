@@ -7,17 +7,12 @@ The `html_strip` character filter strips HTML elements from the text and replace
     
     POST _analyze
     {
-      "tokenizer":      "keyword", ![](images/icons/callouts/1.png)
+      "tokenizer":      "keyword", #1
       "char_filter":  [ "html_strip" ],
       "text": "<p>I&apos;m so <b>happy</b>!</p>"
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The [`keyword` tokenizer](analysis-keyword-tokenizer.html) returns a single term.   
-  
+#1| The [`keyword` tokenizer](analysis-keyword-tokenizer.html) returns a single term.     
 ---|---  
   
 The above example returns the term:

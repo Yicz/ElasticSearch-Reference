@@ -27,7 +27,7 @@ For instance:
         "my_type": {
           "properties": {
             "date": {
-              "type": "date" ![](images/icons/callouts/1.png)
+              "type": "date" #1
             }
           }
         }
@@ -35,20 +35,20 @@ For instance:
     }
     
     PUT my_index/my_type/1
-    { "date": "2015-01-01" } ![](images/icons/callouts/2.png)
+    { "date": "2015-01-01" } #2
     
     PUT my_index/my_type/2
-    { "date": "2015-01-01T12:10:30Z" } ![](images/icons/callouts/3.png)
+    { "date": "2015-01-01T12:10:30Z" } #3
     
     PUT my_index/my_type/3
-    { "date": 1420070400001 } ![](images/icons/callouts/4.png)
+    { "date": 1420070400001 } #4
     
     GET my_index/_search
     {
-      "sort": { "date": "asc"} ![](images/icons/callouts/5.png)
+      "sort": { "date": "asc"} #5
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -56,25 +56,25 @@ The `date` field uses the default `format`.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
 This document uses a plain date.   
   
-![](images/icons/callouts/3.png)
+#3
 
 | 
 
 This document includes a time.   
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 
 This document uses milliseconds-since-the-epoch.   
   
-![](images/icons/callouts/5.png)
+#5
 
 | 
 

@@ -10,24 +10,24 @@ Strings longer than the `ignore_above` setting will not be indexed or stored.
           "properties": {
             "message": {
               "type": "keyword",
-              "ignore_above": 20 ![](images/icons/callouts/1.png)
+              "ignore_above": 20 #1
             }
           }
         }
       }
     }
     
-    PUT my_index/my_type/1 ![](images/icons/callouts/2.png)
+    PUT my_index/my_type/1 #2
     {
       "message": "Syntax error"
     }
     
-    PUT my_index/my_type/2 ![](images/icons/callouts/3.png)
+    PUT my_index/my_type/2 #3
     {
       "message": "Syntax error with some long stacktrace"
     }
     
-    GET _search ![](images/icons/callouts/4.png)
+    GET _search #4
     {
       "aggs": {
         "messages": {
@@ -38,31 +38,11 @@ Strings longer than the `ignore_above` setting will not be indexed or stored.
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This field will ignore any string longer than 20 characters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This document is indexed successfully.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-This document will be indexed, but without indexing the `message` field.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Search returns both documents, but only the first is present in the terms aggregation.   
+#1| This field will ignore any string longer than 20 characters.     
+---|---    
+#2| This document is indexed successfully.     
+#3| This document will be indexed, but without indexing the `message` field.     
+#4| Search returns both documents, but only the first is present in the terms aggregation.   
   
 ![Tip](images/icons/tip.png)
 

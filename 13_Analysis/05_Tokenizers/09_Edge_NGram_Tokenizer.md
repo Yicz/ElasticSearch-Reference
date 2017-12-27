@@ -134,7 +134,7 @@ Below is an example of how to set up a field for _search-as-you-type_ :
     
     PUT my_index/doc/1
     {
-      "title": "Quick Foxes" ![](images/icons/callouts/1.png)
+      "title": "Quick Foxes" #1
     }
     
     POST my_index/_refresh
@@ -144,23 +144,13 @@ Below is an example of how to set up a field for _search-as-you-type_ :
       "query": {
         "match": {
           "title": {
-            "query": "Quick Fo", ![](images/icons/callouts/2.png)
+            "query": "Quick Fo", #2
             "operator": "and"
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `autocomplete` analyzer indexes the terms `[qu, qui, quic, quick, fo, fox, foxe, foxes]`.   
-  
+#1| The `autocomplete` analyzer indexes the terms `[qu, qui, quic, quick, fo, fox, foxe, foxes]`.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `autocomplete_search` analyzer searches for the terms `[quick, fo]`, both of which appear in the index. 
+#2| The `autocomplete_search` analyzer searches for the terms `[quick, fo]`, both of which appear in the index. 

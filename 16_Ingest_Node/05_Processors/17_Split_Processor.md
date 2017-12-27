@@ -17,9 +17,9 @@ Name |  Required |  Default |  Description
     {
       "split": {
         "field": "my_field",
-        "separator": "\\s+" ![](images/icons/callouts/1.png)
+        "separator": "\\s+" #1
       }
     }
 
-![](images/icons/callouts/1.png)| Treat all consecutive whitespace characters as a single separator     
+#1| Treat all consecutive whitespace characters as a single separator     
 ---|---

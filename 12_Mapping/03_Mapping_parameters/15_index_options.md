@@ -39,15 +39,10 @@ The `index_options` parameter controls what information is added to the inverted
       },
       "highlight": {
         "fields": {
-          "text": {} ![](images/icons/callouts/1.png)
+          "text": {} #1
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `text` field will use the postings highlighter by default because `offsets` are indexed.   
-  
+#1| The `text` field will use the postings highlighter by default because `offsets` are indexed.     
 ---|---

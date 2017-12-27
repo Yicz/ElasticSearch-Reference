@@ -15,11 +15,11 @@ The following defines types, each with two context mappings for a completion fie
                     "suggest" : {
                         "type" : "completion",
                         "contexts": [
-                            { ![](images/icons/callouts/1.png)
+                            { #1
                                 "name": "place_type",
                                 "type": "category"
                             },
-                            { ![](images/icons/callouts/2.png)
+                            { #2
                                 "name": "location",
                                 "type": "geo",
                                 "precision": 4
@@ -38,12 +38,12 @@ The following defines types, each with two context mappings for a completion fie
                     "suggest" : {
                         "type" : "completion",
                         "contexts": [
-                            { ![](images/icons/callouts/3.png)
+                            { #3
                                 "name": "place_type",
                                 "type": "category",
                                 "path": "cat"
                             },
-                            { ![](images/icons/callouts/4.png)
+                            { #4
                                 "name": "location",
                                 "type": "geo",
                                 "precision": 4,
@@ -59,31 +59,10 @@ The following defines types, each with two context mappings for a completion fie
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Defines a `category` context named _place_type_ where the categories must be sent with the suggestions.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Defines a `geo` context named _location_ where the categories must be sent with the suggestions.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Defines a `category` context named _place_type_ where the categories are read from the `cat` field.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Defines a `geo` context named _location_ where the categories are read from the `loc` field.   
+#1| Defines a `category` context named _place_type_ where the categories must be sent with the suggestions.     
+---|---    #2| Defines a `geo` context named _location_ where the categories must be sent with the suggestions.     
+#3| Defines a `category` context named _place_type_ where the categories are read from the `cat` field.     
+#4| Defines a `geo` context named _location_ where the categories are read from the `loc` field.   
   
 ![Note](images/icons/note.png)
 
@@ -101,17 +80,12 @@ The mappings are set up like the `place_type` fields above. If `path` is defined
         "suggest": {
             "input": ["timmy's", "starbucks", "dunkin donuts"],
             "contexts": {
-                "place_type": ["cafe", "food"] ![](images/icons/callouts/1.png)
+                "place_type": ["cafe", "food"] #1
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-These suggestions will be associated with _cafe_ and _food_ category.   
-  
+#1| These suggestions will be associated with _cafe_ and _food_ category.    
 ---|---  
   
 If the mapping had a `path` then the following index request would be enough to add the categories:
@@ -120,15 +94,10 @@ If the mapping had a `path` then the following index request would be enough to 
     PUT place_path_category/shops/1
     {
         "suggest": ["timmy's", "starbucks", "dunkin donuts"],
-        "cat": ["cafe", "food"] ![](images/icons/callouts/1.png)
+        "cat": ["cafe", "food"] #1
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-These suggestions will be associated with _cafe_ and _food_ category.   
-  
+#1| These suggestions will be associated with _cafe_ and _food_ category.     
 ---|---  
   
 ![Note](images/icons/note.png)
@@ -172,7 +141,7 @@ Suggestions with certain categories can be boosted higher than others. The follo
                     "field" : "suggest",
                     "size": 10,
                     "contexts": {
-                        "place_type": [ ![](images/icons/callouts/1.png)
+                        "place_type": [ #1
                             { "context" : "cafe" },
                             { "context" : "restaurants", "boost": 2 }
                          ]
@@ -182,35 +151,15 @@ Suggestions with certain categories can be boosted higher than others. The follo
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The context query filter suggestions associated with categories _cafe_ and _restaurants_ and boosts the suggestions associated with _restaurants_ by a factor of `2`  
-  
+#1| The context query filter suggestions associated with categories _cafe_ and _restaurants_ and boosts the suggestions associated with _restaurants_ by a factor of `2`    
 ---|---  
   
 In addition to accepting category values, a context query can be composed of multiple category context clauses. The following parameters are supported for a `category` context clause:
 
-`context`
-
-| 
-
-The value of the category to filter/boost on. This is mandatory.   
-  
----|---  
-  
-`boost`
-
-| 
-
-The factor by which the score of the suggestion should be boosted, the score is computed by multiplying the boost with the suggestion weight, defaults to `1`  
-  
-`prefix`
-
-| 
-
-Whether the category value should be treated as a prefix or not. For example, if set to `true`, you can filter category of _type1_ , _type2_ and so on, by specifying a category prefix of _type_. Defaults to `false`  
+`context`| The value of the category to filter/boost on. This is mandatory.     
+---|---    
+`boost`| The factor by which the score of the suggestion should be boosted, the score is computed by multiplying the boost with the suggestion weight, defaults to `1`    
+`prefix`| Whether the category value should be treated as a prefix or not. For example, if set to `true`, you can filter category of _type1_ , _type2_ and so on, by specifying a category prefix of _type_. Defaults to `false`  
   
 #### Geo location Context
 
@@ -222,12 +171,7 @@ Internally, geo points are encoded as geohashes with the specified precision.
 
 In addition to the `path` setting, `geo` context mapping accepts the following settings:
 
-`precision`
-
-| 
-
-This defines the precision of the geohash to be indexed and can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to a raw geohash precision value of `6`.   
-  
+`precision`| This defines the precision of the geohash to be indexed and can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to a raw geohash precision value of `6`.     
 ---|---  
   
 ![Note](images/icons/note.png)
@@ -298,7 +242,7 @@ Suggestions that are within an area represented by a geohash can also be boosted
                     "field" : "suggest",
                     "size": 10,
                     "contexts": {
-                        "location": [ ![](images/icons/callouts/1.png)
+                        "location": [ #1
                             {
                                 "lat": 43.6624803,
                                 "lon": -79.3863353,
@@ -317,10 +261,12 @@ Suggestions that are within an area represented by a geohash can also be boosted
             }
         }
     }
-![](images/icons/callouts/1.png)| The context query filters for suggestions that fall under the geo location represented by a geohash of _(43.662, -79.380)_ with a precision of _2_ and boosts suggestions that fall under the geohash representation of _(43.6624803, -79.3863353)_ with a default precision of _6_ by a factor of `2`   
- ---|---    In addition to accepting context values, a context query can be composed of multiple context clauses. The following parameters are supported for a `category` context clause:
+#1| The context query filters for suggestions that fall under the geo location represented by a geohash of _(43.662, -79.380)_ with a precision of _2_ and boosts suggestions that fall under the geohash representation of _(43.6624803, -79.3863353)_ with a default precision of _6_ by a factor of `2`   
+---|---    
  
- `context`| A geo point object or a geo hash string to filter or boost the suggestion by. This is mandatory.     
+In addition to accepting context values, a context query can be composed of multiple context clauses. The following parameters are supported for a `category` context clause:
+ 
+`context`| A geo point object or a geo hash string to filter or boost the suggestion by. This is mandatory.     
 ---|---    
 `boost`| The factor by which the score of the suggestion should be boosted, the score is computed by multiplying the boost with the suggestion weight, defaults to `1`    
 `precision`| The precision of the geohash to encode the query geo point. This can be specified as a distance value (`5m`, `10km` etc.), or as a raw geohash precision (`1`..`12`). Defaults to index time precision level.     

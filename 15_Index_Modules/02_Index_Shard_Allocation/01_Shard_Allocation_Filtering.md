@@ -9,9 +9,9 @@ The per-index shard allocation filters explained below work in conjunction with 
 It is possible to assign arbitrary metadata attributes to each node at startup. For instance, nodes could be assigned a `rack` and a `size` attribute as follows:
     
     
-    bin/elasticsearch -Enode.attr.rack=rack1 -Enode.attr.size=big  ![](images/icons/callouts/1.png)
+    bin/elasticsearch -Enode.attr.rack=rack1 -Enode.attr.size=big  #1
 
-![](images/icons/callouts/1.png)| These attribute settings can also be specified in the `elasticsearch.yml` config file.     
+#1| These attribute settings can also be specified in the `elasticsearch.yml` config file.     
 ---|---  
   
 These metadata attributes can be used with the `index.routing.allocation.*` settings to allocate an index to a particular group of nodes. For instance, we can move the index `test` to either `big` or `medium` nodes as follows:

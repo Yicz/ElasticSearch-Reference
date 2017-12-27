@@ -48,21 +48,21 @@ Request:
     
     {
         "fields": {
-            "rating": { ![](images/icons/callouts/1.png)
+            "rating": { #1
                 "long": {
                     "searchable": true,
                     "aggregatable": false,
                     "indices": ["index1", "index2"],
-                    "non_aggregatable_indices": ["index1"] ![](images/icons/callouts/2.png)
+                    "non_aggregatable_indices": ["index1"] #2
                 },
                 "keyword": {
                     "searchable": false,
                     "aggregatable": true,
                     "indices": ["index3", "index4"],
-                    "non_searchable_indices": ["index4"] ![](images/icons/callouts/3.png)
+                    "non_searchable_indices": ["index4"] #3
                 }
             },
-            "title": { ![](images/icons/callouts/4.png)
+            "title": { #4
                 "text": {
                     "searchable": true,
                     "aggregatable": false
@@ -72,28 +72,8 @@ Request:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The field `rating` is defined as a long in `index1` and `index2` and as a `keyword` in `index3` and `index4`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The field `rating` is not aggregatable in `index1`.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The field `rating` is not searchable in `index4`.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-The field `title` is defined as `text` in all indices. 
+#1| The field `rating` is defined as a long in `index1` and `index2` and as a `keyword` in `index3` and `index4`.     
+---|---    
+#2| The field `rating` is not aggregatable in `index1`.     
+#3| The field `rating` is not searchable in `index4`.     
+#4| The field `title` is defined as `text` in all indices. 

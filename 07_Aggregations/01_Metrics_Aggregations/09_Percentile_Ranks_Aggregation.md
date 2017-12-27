@@ -17,19 +17,14 @@ Let’s look at a range of percentiles representing load time:
         "aggs" : {
             "load_time_outlier" : {
                 "percentile_ranks" : {
-                    "field" : "load_time", ![](images/icons/callouts/1.png)
+                    "field" : "load_time", #1
                     "values" : [15, 30]
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The field `load_time` must be a numeric field   
-  
+#1| The field `load_time` must be a numeric field     
 ---|---  
   
 The response will look like this:
@@ -102,9 +97,9 @@ The percentile rank metric supports scripting. For example, if our load times ar
                     "values" : [3, 5],
                     "script" : {
                         "lang": "painless",
-                        "inline": "doc['load_time'].value / params.timeUnit", ![](images/icons/callouts/1.png)
+                        "inline": "doc['load_time'].value / params.timeUnit", #1
                         "params" : {
-                            "timeUnit" : 1000   ![](images/icons/callouts/2.png)
+                            "timeUnit" : 1000   #2
                         }
                     }
                 }
@@ -112,19 +107,9 @@ The percentile rank metric supports scripting. For example, if our load times ar
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `field` parameter is replaced with a `script` parameter, which uses the script to generate values which percentile ranks are calculated on   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Scripting supports parameterized input just like any other script   
+#1| The `field` parameter is replaced with a `script` parameter, which uses the script to generate values which percentile ranks are calculated on     
+---|---    
+#2| Scripting supports parameterized input just like any other script   
   
 This will interpret the `script` parameter as an `inline` script with the `painless` script language and no script parameters. To use a file script use the following syntax:
     
@@ -166,27 +151,17 @@ The HDR Histogram can be used by specifying the `method` parameter in the reques
                 "percentile_ranks" : {
                     "field" : "load_time",
                     "values" : [15, 30],
-                    "hdr": { ![](images/icons/callouts/1.png)
-                      "number_of_significant_value_digits" : 3 ![](images/icons/callouts/2.png)
+                    "hdr": { #1
+                      "number_of_significant_value_digits" : 3 #2
                     }
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`hdr` object indicates that HDR Histogram should be used to calculate the percentiles and specific settings for this algorithm can be specified inside the object   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-`number_of_significant_value_digits` specifies the resolution of values for the histogram in number of significant digits   
+#1| `hdr` object indicates that HDR Histogram should be used to calculate the percentiles and specific settings for this algorithm can be specified inside the object     
+---|---    
+#2| `number_of_significant_value_digits` specifies the resolution of values for the histogram in number of significant digits   
   
 The HDRHistogram only supports positive values and will error if it is passed a negative value. It is also not a good idea to use the HDRHistogram if the range of values is unknown as this could lead to high memory usage.
 
@@ -200,16 +175,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "grade_ranks" : {
                 "percentile_ranks" : {
                     "field" : "grade",
-                    "missing": 10 ![](images/icons/callouts/1.png)
+                    "missing": 10 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.   
-  
+#1| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.     
 ---|---

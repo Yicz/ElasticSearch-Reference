@@ -73,35 +73,20 @@ It is an error to index to an alias which points to more than one index.
 It is also possible to swap an index with an alias in one operation:
     
     
-    PUT test     ![](images/icons/callouts/1.png)
-    PUT test_2   ![](images/icons/callouts/2.png)
+    PUT test     #1
+    PUT test_2   #2
     POST /_aliases
     {
         "actions" : [
             { "add":  { "index": "test_2", "alias": "test" } },
-            { "remove_index": { "index": "test" } }  ![](images/icons/callouts/3.png)
+            { "remove_index": { "index": "test" } }  #3
         ]
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-An index we’ve added by mistake   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The index we should have added   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-`remove_index` is just like [_Delete Index_](indices-delete-index.html)  
+#1| An index we’ve added by mistake     
+---|---    
+#2| The index we should have added     
+#3| `remove_index` is just like [_Delete Index_](indices-delete-index.html)  
   
 ### Filtered Aliases
 
@@ -193,31 +178,10 @@ An alias can also be added with the endpoint
 
 where
 
-`index`
-
-| 
-
-The index the alias refers to. Can be any of `* | _all | glob pattern | name1, name2, …`  
-  
----|---  
-  
-`name`
-
-| 
-
-The name of the alias. This is a required option.   
-  
-`routing`
-
-| 
-
-An optional routing that can be associated with an alias.   
-  
-`filter`
-
-| 
-
-An optional filter that can be associated with an alias.   
+`index`| The index the alias refers to. Can be any of `* | _all | glob pattern | name1, name2, …`   
+---|---    `name`| The name of the alias. This is a required option.     
+`routing`| An optional routing that can be associated with an alias.     
+`filter`| An optional filter that can be associated with an alias.   
   
 You can also use the plural `_aliases`.
 

@@ -15,18 +15,13 @@ Any `_search` request can be profiled by adding a top-level `profile` parameter:
     
     GET /_search
     {
-      "profile": true,![](images/icons/callouts/1.png)
+      "profile": true,#1
       "query" : {
         "match" : { "message" : "message number" }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Setting the top-level `profile` parameter to `true` will enable profiling for the search   
-  
+#1| Setting the top-level `profile` parameter to `true` will enable profiling for the search     
 ---|---  
   
 This will yield the following result:
@@ -43,7 +38,7 @@ This will yield the following result:
        "hits": {
           "total": 4,
           "max_score": 0.5093388,
-          "hits": [...] ![](images/icons/callouts/1.png)
+          "hits": [...] #1
        },
        "profile": {
          "shards": [
@@ -140,12 +135,7 @@ This will yield the following result:
        }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Search results are returned, but were omitted here for brevity   
-  
+#1| Search results are returned, but were omitted here for brevity     
 ---|---  
   
 Even for a simple query, the response is relatively complicated. Let’s break it down piece-by-piece before moving to more complex examples.
@@ -157,51 +147,26 @@ First, the overall structure of the profile response is as follows:
        "profile": {
             "shards": [
                {
-                  "id": "[2aE02wS1R8q_QFnYu6vDVQ][twitter][1]",  ![](images/icons/callouts/1.png)
+                  "id": "[2aE02wS1R8q_QFnYu6vDVQ][twitter][1]",  #1
                   "searches": [
                      {
-                        "query": [...],             ![](images/icons/callouts/2.png)
-                        "rewrite_time": 51443,      ![](images/icons/callouts/3.png)
-                        "collector": [...]          ![](images/icons/callouts/4.png)
+                        "query": [...],             #2
+                        "rewrite_time": 51443,      #3
+                        "collector": [...]          #4
                      }
                   ],
-                  "aggregations": [...]             ![](images/icons/callouts/5.png)
+                  "aggregations": [...]             #5
                }
             ]
          }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-A profile is returned for each shard that participated in the response, and is identified by a unique ID   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Each profile contains a div which holds details about the query execution   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Each profile has a single time representing the cumulative rewrite time   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Each profile also contains a div about the Lucene Collectors which run the search   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-Each profile contains a div which holds the details about the aggregation execution   
+#1| A profile is returned for each shard that participated in the response, and is identified by a unique ID     
+---|---    
+#2| Each profile contains a div which holds details about the query execution     
+#3| Each profile has a single time representing the cumulative rewrite time     
+#4| Each profile also contains a div about the Lucene Collectors which run the search     
+#5| Each profile contains a div which holds the details about the aggregation execution   
   
 Because a search request may be executed against one or more shards in an index, and a search may cover one or more indices, the top level element in the profile response is an array of `shard` objects. Each shard object lists it’s `id` which uniquely identifies the shard. The ID’s format is `[nodeID][indexName][shardID]`.
 

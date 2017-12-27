@@ -15,7 +15,7 @@ For example:
         "query": {
             "match_phrase": {
                 "names": {
-                    "query": "Abraham Lincoln" ![](images/icons/callouts/1.png)
+                    "query": "Abraham Lincoln" #1
                 }
             }
         }
@@ -27,25 +27,15 @@ For example:
             "match_phrase": {
                 "names": {
                     "query": "Abraham Lincoln",
-                    "slop": 101 ![](images/icons/callouts/2.png)
+                    "slop": 101 #2
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This phrase query doesn’t match our document which is totally expected.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This phrase query matches our document, even though `Abraham` and `Lincoln` are in separate strings, because `slop` > `position_increment_gap`.   
+#1| This phrase query doesn’t match our document which is totally expected.     
+---|---    
+#2| This phrase query matches our document, even though `Abraham` and `Lincoln` are in separate strings, because `slop` > `position_increment_gap`.   
   
 The `position_increment_gap` can be specified in the mapping. For instance:
     
@@ -57,7 +47,7 @@ The `position_increment_gap` can be specified in the mapping. For instance:
           "properties": {
             "names": {
               "type": "text",
-              "position_increment_gap": 0 ![](images/icons/callouts/1.png)
+              "position_increment_gap": 0 #1
             }
           }
         }
@@ -73,24 +63,14 @@ The `position_increment_gap` can be specified in the mapping. For instance:
     {
         "query": {
             "match_phrase": {
-                "names": "Abraham Lincoln" ![](images/icons/callouts/2.png)
+                "names": "Abraham Lincoln" #2
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The first term in the next array element will be 0 terms apart from the last term in the previous array element.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The phrase query matches our document which is weird, but its what we asked for in the mapping.   
+#1| The first term in the next array element will be 0 terms apart from the last term in the previous array element.     
+---|---    
+#2| The phrase query matches our document which is weird, but its what we asked for in the mapping.   
   
 ![Tip](images/icons/tip.png)
 

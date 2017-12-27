@@ -297,31 +297,11 @@ Scripts can be inline (as in above example), indexed or stored on disk. For deta
 
 Available parameters in the script are
 
-`_subset_freq`
-
-| 
-
-Number of documents the term appears in in the subset.   
-  
----|---  
-  
-`_superset_freq`
-
-| 
-
-Number of documents the term appears in in the superset.   
-  
-`_subset_size`
-
-| 
-
-Number of documents in the subset.   
-  
-`_superset_size`
-
-| 
-
-Number of documents in the superset.   
+`_subset_freq`| Number of documents the term appears in in the subset.     
+---|---    
+`_superset_freq`| Number of documents the term appears in in the superset.     
+`_subset_size`| Number of documents in the subset.     
+`_superset_size`| Number of documents in the superset.   
   
 #### Size & Shard Size
 
@@ -418,18 +398,13 @@ Elasticsearch tries to have sensible defaults so this is something that generall
             "tags" : {
                  "significant_terms" : {
                      "field" : "tags",
-                     "execution_hint": "map" ![](images/icons/callouts/1.png)
+                     "execution_hint": "map" #1
                  }
              }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-the possible values are `map`, `global_ordinals` and `global_ordinals_hash`  
-  
+#1| the possible values are `map`, `global_ordinals` and `global_ordinals_hash`    
 ---|---  
   
 Please note that Elasticsearch will ignore this execution hint if it is not applicable.

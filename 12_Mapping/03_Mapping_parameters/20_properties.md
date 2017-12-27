@@ -14,15 +14,15 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
     PUT my_index
     {
       "mappings": {
-        "my_type": { ![](images/icons/callouts/1.png)
+        "my_type": { #1
           "properties": {
-            "manager": { ![](images/icons/callouts/2.png)
+            "manager": { #2
               "properties": {
                 "age":  { "type": "integer" },
                 "name": { "type": "text"  }
               }
             },
-            "employees": { ![](images/icons/callouts/3.png)
+            "employees": { #3
               "type": "nested",
               "properties": {
                 "age":  { "type": "integer" },
@@ -34,7 +34,7 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
       }
     }
     
-    PUT my_index/my_type/1 ![](images/icons/callouts/4.png)
+    PUT my_index/my_type/1 #4
     {
       "region": "US",
       "manager": {
@@ -53,31 +53,11 @@ Below is an example of adding `properties` to a mapping type, an `object` field,
       ]
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Properties under the `my_type` mapping type.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Properties under the `manager` object field.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Properties under the `employees` nested field.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-An example document which corresponds to the above mapping.   
+#1| Properties under the `my_type` mapping type.     
+---|---    
+#2| Properties under the `manager` object field.     
+#3| Properties under the `employees` nested field.     
+#4| An example document which corresponds to the above mapping.   
   
 ![Tip](images/icons/tip.png)
 
@@ -92,7 +72,7 @@ Inner fields can be referred to in queries, aggregations, etc., using _dot notat
     {
       "query": {
         "match": {
-          "manager.name": "Alice White" ![](images/icons/callouts/1.png)
+          "manager.name": "Alice White" #1
         }
       },
       "aggs": {
@@ -103,7 +83,7 @@ Inner fields can be referred to in queries, aggregations, etc., using _dot notat
           "aggs": {
             "Employee Ages": {
               "histogram": {
-                "field": "employees.age", ![](images/icons/callouts/2.png)
+                "field": "employees.age", #2
                 "interval": 5
               }
             }

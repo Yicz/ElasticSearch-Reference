@@ -101,11 +101,11 @@ The `arabic` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "arabic_stop": {
               "type":       "stop",
-              "stopwords":  "_arabic_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_arabic_" #1
             },
             "arabic_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["مثال"] ![](images/icons/callouts/2.png)
+              "keywords":   ["مثال"] #2
             },
             "arabic_stemmer": {
               "type":       "stemmer",
@@ -128,19 +128,9 @@ The `arabic` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `armenian` analyzer
 
@@ -154,11 +144,11 @@ The `armenian` analyzer could be reimplemented as a `custom` analyzer as follows
           "filter": {
             "armenian_stop": {
               "type":       "stop",
-              "stopwords":  "_armenian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_armenian_" #1
             },
             "armenian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["օրինակ"] ![](images/icons/callouts/2.png)
+              "keywords":   ["օրինակ"] #2
             },
             "armenian_stemmer": {
               "type":       "stemmer",
@@ -180,19 +170,9 @@ The `armenian` analyzer could be reimplemented as a `custom` analyzer as follows
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `basque` analyzer
 
@@ -206,11 +186,11 @@ The `basque` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "basque_stop": {
               "type":       "stop",
-              "stopwords":  "_basque_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_basque_" #1
             },
             "basque_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["Adibidez"] ![](images/icons/callouts/2.png)
+              "keywords":   ["Adibidez"] #2
             },
             "basque_stemmer": {
               "type":       "stemmer",
@@ -232,19 +212,9 @@ The `basque` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `brazilian` analyzer
 
@@ -258,11 +228,11 @@ The `brazilian` analyzer could be reimplemented as a `custom` analyzer as follow
           "filter": {
             "brazilian_stop": {
               "type":       "stop",
-              "stopwords":  "_brazilian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_brazilian_" #1
             },
             "brazilian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exemplo"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exemplo"] #2
             },
             "brazilian_stemmer": {
               "type":       "stemmer",
@@ -284,19 +254,9 @@ The `brazilian` analyzer could be reimplemented as a `custom` analyzer as follow
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `bulgarian` analyzer
 
@@ -310,11 +270,11 @@ The `bulgarian` analyzer could be reimplemented as a `custom` analyzer as follow
           "filter": {
             "bulgarian_stop": {
               "type":       "stop",
-              "stopwords":  "_bulgarian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_bulgarian_" #1
             },
             "bulgarian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["пример"] ![](images/icons/callouts/2.png)
+              "keywords":   ["пример"] #2
             },
             "bulgarian_stemmer": {
               "type":       "stemmer",
@@ -336,19 +296,9 @@ The `bulgarian` analyzer could be reimplemented as a `custom` analyzer as follow
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `catalan` analyzer
 
@@ -366,11 +316,11 @@ The `catalan` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "catalan_stop": {
               "type":       "stop",
-              "stopwords":  "_catalan_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_catalan_" #1
             },
             "catalan_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exemple"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exemple"] #2
             },
             "catalan_stemmer": {
               "type":       "stemmer",
@@ -393,19 +343,9 @@ The `catalan` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `cjk` analyzer
 
@@ -419,7 +359,7 @@ The `cjk` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "english_stop": {
               "type":       "stop",
-              "stopwords":  "_english_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_english_" #1
             }
           },
           "analyzer": {
@@ -437,12 +377,7 @@ The `cjk` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
   
 #### `czech` analyzer
@@ -457,11 +392,11 @@ The `czech` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "czech_stop": {
               "type":       "stop",
-              "stopwords":  "_czech_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_czech_" #1
             },
             "czech_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["příklad"] ![](images/icons/callouts/2.png)
+              "keywords":   ["příklad"] #2
             },
             "czech_stemmer": {
               "type":       "stemmer",
@@ -483,19 +418,9 @@ The `czech` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `danish` analyzer
 
@@ -509,11 +434,11 @@ The `danish` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "danish_stop": {
               "type":       "stop",
-              "stopwords":  "_danish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_danish_" #1
             },
             "danish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["eksempel"] ![](images/icons/callouts/2.png)
+              "keywords":   ["eksempel"] #2
             },
             "danish_stemmer": {
               "type":       "stemmer",
@@ -535,19 +460,9 @@ The `danish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `dutch` analyzer
 
@@ -561,11 +476,11 @@ The `dutch` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "dutch_stop": {
               "type":       "stop",
-              "stopwords":  "_dutch_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_dutch_" #1
             },
             "dutch_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["voorbeeld"] ![](images/icons/callouts/2.png)
+              "keywords":   ["voorbeeld"] #2
             },
             "dutch_stemmer": {
               "type":       "stemmer",
@@ -597,19 +512,9 @@ The `dutch` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `english` analyzer
 
@@ -623,11 +528,11 @@ The `english` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "english_stop": {
               "type":       "stop",
-              "stopwords":  "_english_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_english_" #1
             },
             "english_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["example"] ![](images/icons/callouts/2.png)
+              "keywords":   ["example"] #2
             },
             "english_stemmer": {
               "type":       "stemmer",
@@ -654,19 +559,9 @@ The `english` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `finnish` analyzer
 
@@ -680,11 +575,11 @@ The `finnish` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "finnish_stop": {
               "type":       "stop",
-              "stopwords":  "_finnish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_finnish_" #1
             },
             "finnish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["esimerkki"] ![](images/icons/callouts/2.png)
+              "keywords":   ["esimerkki"] #2
             },
             "finnish_stemmer": {
               "type":       "stemmer",
@@ -706,19 +601,9 @@ The `finnish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `french` analyzer
 
@@ -741,11 +626,11 @@ The `french` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "french_stop": {
               "type":       "stop",
-              "stopwords":  "_french_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_french_" #1
             },
             "french_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["Exemple"] ![](images/icons/callouts/2.png)
+              "keywords":   ["Exemple"] #2
             },
             "french_stemmer": {
               "type":       "stemmer",
@@ -768,19 +653,9 @@ The `french` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `galician` analyzer
 
@@ -794,11 +669,11 @@ The `galician` analyzer could be reimplemented as a `custom` analyzer as follows
           "filter": {
             "galician_stop": {
               "type":       "stop",
-              "stopwords":  "_galician_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_galician_" #1
             },
             "galician_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exemplo"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exemplo"] #2
             },
             "galician_stemmer": {
               "type":       "stemmer",
@@ -820,19 +695,9 @@ The `galician` analyzer could be reimplemented as a `custom` analyzer as follows
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `german` analyzer
 
@@ -846,11 +711,11 @@ The `german` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "german_stop": {
               "type":       "stop",
-              "stopwords":  "_german_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_german_" #1
             },
             "german_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["Beispiel"] ![](images/icons/callouts/2.png)
+              "keywords":   ["Beispiel"] #2
             },
             "german_stemmer": {
               "type":       "stemmer",
@@ -873,19 +738,9 @@ The `german` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `greek` analyzer
 
@@ -899,7 +754,7 @@ The `greek` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "greek_stop": {
               "type":       "stop",
-              "stopwords":  "_greek_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_greek_" #1
             },
             "greek_lowercase": {
               "type":       "lowercase",
@@ -907,7 +762,7 @@ The `greek` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "greek_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["παράδειγμα"] ![](images/icons/callouts/2.png)
+              "keywords":   ["παράδειγμα"] #2
             },
             "greek_stemmer": {
               "type":       "stemmer",
@@ -929,19 +784,9 @@ The `greek` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `hindi` analyzer
 
@@ -955,11 +800,11 @@ The `hindi` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "hindi_stop": {
               "type":       "stop",
-              "stopwords":  "_hindi_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_hindi_" #1
             },
             "hindi_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["उदाहरण"] ![](images/icons/callouts/2.png)
+              "keywords":   ["उदाहरण"] #2
             },
             "hindi_stemmer": {
               "type":       "stemmer",
@@ -983,19 +828,9 @@ The `hindi` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `hungarian` analyzer
 
@@ -1009,11 +844,11 @@ The `hungarian` analyzer could be reimplemented as a `custom` analyzer as follow
           "filter": {
             "hungarian_stop": {
               "type":       "stop",
-              "stopwords":  "_hungarian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_hungarian_" #1
             },
             "hungarian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["példa"] ![](images/icons/callouts/2.png)
+              "keywords":   ["példa"] #2
             },
             "hungarian_stemmer": {
               "type":       "stemmer",
@@ -1035,19 +870,9 @@ The `hungarian` analyzer could be reimplemented as a `custom` analyzer as follow
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `indonesian` analyzer
 
@@ -1061,11 +886,11 @@ The `indonesian` analyzer could be reimplemented as a `custom` analyzer as follo
           "filter": {
             "indonesian_stop": {
               "type":       "stop",
-              "stopwords":  "_indonesian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_indonesian_" #1
             },
             "indonesian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["contoh"] ![](images/icons/callouts/2.png)
+              "keywords":   ["contoh"] #2
             },
             "indonesian_stemmer": {
               "type":       "stemmer",
@@ -1087,19 +912,9 @@ The `indonesian` analyzer could be reimplemented as a `custom` analyzer as follo
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `irish` analyzer
 
@@ -1117,7 +932,7 @@ The `irish` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "irish_stop": {
               "type":       "stop",
-              "stopwords":  "_irish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_irish_" #1
             },
             "irish_lowercase": {
               "type":       "lowercase",
@@ -1125,7 +940,7 @@ The `irish` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "irish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["sampla"] ![](images/icons/callouts/2.png)
+              "keywords":   ["sampla"] #2
             },
             "irish_stemmer": {
               "type":       "stemmer",
@@ -1148,19 +963,9 @@ The `irish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `italian` analyzer
 
@@ -1183,11 +988,11 @@ The `italian` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "italian_stop": {
               "type":       "stop",
-              "stopwords":  "_italian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_italian_" #1
             },
             "italian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["esempio"] ![](images/icons/callouts/2.png)
+              "keywords":   ["esempio"] #2
             },
             "italian_stemmer": {
               "type":       "stemmer",
@@ -1210,19 +1015,9 @@ The `italian` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `latvian` analyzer
 
@@ -1236,11 +1031,11 @@ The `latvian` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "latvian_stop": {
               "type":       "stop",
-              "stopwords":  "_latvian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_latvian_" #1
             },
             "latvian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["piemērs"] ![](images/icons/callouts/2.png)
+              "keywords":   ["piemērs"] #2
             },
             "latvian_stemmer": {
               "type":       "stemmer",
@@ -1262,19 +1057,9 @@ The `latvian` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `lithuanian` analyzer
 
@@ -1288,11 +1073,11 @@ The `lithuanian` analyzer could be reimplemented as a `custom` analyzer as follo
           "filter": {
             "lithuanian_stop": {
               "type":       "stop",
-              "stopwords":  "_lithuanian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_lithuanian_" #1
             },
             "lithuanian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["pavyzdys"] ![](images/icons/callouts/2.png)
+              "keywords":   ["pavyzdys"] #2
             },
             "lithuanian_stemmer": {
               "type":       "stemmer",
@@ -1314,19 +1099,9 @@ The `lithuanian` analyzer could be reimplemented as a `custom` analyzer as follo
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `norwegian` analyzer
 
@@ -1340,11 +1115,11 @@ The `norwegian` analyzer could be reimplemented as a `custom` analyzer as follow
           "filter": {
             "norwegian_stop": {
               "type":       "stop",
-              "stopwords":  "_norwegian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_norwegian_" #1
             },
             "norwegian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["eksempel"] ![](images/icons/callouts/2.png)
+              "keywords":   ["eksempel"] #2
             },
             "norwegian_stemmer": {
               "type":       "stemmer",
@@ -1366,19 +1141,9 @@ The `norwegian` analyzer could be reimplemented as a `custom` analyzer as follow
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `persian` analyzer
 
@@ -1392,13 +1157,13 @@ The `persian` analyzer could be reimplemented as a `custom` analyzer as follows:
           "char_filter": {
             "zero_width_spaces": {
                 "type":       "mapping",
-                "mappings": [ "\\u200C=> "] ![](images/icons/callouts/1.png)
+                "mappings": [ "\\u200C=> "] #1
             }
           },
           "filter": {
             "persian_stop": {
               "type":       "stop",
-              "stopwords":  "_persian_" ![](images/icons/callouts/2.png)
+              "stopwords":  "_persian_" #2
             }
           },
           "analyzer": {
@@ -1417,19 +1182,9 @@ The `persian` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Replaces zero-width non-joiners with an ASCII space.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
+#1| Replaces zero-width non-joiners with an ASCII space.     
+---|---    
+#2| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
   
 #### `portuguese` analyzer
 
@@ -1443,11 +1198,11 @@ The `portuguese` analyzer could be reimplemented as a `custom` analyzer as follo
           "filter": {
             "portuguese_stop": {
               "type":       "stop",
-              "stopwords":  "_portuguese_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_portuguese_" #1
             },
             "portuguese_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exemplo"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exemplo"] #2
             },
             "portuguese_stemmer": {
               "type":       "stemmer",
@@ -1469,19 +1224,9 @@ The `portuguese` analyzer could be reimplemented as a `custom` analyzer as follo
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `romanian` analyzer
 
@@ -1495,11 +1240,11 @@ The `romanian` analyzer could be reimplemented as a `custom` analyzer as follows
           "filter": {
             "romanian_stop": {
               "type":       "stop",
-              "stopwords":  "_romanian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_romanian_" #1
             },
             "romanian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exemplu"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exemplu"] #2
             },
             "romanian_stemmer": {
               "type":       "stemmer",
@@ -1521,19 +1266,9 @@ The `romanian` analyzer could be reimplemented as a `custom` analyzer as follows
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `russian` analyzer
 
@@ -1547,11 +1282,11 @@ The `russian` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "russian_stop": {
               "type":       "stop",
-              "stopwords":  "_russian_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_russian_" #1
             },
             "russian_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["пример"] ![](images/icons/callouts/2.png)
+              "keywords":   ["пример"] #2
             },
             "russian_stemmer": {
               "type":       "stemmer",
@@ -1573,19 +1308,9 @@ The `russian` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `sorani` analyzer
 
@@ -1599,11 +1324,11 @@ The `sorani` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "sorani_stop": {
               "type":       "stop",
-              "stopwords":  "_sorani_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_sorani_" #1
             },
             "sorani_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["mînak"] ![](images/icons/callouts/2.png)
+              "keywords":   ["mînak"] #2
             },
             "sorani_stemmer": {
               "type":       "stemmer",
@@ -1626,19 +1351,9 @@ The `sorani` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `spanish` analyzer
 
@@ -1652,11 +1367,11 @@ The `spanish` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "spanish_stop": {
               "type":       "stop",
-              "stopwords":  "_spanish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_spanish_" #1
             },
             "spanish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["ejemplo"] ![](images/icons/callouts/2.png)
+              "keywords":   ["ejemplo"] #2
             },
             "spanish_stemmer": {
               "type":       "stemmer",
@@ -1678,19 +1393,9 @@ The `spanish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `swedish` analyzer
 
@@ -1704,11 +1409,11 @@ The `swedish` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "swedish_stop": {
               "type":       "stop",
-              "stopwords":  "_swedish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_swedish_" #1
             },
             "swedish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["exempel"] ![](images/icons/callouts/2.png)
+              "keywords":   ["exempel"] #2
             },
             "swedish_stemmer": {
               "type":       "stemmer",
@@ -1730,19 +1435,9 @@ The `swedish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
+---|---    
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `turkish` analyzer
 
@@ -1756,7 +1451,7 @@ The `turkish` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "turkish_stop": {
               "type":       "stop",
-              "stopwords":  "_turkish_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_turkish_" #1
             },
             "turkish_lowercase": {
               "type":       "lowercase",
@@ -1764,7 +1459,7 @@ The `turkish` analyzer could be reimplemented as a `custom` analyzer as follows:
             },
             "turkish_keywords": {
               "type":       "keyword_marker",
-              "keywords":   ["örnek"] ![](images/icons/callouts/2.png)
+              "keywords":   ["örnek"] #2
             },
             "turkish_stemmer": {
               "type":       "stemmer",
@@ -1787,19 +1482,9 @@ The `turkish` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This filter should be removed unless there are words which should be excluded from stemming.   
+#2| This filter should be removed unless there are words which should be excluded from stemming.   
   
 #### `thai` analyzer
 
@@ -1813,7 +1498,7 @@ The `thai` analyzer could be reimplemented as a `custom` analyzer as follows:
           "filter": {
             "thai_stop": {
               "type":       "stop",
-              "stopwords":  "_thai_" ![](images/icons/callouts/1.png)
+              "stopwords":  "_thai_" #1
             }
           },
           "analyzer": {
@@ -1829,10 +1514,5 @@ The `thai` analyzer could be reimplemented as a `custom` analyzer as follows:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.   
-  
+#1| The default stopwords can be overridden with the `stopwords` or `stopwords_path` parameters.     
 ---|---

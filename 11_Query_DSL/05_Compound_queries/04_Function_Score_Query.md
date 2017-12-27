@@ -13,18 +13,13 @@ To use `function_score`, the user has to define a query and one or more function
             "function_score": {
                 "query": { "match_all": {} },
                 "boost": "5",
-                "random_score": {}, ![](images/icons/callouts/1.png)
+                "random_score": {}, #1
                 "boost_mode":"multiply"
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-See [Function Score Query](query-dsl-function-score-query.html#score-functions) for a list of supported functions.   
-  
+#1| See [Function Score Query](query-dsl-function-score-query.html#score-functions) for a list of supported functions.     
 ---|---  
   
 Furthermore, several functions can be combined. In this case one can optionally choose to apply the function only if a document matches a given filtering query
@@ -35,11 +30,11 @@ Furthermore, several functions can be combined. In this case one can optionally 
         "query": {
             "function_score": {
               "query": { "match_all": {} },
-              "boost": "5", ![](images/icons/callouts/1.png)
+              "boost": "5", #1
               "functions": [
                   {
                       "filter": { "match": { "test": "bar" } },
-                      "random_score": {}, ![](images/icons/callouts/2.png)
+                      "random_score": {}, #2
                       "weight": 23
                   },
                   {
@@ -55,7 +50,7 @@ Furthermore, several functions can be combined. In this case one can optionally 
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -63,7 +58,7 @@ Boost for the whole query.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
@@ -253,8 +248,8 @@ Decay functions score a document with a function that decays depending on the di
 To use distance scoring on a query that has numerical fields, the user has to define an `origin` and a `scale` for each field. The `origin` is needed to define the “central point” from which the distance is calculated, and the `scale` to define the rate of decay. The decay function is specified as
     
     
-    "DECAY_FUNCTION": { ![](images/icons/callouts/1.png)
-        "FIELD_NAME": { ![](images/icons/callouts/2.png)
+    "DECAY_FUNCTION": { #1
+        "FIELD_NAME": { #2
               "origin": "11, 12",
               "scale": "2km",
               "offset": "0km",
@@ -262,7 +257,7 @@ To use distance scoring on a query that has numerical fields, the user has to de
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -270,7 +265,7 @@ The `DECAY_FUNCTION` should be one of `linear`, `exp`, or `gauss`.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
@@ -285,17 +280,17 @@ In the above example, the field is a [`geo_point`](geo-point.html) and origin ca
             "function_score": {
                 "gauss": {
                     "date": {
-                          "origin": "2013-09-17", ![](images/icons/callouts/1.png)
+                          "origin": "2013-09-17", #1
                           "scale": "10d",
-                          "offset": "5d", ![](images/icons/callouts/2.png)
-                          "decay" : 0.5 ![](images/icons/callouts/3.png)
+                          "offset": "5d", #2
+                          "decay" : 0.5 #3
                     }
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -303,7 +298,7 @@ The date format of the origin depends on the [`format`](mapping-date-format.html
   
 ---|---  
   
-![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png)
+#2 #3
 | The `offset` and `decay` parameters are optional. | 
 `origin`| The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fieldsand geo point for geo fields. Required for geo and numeric field. For date fields the default is `now`. Date math (forexample `now-1h`) is supported for origin.     
 ---|---    
@@ -397,14 +392,14 @@ In this example, the fields might be called "price" for the price of the hotel a
 The function for `price` in this case would be
     
     
-    "gauss": { ![](images/icons/callouts/1.png)
+    "gauss": { #1
         "price": {
               "origin": "0",
               "scale": "20"
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -415,14 +410,14 @@ This decay function could also be `linear` or `exp`.
 and for `location`:
     
     
-    "gauss": { ![](images/icons/callouts/1.png)
+    "gauss": { #1
         "location": {
               "origin": "11, 12",
               "scale": "2km"
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 

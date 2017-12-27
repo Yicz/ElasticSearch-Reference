@@ -28,7 +28,7 @@ Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be refer
       "settings": {
         "analysis": {
           "analyzer": {
-            "std_folded": { ![](images/icons/callouts/1.png)
+            "std_folded": { #1
               "type": "custom",
               "tokenizer": "standard",
               "filter": [
@@ -44,28 +44,28 @@ Alternatively, a [`custom` analyzer](analysis-custom-analyzer.html) can be refer
           "properties": {
             "my_text": {
               "type": "text",
-              "analyzer": "std_folded" ![](images/icons/callouts/2.png)
+              "analyzer": "std_folded" #2
             }
           }
         }
       }
     }
     
-    GET my_index/_analyze ![](images/icons/callouts/3.png)
+    GET my_index/_analyze #3
     {
-      "analyzer": "std_folded", ![](images/icons/callouts/4.png)
+      "analyzer": "std_folded", #4
       "text":     "Is this déjà vu?"
     }
     
-    GET my_index/_analyze ![](images/icons/callouts/5.png)
+    GET my_index/_analyze #5
     {
-      "field": "my_text", ![](images/icons/callouts/6.png)
+      "field": "my_text", #6
       "text":  "Is this déjà vu?"
     }
 
-![](images/icons/callouts/1.png)| Define a `custom` analyzer called `std_folded`.     
+#1| Define a `custom` analyzer called `std_folded`.     
 ---|---    
-![](images/icons/callouts/2.png)| The field `my_text` uses the `std_folded` analyzer.     ![](images/icons/callouts/3.png) 
-![](images/icons/callouts/5.png)| To refer to this analyzer, the `analyze` API must specify the index name.     
-![](images/icons/callouts/4.png)| Refer to the analyzer by name.     
-![](images/icons/callouts/6.png)| Refer to the analyzer used by field `my_text`. 
+#2| The field `my_text` uses the `std_folded` analyzer.     #3 
+#5| To refer to this analyzer, the `analyze` API must specify the index name.     
+#4| Refer to the analyzer by name.     
+#6| Refer to the analyzer used by field `my_text`. 

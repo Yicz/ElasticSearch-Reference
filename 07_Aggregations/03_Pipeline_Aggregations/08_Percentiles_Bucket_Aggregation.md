@@ -51,26 +51,16 @@ The following snippet calculates the percentiles for the total monthly `sales` b
             },
             "percentiles_monthly_sales": {
                 "percentiles_bucket": {
-                    "buckets_path": "sales_per_month>sales", ![](images/icons/callouts/1.png)
-                    "percents": [ 25.0, 50.0, 75.0 ] ![](images/icons/callouts/2.png)
+                    "buckets_path": "sales_per_month>sales", #1
+                    "percents": [ 25.0, 50.0, 75.0 ] #2
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`buckets_path` instructs this percentiles_bucket aggregation that we want to calculate percentiles for the `sales` aggregation in the `sales_per_month` date histogram.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-`percents` specifies which percentiles we wish to calculate, in this case, the 25th, 50th and 75th percentiles.   
+#1| `buckets_path` instructs this percentiles_bucket aggregation that we want to calculate percentiles for the `sales` aggregation in the `sales_per_month` date histogram.     
+---|---    
+#2| `percents` specifies which percentiles we wish to calculate, in this case, the 25th, 50th and 75th percentiles.   
   
 And the following may be the response:
     

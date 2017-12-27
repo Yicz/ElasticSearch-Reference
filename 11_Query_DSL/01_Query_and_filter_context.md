@@ -35,45 +35,25 @@ Below is an example of query clauses being used in query and filter context in t
     
     GET /_search
     {
-      "query": { ![](images/icons/callouts/1.png)
-        "bool": { ![](images/icons/callouts/2.png)
+      "query": { #1
+        "bool": { #2
           "must": [
-            { "match": { "title":   "Search"        } }, ![](images/icons/callouts/3.png)
-            { "match": { "content": "Elasticsearch" } }  ![](images/icons/callouts/4.png)
+            { "match": { "title":   "Search"        } }, #3
+            { "match": { "content": "Elasticsearch" } }  #4
           ],
-          "filter": [ ![](images/icons/callouts/5.png)
-            { "term":  { "status": "published" } }, ![](images/icons/callouts/6.png)
-            { "range": { "publish_date": { "gte": "2015-01-01" } } } ![](images/icons/callouts/7.png)
+          "filter": [ #5
+            { "term":  { "status": "published" } }, #6
+            { "range": { "publish_date": { "gte": "2015-01-01" } } } #7
           ]
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `query` parameter indicates query context.   
-  
----|---  
-  
-![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png) ![](images/icons/callouts/4.png)
-
-| 
-
-The `bool` and two `match` clauses are used in query context, which means that they are used to score how well each document matches.   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-The `filter` parameter indicates filter context.   
-  
-![](images/icons/callouts/6.png) ![](images/icons/callouts/7.png)
-
-| 
-
-The `term` and `range` clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.   
+#1| The `query` parameter indicates query context.     
+---|---    
+#2 #3 #4| The `bool` and two `match` clauses are used in query context, which means that they are used to score how well each document matches.     
+#5| The `filter` parameter indicates filter context.     
+#6 #7| The `term` and `range` clauses are used in filter context. They will filter out documents which do not match, but they will not affect the score for matching documents.   
   
 ![Tip](images/icons/tip.png)
 

@@ -113,7 +113,7 @@ For instance:
       "mappings": {
         "my_type": {
           "properties": {
-            "title": { ![](images/icons/callouts/1.png)
+            "title": { #1
               "type": "text"
             },
             "first_name": {
@@ -141,7 +141,7 @@ For instance:
       "script_fields": {
         "source": {
           "script": {
-            "inline": "params._source.title + ' ' + params._source.first_name + ' ' + params._source.last_name" ![](images/icons/callouts/2.png)
+            "inline": "params._source.title + ' ' + params._source.first_name + ' ' + params._source.last_name" #2
           }
         },
         "stored_fields": {
@@ -152,19 +152,9 @@ For instance:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `title` field is not stored and so cannot be used with the `_fields[]` syntax.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `title` field can still be accessed from the `_source`.   
+#1| The `title` field is not stored and so cannot be used with the `_fields[]` syntax.     
+---|---    
+#2| The `title` field can still be accessed from the `_source`.   
   
 ![Tip](images/icons/tip.png)
 

@@ -50,18 +50,13 @@ The following snippet calculates the stats for monthly `sales`:
             },
             "stats_monthly_sales": {
                 "stats_bucket": {
-                    "buckets_path": "sales_per_month>sales" ![](images/icons/callouts/1.png)
+                    "buckets_path": "sales_per_month>sales" #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`bucket_paths` instructs this `stats_bucket` aggregation that we want the calculate stats for the `sales` aggregation in the `sales_per_month` date histogram.   
-  
+#1| `bucket_paths` instructs this `stats_bucket` aggregation that we want the calculate stats for the `sales` aggregation in the `sales_per_month` date histogram.     
 ---|---  
   
 And the following may be the response:

@@ -60,7 +60,7 @@ A `serial_diff` aggregation looks like this in isolation:
     {
        "size": 0,
        "aggs": {
-          "my_date_histo": {                  ![](images/icons/callouts/1.png)
+          "my_date_histo": {                  #1
              "date_histogram": {
                 "field": "timestamp",
                 "interval": "day"
@@ -68,11 +68,11 @@ A `serial_diff` aggregation looks like this in isolation:
              "aggs": {
                 "the_sum": {
                    "sum": {
-                      "field": "lemmings"     ![](images/icons/callouts/2.png)
+                      "field": "lemmings"     #2
                    }
                 },
                 "thirtieth_difference": {
-                   "serial_diff": {                ![](images/icons/callouts/3.png)
+                   "serial_diff": {                #3
                       "buckets_path": "the_sum",
                       "lag" : 30
                    }
@@ -82,24 +82,9 @@ A `serial_diff` aggregation looks like this in isolation:
        }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-A `date_histogram` named "my_date_histo" is constructed on the "timestamp" field, with one-day intervals   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-A `sum` metric is used to calculate the sum of a field. This could be any metric (sum, min, max, etc)   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Finally, we specify a `serial_diff` aggregation which uses "the_sum" metric as its input.   
+#1| A `date_histogram` named "my_date_histo" is constructed on the "timestamp" field, with one-day intervals     
+---|---    
+#2| A `sum` metric is used to calculate the sum of a field. This could be any metric (sum, min, max, etc)     
+#3| Finally, we specify a `serial_diff` aggregation which uses "the_sum" metric as its input.   
   
 Serial differences are built by first specifying a `histogram` or `date_histogram` over a field. You can then optionally add normal metrics, such as a `sum`, inside of that histogram. Finally, the `serial_diff` is embedded inside the histogram. The `buckets_path` parameter is then used to "point" at one of the sibling metrics inside of the histogram (see [`buckets_path` Syntax for a description of the syntax for `buckets_path`.
