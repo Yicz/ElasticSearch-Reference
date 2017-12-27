@@ -16,19 +16,14 @@ A `bucket_selector` aggregation looks like this in isolation:
     {
         "bucket_selector": {
             "buckets_path": {
-                "my_var1": "the_sum", ![](images/icons/callouts/1.png)
+                "my_var1": "the_sum", #1
                 "my_var2": "the_value_count"
             },
             "script": "params.my_var1 > params.my_var2"
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Here, `my_var1` is the name of the variable for this buckets path to use in the script, `the_sum` is the path to the metrics to use for that variable.   
-  
+#1| Here, `my_var1` is the name of the variable for this buckets path to use in the script, `the_sum` is the path to the metrics to use for that variable.     
 ---|---  
   
 **Table 12. `bucket_selector` Parameters**
@@ -36,27 +31,8 @@ Here, `my_var1` is the name of the variable for this buckets path to use in the 
 参数名|描述|是否必需|默认值    
 ---|---|---|---    
 `script`| The script to run for this aggregation. The script can be inline, file or indexed. (see [_Scripting_]modules-scripting.html) for more details)| Required|     
-`buckets_path`| A map of script variables and their associated path to the buckets we wish to use for the variable (see [`buckets_path Syntax
-
-| 
-
-Required
-
-|   
-  
-`gap_policy`
-
-| 
-
-The policy to apply when gaps are found in the data (see [Dealing with gaps in the data
-
-| 
-
-Optional
-
-| 
-
-`skip`  
+`buckets_path`| A map of script variables and their associated path to the buckets we wish to use for the variable (see [`buckets_path Syntax| Required|     
+`gap_policy`| The policy to apply when gaps are found in the data (see [Dealing with gaps in the data| Optional| `skip`  
   
   
 
@@ -110,7 +86,7 @@ And the following may be the response:
                    "total_sales": {
                        "value": 550.0
                    }
-                },![](images/icons/callouts/1.png)
+                },#1
                 {
                    "key_as_string": "2015/03/01 00:00:00",
                    "key": 1425168000000,
@@ -124,10 +100,5 @@ And the following may be the response:
        }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Bucket for `2015/02/01 00:00:00` has been removed as its total sales was less than 200   
-  
+#1| Bucket for `2015/02/01 00:00:00` has been removed as its total sales was less than 200     
 ---|---

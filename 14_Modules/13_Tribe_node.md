@@ -14,12 +14,12 @@ The `elasticsearch.yml` config file for a tribe node just needs to list the clus
     
     
     tribe:
-        t1: ![](images/icons/callouts/1.png)
+        t1: #1
             cluster.name:   cluster_one
-        t2: ![](images/icons/callouts/2.png)
+        t2: #2
             cluster.name:   cluster_two
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png)| `t1` and `t2` are arbitrary names representing the connection to each cluster.     
+#1 #2| `t1` and `t2` are arbitrary names representing the connection to each cluster.     
 ---|---  
   
 The example above configures connections to two clusters, name `t1` and `t2` respectively. The tribe node will create a [node client](modules-node.html) to connect each cluster using [unicast discovery](modules-discovery-zen.html#unicast) by default. Any other settings for the connection can be configured under `tribe.{name}`, just like the `cluster.name` in the example.
@@ -85,17 +85,17 @@ Almost any setting (except for `path.*`) may be configured at the node client le
 
     
     
-    path.scripts:   some/path/to/config ![](images/icons/callouts/1.png)
-    network.host:   192.168.1.5 ![](images/icons/callouts/2.png)
+    path.scripts:   some/path/to/config #1
+    network.host:   192.168.1.5 #2
     
     tribe:
       t1:
         cluster.name:   cluster_one
       t2:
         cluster.name:   cluster_two
-        network.host:   10.1.2.3 ![](images/icons/callouts/3.png)
+        network.host:   10.1.2.3 #3
 
-![](images/icons/callouts/1.png)| The `path.scripts` setting is inherited by both `t1` and `t2`.     
+#1| The `path.scripts` setting is inherited by both `t1` and `t2`.     
 ---|---    
-![](images/icons/callouts/2.png)| The `network.host` setting is inherited by `t1`.     
-![](images/icons/callouts/3.png)| The `t3` node client overrides the inherited from the tribe node. 
+#2| The `network.host` setting is inherited by `t1`.     
+#3| The `t3` node client overrides the inherited from the tribe node. 

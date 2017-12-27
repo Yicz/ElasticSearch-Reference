@@ -21,9 +21,9 @@ Response:
     
         "aggregations" : {
             "genres" : {
-                "doc_count_error_upper_bound": 0, ![](images/icons/callouts/1.png)
-                "sum_other_doc_count": 0, ![](images/icons/callouts/2.png)
-                "buckets" : [ ![](images/icons/callouts/3.png)
+                "doc_count_error_upper_bound": 0, #1
+                "sum_other_doc_count": 0, #2
+                "buckets" : [ #3
                     {
                         "key" : "jazz",
                         "doc_count" : 10
@@ -41,25 +41,13 @@ Response:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-an upper bound of the error on the document counts for each term, see [below](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts)  
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-when there are lots of unique terms, elasticsearch only returns the top terms; this number is the sum of the document counts for all buckets that are not part of the response   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-the list of the top buckets, the meaning of `top` being defined by the [order](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order)  
+#
+1| an upper bound of the error on the document counts for each term, see [below](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-approximate-counts)    
+---|---    
+#
+2| when there are lots of unique terms, elasticsearch only returns the top terms; this number is the sum of the document counts for all buckets that are not part of the response     
+#
+3| the list of the top buckets, the meaning of `top` being defined by the [order](search-aggregations-bucket-terms-aggregation.html#search-aggregations-bucket-terms-aggregation-order)  
   
 By default, the `terms` aggregation will return the buckets for the top ten terms ordered by the `doc_count`. One can change this default behaviour by setting the `size` parameter.
 
@@ -88,252 +76,35 @@ A request is made to obtain the top 5 terms in the field product, ordered by des
 The terms for each of the three shards are shown below with their respective document counts in brackets:
 
 |  Shard A |  Shard B |  Shard C  
----|---|---|---  
-  
-1
-
-| 
-
-Product A (25)
-
-| 
-
-Product A (30)
-
-| 
-
-Product A (45)  
-  
-2
-
-| 
-
-Product B (18)
-
-| 
-
-Product B (25)
-
-| 
-
-Product C (44)  
-  
-3
-
-| 
-
-Product C (6)
-
-| 
-
-Product F (17)
-
-| 
-
-Product Z (36)  
-  
-4
-
-| 
-
-Product D (3)
-
-| 
-
-Product Z (16)
-
-| 
-
-Product G (30)  
-  
-5
-
-| 
-
-Product E (2)
-
-| 
-
-Product G (15)
-
-| 
-
-Product E (29)  
-  
-6
-
-| 
-
-Product F (2)
-
-| 
-
-Product H (14)
-
-| 
-
-Product H (28)  
-  
-7
-
-| 
-
-Product G (2)
-
-| 
-
-Product I (10)
-
-| 
-
-Product Q (2)  
-  
-8
-
-| 
-
-Product H (2)
-
-| 
-
-Product Q (6)
-
-| 
-
-Product D (1)  
-  
-9
-
-| 
-
-Product I (1)
-
-| 
-
-Product J (8)
-
-|   
-  
-10
-
-| 
-
-Product J (1)
-
-| 
-
-Product C (4)
-
-|   
-  
-The shards will return their top 5 terms so the results from the shards will be:
+---|---|---|---    
+1| Product A (25)| Product A (30)| Product A (45)    
+2| Product B (18)| Product B (25)| Product C (44)    
+3| Product C (6)| Product F (17)| Product Z (36)    
+4| Product D (3)| Product Z (16)| Product G (30)    
+5| Product E (2)| Product G (15)| Product E (29)    
+6| Product F (2)| Product H (14)| Product H (28)    
+7| Product G (2)| Product I (10)| Product Q (2)    
+8| Product H (2)| Product Q (6)| Product D (1)    
+9| Product I (1)| Product J (8)|     1
+0| Product J (1)| Product C (4)|     The shards will return their top 5 terms so the results from the shards will be:
 
 |  Shard A |  Shard B |  Shard C  
----|---|---|---  
-  
-1
-
-| 
-
-Product A (25)
-
-| 
-
-Product A (30)
-
-| 
-
-Product A (45)  
-  
-2
-
-| 
-
-Product B (18)
-
-| 
-
-Product B (25)
-
-| 
-
-Product C (44)  
-  
-3
-
-| 
-
-Product C (6)
-
-| 
-
-Product F (17)
-
-| 
-
-Product Z (36)  
-  
-4
-
-| 
-
-Product D (3)
-
-| 
-
-Product Z (16)
-
-| 
-
-Product G (30)  
-  
-5
-
-| 
-
-Product E (2)
-
-| 
-
-Product G (15)
-
-| 
-
-Product E (29)  
+---|---|---|---    
+1| Product A (25)| Product A (30)| Product A (45)    
+2| Product B (18)| Product B (25)| Product C (44)    
+3| Product C (6)| Product F (17)| Product Z (36)    
+4| Product D (3)| Product Z (16)| Product G (30)    
+5| Product E (2)| Product G (15)| Product E (29)  
   
 Taking the top 5 results from each of the shards (as requested) and combining them to make a final top 5 list produces the following:
 
-1
 
-| 
-
-Product A (100)  
-  
----|---  
-  
-2
-
-| 
-
-Product Z (52)  
-  
-3
-
-| 
-
-Product C (50)  
-  
-4
-
-| 
-
-Product G (45)  
-  
-5
-
-| 
-
-Product B (43)  
+1| Product A (100)    
+---|---    
+2| Product Z (52)    
+3| Product C (50)    
+4| Product G (45)    
+5| Product B (43)  
   
 Because Product A was returned from all shards we know that its document count value is accurate. Product C was only returned by shards A and C so its document count is shown as 50 but this is not an accurate count. Product C exists on shard B, but its count of 4 was not high enough to put Product C into the top 5 list for that shard. Product Z was also returned only by 2 shards but the third shard does not contain the term. There is no way of knowing, at the point of combining the results to produce the final list of terms, that there is an error in the document count for Product C and not for Product Z. Product H has a document count of 44 across all 3 shards but was not included in the final list of terms because it did not make it into the top five terms on any of the shards.
 
@@ -781,7 +552,7 @@ The `breadth_first` is the default mode for fields with a cardinality bigger tha
                  "terms" : {
                      "field" : "actors",
                      "size" : 10,
-                     "collect_mode" : "breadth_first" ![](images/icons/callouts/1.png)
+                     "collect_mode" : "breadth_first" #1
                  },
                 "aggs" : {
                     "costars" : {
@@ -795,12 +566,7 @@ The `breadth_first` is the default mode for fields with a cardinality bigger tha
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-the possible values are `breadth_first` and `depth_first`  
-  
+#1| the possible values are `breadth_first` and `depth_first`    
 ---|---  
   
 When using `breadth_first` mode the set of documents that fall into the uppermost buckets are cached for subsequent replay so there is a memory overhead in doing this which is linear with the number of matching documents. Note that the `order` parameter can still be used to refer to data from a child aggregation when using the `breadth_first` setting - the parent aggregation understands that this child aggregation will need to be called first before any of the other child aggregations.
@@ -840,18 +606,13 @@ Elasticsearch tries to have sensible defaults so this is something that generall
             "tags" : {
                  "terms" : {
                      "field" : "tags",
-                     "execution_hint": "map" ![](images/icons/callouts/1.png)
+                     "execution_hint": "map" #1
                  }
              }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-[experimental] This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. the possible values are `map`, `global_ordinals`, `global_ordinals_hash` and `global_ordinals_low_cardinality`  
-  
+#1| [experimental] This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features. the possible values are `map`, `global_ordinals`, `global_ordinals_hash` and `global_ordinals_low_cardinality`    
 ---|---  
   
 Please note that Elasticsearch will ignore this execution hint if it is not applicable and that there is no backward compatibility guarantee on these hints.
@@ -866,16 +627,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "tags" : {
                  "terms" : {
                      "field" : "tags",
-                     "missing": "N/A" ![](images/icons/callouts/1.png)
+                     "missing": "N/A" #1
                  }
              }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Documents without a value in the `tags` field will fall into the same bucket as documents that have the value `N/A`.   
-  
+#1| Documents without a value in the `tags` field will fall into the same bucket as documents that have the value `N/A`.  
 ---|---

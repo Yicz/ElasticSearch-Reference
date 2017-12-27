@@ -56,16 +56,11 @@ It is also possible to include aliases in an index template as follows:
                 },
                 "routing" : "kimchy"
             },
-            "{index}-alias" : {} ![](images/icons/callouts/1.png)
+            "{index}-alias" : {} #1
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-the `{index}` placeholder in the alias name will be replaced with the actual index name that the template gets applied to, during index creation.   
-  
+#1| the `{index}` placeholder in the alias name will be replaced with the actual index name that the template gets applied to, during index creation.     
 ---|---  
   
 ### Deleting a Template

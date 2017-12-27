@@ -1,19 +1,18 @@
 ## Bulk API
 
-The bulk API makes it possible to perform many index/delete operations in a single API call. This can greatly increase the indexing speed.
+批量API使得可以在单个API调用中执行许多索引/删除操作。 这可以大大提高索引速度。
 
- **Client support for bulk requests**
+ **支持批量请求的客户端**
 
-Some of the officially supported clients provide helpers to assist with bulk requests and reindexing of documents from one index to another:
+一些官方支持的客户提供帮助以协助批量请求，并将文件从一个索引重新索引到另一个索引：
 
 Perl 
-     See [Search::Elasticsearch::Client::5_0::Bulk](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Bulk) and [Search::Elasticsearch::Client::5_0::Scroll](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Scroll)
+     请查看 [Search::Elasticsearch::Client::5_0::Bulk](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Bulk)和[Search::Elasticsearch::Client::5_0::Scroll](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Scroll)
 Python 
-     See [elasticsearch.helpers.*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
+     请查看 [elasticsearch.helpers.\*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
 
-The REST API endpoint is `/_bulk`, and it expects the following newline delimited JSON (NDJSON) structure:
-    
-    
+批量操作的API是`/_bulk`,它支持使用换行符使用分隔符的JSON（NDJSON）数据结构：
+  
     action_and_meta_data\n
     optional_source\n
     action_and_meta_data\n
@@ -22,12 +21,12 @@ The REST API endpoint is `/_bulk`, and it expects the following newline delimite
     action_and_meta_data\n
     optional_source\n
 
- **NOTE** : the final line of data must end with a newline character `\n`. Each newline character may be preceded by a carriage return `\r`. When sending requests to this endpoint the `Content-Type` header should be set to `application/x-ndjson`.
+ **提示** :最后一行必须有一个换行符（\\n）每一个换行符可能被当作一个回车`\\r`,当进行请求时，请求头应当被设置`Content-Type=application/x-ndjson` 
 
-The possible actions are `index`, `create`, `delete` and `update`. `index` and `create` expect a source on the next line, and have the same semantics as the `op_type` parameter to the standard index API (i.e. create will fail if a document with the same index and type exists already, whereas index will add or replace a document as necessary). `delete` does not expect a source on the following line, and has the same semantics as the standard delete API. `update` expects that the partial doc, upsert and script and its options are specified on the next line.
+批量操作接口允许的操作有`建索引 index`,`建文档 create`,`删除文档 delete`跟`更新文档 update`,`index`跟`create`操作的参数要作为下一行，且要声明它的操作类型`op_type`(例如：如果索引或文档已经存在，`index`操作会失败，而`create`操作会更新文档)。`delete`操作不要求参数是下一行，跟标准的delete api格式一致。`update`操作要求文档结构的一部分或着upset\脚本（script）作为下一行。
 
-If you’re providing text file input to `curl`, you **must** use the `--data-binary` flag instead of plain `-d`. The latter doesn’t preserve newlines. Example:
-    
+
+如果您提供文本文件输入到`curl`，您必须使用`-data-binary`而不是`-d`选项。后者不保存新行。例子:
     
     $ cat requests
     { "index" : { "_index" : "test", "_type" : "type1", "_id" : "1" } }
@@ -35,8 +34,7 @@ If you’re providing text file input to `curl`, you **must** use the `--data-bi
     $ curl -s -H "Content-Type: application/x-ndjson" -XPOST localhost:9200/_bulk --data-binary "@requests"; echo
     {"took":7, "errors": false, "items":[{"index":{"_index":"test","_type":"type1","_id":"1","_version":1,"result":"created","forced_refresh":false} }]}
 
-Because this format uses literal `\n`'s as delimiters, please be sure that the JSON actions and sources are not pretty printed. Here is an example of a correct sequence of bulk commands:
-    
+因为这种格式使用字面的`\n`作为分隔符，请确保JSON操作和参数不是格式化的数据。下面是一个正确的批量命令序列示例:
     
     POST _bulk
     { "index" : { "_index" : "test", "_type" : "type1", "_id" : "1" } }
@@ -47,8 +45,7 @@ Because this format uses literal `\n`'s as delimiters, please be sure that the J
     { "update" : {"_id" : "1", "_type" : "type1", "_index" : "test"} }
     { "doc" : {"field2" : "value2"} }
 
-The result of this bulk operation is:
-    
+请求的响应是：    
     
     {
        "took": 30,
@@ -120,44 +117,44 @@ The result of this bulk operation is:
        ]
     }
 
-The endpoints are `/_bulk`, `/{index}/_bulk`, and `{index}/{type}/_bulk`. When the index or the index/type are provided, they will be used by default on bulk items that don’t provide them explicitly.
+接口有`/_bulk`, `/{index}/_bulk` 和 `{index}/{type}/_bulk`。当提供索引或索引/类型时，默认情况下将使用未显式提供它们的批量项目。
 
-A note on the format. The idea here is to make processing of this as fast as possible. As some of the actions will be redirected to other shards on other nodes, only `action_meta_data` is parsed on the receiving node side.
+格式上的说明。这里的想法是尽可能快地处理这个问题。由于一些操作将被重定向到其他节点上的其他碎片，只有`action_meta_data`被解析到接收节点端。
 
-Client libraries using this protocol should try and strive to do something similar on the client side, and reduce buffering as much as possible.
+使用此协议的客户端库应该尝试在客户端做一些类似的事情，尽可能减少缓存。
 
-The response to a bulk action is a large JSON structure with the individual results of each action that was performed. The failure of a single action does not affect the remaining actions.
+对批量操作的响应是一个大的JSON结构，每个操作的单个结果都执行了。单个动作的失败不会影响其余的动作。
 
-There is no "correct" number of actions to perform in a single bulk call. You should experiment with different settings to find the optimum size for your particular workload.
+在一个批量调用中执行的操作数没有`正确`的数量。您应该尝试不同的设置，以找到您的特定工作负载的最佳大小。
 
-If using the HTTP API, make sure that the client does not send HTTP chunks, as this will slow things down.
+如果使用HTTP API，请确保客户端不发送大量的HTTP请求，因为这会减慢速度。
 
-### Versioning
+### 版本控制 Versioning
 
-Each bulk item can include the version value using the `_version`/`version` field. It automatically follows the behavior of the index / delete operation based on the `_version` mapping. It also support the `version_type`/`_version_type` (see [versioning](docs-index_.html#index-versioning))
+每个批量操作项都可以使用`\_version`/`version`字段包含版本值。它根据`\_version`映射自动跟踪索引/删除操作的行为。它还支持' version_type ' / '\_version_type '(参见[版本控制](docs-index_.html#index-versioning)))
 
-### Routing
+### 路由 Routing
 
-Each bulk item can include the routing value using the `_routing`/`routing` field. It automatically follows the behavior of the index / delete operation based on the `_routing` mapping.
+每个批量操作项都可以使用"\_routing"/"routing"字段包含路由值。它根据"\_routing"映射自动跟踪索引/删除操作的行为。
 
-### Parent
 
-Each bulk item can include the parent value using the `_parent`/`parent` field. It automatically follows the behavior of the index / delete operation based on the `_parent` / `_routing` mapping.
+### 父文档参数 Parent
 
-### Wait For Active Shards
+每个批量项目可以使用"\_parent"/"parent"字段包含父值。它根据"\_parent"/"\_routing"映射自动跟踪索引/删除操作的行为。
 
-When making bulk calls, you can set the `wait_for_active_shards` parameter to require a minimum number of shard copies to be active before starting to process the bulk request. See [here](docs-index_.html#index-wait-for-active-shards) for further details and a usage example.
+### 等待分片激活（请求超时） Wait For Active Shards
 
-### Refresh
+在进行批量调用时，可以设置`wait_for_active_shards`参数，在开始处理批量请求之前，需要使用最少的shard副本。请参阅[此处](docs-index_.html#index-wait-for-active-shards) ，了解更多细节和使用示例。
 
-Control when the changes made by this request are visible to search. See [refresh](docs-refresh.html "?refresh").
+### 刷新 Refresh
 
-### Update
+当该请求所做的更改对搜索可见时，可以进行控制. 请参阅 [refresh](docs-refresh.html "?refresh").
 
-When using `update` action `_retry_on_conflict` can be used as field in the action itself (not in the extra payload line), to specify how many times an update should be retried in the case of a version conflict.
+### 更新 Update
 
-The `update` action payload, supports the following options: `doc` (partial document), `upsert`, `doc_as_upsert`, `script` and `_source`. See [update](docs-update.html) documentation for details on the options. Example with update actions:
-    
+在使用`update`操作时，可以将`_retry_on_conflict`作为操作本身中的字段(而不是在额外的负载行中)，指定在版本冲突的情况下，更新应该重新尝试多少次。
+
+`更新`操作有效负载，支持以下选项:`doc`(部分文档)、`upsert`、`doc_as_upsert`、`script`和`_source`。有关选项的详细信息，请参阅[更新](docs-update.html)文档。例子与更新操作:
     
     POST _bulk
     { "update" : {"_id" : "1", "_type" : "type1", "_index" : "index1", "_retry_on_conflict" : 3} }
@@ -171,6 +168,6 @@ The `update` action payload, supports the following options: `doc` (partial docu
     { "update" : {"_id" : "4", "_type" : "type1", "_index" : "index1"} }
     { "doc" : {"field" : "value"}, "_source": true}
 
-### Security
+### 安全 Security
 
-See [_URL-based access control_](url-access-control.html)
+请查看[基于URL的访问控制](url-access-control.html)

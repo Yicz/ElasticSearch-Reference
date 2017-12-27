@@ -12,7 +12,7 @@ The `null_value` parameter allows you to replace explicit `null` values with the
           "properties": {
             "status_code": {
               "type":       "keyword",
-              "null_value": "NULL" ![](images/icons/callouts/1.png)
+              "null_value": "NULL" #1
             }
           }
         }
@@ -26,37 +26,22 @@ The `null_value` parameter allows you to replace explicit `null` values with the
     
     PUT my_index/my_type/2
     {
-      "status_code": [] ![](images/icons/callouts/2.png)
+      "status_code": [] #2
     }
     
     GET my_index/_search
     {
       "query": {
         "term": {
-          "status_code": "NULL" ![](images/icons/callouts/3.png)
+          "status_code": "NULL" #3
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Replace explicit `null` values with the term `NULL`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-An empty array does not contain an explicit `null`, and so won’t be replaced with the `null_value`.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-A query for `NULL` returns document 1, but not document 2.   
+#1| Replace explicit `null` values with the term `NULL`.     
+---|---    
+#2| An empty array does not contain an explicit `null`, and so won’t be replaced with the `null_value`.     
+#3| A query for `NULL` returns document 1, but not document 2.   
   
 ![Important](images/icons/important.png)
 

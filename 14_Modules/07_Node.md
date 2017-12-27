@@ -44,14 +44,14 @@ While master nodes can also behave as [coordinating nodes](modules-node.html#coo
 To create a standalone master-eligible node, set:
     
     
-    node.master: true ![](images/icons/callouts/1.png)
-    node.data: false ![](images/icons/callouts/2.png)
-    node.ingest: false ![](images/icons/callouts/3.png)
+    node.master: true #1
+    node.data: false #2
+    node.ingest: false #3
 
-![](images/icons/callouts/1.png)| The `node.master` role is enabled by default.     
+#1| The `node.master` role is enabled by default.     
 ---|---    
-![](images/icons/callouts/2.png)| Disable the `node.data` role (enabled by default).     
-![](images/icons/callouts/3.png)| Disable the `node.ingest` role (enabled by default).   
+#2| Disable the `node.data` role (enabled by default).     
+#3| Disable the `node.ingest` role (enabled by default).   
   
 #### Avoiding split brain with `minimum_master_nodes`
 
@@ -69,9 +69,9 @@ This setting should be set to a _quorum_ of master-eligible nodes:
 In other words, if there are three master-eligible nodes, then minimum master nodes should be set to `(3 / 2) + 1` or `2`:
     
     
-    discovery.zen.minimum_master_nodes: 2 ![](images/icons/callouts/1.png)
+    discovery.zen.minimum_master_nodes: 2 #1
 
-![](images/icons/callouts/1.png)| Defaults to `1`.     
+#1| Defaults to `1`.     
 ---|---    
 This setting can also be changed dynamically on a live cluster with the [cluster update settings API](cluster-update-settings.html):
     
@@ -96,29 +96,14 @@ The main benefit of having dedicated data nodes is the separation of the master 
 To create a dedicated data node, set:
     
     
-    node.master: false ![](images/icons/callouts/1.png)
-    node.data: true ![](images/icons/callouts/2.png)
-    node.ingest: false ![](images/icons/callouts/3.png)
+    node.master: false #1
+    node.data: true #2
+    node.ingest: false #3
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Disable the `node.master` role (enabled by default).   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `node.data` role is enabled by default.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Disable the `node.ingest` role (enabled by default).   
+#1| Disable the `node.master` role (enabled by default).     
+---|---    
+#2| The `node.data` role is enabled by default.     
+#3| Disable the `node.ingest` role (enabled by default).   
   
 ### Ingest Node
 
@@ -127,36 +112,16 @@ Ingest nodes can execute pre-processing pipelines, composed of one or more inges
 To create a dedicated ingest node, set:
     
     
-    node.master: false ![](images/icons/callouts/1.png)
-    node.data: false ![](images/icons/callouts/2.png)
-    node.ingest: true ![](images/icons/callouts/3.png)
-    search.remote.connect: false ![](images/icons/callouts/4.png)
+    node.master: false #1
+    node.data: false #2
+    node.ingest: true #3
+    search.remote.connect: false #4
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Disable the `node.master` role (enabled by default).   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Disable the `node.data` role (enabled by default).   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `node.ingest` role is enabled by default.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Disable cross-cluster search (enabled by default).   
+#1| Disable the `node.master` role (enabled by default).     
+---|---    
+#2| Disable the `node.data` role (enabled by default).     
+#3| The `node.ingest` role is enabled by default.     
+#4| Disable cross-cluster search (enabled by default).   
   
 ### Coordinating only node
 
@@ -171,16 +136,16 @@ Adding too many coordinating only nodes to a cluster can increase the burden on 
 To create a dedicated coordinating node, set:
     
     
-    node.master: false ![](images/icons/callouts/1.png)
-    node.data: false ![](images/icons/callouts/2.png)
-    node.ingest: false ![](images/icons/callouts/3.png)
-    search.remote.connect: false ![](images/icons/callouts/4.png)
+    node.master: false #1
+    node.data: false #2
+    node.ingest: false #3
+    search.remote.connect: false #4
 
-![](images/icons/callouts/1.png)| Disable the `node.master` role (enabled by default).     
+#1| Disable the `node.master` role (enabled by default).     
 ---|---    
-![](images/icons/callouts/2.png)| Disable the `node.data` role (enabled by default).     
-![](images/icons/callouts/3.png)| Disable the `node.ingest` role (enabled by default).     
-![](images/icons/callouts/4.png)| Disable cross-cluster search (enabled by default).   
+#2| Disable the `node.data` role (enabled by default).     
+#3| Disable the `node.ingest` role (enabled by default).     
+#4| Disable cross-cluster search (enabled by default).   
   
 ## Node data path settings
 

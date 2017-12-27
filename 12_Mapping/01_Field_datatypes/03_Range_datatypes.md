@@ -21,7 +21,7 @@ Below is an example of configuring a mapping with various range fields followed 
               "type": "integer_range"
             },
             "time_frame": {
-              "type": "date_range", ![](images/icons/callouts/1.png)
+              "type": "date_range", #1
               "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
             }
           }
@@ -31,12 +31,12 @@ Below is an example of configuring a mapping with various range fields followed 
     
     PUT range_index/my_type/1
     {
-      "expected_attendees" : { ![](images/icons/callouts/2.png)
+      "expected_attendees" : { #2
         "gte" : 10,
         "lte" : 20
       },
-      "time_frame" : { ![](images/icons/callouts/3.png)
-        "gte" : "2015-10-31 12:00:00", ![](images/icons/callouts/4.png)
+      "time_frame" : { #3
+        "gte" : "2015-10-31 12:00:00", #4
         "lte" : "2015-11-01"
       }
     }
@@ -48,10 +48,10 @@ The following is an example of a `date_range` query over the `date_range` field 
     {
       "query" : {
         "range" : {
-          "time_frame" : { ![](images/icons/callouts/1.png)
+          "time_frame" : { #1
             "gte" : "2015-10-31",
             "lte" : "2015-11-01",
-            "relation" : "within" ![](images/icons/callouts/2.png)
+            "relation" : "within" #2
           }
         }
       }
@@ -90,7 +90,7 @@ The result produced by the above query.
       }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -99,31 +99,31 @@ The result produced by the above query.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
 Example indexing a meeting with 10 to 20 attendees.   
   
-![](images/icons/callouts/3.png)
+#3
 
 | 
 
 Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates).   
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 
 Example date range using date time stamp. This also accepts [date math](common-options.html#date-math) formatting, or "now" for system time.   
   
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
 Range queries work the same as described in [range query](query-dsl-range-query.html).   
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 

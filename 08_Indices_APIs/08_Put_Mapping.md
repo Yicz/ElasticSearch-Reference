@@ -3,7 +3,7 @@
 The PUT mapping API allows you to add a new type to an existing index, or add new fields to an existing type:
     
     
-    PUT twitter ![](images/icons/callouts/1.png)
+    PUT twitter #1
     {
       "mappings": {
         "tweet": {
@@ -16,7 +16,7 @@ The PUT mapping API allows you to add a new type to an existing index, or add ne
       }
     }
     
-    PUT twitter/_mapping/user ![](images/icons/callouts/2.png)
+    PUT twitter/_mapping/user #2
     {
       "properties": {
         "name": {
@@ -25,7 +25,7 @@ The PUT mapping API allows you to add a new type to an existing index, or add ne
       }
     }
     
-    PUT twitter/_mapping/tweet ![](images/icons/callouts/3.png)
+    PUT twitter/_mapping/tweet #3
     {
       "properties": {
         "user_name": {
@@ -34,25 +34,10 @@ The PUT mapping API allows you to add a new type to an existing index, or add ne
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-[Creates an index](indices-create-index.html) called `twitter` with the `message` field in the `tweet` [mapping type](mapping.html#mapping-type).   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Uses the PUT mapping API to add a new mapping type called `user`.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Uses the PUT mapping API to add a new field called `user_name` to the `tweet` mapping type.   
+#1| [Creates an index](indices-create-index.html) called `twitter` with the `message` field in the `tweet` [mapping type](mapping.html#mapping-type).     
+---|---    
+#2| Uses the PUT mapping API to add a new mapping type called `user`.     
+#3| Uses the PUT mapping API to add a new field called `user_name` to the `tweet` mapping type.   
   
 More information on how to define type mappings can be found in the [mapping](mapping.html) div.
 
@@ -87,7 +72,7 @@ In general, the mapping for existing fields cannot be updated. There are some ex
 For example:
     
     
-    PUT my_index ![](images/icons/callouts/1.png)
+    PUT my_index #1
     {
       "mappings": {
         "user": {
@@ -112,38 +97,23 @@ For example:
       "properties": {
         "name": {
           "properties": {
-            "last": { ![](images/icons/callouts/2.png)
+            "last": { #2
               "type": "text"
             }
           }
         },
         "user_id": {
           "type": "keyword",
-          "ignore_above": 100 ![](images/icons/callouts/3.png)
+          "ignore_above": 100 #3
         }
       }
     }
 
-![](images/icons/callouts/1.png)
+#1| Create an index with a `first` field under the `name` [Object datatype](object.html) field, and a `user_id` field.     
+---|---    
+#2| Add a `last` field under the `name` object field.     
+#3| Update the `ignore_above` setting from its default of 0.     
 
-| 
-
-Create an index with a `first` field under the `name` [Object datatype](object.html) field, and a `user_id` field.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Add a `last` field under the `name` object field.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Update the `ignore_above` setting from its default of 0.   
-  
 Each [mapping parameter](mapping-params.html) specifies whether or not its setting can be updated on an existing field.
 
 ### Conflicts between fields in different types
@@ -162,7 +132,7 @@ For example, this fails:
       "mappings": {
         "type_one": {
           "properties": {
-            "text": { ![](images/icons/callouts/1.png)
+            "text": { #1
               "type": "text",
               "analyzer": "standard"
             }
@@ -170,7 +140,7 @@ For example, this fails:
         },
         "type_two": {
           "properties": {
-            "text": { ![](images/icons/callouts/2.png)
+            "text": { #2
               "type": "text",
               "analyzer": "standard"
             }
@@ -179,7 +149,7 @@ For example, this fails:
       }
     }
     
-    PUT my_index/_mapping/type_one ![](images/icons/callouts/3.png)
+    PUT my_index/_mapping/type_one #3
     {
       "properties": {
         "text": {
@@ -190,24 +160,14 @@ For example, this fails:
       }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png)
-
-| 
-
-Create an index with two types, both of which contain a `text` field which have the same mapping.   
-  
----|---  
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Trying to update the `search_analyzer` just for `type_one` throws an exception like `"Merge failed with failures..."`.   
+#1 #2| Create an index with two types, both of which contain a `text` field which have the same mapping.     
+---|---   
+#3| Trying to update the `search_analyzer` just for `type_one` throws an exception like `"Merge failed with failures..."`.   
   
 But this then running this succeeds:
     
     
-    PUT my_index/_mapping/type_one?update_all_types ![](images/icons/callouts/1.png)
+    PUT my_index/_mapping/type_one?update_all_types #1
     {
       "properties": {
         "text": {
@@ -218,10 +178,5 @@ But this then running this succeeds:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Adding the `update_all_types` parameter updates the `text` field in `type_one` and `type_two`.   
-  
+#1| Adding the `update_all_types` parameter updates the `text` field in `type_one` and `type_two`.     
 ---|---

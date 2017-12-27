@@ -59,17 +59,12 @@ This can be done with a [`terms` aggregation](search-aggregations-bucket-terms-a
       },
       "aggs": {
         "models": {
-          "terms": { "field": "model" } ![](images/icons/callouts/1.png)
+          "terms": { "field": "model" } #1
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Returns the most popular models of red shirts by Gucci.   
-  
+#1| Returns the most popular models of red shirts by Gucci.     
 ---|---  
   
 But perhaps you would also like to tell the user how many Gucci shirts are available in **other colors**. If you just add a `terms` aggregation on the `color` field, you will only get back the color `red`, because your query returns only red shirts by Gucci.
@@ -82,52 +77,33 @@ Instead, you want to include shirts of all colors during aggregation, then apply
       "query": {
         "bool": {
           "filter": {
-            "term": { "brand": "gucci" } ![](images/icons/callouts/1.png)
+            "term": { "brand": "gucci" } #1
           }
         }
       },
       "aggs": {
         "colors": {
-          "terms": { "field": "color" } ![](images/icons/callouts/2.png)
+          "terms": { "field": "color" } #2
         },
         "color_red": {
           "filter": {
-            "term": { "color": "red" } ![](images/icons/callouts/3.png)
+            "term": { "color": "red" } #3
           },
           "aggs": {
             "models": {
-              "terms": { "field": "model" } ![](images/icons/callouts/4.png)
+              "terms": { "field": "model" } #4
             }
           }
         }
       },
-      "post_filter": { ![](images/icons/callouts/5.png)
+      "post_filter": { #5
         "term": { "color": "red" }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The main query now finds all shirts by Gucci, regardless of color.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `colors` agg returns popular colors for shirts by Gucci.   
-  
-![](images/icons/callouts/3.png) ![](images/icons/callouts/4.png)
-
-| 
-
-The `color_red` agg limits the `models` sub-aggregation to **red** Gucci shirts.   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
+#1| The main query now finds all shirts by Gucci, regardless of color.     
+---|---    
+#2| The `colors` agg returns popular colors for shirts by Gucci.     
+#3 #4| The `color_red` agg limits the `models` sub-aggregation to **red** Gucci shirts.     
+#5| 
 Finally, the `post_filter` removes colors other than red from the search `hits`. 

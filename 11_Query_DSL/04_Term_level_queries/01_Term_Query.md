@@ -6,16 +6,11 @@ The `term` query finds documents that contain the **exact** term specified in th
     POST _search
     {
       "query": {
-        "term" : { "user" : "Kimchy" } ![](images/icons/callouts/1.png)
+        "term" : { "user" : "Kimchy" } #1
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Finds documents which contain the exact term `Kimchy` in the inverted index of the `user` field.   
-  
+#1| Finds documents which contain the exact term `Kimchy` in the inverted index of the `user` field.     
 ---|---  
   
 A `boost` parameter can be specified to give this `term` query a higher relevance score than another query, for instance:
@@ -30,13 +25,13 @@ A `boost` parameter can be specified to give this `term` query a higher relevanc
               "term": {
                 "status": {
                   "value": "urgent",
-                  "boost": 2.0 ![](images/icons/callouts/1.png)
+                  "boost": 2.0 #1
                 }
               }
             },
             {
               "term": {
-                "status": "normal" ![](images/icons/callouts/2.png)
+                "status": "normal" #2
               }
             }
           ]
@@ -44,19 +39,9 @@ A `boost` parameter can be specified to give this `term` query a higher relevanc
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `urgent` query clause has a boost of `2.0`, meaning it is twice as important as the query clause for `normal`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `normal` clause has the default neutral boost of `1.0`.   
+#1| The `urgent` query clause has a boost of `2.0`, meaning it is twice as important as the query clause for `normal`.     
+---|---    
+#2| The `normal` clause has the default neutral boost of `1.0`.   
   
 **Why doesn’t the`term` query match my document?**
 
@@ -79,10 +64,10 @@ To demonstrate, try out the example below. First, create an index, specifying th
         "my_type": {
           "properties": {
             "full_text": {
-              "type":  "text" ![](images/icons/callouts/1.png)
+              "type":  "text" #1
             },
             "exact_value": {
-              "type":  "keyword" ![](images/icons/callouts/2.png)
+              "type":  "keyword" #2
             }
           }
         }
@@ -91,35 +76,15 @@ To demonstrate, try out the example below. First, create an index, specifying th
     
     PUT my_index/my_type/1
     {
-      "full_text":   "Quick Foxes!", ![](images/icons/callouts/3.png)
-      "exact_value": "Quick Foxes!"  ![](images/icons/callouts/4.png)
+      "full_text":   "Quick Foxes!", #3
+      "exact_value": "Quick Foxes!"  #4
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `full_text` field is of type `text` and will be analyzed.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `exact_value` field is of type `keyword` and will NOT be analyzed.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `full_text` inverted index will contain the terms: [`quick`, `foxes`].   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-The `exact_value` inverted index will contain the exact term: [`Quick Foxes!`].   
+#1| The `full_text` field is of type `text` and will be analyzed.     
+---|---    
+#2| The `exact_value` field is of type `keyword` and will NOT be analyzed.    
+#3| The `full_text` inverted index will contain the terms: [`quick`, `foxes`].     
+#4| The `exact_value` inverted index will contain the exact term: [`Quick Foxes!`].   
   
 Now, compare the results for the `term` query and the `match` query:
     
@@ -128,7 +93,7 @@ Now, compare the results for the `term` query and the `match` query:
     {
       "query": {
         "term": {
-          "exact_value": "Quick Foxes!" ![](images/icons/callouts/1.png)
+          "exact_value": "Quick Foxes!" #1
         }
       }
     }
@@ -137,7 +102,7 @@ Now, compare the results for the `term` query and the `match` query:
     {
       "query": {
         "term": {
-          "full_text": "Quick Foxes!" ![](images/icons/callouts/2.png)
+          "full_text": "Quick Foxes!" #2
         }
       }
     }
@@ -146,7 +111,7 @@ Now, compare the results for the `term` query and the `match` query:
     {
       "query": {
         "term": {
-          "full_text": "foxes" ![](images/icons/callouts/3.png)
+          "full_text": "foxes" #3
         }
       }
     }
@@ -155,33 +120,13 @@ Now, compare the results for the `term` query and the `match` query:
     {
       "query": {
         "match": {
-          "full_text": "Quick Foxes!" ![](images/icons/callouts/4.png)
+          "full_text": "Quick Foxes!" #4
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This query matches because the `exact_value` field contains the exact term `Quick Foxes!`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This query does not match, because the `full_text` field only contains the terms `quick` and `foxes`. It does not contain the exact term `Quick Foxes!`.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-A `term` query for the term `foxes` matches the `full_text` field.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-This `match` query on the `full_text` field first analyzes the query string, then looks for documents containing `quick` or `foxes` or both. 
+#1| This query matches because the `exact_value` field contains the exact term `Quick Foxes!`.     
+---|---   
+#2| This query does not match, because the `full_text` field only contains the terms `quick` and `foxes`. It does not contain the exact term `Quick Foxes!`.     
+#3| A `term` query for the term `foxes` matches the `full_text` field.     
+#4| This `match` query on the `full_text` field first analyzes the query string, then looks for documents containing `quick` or `foxes` or both. 

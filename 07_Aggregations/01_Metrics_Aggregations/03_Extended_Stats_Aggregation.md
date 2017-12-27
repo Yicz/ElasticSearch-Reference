@@ -49,21 +49,13 @@ By default, the `extended_stats` metric will return an object called `std_deviat
             "grades_stats" : {
                 "extended_stats" : {
                     "field" : "grade",
-                    "sigma" : 3 ![](images/icons/callouts/1.png)
+                    "sigma" : 3 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`sigma` controls how many standard deviations +/- from the mean should be displayed   
-  
----|---  
-  
-`sigma` can be any non-negative double, meaning you can request non-integer values such as `1.5`. A value of `0` is valid, but will simply return the average for both `upper` and `lower` bounds.
+#1| `sigma` controls how many standard deviations +/- from the mean should be displayed     ---|---    `sigma` can be any non-negative double, meaning you can request non-integer values such as `1.5`. A value of `0` is valid, but will simply return the average for both `upper` and `lower` bounds.
 
 ![Note](images/icons/note.png)
 
@@ -151,16 +143,11 @@ The `missing` parameter defines how documents that are missing a value should be
             "grades_stats" : {
                 "extended_stats" : {
                     "field" : "grade",
-                    "missing": 0 ![](images/icons/callouts/1.png)
+                    "missing": 0 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `0`.   
-  
+#1| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `0`.     
 ---|---

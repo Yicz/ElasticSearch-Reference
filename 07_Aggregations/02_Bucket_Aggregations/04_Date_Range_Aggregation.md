@@ -13,27 +13,17 @@ Example:
                     "field": "date",
                     "format": "MM-yyy",
                     "ranges": [
-                        { "to": "now-10M/M" }, ![](images/icons/callouts/1.png)
-                        { "from": "now-10M/M" } ![](images/icons/callouts/2.png)
+                        { "to": "now-10M/M" }, #1
+                        { "from": "now-10M/M" } #2
                     ]
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-< now minus 10 months, rounded down to the start of the month.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
->= now minus 10 months, rounded down to the start of the month.   
+#1| < now minus 10 months, rounded down to the start of the month.     
+---|---    
+#2| >= now minus 10 months, rounded down to the start of the month.   
   
 In the example above, we created two range buckets, the first will "bucket" all documents dated prior to 10 months ago and the second will "bucket" all documents dated since 10 months ago
 
@@ -129,8 +119,8 @@ The `time_zone` parameter is also applied to rounding in date math expressions. 
                    "field": "date",
                    "time_zone": "CET",
                    "ranges": [
-                      { "to": "2016/02/01" }, ![](images/icons/callouts/1.png)
-                      { "from": "2016/02/01", "to" : "now/d" ![](images/icons/callouts/2.png)},
+                      { "to": "2016/02/01" }, #1
+                      { "from": "2016/02/01", "to" : "now/d" #2},
                       { "from": "now/d" }
                   ]
               }
@@ -138,19 +128,9 @@ The `time_zone` parameter is also applied to rounding in date math expressions. 
        }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This date will be converted to `2016-02-15T00:00:00.000+01:00`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-`now/d` will be rounded to the beginning of the day in the CET time zone.   
+#1| This date will be converted to `2016-02-15T00:00:00.000+01:00`.     
+---|---    
+#2| `now/d` will be rounded to the beginning of the day in the CET time zone.   
   
 ### Keyed Response
 

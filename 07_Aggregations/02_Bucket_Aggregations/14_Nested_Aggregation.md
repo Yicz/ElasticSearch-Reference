@@ -10,7 +10,7 @@ For example, lets say we have a index of products, and each product holds the li
     
         "product" : {
             "properties" : {
-                "resellers" : { ![](images/icons/callouts/1.png)
+                "resellers" : { #1
                     "type" : "nested",
                     "properties" : {
                         "name" : { "type" : "text" },
@@ -21,12 +21,7 @@ For example, lets say we have a index of products, and each product holds the li
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `resellers` is an array that holds nested documents under the `product` object.   
-  
+#1| The `resellers` is an array that holds nested documents under the `product` object.     
 ---|---  
   
 The following aggregations will return the minimum price products can be purchased in:

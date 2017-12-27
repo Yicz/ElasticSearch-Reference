@@ -9,9 +9,9 @@ The shard allocation awareness settings allow you to tell Elasticsearch about yo
 As an example, let’s assume we have several racks. When we start a node, we can tell it which rack it is in by assigning it an arbitrary metadata attribute called `rack_id` — we could use any attribute name. For example:
     
     
-    ./bin/elasticsearch -Enode.attr.rack_id=rack_one ![](images/icons/callouts/1.png)
+    ./bin/elasticsearch -Enode.attr.rack_id=rack_one #1
 
-![](images/icons/callouts/1.png)| This setting could also be specified in the `elasticsearch.yml` config file.     
+#1| This setting could also be specified in the `elasticsearch.yml` config file.     
 ---|---  
   
 Now, we need to setup _shard allocation awareness_ by telling Elasticsearch which attributes to use. This can be configured in the `elasticsearch.yml` file on **all** master-eligible nodes, or it can be set (and changed) with the [cluster-update-settings](cluster-update-settings.html) API.
@@ -53,10 +53,10 @@ Forced awareness solves this problem by **NEVER** allowing copies of the same sh
 For example, lets say we have an awareness attribute called `zone`, and we know we are going to have two zones, `zone1` and `zone2`. Here is how we can force awareness on a node:
     
     
-    cluster.routing.allocation.awareness.force.zone.values: zone1,zone2 ![](images/icons/callouts/1.png)
+    cluster.routing.allocation.awareness.force.zone.values: zone1,zone2 #1
     cluster.routing.allocation.awareness.attributes: zone
 
-![](images/icons/callouts/1.png)| We must list all possible values that the `zone` attribute can have.     
+#1| We must list all possible values that the `zone` attribute can have.     
 ---|---  
   
 Now, if we start 2 nodes with `node.attr.zone` set to `zone1` and create an index with 5 shards and 1 replica. The index will be created, but only the 5 primary shards will be allocated (with no replicas). Only when we start more nodes with `node.attr.zone` set to `zone2` will the replicas be allocated.

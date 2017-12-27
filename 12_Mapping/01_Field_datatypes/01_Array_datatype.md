@@ -29,8 +29,8 @@ Nothing needs to be pre-configured in order to use arrays in documents, they are
     PUT my_index/my_type/1
     {
       "message": "some arrays in this document...",
-      "tags":  [ "elasticsearch", "wow" ], ![](images/icons/callouts/1.png)
-      "lists": [ ![](images/icons/callouts/2.png)
+      "tags":  [ "elasticsearch", "wow" ], #1
+      "lists": [ #2
         {
           "name": "prog_list",
           "description": "programming list"
@@ -42,7 +42,7 @@ Nothing needs to be pre-configured in order to use arrays in documents, they are
       ]
     }
     
-    PUT my_index/my_type/2 ![](images/icons/callouts/3.png)
+    PUT my_index/my_type/2 #3
     {
       "message": "no arrays in this document...",
       "tags":  "elasticsearch",
@@ -56,12 +56,12 @@ Nothing needs to be pre-configured in order to use arrays in documents, they are
     {
       "query": {
         "match": {
-          "tags": "elasticsearch" ![](images/icons/callouts/4.png)
+          "tags": "elasticsearch" #4
         }
       }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -69,19 +69,19 @@ The `tags` field is dynamically added as a `string` field.
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
 The `lists` field is dynamically added as an `object` field.   
   
-![](images/icons/callouts/3.png)
+#3
 
 | 
 
 The second document contains no arrays, but can be indexed into the same fields.   
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 

@@ -8,7 +8,7 @@ The built-in analyzers can be used directly without any configuration. Some of t
       "settings": {
         "analysis": {
           "analyzer": {
-            "std_english": { ![](images/icons/callouts/1.png)
+            "std_english": { #1
               "type":      "standard",
               "stopwords": "_english_"
             }
@@ -20,11 +20,11 @@ The built-in analyzers can be used directly without any configuration. Some of t
           "properties": {
             "my_text": {
               "type":     "text",
-              "analyzer": "standard", ![](images/icons/callouts/2.png)
+              "analyzer": "standard", #2
               "fields": {
                 "english": {
                   "type":     "text",
-                  "analyzer": "std_english" ![](images/icons/callouts/3.png)
+                  "analyzer": "std_english" #3
                 }
               }
             }
@@ -35,17 +35,17 @@ The built-in analyzers can be used directly without any configuration. Some of t
     
     POST my_index/_analyze
     {
-      "field": "my_text", ![](images/icons/callouts/4.png)
+      "field": "my_text", #4
       "text": "The old brown cow"
     }
     
     POST my_index/_analyze
     {
-      "field": "my_text.english", ![](images/icons/callouts/5.png)
+      "field": "my_text.english", #5
       "text": "The old brown cow"
     }
 
-![](images/icons/callouts/1.png)| We define the `std_english` analyzer to be based on the `standard` analyzer, but configured to remove the pre-defined list of English stopwords. 
+#1| We define the `std_english` analyzer to be based on the `standard` analyzer, but configured to remove the pre-defined list of English stopwords. 
 ---|---    
-![](images/icons/callouts/2.png) ![](images/icons/callouts/4.png)| The `my_text` field uses the `standard` analyzer directly, without any configuration. No stop words will be removed from this field. The resulting terms are: `[ the, old, brown, cow ]`    \
-![](images/icons/callouts/3.png) ![](images/icons/callouts/5.png)| The `my_text.english` field uses the `std_english` analyzer, so English stop words will be removed. The resulting terms are: `[ old, brown, cow ]`
+#2 #4| The `my_text` field uses the `standard` analyzer directly, without any configuration. No stop words will be removed from this field. The resulting terms are: `[ the, old, brown, cow ]`    \
+#3 #5| The `my_text.english` field uses the `std_english` analyzer, so English stop words will be removed. The resulting terms are: `[ old, brown, cow ]`

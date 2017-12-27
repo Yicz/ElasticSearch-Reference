@@ -59,8 +59,8 @@ Response:
         ...
         "aggregations": {
             "my_unbiased_sample": {
-                "doc_count": 1000,![](images/icons/callouts/1.png)
-                "keywords": {![](images/icons/callouts/2.png)
+                "doc_count": 1000,#1
+                "keywords": {#2
                     "doc_count": 1000,
                     "buckets": [
                         {
@@ -75,19 +75,9 @@ Response:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-1000 documents were sampled in total because we asked for a maximum of 200 from an index with 5 shards. The cost of performing the nested significant_terms aggregation was therefore limited rather than unbounded.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The results of the significant_terms aggregation are not skewed by any single author’s quirks because we asked for a maximum of one post from any one author in our sample.   
+#1| 1000 documents were sampled in total because we asked for a maximum of 200 from an index with 5 shards. The cost of performing the nested significant_terms aggregation was therefore limited rather than unbounded.     
+---|---    
+#2| The results of the significant_terms aggregation are not skewed by any single author’s quirks because we asked for a maximum of one post from any one author in our sample.   
   
 ### Scripted example:
 

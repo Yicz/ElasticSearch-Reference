@@ -17,18 +17,13 @@ Let’s look at a range of percentiles representing load time:
         "aggs" : {
             "load_time_outlier" : {
                 "percentiles" : {
-                    "field" : "load_time" ![](images/icons/callouts/1.png)
+                    "field" : "load_time" #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The field `load_time` must be a numeric field   
-  
+#1| The field `load_time` must be a numeric field     
 ---|---  
   
 By default, the `percentile` metric will generate a range of percentiles: `[ 1, 5, 25, 50, 75, 95, 99 ]`. The response will look like this:
@@ -62,18 +57,13 @@ Often, administrators are only interested in outliers — the extreme percen
             "load_time_outlier" : {
                 "percentiles" : {
                     "field" : "load_time",
-                    "percents" : [95, 99, 99.9] ![](images/icons/callouts/1.png)
+                    "percents" : [95, 99, 99.9] #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Use the `percents` parameter to specify particular percentiles to calculate   
-  
+#1| Use the `percents` parameter to specify particular percentiles to calculate     
 ---|---  
   
 ### Keyed Response
@@ -146,9 +136,9 @@ The percentile metric supports scripting. For example, if our load times are in 
                 "percentiles" : {
                     "script" : {
                         "lang": "painless",
-                        "inline": "doc['load_time'].value / params.timeUnit", ![](images/icons/callouts/1.png)
+                        "inline": "doc['load_time'].value / params.timeUnit", #1
                         "params" : {
-                            "timeUnit" : 1000   ![](images/icons/callouts/2.png)
+                            "timeUnit" : 1000   #2
                         }
                     }
                 }
@@ -156,19 +146,9 @@ The percentile metric supports scripting. For example, if our load times are in 
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `field` parameter is replaced with a `script` parameter, which uses the script to generate values which percentiles are calculated on   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Scripting supports parameterized input just like any other script   
+#1| The `field` parameter is replaced with a `script` parameter, which uses the script to generate values which percentiles are calculated on     
+---|---    
+#2| Scripting supports parameterized input just like any other script   
   
 This will interpret the `script` parameter as an `inline` script with the `painless` script language and no script parameters. To use a file script use the following syntax:
     
@@ -229,19 +209,14 @@ Approximate algorithms must balance memory utilization with estimation accuracy.
                 "percentiles" : {
                     "field" : "load_time",
                     "tdigest": {
-                      "compression" : 200 ![](images/icons/callouts/1.png)
+                      "compression" : 200 #1
                     }
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Compression controls memory usage and approximation error   
-  
+#1| Compression controls memory usage and approximation error     
 ---|---  
   
 The TDigest algorithm uses a number of "nodes" to approximate percentiles — the more nodes available, the higher the accuracy (and large memory footprint) proportional to the volume of data. The `compression` parameter limits the maximum number of nodes to `20 * compression`.
@@ -267,15 +242,15 @@ The HDR Histogram can be used by specifying the `method` parameter in the reques
                 "percentiles" : {
                     "field" : "load_time",
                     "percents" : [95, 99, 99.9],
-                    "hdr": { ![](images/icons/callouts/1.png)
-                      "number_of_significant_value_digits" : 3 ![](images/icons/callouts/2.png)
+                    "hdr": { #1
+                      "number_of_significant_value_digits" : 3 #2
                     }
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 
@@ -283,7 +258,7 @@ The HDR Histogram can be used by specifying the `method` parameter in the reques
   
 ---|---  
   
-![](images/icons/callouts/2.png)
+#2
 
 | 
 
@@ -301,13 +276,13 @@ The `missing` parameter defines how documents that are missing a value should be
             "grade_percentiles" : {
                 "percentiles" : {
                     "field" : "grade",
-                    "missing": 10 ![](images/icons/callouts/1.png)
+                    "missing": 10 #1
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
+#1
 
 | 
 

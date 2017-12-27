@@ -17,34 +17,19 @@ The body includes a search template body request and supports inline, stored and
     
     $ cat requests
     {"index": "test"}
-    {"inline": {"query": {"match":  {"user" : "{ {username} }" } } }, "params": {"username": "john"} } ![](images/icons/callouts/1.png)
+    {"inline": {"query": {"match":  {"user" : "{ {username} }" } } }, "params": {"username": "john"} } #1
     {"index": "_all", "types": "accounts"}
     {"inline": {"query": {"{ {query_type} }": {"name": "{ {name} }" } } }, "params": {"query_type": "match_phrase_prefix", "name": "Smith"} }
     {"index": "_all"}
-    {"id": "template_1", "params": {"query_string": "search for these words" } } ![](images/icons/callouts/2.png)
+    {"id": "template_1", "params": {"query_string": "search for these words" } } #2
     {"types": "users"}
-    {"file": "template_2", "params": {"field_name": "fullname", "field_value": "john smith" } } ![](images/icons/callouts/3.png)
+    {"file": "template_2", "params": {"field_name": "fullname", "field_value": "john smith" } } #3
     
     $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Inline search template request   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Search template request based on a stored template   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Search template request based on a file template   
+#1| Inline search template request     
+---|---    
+#2| Search template request based on a stored template     
+#3| Search template request based on a file template   
   
 The response returns a `responses` array, which includes the search template response for each search template request matching its order in the original multi search template request. If there was a complete failure for that specific search template request, an object with `error` message will be returned in place of the actual search response.

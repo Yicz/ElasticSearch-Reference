@@ -95,7 +95,7 @@ By default, the distance unit is `m` (meters) but it can also accept: `mi` (mile
                 "geo_distance" : {
                     "field" : "location",
                     "origin" : "52.3760, 4.894",
-                    "unit" : "km", ![](images/icons/callouts/1.png)
+                    "unit" : "km", #1
                     "ranges" : [
                         { "to" : 100 },
                         { "from" : 100, "to" : 300 },
@@ -106,12 +106,7 @@ By default, the distance unit is `m` (meters) but it can also accept: `mi` (mile
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The distances will be computed in kilometers   
-  
+#1| The distances will be computed in kilometers     
 ---|---  
   
 There are two distance calculation modes: `arc` (the default), and `plane`. The `arc` calculation is the most accurate. The `plane` is the fastest but least accurate. Consider using `plane` when your search context is "narrow", and spans smaller geographical areas (~5km). `plane` will return higher error margins for searches across very large areas (e.g. cross continent search). The distance calculation type can be set using the `distance_type` parameter:

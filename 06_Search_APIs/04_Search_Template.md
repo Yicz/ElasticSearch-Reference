@@ -229,19 +229,14 @@ The `params` would look like:
     {
         "params": {
             "text":      "words to search for",
-            "line_no": { ![](images/icons/callouts/1.png)
-                "start": 10, ![](images/icons/callouts/2.png)
-                "end":   20  ![](images/icons/callouts/3.png)
+            "line_no": { #1
+                "start": 10, #2
+                "end":   20  #3
             }
         }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png)
-
-| 
-
-All three of these elements are optional.   
-  
+#1 #2 #3| All three of these elements are optional.     
 ---|---  
   
 We could write the query as:
@@ -252,20 +247,20 @@ We could write the query as:
         "bool": {
           "must": {
             "match": {
-              "line": "{ {text} }" ![](images/icons/callouts/1.png)
+              "line": "{ {text} }" #1
             }
           },
           "filter": {
-            { {#line_no} } ![](images/icons/callouts/2.png)
+            { {#line_no} } #2
               "range": {
                 "line_no": {
-                  { {#start} } ![](images/icons/callouts/3.png)
-                    "gte": "{ {start} }" ![](images/icons/callouts/4.png)
-                    { {#end} },{ {/end} } ![](images/icons/callouts/5.png)
-                  { {/start} } ![](images/icons/callouts/6.png)
-                  { {#end} } ![](images/icons/callouts/7.png)
-                    "lte": "{ {end} }" ![](images/icons/callouts/8.png)
-                  { {/end} } ![](images/icons/callouts/9.png)
+                  { {#start} } #3
+                    "gte": "{ {start} }" #4
+                    { {#end} },{ {/end} } #5
+                  { {/start} } #6
+                  { {#end} } #7
+                    "lte": "{ {end} }" #8
+                  { {/end} } #9
                 }
               }
             { {/line_no} } ![](images/icons/callouts/10.png)
@@ -274,49 +269,14 @@ We could write the query as:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Fill in the value of param `text`  
-  
----|---  
-  
-![](images/icons/callouts/2.png) ![](images/icons/callouts/10.png)
-
-| 
-
-Include the `range` filter only if `line_no` is specified   
-  
-![](images/icons/callouts/3.png) ![](images/icons/callouts/6.png)
-
-| 
-
-Include the `gte` clause only if `line_no.start` is specified   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-Fill in the value of param `line_no.start`  
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-Add a comma after the `gte` clause only if `line_no.start` AND `line_no.end` are specified   
-  
-![](images/icons/callouts/7.png) ![](images/icons/callouts/9.png)
-
-| 
-
-Include the `lte` clause only if `line_no.end` is specified   
-  
-![](images/icons/callouts/8.png)
-
-| 
-
-Fill in the value of param `line_no.end`  
+#1| Fill in the value of param `text`    
+---|---    
+#2 ![](images/icons/callouts/10.png)| Include the `range` filter only if `line_no` is specified     
+#3 #6| Include the `gte` clause only if `line_no.start` is specified     
+#4| Fill in the value of param `line_no.start`    
+#5| Add a comma after the `gte` clause only if `line_no.start` AND `line_no.end` are specified     
+#7 #9| Include the `lte` clause only if `line_no.end` is specified     
+#8| Fill in the value of param `line_no.end`  
   
 ![Note](images/icons/note.png)
 
@@ -367,20 +327,15 @@ You can register search templates by storing it in the `config/scripts` director
     
     GET _search/template
     {
-        "file": "storedTemplate", ![](images/icons/callouts/1.png)
+        "file": "storedTemplate", #1
         "params": {
             "query_string": "search for these words"
         }
     }
 
-![](images/icons/callouts/1.png)
+#1| Name of the query template in `config/scripts/`, i.e., `storedTemplate.mustache`.     
+---|---    
 
-| 
-
-Name of the query template in `config/scripts/`, i.e., `storedTemplate.mustache`.   
-  
----|---  
-  
 You can also register search templates by storing it in the cluster state. There are REST APIs to manage these indexed templates.
     
     
@@ -420,18 +375,13 @@ To use an indexed template at search time use:
     
     GET _search/template
     {
-        "id": "<templateName>", ![](images/icons/callouts/1.png)
+        "id": "<templateName>", #1
         "params": {
             "query_string": "search for these words"
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Name of the query template stored in the `.scripts` index.   
-  
+#1| Name of the query template stored in the `.scripts` index.    
 ---|---  
   
 #### Validating templates
@@ -456,7 +406,7 @@ This call will return the rendered template:
       "template_output": {
         "query": {
           "terms": {
-            "status": [ ![](images/icons/callouts/1.png)
+            "status": [ #1
               "pending",
               "published"
             ]
@@ -465,12 +415,7 @@ This call will return the rendered template:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`status` array has been populated with values from the `params` object.   
-  
+#1| `status` array has been populated with values from the `params` object.     
 ---|---  
   
 File and indexed templates can also be rendered by replacing `inline` with `file` or `id` respectively. For example, to render a file template

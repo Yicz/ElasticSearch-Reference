@@ -1,7 +1,6 @@
-## Multi Get API
+## 多获取API Multi Get API
 
-Multi GET API allows to get multiple documents based on an index, type (optional) and id (and possibly routing). The response includes a `docs` array with all the fetched documents, each element similar in structure to a document provided by the [get](docs-get.html) API. Here is an example:
-    
+Multi GET API允许基于索引，类型（可选）和id（以及可能的路由）获取多个文档。 响应包括一个带有所有获取文档的“docs”数组，每个元素的结构与[get](docs-get.html)API提供的文档相似。 这里是一个例子：
     
     GET _mget
     {
@@ -19,8 +18,7 @@ Multi GET API allows to get multiple documents based on an index, type (optional
         ]
     }
 
-The `mget` endpoint can also be used against an index (in which case it is not required in the body):
-    
+`_mget`接口也可以用于索引（在这种情况下，它不是必需的）：    
     
     GET test/_mget
     {
@@ -36,7 +34,7 @@ The `mget` endpoint can also be used against an index (in which case it is not r
         ]
     }
 
-And type:
+还有文档类型:
     
     
     GET test/type/_mget
@@ -51,30 +49,27 @@ And type:
         ]
     }
 
-In which case, the `ids` element can directly be used to simplify the request:
-    
+在这种情况下，`id`元素可以直接用来作简单请求：    
     
     GET test/type/_mget
     {
         "ids" : ["1", "2"]
     }
 
-### Optional Type
+### 可选的类型 Optional Type
 
-The mget API allows for `_type` to be optional. Set it to `_all` or leave it empty in order to fetch the first document matching the id across all types.
+mget API 允许`类型（type）`作为可选项，取全或者设置`_all`会首先匹配到id的第一个文档。
 
-If you don’t set the type and have many documents sharing the same `_id`, you will end up getting only the first matching document.
+如果没有设置类型同时不类类型的文件有着相同的`_id`,你只先匹配到一个文档。
 
-For example, if you have a document 1 within typeA and typeB then following request will give you back only the same document twice:
-    
+例如：如果你在 类型A和类型B中有一个id为1的文档，发出如下的请求，你只会拿到同一个文档两次。
     
     GET test/_mget
     {
         "ids" : ["1", "1"]
     }
 
-You need in that case to explicitly set the `_type`:
-    
+在这个例子里，你需要显示指定类型（type）
     
     GET test/_mget/
     {
@@ -90,11 +85,11 @@ You need in that case to explicitly set the `_type`:
         ]
     }
 
-### Source filtering
+### 源过滤 Source filtering
 
-By default, the `_source` field will be returned for every document (if stored). Similar to the [get](docs-get.html#get-source-filtering) API, you can retrieve only parts of the `_source` (or not at all) by using the `_source` parameter. You can also use the url parameters `_source`,`_source_include` & `_source_exclude` to specify defaults, which will be used when there are no per-document instructions.
+默认地,`_source`将会返回存储了的文档。类似于[get API](docs-get.html#get-source-filtering)，你可以通过指定`_source`参数进行过滤`_source`字段中返回的属性。你可以使用url参数`_source`,`_source_include`和`_source_exclude`设定每个文档`_source`返回的默认字段。
 
-For example:
+例如:
     
     
     GET _mget
@@ -124,10 +119,9 @@ For example:
         ]
     }
 
-### Fields
+### 字段 Fields
 
-Specific stored fields can be specified to be retrieved per document to get, similar to the [stored_fields](docs-get.html#get-stored-fields) parameter of the Get API. For example:
-    
+类似 Get API的[字段存储 stored field](docs-get.html#get-stored-fields),存储了的字段可以在请求的时候进行返回。例如：
     
     GET _mget
     {
@@ -146,45 +140,34 @@ Specific stored fields can be specified to be retrieved per document to get, sim
             }
         ]
     }
+或者，您可以将查询字符串中的`stored_fields`参数指定为默认值，以应用于所有文档。
 
-Alternatively, you can specify the `stored_fields` parameter in the query string as a default to be applied to all documents.
-    
-    
+```sh
     GET test/type/_mget?stored_fields=field1,field2
     {
         "docs" : [
             {
-                "_id" : "1" ![](images/icons/callouts/1.png)
+                "_id" : "1" #1
             },
             {
                 "_id" : "2",
-                "stored_fields" : ["field3", "field4"] ![](images/icons/callouts/2.png)
+                "stored_fields" : ["field3", "field4"] #2
             }
         ]
     }
+```
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Returns `field1` and `field2`  
+#1 | Returns `field1` and `field2`    
+---|---    
+#2 | Returns `field3` and `field4`  
   
----|---  
-  
-![](images/icons/callouts/2.png)
+### 生成字段 Generated fields
 
-| 
+[生成字段 Generated fields](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-get.html#generated-fields)只有在建立索引的时候才有效
 
-Returns `field3` and `field4`  
-  
-### Generated fields
+### 路由 Routing
 
-See [Generated fields for fields generated only when indexing.
-
-### Routing
-
-You can also specify routing value as a parameter:
-    
+您还可以指定路由值（routing）作为参数：    
     
     GET _mget?routing=key1
     {
@@ -203,8 +186,8 @@ You can also specify routing value as a parameter:
         ]
     }
 
-In this example, document `test/type/2` will be fetch from shard corresponding to routing key `key1` but document `test/type/1` will be fetch from shard corresponding to routing key `key2`.
+在这个例子中，文件`test/type/2`将从路由关键字`key1`对应的分片中获取，而文档`test/type/1`将从对应于路由关键词`key2`的分片中获取。
 
-### Security
+### 安全 Security
 
-See [_URL-based access control_](url-access-control.html)
+请查看[基于URL的访问控制](url-access-control.html)

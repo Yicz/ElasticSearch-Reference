@@ -144,46 +144,26 @@ The response contains suggestions scored by the most likely spell correction fir
               "min_word_length" :  1
             } ],
             "collate": {
-              "query": { ![](images/icons/callouts/1.png)
+              "query": { #1
                 "inline" : {
                   "match": {
-                    "{ {field_name} }" : "{ {suggestion} }" ![](images/icons/callouts/2.png)
+                    "{ {field_name} }" : "{ {suggestion} }" #2
                   }
                 }
               },
-              "params": {"field_name" : "title"}, ![](images/icons/callouts/3.png)
-              "prune": true ![](images/icons/callouts/4.png)
+              "params": {"field_name" : "title"}, #3
+              "prune": true #4
             }
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This query will be run once for every suggestion.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `{ {suggestion} }` variable will be replaced by the text of each suggestion.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-An additional `field_name` variable has been specified in `params` and is used by the `match` query.   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-All suggestions will be returned with an extra `collate_match` option indicating whether the generated phrase matched any document.   
+#1| This query will be run once for every suggestion.     
+---|---    
+#2| The `{ {suggestion} }` variable will be replaced by the text of each suggestion.     
+#3| An additional `field_name` variable has been specified in `params` and is used by the `match` query.     
+#4| All suggestions will be returned with an extra `collate_match` option indicating whether the generated phrase matched any document.   
   
 ### Smoothing Models
 

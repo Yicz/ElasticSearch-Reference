@@ -51,8 +51,9 @@
       }
     }
 
-![](images/icons/callouts/1.png)| 查询必须以与[Search API](search-search.html)相同的方式作为值传递给`query`键。 您也可以像搜索api一样使用`q`参数。    
----|---  
+
+#1| 查询必须以与[Search API](search-search.html)相同的方式作为值传递给`query`键。 您也可以像搜索api一样使用`q`参数。    
+
 
 到目前为止，我们只是在不更改源文件的情况下更新文档。 这对于[新增的属性](docs-update-by-query.html#picking-up-a-new-property)这样的东西是真正有用的，但它只是一半的乐趣。 `_update_by_query`支持`脚本(script)`对象来更新文档。 这将增加所有kimchy的tweets上的`likes`字段：    
     
@@ -156,7 +157,9 @@
 `failures`
      所有索引失败的数组。 如果这是非空的，则请求由于这些故障而中止。 有关如何防止版本冲突终止操作的信息，请参阅[冲突]()。 
 
-### 写任务API协作
+
+### 与任务API协作
+
 
 您可以使用[任务API](tasks.html)获取所有正在运行的逐个查询请求的状态:
     
@@ -203,9 +206,9 @@
       }
     }
 
-![](images/icons/callouts/1.png)| 该对象包含实际状态。 这就像"total”字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过添加"updated"，"created"和"deleted"字段来估计进度。 当他们的总和等于'total'字段时，请求将完成。
- 
----|---    
+
+#1| 该对象包含实际状态。 这就像"total”字段的重要补充json的响应一样。 总数是reindex预期执行的操作总数。 您可以通过添加"updated"，"created"和"deleted"字段来估计进度。 当他们的总和等于'total'字段时，请求将完成。
+
 
 使用任务ID，您可以直接查找任务：    
     
@@ -213,7 +216,7 @@
 
 这个API的优点是它与`wait_for_completion = false`集成，透明地返回已完成任务的状态。 如果任务完成，并且wait_for_completion = false被设置，那么它会返回一个`results`或`error`字段。 这个特性的成本是在 `.tasks/task/${taskId}`创建`wait_for_completion = false`的文件。 删除该文件由您决定。
 
-### Works with the Cancel Task API
+### 使用task API 取消任务  Works with the Cancel Task API
 
 任何通过查询更新可以使用[任务取消API](tasks.html)取消：
     
@@ -235,7 +238,7 @@
 
 #### 手动分页 Manual slicing 
 
-Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scroll) allowing you to manually parallelize the process relatively easily:
+Update-by-query 支持[切片滚动](search-request-scroll.html#sliced-scroll)，使您可以相对容易地手动并行化进程：
     
     
     POST twitter/_update_by_query
@@ -274,9 +277,9 @@ Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scrol
       }
     }
 
-### Automatic slicing
+### 自动分片 Automatic slicing
 
-通过查询更新支持[切片滚动](search-request-scroll.html#sliced-scroll)，使您可以相对简单地手动并行化进程：
+你也可以让_update_by_query使用[Sliced Scroll](search-request-scroll.html#sliced-scroll)自动并行分割在`_uid`上：
 
     
     POST twitter/_update_by_query?refresh&slices=5
@@ -298,7 +301,9 @@ Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scrol
       }
     }
 
-在`_update_by_query`中添加`slices`只是自动执行上面div中的手动过程，创建子请求，这意味着它有一些怪癖：
+
+在`_update_by_query`中添加`slices`只是自动执行上面内容中的手动过程，创建子请求，这意味着它的处理过程稍有不同：
+
 
   *您可以在[任务API](docs-update-by-query.html#docs-update-by-query-task-api)中看到这些请求。这些子请求是“切片”请求任务的“子”任务。
   *用“切片”获取请求任务的状态只包含已完成切片的状态。
@@ -353,9 +358,11 @@ Update-by-query supports [Sliced Scroll](search-request-scroll.html#sliced-scrol
       }
     }
 
-![](images/icons/callouts/1.png)| 这意味着新字段不会被索引，只是存储在`_source`中。    
+
+#1| 这意味着新字段不会被索引，只是存储在`_source`中。    
 ---|---    
-![](images/icons/callouts/2.png)| 这会更新映射以添加新的“flag”字段。 要拿起新的领域，你必须重新索引所有的文件。
+#2| 这会更新映射以添加新的“flag”字段。 要拿起新的领域，你必须重新索引所有的文件。
+
 
 搜索数据将找不到任何内容：
     

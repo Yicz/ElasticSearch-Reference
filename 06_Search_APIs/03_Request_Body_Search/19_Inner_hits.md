@@ -76,17 +76,12 @@ The example below assumes that there is a nested object field defined with the n
                 "query" : {
                     "match" : {"comments.message" : "[actual query]"}
                 },
-                "inner_hits" : {} ![](images/icons/callouts/1.png)
+                "inner_hits" : {} #1
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The inner hit definition in the nested query. No other options need to be defined.   
-  
+#1| The inner hit definition in the nested query. No other options need to be defined.     
 ---|---  
   
 An example of a response snippet that could be generated from the above search request:
@@ -102,7 +97,7 @@ An example of a response snippet that could be generated from the above search r
             "_id": "1",
             "_source": ...,
             "inner_hits": {
-               "comments": { ![](images/icons/callouts/1.png)
+               "comments": { #1
                   "hits": {
                      "total": ...,
                      "hits": [
@@ -121,12 +116,7 @@ An example of a response snippet that could be generated from the above search r
          },
          ...
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The name used in the inner hit definition in the search request. A custom key can be used via the `name` option.   
-  
+#1| The name used in the inner hit definition in the search request. A custom key can be used via the `name` option.    
 ---|---  
   
 The `_nested` metadata is crucial in the above example, because it defines from what inner nested object this inner hit came from. The `field` defines the object array field the nested hit is from and the `offset` relative to its location in the `_source`. Due to sorting and scoring the actual location of the hit objects in the `inner_hits` is usually different than the location a nested inner object was defined.
@@ -205,17 +195,12 @@ The examples below assumes that there is a `_parent` field mapping in the `comme
                 "query" : {
                     "match" : {"message" : "[actual query]"}
                 },
-                "inner_hits" : {} ![](images/icons/callouts/1.png)
+                "inner_hits" : {} #1
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The inner hit definition like in the nested example.   
-  
+#1| The inner hit definition like in the nested example.     
 ---|---  
   
 An example of a response snippet that could be generated from the above search request:

@@ -37,29 +37,14 @@ Below this we describe the security settings for scripts and how you can change 
 Which scripts Elasticsearch will execute where is controlled by settings starting with `scripts.`. The simplest settings allow scripts to be enabled or disabled based on where they are stored. For example:
     
     
-    script.inline: false  ![](images/icons/callouts/1.png)
-    script.stored: false  ![](images/icons/callouts/2.png)
-    script.file:   true   ![](images/icons/callouts/3.png)
+    script.inline: false  #1
+    script.stored: false  #2
+    script.file:   true   #3
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Refuse to run scripts provided inline in the API.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Refuse to run scripts stored using the API.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb) or `config/scripts` (zip or tar).   
+#1| Refuse to run scripts provided inline in the API.     
+---|---    
+#2| Refuse to run scripts stored using the API.     
+#3| Run scripts found on the filesystem in `/etc/elasticsearch/scripts` (rpm or deb) or `config/scripts` (zip or tar).   
   
 ![Note](images/icons/note.png)
 
@@ -99,17 +84,17 @@ And
 For example:
     
     
-    script.inline: false ![](images/icons/callouts/1.png)
-    script.stored: false ![](images/icons/callouts/2.png)
-    script.file:   false ![](images/icons/callouts/3.png)
+    script.inline: false #1
+    script.stored: false #2
+    script.file:   false #3
     
-    script.engine.painless.inline:          true ![](images/icons/callouts/4.png)
-    script.engine.painless.stored.search:   true ![](images/icons/callouts/5.png)
-    script.engine.painless.stored.aggs:     true ![](images/icons/callouts/6.png)
+    script.engine.painless.inline:          true #4
+    script.engine.painless.stored.search:   true #5
+    script.engine.painless.stored.aggs:     true #6
     
-    script.engine.mustache.stored.search:   true ![](images/icons/callouts/7.png)
+    script.engine.mustache.stored.search:   true #7
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png) ![](images/icons/callouts/3.png)
+#1 #2 #3
 
 | 
 
@@ -117,19 +102,19 @@ Disable all scripting from any source.
   
 ---|---  
   
-![](images/icons/callouts/4.png)
+#4
 
 | 
 
 Allow inline Painless scripts for all operations.   
   
-![](images/icons/callouts/5.png) ![](images/icons/callouts/6.png)
+#5 #6
 
 | 
 
 Allow stored Painless scripts to be used for search and aggregations.   
   
-![](images/icons/callouts/7.png)
+#7
 
 | 
 

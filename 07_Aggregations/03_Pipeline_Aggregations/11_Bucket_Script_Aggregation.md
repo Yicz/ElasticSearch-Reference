@@ -14,19 +14,14 @@ A `bucket_script` aggregation looks like this in isolation:
     {
         "bucket_script": {
             "buckets_path": {
-                "my_var1": "the_sum", ![](images/icons/callouts/1.png)
+                "my_var1": "the_sum", #1
                 "my_var2": "the_value_count"
             },
             "script": "params.my_var1 / params.my_var2"
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Here, `my_var1` is the name of the variable for this buckets path to use in the script, `the_sum` is the path to the metrics to use for that variable.   
-  
+#1| Here, `my_var1` is the name of the variable for this buckets path to use in the script, `the_sum` is the path to the metrics to use for that variable.     
 ---|---  
   
 **Table 11. `bucket_script` Parameters**

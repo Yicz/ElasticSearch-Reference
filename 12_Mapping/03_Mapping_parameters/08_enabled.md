@@ -16,7 +16,7 @@ The `enabled` setting, which can be applied only to the mapping type and to [`ob
             "last_updated": {
               "type": "date"
             },
-            "session_data": { ![](images/icons/callouts/1.png)
+            "session_data": { #1
               "enabled": false
             }
           }
@@ -27,7 +27,7 @@ The `enabled` setting, which can be applied only to the mapping type and to [`ob
     PUT my_index/session/session_1
     {
       "user_id": "kimchy",
-      "session_data": { ![](images/icons/callouts/2.png)
+      "session_data": { #2
         "arbitrary_object": {
           "some_array": [ "foo", "bar", { "baz": 2 } ]
         }
@@ -38,29 +38,14 @@ The `enabled` setting, which can be applied only to the mapping type and to [`ob
     PUT my_index/session/session_2
     {
       "user_id": "jpountz",
-      "session_data": "none", ![](images/icons/callouts/3.png)
+      "session_data": "none", #3
       "last_updated": "2015-12-06T18:22:13"
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The `session_data` field is disabled.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-Any arbitrary data can be passed to the `session_data` field as it will be entirely ignored.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `session_data` will also ignore values that are not JSON objects.   
+#1| The `session_data` field is disabled.     
+---|---    
+#2| Any arbitrary data can be passed to the `session_data` field as it will be entirely ignored.     
+#3| The `session_data` will also ignore values that are not JSON objects.   
   
 The entire mapping type may be disabled as well, in which case the document is stored in the [`_source`](mapping-source-field.html) field, which means it can be retrieved, but none of its contents are indexed in any way:
     
@@ -68,7 +53,7 @@ The entire mapping type may be disabled as well, in which case the document is s
     PUT my_index
     {
       "mappings": {
-        "session": { ![](images/icons/callouts/1.png)
+        "session": { #1
           "enabled": false
         }
       }
@@ -85,29 +70,14 @@ The entire mapping type may be disabled as well, in which case the document is s
       "last_updated": "2015-12-06T18:20:22"
     }
     
-    GET my_index/session/session_1 ![](images/icons/callouts/2.png)
+    GET my_index/session/session_1 #2
     
-    GET my_index/_mapping ![](images/icons/callouts/3.png)
+    GET my_index/_mapping #3
 
-![](images/icons/callouts/1.png)
-
-| 
-
-The entire `session` mapping type is disabled.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The document can be retrieved.   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-Checking the mapping reveals that no fields have been added.   
+#1| The entire `session` mapping type is disabled.     
+---|---    
+#2| The document can be retrieved.     
+#3| Checking the mapping reveals that no fields have been added.   
   
 ![Tip](images/icons/tip.png)
 

@@ -82,24 +82,14 @@ Dates can be converted from another timezone to UTC either by specifying the tim
         "query": {
             "range" : {
                 "timestamp" : {
-                    "gte": "2015-01-01 00:00:00", ![](images/icons/callouts/1.png)
-                    "lte": "now", ![](images/icons/callouts/2.png)
+                    "gte": "2015-01-01 00:00:00", #1
+                    "lte": "now", #2
                     "time_zone": "+01:00"
                 }
             }
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This date will be converted to `2014-12-31T23:00:00 UTC`.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-`now` is not affected by the `time_zone` parameter (dates must be stored as UTC). 
+#1| This date will be converted to `2014-12-31T23:00:00 UTC`.     
+---|---    
+#2| `now` is not affected by the `time_zone` parameter (dates must be stored as UTC). 

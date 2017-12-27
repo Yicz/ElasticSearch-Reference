@@ -18,7 +18,7 @@ Example:
             "profit": {
                 "scripted_metric": {
                     "init_script" : "params._agg.transactions = []",
-                    "map_script" : "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)", ![](images/icons/callouts/1.png)
+                    "map_script" : "params._agg.transactions.add(doc.type.value == 'sale' ? doc.amount.value : -1 * doc.amount.value)", #1
                     "combine_script" : "double profit = 0; for (t in params._agg.transactions) { profit += t } return profit",
                     "reduce_script" : "double profit = 0; for (a in params._aggs) { profit += a } return profit"
                 }
@@ -26,12 +26,7 @@ Example:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-`map_script` is the only required parameter   
-  
+#1| `map_script` is the only required parameter   
 ---|---  
   
 The above aggregation demonstrates how one would use the script aggregation compute the total profit from sale and cost transactions.
@@ -67,8 +62,8 @@ The above example can also be specified using file scripts as follows:
                         "file": "my_combine_script"
                     },
                     "params": {
-                        "field": "amount", ![](images/icons/callouts/1.png)
-                        "_agg": {}        ![](images/icons/callouts/2.png)
+                        "field": "amount", #1
+                        "_agg": {}        #2
                     },
                     "reduce_script" : {
                         "file": "my_reduce_script"
@@ -78,19 +73,9 @@ The above example can also be specified using file scripts as follows:
         }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-script parameters for `init`, `map` and `combine` scripts must be specified in a global `params` object so that it can be share between the scripts.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-if you specify script parameters then you must specify `"_agg": {}`.   
+#1| script parameters for `init`, `map` and `combine` scripts must be specified in a global `params` object so that it can be share between the scripts.     
+---|---    
+#2| if you specify script parameters then you must specify `"_agg": {}`.   
   
 For more details on specifying scripts see [script documentation](modules-scripting.html).
 
@@ -245,17 +230,7 @@ It reduces the responses for the shards down to a final overall profit figure (b
 
 ### Other Parameters
 
-params 
-
-| 
-
-Optional. An object whose contents will be passed as variables to the `init_script`, `map_script` and `combine_script`. This can be useful to allow the user to control the behavior of the aggregation and for storing state between the scripts. If this is not specified, the default is the equivalent of providing: 
-    
-    
-    "params" : {
-        "_agg" : {}
-    }  
-  
+params | Optional. An object whose contents will be passed as variables to the `init_script`, `map_script` and `combine_script`. This can be useful to allow the user to control the behavior of the aggregation and for storing state between the scripts. If this is not specified, the default is the equivalent of providing:             "params" : {        "_agg" : {}    }    
 ---|---  
   
 ### Empty Buckets

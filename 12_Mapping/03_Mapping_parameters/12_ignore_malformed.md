@@ -27,28 +27,18 @@ For example:
     PUT my_index/my_type/1
     {
       "text":       "Some text value",
-      "number_one": "foo" ![](images/icons/callouts/1.png)
+      "number_one": "foo" #1
     }
     
     PUT my_index/my_type/2
     {
       "text":       "Some text value",
-      "number_two": "foo" ![](images/icons/callouts/2.png)
+      "number_two": "foo" #2
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-This document will have the `text` field indexed, but not the `number_one` field.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-This document will be rejected because `number_two` does not allow malformed values.   
+#1| This document will have the `text` field indexed, but not the `number_one` field.     
+---|---    
+#2| This document will be rejected because `number_two` does not allow malformed values.   
   
 ![Tip](images/icons/tip.png)
 
@@ -62,33 +52,23 @@ The `index.mapping.ignore_malformed` setting can be set on the index level to al
     PUT my_index
     {
       "settings": {
-        "index.mapping.ignore_malformed": true ![](images/icons/callouts/1.png)
+        "index.mapping.ignore_malformed": true #1
       },
       "mappings": {
         "my_type": {
           "properties": {
-            "number_one": { ![](images/icons/callouts/2.png)
+            "number_one": { #2
               "type": "byte"
             },
             "number_two": {
               "type": "integer",
-              "ignore_malformed": false ![](images/icons/callouts/3.png)
+              "ignore_malformed": false #3
             }
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png) ![](images/icons/callouts/2.png)
-
-| 
-
-The `number_one` field inherits the index-level setting.   
-  
----|---  
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `number_two` field overrides the index-level setting to turn off `ignore_malformed`. 
+#1 #2| The `number_one` field inherits the index-level setting.     
+---|---    
+#3| The `number_two` field overrides the index-level setting to turn off `ignore_malformed`. 

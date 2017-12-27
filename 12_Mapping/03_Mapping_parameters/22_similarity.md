@@ -23,38 +23,24 @@ The `similarity` can be set on the field level when a field is first created, as
       "mappings": {
         "my_type": {
           "properties": {
-            "default_field": { ![](images/icons/callouts/1.png)
+            "default_field": { #1
               "type": "text"
             },
             "classic_field": {
               "type": "text",
-              "similarity": "classic" ![](images/icons/callouts/2.png)
+              "similarity": "classic" #2
             },
             "boolean_sim_field": {
               "type": "text",
-              "similarity": "boolean" ![](images/icons/callouts/3.png)
+              "similarity": "boolean" #3
             }
           }
         }
       }
     }
 
-![](images/icons/callouts/1.png)
+#1| The `default_field` uses the `BM25` similarity.     
+---|---    
+#2| The `classic_field` uses the `classic` similarity (ie TF/IDF).     
+#3| The `boolean_sim_field` uses the `boolean` similarity. 
 
-| 
-
-The `default_field` uses the `BM25` similarity.   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-The `classic_field` uses the `classic` similarity (ie TF/IDF).   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-The `boolean_sim_field` uses the `boolean` similarity. 

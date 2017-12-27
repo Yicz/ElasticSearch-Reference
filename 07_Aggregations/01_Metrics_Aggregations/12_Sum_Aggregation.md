@@ -132,7 +132,7 @@ The `missing` parameter defines how documents that are missing a value should be
             "hat_prices" : {
                 "sum" : {
                     "field" : "price",
-                    "missing": 100 ![](images/icons/callouts/1.png)
+                    "missing": 100 #1
                 }
             }
         }

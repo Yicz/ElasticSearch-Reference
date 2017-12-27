@@ -11,31 +11,16 @@ Allows to collapse search results based on field values. The collapsing is done 
             }
         },
         "collapse" : {
-            "field" : "user" ![](images/icons/callouts/1.png)
+            "field" : "user" #1
         },
-        "sort": ["likes"], ![](images/icons/callouts/2.png)
-        "from": 10 ![](images/icons/callouts/3.png)
+        "sort": ["likes"], #2
+        "from": 10 #3
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-collapse the result set using the "user" field   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-sort the top docs by number of likes   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-define the offset of the first collapsed result   
+#1| collapse the result set using the "user" field     
+---|---    
+#2| sort the top docs by number of likes     
+#3| define the offset of the first collapsed result   
   
 ![Warning](images/icons/warning.png)
 
@@ -60,48 +45,23 @@ It is also possible to expand each collapsed top hits with the `inner_hits` opti
             }
         },
         "collapse" : {
-            "field" : "user", ![](images/icons/callouts/1.png)
+            "field" : "user", #1
             "inner_hits": {
-                "name": "last_tweets", ![](images/icons/callouts/2.png)
-                "size": 5, ![](images/icons/callouts/3.png)
-                "sort": [{ "date": "asc" }] ![](images/icons/callouts/4.png)
+                "name": "last_tweets", #2
+                "size": 5, #3
+                "sort": [{ "date": "asc" }] #4
             },
-            "max_concurrent_group_searches": 4 ![](images/icons/callouts/5.png)
+            "max_concurrent_group_searches": 4 #5
         },
         "sort": ["likes"]
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-collapse the result set using the "user" field   
-  
----|---  
-  
-![](images/icons/callouts/2.png)
-
-| 
-
-the name used for the inner hit div in the response   
-  
-![](images/icons/callouts/3.png)
-
-| 
-
-the number of inner_hits to retrieve per collapse key   
-  
-![](images/icons/callouts/4.png)
-
-| 
-
-how to sort the document inside each group   
-  
-![](images/icons/callouts/5.png)
-
-| 
-
-the number of concurrent requests allowed to retrieve the inner_hits` per group   
+#1| collapse the result set using the "user" field     
+---|---    
+#2| the name used for the inner hit div in the response     
+#3| the number of inner_hits to retrieve per collapse key     
+#4| how to sort the document inside each group     
+#5| the number of concurrent requests allowed to retrieve the inner_hits` per group   
   
 See [inner hits](search-request-inner-hits.html) for the complete list of supported options and the format of the response.
 

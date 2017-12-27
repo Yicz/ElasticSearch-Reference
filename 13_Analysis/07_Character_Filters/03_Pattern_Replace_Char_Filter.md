@@ -161,7 +161,7 @@ The output from the above is:
             },
             "highlight": {
               "text": [
-                "The foo<em>Ba</em>rBaz method" ![](images/icons/callouts/1.png)
+                "The foo<em>Ba</em>rBaz method" #1
               ]
             }
           }
@@ -169,10 +169,5 @@ The output from the above is:
       }
     }
 
-![](images/icons/callouts/1.png)
-
-| 
-
-Note the incorrect highlight.   
-  
+#1| Note the incorrect highlight.     
 ---|---
