@@ -19,7 +19,7 @@ Suppose that the query to retrieve the first page looks like this:
         ]
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 A field with one unique value per document should be used as the tiebreaker of the sort specification. Otherwise the sort order for documents that have the same sort values would be undefined. The recommended way is to use the field `_uid` which is certain to contain one unique value for each document.
 
@@ -41,7 +41,7 @@ The result from the above request includes an array of `sort values` for each do
         ]
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The parameter `from` must be set to 0 (or -1) when `search_after` is used.
 

@@ -35,7 +35,7 @@ Below is an example of configuring a mapping with numeric fields:
       }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The `double`, `float` and `half_float` types consider that `-0.0` and `+0.0` are different values. As a consequence, doing a `term` query on `-0.0` will not match `+0.0` and vice-versa. Same is true for range queries: if the upper bound is `-0.0` then `+0.0` will not match, and if the lower bound is `+0.0` then `-0.0` will not match.
 

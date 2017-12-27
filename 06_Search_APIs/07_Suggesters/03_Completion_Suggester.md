@@ -1,6 +1,6 @@
 ## Completion Suggester
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
 
@@ -135,7 +135,7 @@ returns this response:
       }
     }
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 `_source` meta-field must be enabled, which is the default behavior, to enable returning `_source` with suggestions.
 
@@ -197,11 +197,11 @@ The basic completion suggester query supports the following parameters:
 `size`
      The number of suggestions to return (defaults to `5`). 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The completion suggester considers all documents in the index. See [Context Suggester](suggester-context.html) for an explanation of how to query a subset of documents instead.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 In case of completion queries spanning more than one shard, the suggest is executed in two phases, where the last phase fetches the relevant documents from shards, implying executing completion requests against a single shard is more performant due to the document fetch overhead when the suggest spans multiple shards. To get best performance for completions, it is recommended to index completions into a single shard index. In case of high heap usage due to shard size, it is still recommended to break index into multiple shards instead of optimizing for completion performance.
 
@@ -236,7 +236,7 @@ The fuzzy query can take specific fuzzy parameters. The following parameters are
 `prefix_length`| Minimum length of the input, which is not checked for fuzzy alternatives, defaults to `1`    
 `unicode_aware`| If `true`, all measurements (like fuzzy edit distance, transpositions, and lengths) are measured in Unicode code points instead of in bytes. This is slightly slower than raw bytes, so it is set to `false` by default.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 If you want to stick with the default values, but still use fuzzy, you can either use `fuzzy: {}` or `fuzzy: true`.
 

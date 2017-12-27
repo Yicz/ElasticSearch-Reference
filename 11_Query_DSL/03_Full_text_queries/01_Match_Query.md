@@ -86,7 +86,7 @@ Here is an example showing a query composed of stopwords exclusively:
         }
     }
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 The `cutoff_frequency` option operates on a per-shard-level. This means that when trying it out on test indexes with low document numbers you should follow the advice in [Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html).
 

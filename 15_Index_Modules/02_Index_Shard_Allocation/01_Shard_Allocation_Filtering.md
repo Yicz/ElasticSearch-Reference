@@ -2,7 +2,7 @@
 
 Shard allocation filtering allows you to specify which nodes are allowed to host the shards of a particular index.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The per-index shard allocation filters explained below work in conjunction with the cluster-wide allocation filters explained in [Cluster Level Shard Allocation](shards-allocation.html).
 
@@ -39,7 +39,7 @@ Multiple rules can be specified, in which case all conditions must be satisfied.
       "index.routing.allocation.include.rack": "rack1"
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 If some conditions cannot be satisfied then shards will not be moved.
 

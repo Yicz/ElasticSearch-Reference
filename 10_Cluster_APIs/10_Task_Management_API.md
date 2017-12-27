@@ -1,6 +1,6 @@
 ## Task Management API
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The Task Management API is new and should still be considered experimental. The API may change in ways that are not backwards compatible 
 

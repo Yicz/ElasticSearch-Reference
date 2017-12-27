@@ -51,7 +51,7 @@ While languages like `expression` and `painless` can be used out of the box as i
 `params`
      Specifies any named parameters that are passed into the script as variables. 
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 ### Prefer parameters
 
@@ -177,6 +177,6 @@ And deleted with:
 
 All scripts are cached by default so that they only need to be recompiled when updates occur. File scripts keep a static cache and will always reside in memory. Both inline and stored scripts are stored in a cache that can evict residing scripts. By default, scripts do not have a time-based expiration, but you can change this behavior by using the `script.cache.expire` setting. You can configure the size of this cache by using the `script.cache.max_size` setting. By default, the cache size is `100`.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The size of stored scripts is limited to 65,535 bytes. This can be changed by setting `script.max_size_in_bytes` setting to increase that soft limit, but if scripts are really large then alternatives like [native](modules-scripting-native.html) scripts should be considered instead.

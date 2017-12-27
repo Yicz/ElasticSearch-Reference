@@ -137,7 +137,7 @@ The `os` flag can be set to retrieve statistics that concern the operating syste
 `os.cgroup.cpu.stat.time_throttled_nanos` (Linux only) 
      The total amount of time (in nanoseconds) for which all tasks in the same cgroup as the Elasticsearch process have been throttled. 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 For the cgroup stats to be visible, cgroups must be compiled into the kernal, the `cpu` and `cpuacct` cgroup subsystems must be configured and stats must be readable from `/sys/fs/cgroup/cpu` and `/sys/fs/cgroup/cpuacct`.
 

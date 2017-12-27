@@ -4,7 +4,7 @@ Elasticsearch can be installed on Windows using the `.zip` package. This comes w
 
 The latest stable version of Elasticsearch can be found on the [Download Elasticsearch](/downloads/elasticsearch) page. Other versions can be found on the [Past Releases page](/downloads/past-releases).
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Elasticsearch requires Java 8 or later. Use the [official Oracle distribution](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or an open-source distribution such as [OpenJDK](http://openjdk.java.net).
 
@@ -35,11 +35,11 @@ Any settings that can be specified in the config file can also be specified on t
     
     .\bin\elasticsearch.bat -Ecluster.name=my_cluster -Enode.name=node_1
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Values that contain spaces must be surrounded with quotes. For instance `-Epath.logs="C:\My Logs\logs"`.
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 Typically, any cluster-wide settings (like `cluster.name`) should be added to the `elasticsearch.yml` config file, while any node-specific settings such as `node.name` could be specified on the command line.
 
@@ -96,11 +96,11 @@ Based on the architecture of the available JDK/JRE (set through `JAVA_HOME`), th
     Using JAVA_HOME (64-bit):  "c:\jvm\jdk1.8"
     The service 'elasticsearch-service-x64' has been installed.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 While a JRE can be used for the Elasticsearch service, due to its use of a client VM (as opposed to a server JVM which offers better performance for long-running applications) its usage is discouraged and a warning will be issued.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The system environment variable `JAVA_HOME` should be set to the path to the JDK installation that you want the service to use. If you upgrade the JDK, you are not required to the reinstall the service but you must set the value of the system environment variable `JAVA_HOME` to the path to the new JDK installation. However, upgrading across JVM types (e.g. JRE versus SE) is not supported, and does require the service to be reinstalled.
 
@@ -123,11 +123,11 @@ The Elasticsearch service can be configured prior to installation by setting the
 
 The timeout in seconds that procrun waits for service to exit gracefully. Defaults to `0`.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 At its core, `elasticsearch-service.bat` relies on [Apache Commons Daemon](http://commons.apache.org/proper/commons-daemon/) project to install the service. Environment variables set prior to the service installation are copied and will be used during the service lifecycle. This means any changes made to them after the installation will not be picked up unless the service is reinstalled.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 On Windows, the [heap size](heap-size.html) can be configured as for any other Elasticsearch installation when running Elasticsearch from the command line, or when installing Elasticsearch as a service for the first time. To adjust the heap size for an already installed service, use the service manager: `bin\elasticsearch-service.bat manager`.
 

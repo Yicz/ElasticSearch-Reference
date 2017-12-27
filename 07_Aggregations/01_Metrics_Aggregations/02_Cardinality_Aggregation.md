@@ -19,7 +19,7 @@ Assume you are indexing books and would like to count the unique authors that ma
 
 This aggregation also supports the `precision_threshold` option:
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The `precision_threshold` option is specific to the current internal implementation of the `cardinality` agg, which may change in the future 
     
@@ -62,7 +62,7 @@ For all 3 thresholds, counts have been accurate up to the configured threshold (
 
 On string fields that have a high cardinality, it might be faster to store the hash of your field values in your index and then run the cardinality aggregation on this field. This can either be done by providing hash values from client-side or by letting elasticsearch compute hash values for you by using the [`mapper-murmur3`](https://www.elastic.co/guide/en/elasticsearch/plugins/5.4/mapper-murmur3.html) plugin.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Pre-computing hashes is usually only useful on very large and/or high-cardinality fields as it saves CPU and memory. However, on numeric fields, hashing is very fast and storing the original values requires as much or less memory than storing the hashes. This is also true on low-cardinality string fields, especially given that those have an optimization in order to make sure that hashes are computed at most once per unique value per segment.
 
@@ -103,7 +103,7 @@ This will interpret the `script` parameter as an `inline` script with the `painl
         }
     }
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 for indexed scripts replace the `file` parameter with an `id` parameter.
 

@@ -34,11 +34,11 @@ Multiple awareness attributes can be specified, in which case the combination of
     
     cluster.routing.allocation.awareness.attributes: rack_id,zone
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 When using awareness attributes, shards will not be allocated to nodes that don’t have values set for those attributes.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Number of primary/replica of a shard allocated on a specific group of nodes with the same awareness attribute value is determined by the number of attribute values. When the number of nodes in groups is unbalanced and there are many replicas, replica shards may be left unassigned.
 

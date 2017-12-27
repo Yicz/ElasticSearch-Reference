@@ -102,7 +102,7 @@ Geo-point expressed as an array with the format: [ `lon`, `lat`]
 
 A geo-bounding box query which finds all geo-points that fall inside the box.   
   
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 ### Geo-points expressed as an array or string
 

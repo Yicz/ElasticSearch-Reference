@@ -40,7 +40,7 @@ For example:
 ---|---    
 <2>| This document will be rejected because `number_two` does not allow malformed values.   
   
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 The `ignore_malformed` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 

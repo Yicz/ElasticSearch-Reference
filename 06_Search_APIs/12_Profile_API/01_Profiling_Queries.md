@@ -1,6 +1,6 @@
 ## Profiling Queries
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The details provided by the Profile API directly expose Lucene class names and concepts, which means that complete interpretation of the results require fairly advanced knowledge of Lucene. This page attempts to give a crash-course in how Lucene executes queries so that you can use the Profile API to successfully diagnose and debug queries, but it is only an overview. For complete understanding, please refer to Lucene’s documentation and, in places, the code.
 
@@ -48,7 +48,7 @@ The `time_in nanos` field shows the timing information in an exact, machine read
 
 The `breakdown` field will give detailed stats about how the time was spent, we’ll look at that in a moment. Finally, the `children` array lists any sub-queries that may be present. Because we searched for two values ("search test"), our BooleanQuery holds two children TermQueries. They have identical information (type, time, breakdown, etc). Children are allowed to have their own children.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The `time` field is only intended for human consumption. If you need exact timing values use `time_in nanos`. The `time` field is currently printed by default, but this will change with the next major version (6.0.0) where `time_in_nanos` will be printed by default.
 

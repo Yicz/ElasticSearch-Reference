@@ -85,7 +85,7 @@ The following analyzers support setting custom `stem_exclusion` list: `arabic`, 
 
 The built-in language analyzers can be reimplemented as `custom` analyzers (as described below) in order to customize their behaviour.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 If you do not intend to exclude words from being stemmed (the equivalent of the `stem_exclusion` parameter above), then you should remove the `keyword_marker` token filter from the custom analyzer configuration.
 

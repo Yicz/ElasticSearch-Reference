@@ -9,7 +9,7 @@ In Elasticsearch, there is no dedicated `array` type. Any field can contain zero
 
 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 ### Arrays of objects
 

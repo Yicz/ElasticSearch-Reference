@@ -1,6 +1,6 @@
 ## Painless Scripting Language
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The Painless scripting language is new and is still marked as experimental. The syntax or API may be changed in the future in non-backwards compatible ways if required. 
 
@@ -179,7 +179,7 @@ If the date field is a list then `date` will always return the first date. To ac
 
 ### Regular expressions
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Regexes are disabled by default because they circumvent Painless’s protection against long running and memory hungry scripts. To make matters worse even innocuous looking regexes can have staggering performance and stack depth behavior. They remain an amazing powerful tool but are too scary to enable by default. To enable them yourself set `script.painless.regex.enabled: true` in `elasticsearch.yml`. We’d like very much to have a safe alternative implementation that can be enabled by default so check this space for later developments!
 
@@ -237,7 +237,7 @@ You can use the `Pattern.matcher` directly to get a `Matcher` instance and remov
 
 If you need more control over replacements you can call `replaceAll` on a `CharSequence` with a `Function<Matcher, String>` that builds the replacement. This does not support `$1` or `\1` to access replacements because you already have a reference to the matcher and can get them with `m.group(1)`.
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 Calling `Matcher.find` inside of the function that builds the replacement is rude and will likely break the replacement process.
 

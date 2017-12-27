@@ -43,6 +43,6 @@ The `null_value` parameter allows you to replace explicit `null` values with the
 <2>| An empty array does not contain an explicit `null`, and so won’t be replaced with the `null_value`.     
 <3>| A query for `NULL` returns document 1, but not document 2.   
   
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 The `null_value` needs to be the same datatype as the field. For instance, a `long` field cannot have a string `null_value`.

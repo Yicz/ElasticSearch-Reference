@@ -1,6 +1,6 @@
 ## Synonym Graph Token Filter
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -8,7 +8,7 @@ The `synonym_graph` token filter allows to easily handle synonyms, including mul
 
 In order to properly handle multi-word synonyms this token filter creates a "graph token stream" during processing. For more information on this topic and its various complexities, please read the [Lucene’s TokenStreams are actually graphs](http://blog.mikemccandless.com/2012/04/lucenes-tokenstreams-are-actually.html) blog post.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 This token filter is designed to be used as part of a search analyzer only. If you want to apply synonyms during indexing please use the standard [synonym token filter](analysis-synonym-tokenfilter.html).
 

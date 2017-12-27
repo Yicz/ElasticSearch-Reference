@@ -44,12 +44,12 @@ Strings longer than the `ignore_above` setting will not be indexed or stored.
 <3>| This document will be indexed, but without indexing the `message` field.     
 <4>| Search returns both documents, but only the first is present in the terms aggregation.   
   
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 The `ignore_above` setting is allowed to have different settings for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).
 
 This option is also useful for protecting against Lucene’s term byte-length limit of `32766`.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The value for `ignore_above` is the _character count_ , but Lucene counts bytes. If you use UTF-8 text with many non-ASCII characters, you may want to set the limit to `32766 / 3 = 10922` since UTF-8 characters may occupy at most 3 bytes.

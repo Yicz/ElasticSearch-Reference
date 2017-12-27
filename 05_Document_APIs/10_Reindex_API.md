@@ -1,6 +1,6 @@
 ## Reindex API
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 Reindex不试图设置目标索引。它不复制源索引的设置。在运行`_reindex`操作之前，应该设置目标索引，包括设置映射、碎片计数、副本等。
 
@@ -266,7 +266,7 @@ Reindex也可以通过像这样指定`pipeline'来使用[Ingest Node](ingest.htm
 
 ### 从远程重建索引 Reindex from Remote
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 来自远程的Reindex在5.4.0中是[broken](https://github.com/elastic/elasticsearch/issues/24520)，在5.4.1中是修复。
 

@@ -18,7 +18,7 @@ The request is processed in two phases. In the first phase, the query is forward
 
 During the second phase, the coordinating node requests the document content (and highlighted snippets, if any) from **only the relevant shards**.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 This is the default setting, if you do not specify a `search_type` in your request.
 

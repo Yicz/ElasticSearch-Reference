@@ -14,7 +14,7 @@ For instance, we could decommission a node using its IP address as follows:
       }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Shards will only be relocated if it is possible to do so without breaking another routing constraint, such as never allocating a primary and replica shard to the same node.
 

@@ -27,7 +27,7 @@ It accepts the same parameters as the phrase type. In addition, it also accepts 
         }
     }
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 The `match_phrase_prefix` query is a poor-man’s autocomplete. It is very easy to use, which lets you get started quickly with _search-as-you-type_ but its results, which usually are good enough, can sometimes be confusing.
 

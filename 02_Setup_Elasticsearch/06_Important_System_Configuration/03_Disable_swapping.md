@@ -27,7 +27,7 @@ Linux系统上的另一个选项是确保sysctl值`vm.swappiness`被设置为`1`
     
     bootstrap.memory_lock: true
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 `mlockall`可能会导致JVM或shell会话退出，如果它试图分配超出可用的内存！
 

@@ -55,7 +55,7 @@ The PUT mapping API can be applied to multiple indices with a single request. It
 
 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 When updating the `_default_` mapping with the [PUT mapping](indices-put-mapping.html) API, the new mapping is not merged with the existing mapping. Instead, the new `_default_` mapping replaces the existing one.
 
@@ -120,7 +120,7 @@ Each [mapping parameter](mapping-params.html) specifies whether or not its setti
 
 Fields in the same index with the same name in two different types must have the same mapping, as they are backed by the same field internally. Trying to [update a mapping parameter](indices-put-mapping.html#updating-field-mappings) for a field which exists in more than one type will throw an exception, unless you specify the `update_all_types` parameter, in which case it will update that parameter across all fields with the same name in the same index.
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 The only parameters which are exempt from this rule — they can be set to different values on each field — can be found in [Fields are shared across mapping types.
 

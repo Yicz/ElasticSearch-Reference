@@ -27,7 +27,7 @@
 
 `_update_by_query` 发出请求的时候会得到一个使用ES内部版本控制的索引快照。这就意味着，请求在快照上进行处理的时候，可以会与实时索引之间产生版本冲突。当版本不冲突的时候，文档进行更新并会增加版本号（+1）。
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 内部版本控制并不支持使用0作为一个有效的版本号。文档使用了0作版本号的，并不能使用使用`_update_by_query`,如果使用了，请求会失败。
 

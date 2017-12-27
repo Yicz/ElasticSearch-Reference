@@ -52,6 +52,6 @@ Advance settings include:
         # see http://en.wikipedia.org/wiki/Zero-width_joiner
         \\u200D => ALPHANUM
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Using a tokenizer like the `standard` tokenizer may interfere with the `catenate_*` and `preserve_original` parameters, as the original string may already have lost punctuation during tokenization. Instead, you may want to use the `whitespace` tokenizer.

@@ -47,7 +47,7 @@ With delayed allocation enabled, the above scenario changes to look like this:
 
 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 This setting will not affect the promotion of replicas to primaries, nor will it affect the assignment of replicas that have not been assigned previously. In particular, delayed allocation does not come into effect after a full cluster restart. Also, in case of a master failover situation, elapsed delay time is forgotten (i.e. reset to the full initial delay).
 

@@ -187,7 +187,7 @@ Sets the default `include_in_all` value for all the `properties` within the nest
 
 The fields within the nested object, which can be of any [datatype](mapping-types.html), including `nested`. New properties may be added to an existing nested object.   
   
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 Because nested documents are indexed as separate documents, they can only be accessed within the scope of the `nested` query, the `nested`/`reverse_nested`, or [nested inner hits](search-request-inner-hits.html#nested-inner-hits).
 

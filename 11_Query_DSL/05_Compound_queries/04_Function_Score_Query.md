@@ -64,7 +64,7 @@ Boost for the whole query.
 
 See [Function Score Query](query-dsl-function-score-query.html#score-functions) for a list of supported functions.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The scores produced by the filtering query of each function do not matter.
 
@@ -97,7 +97,7 @@ The newly computed score is combined with the score of the query. The parameter 
   
 By default, modifying the score does not change which documents match. To exclude documents that do not meet a certain score threshold the `min_score` parameter can be set to the desired score threshold.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 For `min_score` to work, **all** documents returned by the query need to be scored and then filtered out one by one.
 
@@ -170,7 +170,7 @@ The `weight` score allows you to multiply the score by the provided `weight`. Th
 
 The `random_score` generates scores using a hash of the `_uid` field, with a `seed` for variation. If `seed` is not specified, the current time is used.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Using this feature will load field data for `_uid`, which can be a memory intensive operation since the values are unique.
     

@@ -12,7 +12,7 @@ You can also limit the amount of shards a node can have regardless of the index:
 `cluster.routing.allocation.total_shards_per_node`
      The maximum number of shards (replicas and primaries) that will be allocated to a single node globally. Defaults to unbounded (-1). 
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 These settings impose a hard limit which can result in some shards not being allocated.
 

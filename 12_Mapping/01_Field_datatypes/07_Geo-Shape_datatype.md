@@ -92,7 +92,7 @@ GeoJSON Type | Elasticsearch Type | Description
 `N/A`| `envelope`| A bounding rectangle, or envelope, specified by specifying only the top left and bottom right points.    
 `N/A`| `circle`| A circle specified by a center point and radius with units, which default to `METERS`.  
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 For all types, both the inner `type` and `coordinates` fields are required.
 

@@ -21,5 +21,5 @@ ES是使用java语言开发的，至少需要[java 8](http://www.oracle.com/tec
 
 ES使用的是`JAVA_HOME`的环境变量
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 ES默认设置的是使用64位的服务器版的jvms,如果你想将他运行在32位的JVM上，你必须在[`jvm.options`]中移除`-server`并重新配置线程栈（thread stack）的大小，从`-Xss1m`到`-Xss320k`

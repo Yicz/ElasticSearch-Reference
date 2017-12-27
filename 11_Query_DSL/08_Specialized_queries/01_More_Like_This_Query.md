@@ -80,7 +80,7 @@ Finally, users can mix some texts, a chosen set of documents but also provide do
 
 Suppose we wanted to find all documents similar to a given input document. Obviously, the input document itself should be its best match for that type of query. And the reason would be mostly, according to [Lucene scoring formula](https://lucene.apache.org/core/4_9_0/core/org/apache/lucene/search/similarities/TFIDFSimilarity.html), due to the terms with the highest tf-idf. Therefore, the terms of the input document that have the highest tf-idf are good representatives of that document, and could be used within a disjunctive query (or `OR`) to retrieve similar documents. The MLT query simply extracts the text from the input document, analyzes it, usually using the same analyzer at the field, then selects the top K terms with highest tf-idf to form a disjunctive query of these terms.
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 The fields on which to perform MLT must be indexed and of type `string`. Additionally, when using `like` with documents, either `_source` must be enabled or the fields must be `stored` or store `term_vector`. In order to speed up analysis, it could help to store term vectors at index time.
 

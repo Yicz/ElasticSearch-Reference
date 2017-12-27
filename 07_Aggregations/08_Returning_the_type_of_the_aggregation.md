@@ -66,6 +66,6 @@ In the response, the aggregations names will be changed to respectively `date_hi
 ---|---   
 <2>| The name `top_users` now contains the `top_hits` prefix.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 For some aggregations, it is possible that the returned type is not the same as the one provided with the request. This is the case for Terms, Significant Terms and Percentiles aggregations, where the returned type also contains information about the type of the targeted field: `lterms` (for a terms aggregation on a Long field), `sigsterms` (for a significant terms aggregation on a String field), `tdigest_percentiles` (for a percentile aggregation based on the TDigest algorithm).

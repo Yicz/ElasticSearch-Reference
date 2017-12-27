@@ -21,6 +21,6 @@
 
 
 
-![提醒](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![提醒](/images/icons/note.png)
 
 全部增删查找(CRUD)APIs都只能进行单文档操作，`index`参数是单索引的名称，或者使用`alias`指向单个索引。

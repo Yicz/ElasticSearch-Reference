@@ -1,6 +1,6 @@
 ## Groovy Scripting Language
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.0.0. 
 

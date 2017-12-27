@@ -4,7 +4,7 @@ The `pattern` tokenizer uses a regular expression to either split text into term
 
 The default pattern is `\W+`, which splits text whenever it encounters non-word characters.
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Beware of Pathological Regular Expressions
 

@@ -39,7 +39,7 @@ Character classes may be any of the following:
 
   
   
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 It usually makes sense to set `min_gram` and `max_gram` to the same value. The smaller the length, the more documents will match but the lower the quality of the matches. The longer the length, the more specific the matches. A tri-gram (length `3`) is a good place to start.
 

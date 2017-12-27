@@ -18,7 +18,7 @@ The automatic detection and addition of new types and fields is called _dynamic 
 [Dynamic templates](dynamic-templates.html)
      Custom rules to configure the mapping for dynamically added fields. 
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 [Index templates](indices-templates.html) allow you to configure the default mappings, settings and aliases for new indices, whether created automatically or explicitly.
 

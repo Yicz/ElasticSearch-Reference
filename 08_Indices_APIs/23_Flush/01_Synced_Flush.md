@@ -58,7 +58,7 @@ While handy, there are a couple of caveats for this API:
 
 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 It is harmless to request a synced flush while there is ongoing indexing. Shards that are idle will succeed and shards that are not will fail. Any shards that succeeded will have faster recovery times.
     
@@ -105,7 +105,7 @@ Here is what it looks like when one shard group failed due to pending operations
        }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The above error is shown when the synced flush fails due to concurrent indexing operations. The HTTP status code in that case will be `409 CONFLICT`.
 
@@ -139,7 +139,7 @@ Sometimes the failures are specific to a shard copy. The copies that failed will
        }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 When a shard copy fails to sync-flush, the HTTP status code returned will be `409 CONFLICT`.
 

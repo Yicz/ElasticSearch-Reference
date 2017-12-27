@@ -22,13 +22,13 @@ Allows to collapse search results based on field values. The collapsing is done 
 <2>| sort the top docs by number of likes     
 <3>| define the offset of the first collapsed result   
   
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The total number of hits in the response indicates the number of matching documents without collapsing. The total number of distinct group is unknown.
 
 The field used for collapsing must be a single valued [`keyword`](keyword.html) or [`numeric`](number.html) field with [`doc_values`](doc-values.html) activated
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The collapsing is applied to the top hits only and does not affect aggregations.
 
@@ -67,6 +67,6 @@ See [inner hits](search-request-inner-hits.html) for the complete list of suppor
 
 The expansion of the group is done by sending an additional query for each collapsed hit returned in the response. The `max_concurrent_group_searches` request parameter can be used to control the maximum number of concurrent searches allowed in this phase. The default is based on the number of data nodes and the default search thread pool size.
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 `collapse` cannot be used in conjunction with [scroll](search-request-scroll.html), [rescore](search-request-rescore.html) or [search after](search-request-search-after.html).

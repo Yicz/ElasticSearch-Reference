@@ -72,6 +72,6 @@ The following settings are used together to determine where to place each shard.
 `cluster.routing.allocation.balance.threshold`
      Minimal optimization value of operations that should be performed (non negative float). Defaults to `1.0f`. Raising this will cause the cluster to be less aggressive about optimizing the shard balance. 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Regardless of the result of the balancing algorithm, rebalancing might not be allowed due to forced awareness or allocation filtering.

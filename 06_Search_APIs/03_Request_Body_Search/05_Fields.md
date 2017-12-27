@@ -1,6 +1,6 @@
 ## Fields
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The `stored_fields` parameter is about fields that are explicitly marked as stored in the mapping, which is off by default and generally not recommended. Use [source filtering](search-request-source-filtering.html) instead to select subsets of the original source document to be returned.
 
@@ -49,6 +49,6 @@ To disable the stored fields (and metadata fields) entirely use: `_none_`:
         }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 [`_source`](search-request-source-filtering.html) and [`version`](search-request-version.html) parameters cannot be activated if `_none_` is used.

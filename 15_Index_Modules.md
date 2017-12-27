@@ -11,7 +11,7 @@ _静态 static_
 _动态 dynamic_
      可以使用[update-index-settings](indices-update-settings.html)API在实时索引中更改
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 更改关闭索引上的静态或动态索引设置可能会导致错误的设置，如果不删除并重新创建索引，这些设置将无法纠正。
 

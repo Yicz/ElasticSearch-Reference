@@ -1,6 +1,6 @@
 ## 文件描述符 File Descriptors
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 这只适用于Linux和macOS，如果在Windows上运行Elasticsearch，可以放心地忽略它。 在Windows上，JVM使用[API](https://msdn.microsoft.com/en-us/library/windows/desktop/aa363858v=vs.85.aspx)仅受可用资源的限制。
 

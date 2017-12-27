@@ -5,13 +5,13 @@ False values | `false`, `"false"`, `"off"`, `"no"`, `"0"`, `""` (empty string), 
 ---|---    
 True values | Anything that isn’t false.   
   
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.1.0. 
 
 While Elasticsearch will currently accept the above values during index time. Searching a boolean field using these pseudo-boolean values is deprecated. Please use "true" or "false" instead. 
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.3.0. 
 

@@ -1,6 +1,6 @@
 ## Pipeline Aggregations
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
 
@@ -15,7 +15,7 @@ Pipeline aggregations can reference the aggregations they need to perform their 
 
 Pipeline aggregations cannot have sub-aggregations but depending on the type it can reference another pipeline in the `buckets_path` allowing pipeline aggregations to be chained. For example, you can chain together two derivatives to calculate the second derivative (i.e. a derivative of a derivative).
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Because pipeline aggregations only add to the output, when chaining pipeline aggregations the output of each pipeline aggregation will be included in the final output.
 

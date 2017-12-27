@@ -53,7 +53,7 @@ compound
 
 To add additional information that can be used for debugging, use the `verbose` flag.
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 The format of the additional verbose information is experimental and can change at any time 
     

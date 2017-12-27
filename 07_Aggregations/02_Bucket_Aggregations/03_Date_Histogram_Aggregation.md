@@ -38,7 +38,7 @@ Time values can also be specified via abbreviations supported by [time units](co
 
 Internally, a date is represented as a 64 bit number representing a timestamp in milliseconds-since-the-epoch. These timestamps are returned as the bucket `key`s. The `key_as_string` is the same timestamp converted to a formatted date string using the format specified with the `format` parameter:
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 If no `format` is specified, then it will use the first date [format](mapping-date-format.html) specified in the field mapping.
     
@@ -178,7 +178,7 @@ Now the first document falls into the bucket for 30 September 2015, while the se
 <1> <2>| The `key_as_string` value represents midnight on each day in the specified time zone.     
 ---|---  
   
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 When using time zones that follow DST (daylight savings time) changes, buckets close to the moment when those changes happen can have slightly different sizes than would be expected from the used `interval`. For example, consider a DST start in the `CET` time zone: on 27 March 2016 at 2am, clocks were turned forward 1 hour to 3am local time. When using `day` as `interval`, the bucket covering that day will only hold data for 23 hours instead of the usual 24 hours for other buckets. The same is true for shorter intervals like e.g. 12h. Here, we will have only a 11h bucket on the morning of 27 March when the DST shift happens.
 
@@ -235,7 +235,7 @@ Instead of a single bucket starting at midnight, the above request groups the do
       }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The start `offset` of each bucket is calculated after the `time_zone` adjustments have been made.
 

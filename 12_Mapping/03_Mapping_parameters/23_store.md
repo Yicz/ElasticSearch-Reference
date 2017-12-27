@@ -44,7 +44,7 @@ In certain situations it can make sense to `store` a field. For instance, if you
 ---|---   
  <3>| This request will retrieve the values of the `title` and `date` fields.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 ### Stored fields returned as arrays
 

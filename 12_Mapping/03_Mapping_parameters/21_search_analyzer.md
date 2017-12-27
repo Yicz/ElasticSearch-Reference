@@ -68,6 +68,6 @@ By default, queries will use the `analyzer` defined in the field mapping, but th
   
 See [Index time search-as-you- type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html) for a full explanation of this example.
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 The `search_analyzer` setting must have the same setting for fields of the same name in the same index. Its value can be updated on existing fields using the [PUT mapping API](indices-put-mapping.html).

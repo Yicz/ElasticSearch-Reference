@@ -2,7 +2,7 @@
 
 The `pattern` analyzer uses a regular expression to split the text into terms. The regular expression should match the **token separators** not the tokens themselves. The regular expression defaults to `\W+` (or all non-word characters).
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Beware of Pathological Regular Expressions
 

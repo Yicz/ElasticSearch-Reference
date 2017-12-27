@@ -26,7 +26,7 @@ Then the following json snippet can be indexed as a native query:
             }
     }
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 Fields referred to in a percolator query must **already** exist in the mapping associated with the index used for percolation. In order to make sure these fields exist, add or update a mapping via the [create index](indices-create-index.html) or [put mapping](indices-put-mapping.html) APIs. Fields referred in a percolator query may exist in any type of the index containing the `percolator` field type.
 

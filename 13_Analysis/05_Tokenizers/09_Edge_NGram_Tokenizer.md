@@ -4,7 +4,7 @@ The `edge_ngram` tokenizer first breaks text down into words whenever it encount
 
 Edge N-Grams are useful for _search-as-you-type_ queries.
 
-![Tip](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/tip.png)
+![Tip](/images/icons/tip.png)
 
 When you need _search-as-you-type_ for text which has a widely known order, such as movie or song titles, the [completion suggester](search-suggesters-completion.html) is a much more efficient choice than edge N-grams. Edge N-grams have the advantage when trying to autocomplete words that can appear in any order.
 
@@ -24,7 +24,7 @@ The above sentence would produce the following terms:
     
     [ Q, Qu ]
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 These default gram lengths are almost entirely useless. You need to configure the `edge_ngram` before using it.
 

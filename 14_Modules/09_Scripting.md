@@ -25,7 +25,7 @@ Language | Sandboxed | Required plugin | Purpose
 [`mustache`](search-template.html)| yes| built-in| templates    
 [`java`](modules-scripting-native.html)| n/a| you write it!| expert API  
   
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Scripts and security
 

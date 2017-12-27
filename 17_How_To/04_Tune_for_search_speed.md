@@ -142,7 +142,7 @@ could be replaced with the following query:
 
 In that case we rounded to the minute, so if the current time is `16:31:29`, the range query will match everything whose value of the `my_date` field is between `15:31:00` and `16:31:59`. And if several users run a query that contains this range in the same minute, the query cache could help speed things up a bit. The longer the interval that is used for rounding, the more the query cache can help, but beware that too aggressive rounding might also hurt user experience.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 It might be tempting to split ranges into a large cacheable part and smaller not cacheable parts in order to be able to leverage the query cache, as shown below:
     
@@ -191,7 +191,7 @@ However such practice might make the query run slower in some cases since the ov
 
 Indices that are read-only would benefit from being [merged down to a single segment](indices-forcemerge.html). This is typically the case with time-based indices: only the index for the current time frame is getting new documents while older indices are read-only.
 
-![Important](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/important.png)
+![Important](/images/icons/important.png)
 
 Don’t force-merge indices that are still being written to — leave merging to the background merge process.
 
@@ -218,6 +218,6 @@ Global ordinals are a data-structure that is used in order to run [`terms`](sear
 
 If the machine running elasticsearch is restarted, the filesystem cache will be empty, so it will take some time before the operating system loads hot regions of the index into memory so that search operations are fast. You can explicitly tell the operating system which files should be loaded into memory eagerly depending on the file extension using the [`index.store.preload`](index-modules-store.html#file-system) setting.
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 Loading data into the filesystem cache eagerly on too many indices or too many files will make search _slower_ if the filesystem cache is not large enough to hold all the data. Use with caution.

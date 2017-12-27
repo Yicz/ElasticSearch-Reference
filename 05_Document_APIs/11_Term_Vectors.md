@@ -12,7 +12,7 @@ Optionally, you can specify the fields for which the information is retrieved ei
 
 or by adding the requested fields in the request body (see example below). Fields can also be specified with wildcards in similar way to the [multi match query](query-dsl-multi-match-query.html)
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 Note that the usage of `/_termvector` is deprecated in 2.0, and replaced by `/_termvectors`.
 
@@ -31,7 +31,7 @@ Three types of values can be requested: _term information_ , _term statistics_ a
 
 If the requested information wasn’t stored in the index, it will be computed on the fly if possible. Additionally, term vectors could be computed for documents not even existing in the index, but instead provided by the user.
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 Start and end offsets assume UTF-16 encoding is being used. If you want to use these offsets in order to get the original text that produced this token, you should make sure that the string you are taking a sub-string of is also encoded using UTF-16.
 

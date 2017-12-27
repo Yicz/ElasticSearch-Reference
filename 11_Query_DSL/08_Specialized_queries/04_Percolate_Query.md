@@ -301,6 +301,6 @@ The selecting of candidate percolator queries matches is an important performanc
       }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 The above example assumes that there is a `query` field of type `percolator` in the mappings.

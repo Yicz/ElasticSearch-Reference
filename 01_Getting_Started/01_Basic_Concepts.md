@@ -64,7 +64,7 @@ ES是一个近实时的搜索平台，意味着只要一个延迟就可以（通
 ES分片默认的设置是分配5个分片和一个副本，这意味着至少集群要包含两个结点。通过默认设置，你会得到5个分片和5个副本分片，总共就是每个索引（index）10个分片。
 
 
-![提示](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![提示](/images/icons/note.png)
 
 每一个ES分片都是一个lucene的索引. 单个lucene索引中文档数是有一个最大值的. 参考 [`LUCENE-5843`](https://issues.apache.org/jira/browse/LUCENE-5843), 最大值是 `2,147,483,519` (= Integer.MAX_VALUE - 128) 你可以使用 [`_cat/shards`](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/cat-shards.html) api进行查看分片的大小
 

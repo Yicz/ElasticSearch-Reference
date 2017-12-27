@@ -11,7 +11,7 @@ Below are the settings that can be configured in the `elasticsearch.yml` config 
 `cluster.routing.allocation.disk.watermark.high`
      Controls the high watermark. It defaults to 90%, meaning ES will attempt to relocate shards to another node if the node disk usage rises above 90%. It can also be set to an absolute byte value (similar to the low watermark) to relocate shards once less than the configured amount of space is available on the node. 
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Percentage values refer to used disk space, while byte values refer to free disk space. This can be confusing, since it flips the meaning of high and low. For example, it makes sense to set the low watermark to 10gb and the high watermark to 5gb, but not the other way around.
 
@@ -32,6 +32,6 @@ An example of updating the low watermark to no more than 80% of the disk size, a
       }
     }
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Prior to 2.0.0, when using multiple data paths, the disk threshold decider only factored in the usage across all data paths (if you had two data paths, one with 50b out of 100b free (50% used) and another with 40b out of 50b free (80% used) it would see the node’s disk usage as 90b out of 150b). In 2.0.0, the minimum and maximum disk usages are tracked separately.

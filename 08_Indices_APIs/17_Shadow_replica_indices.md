@@ -1,6 +1,6 @@
 ## Shadow replica indices
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.2.0. 
 
@@ -22,7 +22,7 @@ This means that Elasticsearch can read and write to files in any subdirectory of
 
 You can then create an index with a custom data path, where each node will use this path for the data:
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 Because shadow replicas do not index the document on replica shards, it’s possible for the replica’s known mapping to be behind the index’s known mapping if the latest cluster state has not yet been processed on the node containing the replica. Because of this, it is highly recommended to use pre-defined mappings when using shadow replicas.
     
@@ -37,7 +37,7 @@ Because shadow replicas do not index the document on replica shards, it’s poss
         }
     }
 
-![Warning](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/warning.png)
+![Warning](/images/icons/warning.png)
 
 In the above example, the "/opt/data/my_index" path is a shared filesystem that must be available on every node in the Elasticsearch cluster. You must also ensure that the Elasticsearch process has the correct permissions to read from and write to the directory used in the `index.data_path` setting.
 
@@ -45,7 +45,7 @@ The `data_path` does not have to contain the index name, in this case, "my_index
 
 An index that has been created with the `index.shadow_replicas` setting set to), a regular refresh (governed by the `index.refresh_interval`) can be used to make the new data searchable.
 
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Since documents are only indexed on the primary shard, realtime GET requests could fail to return a document if executed on the replica shard, therefore, GET API requests automatically have the `?preference=_primary` flag set if there is no preference flag already set.
 

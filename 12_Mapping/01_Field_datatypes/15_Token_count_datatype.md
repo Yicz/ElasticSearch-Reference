@@ -60,7 +60,7 @@ The `name.length` field is a `token_count` [multi-field](multi-fields.html) whic
 
 This query matches only the document containing `Rachel Alice Williams`, as it contains three tokens.   
   
-![Note](https://www.elastic.co/guide/en/elasticsearch/reference/current/images/icons/note.png)
+![Note](/images/icons/note.png)
 
 Technically the `token_count` type sums position increments rather than counting tokens. This means that even if the analyzer filters out stop words they are included in the count.
 
