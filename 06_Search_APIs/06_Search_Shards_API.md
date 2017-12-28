@@ -1,4 +1,4 @@
-## Search Shards API
+## 查询分片API Search Shards API
 
 The search shards api returns the indices and shards that a search request would be executed against. This can give useful feedback for working out issues or planning optimizations with routing and shard preferences. When filtered aliases are used, the filter is returned as part of the `indices` div  [5.1.0] Added in 5.1.0. .
 

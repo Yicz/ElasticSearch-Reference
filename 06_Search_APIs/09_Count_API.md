@@ -1,4 +1,4 @@
-## Count API
+## 统计API Count API
 
 The count API allows to easily execute a query and get the number of matches for that query. It can be executed across one or more indices and across one or more types. The query can either be provided using a simple query string as a parameter, or using the [Query DSL](query-dsl.html) defined within the request body. Here is an example:
     

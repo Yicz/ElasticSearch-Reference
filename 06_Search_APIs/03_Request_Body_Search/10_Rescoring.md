@@ -1,4 +1,4 @@
-## Rescoring
+## 重评分
 
 Rescoring can help to improve precision by reordering just the top (eg 100 - 500) documents returned by the [`query`](search-request-query.html) and [`post_filter`](search-request-post-filter.html) phases, using a secondary (usually more costly) algorithm, instead of applying the costly algorithm to all documents in the index.
 

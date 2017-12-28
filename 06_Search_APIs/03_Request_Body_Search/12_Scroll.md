@@ -1,4 +1,4 @@
-## Scroll
+## 滚动 Scroll
 
 While a `search` request returns a single “page” of results, the `scroll` API can be used to retrieve large numbers of results (or even all results) from a single search request, in much the same way as you would use a cursor on a traditional database.
 
@@ -11,7 +11,7 @@ Some of the officially supported clients provide helpers to assist with scrolled
 Perl 
      See [Search::Elasticsearch::Client::5_0::Bulk](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Bulk) and [Search::Elasticsearch::Client::5_0::Scroll](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Scroll)
 Python 
-     See [elasticsearch.helpers.*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
+     See [elasticsearch.helpers.\*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
 
 ![Note](/images/icons/note.png)
 

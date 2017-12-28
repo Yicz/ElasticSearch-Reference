@@ -1,7 +1,6 @@
-## Explain
+## 明细 Explain
 
-Enables explanation for each hit on how its score was computed.
-    
+对每个命中文档的分数进行解释。    
     
     GET /_search
     {

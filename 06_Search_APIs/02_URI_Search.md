@@ -1,12 +1,10 @@
-## URI Search
+## 使用URI查询URI Search
 
-A search request can be executed purely using a URI by providing request parameters. Not all search options are exposed when executing a search using this mode, but it can be handy for quick "curl tests". Here is an example:
-    
+查询请求可以纯使用带有请求参数的URI进行查询。但并不能包含所有的查询条件。它只是提供随时进行`curl`测试，下面是一个例子：
     
     GET twitter/tweet/_search?q=user:kimchy
 
-And here is a sample response:
-    
+响应如下:
     
     {
         "timed_out": false,
@@ -36,26 +34,26 @@ And here is a sample response:
         }
     }
 
-### Parameters
+### 参数 Parameters
 
-The parameters allowed in the URI are:
+在URI请求中允许使用的参数：
 
-Name | Description  
+名称 | 描述  
 ---|---  
-`q`| The query string (maps to the `query_string` query, see [_Query String Query_](query-dsl-query-string-query.html) for more details).    
-`df`| The default field to use when no field prefix is defined within the query.    
-`analyzer`| The analyzer name to be used when analyzing the query string.    
-`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to `false`.    
-`batched_reduce_size`| The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.    
-`default_operator`| The default operator to be used, can be `AND` or `OR`. Defaults to `OR`.    
-`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.    
-`explain`| For each hit, contain an explanation of how scoring of the hits was computed.    
+`q`| 查询字符串（映射到`query_string`查询，更多详细信息请参见[_Query String Query_](query-dsl-query-string-query.html)）
+`df`| 在查询中未定义字段前缀时使用的默认字段。    
+`analyzer`| 分析查询字符串时要使用的分词器名称。
+`analyze_wildcard`| 是否应该分析通配符和前缀查询. 默认 `false`.    
+`batched_reduce_size`|在协调节点上应该一次减少分片结果的数量。如果请求中的潜在分片数可能很大，则应该使用此值作为保护机制来减少每个搜索请求的内存开销。
+`default_operator`| 默认查询条件连接词,  值为`AND` 或 `OR`. 默认 `OR`.    
+`lenient`| 如果设置为true将导致基于格式的失败（如提供文本到数字字段）被忽略. 默认 false.    
+`explain`| 对于每个命中，包含如何计算命中计分的解释。    
 `_source`| Set to `false` to disable retrieval of the `_source` field. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see the [request body](search-request-source-filtering.html) documentation for more details)    
-`stored_fields`| The selective stored fields of the document to return for each hit, comma delimited. Not specifying any value will cause no fields to return.    
-`sort`| Sorting to perform. Can either be in the form of `fieldName`, or `fieldName:asc`/`fieldName:desc`. The fieldName can either be an actual field within the document, or the special `_score` name to indicate sorting based on scores. There can be several `sort` parameters (order is important).    
-`track_scores`| When sorting, set to `true` in order to still track scores and return them as part of each hit.    
-`timeout`| A search timeout, bounding the search request to be executed within the specified time value and bail with the hits accumulated up to that point when expired. Defaults to no timeout.    
-`terminate_after`| The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.    
-`from`| The starting from index of the hits to return. Defaults to `0`.    
-`size`| The number of hits to return. Defaults to `10`.    
-`search_type`| The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more details on the different types of search that can be performed.
+`stored_fields`| 选择性存储的文件字段返回给每个命中，逗号分隔。 不指定任何值将导致没有字段返回。   
+`sort`| 排序。 可以是`fieldName`或`fieldName：asc/desc`的形式。`fieldName`可以是文档中的实际字段，也可以是特殊的`_score`名称以表示根据分数排序。 可以有几个“sort”参数（顺序是重要的）。
+`track_scores`| 排序时，设置为“true”，以便继续跟踪分数并将它们作为每个命中的一部分返回。
+`timeout`|搜索超时，限制搜索请求在指定的时间值内执行，并在到期时累积至点的保留时间。 默认 `不超时`.    
+`terminate_after`| 为每个分片收集的文档的最大数量，一旦达到该数量，查询执行将提前终止。 如果设置，响应将有一个布尔型字段“terminated_early”来指示查询执行是否实际已经terminate_early。 默认no terminate_after。  
+`from`| 返回匹配返回文档的起始位置. 默认 `0`.    
+`size`| 返回文档大小，默认`10`.    
+`search_type`| 要执行的搜索操作的类型。 可以是`dfs_query_then_fetch`或`query_then_fetch`。 默认`query_then_fetch`。 有关可以执行的不同搜索类型的更多详细信息，请参阅[_查询类型 Search Type_](search-request-search-type.html)。

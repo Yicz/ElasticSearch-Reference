@@ -1,4 +1,4 @@
-## Term suggester
+## 词条建议 Term suggester
 
 ![Note](/images/icons/note.png)
 
@@ -6,7 +6,7 @@ In order to understand the format of suggestions, please read the [_Suggesters_]
 
 The `term` suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. The suggested terms are provided per analyzed suggest text token. The `term` suggester doesn’t take the query into account that is part of request.
 
-### Common suggest options:
+### 通用建议选项 Common suggest options:
 
 `text`| The suggest text. The suggest text is a required option that needs to be set globally or per suggestion.     
 ---|---    
@@ -22,7 +22,7 @@ The `term` suggester suggests terms based on edit distance. The provided suggest
 
   
   
-### Other term suggest options:
+### 其他建议选项 Other term suggest options:
 
 `lowercase_terms`| Lower cases the suggest text terms after text analysis.     
 ---|---    

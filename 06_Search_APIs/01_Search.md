@@ -1,31 +1,27 @@
-## Search
+## 查询 Search
 
-The search API allows you to execute a search query and get back search hits that match the query. The query can either be provided using a simple [query string as a parameter](search-uri-request.html), or using a [request body](search-request-body.html).
+search API 允许执行一个查询并返回匹配到的内容，查询可以使用一个简单的uri[查询字符串 uery string as a parameter](search-uri-request.html)作为参数，也可以使用[请求体 request body](search-request-body.html)作为参数载荷。
 
-### Multi-Index, Multi-Type
 
-All search APIs can be applied across multiple types within an index, and across multiple indices with support for the [multi index syntax](multi-index.html). For example, we can search on all documents across all types within the twitter index:
-    
+### 多索引，多类型 Multi-Index, Multi-Type
+
+所有的search APIs 都支持索引内跨类型查询，和使用多[索引语法]](multi-index.html)进行跨索引查询。例如，我们可以在`twitter`索引内进行跨类型查询。
     
     GET /twitter/_search?q=user:kimchy
 
-We can also search within specific types:
-    
+也可以进行指定类型查询：
     
     GET /twitter/tweet,user/_search?q=user:kimchy
 
-We can also search all tweets with a certain tag across several indices (for example, when each user has his own index):
-    
+可以跨多个索引查询所有包含一个明确标签的`tweets`（例如，每个用户都有自己的索引）
     
     GET /kimchy,elasticsearch/tweet/_search?q=tag:wow
 
-Or we can search all tweets across all available indices using `_all` placeholder:
-    
+可以使用`_all`来代替所有可用的索引：
     
     GET /_all/tweet/_search?q=tag:wow
 
-Or even search across all indices and all types:
-    
+使用`_search`作为根查询所有索引和类型：
     
     GET /_search?q=tag:wow
 

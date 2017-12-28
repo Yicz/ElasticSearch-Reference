@@ -1,4 +1,4 @@
-## Multi Search API
+## 多查询API Multi Search API
 
 The multi search API allows to execute several search requests within the same API. The endpoint for it is `_msearch`.
 

@@ -1,7 +1,6 @@
-## min_score
+##  最小评分 min_score
 
-Exclude documents which have a `_score` less than the minimum specified in `min_score`:
-    
+排除具有小于`min_score`中指定的最小值_score的文档：    
     
     GET /_search
     {
@@ -11,4 +10,4 @@ Exclude documents which have a `_score` less than the minimum specified in `min_
         }
     }
 
-Note, most times, this does not make much sense, but is provided for advanced use cases.
+请注意，大多数情况下，这没有多大意义，但提供给高级用例。

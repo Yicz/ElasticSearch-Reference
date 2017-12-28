@@ -1,7 +1,6 @@
-## Request Body Search
+## 使用请求体查询 Request Body Search
 
-The search request can be executed with a search DSL, which includes the [Query DSL](query-dsl.html), within its body. Here is an example:
-    
+搜索请求可以使用搜索DSL来执行，搜索DSL在其请求体中包括[查询结构语言 Query DSL](query-dsl.html)。 这里是一个例子：
     
     GET /twitter/tweet/_search
     {
@@ -10,8 +9,7 @@ The search request can be executed with a search DSL, which includes the [Query 
         }
     }
 
-And here is a sample response:
-    
+响应：
     
     {
         "took": 1,
@@ -41,28 +39,30 @@ And here is a sample response:
         }
     }
 
-### Parameters
+### 参数
 
-`timeout`| A search timeout, bounding the search request to be executed within the specified time value and bail with the hits accumulated up to that point when expired. Defaults to no timeout. See [Time units.     ---|---    
-`from`| To retrieve hits from a certain offset. Defaults to `0`.     
-`size`| The number of hits to return. Defaults to `10`. If you do not care about getting some hits back but only about the number of matches and/or aggregations, setting the value to `0` will help performance.     
-`search_type`| The type of the search operation to perform. Can be `dfs_query_then_fetch` or `query_then_fetch`. Defaults to `query_then_fetch`. See [_Search Type_](search-request-search-type.html) for more.     
-`request_cache`| Set to `true` or `false` to enable or disable the caching of search results for requests where `size` is 0, ie aggregations and suggestions (no top hits returned). See [Shard request cache](shard-request-cache.html).     
-`terminate_after`| The maximum number of documents to collect for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.     
-`batched_reduce_size`| The number of shard results that should be reduced at once on the coordinating node. This value should be used as a protection mechanism to reduce the memory overhead per search request if the potential number of shards in the request can be large.   
+`timeout`| 搜索超时，限制搜索请求在指定的时间值内执行，并在到期时累积至点的保留时间。 默认没有超时。 参见[时间单位]()。    
+---|---    
+`from`| 从特定的偏移量中返回匹配值。 默认为“0”。   
+`size`| 要返回命中文档数。 默认为`10`。 如果你不关心返回的命中文档，只关心匹配数/聚合的数量，将值设置为`0`将有助于执行性能。
+`search_type`| 要执行的搜索操作的类型。 可以是`dfs_query_then_fetch`或`query_then_fetch`。 默认`query_then_fetch`。 有关可以执行的不同搜索类型的更多详细信息，请参阅[_查询类型 Search Type_](search-request-search-type.html)。
+`request_cache`| 设置为`true`或`fals`”来启用或禁用请求的搜索结果`size`为0的的缓存，即聚合和建议（不返回命中文档）。请参阅[分片请求缓存](shard-request-cache.html).  
+`terminate_after`|为每个分片收集的文档的最大数量，一旦达到该数量，查询执行将提前终止。 如果设置，响应将有一个布尔型字段“terminated_early”来指示查询执行是否实际已经terminate_early。 默认`no terminate_after`。       
+`batched_reduce_size`| 在协调节点上应该一次减少分片结果的数量。如果请求中的潜在分片数可能很大，则应该使用此值作为保护机制来减少每个搜索请求的内存开销。
   
-Out of the above, the `search_type` and the `request_cache` must be passed as query-string parameters. The rest of the search request should be passed within the body itself. The body content can also be passed as a REST parameter named `source`.
+除此之外，`search_type`和`request_cache`必须作为查询字符串参数传递。 搜索请求的其余部分应该在主体内传递。 主体内容也可以作为名为`source`的REST参数传递。
 
-Both HTTP GET and HTTP POST can be used to execute search with body. Since not all clients support GET with body, POST is allowed as well.
+HTTP GET和HTTP POST都可以用来执行搜索正文。 由于不是所有的客户端都支持GET，所以POST也是允许的。
 
-### Fast check for any matching docs
+### 快速检查任何匹配的文档 Fast check for any matching docs
 
-In case we only want to know if there are any documents matching a specific query, we can set the `size` to `0` to indicate that we are not interested in the search results. Also we can set `terminate_after` to `1` to indicate that the query execution can be terminated whenever the first matching document was found (per shard).
+如果我们只想知道是否有任何匹配特定查询的文档，我们可以将`size`设置为'0'来表示我们对搜索结果不感兴趣。 此外，我们可以将`terminate_after`设置为`1`，以表示只要找到第一个匹配文档（每个分片）就可以终止查询执行。
     
     
     GET /_search?q=message:elasticsearch&size=0&terminate_after=1
 
-The response will not contain any hits as the `size` was set to `0`. The `hits.total` will be either equal to `0`, indicating that there were no matching documents, or greater than `0` meaning that there were at least as many documents matching the query when it was early terminated. Also if the query was terminated early, the `terminated_early` flag will be set to `true` in the response.
+当`size`被设置为'0'时，响应将不包含任何命中。`hits.total`将等于`0`，表示没有匹配的文档，或者大于“0”，这意味着当提前终止时至少有与查询匹配的文档。同样，如果查询被提前终止，响应中的`terminated_early`标志将被设置为`true`。
+
     
     
     {

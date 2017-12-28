@@ -1,4 +1,4 @@
-## Preference
+## 性能 Preference
 
 Controls a `preference` of which shard copies on which to execute the search. By default, the operation is randomized among the available shard copies.
 

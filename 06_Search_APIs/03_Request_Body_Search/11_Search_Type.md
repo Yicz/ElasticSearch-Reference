@@ -1,4 +1,4 @@
-## Search Type
+## 查询类型 Search Type
 
 There are different execution paths that can be done when executing a distributed search. The distributed search operation needs to be scattered to all the relevant shards and then all the results are gathered back. When doing scatter/gather type execution, there are several ways to do that, specifically with search engines.
 

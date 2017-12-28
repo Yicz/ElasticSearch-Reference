@@ -1,4 +1,4 @@
-## Index Boost
+## 索引因子（提升） Index Boost
 
 Allows to configure different boost level per index when searching across more than one indices. This is very handy when hits coming from one index matter more than hits coming from another index (think social graph where each user has an index).
 

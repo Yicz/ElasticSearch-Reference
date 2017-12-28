@@ -1,4 +1,4 @@
-## Field Collapsing
+## 字段折叠 Field Collapsing
 
 Allows to collapse search results based on field values. The collapsing is done by selecting only the top sorted document per collapse key. For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
     

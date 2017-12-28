@@ -1,4 +1,4 @@
-## Inner hits
+## 内部命中 Inner hits
 
 The [parent/child](mapping-parent-field.html) and [nested](nested.html) features allow the return of documents that have matches in a different scope. In the parent/child case, parent documents are returned based on matches in child documents or child documents are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
 

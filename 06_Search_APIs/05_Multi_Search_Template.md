@@ -1,4 +1,4 @@
-## Multi Search Template
+## 多查询模板 Multi Search Template
 
 The multi search template API allows to execute several search template requests within the same API using the `_msearch/template` endpoint.
 

@@ -1,4 +1,4 @@
-## Suggesters
+## 查询建议 Suggesters
 
 The suggest feature suggests similar looking terms based on a provided text by using a suggester. Parts of the suggest feature are still under development.
 

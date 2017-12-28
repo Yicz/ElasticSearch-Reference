@@ -1,6 +1,6 @@
-## Validate API
+## 检验API Validate API
 
-The validate API allows a user to validate a potentially expensive query without executing it. We’ll use the following test data to explain _validate:
+The validate API allows a user to validate a potentially expensive query without executing it. We’ll use the following test data to explain \_validate:
     
     
     PUT twitter/tweet/_bulk?refresh

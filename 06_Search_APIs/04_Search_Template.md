@@ -1,4 +1,4 @@
-## Search Template
+## 查询模板 Search Template
 
 The `/_search/template` endpoint allows to use the mustache language to pre render search requests, before they are executed and fill existing templates with template parameters.
     

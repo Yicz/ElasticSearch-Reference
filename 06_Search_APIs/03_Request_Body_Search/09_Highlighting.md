@@ -1,4 +1,4 @@
-## Highlighting
+## 高亮 Highlighting
 
 Allows to highlight search results on one or more fields. The implementation uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`) or `postings` highlighter. The following is an example of the search request body:
     

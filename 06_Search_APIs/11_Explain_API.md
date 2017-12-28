@@ -1,4 +1,4 @@
-## Explain API
+## 明细API Explain API
 
 The explain api computes a score explanation for a query and a specific document. This can give useful feedback whether a document matches or didn’t match a specific query.
 

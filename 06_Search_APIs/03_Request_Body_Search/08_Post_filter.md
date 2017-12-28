@@ -1,4 +1,4 @@
-## Post filter
+## 预过滤器 Post filter
 
 The `post_filter` is applied to the search `hits` at the very end of a search request, after aggregations have already been calculated. Its purpose is best explained by example:
 

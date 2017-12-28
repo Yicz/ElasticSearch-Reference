@@ -1,4 +1,4 @@
-## Phrase Suggester
+## 词组建议 Phrase Suggester
 
 ![Note](/images/icons/note.png)
 
@@ -6,7 +6,7 @@ In order to understand the format of suggestions, please read the [_Suggesters_]
 
 The `term` suggester provides a very convenient API to access word alternatives on a per token basis within a certain string distance. The API allows accessing each token in the stream individually while suggest-selection is left to the API consumer. Yet, often pre-selected suggestions are required in order to present to the end-user. The `phrase` suggester adds additional logic on top of the `term` suggester to select entire corrected phrases instead of individual tokens weighted based on `ngram-language` models. In practice this suggester will be able to make better decisions about which tokens to pick based on co-occurrence and frequencies.
 
-### API Example
+### API 示例
 
 In general the `phrase` suggester requires special mapping up front to work. The `phrase` suggester examples on this page need the following mapping to work. The `reverse` analyzer is used only in the last example.
     
@@ -113,7 +113,7 @@ The response contains suggestions scored by the most likely spell correction fir
       }
     }
 
-### Basic Phrase suggest API parameters
+### 基本词组建议API参数 Basic Phrase suggest API parameters
 
 `field`| the name of the field used to do n-gram lookups for the language model, the suggester will use this field to gain statistics to score corrections. This field is mandatory.     
 ---|---    
@@ -165,7 +165,7 @@ The response contains suggestions scored by the most likely spell correction fir
 <3>| An additional `field_name` variable has been specified in `params` and is used by the `match` query.     
 <4>| All suggestions will be returned with an extra `collate_match` option indicating whether the generated phrase matched any document.   
   
-### Smoothing Models
+### 平滑模型 Smoothing Models
 
 The `phrase` suggester supports multiple smoothing models to balance weight between infrequent grams (grams (shingles) are not existing in the index) and frequent grams (appear at least once in the index).
 
