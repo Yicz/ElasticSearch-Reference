@@ -1,18 +1,22 @@
-## 性能 Preference
+## 首选项 Preference
 
+控制执行搜索的哪个分片副本的`首选项`。 默认情况下，操作在可用分片副本中随机化。
 Controls a `preference` of which shard copies on which to execute the search. By default, the operation is randomized among the available shard copies.
 
-The `preference` is a query string parameter which can be set to:
+`preference`是一个查询字符串参数，可以设置为：
 
-`_primary`| The operation will go and be executed only on the primary shards.     ---|---    
-`_primary_first`| The operation will go and be executed on the primary shard, and if not available (failover), will execute on other shards.     
-`_replica`| The operation will go and be executed only on a replica shard.     
-`_replica_first`| The operation will go and be executed only on a replica shard, and if not available (failover), will execute on other shards.     
-`_local`| The operation will prefer to be executed on a local allocated shard if possible.     `_prefer_nodes:abc,xyz`| Prefers execution on the nodes with the provided node ids (`abc` or `xyz` in this case) if applicable.     `_shards:2,3`| Restricts the operation to the specified shards. (`2` and `3` in this case). This preference can be combined with other preferences but it has to appear first: `_shards:2,3|_primary`    
-`_only_nodes`| Restricts the operation to nodes specified in [node specification](cluster.html)    Custom (string) value | A custom value will be used to guarantee that the same shards will be used for the same custom value. This can help with "jumping values" when hitting different shards in different refresh states. A sample value can be something like the web session id, or the user name.   
+`_primary`| 操作只会在主碎片上执行。
+---|---    
+`_primary_first`| 该操作将在主分片上执行，如果不可用（故障转移），将在其他分片上执行。    
+`_replica`| 该操作将仅在副本分片上执行并执行。     
+`_replica_first`| 该操作将仅在副本分片上执行，如果不可用（故障转移），将在其他分片上执行。     
+`_local`| 如果可能，该操作将优选在本地分配的分片上执行。    
+`_prefer_nodes:abc,xyz`| 如果适用，则优先在节点上执行节点ID（在这种情况下为`abc`或`xyz`）。
+`_shards:2,3`|限制操作指定的碎片。 （在这种情况下为“2”和“3”）。 此首选项可以与其他首选项相结合，但必须首先显示：`_shards：2,3 | _primary`
+`_only_nodes`| 将操作限制在[节点规范 node specification](cluster.html)中指定的节点上
+自定义（字符串）值| 自定义值将用于保证相同的自定义值将使用相同的分片。 当在不同的刷新状态下点击不同的碎片时，这可以帮助“跳跃值”。 示例值可以是Web会话标识或用户名。
   
-For instance, use the user’s session ID to ensure consistent ordering of results for the user:
-    
+例如，使用用户的会话ID来确保用户的结果排序一致：    
     
     GET /_search?preference=xyzabc123
     {

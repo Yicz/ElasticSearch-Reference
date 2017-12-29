@@ -1,7 +1,6 @@
 ## 命名查询 Named Queries
 
-Each filter and query can accept a `_name` in its top level definition.
-    
+每个过滤器和查询都可以在顶层定义中指定一个`_name`。    
     
     GET /_search
     {

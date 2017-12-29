@@ -1,8 +1,8 @@
-## From / Size
+##  偏移量/大小  From / Size
 
-Pagination of results can be done by using the `from` and `size` parameters. The `from` parameter defines the offset from the first result you want to fetch. The `size` parameter allows you to configure the maximum amount of hits to be returned.
+结果的分页可以通过使用`from`和`size`参数来完成。 `from`参数定义了你想要获取的第一个结果的偏移量。 `size`参数允许您配置要返回的最大命中文档数量。
 
-Though `from` and `size` can be set as request parameters, they can also be set within the search body. `from` defaults to `0`, and `size` defaults to `10`.
+虽然`from`和`size`可以设置为请求参数，但是也可以在搜索体中设置。 `from`默认为`0`，`size`默认为`10`。
     
     
     GET /_search
@@ -13,4 +13,4 @@ Though `from` and `size` can be set as request parameters, they can also be set 
         }
     }
 
-Note that `from` \+ `size` can not be more than the `index.max_result_window` index setting which defaults to 10,000. See the [Scroll](search-request-scroll.html) or [Search After](search-request-search-after.html) API for more efficient ways to do deep scrolling.
+请注意`from`+`size`不能超过`index.max_result_window`索引设置，默认为`10000`。 查看[Scroll](search-request-scroll.html)或[Search After][Search After](search-request-search-after.html) API以获得更高效的深度滚动方法。

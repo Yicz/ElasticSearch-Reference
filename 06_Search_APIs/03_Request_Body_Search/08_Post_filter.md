@@ -1,8 +1,8 @@
-## 预过滤器 Post filter
+## 后过滤器 Post filter
 
-The `post_filter` is applied to the search `hits` at the very end of a search request, after aggregations have already been calculated. Its purpose is best explained by example:
+已经计算了聚合之后，`post_filter`应用于搜索请求最后的搜索`hits`。 其目的最好的例子是：
 
-Imagine that you are selling shirts that have the following properties:
+想象一下，你正在销售具有以下属性的衬衫：
     
     
     PUT /shirts
@@ -25,9 +25,11 @@ Imagine that you are selling shirts that have the following properties:
         "model": "slim"
     }
 
-Imagine a user has specified two filters:
+设想一个用户已经指定了两个过滤器：
 
-`color:red` and `brand:gucci`. You only want to show them red shirts made by Gucci in the search results. Normally you would do this with a [`bool` query](query-dsl-bool-query.html):
+`color:red` and `brand:gucci`. 
+
+你只想让他们在搜索结果中显示由Gucci制作的红色衬衫。 通常你可以用[`bool` query](query-dsl-bool-query.html)来做到这一点：
     
     
     GET /shirts/_search
@@ -42,9 +44,9 @@ Imagine a user has specified two filters:
       }
     }
 
-However, you would also like to use _faceted navigation_ to display a list of other options that the user could click on. Perhaps you have a `model` field that would allow the user to limit their search results to red Gucci `t-shirts` or `dress-shirts`.
+但是，您也想使用_面对面导航_来显示用户可以点击的其他选项列表。 也许你有一个`model`字段，可以让用户将他们的搜索结果限制在红色的古驰"T恤"或"礼服衬衫"上。
 
-This can be done with a [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html):
+这可以通过[`terms` aggregation](search-aggregations-bucket-terms-aggregation.html)来完成：
     
     
     GET /shirts/_search
@@ -64,12 +66,12 @@ This can be done with a [`terms` aggregation](search-aggregations-bucket-terms-a
       }
     }
 
-<1>| Returns the most popular models of red shirts by Gucci.     
+<1>| 返回Gucci最受欢迎的红色衬衫款式。     
 ---|---  
-  
-But perhaps you would also like to tell the user how many Gucci shirts are available in **other colors**. If you just add a `terms` aggregation on the `color` field, you will only get back the color `red`, because your query returns only red shirts by Gucci.
 
-Instead, you want to include shirts of all colors during aggregation, then apply the `colors` filter only to the search results. This is the purpose of the `post_filter`:
+但也许你也想告诉用户有多少种古奇衬衫可以用**其他颜色**。 如果你只是在`color`字段上添加`terms`聚合，你只会回到`red`颜色，因为你的查询只返回Gucci的红色衬衫。
+
+相反，您希望在聚合过程中包括所有颜色的衬衫，然后仅将“颜色”过滤器应用于搜索结果。 这是`post_filter`的目的：
     
     
     GET /shirts/_search
@@ -101,9 +103,8 @@ Instead, you want to include shirts of all colors during aggregation, then apply
       }
     }
 
-<1>| The main query now finds all shirts by Gucci, regardless of color.     
+<1>| 主查询现在可以找到所有Gucci衬衫，不管颜色。     
 ---|---    
-<2>| The `colors` agg returns popular colors for shirts by Gucci.     
-<3> <4>| The `color_red` agg limits the `models` sub-aggregation to **red** Gucci shirts.     
-<5>| 
-Finally, the `post_filter` removes colors other than red from the search `hits`. 
+<2>| `color`聚合返回Gucci的颜色。    
+<3> <4>| `color_red` agg将`models`子集合限制为** red ** Gucci衬衫。     
+<5>| 最后，`post_filter`从搜索结果中删除除红色以外的颜色。

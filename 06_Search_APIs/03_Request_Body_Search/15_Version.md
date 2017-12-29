@@ -1,7 +1,6 @@
 ## 版本 Version
 
-Returns a version for each search hit.
-    
+为每个检索命中文档返回版本值。    
     
     GET /_search
     {

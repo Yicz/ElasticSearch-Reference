@@ -125,9 +125,9 @@ By default the `_source` is returned also for the hit objects in `inner_hits`, b
 
 An important default is that the `_source` returned in hits inside `inner_hits` is relative to the `_nested` metadata. So in the above example only the comment part is returned per nested hit and not the entire source of the top level document that contained the comment.
 
-### Nested inner hits and _source
+### Nested inner hits and \_source
 
-Nested document don’t have a ‘_source` field, because the entire source of document is stored with the root document under its `_source` field. To include the source of just the nested document, the source of the root document is parsed and just the relevant bit for the nested document is included as source in the inner hit. Doing this for each matching nested document has an impact on the time it takes to execute the entire search request, especially when `size` and the inner hits’ `size` are set higher than the default. To avoid the relatively expensive source extraction for nested inner hits, one can disable including the source and solely rely on stored fields.
+Nested document don’t have a ‘\_source` field, because the entire source of document is stored with the root document under its `_source` field. To include the source of just the nested document, the source of the root document is parsed and just the relevant bit for the nested document is included as source in the inner hit. Doing this for each matching nested document has an impact on the time it takes to execute the entire search request, especially when `size` and the inner hits’ `size` are set higher than the default. To avoid the relatively expensive source extraction for nested inner hits, one can disable including the source and solely rely on stored fields.
 
 Enabled stored field for fields under the nested object field in your mapping:
     

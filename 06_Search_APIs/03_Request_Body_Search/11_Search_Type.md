@@ -1,29 +1,31 @@
 ## 查询类型 Search Type
 
-There are different execution paths that can be done when executing a distributed search. The distributed search operation needs to be scattered to all the relevant shards and then all the results are gathered back. When doing scatter/gather type execution, there are several ways to do that, specifically with search engines.
+执行分布式搜索时可以执行不同的执行路径。分布式搜索操作需要分散到所有相关的碎片，然后收集所有的结果。在执行分散/聚集类型的操作时，有几种方法可以做到这一点，特别是在搜索引擎中。
 
-One of the questions when executing a distributed search is how much results to retrieve from each shard. For example, if we have 10 shards, the 1st shard might hold the most relevant results from 0 till 10, with other shards results ranking below it. For this reason, when executing a request, we will need to get results from 0 till 10 from all shards, sort them, and then return the results if we want to ensure correct results.
+执行分布式搜索时的一个问题是从每个分片中检索多少结果。例如，如果我们有10个碎片，第1个碎片可能会保持从0到10的最相关的结果，其他碎片结果排在其下面。因此，在执行请求时，我们需要从所有分片中得到0到10的结果，对它们进行排序，然后返回结果，以确保结果正确。
 
-Another question, which relates to the search engine, is the fact that each shard stands on its own. When a query is executed on a specific shard, it does not take into account term frequencies and other search engine information from the other shards. If we want to support accurate ranking, we would need to first gather the term frequencies from all shards to calculate global term frequencies, then execute the query on each shard using these global frequencies.
+另一个与搜索引擎相关的问题是每个碎片都是独立的。在特定分片上执行查询时，不会考虑其他分片中的词频和其他搜索引擎信息。如果我们要支持准确的排名，我们需要首先从所有分片收集术语频率以计算全局词频，然后使用这些全局频率在每个分片上执行查询。
 
-Also, because of the need to sort the results, getting back a large document set, or even scrolling it, while maintaining the correct sorting behavior can be a very expensive operation. For large result set scrolling, it is best to sort by `_doc` if the order in which documents are returned is not important.
+另外，由于需要对结果进行排序，在保持正确的排序行为的同时取回大文档集，甚至滚动它，可能是非常昂贵的操作。对于较大的结果集滚动，如果返回文档的顺序不重要，最好按`_doc`排序。
 
-Elasticsearch is very flexible and allows to control the type of search to execute on a **per search request** basis. The type can be configured by setting the **search_type** parameter in the query string. The types are:
+Elasticsearch非常灵活，可以控制**每个搜索请求**执行的搜索类型。可以通过在查询字符串中设置**search_type** 参数来配置类型。类型是：
 
-### Query Then Fetch
+### 查询然后获取 Query Then Fetch
 
-Parameter value: **query_then_fetch**.
+参数值: **query_then_fetch**.
 
-The request is processed in two phases. In the first phase, the query is forwarded to **all involved shards**. Each shard executes the search and generates a sorted list of results, local to that shard. Each shard returns **just enough information** to the coordinating node to allow it merge and re-sort the shard level results into a globally sorted set of results, of maximum length `size`.
+该请求分两个阶段处理。 在第一阶段，查询被转发到**所有涉及的分片**。 每个分片都执行搜索，并生成结果的排序列表，该分片在本地。 每个分片向协调节点返回**正好足够的信息**，以允许它合并，并将分片级结果重新排序为全局排序的结果集，最大长度为`size`。
 
-During the second phase, the coordinating node requests the document content (and highlighted snippets, if any) from **only the relevant shards**.
+在第二阶段，协调节点请求来自**的文档内容（以及突出显示的片段，如果有的话）只有相关的分片**。
+
+在第二阶段，协调节点请求来自的文档内容（以及突出显示的片段，如果有的话）来自**相关的分片**的查询结果。
 
 ![Note](/images/icons/note.png)
 
-This is the default setting, if you do not specify a `search_type` in your request.
+这是默认设置，如果你没有在你的请求中指定`search_type`。
 
-### Dfs, Query Then Fetch
+###Dfs，查询然后获取
 
-Parameter value: **dfs_query_then_fetch**.
+参数值 **dfs_query_then_fetch**.
 
-Same as "Query Then Fetch", except for an initial scatter phase which goes and computes the distributed term frequencies for more accurate scoring.
+与`查询然后获取`相同，除了最初的分散阶段，它计算分布式词条频率以获得更准确的评分。

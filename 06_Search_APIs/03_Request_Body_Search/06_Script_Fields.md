@@ -1,6 +1,6 @@
 ## 脚本字段 Script Fields
 
-Allows to return a [script evaluation](modules-scripting.html) (based on different fields) for each hit, for example:
+允许为每个匹配返回一个[脚本计算结果](modules-scripting.html)（基于不同的字段），例如：
     
     
     GET /_search
@@ -27,9 +27,10 @@ Allows to return a [script evaluation](modules-scripting.html) (based on differe
         }
     }
 
-Script fields can work on fields that are not stored (`my_field_name` in the above case), and allow to return custom values to be returned (the evaluated value of the script).
+脚本字段可以在未存储的字段上工作（在上面的例子中是`my_field_name`），并允许返回自定义值（脚本的计算结果）。
 
-Script fields can also access the actual `_source` document and extract specific elements to be returned from it by using `params['_source']`. Here is an example:
+
+脚本字段也可以通过使用`params ['_source']`来访问实际的`_source`文件并从中提取特定的元素。 这里是一个例子：
     
     
     GET /_search
@@ -44,6 +45,6 @@ Script fields can also access the actual `_source` document and extract specific
             }
         }
 
-Note the `_source` keyword here to navigate the json-like model.
+请注意`_source`关键字在这里代表类似json的模型。
 
-It’s important to understand the difference between `doc['my_field'].value` and `params['_source']['my_field']`. The first, using the doc keyword, will cause the terms for that field to be loaded to memory (cached), which will result in faster execution, but more memory consumption. Also, the `doc[...]` notation only allows for simple valued fields (can’t return a json object from it) and make sense only on non-analyzed or single term based fields. However, using `doc` is still the recommended way to access values from the document, if at all possible, because `_source` must be loaded and parsed every time it’s used. Using `_source` is very slow.
+理解`doc ['my_field'] .value`和`params ['_ source'] ['my_field']`之间的区别是很重要的。 首先，使用`doc`关键字，将导致该字段的条件被加载到内存（缓存），这将导致更多的内存消耗，但更快的执行。 此外，`doc`符号只允许简单值（不能从它返回一个json对象），只有在非分析或单一项的基本字段是有意义的。 然而，如果可能的话，使用`doc`仍然是从文档中访问值的推荐方式，因为每次使用`_source`时必须加载和解析。 使用`_source`非常慢。

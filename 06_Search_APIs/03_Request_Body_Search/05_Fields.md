@@ -2,10 +2,10 @@
 
 ![Warning](/images/icons/warning.png)
 
-The `stored_fields` parameter is about fields that are explicitly marked as stored in the mapping, which is off by default and generally not recommended. Use [source filtering](search-request-source-filtering.html) instead to select subsets of the original source document to be returned.
+`stored_fields`参数是关于显式标记为存储在映射中的字段，默认情况下是关闭的，通常不推荐。 使用[源过滤source filtering](search-request-source-filtering.html)来选择要返回的原始源文档的子集。
 
-Allows to selectively load specific stored fields for each document represented by a search hit.
-    
+允许选择性地为由搜索命中代表的每个文档加载特定的存储字段。
+
     
     GET /_search
     {
@@ -15,10 +15,9 @@ Allows to selectively load specific stored fields for each document represented 
         }
     }
 
-`*` can be used to load all stored fields from the document.
+通配符`*` 可以用来代表文档中所有存储的字段。
 
-An empty array will cause only the `_id` and `_type` for each hit to be returned, for example:
-    
+一个空的数组只会返回每个命中的`_id`和`_type`，例如：    
     
     GET /_search
     {
@@ -28,18 +27,18 @@ An empty array will cause only the `_id` and `_type` for each hit to be returned
         }
     }
 
-If the requested fields are not stored (`store` mapping set to `false`), they will be ignored.
+如果请求的字段没有被存储（`store`映射设置为`false`），它们将被忽略。
 
-Stored field values fetched from the document itself are always returned as an array. On the contrary, metadata fields like `_routing` and `_parent` fields are never returned as an array.
+从文档本身获取的存储字段值总是作为数组返回。 相反，像`_routing`和`_parent`这样的元数据字段永远不会以数组的形式返回。
 
-Also only leaf fields can be returned via the `field` option. So object fields can’t be returned and such requests will fail.
+也只有叶字段可以通过`field`选项返回。 所以对象字段不能被返回，这样的请求将失败。
 
-Script fields can also be automatically detected and used as fields, so things like `_source.obj1.field1` can be used, though not recommended, as `obj1.field1` will work as well.
+脚本字段也可以自动检测并用作字段，所以可以使用`_source.obj1.field1`，尽管不推荐，因为`obj1.field1`也可以。
 
-### Disable stored fields entirely
 
-To disable the stored fields (and metadata fields) entirely use: `_none_`:
-    
+### 完全禁用存储的字段 Disable stored fields entirely
+
+要完全禁用存储的字段（和元数据字段），请使用：`_none_`：    
     
     GET /_search
     {
@@ -51,4 +50,4 @@ To disable the stored fields (and metadata fields) entirely use: `_none_`:
 
 ![Note](/images/icons/note.png)
 
-[`_source`](search-request-source-filtering.html) and [`version`](search-request-version.html) parameters cannot be activated if `_none_` is used.
+如果使用`_none_`，则不能激活[`_source`](search-request-source-filtering.html)和[`version`](search-request-version.html) 参数。
