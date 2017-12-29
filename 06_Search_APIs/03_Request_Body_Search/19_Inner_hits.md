@@ -1,10 +1,10 @@
 ## 内部命中 Inner hits
 
-The [parent/child](mapping-parent-field.html) and [nested](nested.html) features allow the return of documents that have matches in a different scope. In the parent/child case, parent documents are returned based on matches in child documents or child documents are returned based on matches in parent documents. In the nested case, documents are returned based on matches in nested inner objects.
+[parent / child](mapping-parent-field.html)和[nested](nested.html) 特性允许返回具有不同范围匹配的文档。在父/子情况下，根据子文档中的匹配返回父文档，或者根据父文档中的匹配返回子文档。在嵌套的情况下，基于嵌套的内部对象中的匹配返回文档。
 
-In both cases, the actual matches in the different scopes that caused a document to be returned is hidden. In many cases, it’s very useful to know which inner nested objects (in the case of nested) or children/parent documents (in the case of parent/child) caused certain information to be returned. The inner hits feature can be used for this. This feature returns per search hit in the search response additional nested hits that caused a search hit to match in a different scope.
+在这两种情况下，隐藏导致文档被返回的不同作用域中的实际匹配。在很多情况下，知道哪些内部嵌套对象（在嵌套的情况下）或子/父文档（在父/子的情况下）导致某些信息被返回是非常有用的。内部命中功能可以用于此。此功能会返回搜索响应中的每个搜索命中，导致搜索命中匹配的其他嵌套命中。
 
-Inner hits can be used by defining an `inner_hits` definition on a `nested`, `has_child` or `has_parent` query and filter. The structure looks like this:
+可以通过在嵌套，`has_child`或`has_parent`查询和过滤器上定义`inner_hits`定义来使用内部命中。结构如下所示：
     
     
     "<query>" : {
@@ -13,7 +13,7 @@ Inner hits can be used by defining an `inner_hits` definition on a `nested`, `ha
         }
     }
 
-If `inner_hits` is defined on a query that supports it then each search hit will contain an `inner_hits` json object with the following structure:
+如果在支持它的查询上定义了“inner_hits”，那么每个搜索命中文档都将包含一个具有以下结构的“inner_hits”json对象：
     
     
     "hits": [
@@ -41,17 +41,16 @@ If `inner_hits` is defined on a query that supports it then each search hit will
          ...
     ]
 
-### Options
+### 选项 Options
 
-Inner hits support the following options:
-
-`from`| The offset from where the first hit to fetch for each `inner_hits` in the returned regular search hits.     
+内部匹配支持以下选项：
+`from`| 在返回的常规搜索中，每次搜索“inner_hits”的第一个匹配点的偏移量。    
 ---|---    
-`size`| The maximum number of hits to return per `inner_hits`. By default the top three matching hits are returned.     
-`sort`| How the inner hits should be sorted per `inner_hits`. By default the hits are sorted by the score.     
-`name`| The name to be used for the particular inner hit definition in the response. Useful when multiple inner hits have been defined in a single search request. The default depends in which query the inner hit is defined. For `has_child` query and filter this is the child type, `has_parent` query and filter this is the parent type and the nested query and filter this is the nested path.   
+`size`| 每个`inner_hits`返回的最大点击数。 默认情况下返回前三个匹配的匹配。     
+`sort`| 内部点击应该如何按照`inner_hits`排序。 默认情况下，按照分数排序。     
+`name`| 在响应中用于特定内部命中定义的名称。 在单个搜索请求中定义了多个内部匹配时很有用。 默认取决于在哪个查询中定义了内部命中。 对于`has_child`查询和过滤，这是子类型，`has_parent`查询和过滤这是父类型和嵌套查询和过滤这是嵌套的路径。  
   
-Inner hits also supports the following per document features:
+内部命中还支持以下每个文档功能：
 
   * [Highlighting](search-request-highlighting.html)
   * [Explain](search-request-explain.html)
@@ -64,9 +63,9 @@ Inner hits also supports the following per document features:
 
 ### Nested inner hits
 
-The nested `inner_hits` can be used to include nested inner objects as inner hits to a search hit.
+可以使用嵌套的`inner_hits`将嵌套的内部对象作为搜索命中的内部命中。
 
-The example below assumes that there is a nested object field defined with the name `comments`:
+下面的例子假定有一个名为`comments`的嵌套对象字段：
     
     
     {
@@ -81,11 +80,10 @@ The example below assumes that there is a nested object field defined with the n
         }
     }
 
-<1>| The inner hit definition in the nested query. No other options need to be defined.     
+<1>| 嵌套查询中的内部命中定义。 没有其他选项需要定义。    
 ---|---  
   
-An example of a response snippet that could be generated from the above search request:
-    
+可以从上述搜索请求生成的响应代码片段的示例：    
     
     ...
     "hits": {
@@ -116,20 +114,20 @@ An example of a response snippet that could be generated from the above search r
          },
          ...
 
-<1>| The name used in the inner hit definition in the search request. A custom key can be used via the `name` option.    
+<1>| 搜索请求中内部命中定义中使用的名称。 自定义键可以通过`name`选项使用。   
 ---|---  
   
-The `_nested` metadata is crucial in the above example, because it defines from what inner nested object this inner hit came from. The `field` defines the object array field the nested hit is from and the `offset` relative to its location in the `_source`. Due to sorting and scoring the actual location of the hit objects in the `inner_hits` is usually different than the location a nested inner object was defined.
+在上面的例子中`_nested`元数据是至关重要的，因为它定义了内部命中来自哪个内部嵌套对象。 `field`定义嵌套命中的对象数组字段和`_source`中相对于其位置的`offset`。 由于排序和计分，`inner_hits`中的命中对象的实际位置通常与定义嵌套内部对象的位置不同。
 
-By default the `_source` is returned also for the hit objects in `inner_hits`, but this can be changed. Either via `_source` filtering feature part of the source can be returned or be disabled. If stored fields are defined on the nested level these can also be returned via the `fields` feature.
+默认情况下`_source`也返回给`inner_hits`中的命中对象，但是这个可以改变。 无论是通过`_source`过滤功能的一部分源可以返回或禁用。 如果存储的字段是在嵌套级别上定义的，则也可以通过“fields”功能返回。
 
-An important default is that the `_source` returned in hits inside `inner_hits` is relative to the `_nested` metadata. So in the above example only the comment part is returned per nested hit and not the entire source of the top level document that contained the comment.
+一个重要的默认值是`inner_hits`内返回的_source相对于`_nested`元数据。 所以在上面的例子中，只有注释部分是每个嵌套命中返回的，而不是包含注释的顶层文档的整个源。
 
-### Nested inner hits and \_source
+### 嵌套内部命中和`_source`
 
-Nested document don’t have a ‘\_source` field, because the entire source of document is stored with the root document under its `_source` field. To include the source of just the nested document, the source of the root document is parsed and just the relevant bit for the nested document is included as source in the inner hit. Doing this for each matching nested document has an impact on the time it takes to execute the entire search request, especially when `size` and the inner hits’ `size` are set higher than the default. To avoid the relatively expensive source extraction for nested inner hits, one can disable including the source and solely rely on stored fields.
+嵌套的文档没有`_source`字段，因为整个文档的源文件与其根目录下的`_source`字段一起存储。 要包含嵌套文档的源代码，将解析根文档的源代码，并将嵌套文档的相关位作为源包含在内部命中中。 对每个匹配的嵌套文档执行此操作会影响执行整个搜索请求所花费的时间，特别是当“size”和内部匹配“size”设置为高于默认值时。 为了避免嵌套内部命中的相对昂贵的源提取，可以禁止包括源并且完全依靠存储的字段。
 
-Enabled stored field for fields under the nested object field in your mapping:
+为您的映射中的嵌套对象字段下的字段启用存储字段：
     
     
     {
@@ -146,8 +144,7 @@ Enabled stored field for fields under the nested object field in your mapping:
         }
     }
 
-Disable including source and include specific stored fields in the inner hits definition:
-    
+禁用包含源并在内部匹配定义中包含特定的存储字段：    
     
     {
         "query" : {
@@ -164,9 +161,9 @@ Disable including source and include specific stored fields in the inner hits de
         }
     }
 
-### Hierarchical levels of nested object fields and inner hits.
+### 嵌套对象字段和内部命中的层次级别。 Hierarchical levels of nested object fields and inner hits.
 
-If a mapping has multiple levels of hierarchical nested object fields each level can be accessed via dot notated path. For example if there is a `comments` nested field that contains a `votes` nested field and votes should directly be returned with the root hits then the following path can be defined:
+如果一个映射有多层次的层次嵌套对象字段，则每个层次都可以通过点记号路径访问。 例如，如果有一个包含`votes`嵌套字段的`comments`嵌套字段，则应该直接使用根命中返回投票，则可以定义以下路径：
     
     
     {
@@ -179,13 +176,13 @@ If a mapping has multiple levels of hierarchical nested object fields each level
         }
     }
 
-This indirect referencing is only supported for nested inner hits.
+这个间接引用仅支持嵌套内部匹配。
 
 ### Parent/child inner hits
 
-The parent/child `inner_hits` can be used to include parent or child
+父/子`inner_hits`可以用来包含父或子
 
-The examples below assumes that there is a `_parent` field mapping in the `comment` type:
+下面的例子假设在`comment`类型中有一个`_parent`字段映射：
     
     
     {
@@ -200,11 +197,10 @@ The examples below assumes that there is a `_parent` field mapping in the `comme
         }
     }
 
-<1>| The inner hit definition like in the nested example.     
+<1>| 内部命中定义就像在嵌套的例子中一样。     
 ---|---  
   
-An example of a response snippet that could be generated from the above search request:
-    
+可以从上述搜索请求生成的响应代码片段的示例：    
     
     ...
     "hits": {

@@ -1,9 +1,8 @@
 ## 搜索之后 Search After
 
-Pagination of results can be done by using the `from` and `size` but the cost becomes prohibitive when the deep pagination is reached. The `index.max_result_window` which defaults to 10,000 is a safeguard, search requests take heap memory and time proportional to `from + size`. The [Scroll](search-request-scroll.html) api is recommended for efficient deep scrolling but scroll contexts are costly and it is not recommended to use it for real time user requests. The `search_after` parameter circumvents this problem by providing a live cursor. The idea is to use the results from the previous page to help the retrieval of the next page.
+结果的分页可以通过使用`from`和`size`来完成，但是当达到深度分页时，成本变得过高。 默认为10000的`index.max_result_window`是一个安全措施，搜索请求占用堆内存，时间与`from + size`成比例。 建议使用[Scroll](search-request-scroll.html)api进行高效的深度滚动，但是滚动上下文代价高昂，建议不要将其用于实时用户请求。 `search_after`参数通过提供一个实时光标来解决这个问题。 这个想法是使用前一页的结果来帮助检索下一页。
 
-Suppose that the query to retrieve the first page looks like this:
-    
+假设检索第一页的查询如下所示：
     
     GET twitter/tweet/_search
     {
@@ -21,9 +20,9 @@ Suppose that the query to retrieve the first page looks like this:
 
 ![Note](/images/icons/note.png)
 
-A field with one unique value per document should be used as the tiebreaker of the sort specification. Otherwise the sort order for documents that have the same sort values would be undefined. The recommended way is to use the field `_uid` which is certain to contain one unique value for each document.
+应该使用每个文档具有一个唯一值的字段作为排序规范的仲裁者。 否则，具有相同排序值的文档的排序顺序将是未定义的。 推荐的方法是使用`_uid`字段，这个字段肯定包含每个文档的一个唯一值。
 
-The result from the above request includes an array of `sort values` for each document. These `sort values` can be used in conjunction with the `search_after` parameter to start returning results "after" any document in the result list. For instance we can use the `sort values` of the last document and pass it to `search_after` to retrieve the next page of results:
+上述请求的结果包含每个文档的`sort values`数组。 这些`sort values`可以与`search_after`参数一起使用，以便在结果列表中的任何文档之后开始返回结果。 例如，我们可以使用最后一个文档的`sort values`，并将其传递给`search_after`来检索结果的下一页：
     
     
     GET twitter/tweet/_search
@@ -34,7 +33,7 @@ The result from the above request includes an array of `sort values` for each do
                 "title" : "elasticsearch"
             }
         },
-        "search_after": [1463538857, "tweet<6>54323"],
+        "search_after": [1463538857, "tweet#654323"],
         "sort": [
             {"date": "asc"},
             {"_uid": "desc"}
@@ -43,6 +42,6 @@ The result from the above request includes an array of `sort values` for each do
 
 ![Note](/images/icons/note.png)
 
-The parameter `from` must be set to 0 (or -1) when `search_after` is used.
+当使用`search_after`时，参数`from`必须设置为0（或-1）。
 
-`search_after` is not a solution to jump freely to a random page but rather to scroll many queries in parallel. It is very similar to the `scroll` API but unlike it, the `search_after` parameter is stateless, it is always resolved against the latest version of the searcher. For this reason the sort order may change during a walk depending on the updates and deletes of your index.
+`search_after`不是自由跳转到随机页面的解决方案，而是并行滚动许多查询。 它和`scroll` API非常相似，不同之处在于`search_after`参数是无状态的，它总是与最新版本的搜索器进行解析。 出于这个原因，排序顺序可能会在步行过程中发生变化，具体取决于索引的更新和删除。

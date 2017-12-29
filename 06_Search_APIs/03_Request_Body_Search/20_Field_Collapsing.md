@@ -1,5 +1,7 @@
 ## 字段折叠 Field Collapsing
 
+允许根据字段值折叠搜索结果。 折叠是通过每个折叠键只选择顶部排序的文件来完成的。 例如下面的查询为每个用户检索最好的推文，并按喜欢的数量排序。
+
 Allows to collapse search results based on field values. The collapsing is done by selecting only the top sorted document per collapse key. For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
     
     
@@ -17,25 +19,25 @@ Allows to collapse search results based on field values. The collapsing is done 
         "from": 10 <3>
     }
 
-<1>| collapse the result set using the "user" field     
+<1>| 折叠`user`字段     
 ---|---    
-<2>| sort the top docs by number of likes     
-<3>| define the offset of the first collapsed result   
+<2>| 根据`like`进行排序     
+<3>| 定义第一个折叠结果的偏移量   
   
 ![Warning](/images/icons/warning.png)
 
-The total number of hits in the response indicates the number of matching documents without collapsing. The total number of distinct group is unknown.
+响应中的命中总数表示没有折叠的匹配文档的数量。 不同组的总数是未知的。
 
-The field used for collapsing must be a single valued [`keyword`](keyword.html) or [`numeric`](number.html) field with [`doc_values`](doc-values.html) activated
+用于折叠的字段必须是激活[`doc_values`](doc-values.html)的单值[`keyword`](keyword.html)或[`numeric`](number.html)
+
 
 ![Note](/images/icons/note.png)
 
-The collapsing is applied to the top hits only and does not affect aggregations.
+折叠仅适用于顶部点击，不影响聚合。
 
-### Expand collapse results
+### 展开折叠结果 Expand collapse results
 
-It is also possible to expand each collapsed top hits with the `inner_hits` option.
-    
+也可以用`inner_hits`选项扩展每个折叠的顶部命中。    
     
     GET /twitter/tweet/_search
     {
@@ -56,17 +58,17 @@ It is also possible to expand each collapsed top hits with the `inner_hits` opti
         "sort": ["likes"]
     }
 
-<1>| collapse the result set using the "user" field     
+<1>| 使用`user`字段折叠结果集  
 ---|---    
-<2>| the name used for the inner hit div in the response     
-<3>| the number of inner_hits to retrieve per collapse key     
-<4>| how to sort the document inside each group     
-<5>| the number of concurrent requests allowed to retrieve the inner_hits` per group   
-  
-See [inner hits](search-request-inner-hits.html) for the complete list of supported options and the format of the response.
+<2>| 在响应中用于内部命中部分的名称     
+<3>| 每个折叠键检索的inner_hits的数量     
+<4>| 如何对每个组内的文档进行排序     
+<5>| 允许每个组检索inner_hits的并发请求的数量   
 
-The expansion of the group is done by sending an additional query for each collapsed hit returned in the response. The `max_concurrent_group_searches` request parameter can be used to control the maximum number of concurrent searches allowed in this phase. The default is based on the number of data nodes and the default search thread pool size.
+请参阅[内部匹配 inner hits](search-request-inner-hits.html)以获取支持选项的完整列表以及响应的格式。
+
+通过为响应中返回的每个折叠命中发送额外的查询来完成组的扩展。 `max_concurrent_group_searches`请求参数可用于控制此阶段允许的最大并发搜索数。 默认值是基于数据节点的数量和默认的搜索线程池大小。
 
 ![Warning](/images/icons/warning.png)
 
-`collapse` cannot be used in conjunction with [scroll](search-request-scroll.html), [rescore](search-request-rescore.html) or [search after](search-request-search-after.html).
+`collapse`不能与[scroll](search-request-scroll.html)，[rescore](search-request-rescore.html)或[search after](search-request-search-after.html)结合使用。。
