@@ -2,8 +2,6 @@
 
 允许在跨越多个索引进行搜索时为每个索引配置不同的提升级别。当来自一个索引的命中超过来自另一索引的命中时（这认为每个用户具有索引的社交图），这是非常方便的。
 
-Allows to configure different boost level per index when searching across more than one indices. This is very handy when hits coming from one index matter more than hits coming from another index (think social graph where each user has an index).
-
 ![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.2.0. 

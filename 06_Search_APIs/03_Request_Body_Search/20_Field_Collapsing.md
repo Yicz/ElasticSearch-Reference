@@ -2,7 +2,6 @@
 
 允许根据字段值折叠搜索结果。 折叠是通过每个折叠键只选择顶部排序的文件来完成的。 例如下面的查询为每个用户检索最好的推文，并按喜欢的数量排序。
 
-Allows to collapse search results based on field values. The collapsing is done by selecting only the top sorted document per collapse key. For instance the query below retrieves the best tweet for each user and sorts them by number of likes.
     
     
     GET /twitter/tweet/_search

@@ -1,27 +1,25 @@
 ## 重评分
 
-Rescoring can help to improve precision by reordering just the top (eg 100 - 500) documents returned by the [`query`](search-request-query.html) and [`post_filter`](search-request-post-filter.html) phases, using a secondary (usually more costly) algorithm, instead of applying the costly algorithm to all documents in the index.
+通过对[`query`](search-request-query.html)和[`post_filter`](search-request-post-filter.html)返回的顶部（例如100-500）文档进行重新排序，重新分类可以帮助提高精度。html）阶段，使用次要的（通常更昂贵的）算法，而不是将昂贵的算法应用于索引中的所有文档。
 
-A `rescore` request is executed on each shard before it returns its results to be sorted by the node handling the overall search request.
+在每个分片上执行一个`rescore`请求，然后返回结果，由处理整个搜索请求的节点排序。
 
-Currently the rescore API has only one implementation: the query rescorer, which uses a query to tweak the scoring. In the future, alternative rescorers may be made available, for example, a pair-wise rescorer.
+目前rescore API只有一个实现：查询rescorer，它使用查询来调整评分。 在将来，可以提供替代的rescorers，例如`pair-wise rescorer`
 
-![Note](/images/icons/note.png)
-
-the `rescore` phase is not executed when [`sort`](search-request-sort.html) is used.
 
 ![Note](/images/icons/note.png)
 
-when exposing pagination to your users, you should not change `window_size` as you step through each page (by passing different `from` values) since that can alter the top hits causing results to confusingly shift as the user steps through pages.
+当使用[`sort`](search-request-sort.html)时`rescore`阶段不执行。
+
+![Note](/images/icons/note.png)
+
+当向用户公开分页时，当您逐页浏览每个页面（通过传递不同的`from`值）时，不应该更改`window_size`，因为这可能会改变顶部的点击，从而导致在用户遍历页面时导致结果易混淆。
 
 ### Query rescorer
 
-The query rescorer executes a second query only on the Top-K results returned by the [`query`](search-request-query.html) and [`post_filter`](search-request-post-filter.html) phases. The number of docs which will be examined on each shard can be controlled by the `window_size` parameter, which defaults to [`from` and `size`](search-request-from-size.html).
+查询rescorer只对[`query`](search-request-query.html) 和[`post_filter`](search-request-post-filter.html)阶段返回的Top-K结果执行第二个查询。 将在每个分片上检查的文档的数量可以通过`window_size`参数来控制，该参数默认为[`from`和`size`](search-request-from-size.html).
 
-By default the scores from the original query and the rescore query are combined linearly to produce the final `_score` for each document. The relative importance of the original query and of the rescore query can be controlled with the `query_weight` and `rescore_query_weight` respectively. Both default to `1`.
-
-For example:
-    
+默认情况下，原始查询和重新评分查询的分数线性组合，为每个文档生成最终的`_score`。 原始查询和重新评分查询的相对重要性可以分别用`query_weight`和`rescore_query_weight`来控制。 两者都默认为`1`。
     
     POST /_search
     {
@@ -50,20 +48,19 @@ For example:
        }
     }
 
-The way the scores are combined can be controlled with the `score_mode`:
+分数的组合方式可以通过`score_mode`控制：
 
-Score Mode | Description  
+分数模式| 描述
 ---|---  
-`total`| Add the original score and the rescore query score. The default.    
-`multiply`| Multiply the original score by the rescore query score. Useful for [`function query`](query-dsl-function-score-query.html) rescores.    
-`avg`| Average the original score and the rescore query score.    
-`max`| Take the max of original score and the rescore query score.    
-`min`| Take the min of the original score and the rescore query score.  
+`total`| 添加原始分数和重新查询分数。 默认。    
+`multiply`| 将原始分数乘以rescore查询分数。 用于[`函数查询`](query-dsl-function-score-query.html)重新定义。    
+`avg`| 平均原始分数和重新查询分数。
+`max`| 取原始分数和重新查询分数的最大值。    
+`min`| 取原始分数和重新查询分数的最小值。
   
 ### Multiple Rescores
 
-It is also possible to execute multiple rescores in sequence:
-    
+也可以按顺序执行多个重新评分：    
     
     POST /_search
     {
@@ -106,4 +103,4 @@ It is also possible to execute multiple rescores in sequence:
        } ]
     }
 
-The first one gets the results of the query then the second one gets the results of the first, etc. The second rescore will "see" the sorting done by the first rescore so it is possible to use a large window on the first rescore to pull documents into a smaller window for the second rescore.
+第一个获取查询的结果，第二个获得第一个的结果等等。第二个rescore将“看到”第一个rescore完成的排序，因此可以在第一个rescore上使用一个大窗口 将文档拉到更小的窗口进行第二次重新打印。

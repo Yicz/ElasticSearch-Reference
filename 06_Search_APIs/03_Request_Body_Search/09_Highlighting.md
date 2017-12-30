@@ -1,7 +1,6 @@
 ## 高亮 Highlighting
 
-Allows to highlight search results on one or more fields. The implementation uses either the lucene `plain` highlighter, the fast vector highlighter (`fvh`) or `postings` highlighter. The following is an example of the search request body:
-    
+允许高亮显示一个或多个字段的搜索结果。 这个实现使用了lucene的普通高亮器，快速向量高亮器（`fvh`）或者`postings`高亮器。 以下是搜索请求主体的示例：
     
     GET /_search
     {
@@ -15,37 +14,33 @@ Allows to highlight search results on one or more fields. The implementation use
         }
     }
 
-In the above case, the `content` field will be highlighted for each search hit (there will be another element in each search hit, called `highlight`, which includes the highlighted fields and the highlighted fragments).
+在上面的例子中，对于每个搜索命文档中，`content`字段将被高亮显示（每个搜索命中文档将有另一个元素，称为`高亮`，其中包括高亮显示的字段和高亮显示的片段）。
 
 ![Note](/images/icons/note.png)
 
-In order to perform highlighting, the actual content of the field is required. If the field in question is stored (has `store` set to `true` in the mapping) it will be used, otherwise, the actual `_source` will be loaded and the relevant field will be extracted from it.
+为了执行高亮显示，该字段的实际内容是必需的。 如果有问题的字段被存储（在映射中`store`设置为`true`），将被使用，否则，实际的`_source`将被加载，相关字段将被提取。
 
-The `_all` field cannot be extracted from `_source`, so it can only be used for highlighting if it mapped to have `store` set to `true`.
+`_all`字段不能从`_source`中提取，所以只能用来高亮显示它是否被映射为`store`设置为`true`。
 
-The field name supports wildcard notation. For example, using `comment_*` will cause all [text](text.html) and [keyword](keyword.html) fields (and [string](string.html) from versions before 5.0) that match the expression to be highlighted. Note that all other fields will not be highlighted. If you use a custom mapper and want to highlight on a field anyway, you have to provide the field name explicitly.
 
-### Plain highlighter
+该字段名称支持通配符表示法。 例如，使用`comment_*`将导致匹配表达式的所有[text](text.html)和[keyword](keyword.html)字段（和[string](string.html)高亮显示。 请注意，所有其他字段将不会高亮显示。 如果使用自定义映射器，并且想要在字段上高亮显示，则必须明确提供字段名称。
 
-The default choice of highlighter is of type `plain` and uses the Lucene highlighter. It tries hard to reflect the query matching logic in terms of understanding word importance and any word positioning criteria in phrase queries.
-
+### 普通高亮器 Plain highlighter高亮器的默认选择是“普通"类型，并使用Lucene高亮器。 在词组查询中，从理解单词重要性和词义定位的角度出发，努力体现查询匹配逻辑。
 ![Warning](/images/icons/warning.png)
 
-If you want to highlight a lot of fields in a lot of documents with complex queries this highlighter will not be fast. In its efforts to accurately reflect query logic it creates a tiny in-memory index and re-runs the original query criteria through Lucene’s query execution planner to get access to low-level match information on the current document. This is repeated for every field and every document that needs highlighting. If this presents a performance issue in your system consider using an alternative highlighter.
+如果你想在许多复杂查询的文档中高亮显示很多字段，这个高亮器不会很快。为了准确地反映查询逻辑，它创建了一个微小的内存中索引，并通过Lucene的查询执行计划器重新运行原始查询条件，以访问当前文档上的低级匹配信息。每个字段和每个需要高亮显示的文档都会重复此操作。如果在系统中出现性能问题，请考虑使用替换高亮器。
+
 
 ### Postings highlighter
 
-If `index_options` is set to `offsets` in the mapping the postings highlighter will be used instead of the plain highlighter. The postings highlighter:
+如果在映射中将`index_options`设置为偏移量`offsets`，则将使用`postings`高亮显示而不是`plain`的高亮显示。 `postings`高亮器：
 
-  * Is faster since it doesn’t require to reanalyze the text to be highlighted: the larger the documents the better the performance gain should be 
-  * Requires less disk space than term_vectors, needed for the fast vector highlighter 
-  * Breaks the text into sentences and highlights them. Plays really well with natural languages, not as well with fields containing for instance html markup 
-  * Treats the document as the whole corpus, and scores individual sentences as if they were documents in this corpus, using the BM25 algorithm 
+* 更快，因为它不需要重新分析要高亮显示的文本：文档越大性能增益越好
+* 需要比`term_vectors`更少的磁盘空间，这是快速向量高亮器所需要的
+* 将文本分解为句子并高亮显示。 和自然语言一起处理真的很好，而不是像包含html标记的字段
+* 将文档视为整个语料库，并使用`BM25`算法对单个语句进行评分，就好像它们是该语料库中的文档一样
 
-
-
-Here is an example of setting the `content` field in the index mapping to allow for highlighting using the postings highlighter on it:
-    
+以下是在索引映射中设置`content`字段的示例，以允许使用其上的高亮标记进行高亮显示：    
     
     PUT /example
     {
@@ -63,26 +58,25 @@ Here is an example of setting the `content` field in the index mapping to allow 
 
 ![Note](/images/icons/note.png)
 
-Note that the postings highlighter is meant to perform simple query terms highlighting, regardless of their positions. That means that when used for instance in combination with a phrase query, it will highlight all the terms that the query is composed of, regardless of whether they are actually part of a query match, effectively ignoring their positions.
+请注意，`postings`高亮器旨在执行简单的查询条件高亮显示，无论其位置。这意味着，当与例如短语查询结合使用时，它将高亮显示查询所组成的所有项，而不管它们是否实际上是查询匹配的一部分，从而有效地忽略它们的位置。
 
 ![Warning](/images/icons/warning.png)
 
-The postings highlighter doesn’t support highlighting some complex queries, like a `match` query with `type` set to `match_phrase_prefix`. No highlighted snippets will be returned in that case.
+`postings`高亮显示不支持高亮显示一些复杂的查询，比如`type`设置为`match_phrase_prefix`的`match`查询。 在这种情况下，将不会返回高亮显示的片段。
 
-### Fast vector highlighter
+### 快速向量高亮 Fast vector highlighter
 
-If `term_vector` information is provided by setting `term_vector` to `with_positions_offsets` in the mapping then the fast vector highlighter will be used instead of the plain highlighter. The fast vector highlighter:
+如果通过在映射中将`term_vector`设置为`with_positions_offsets`来提供`term_vector`信息，则将使用快速向量高亮器而不是普通(`plain`)高亮器。 快速向量高亮器：
 
-  * Is faster especially for large fields (> `1MB`) 
-  * Can be customized with `boundary_scanner` (see [below](search-request-highlighting.html#boundary-scanners)) 
-  * Requires setting `term_vector` to `with_positions_offsets` which increases the size of the index 
-  * Can combine matches from multiple fields into one result. See `matched_fields`
-  * Can assign different weights to matches at different positions allowing for things like phrase matches being sorted above term matches when highlighting a Boosting Query that boosts phrase matches over term matches 
+   * 特别是对于大字段更快（> 1MB）
+   * 可以使用`boundary_scanner`进行定制（参见[below](search-request-highlighting.html#boundary-scanners)）
+   * 需要将`term_vector`设置为'with_positions_offsets`，这会增加索引的大小
+   * 可以将来自多个字段的匹配合并成一个结果。 参见`matched_fields`
+   * 可以分配不同的权重匹配不同的位置，允许像词组匹配高于词条匹配时，高亮显示一个Boosting查询，提高词条匹配相对词条匹配
 
 
 
-Here is an example of setting the `content` field to allow for highlighting using the fast vector highlighter on it (this will cause the index to be bigger):
-    
+下面是一个设置'content'字段的例子，它允许使用快速向量高亮显示来高亮显示（这会导致索引变大）：
     
     PUT /example
     {
@@ -119,8 +113,8 @@ The `unified` highlighter can extract offsets from either postings, term vectors
 
 ### Force highlighter type
 
-The `type` field allows to force a specific highlighter type. This is useful for instance when needing to use the plain highlighter on a field that has `term_vectors` enabled. The allowed values are: `plain`, `postings` and `fvh`. The following is an example that forces the use of the plain highlighter:
-    
+
+`type`字段允许强制使用特定的高亮器类型。 这对于需要在启用了`term_vectors`的字段上使用普通高亮器时非常有用。 允许的值是：`plain`，`postings`和`fvh`。 以下是强制使用普通高亮器的例子：
     
     GET /_search
     {
@@ -136,7 +130,7 @@ The `type` field allows to force a specific highlighter type. This is useful for
 
 ### Force highlighting on source
 
-Forces the highlighting to highlight fields based on the source even if fields are stored separately. Defaults to `false`.
+即使字段单独存储，也会强制高亮显示基于`source`的字段。 默认为`false`。
     
     
     GET /_search
@@ -153,7 +147,7 @@ Forces the highlighting to highlight fields based on the source even if fields a
 
 ### Highlighting Tags
 
-By default, the highlighting will wrap highlighted text in `<em>` and `</em>`. This can be controlled by setting `pre_tags` and `post_tags`, for example:
+默认情况下，高亮显示将在`<em>`和`</ em>`中包装高亮显示的文本。 这可以通过设置`pre_tags`和`post_tags`来控制，例如：
     
     
     GET /_search
@@ -170,7 +164,7 @@ By default, the highlighting will wrap highlighted text in `<em>` and `</em>`. T
         }
     }
 
-Using the fast vector highlighter there can be more tags, and the "importance" is ordered.
+使用快速向量高亮器可以有更多的标签，并且重要是有序的。
     
     
     GET /_search
@@ -187,7 +181,7 @@ Using the fast vector highlighter there can be more tags, and the "importance" i
         }
     }
 
-There are also built in "tag" schemas, with currently a single schema called `styled` with the following `pre_tags`:
+还有一些内置的`标签 tags`模式，目前有一个叫`样式 styled`的模式，带有以下`pre_tags`：
     
     
     <em class="hlt1">, <em class="hlt2">, <em class="hlt3">,
@@ -195,7 +189,7 @@ There are also built in "tag" schemas, with currently a single schema called `st
     <em class="hlt7">, <em class="hlt8">, <em class="hlt9">,
     <em class="hlt10">
 
-and `</em>` as `post_tags`. If you think of more nice to have built in tag schemas, just send an email to the mailing list or open an issue. Here is an example of switching tag schemas:
+和`</ em>`作为`post_tags`。 如果您认为使用标签架构更好，只需将电子邮件发送到邮件列表或打开一个issue。 这是一个切换标签模式的例子：
     
     
     GET /_search
@@ -211,13 +205,13 @@ and `</em>` as `post_tags`. If you think of more nice to have built in tag schem
         }
     }
 
-### Encoder
+### 编码器 Encoder
 
-An `encoder` parameter can be used to define how highlighted text will be encoded. It can be either `default` (no encoding) or `html` (will escape html, if you use html highlighting tags).
+`encoder`参数可以用来定义高亮显示的文本将被编码的方式。 它可以是`default`（无编码）或`html`（如果使用html高亮标签，将会转义html）。
 
 ### Highlighted Fragments
 
-Each field highlighted can control the size of the highlighted fragment in characters (defaults to `100`), and the maximum number of fragments to return (defaults to `5`). For example:
+高亮显示的每个字段都可以控制高亮显示的片段大小（以字符为单位）（默认值为“100"），并返回片段的最大数量（默认为“5"）。 例如：
     
     
     GET /_search
@@ -232,9 +226,9 @@ Each field highlighted can control the size of the highlighted fragment in chara
         }
     }
 
-The `fragment_size` is ignored when using the postings highlighter, as it outputs sentences regardless of their length.
+使用过`postings`高亮显示时，`fragment_size`被忽略，因为它会输出句子，而不管它们的长度。
 
-On top of this it is possible to specify that highlighted fragments need to be sorted by score:
+除此之外，还可以指定高亮显示的片段需要按分数排序：
     
     
     GET /_search
@@ -250,8 +244,7 @@ On top of this it is possible to specify that highlighted fragments need to be s
         }
     }
 
-If the `number_of_fragments` value is set to `0` then no fragments are produced, instead the whole content of the field is returned, and of course it is highlighted. This can be very handy if short texts (like document title or address) need to be highlighted but no fragmentation is required. Note that `fragment_size` is ignored in this case.
-    
+如果`number_of_fragments`值被设置为'0'，则不产生片段，而是返回该字段的全部内容，当然它被高亮显示。如果短文本（如文档标题或地址）需要高亮显示，但不需要分片，这可以非常方便。 请注意，在这种情况下，`fragment_size`被忽略。
     
     GET /_search
     {
@@ -266,9 +259,10 @@ If the `number_of_fragments` value is set to `0` then no fragments are produced,
         }
     }
 
-When using `fvh` one can use `fragment_offset` parameter to control the margin to start highlighting from.
+当使用`fvh`时，可以使用`fragment_offset`参数来控制边距从高亮开始。
 
-In the case where there is no matching fragment to highlight, the default is to not return anything. Instead, we can return a snippet of text from the beginning of the field by setting `no_match_size` (default `0`) to the length of the text that you want returned. The actual length may be shorter or longer than specified as it tries to break on a word boundary. When using the postings highlighter it is not possible to control the actual size of the snippet, therefore the first sentence gets returned whenever `no_match_size` is greater than `0`.
+在没有匹配的片段高亮的情况下，默认是不返回任何东西。 相反，我们可以通过将`no_match_size`（默认为`0`）设置为您希望返回的文本的长度来从字段开头返回一段文本。 实际的长度可能比指定的更短或更长，因为它试图打破一个字边界。 当使用张贴高亮显示器时，无法控制片段的实际大小，因此，只要`no_match_size`大于'0'，就会返回第一个句子。
+
     
     
     GET /_search
@@ -289,22 +283,11 @@ In the case where there is no matching fragment to highlight, the default is to 
 
 ### Fragmenter
 
-Fragmenter can control how text should be broken up in highlight snippets. However, this option is applicable only for the Plain Highlighter. There are two options:
+段处理器可以控制如何在高亮片段中分解文本。 但是，此选项仅适用于普通高亮器。 有两个选项：
 
-`simple`
-
-| 
-
-Breaks up text into same sized fragments.   
-  
----|---  
-  
-`span`
-
-| 
-
-Same as the simple fragmenter, but tries not to break up text between highlighted terms (this is applicable when using phrase like queries). This is the default.   
-      
+`simple`| 将文本分解成相同大小的片段。     
+---|---    
+`span`| 和简单的段处理器一样，但是尽量不要在高亮显示的词语之间分解文本（这适用于使用类似查询的短语时）。 这是默认。
     
     GET twitter/tweet/_search
     {
@@ -322,7 +305,7 @@ Same as the simple fragmenter, but tries not to break up text between highlighte
         }
     }
 
-Response:
+响应:
     
     
     {
@@ -370,7 +353,7 @@ Response:
         }
     }
 
-Response:
+响应:
     
     
     {
@@ -400,12 +383,11 @@ Response:
         }
     }
 
-If the `number_of_fragments` option is set to `0`, `NullFragmenter` is used which does not fragment the text at all. This is useful for highlighting the entire content of a document or field.
+如果`number_of_fragments`选项设置为“0"，则使用`NullFragmenter`，它根本不分片文本。 这对于高亮显示文档或字段的全部内容非常有用。
 
 ### Highlight query
 
-It is also possible to highlight against a query other than the search query by setting `highlight_query`. This is especially useful if you use a rescore query because those are not taken into account by highlighting by default. Elasticsearch does not validate that `highlight_query` contains the search query in any way so it is possible to define it so legitimate query results aren’t highlighted at all. Generally it is better to include the search query in the `highlight_query`. Here is an example of including both the search query and the rescore query in `highlight_query`.
-    
+也可以通过设置`highlight_query`来高亮显示与搜索查询不同的查询。 如果您使用重新查询，这是特别有用的，因为默认情况下不会考虑这些查询。 Elasticsearch不会验证`highlight_query`包含任何方式的搜索查询，所以可以定义它，因此合法的查询结果根本不被高亮显示。 通常，将搜索查询包含在`highlight_query`中会更好。 这是一个在`highlight_query`中包含搜索查询和rescore查询的例子。
     
     GET /_search
     {
@@ -463,12 +445,11 @@ It is also possible to highlight against a query other than the search query by 
         }
     }
 
-Note that the score of text fragment in this case is calculated by the Lucene highlighting framework. For implementation details you can check the `ScoreOrderFragmentsBuilder.java` class. On the other hand when using the postings highlighter the fragments are scored using, as mentioned above, the BM25 algorithm.
+请注意，在这种情况下，文本片段的分数是由Lucene高亮显示框架计算的。 有关实现细节，您可以检查`ScoreOrderFragmentsBuilder`类。 另一方面，当使用`postings`高亮标记时，如上所述，使用BM25算法对片段进行评分。
 
 ### Global Settings
 
-Highlighting settings can be set on a global level and then overridden at the field level.
-    
+高亮显示设置可以在全局级别上进行设置，然后在字段级别进行覆盖。    
     
     GET /_search
     {
@@ -489,7 +470,7 @@ Highlighting settings can be set on a global level and then overridden at the fi
 
 ### Require Field Match
 
-`require_field_match` can be set to `false` which will cause any field to be highlighted regardless of whether the query matched specifically on them. The default behaviour is `true`, meaning that only fields that hold a query match will be highlighted.
+可以将`require_field_match`设置为`false`，这将导致任何字段高亮显示，而不管查询是否与它们特别匹配。 默认行为是“true"，这意味着只有持有查询匹配的字段才会被高亮显示。
     
     
     GET /_search
@@ -507,22 +488,23 @@ Highlighting settings can be set on a global level and then overridden at the fi
 
 ### Boundary Scanners
 
-When highlighting a field using the unified highlighter or the fast vector highlighter, you can specify how to break the highlighted fragments using `boundary_scanner`, which accepts the following values:
+当使用统一的高亮器或快速向量高亮器高亮显示一个字段时，您可以指定如何使用“boundary_scanner"来分割高亮显示的片段，该接受以下值：
 
-  * `chars` (default mode for the FVH): allows to configure which characters (`boundary_chars`) constitute a boundary for highlighting. It’s a single string with each boundary character defined in it (defaults to `.,!? \t\n`). It also allows configuring the `boundary_max_scan` to control how far to look for boundary characters (defaults to `20`). Works only with the Fast Vector Highlighter. 
-  * `sentence` and `word`: use Java’s [BreakIterator](https://docs.oracle.com/javase/8/docs/api/java/text/BreakIterator.html) to break the highlighted fragments at the next _sentence_ or _word_ boundary. You can further specify `boundary_scanner_locale` to control which Locale is used to search the text for these boundaries. 
+
+  * `chars` （FVH的默认模式）：允许配置哪些字符（`boundary_chars`）构成高亮显示的边界。 它是一个单一的字符串，其中定义了每个边界字符（默认为`。，！？\ t \ n`）。 它还允许配置`boundary_max_scan`来控制边界字符的多少（默认为`20`）。 只适用于快速向量高亮器。
+  * `sentence` and `word`:使用Java的[BreakIterator](https://docs.oracle.com/javase/8/docs/api/java/text/BreakIterator.html)在下一个_sentence_或_word_边界处高亮显示的片段。 您可以进一步指定`boundary_scanner_locale`来控制使用哪个Locale搜索这些边界的文本。
 
 
 
 ![Note](/images/icons/note.png)
 
-When used with the `unified` highlighter, the `sentence` scanner splits sentence bigger than `fragment_size` at the first word boundary next to `fragment_size`. You can set `fragment_size` to 0 to never split any sentence.
+当与"统一"高亮器一起使用时，"句子"扫描器在"fragment_size"旁边的第一个单词边界处分割大于"fragment_size"的句子。 您可以将`fragment_size`设置为0，永不拆分任何句子。
 
-### Matched Fields
+### 匹配字段 Matched Fields
 
-The Fast Vector Highlighter can combine matches on multiple fields to highlight a single field using `matched_fields`. This is most intuitive for multifields that analyze the same string in different ways. All `matched_fields` must have `term_vector` set to `with_positions_offsets` but only the field to which the matches are combined is loaded so only that field would benefit from having `store` set to `yes`.
+快速向量高亮器可以结合多个字段的匹配，使用`matched_fields`高亮显示单个字段。 对于以不同方式分析相同字符串的多字段，这是最直观的。 所有`matched_fields`都必须将term_vector设置为`with_positions_offsets`，但是只有加入匹配的字段才会被加载，所以只有这个字段才能从`store`设置为`yes`而受益。
 
-In the following examples `content` is analyzed by the `english` analyzer and `content.plain` is analyzed by the `standard` analyzer.
+在下面的例子中，`content`由`english`分析器分析，`content.plain`由`standard`分析器分析。
     
     
     GET /_search
@@ -544,7 +526,7 @@ In the following examples `content` is analyzed by the `english` analyzer and `c
         }
     }
 
-The above matches both "run with scissors" and "running with scissors" and would highlight "running" and "scissors" but not "run". If both phrases appear in a large document then "running with scissors" is sorted above "run with scissors" in the fragments list because there are more matches in that fragment.
+上面的比赛都是"run with scissors"和"running with scissors"，突出"running"和"scissors"而不是"run"。如果两个短语都出现在一个大文档中，那么"run with scissors"会在片段列表中的"un with scissors"之上进行排序，因为该片段中有更多的匹配。
     
     
     GET /_search
@@ -566,8 +548,7 @@ The above matches both "run with scissors" and "running with scissors" and would
         }
     }
 
-The above highlights) is boosted.
-    
+上述亮点会根据评分排序。    
     
     GET /_search
     {
@@ -588,15 +569,15 @@ The above highlights) is boosted.
         }
     }
 
-The above query wouldn’t highlight "run" or "scissor" but shows that it is just fine not to list the field to which the matches are combined (`content`) in the matched fields.
+上面的查询不会高亮显示“run"或“scissor"，但是显示只要在匹配的字段中列出匹配组合的字段（`content`）就好了。
 
 ![Note](/images/icons/note.png)
 
-Technically it is also fine to add fields to `matched_fields` that don’t share the same underlying string as the field to which the matches are combined. The results might not make much sense and if one of the matches is off the end of the text then the whole query will fail.
+从技术角度来说，将字段添加到`matched_fields`中是不错的，因为这些字段与组合匹配的字段不共享相同的基础字符串。 结果可能没有多大意义，如果其中一个匹配结束的文本末尾，那么整个查询将失败。
 
 ![Note](/images/icons/note.png)
 
-There is a small amount of overhead involved with setting `matched_fields` to a non-empty array so always prefer
+将`matched_fields`设置为一个非空的数组涉及少量开销，所以总是优先考虑的：
     
     
         "highlight": {
@@ -605,7 +586,7 @@ There is a small amount of overhead involved with setting `matched_fields` to a 
             }
         }
 
-to
+变成：
     
     
         "highlight": {
@@ -617,15 +598,15 @@ to
             }
         }
 
-### Phrase Limit
+### 短语限制 Phrase Limit
 
-The fast vector highlighter has a `phrase_limit` parameter that prevents it from analyzing too many phrases and eating tons of memory. It defaults to 256 so only the first 256 matching phrases in the document scored considered. You can raise the limit with the `phrase_limit` parameter but keep in mind that scoring more phrases consumes more time and memory.
+快速向量高亮器有一个`phrase_limit`参数，防止它分析太多的短语和消耗成吨的内存。 它默认为`256`，所以只考虑文档中前256个匹配的短语。 你可以用`phrase_limit`参数来提高限制，但是记住更多的短语会消耗更多的时间和内存。
 
-If using `matched_fields` keep in mind that `phrase_limit` phrases per matched field are considered.
+如果使用`matched_fields`，请记住每个匹配字段的“phrase_limit"短语被考虑。
 
-### Field Highlight Order
+### 字段高亮顺序 Field Highlight Order
 
-Elasticsearch highlights the fields in the order that they are sent. Per the json spec objects are unordered but if you need to be explicit about the order that fields are highlighted then you can use an array for `fields` like this:
+Elasticsearch按照发送顺序高亮显示这些字段。 按照JSON规范，对象是无序的，但是如果你需要明确地指出字段被高亮显示的顺序，那么你可以像下面这样为`fields`使用一个数组：
     
     
     GET /_search
@@ -638,4 +619,4 @@ Elasticsearch highlights the fields in the order that they are sent. Per the jso
         }
     }
 
-None of the highlighters built into Elasticsearch care about the order that the fields are highlighted but a plugin may.
+Elasticsearch内置的高亮器没有一个关注字段高亮显示的顺序，而一个插件可以会关注。

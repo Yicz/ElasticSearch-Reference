@@ -1,24 +1,23 @@
 ## 滚动 Scroll
 
-While a `search` request returns a single “page” of results, the `scroll` API can be used to retrieve large numbers of results (or even all results) from a single search request, in much the same way as you would use a cursor on a traditional database.
+当“搜索”请求返回单个“页面”结果时，“scroll”API可用于从单个搜索请求中检索大量结果（甚至是所有结果），与您使用传统数据库上的光标的方法大致相同 。
 
-Scrolling is not intended for real time user requests, but rather for processing large amounts of data, e.g. in order to reindex the contents of one index into a new index with a different configuration.
+滚动不是为了实时的用户请求，而是为了处理大量的数据，例如， 以便将一个索引的内容重新索引到具有不同配置的新索引中。
 
- **Client support for scrolling and reindexing**
+  **客户端支持滚动和重新索引**
 
-Some of the officially supported clients provide helpers to assist with scrolled searches and reindexing of documents from one index to another:
+一些官方支持的客户提供帮助来帮助滚动搜索和重新索引文件从一个索引到另一个：
 
 Perl 
-     See [Search::Elasticsearch::Client::5_0::Bulk](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Bulk) and [Search::Elasticsearch::Client::5_0::Scroll](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Scroll)
+    [Search::Elasticsearch::Client::5_0::Bulk](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Bulk) 和 [Search::Elasticsearch::Client::5_0::Scroll](https://metacpan.org/pod/Search::Elasticsearch::Client::5_0::Scroll)
 Python 
-     See [elasticsearch.helpers.\*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
+    [elasticsearch.helpers.\*](http://elasticsearch-py.readthedocs.org/en/master/helpers.html)
 
 ![Note](/images/icons/note.png)
 
-The results that are returned from a scroll request reflect the state of the index at the time that the initial `search` request was made, like a snapshot in time. Subsequent changes to documents (index, update or delete) will only affect later search requests.
+滚动请求返回的结果反映了在发出初始“搜索”请求时索引的状态，就像是快照。 文档的后续更改（索引，更新或删除）只会影响稍后的搜索请求。
 
-In order to use scrolling, the initial search request should specify the `scroll` parameter in the query string, which tells Elasticsearch how long it should keep the “search context” alive (see [Keeping the search context alive](search-request-scroll.html#scroll-search-context)), eg `?scroll=1m`.
-    
+为了使用滚动，最初的搜索请求应该在查询字符串中指定`scroll`参数，它告诉Elasticsearch应该保持“搜索上下文”保持多久（参见[Keeping the search context alive](search-request-scroll.html#scroll-search-context)），例如`？scroll = 1m`。
     
     POST /twitter/tweet/_search?scroll=1m
     {
@@ -30,7 +29,7 @@ In order to use scrolling, the initial search request should specify the `scroll
         }
     }
 
-The result from the above request includes a `_scroll_id`, which should be passed to the `scroll` API in order to retrieve the next batch of results.
+上述请求的结果包含一个`_scroll_id`，它应该被传递给`scroll` API以获取下一批结果。
     
     
     POST <1> /_search/scroll <2>
@@ -39,25 +38,25 @@ The result from the above request includes a `_scroll_id`, which should be passe
         "scroll_id" : "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==" <4>
     }
 
-<1>| `GET` or `POST` can be used.     
+<1>| 可以使用 `GET` 或 `POST`     
 ---|---    
-<2>| The URL should not include the `index` or `type` name — these are specified in the original `search` request instead.     
-<3>| The `scroll` parameter tells Elasticsearch to keep the search context open for another `1m`.     
-<4>| The `scroll_id` parameter   
+<2>| 该URL不应包含`index`或`type`的名称 - 这些在原始的“搜索”请求中指定。     
+<3>| `scroll`参数告诉Elasticsearch保持搜索上下文打开另一个`1m`。   
+<4>| `scroll_id`参数   
   
-The `size` parameter allows you to configure the maximum number of hits to be returned with each batch of results. Each call to the `scroll` API returns the next batch of results until there are no more results left to return, ie the `hits` array is empty.
+`size`参数允许您配置每批结果返回的最大命中数。 每次调用“scroll”API都会返回下一批结果，直到没有更多结果返回，即“hits”数组为空。
 
 ![Important](/images/icons/important.png)
 
-The initial search request and each subsequent scroll request returns a new `_scroll_id` — only the most recent `_scroll_id` should be used.
+最初的搜索请求和每个后续的滚动请求返回一个新的_scroll_id - 只应使用最近的_scroll_id。
 
 ![Note](/images/icons/note.png)
 
-If the request specifies aggregations, only the initial search response will contain the aggregations results.
+如果请求指定了聚合，则只有最初的搜索响应将包含聚合结果。
 
 ![Note](/images/icons/note.png)
 
-Scroll requests have optimizations that make them faster when the sort order is `_doc`. If you want to iterate over all documents regardless of the order, this is the most efficient option:
+滚动请求具有优化功能，当排序顺序为`_doc`时，它们会更快。 如果您要遍历所有文档，而不考虑顺序，这是最有效的选择：
     
     
     GET /_search?scroll=1m
@@ -69,31 +68,28 @@ Scroll requests have optimizations that make them faster when the sort order is 
 
 ### Keeping the search context alive
 
-The `scroll` parameter (passed to the `search` request and to every `scroll` request) tells Elasticsearch how long it should keep the search context alive. Its value (e.g. `1m`, see [Time units sets a new expiry time.
+`scroll`参数（传递给“搜索”请求和每个“滚动”请求）告诉Elasticsearch应该保持搜索上下文多长时间。 其值（例如`1m`，参见[时间单位]设置新的到期时间)。
 
-Normally, the background merge process optimizes the index by merging together smaller segments to create new bigger segments, at which time the smaller segments are deleted. This process continues during scrolling, but an open search context prevents the old segments from being deleted while they are still in use. This is how Elasticsearch is able to return the results of the initial search request, regardless of subsequent changes to documents.
+通常情况下，后台合并过程通过合并较小的段来创建新的更大的段来优化索引，此时较小的段被删除。 这个过程在滚动过程中继续，但是一个开放的搜索上下文可以防止旧的段在被使用时被删除。 这就是Elasticsearch如何能够返回初始搜索请求的结果，而不管随后对文档所做的更改。
 
 ![Tip](/images/icons/tip.png)
 
-Keeping older segments alive means that more file handles are needed. Ensure that you have configured your nodes to have ample free file handles. See [File Descriptors](file-descriptors.html).
+保持较旧的段活着意味着需要更多的文件句柄。 确保你已经配置了你的节点有足够的空闲文件句柄。 请参见[文件描述符](file-descriptors.html)。
 
-You can check how many search contexts are open with the [nodes stats API](cluster-nodes-stats.html):
-    
+您可以使用[nodes stats API](cluster-nodes-stats.html)检查打开了多少个搜索上下文：    
     
     GET /_nodes/stats/indices/search
 
 ### Clear scroll API
 
-Search context are automatically removed when the `scroll` timeout has been exceeded. However keeping scrolls open has a cost, as discussed in the [previous div](search-request-scroll.html#scroll-search-context) so scrolls should be explicitly cleared as soon as the scroll is not being used anymore using the `clear-scroll` API:
-    
+搜索上下文会在超过滚动超时时自动删除。 然而，保持滚动打开有一个成本，正如[前面内容](search-request-scroll.html#scroll-search-context)中所讨论的那样，只要不再使用滚动，滚动就应该使用 `clear-scroll` API明确地清除
     
     DELETE /_search/scroll
     {
         "scroll_id" : ["DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ=="]
     }
 
-Multiple scroll IDs can be passed as array:
-    
+多个滚动ID可以作为数组传递：    
     
     DELETE /_search/scroll
     {
@@ -103,19 +99,18 @@ Multiple scroll IDs can be passed as array:
         ]
     }
 
-All search contexts can be cleared with the `_all` parameter:
-    
+所有的搜索上下文都可以用`_all`参数清除：    
     
     DELETE /_search/scroll/_all
 
-The `scroll_id` can also be passed as a query string parameter or in the request body. Multiple scroll IDs can be passed as comma separated values:
+`scroll_id`也可以作为查询字符串参数或请求主体传递。 多个滚动ID可以作为逗号分隔值传递：
     
     
     DELETE /_search/scroll/DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==,DnF1ZXJ5VGhlbkZldGNoBQAAAAAAAAABFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAAAxZrUllkUVlCa1NqNmRMaUhiQlZkMWFBAAAAAAAAAAIWa1JZZFFZQmtTajZkTGlIYkJWZDFhQQAAAAAAAAAFFmtSWWRRWUJrU2o2ZExpSGJCVmQxYUEAAAAAAAAABBZrUllkUVlCa1NqNmRMaUhiQlZkMWFB
 
 ### Sliced Scroll
 
-For scroll queries that return a lot of documents it is possible to split the scroll in multiple slices which can be consumed independently:
+对于返回大量文档的滚动查询，可以将滚动拆分为可以独立使用的多个切片：
     
     
     GET /twitter/tweet/_search?scroll=1m
@@ -143,9 +138,9 @@ For scroll queries that return a lot of documents it is possible to split the sc
         }
     }
 
-<1>| The id of the slice     
+<1>| 切片的ID   
 ---|---    
-<2>| The maximum number of slices   
+<2>| 切片的最大数量  
   
 The result from the first request returned documents that belong to the first slice (id: 0) and the result from the second request returned documents that belong to the second slice. Since the maximum number of slices is set to 2 the union of the results of the two requests is equivalent to the results of a scroll query without slicing. By default the splitting is done on the shards first and then locally on each shard using the   \_uid field with the following formula: `slice(doc) = floorMod(hashCode(doc._uid), max)` For instance if the number of shards is equal to 2 and the user requested 4 slices then the slices 0 and 2 are assigned to the first shard and the slices 1 and 3 are assigned to the second shard.
 
@@ -180,8 +175,7 @@ To avoid this cost entirely it is possible to use the `doc_values` of another fi
         }
     }
 
-For append only time-based indices, the `timestamp` field can be used safely.
-
+只附加基于时间的索引，`timestamp`字段可以安全使用。
 ![Note](/images/icons/note.png)
 
-By default the maximum number of slices allowed per scroll is limited to 1024. You can update the `index.max_slices_per_scroll` index setting to bypass this limit.
+默认情况下，每个滚动允许的最大切片数量限制为1024.您可以更新index.max_slices_per_scroll索引设置以绕过此限制。
