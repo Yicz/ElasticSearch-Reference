@@ -1,21 +1,20 @@
-## Get Index
+## 获取索引 Get Index
 
-The get index API allows to retrieve information about one or more indexes.
-    
+获取索引API允许对一个或者多个索引进行检索信息。
     
     GET /twitter
+上面的例子检索了一个名字叫做`twitter`的索引。获取索引API必须指定一个索引（index）,别名（alias）或者通配符表达式（wildcard expression）。
 
-The above example gets the information for an index called `twitter`. Specifying an index, alias or wildcard expression is required.
 
-The get index API can also be applied to more than one index, or on all indices by using `_all` or `*` as index.
+获取索引API可以指定多个文档，或者使用`_all`和`*`代表全部的文档
 
-### Filtering index information
+### 过滤索引信息 Filtering index information
 
-The information returned by the get API can be filtered to include only specific features by specifying a comma delimited list of features in the URL:
-    
+返回的响应内容可以通过指定内容进行过滤，可以使用`,`进行分隔指定多个内容。
     
     GET twitter/_settings,_mappings
 
-The above command will only return the settings and mappings for the index called `twitter`.
+上述的例子只会返回`twitter`引过中的`settings`和`mappings`内容
 
-The available features are `_settings`, `_mappings` and `_aliases`.
+
+可以指定的内容有 `_settings`, `_mappings` 和 `_aliases`.

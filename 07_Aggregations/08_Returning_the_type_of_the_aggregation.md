@@ -1,9 +1,8 @@
-## Returning the type of the aggregation
+## 返回聚合类型
 
-Sometimes you need to know the exact type of an aggregation in order to parse its results. The `typed_keys` parameter can be used to change the aggregation’s name in the response so that it will be prefixed by its internal type.
+有时您需要知道聚合的确切类型以解析其结果。 `typed_keys`参数可以用来在响应中改变聚合的名字，这样它的前缀就是它的内部类型。
 
-Considering the following [`date_histogram` aggregation](search-aggregations-bucket-datehistogram-aggregation.html) named `tweets_over_time` which has a sub ['top_hits` aggregation](search-aggregations-metrics-top-hits-aggregation.html) named `top_users`:
-    
+考虑下列[`date_histogram`聚合](search-aggregations-bucket-datehistogram-aggregation.html)，名为`tweets_over_time`，它有一个sub [`top_hits`聚合](search-aggregations-metrics-top-hits-aggregation.html)名为`top_users`：
     
     GET /twitter/tweet/_search?typed_keys
     {
@@ -23,8 +22,7 @@ Considering the following [`date_histogram` aggregation](search-aggregations-buc
         }
       }
     }
-
-In the response, the aggregations names will be changed to respectively `date_histogram#tweets_over_time` and `top_hits#top_users`, reflecting the internal types of each aggregation:
+在响应中，聚合名称将分别更改为`date_histogram＃tweets_over_time`和`top_hits＃top_users`，反映每个聚合的内部类型：
     
     
     {
@@ -62,10 +60,8 @@ In the response, the aggregations names will be changed to respectively `date_hi
         ...
     }
 
-<1>| The name `tweets_over_time` now contains the `date_histogram` prefix.     
+<1>| 现在`tweets_over_time`这个名字包含`date_histogram`前缀。     
 ---|---   
-<2>| The name `top_users` now contains the `top_hits` prefix.   
+<2>| 名字`top_users`现在包含`top_hits`前缀。   
   
-![Note](/images/icons/note.png)
-
-For some aggregations, it is possible that the returned type is not the same as the one provided with the request. This is the case for Terms, Significant Terms and Percentiles aggregations, where the returned type also contains information about the type of the targeted field: `lterms` (for a terms aggregation on a Long field), `sigsterms` (for a significant terms aggregation on a String field), `tdigest_percentiles` (for a percentile aggregation based on the TDigest algorithm).
+![Note](/images/icons/note.png)对于某些聚合，返回的类型可能与提供请求的类型不同。`Terms`, `Significant Terms`和 `Percentiles` 聚合的情况就是如此，其中返回的类型还包含有关目标字段类型的信息：`lterms`（对于长字段中的术语聚合），`sigsterms` (在字段字段上的聚合)，`tdigest_percentiles`（基于TDigest算法的百分位聚合）。

@@ -1,15 +1,13 @@
 ## Pipeline Aggregations
 
-![Warning](/images/icons/warning.png)
+![Warning](/images/icons/warning.png)此功能是实验性的，可能会在将来的版本中完全更改或删除。ES将采取尽最大努力解决任何问题，但实验功能不受支持官方遗传算法功能的SLA。
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
-
-Pipeline aggregations work on the outputs produced from other aggregations rather than from document sets, adding information to the output tree. There are many different types of pipeline aggregation, each computing different information from other aggregations, but these types can be broken down into two families:
+管道聚合对其他聚合产生的输出进行处理，而不是从文档集合中输出，并将信息添加到输出树中。 有许多不同类型的管道聚合，每个聚合都计算不同的信息，但是这些类型可以分为两类：
 
 _Parent_
-     A family of pipeline aggregations that is provided with the output of its parent aggregation and is able to compute new buckets or new aggregations to add to existing buckets. 
+    一系列管道聚合提供了其父聚合的输出，并且能够计算新的存储桶或新的聚合以添加到现有的存储桶。
 _Sibling_
-     Pipeline aggregations that are provided with the output of a sibling aggregation and are able to compute a new aggregation which will be at the same level as the sibling aggregation. 
+    管道聚合提供了同级聚合的输出，并且能够计算与兄弟聚合处于同一级别的新聚合。
 
 Pipeline aggregations can reference the aggregations they need to perform their computation by using the `buckets_path` parameter to indicate the paths to the required metrics. The syntax for defining these paths can be found in the [`buckets_path` Syntax](search-aggregations-pipeline.html#buckets-path-syntax) div below.
 

@@ -1,8 +1,9 @@
-## Geo Bounds Aggregation
+## 地理位置边界聚合 Geo Bounds Aggregation
 
-A metric aggregation that computes the bounding box containing all geo_point values for a field.
+一个用于计算字段中地理位置数据的度量聚合。
 
-Example:
+
+示例:
     
     
     PUT /museums
@@ -47,14 +48,13 @@ Example:
         }
     }
 
-<1>| The `geo_bounds` aggregation specifies the field to use to obtain the bounds     
+<1>|  `geo_bounds` 指定了用于计算边界的字段     
 ---|---    
-<2>| `wrap_longitude` is an optional parameter which specifies whether the bounding box should be allowed to overlap the international date line. The default value is `true`  
+<2>| `wrap_longitude` 是一个可选的参数，定义着是否允许与国际日期变更线重叠，默认是`true`
   
-The above aggregation demonstrates how one would compute the bounding box of the location field for all documents with a business type of shop
+上述的聚合用例演示了如如何计算全部文档的地理位置。
 
-The response for the above aggregation:
-    
+响应的内容是:
     
     {
         ...

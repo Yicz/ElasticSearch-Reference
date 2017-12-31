@@ -1,7 +1,8 @@
 ## Bucket Aggregations
 
-Bucket aggregations don’t calculate metrics over fields like the metrics aggregations do, but instead, they create buckets of documents. Each bucket is associated with a criterion (depending on the aggregation type) which determines whether or not a document in the current context "falls" into it. In other words, the buckets effectively define document sets. In addition to the buckets themselves, the `bucket` aggregations also compute and return the number of documents that "fell into" each bucket.
+分组聚合不像度量聚合那样计算字段上的度量，而是创建文档类别。每个桶类别与一个标准（取决于聚合类型）相关联，该标准确定当前上下文中的文档是否归类其中。 换句话说，桶有效地定义文档集。 除了类别本身，“`buckets`类别”聚合也计算并返回“落入”每个桶的文档数量。
 
-Bucket aggregations, as opposed to `metrics` aggregations, can hold sub-aggregations. These sub-aggregations will be aggregated for the buckets created by their "parent" bucket aggregation.
+与“指标”聚合相反，分组聚合可以保存子聚合。 这些子聚合将针对由其“父”归类聚合创建的类别进行聚合。
 
-There are different bucket aggregators, each with a different "bucketing" strategy. Some define a single bucket, some define fixed number of multiple buckets, and others dynamically create the buckets during the aggregation process.
+有不同的归类集合器，每个都有不同的“类别”策略。 一些定义了一个类别，一些定义了固定数量的多个类别，另一些则在聚合过程中动态地创建类别。
+

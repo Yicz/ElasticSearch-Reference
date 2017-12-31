@@ -74,7 +74,7 @@ This will interpret the `script` parameter as an `inline` script with the `painl
 
 ![Tip](/images/icons/tip.png)
 
-for indexed scripts replace the `file` parameter with an `id` parameter.
+对于保存在`.script`索引脚本，用`id`参数替换`file`参数。
 
 #### Value Script
 
@@ -104,7 +104,7 @@ It turned out that the exam was way above the level of the students and a grade 
 
 ### Missing value
 
-The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.
+`missing`参数定义了如何处理缺少值的文档。 默认情况下，它们将被忽略，但也可以把它们看作是有价值的。
     
     
     {
@@ -118,5 +118,5 @@ The `missing` parameter defines how documents that are missing a value should be
         }
     }
 
-<1>| Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `0`.     
+<1>| 文档中如果`grade`字段中没有值，将会默认设置`0`进行使用。
 ---|---

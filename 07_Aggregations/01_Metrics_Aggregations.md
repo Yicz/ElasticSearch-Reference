@@ -1,5 +1,6 @@
-## Metrics Aggregations
+## 度量聚合 Metrics Aggregations
 
-The aggregations in this family compute metrics based on values extracted in one way or another from the documents that are being aggregated. The values are typically extracted from the fields of the document (using the field data), but can also be generated using scripts.
+该系列中的聚合基于从正在聚合的文档中以某种方式提取的值来计算度量标准。 这些值通常是从文档的字段（使用字段数据）提取的，但也可以使用脚本生成。
 
-Numeric metrics aggregations are a special type of metrics aggregation which output numeric values. Some aggregations output a single numeric metric (e.g. `avg`) and are called `single-value numeric metrics aggregation`, others generate multiple metrics (e.g. `stats`) and are called `multi-value numeric metrics aggregation`. The distinction between single-value and multi-value numeric metrics aggregations plays a role when these aggregations serve as direct sub-aggregations of some bucket aggregations (some bucket aggregations enable you to sort the returned buckets based on the numeric metrics in each bucket).
+数字度量聚合是输出数值的一种特殊类型的度量聚合。 一些聚合输出单个数字度量（例如`avg`），被称为“单值数字度量聚合”，其他聚合产生多个度量（例如`stats`），被称为“多值数字度量聚合”。 当这些聚合用作某些归类聚合的直接子聚合（某些归类聚合使您能够根据每个存储桶中的数字度量对返回的存储桶进行排序）时，单值和多值数值度量聚合之间的区别起作用。
+

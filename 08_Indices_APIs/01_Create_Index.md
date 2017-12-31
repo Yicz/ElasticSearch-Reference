@@ -1,11 +1,10 @@
-## Create Index
+## 创建索引 Create Index
 
-The create index API allows to instantiate an index. Elasticsearch provides support for multiple indices, including executing operations across several indices.
+创建索引API允许进行实例化一个索引。ES提供了多索引的支持，包含跨多个索引。
 
-### Index Settings
+### 索引设置 Index Settings
 
-Each index created can have specific settings associated with it.
-    
+每一个索引的创建都要指定如下的参数
     
     PUT twitter
     {
@@ -17,12 +16,11 @@ Each index created can have specific settings associated with it.
         }
     }
 
-<1>| Default for `number_of_shards` is 5     
+<1>| `number_of_shards` 主分片的大小，默认大小`5`   
 ---|---    
-<2>| Default for `number_of_replicas` is 1 (ie one replica for each primary shard)   
+<2>| `number_of_replicas` 默认大小`1` (即每个主分片都有一个复制分片)   
   
-The above second curl example shows how an index called `twitter` can be created with specific settings for it using [YAML](http://www.yaml.org). In this case, creating an index with 3 shards, each with 2 replicas. The index settings can also be defined with [JSON](http://www.json.org):
-    
+上述请展示了如何创建一个`titter`索引，并进行指定了设置，在上面的例子中，创建一个3个主分片和2个复制分片的索引，索引的设置可以定义为`JSON`:
     
     PUT twitter
     {
@@ -34,7 +32,7 @@ The above second curl example shows how an index called `twitter` can be created
         }
     }
 
-or more simplified
+可以更加地简单：
     
     
     PUT twitter
@@ -47,14 +45,13 @@ or more simplified
 
 ![Note](/images/icons/note.png)
 
-You do not have to explicitly specify `index` div inside the `settings` div.
+可以不用显示地在`setting`进行指定`index`部分的内容。
 
-For more information regarding all the different index level settings that can be set when creating an index, please check the [index modules](index-modules.html) div.
+更多关于创建索引时不同索引级别的设置，可以参考[`index modules`](index-modules.html)部分的内容。
 
-### Mappings
+### 映射关系 Mappings
 
-The create index API allows to provide a set of one or more mappings:
-    
+创建索引API可以提供一个或者多个的映射关系:
     
     PUT test
     {
@@ -70,10 +67,9 @@ The create index API allows to provide a set of one or more mappings:
         }
     }
 
-### Aliases
+###  别名 Aliases
 
-The create index API allows also to provide a set of [aliases](indices-aliases.html):
-    
+创建索引的API也可以提供一个[别名 alias ](indices-aliases.html)的集合。
     
     PUT test
     {
@@ -88,10 +84,9 @@ The create index API allows also to provide a set of [aliases](indices-aliases.h
         }
     }
 
-### Wait For Active Shards
+### 等待激活的人雪片 Wait For Active Shards
 
-By default, index creation will only return a response to the client when the primary copies of each shard have been started, or the request times out. The index creation response will indicate what happened:
-    
+默认地，一个索引的请求只会返回每个分片都已经可以进行拷贝的响应内容，或者请求超时。下面是索引已经创建成功的响应内容：
     
     {
         "acknowledged": true,

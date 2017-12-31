@@ -1,8 +1,8 @@
-## Indices Exists
+##  索引是否存在 Indices Exists
 
-Used to check if the index (indices) exists or not. For example:
+可以进行判断一个索引是否存在，如：
     
     
     HEAD twitter
 
-The HTTP status code indicates if the index exists or not. A `404` means it does not exist, and `200` means it does.
+HTTP的返回状态码代表着这个索引是否存在，`404`表示不存在，`200`表示存在。

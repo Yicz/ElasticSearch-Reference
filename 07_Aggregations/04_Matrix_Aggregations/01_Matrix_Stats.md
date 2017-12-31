@@ -1,18 +1,17 @@
 ## Matrix Stats
 
-The `matrix_stats` aggregation is a numeric aggregation that computes the following statistics over a set of document fields:
+`matrix_stats`聚合是一个数字聚合，它计算一组文档字段的以下统计信息：
 
-`count`| Number of per field samples included in the calculation.     
+`count`| 包含在计算中的每个字段样本的数量。     
 ---|---    
-`mean`| The average value for each field.     
-`variance`| Per field Measurement for how spread out the samples are from the mean.     
-`skewness`| Per field measurement quantifying the asymmetric distribution around the mean.     
-`kurtosis`| Per field measurement quantifying the shape of the distribution.     
-`covariance`| A matrix that quantitatively describes how changes in one field are associated with another.     
-`correlation`| The covariance matrix scaled to a range of -1 to 1, inclusive. Describes the relationship between field distributions   
+`mean`| 每个字段的平均值。    
+`variance`| 每场测量样本是如何分散的平均值。     
+`skewness`| 每场测量量化均值周围的不对称分布。    
+`kurtosis`| 每场测量量化分布的形状。    
+`covariance`| 定量描述一个领域的变化与另一个领域相关联的矩阵。    
+`correlation`| 协方差矩阵缩放到-1到1（含）的范围。 介绍字段分布之间的关系
   
-The following example demonstrates the use of matrix stats to describe the relationship between income and poverty.
-    
+下面的例子演示了使用矩阵统计来描述收入和贫困之间的关系。    
     
     {
         "aggs": {
@@ -24,7 +23,7 @@ The following example demonstrates the use of matrix stats to describe the relat
         }
     }
 
-The aggregation type is `matrix_stats` and the `fields` setting defines the set of fields (as an array) for computing the statistics. The above request returns the following response:
+聚合类型是`matrix_stats`，`fields`设置定义了用于计算统计的字段集（作为数组）。 上述请求返回以下响应：
     
     
     {
@@ -66,20 +65,20 @@ The aggregation type is `matrix_stats` and the `fields` setting defines the set 
         }
     }
 
-### Multi Value Fields
+### 多值字段
 
-The `matrix_stats` aggregation treats each document field as an independent sample. The `mode` parameter controls what array value the aggregation will use for array or multi-valued fields. This parameter can take one of the following:
+`matrix_stats`聚合将每个文档字段视为一个独立样本。 `mode`参数控制聚合将用于数组或多值字段的数组值。 该参数可以采取下列之一：
 
-`avg`| (default) Use the average of all values.     
+`avg`| （默认）使用所有值的平均值。    
 ---|---    
-`min`| Pick the lowest value.     
-`max`| Pick the highest value.     
-`sum`| Use the sum of all values.     
-`median`| Use the median of all values.   
+`min`| 取最小值     
+`max`| 取最大值    
+`sum`| 取和.     
+`median`| 取中间值   
   
-### Missing Values
+### 缺少值
 
-The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value. This is done by adding a set of fieldname : value mappings to specify default values per field.
+`missing`参数定义了如何处理缺少值的文档。默认情况下，它们将被忽略，但也可以把它们看作是有价值的。这是通过添加一组fieldname：value映射来指定每个字段的默认值。
     
     
     {
@@ -93,9 +92,9 @@ The `missing` parameter defines how documents that are missing a value should be
         }
     }
 
-<1>| Documents without a value in the `income` field will have the default value `50000`.     
+<1>| 在`income`字段中没有值的文档将具有默认值“50000”。    
 ---|---  
   
-### Script
+### 脚本
 
-This aggregation family does not yet support scripting.
+这个汇总系列还不支持脚本。

@@ -1,18 +1,19 @@
-## Top hits Aggregation
+## 最高命中聚合 Top hits Aggregation
 
-A `top_hits` metric aggregator keeps track of the most relevant document being aggregated. This aggregator is intended to be used as a sub aggregator, so that the top matching documents can be aggregated per bucket.
+`top_hits`聚合追踪最高相关度的文档。通常作为其他聚合的子聚合进行使用，所有可以结合归类聚合进行使用。
 
-The `top_hits` aggregator can effectively be used to group result sets by certain fields via a bucket aggregator. One or more bucket aggregators determines by which properties a result set get sliced into.
-
-### Options
-
-  * `from` \- The offset from the first result you want to fetch. 
-  * `size` \- The maximum number of top matching hits to return per bucket. By default the top three matching hits are returned. 
-  * `sort` \- How the top matching hits should be sorted. By default the hits are sorted by the score of the main query. 
+`top_hist`聚合可以使用归类聚合进行高效地分组。可以定义一个或都多个属性进行归类的划分。
 
 
+### 选项
 
-### Supported per hit features
+  * `from` 偏移量，用于获取分布的结果 
+  * `size` 获取文档的大小。
+  * `sort` 用于排序结果
+
+
+
+### 支持的特性 Supported per hit features
 
 The top_hits aggregation returns regular search hits, because of this many per hit features can be supported:
 
@@ -61,7 +62,7 @@ In the following example we group the questions by tag and per tag we show the l
         }
     }
 
-Possible response:
+响应内容:
     
     
     {

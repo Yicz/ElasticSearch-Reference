@@ -1,8 +1,8 @@
-## Geo Centroid Aggregation
+## 地理位置中心聚合 Geo Centroid Aggregation
 
-A metric aggregation that computes the weighted [centroid](https://en.wikipedia.org/wiki/Centroid) from all coordinate values for a [Geo-point datatype](geo-point.html) field.
+一个用于衡量[Geo-point 数据类型](geo-point.html)中心定位的度量聚合，
 
-Example:
+示例:
     
     
     PUT /museums
@@ -43,12 +43,12 @@ Example:
         }
     }
 
-<1>| The `geo_centroid` aggregation specifies the field to use for computing the centroid. (NOTE: field must be a [Geo-point datatype](geo-point.html) type)     
+<1>| `geo_centroid`聚合指定了用来计算一个定位中心。（提示：字段必须是一个[Geo-point datatype](geo-point.html) 类型）
 ---|---  
   
-The above aggregation demonstrates how one would compute the centroid of the location field for all documents with a crime type of burglary
+上述聚合演示了如何进行计算文档中的定位中心。
 
-The response for the above aggregation:
+响应的内容如下：
     
     
     {
@@ -63,9 +63,9 @@ The response for the above aggregation:
         }
     }
 
-The `geo_centroid` aggregation is more interesting when combined as a sub-aggregation to other bucket aggregations.
+`geo_centorid`作为归类聚合的子聚合，会更加地有趣。
 
-Example:
+例如:
     
     
     POST /museums/_search?size=0
@@ -82,9 +82,9 @@ Example:
         }
     }
 
-The above example uses `geo_centroid` as a sub-aggregation to a [terms](search-aggregations-bucket-terms-aggregation.html) bucket aggregation for finding the central location for museums in each city.
+上述演示了使用`terms`归类聚合，并结合了`geo_centorid`聚合，用来计算城市的中心位置。
 
-The response for the above aggregation:
+响应如下:
     
     
     {

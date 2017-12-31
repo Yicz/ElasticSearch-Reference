@@ -150,7 +150,7 @@ The percentile metric supports scripting. For example, if our load times are in 
 ---|---    
 <2>| Scripting supports parameterized input just like any other script   
   
-This will interpret the `script` parameter as an `inline` script with the `painless` script language and no script parameters. To use a file script use the following syntax:
+这将使用`painless`脚本语言将`script`参数解释为`inline`脚本，并且没有脚本参数。 要使用文件脚本，请使用以下语法：
     
     
     {
@@ -249,26 +249,15 @@ The HDR Histogram can be used by specifying the `method` parameter in the reques
             }
         }
     }
-
-<1>
-
-| 
-
-`hdr` object indicates that HDR Histogram should be used to calculate the percentiles and specific settings for this algorithm can be specified inside the object   
-  
----|---  
-  
-<2>
-
-| 
-
-`number_of_significant_value_digits` specifies the resolution of values for the histogram in number of significant digits   
+<1>| `hdr` object indicates that HDR Histogram should be used to calculate the percentiles and specific settings for thisalgorithm can be specified inside the object    
+---|---    
+<2>| `number_of_significant_value_digits` specifies the resolution of values for the histogram in number of significant digits   
   
 The HDRHistogram only supports positive values and will error if it is passed a negative value. It is also not a good idea to use the HDRHistogram if the range of values is unknown as this could lead to high memory usage.
 
 ### Missing value
 
-The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.
+`missing`参数定义了如何处理缺少值的文档。 默认情况下，它们将被忽略，但也可以把它们看作是有价值的。
     
     
     {
@@ -282,10 +271,5 @@ The `missing` parameter defines how documents that are missing a value should be
         }
     }
 
-<1>
-
-| 
-
-Documents without a value in the `grade` field will fall into the same bucket as documents that have the value `10`.   
-  
+<1>|文档中如果`grade`字段中没有值，将会默认设置`10`进行使用。
 ---|---

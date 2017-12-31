@@ -230,7 +230,7 @@ It reduces the responses for the shards down to a final overall profit figure (b
 
 ### Other Parameters
 
-params | Optional. An object whose contents will be passed as variables to the `init_script`, `map_script` and `combine_script`. This can be useful to allow the user to control the behavior of the aggregation and for storing state between the scripts. If this is not specified, the default is the equivalent of providing:             "params" : {        "_agg" : {}    }    
+params | Optional. An object whose contents will be passed as variables to the `init_script`, `map_script` and `combine_script`. This can be useful to allow the user to control the behavior of the aggregation and for storing state between the scripts. If this is not specified, the default is the equivalent of providing:             "params" : {        "\_agg" : {}    }    
 ---|---  
   
 ### Empty Buckets

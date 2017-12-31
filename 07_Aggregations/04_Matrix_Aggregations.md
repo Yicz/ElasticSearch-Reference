@@ -1,7 +1,7 @@
 ## Matrix Aggregations
 
 ![Warning](/images/icons/warning.png)
+此功能是实验性的，可能会在将来的版本中完全更改或删除。 ES将采取尽最大努力解决任何问题，但实验功能不支持官方遗传算法功能的SLA。
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
+该族中的聚合操作在多个字段上，并基于从所请求的文档字段中提取的值产生矩阵结果。 与度量和归类聚合不同，此聚合系列还不支持脚本。
 
-The aggregations in this family operate on multiple fields and produce a matrix result based on the values extracted from the requested document fields. Unlike metric and bucket aggregations, this aggregation family does not yet support scripting.

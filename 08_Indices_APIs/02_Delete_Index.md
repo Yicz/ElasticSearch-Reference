@@ -1,12 +1,12 @@
-## Delete Index
+## 删除索引 Delete Index
 
-The delete index API allows to delete an existing index.
-    
+删除索引API是将一个已经存在的索引进行删除：
     
     DELETE /twitter
 
-The above example deletes an index called `twitter`. Specifying an index, alias or wildcard expression is required.
+上面的例子将一个叫做`twitter`的索引进行了删除，必须指定一个索引（index）,索引别名（alias）或者通配符表达式（wilicard expression）.
 
-The delete index API can also be applied to more than one index, by either using a comma separated list, or on all indices (be careful!) by using `_all` or `*` as index.
+删除API可以用于删除一个或者多个的索引，通过使用`,`进行分隔索引的名称列表。或者使用`_all`和`*`代表全部的索引。
 
-In order to disable allowing to delete indices via wildcards or `_all`, set `action.destructive_requires_name` setting in the config to `true`. This setting can also be changed via the cluster update settings api.
+
+禁用使用通配符或者`*`删除索引，可以设置`action.destructive_requires_name=true`,可以设置同样响应更新索引接口。
