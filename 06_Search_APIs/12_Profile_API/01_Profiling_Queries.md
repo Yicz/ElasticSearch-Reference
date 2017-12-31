@@ -2,13 +2,13 @@
 
 ![Note](/images/icons/note.png)
 
-The details provided by the Profile API directly expose Lucene class names and concepts, which means that complete interpretation of the results require fairly advanced knowledge of Lucene. This page attempts to give a crash-course in how Lucene executes queries so that you can use the Profile API to successfully diagnose and debug queries, but it is only an overview. For complete understanding, please refer to Lucene’s documentation and, in places, the code.
+Profile API提供的细节直接暴露了Lucene类的名称和概念，这意味着对结果的完整解释需要相当理解的Lucene知识。这个节内容试图给出Lucene如何执行查询的崩溃过程，以便您可以使用Profile API成功诊断和调试查询，但这只是一个概述。 有关完整的理解，请参阅Lucene的文档和地方的代码。
 
-With that said, a complete understanding is often not required to fix a slow query. It is usually sufficient to see that a particular component of a query is slow, and not necessarily understand why the `advance` phase of that query is the cause, for example.
+这样说，完整的理解往往不需要修复慢速查询。 查看查询的特定组件通常是足够的，例如，不一定理解为什么查询的“advance”阶段是原因。
 
-### `query` Section
+### `query` 章节
 
-The `query` div contains detailed timing of the query tree executed by Lucene on a particular shard. The overall structure of this query tree will resemble your original Elasticsearch query, but may be slightly (or sometimes very) different. It will also use similar but not always identical naming. Using our previous `match` query example, let’s analyze the `query` div:
+`query` 部分包含了Lucene在特定分片上执行的查询树的详细时序。这个查询树的整体结构将类似于您的原始Elasticsearch查询，但可能稍微（或有时甚至是）不同。它也将使用类似的，但并不总是相同的命名。 使用我们以前的`match`查询示例，让我们分析一下`query`部分
     
     
     "query": [
@@ -37,25 +37,24 @@ The `query` div contains detailed timing of the query tree executed by Lucene on
         }
     ]
 
-<1>| The breakdown timings are omitted for simplicity     
+<1>| 为简单起见，故障时间被省略    
 ---|---  
-  
-Based on the profile structure, we can see that our `match` query was rewritten by Lucene into a BooleanQuery with two clauses (both holding a TermQuery). The `type` field displays the Lucene class name, and often aligns with the equivalent name in Elasticsearch. The `description` field displays the Lucene explanation text for the query, and is made available to help differentiating between parts of your query (e.g. both `message:search` and `message:test` are TermQuery’s and would appear identical otherwise.
 
-The `time` field shows that this query took ~1.8ms for the entire BooleanQuery to execute. The recorded time is inclusive of all children.
+根据配置`profile`结构，我们可以看到我们的`match`查询被Lucene重写为带有两个子句的BooleanQuery（都是TermQuery）。 `type`字段显示Lucene类的名称，并且经常与Elasticsearch中的等价名称对齐。 `description`字段显示查询的Lucene说明文本，可用于帮助区分查询的各个部分（例如，message：search和message：test都是TermQuery，否则将显示相同的结果。
 
-The `time_in nanos` field shows the timing information in an exact, machine readable format in nanoseconds.
+`time`字段显示这个查询花费了大约1.8ms的时间执行整个BooleanQuery。记录的时间包括所有的孩子。
 
-The `breakdown` field will give detailed stats about how the time was spent, we’ll look at that in a moment. Finally, the `children` array lists any sub-queries that may be present. Because we searched for two values ("search test"), our BooleanQuery holds two children TermQueries. They have identical information (type, time, breakdown, etc). Children are allowed to have their own children.
+`time_in_nanos`字段以毫微秒的精确机器可读格式显示定时信息。
+
+`breakdown`字段会详细记录下如何花费时间，稍后我们再来看看。最后，`children`数组列出了可能存在的任何子查询。因为我们搜索了两个值（“搜索测试”），所以我们的BooleanQuery包含两个子查询TermQueries。他们有相同的信息（类型，时间，细目等）。儿童可以有自己的孩子。
 
 ![Note](/images/icons/note.png)
 
-The `time` field is only intended for human consumption. If you need exact timing values use `time_in nanos`. The `time` field is currently printed by default, but this will change with the next major version (6.0.0) where `time_in_nanos` will be printed by default.
+`time`字段仅用于人类阅读。 如果您需要准确的时间值，请使用`time_in_nanos`.`time`字段默认是输出的，但是会随着下一个主要版本（6.0.0）而改变，默认打印time_in_nanos。
 
 #### Timing Breakdown
 
-The `breakdown` component lists detailed timing statistics about low-level Lucene execution:
-    
+`breakdown`组件列出了关于底层Lucene执行的详细时间统计信息：    
     
     "breakdown": {
        "score": 51306,
@@ -72,19 +71,19 @@ The `breakdown` component lists detailed timing statistics about low-level Lucen
        "advance_count": 0
     }
 
-Timings are listed in wall-clock nanoseconds and are not normalized at all. All caveats about the overall `time` apply here. The intention of the breakdown is to give you a feel for A) what machinery in Lucene is actually eating time, and B) the magnitude of differences in times between the various components. Like the overall time, the breakdown is inclusive of all children times.
+计时器以挂钟纳秒列出，并且根本没有标准化。 关于整个`time`的所有警告在这里适用。 细分的目的是给你一个感觉：A）Lucene中的哪些机器实际上是在花时间，B）各个部件之间的时间差异的大小。 就像整体的时间一样，花费时间包括了所有的子层。
 
-The meaning of the stats are as follows:
+统计的含义如下：
 
-#### All parameters:
+#### 所有参数:
 
-`create_weight`| A Query in Lucene must be capable of reuse across multiple IndexSearchers (think of it as the engine that executes a search against a specific Lucene Index). This puts Lucene in a tricky spot, since many queries need to accumulate temporary state/statistics associated with the index it is being used against, but the Query contract mandates that it must be immutable. To get around this, Lucene asks each query to generate a Weight object which acts as a temporary context object to hold state associated with this particular (IndexSearcher, Query) tuple. The `weight` metric shows how long this process takes     
+`create_weight`|Lucene中的查询必须能够跨多个IndexSearchers重用（将其视为针对特定Lucene索引执行搜索的引擎）。这使得Lucene处于棘手的地步，因为许多查询需要累积与正在使用的索引关联的临时状态/统计信息，但是Query合同要求它必须是不可变的。为了解决这个问题，Lucene要求每个查询生成一个Weight对象，该对象充当临时上下文对象，以保存与此特定（IndexSearcher，Query）元组关联的状态。“权重”度量显示了这个过程需要多长时间   
 ---|---    
-`build_scorer`| This parameter shows how long it takes to build a Scorer for the query. A Scorer is the mechanism that iterates over matching documents generates a score per-document (e.g. how well does "foo" match the document?). Note, this records the time required to generate the Scorer object, not actually score the documents. Some queries have faster or slower initialization of the Scorer, depending on optimizations, complexity, etc. This may also showing timing associated with caching, if enabled and/or applicable for the query     
-`next_doc`| The Lucene method `next_doc` returns Doc ID of the next document matching the query. This statistic shows the time it takes to determine which document is the next match, a process that varies considerably depending on the nature of the query. Next_doc is a specialized form of advance() which is more convenient for many queries in Lucene. It is equivalent to advance(docId() + 1)     
-`advance`| `advance` is the "lower level" version of next_doc: it serves the same purpose of finding the next matching doc, but requires the calling query to perform extra tasks such as identifying and moving past skips, etc. However, not all queries can use next_doc, so `advance` is also timed for those queries. Conjunctions (e.g. `must` clauses in a boolean) are typical consumers of `advance`    
-`matches`| Some queries, such as phrase queries, match documents using a "Two Phase" process. First, the document is "approximately" matched, and if it matches approximately, it is checked a second time with a more rigorous (and expensive) process. The second phase verification is what the `matches` statistic measures. For example, a phrase query first checks a document approximately by ensuring all terms in the phrase are present in the doc. If all the terms are present, it then executes the second phase verification to ensure the terms are in-order to form the phrase, which is relatively more expensive than just checking for presence of the terms. Because this two-phase process is only used by a handful of queries, the `metric` statistic will often be zero     
-`score`| This records the time taken to score a particular document via it’s Scorer     `*_count`| Records the number of invocations of the particular method. For example, `"next_doc_count": 2,` means the `nextDoc()` method was called on two different documents. This can be used to help judge how selective queries are, by comparing counts between different query components.   
+`build_scorer`| 他的参数显示了为查询构建Scorer需要多长时间。Scorer是迭代匹配文档的机制，每个文档产生一个分数（例如，“foo”与文档匹配程度如何？）。 请注意，这将记录生成Scorer对象所需的时间，而不是实际评分文档。 根据优化，复杂性等，一些查询具有更快或更慢的Scorer初始化。如果启用和/或适用于查询，这也可以显示与缓存相关的时间   
+`next_doc`| Lucene方法`next_doc`返回与查询匹配的下一个文档的Doc ID。 此统计信息显示确定哪个文档是下一个匹配所花费的时间，这个过程根据查询的性质而变化很大。Next_doc是advance（）的一个特殊形式，对于Lucene中的许多查询来说更方便。 相当于advance（docId（）+ 1） 
+`advance`| `advance`是next_doc的“底层”版本：它用于找到下一个匹配文档的相同目的，但是需要调用查询来执行额外的任务，例如识别和移动跳过等等。但是，并不是所有的查询都可以使用next_doc，所以`advance`也为这些查询定时。 连接（例如boolean中的`must`子句）是`advance`的典型消费者
+`matches`| 某些查询（如短语查询）使用“两阶段”过程来匹配文档。首先，文档是“大致”匹配的，如果大致匹配，则以更严格（且昂贵）的过程进行第二次检查。第二阶段验证是“匹配”统计措施。 例如，短语查询首先通过确保短语中的所有词语出现在文档中来检查文档。如果存在所有条款，则执行第二阶段验证，以确保条款按顺序形成短语，这比仅检查条款的存在相对昂贵。 由于这个两阶段过程只被少数查询使用，所以“度量”统计量通常为零
+`score`| 这记录了通过Scorer`* _count` |评分特定文档所花费的时间 记录特定方法的调用次数。 例如``next_doc_count“：2，`表示在两个不同的文档上调用了`nextDoc（）`方法。 这可以用来通过比较不同查询组件之间的计数来帮助判断选择性查询的方式。  
   
 ### `collectors` Section
 

@@ -1,7 +1,6 @@
 ## 检验API Validate API
 
-The validate API allows a user to validate a potentially expensive query without executing it. We’ll use the following test data to explain \_validate:
-    
+`_validate`API允许用户在不执行的情况下验证潜在的消耗大的查询。 我们将使用以下测试数据来解释`_validate`API：
     
     PUT twitter/tweet/_bulk?refresh
     {"index":{"_id":1} }
@@ -9,31 +8,30 @@ The validate API allows a user to validate a potentially expensive query without
     {"index":{"_id":2} }
     {"user" : "kimchi", "post_date" : "2009-11-15T14:12:13", "message" : "My username is similar to @kimchy!"}
 
-When sent a valid query:
+当发送一个`_validate`查询:
     
     
     GET twitter/_validate/query?q=user:foo
 
-The response contains `valid:true`:
+响应包含 `valid:true`:
     
     
     {"valid":true,"_shards":{"total":1,"successful":1,"failed":0} }
 
-### Request Parameters
+### 请求参数
 
-When executing exists using the query parameter `q`, the query passed is a query string using Lucene query parser. There are additional parameters that can be passed:
+当使用查询参数`q`执行时，传递的查询是使用Lucene查询解析器的查询字符串。 还有其他可以传递的参数：
 
-Name | Description  
+名称|描述 
 ---|---  
+`df`| 在查询中未定义字段前缀时使用的默认字段。   
+`analyzer`| 分析查询字符串时要使用的分析器名称。 
+`default_operator`| 要使用的默认运算符可以是`AND`或`OR`。 默认为`OR`。
+`lenient`| 如果设置为true将导致基于格式的失败（如提供文本到数字字段）被忽略。 默认为`false`。
+`analyze_wildcard`| 是否应该分析通配符和前缀查询。 默认为`false`。    
   
-`df`| The default field to use when no field prefix is defined within the query.    
-`analyzer`| The analyzer name to be used when analyzing the query string.    
-`default_operator`| The default operator to be used, can be `AND` or `OR`. Defaults to `OR`.    
-`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.    
-`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to `false`.  
   
-The query may also be sent in the request body:
-    
+该查询也可以在请求主体中发送：    
     
     GET twitter/tweet/_validate/query
     {
@@ -53,23 +51,20 @@ The query may also be sent in the request body:
 
 ![Note](/images/icons/note.png)
 
-The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html) works
+正在发送的查询必须嵌套在`query`键中，与[search api]（search-search.html）相同
 
-If the query is invalid, `valid` will be `false`. Here the query is invalid because Elasticsearch knows the post_date field should be a date due to dynamic mapping, and _foo_ does not correctly parse into a date:
-    
+如果查询无效，`valid`将会是`false`。 这里的查询是无效的，因为Elasticsearch知道post_date字段应该是由于动态映射的日期，而_foo_不能正确地解析成日期：
     
     GET twitter/tweet/_validate/query?q=post_date:foo
     
     
     {"valid":false,"_shards":{"total":1,"successful":1,"failed":0} }
 
-An `explain` parameter can be specified to get more detailed information about why a query failed:
-    
+可以指定`explain`参数来获取有关查询失败原因的更多详细信息：    
     
     GET twitter/tweet/_validate/query?q=post_date:foo&explain=true
 
-responds with:
-    
+响应：
     
     {
       "valid" : false,
@@ -85,9 +80,8 @@ responds with:
       } ]
     }
 
-When the query is valid, the explanation defaults to the string representation of that query. With `rewrite` set to `true`, the explanation is more detailed showing the actual Lucene query that will be executed.
-
-For More Like This:
+当查询有效时，说明默认为该查询的字符串表示形式。 将`rewrite`设置为`true`，解释更加详细，显示将要执行的实际Lucene查询。
+更多像这样的：
     
     
     GET twitter/tweet/_validate/query?rewrite=true
@@ -102,7 +96,7 @@ For More Like This:
       }
     }
 
-Response:
+响应:
     
     
     {
@@ -121,9 +115,9 @@ Response:
        ]
     }
 
-By default, the request is executed on a single shard only, which is randomly selected. The detailed explanation of the query may depend on which shard is being hit, and therefore may vary from one request to another. So, in case of query rewrite the `all_shards` parameter should be used to get response from all available shards.
+默认情况下，请求只在一个单独的分片上执行，这是随机选择的。 查询的详细解释可能取决于哪个分片正被击中，因此可能因请求而异。 所以，在查询重写的情况下，应该使用`all_shards`参数来获得所有可用分片的响应。
 
-For Fuzzy Queries:
+对于模糊查询：
     
     
     GET twitter/tweet/_validate/query?rewrite=true&all_shards=true
@@ -138,7 +132,7 @@ For Fuzzy Queries:
       }
     }
 
-Response:
+响应:
     
     
     {

@@ -1,6 +1,6 @@
 ## 统计API Count API
 
-The count API allows to easily execute a query and get the number of matches for that query. It can be executed across one or more indices and across one or more types. The query can either be provided using a simple query string as a parameter, or using the [Query DSL](query-dsl.html) defined within the request body. Here is an example:
+计数API允许轻松执行查询并获取该查询的匹配数量。 它可以跨越一个或多个索引并跨越一个或多个类型执行。 可以使用一个简单的查询字符串作为参数，或者使用请求主体中定义的[Query DSL](query-dsl.html)来提供查询。 这里是一个例子：
     
     
     PUT /twitter/tweet/1?refresh
@@ -19,10 +19,9 @@ The count API allows to easily execute a query and get the number of matches for
 
 ![Note](/images/icons/note.png)
 
-The query being sent in the body must be nested in a `query` key, same as the [search api](search-search.html) works
+正在发送的查询必须嵌套在`query`键中，与[search api](search-search.html)相同
 
-Both examples above do the same thing, which is count the number of tweets from the twitter index for a certain user. The result is:
-    
+上面的两个例子都做同样的事情，这是从一个特定的用户的twitter索引的数量。 结果是：    
     
     {
         "count" : 1,
@@ -33,35 +32,35 @@ Both examples above do the same thing, which is count the number of tweets from 
         }
     }
 
-The query is optional, and when not provided, it will use `match_all` to count all the docs.
+该查询是可选的，当不提供时，它将使用`match_all`来计算所有的文档。
 
-### Multi index, Multi type
+### 多索引，多类型 
 
-The count API can be applied to [multiple types in multiple indices](search-search.html#search-multi-index-type).
+计数API可以应用于[多索引中的多类型](search-search.html#search-multi-index-type).
 
-### Request Parameters
+### 请求参数
 
-When executing count using the query parameter `q`, the query passed is a query string using Lucene query parser. There are additional parameters that can be passed:
+当使用查询参数`q`执行计数时，传递的查询是使用Lucene查询解析器的查询字符串。 还有其他可以传递的参数：
 
-Name | Description  
+名称 | 描述  
 ---|---    
-`df`| The default field to use when no field prefix is defined within the query.    
-`analyzer`| The analyzer name to be used when analyzing the query string.    
-`default_operator`| The default operator to be used, can be `AND` or `OR`. Defaults to `OR`.    
-`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.    
-`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to `false`.    
-`terminate_after`| The maximum count for each shard, upon reaching which the query execution will terminate early. If set, the response will have a boolean field `terminated_early` to indicate whether the query execution has actually terminated_early. Defaults to no terminate_after.  
+`df`| 在查询中未定义字段前缀时使用的默认字段。   
+`analyzer`| 分析查询字符串时要使用的分析器名称。 
+`default_operator`| 要使用的默认运算符可以是`AND`或`OR`。 默认为`OR`。
+`lenient`| 如果设置为true将导致基于格式的失败（如提供文本到数字字段）被忽略。 默认为`false`。
+`analyze_wildcard`| 是否应该分析通配符和前缀查询。 默认为`false`。    
+`terminate_after`| 每个分片的最大计数，一旦到达，查询执行将提前终止。 如果设置，响应将有一个布尔型字段`terminated_early`来指示查询执行是否实际已经提前结束。 缺省为不提前。  
   
-### Request Body
+### 请求体
 
-The count can use the [Query DSL](query-dsl.html) within its body in order to express the query that should be executed. The body content can also be passed as a REST parameter named `source`.
+计数可以使用[查询DSL](query-dsl.html)在其正文中，以表达应执行的查询。 主体内容也可以作为名为`source`的REST参数传递。
 
-Both HTTP GET and HTTP POST can be used to execute count with body. Since not all clients support GET with body, POST is allowed as well.
+GET和POST方法都可以用请求体来执行计数API。 由于不是所有的客户端都支持GET，所以POST也是允许的。
 
-### Distributed
+### 分散式 Distributed
+计数操作通过所有分片广播。 对于每个分片ID组，都会选择一个副本并对其执行。 这意味着副本增加了count的可扩展性。
 
-The count operation is broadcast across all shards. For each shard id group, a replica is chosen and executed against it. This means that replicas increase the scalability of count.
 
-### Routing
+### 路由 Routing
 
-The routing value (a comma separated list of the routing values) can be specified to control which shards the count request will be executed on.
+可以指定路由值（以逗号分隔的路由值列表），以控制要执行的计数请求的分片。

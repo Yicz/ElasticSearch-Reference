@@ -1,51 +1,44 @@
 ## 字段职能API Field Capabilities API
 
-![Warning](/images/icons/warning.png)
+![Warning](/images/icons/warning.png)此功能是实验性的，可能会在将来的版本中完全更改或删除。ES将采取尽最大努力解决任何问题，但实验功能不受支持官方遗传算法功能的SLA。
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
+字段功能API允许在多个索引中检索字段的功能。
 
-The field capabilities API allows to retrieve the capabilities of fields among multiple indices.
-
-The field capabilities api by default executes on all indices:
+默认情况下字段功能api在所有索引上执行：
     
     
     GET _field_caps?fields=rating
 
-  1. but the request can also be restricted to specific indices: 
-
-
-    
+但是请求也可以限制在特定的索引中：
     
     GET twitter/_field_caps?fields=rating
 
-Alternatively the `fields` option can also be defined in the request body:
-    
+或者，也可以在请求主体中定义`fields`选项：    
     
     POST _field_caps
     {
        "fields" : ["rating"]
     }
 
-This is equivalent to the previous request.
+支持的请求选项：
 
-Supported request options:
-
-`fields`| A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.     
+`fields`|计算统计信息的字段列表。 该字段名称支持通配符表示法。 例如，使用`text_ *`将导致返回匹配表达式的所有字段。    
 ---|---   
-`searchable`| Whether this field is indexed for search on all indices.     ---|---    
-`aggregatable`| Whether this field can be aggregated on all indices.     
-`indices`| The list of indices where this field has the same type, or null if all indices have the same type for the field.     
-`non_searchable_indices`| The list of indices where this field is not searchable, or null if all indices have the same definition for the field.     
-`non_aggregatable_indices`| The list of indices where this field is not aggregatable, or null if all indices have the same definition for the field.   
+`searchable`| 该字段是否被索引用于在所有索引上进行搜索。    
+`aggregatable`| 该字段是否可以汇总在所有的指标上。    
+`indices`| 该字段具有相同类型的索引列表;如果所有索引具有相同类型的字段，则为null。
+`non_searchable_indices`| 该字段不可搜索的索引列表;如果所有索引具有相同的字段定义，则为null。
+`non_aggregatable_indices`| 该字段不可聚合的索引列表;如果所有索引具有相同的字段定义，则为null。 
   
-### Response format
+### 响应格式
 
-Request:
+请求:
     
     
     GET _field_caps?fields=rating,title
-    
-    
+
+响应：
+
     {
         "fields": {
             "rating": { <1>
@@ -72,8 +65,8 @@ Request:
         }
     }
 
-<1>| The field `rating` is defined as a long in `index1` and `index2` and as a `keyword` in `index3` and `index4`.     
+<1>| 字段`rating`在`index1`和`index2`中定义为一个`long`类型，在`index3`和`index4`中定义为`keyword`类型。    
 ---|---    
-<2>| The field `rating` is not aggregatable in `index1`.     
-<3>| The field `rating` is not searchable in `index4`.     
-<4>| The field `title` is defined as `text` in all indices. 
+<2>| `rating`字段不能在`index1`中聚合.     
+<3>| `index4`中不能搜索`rating`字段。    
+<4>| 在所有索引中，`title`字段被定义为`text`。

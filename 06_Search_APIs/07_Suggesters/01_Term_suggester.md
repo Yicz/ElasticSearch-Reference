@@ -2,35 +2,31 @@
 
 ![Note](/images/icons/note.png)
 
-In order to understand the format of suggestions, please read the [_Suggesters_](search-suggesters.html) page first.
+为了理解建议的格式，请首先阅读[_07_Suggesters_](search-suggesters.html)介绍。
 
-The `term` suggester suggests terms based on edit distance. The provided suggest text is analyzed before terms are suggested. The suggested terms are provided per analyzed suggest text token. The `term` suggester doesn’t take the query into account that is part of request.
+`term`建议根据编辑距离建议词条。 所提供的建议文本在建议词条之前进行分析。 建议的词条提供每个分析建议的文本标记。 `term`建议器不考虑请求的一部分。
 
 ### 通用建议选项 Common suggest options:
 
-`text`| The suggest text. The suggest text is a required option that needs to be set globally or per suggestion.     
+`text`| 建议的文本。 建议文本是需要在全局或每个建议中设置的必需选项。     
 ---|---    
-`field`| The field to fetch the candidate suggestions from. This is an required option that either needs to be set globally or per suggestion.     
-`analyzer`| The analyzer to analyse the suggest text with. Defaults to the search analyzer of the suggest field.     
-`size`| The maximum corrections to be returned per suggest text token.     
-`sort`| Defines how suggestions should be sorted per suggest text term. Two possible values:   * `score`: Sort by score first, then document frequency and then the term itself.   * `frequency`: Sort by document frequency first, then similarity score and then the term itself.     
-`suggest_mode`| The suggest mode controls what suggestions are included or controls for what suggest text terms, suggestions should be suggested. Three possible values can be specified: 
-
-  * `missing`: Only provide suggestions for suggest text terms that are not in the index. This is the default. 
-  * `popular`: Only suggest suggestions that occur in more docs than the original suggest text term. 
-  * `always`: Suggest any matching suggestions based on terms in the suggest text. 
+`field`| 该字段从中获取候选人建议。 这是一个必需的选项，需要在全局或每个建议中设置。
+`analyzer`| 分词器分析建议的文本。 默认为建议字段的搜索分析器。    
+`size`| 每个建议返回的最大更正文本标记。     
+`sort`| 定义如何根据建议的文本术语对建议进行排序。 两个可能的值：`socre`：先按分数排序，然后是文档频率，然后是词条本身。 `frequency`：先按文档频率排序，然后是相似度分数，然后是词条本身。
+`suggest_mode`| 建议模式控制包含哪些建议或控制什么建议文本条款，建议应该建议。 可以指定三个可能的值：`missing'：只提供建议的文本条款不在索引中。 这是默认的。 `popular'：只建议发生在比原来的建议文本条款更多的文档中。`always`：建议根据建议文本中的条款提供任何匹配的建议。
 
   
   
 ### 其他建议选项 Other term suggest options:
 
-`lowercase_terms`| Lower cases the suggest text terms after text analysis.     
+`lowercase_terms`| 将文本分析后的建议文本变成小写。   
 ---|---    
-`max_edits`| The maximum edit distance candidate suggestions can have in order to be considered as a suggestion. Can only be a value between 1 and 2. Any other value result in an bad request error being thrown. Defaults to 2.     
-`prefix_length`| The number of minimal prefix characters that must match in order be a candidate suggestions. Defaults to 1. Increasing this number improves spellcheck performance. Usually misspellings don’t occur in the beginning of terms. (Old name "prefix_len" is deprecated)     
-`min_word_length`| The minimum length a suggest text term must have in order to be included. Defaults to 4. (Old name "min_word_len" is deprecated)     
-`shard_size`| Sets the maximum number of suggestions to be retrieved from each individual shard. During the reduce phase only the top N suggestions are returned based on the `size` option. Defaults to the `size` option. Setting this to a value higher than the `size` can be useful in order to get a more accurate document frequency for spelling corrections at the cost of performance. Due to the fact that terms are partitioned amongst shards, the shard level document frequencies of spelling corrections may not be precise. Increasing this will make these document frequencies more precise.     
-`max_inspections`| A factor that is used to multiply with the `shards_size` in order to inspect more candidate spell corrections on the shard level. Can improve accuracy at the cost of performance. Defaults to 5.     
-`min_doc_freq`| The minimal threshold in number of documents a suggestion should appear in. This can be specified as an absolute number or as a relative percentage of number of documents. This can improve quality by only suggesting high frequency terms. Defaults to 0f and is not enabled. If a value higher than 1 is specified then the number cannot be fractional. The shard level document frequencies are used for this option.     
-`max_term_freq`| The maximum threshold in number of documents a suggest text token can exist in order to be included. Can be a relative percentage number (e.g 0.4) or an absolute number to represent document frequencies. If an value higher than 1 is specified then fractional can not be specified. Defaults to 0.01f. This can be used to exclude high frequency terms from being spellchecked. High frequency terms are usually spelled correctly on top of this also improves the spellcheck performance. The shard level document frequencies are used for this option.     
-`string_distance`| Which string distance implementation to use for comparing how similar suggested terms are. Five possible values can be specified: `internal` \- The default based on damerau_levenshtein but highly optimized for comparing string distance for terms inside the index. `damerau_levenshtein` \- String distance algorithm based on Damerau-Levenshtein algorithm. `levenstein` \- String distance algorithm based on Levenstein edit distance algorithm. `jarowinkler` \- String distance algorithm based on Jaro-Winkler algorithm. `ngram` \- String distance algorithm based on character n-grams. 
+`max_edits`| 候选人建议的最大编辑距离可以被视为一个建议。 只能是1和2之间的值。任何其他值都会导致错误的请求错误被抛出。 默认为2。    
+`prefix_length`| 必须匹配的最小前缀字符的数量才能成为候选建议。 默认为1.增加此数字可提高拼写检查性能。 通常拼写错误不会在条款开始时发生。 （旧名称“prefix_len”已弃用）   
+`min_word_length`|建议文本词语必须包含的最小长度。 缺省为4.（旧名称“min_word_len”已弃用）     
+`shard_size`| 设置从每个单独的分片中检索的建议的最大数量。 在缩小阶段，只有前面N个建议是基于size选项返回的。 默认为`size`选项。 将此设置为比“尺寸”更高的值可能是有用的，以便以性能为代价获得拼写更正的更准确的文档频率。由于术语在碎片之间进行分割，所以拼写纠正的碎片级文档频率可能不准确。 增加这将使这些文件的频率更精确。
+`max_inspections`| 一个用来与`shards_size`相乘的因子，以便在分片级别检查更多候选法术修正。 可以提高性能成本的精度。 默认为5。
+`min_doc_freq`| 建议的文档数量的最小阈值应该出现在该文档中。这可以被指定为绝对数量或文档数量的相对百分比。 这可以通过仅提出高频率术语来改善质量。 默认为0f，未启用。 如果指定的值大于1，则该数字不能是小数。 分片级文档频率用于此选项。    
+`max_term_freq`| 为了被包括在内，可以存在建议文本标记的文档数量的最大阈值。 可以是相对百分比数字（例如0.4）或绝对数字来表示文档频率。 如果指定的值大于1，则不能指定小数。 默认为0.01f。 这可以用来排除拼写检查中的高频词汇。 高频术语通常拼写正确，这也提高了拼写检查性能。 分片级文档频率用于此选项。
+`string_distance`| 使用哪个字符串距离实现来比较建议条件的相似程度。 可以指定五个可能的值：`internal` ： 基于damerau_levenshtein的默认值，但是对于比较索引内部的字符串的字符串距离进行了高度优化。 `damerau_levenshtein` ：基于Damerau-Levenshtein算法的字符串距离算法。 `levenstein` ：基于Levenstein编辑距离算法的字符串距离算法。 `jarowinkler` ：基于Jaro-Winkler算法的字符串距离算法。 `ngram` ： 基于字符n-gram的字符串距离算法。

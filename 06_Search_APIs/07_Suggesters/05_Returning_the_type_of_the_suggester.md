@@ -1,8 +1,8 @@
 ## Returning the type of the suggester
 
-Sometimes you need to know the exact type of a suggester in order to parse its results. The `typed_keys` parameter can be used to change the suggester’s name in the response so that it will be prefixed by its type.
+有时您需要知道建议器的确切类型才能解析其结果。 `typed_keys`参数可以用来改变响应中的建议者的名字，这样它的前缀就是它的类型。
 
-Considering the following example with two suggesters `term` and `phrase`:
+考虑以下两个建议词“term”和“phrase”的例子：
     
     
     POST _search?typed_keys
@@ -22,7 +22,7 @@ Considering the following example with two suggesters `term` and `phrase`:
       }
     }
 
-In the response, the suggester names will be changed to respectively `term#my-first-suggester` and `phrase#my-second-suggester`, reflecting the types of each suggestion:
+在响应中，建议者的名字将分别变成`term＃my-first-suggester`和`phrase＃my-second-suggester`，反映了每个建议的类型：
     
     
     {
@@ -70,6 +70,6 @@ In the response, the suggester names will be changed to respectively `term#my-fi
       ...
     }
 
-<1>| The name `my-first-suggester` now contains the `term` prefix.     
+<1>| `my-first-suggester`这个名字现在包含了`term`前缀。     
 ---|---    
-<2>| The name `my-second-suggester` now contains the `phrase` prefix. 
+<2>| `my-second-suggester`这个名字现在包含了`phrase`前缀。

@@ -1,6 +1,6 @@
 ## 查询模板 Search Template
 
-The `/_search/template` endpoint allows to use the mustache language to pre render search requests, before they are executed and fill existing templates with template parameters.
+`/_search/template`API允许使用`mustache`语言预渲染搜索请求，然后执行它们，并使用模板参数填充现有的模板。
     
     
     GET _search/template
@@ -16,15 +16,15 @@ The `/_search/template` endpoint allows to use the mustache language to pre rend
         }
     }
 
-For more information on how Mustache templating and what kind of templating you can do with it check out the [online documentation of the mustache project](http://mustache.github.io/mustache.5.html).
+有关Mustache模板以及可以使用哪种模板的更多信息，请查看[Mustache项目的在线文档]（http://mustache.github.io/mustache.5.html）。
 
 ![Note](/images/icons/note.png)
 
-The mustache language is implemented in elasticsearch as a sandboxed scripting language, hence it obeys settings that may be used to enable or disable scripts per language, source and operation as described in the [scripting docs](modules-scripting-security.html#security-script-source)
+Mustache语言是在elasticsearch中作为沙盒脚本语言实现的，因此它遵从[脚本文档](modules-scripting-security.html#security-script-source)中描述的可用于启用或禁用每种语言，源和操作的脚本的设置
 
-#### More template examples
+####更多模板示例  More template examples
 
-##### Filling in a query string with a single value
+##### 用单个值填充查询字符串
     
     
     GET _search/template
@@ -41,10 +41,9 @@ The mustache language is implemented in elasticsearch as a sandboxed scripting l
         }
     }
 
-##### Converting parameters to JSON
+##### 将参数转换为JSON
 
-The `{ {#toJson} }parameter{ {/toJson} }` function can be used to convert parameters like maps and array to their JSON representation:
-    
+{{#toJson}}参数{{/ toJson}}函数可以用来将地图和数组等参数转换为JSON表示形式：
     
     GET _search/template
     {
@@ -56,7 +55,7 @@ The `{ {#toJson} }parameter{ {/toJson} }` function can be used to convert parame
       }
     }
 
-which is rendered as:
+这是呈现为:
     
     
     {
@@ -70,7 +69,7 @@ which is rendered as:
       }
     }
 
-A more complex example substitutes an array of JSON objects:
+一个更复杂的例子替代了一个JSON对象的数组:
     
     
     GET _search/template
@@ -84,7 +83,7 @@ A more complex example substitutes an array of JSON objects:
        }
     }
 
-which is rendered as:
+这是呈现为:
     
     
     {
@@ -106,9 +105,9 @@ which is rendered as:
         }
     }
 
-##### Concatenating array of values
+##### 连接值的数组
 
-The `{ {#join} }array{ {/join} }` function can be used to concatenate the values of an array as a comma delimited string:
+可以使用{{#join}}数组{{/ join}}函数将数组的值连接为逗号分隔的字符串：
     
     
     GET _search/template
@@ -125,7 +124,7 @@ The `{ {#join} }array{ {/join} }` function can be used to concatenate the values
       }
     }
 
-which is rendered as:
+这是呈现为:
     
     
     {
@@ -136,7 +135,7 @@ which is rendered as:
         }
     }
 
-The function also accepts a custom delimiter:
+该功能也接受自定义分隔符:
     
     
     GET _search/template
@@ -161,7 +160,7 @@ The function also accepts a custom delimiter:
       }
     }
 
-which is rendered as:
+这是呈现为:
     
     
     {
@@ -176,10 +175,9 @@ which is rendered as:
         }
     }
 
-##### Default values
+##### 默认值
 
-A default value is written as `{ {var} }{ {^var} }default{ {/var} }` for instance:
-    
+例如，默认值写为“{ {var} } { {var} } default { {/ var} }”    
     
     {
       "inline": {
@@ -195,8 +193,7 @@ A default value is written as `{ {var} }{ {^var} }default{ {/var} }` for instanc
       "params": { ... }
     }
 
-When `params` is `{ "start": 10, "end": 15 }` this query would be rendered as:
-    
+当`params`是`{“start”：10，“end”：15}`时，这个查询将会被显示为：    
     
     {
         "range": {
@@ -207,8 +204,7 @@ When `params` is `{ "start": 10, "end": 15 }` this query would be rendered as:
       }
     }
 
-But when `params` is `{ "start": 10 }` this query would use the default value for `end`:
-    
+但是当`params`是`{“start”：10}`时，这个查询将使用`end`的默认值：    
     
     {
         "range": {
@@ -219,12 +215,11 @@ But when `params` is `{ "start": 10 }` this query would use the default value fo
         }
     }
 
-##### Conditional clauses
+##### 有条件的语句
 
-Conditional clauses cannot be expressed using the JSON form of the template. Instead, the template **must** be passed as a string. For instance, let’s say we wanted to run a `match` query on the `line` field, and optionally wanted to filter by line numbers, where `start` and `end` are optional.
+条件子句不能使用模板的JSON形式表示。 相反，模板**必须**作为字符串传递。 例如，假设我们想要在`line`字段上运行`match`查询，并且可以根据行号进行过滤，其中`start`和`end`是可选的。
 
-The `params` would look like:
-    
+“params”看起来像：    
     
     {
         "params": {
@@ -236,11 +231,10 @@ The `params` would look like:
         }
     }
 
-<1> <2> <3>| All three of these elements are optional.     
+<1> <2> <3>| 所有这三个元素都是可选的。  
 ---|---  
   
-We could write the query as:
-    
+我们可以将查询写为：    
     
     {
       "query": {
@@ -263,33 +257,32 @@ We could write the query as:
                   { {/end} } <9>
                 }
               }
-            { {/line_no} } ![](images/icons/callouts/10.png)
+            { {/line_no} } <10>
           }
         }
       }
     }
 
-<1>| Fill in the value of param `text`    
+<1>| 填入参数“text”的值 
 ---|---    
-<2> ![](images/icons/callouts/10.png)| Include the `range` filter only if `line_no` is specified     
-<3> <6>| Include the `gte` clause only if `line_no.start` is specified     
-<4>| Fill in the value of param `line_no.start`    
-<5>| Add a comma after the `gte` clause only if `line_no.start` AND `line_no.end` are specified     
-<7> <9>| Include the `lte` clause only if `line_no.end` is specified     
-<8>| Fill in the value of param `line_no.end`  
+<2> <10>| 只有在指定了`line_no`的情况下才加入`range`过滤器    
+<3> <6>| 仅当指定了`line_no.start`时才包含`gte`子句    
+<4>| 填入参数`line_no.start`的值    
+<5>| 仅当指定了`line_no.start`和`line_no.end`时，才在`gte`子句后面加逗号     
+<7> <9>| 仅当指定了`line_no.end`时才包含`lte`子句    
+<8>| 填入参数`line_no.end`的值 
   
 ![Note](/images/icons/note.png)
 
-As written above, this template is not valid JSON because it includes the _div_ markers like `{ {#line_no} }`. For this reason, the template should either be stored in a file (see [Pre-registered template or, when used via the REST API, should be written as a string:
-    
+如上所述，这个模板不是有效的JSON，因为它包含像`{ {＃line_no} }`这样的_div_标记。 出于这个原因，模板应该存储在一个文件中（参见[预先注册的模板])，或者当通过REST API使用时，应该写成一个字符串：
     
     "inline": "{\"query\":{\"bool\":{\"must\":{\"match\":{\"line\":\"{ {text} }\"} },\"filter\":{ { {#line_no} }\"range\":{\"line_no\":{ { {#start} }\"gte\":\"{ {start} }\"{ {#end} },{ {/end} }{ {/start} }{ {#end} }\"lte\":\"{ {end} }\"{ {/end} } } }{ {/line_no} } } } } }"
 
-##### Encoding URLs
+##### 编码URL
 
-The `{ {#url} }value{ {/url} }` function can be used to encode a string value in a HTML encoding form as defined in by the [HTML specification](http://www.w3.org/TR/html4/).
+可以使用`{ {#url} }`值`{ {/url} }`函数对HTML编码形式的字符串值进行编码，如[HTML规范](http://www.w3.org/TR/HTML4/)。
 
-As an example, it is useful to encode a URL:
+作为一个例子，编码一个URL是很有用的：
     
     
     GET _render/template
@@ -307,7 +300,7 @@ As an example, it is useful to encode a URL:
         }
     }
 
-The previous query will be rendered as:
+查询将呈现为：
     
     
     {
@@ -320,9 +313,9 @@ The previous query will be rendered as:
         }
     }
 
-##### Pre-registered template
+##### 预先注册的模板 Pre-registered template
 
-You can register search templates by storing it in the `config/scripts` directory, in a file using the `.mustache` extension. In order to execute the stored template, reference it by it’s name under the `template` key:
+您可以将搜索模板存储在`config/scripts`目录中，使用`.mustache`扩展名注册到一个文件中。 为了执行存储的模板，请在`template`键下使用它的名字来引用它：
     
     
     GET _search/template
@@ -333,8 +326,10 @@ You can register search templates by storing it in the `config/scripts` director
         }
     }
 
-<1>| Name of the query template in `config/scripts/`, i.e., `storedTemplate.mustache`.     
+<1>| `config/scripts/`文档下查询模板的名称，即`storedTemplate.mustache`。     
 ---|---    
+
+您还可以通过将搜索模板存储在群集中。 有REST API来管理这些索引模板。
 
 You can also register search templates by storing it in the cluster state. There are REST APIs to manage these indexed templates.
     
@@ -350,12 +345,12 @@ You can also register search templates by storing it in the cluster state. There
         }
     }
 
-This template can be retrieved by
+这个模板可以通过
     
     
     GET _search/template/<templatename>
 
-which is rendered as:
+这是呈现为:
     
     
     {
@@ -365,7 +360,7 @@ which is rendered as:
         "template" : "{\"query\":{\"match\":{\"title\":\"{ {query_string} }\"} } }"
     }
 
-This template can be deleted by
+这个模板可以被删除
     
     
     DELETE _search/template/<templatename>
@@ -381,13 +376,12 @@ To use an indexed template at search time use:
         }
     }
 
-<1>| Name of the query template stored in the `.scripts` index.    
+<1>| 存储在`.scripts`索引中的查询模板的名称。    
 ---|---  
   
-#### Validating templates
+#### 验证模板
 
-A template can be rendered in a response with given parameters using
-    
+模板可以使用给定的参数在响应中呈现    
     
     GET _render/template
     {
@@ -415,10 +409,10 @@ This call will return the rendered template:
       }
     }
 
-<1>| `status` array has been populated with values from the `params` object.     
+<1>| `status`数组已经用“params”对象的值填充。   
 ---|---  
   
-File and indexed templates can also be rendered by replacing `inline` with `file` or `id` respectively. For example, to render a file template
+文件和索引模板也可以通过分别用`file`或`id`替换`inline`来渲染。 例如，呈现文件模板
     
     
     GET _render/template
@@ -429,8 +423,7 @@ File and indexed templates can also be rendered by replacing `inline` with `file
       }
     }
 
-Pre-registered templates can also be rendered using
-    
+预先注册的模板也可以使用渲染    
     
     GET _render/template/<template_name>
     {
@@ -439,10 +432,9 @@ Pre-registered templates can also be rendered using
       }
     }
 
-##### Explain
+##### 说明 Explain
 
-You can use `explain` parameter when running a template:
-    
+运行模板时可以使用`explain`参数：    
     
     GET _search/template
     {
@@ -453,10 +445,9 @@ You can use `explain` parameter when running a template:
       "explain": true
     }
 
-##### Profiling
+##### 剖析 profiling
 
-You can use `profile` parameter when running a template:
-    
+运行模板时可以使用`profile`参数：    
     
     GET _search/template
     {

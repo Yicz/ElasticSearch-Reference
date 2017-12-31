@@ -1,15 +1,15 @@
 ## Profiling Considerations
 
-### Performance Notes
+###性能说明
 
-Like any profiler, the Profile API introduces a non-negligible overhead to search execution. The act of instrumenting low-level method calls such as `collect`, `advance` and `next_doc` can be fairly expensive, since these methods are called in tight loops. Therefore, profiling should not be enabled in production settings by default, and should not be compared against non-profiled query times. Profiling is just a diagnostic tool.
+就像任何分析器一样，Profile API引入了一个不可忽略的开销来搜索执行。低级别方法调用例如collect，advance和next_doc的行为可能相当昂贵，因为这些方法在紧密循环中被调用。因此，默认情况下，不应在生产设置中启用分析，并且不应将其与非分析查询时间进行比较。分析只是一个诊断工具。
 
-There are also cases where special Lucene optimizations are disabled, since they are not amenable to profiling. This could cause some queries to report larger relative times than their non-profiled counterparts, but in general should not have a drastic effect compared to other components in the profiled query.
+也有一些特殊的Lucene优化被禁用，因为它们不适合分析。这可能会导致一些查询报告比它们的非异常对象更大的相对时间，但是与概要查询中的其他组件相比，通常不会有太大的影响。
 
-### Limitations
+###限制
 
-  * Profiling statistics are currently not available for suggestions, highlighting, `dfs_query_then_fetch`
-  * Profiling of the reduce phase of aggregation is currently not available 
-  * The Profiler is still highly experimental. The Profiler is instrumenting parts of Lucene that were never designed to be exposed in this manner, and so all results should be viewed as a best effort to provide detailed diagnostics. We hope to improve this over time. If you find obviously wrong numbers, strange query structures or other bugs, please report them! 
+  * 分析统计信息目前无法提供建议，突出显示“dfs_query_then_fetch”
+  * 聚合缩减阶段的分析目前不可用
 
+  Profiler仍然是高度实验性的。 Profiler正在测试那些从未被设计为以这种方式暴露的Lucene的一部分，所以所有的结果都应该被视为尽力提供详细的诊断。我们希望随着时间的推移来改善。如果你发现明显错误的数字，奇怪的查询结构或其他错误，请报告！
 

@@ -1,17 +1,14 @@
 ## 配置API Profile API
 
-![Warning](/images/icons/warning.png)
+![Warning](/images/icons/warning.png)此功能是实验性的，可能会在将来的版本中完全更改或删除。 ES将采取尽最大努力解决任何问题，但实验功能不受支持官方遗传算法功能的SLA。
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
+Profile API提供有关搜索请求中各个组件执行的详细时间信息。它使用户能够深入了解如何在低级别执行搜索请求，以便用户能够理解为什么某些请求很慢，并采取措施加以改进。
 
-The Profile API provides detailed timing information about the execution of individual components in a search request. It gives the user insight into how search requests are executed at a low level so that the user can understand why certain requests are slow, and take steps to improve them.
+Profile API的输出非常详细，特别是对于在许多分片中执行的复杂请求。 漂亮的打印回应建议帮助理解输出
 
-The output from the Profile API is **very** verbose, especially for complicated requests executed across many shards. Pretty-printing the response is recommended to help understand the output
+### 用法
 
-### Usage
-
-Any `_search` request can be profiled by adding a top-level `profile` parameter:
-    
+任何`_search`请求都可以通过添加一个顶级元素`profile`参数来进行分析：    
     
     GET /_search
     {
@@ -21,11 +18,10 @@ Any `_search` request can be profiled by adding a top-level `profile` parameter:
       }
     }
 
-<1>| Setting the top-level `profile` parameter to `true` will enable profiling for the search     
+<1>| 将顶级`profile`参数设置为`true`将启用对搜索的分析   
 ---|---  
   
-This will yield the following result:
-    
+这将产生以下结果：    
     
     {
        "took": 25,
@@ -135,12 +131,12 @@ This will yield the following result:
        }
     }
 
-<1>| Search results are returned, but were omitted here for brevity     
+<1>| 搜索结果被返回，但为了简洁起见在这里省略    
 ---|---  
   
-Even for a simple query, the response is relatively complicated. Let’s break it down piece-by-piece before moving to more complex examples.
+即使对于简单的查询，响应也相对复杂。 让我们逐一分解，然后再转到更复杂的例子。
 
-First, the overall structure of the profile response is as follows:
+首先，`profile`响应的总体结构如下：
     
     
     {
@@ -161,17 +157,17 @@ First, the overall structure of the profile response is as follows:
          }
     }
 
-<1>| A profile is returned for each shard that participated in the response, and is identified by a unique ID     
+<1>| 每个参与响应的分片都会返回一个`profile`，并由一个唯一的ID标识     
 ---|---    
-<2>| Each profile contains a div which holds details about the query execution     
-<3>| Each profile has a single time representing the cumulative rewrite time     
-<4>| Each profile also contains a div about the Lucene Collectors which run the search     
-<5>| Each profile contains a div which holds the details about the aggregation execution   
+<2>| 每个`profile`都包含一个保存查询执行细节的部分`query`
+<3>| 每个`profile`有一个时间代表累计重写时间`rewrite_time`
+<4>| 每个`profile`还包含一个关于运行搜索的Lucene收集器的部分`collector`    
+<5>| 每个`profile`都包含一个保存关于聚合执行的详细信息的分部`aggregations`
   
-Because a search request may be executed against one or more shards in an index, and a search may cover one or more indices, the top level element in the profile response is an array of `shard` objects. Each shard object lists it’s `id` which uniquely identifies the shard. The ID’s format is `[nodeID][indexName][shardID]`.
+由于可以针对索引中的一个或多个分片执行搜索请求，并且搜索可以覆盖一个或多个索引，所以分布式响应中的顶层元素是`shard`对象的数组。每个分片对象都列出了唯一标识分片的“id”。 ID的格式是`[nodeID] [indexName] [shardID]`。
 
-The profile itself may consist of one or more "searches", where a search is a query executed against the underlying Lucene index. Most Search Requests submitted by the user will only execute a single `search` against the Lucene index. But occasionally multiple searches will be executed, such as including a global aggregation (which needs to execute a secondary "match_all" query for the global context).
+配置文件本身可能包含一个或多个“搜索”，其中搜索是针对底层Lucene索引执行的查询。用户提交的大多数搜索请求只会针对Lucene索引执行一次“搜索”。但偶尔会执行多个搜索，例如包含全局聚合（需要为全局上下文执行辅助“match_all”查询）。
 
-Inside each `search` object there will be two arrays of profiled information: a `query` array and a `collector` array. Alongside the `search` object is an `aggregations` object that contains the profile information for the aggregations. In the future, more divs may be added, such as `suggest`, `highlight`, etc
+在每个“搜索”对象内部，将有两个配置信息数组：“查询”数组和“收集器”数组。 “搜索”对象旁边是一个“聚合”对象，其中包含聚合的配置文件信息。未来可能会增加更多的内容，比如`suggest`，`highlight`等
 
-There will also be a `rewrite` metric showing the total time spent rewriting the query (in nanoseconds).
+还会有一个`rewrite`指标，显示重写查询所用的总时间（以纳秒为单位）。

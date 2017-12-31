@@ -1,12 +1,12 @@
-## 明细API Explain API
+##  解释API Explain API
 
-The explain api computes a score explanation for a query and a specific document. This can give useful feedback whether a document matches or didn’t match a specific query.
+解释API计算查询和特定文档的分数解释。 这可以给出有用的反馈，无论文档是否匹配特定的查询。
 
-The `index` and `type` parameters expect a single index and a single type respectively.
+`index`和`type`参数分别指定望单个索引和单个类型。
 
-### Usage
+### 用例
 
-Full query example:
+完整查询示例:
     
     
     GET /twitter/tweet/0/_explain
@@ -16,8 +16,7 @@ Full query example:
           }
     }
 
-This will yield the following result:
-    
+这将产生以下结果：    
     
     {
        "_index": "twitter",
@@ -85,25 +84,24 @@ This will yield the following result:
        }
     }
 
-There is also a simpler way of specifying the query via the `q` parameter. The specified `q` parameter value is then parsed as if the `query_string` query was used. Example usage of the `q` parameter in the explain api:
-    
-    
+通过`q`参数指定查询也有一个更简单的方法。 然后解析指定的`q`参数值，就好像使用`query_string`查询一样。 解释API中`q`参数的使用示例：
+       
     GET /twitter/tweet/0/_explain?q=message:search
 
-This will yield the same result as the previous request.
+这将产生与以前的请求相同的结果。
 
-### All parameters:
+### 所有参数s:
 
-`_source`| Set to `true` to retrieve the `_source` of the document explained. You can also retrieve part of the document by using `_source_include` & `_source_exclude` (see [Get API](docs-get.html#get-source-filtering) for more details)     
+`_source`| 设置为`true`来检索所解释文档的_source。 您还可以使用`_source_include`＆`_source_exclude`来获取部分文档（更多细节请参阅[获取API](docs-get.html＃get-source-filtering)）
 ---|---    
-`stored_fields`| Allows to control which stored fields to return as part of the document explained.     
-`routing`| Controls the routing in the case the routing was used during indexing.     
-`parent`| Same effect as setting the routing parameter.     
-`preference`| Controls on which shard the explain is executed.     
-`source`| Allows the data of the request to be put in the query string of the url.     
-`q`| The query string (maps to the query_string query).     
-`df`| The default field to use when no field prefix is defined within the query. Defaults to _all field.     
-`analyzer`| The analyzer name to be used when analyzing the query string. Defaults to the analyzer of the _all field.     
-`analyze_wildcard`| Should wildcard and prefix queries be analyzed or not. Defaults to false.     
-`lenient`| If set to true will cause format based failures (like providing text to a numeric field) to be ignored. Defaults to false.     
-`default_operator`| The default operator to be used, can be AND or OR. Defaults to OR. 
+`stored_fields`| 允许控制哪些存储的字段作为所解释文档的一部分返回。   
+`routing`| 在索引过程中使用路由的情况下控制路由。    
+`parent`|与设置路由参数的效果相同。    
+`preference`| 控制执行解释的分片。    
+`source`|允许将请求的数据放入url的查询字符串中。     
+`q`| 查询字符串（映射到query_string查询）.     
+`df`| 在查询中未定义字段前缀时使用的默认字段。 默认为_all字段。     
+`analyzer`| 分析查询字符串时要使用的分析器名称。 默认为全部字段的分析器。
+`default_operator`| 要使用的默认运算符可以是“AND”或`OR`。 默认为`OR`。
+`lenient`| 如果设置为true将导致基于格式的失败（如提供文本到数字字段）被忽略。 默认为`false`。
+`analyze_wildcard`| 是否应该分析通配符和前缀查询。 默认为`false`。    

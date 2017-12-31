@@ -1,18 +1,17 @@
 ## 多查询API Multi Search API
 
-The multi search API allows to execute several search requests within the same API. The endpoint for it is `_msearch`.
+多搜索API允许在相同的API中执行多个搜索请求。 它的接口是`_msearch`。
 
-The format of the request is similar to the bulk API format and makes use of the newline delimited JSON (NDJSON) format. the structure is as follows (the structure is specifically optimized to reduce parsing if a specific search ends up redirected to another node):
-    
+请求的格式类似于批量（bluk）API格式，并使用换行符分隔的JSON（NDJSON）格式。 结构如下（如果特定的搜索结束重定向到另一个节点，则该结构被特别优化以减少解析）：
     
     header\n
     body\n
     header\n
     body\n
 
- **NOTE** : the final line of data must end with a newline character `\n`. Each newline character may be preceded by a carriage return `\r`. When sending requests to this endpoint the `Content-Type` header should be set to `application/x-ndjson`.
+**注意**：最后一行数据必须以换行符`\n`结尾。 每个换行符都可以在回车符`\r`之后。 当向这个接口发送请求时，Content-Type头应该被设置为application/x-ndjson。
 
-The header part includes which index / indices to search on, optional (mapping) types to search on, the `search_type`, `preference`, and `routing`. The body includes the typical search body request (including the `query`, `aggregations`, `from`, `size`, and so on). Here is an example:
+头部分包括搜索哪些索引/索引，可选（映射）类型来搜索，search_type，preference和routing。 主体包括典型的搜索主体请求（包括`query`，`aggregations`，`from`，`size`等等）。 这里是一个例子：
     
     
     $ cat requests
@@ -30,11 +29,11 @@ The header part includes which index / indices to search on, optional (mapping) 
     
     $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch --data-binary "@requests"; echo
 
-Note, the above includes an example of an empty header (can also be just without any content) which is supported as well.
+注意，上面包括了一个空头的例子（也可以是没有任何内容的），它也被支持。
 
-The response returns a `responses` array, which includes the search response and status code for each search request matching its order in the original multi search request. If there was a complete failure for that specific search request, an object with `error` message and corresponding status code will be returned in place of the actual search response.
+响应返回一个`responses`数组，其中包含每个搜索请求的搜索响应和状态码，以匹配原始多重搜索请求中的顺序。 如果该特定搜索请求完全失败，将返回带有`error`消息和相应状态代码的对象，而不是实际的搜索响应。
 
-The endpoint allows to also search against an index/indices and type/types in the URI itself, in which case it will be used as the default unless explicitly defined otherwise in the header. For example:
+接口还允许在URI本身中对`indices`和`types`进行搜索，在这种情况下，它将被用作默认值，除非在头中另外明确定义。 例如：
     
     
     GET twitter/_msearch
@@ -45,20 +44,19 @@ The endpoint allows to also search against an index/indices and type/types in th
     {"index" : "twitter2"}
     {"query" : {"match_all" : {} } }
 
-The above will execute the search against the `twitter` index for all the requests that don’t define an index, and the last one will be executed against the `twitter2` index.
+以上将针对所有未定义索引的请求执行针对`twitter`索引的搜索，最后一个针对`twitter2`索引执行。
 
-The `search_type` can be set in a similar manner to globally apply to all search requests.
+`search_type`可以用类似的方式设置，以全局应用于所有的搜索请求。
 
-The msearch’s `max_concurrent_searches` request parameter can be used to control the maximum number of concurrent searches the multi search api will execute. This default is based on the number of data nodes and the default search thread pool size.
+msearch的`max_concurrent_searches`请求参数可以用来控制多搜索api将执行的最大并发搜索数。 此默认值基于数据节点的数量和默认搜索线程池大小。
 
-### Security
+### 安全
 
-See [_URL-based access control_](url-access-control.html)
+参见 [_URL-based access control_](url-access-control.html)
 
-### Template support
+### 模板支持
 
-Much like described in [_Search Template_](search-template.html) for the _search resource, _msearch also provides support for templates. Submit them like follows:
-    
+就像`_search`资源的[_Search Template_](search-template.html)中所描述的一样，`_msearch`也提供了对模板的支持。 提交他们如下所示：
     
     GET _msearch/template
     {"index" : "twitter"}
@@ -66,9 +64,9 @@ Much like described in [_Search Template_](search-template.html) for the _search
     {"index" : "twitter"}
     { "inline" : "{ \"query\": { \"match_{ {template} }\": {} } }", "params": { "template": "all" } }
 
-for inline templates.
+内联模板。
 
-You can also create search templates:
+您也可以创建搜索模板：
     
     
     POST /_search/template/my_template_1
@@ -94,8 +92,7 @@ You can also create search templates:
         }
     }
 
-and later use them in a _msearch:
-    
+并稍后在`_msearch`中使用它们：    
     
     GET _msearch/template
     {"index" : "main"}

@@ -1,12 +1,12 @@
 ## 查询建议 Suggesters
 
-The suggest feature suggests similar looking terms based on a provided text by using a suggester. Parts of the suggest feature are still under development.
+建议功能通过使用建议器，根据提供的文本建议类似的外观项。 建议功能的一部分仍在开发中。
 
-The suggest request part is defined alongside the query part in a `_search` request.
+建议的请求部分在查询部分的`_search`请求中被定义。
 
 ![Note](/images/icons/note.png)
 
-`_suggest` endpoint has been deprecated in favour of using suggest via `_search` endpoint. In 5.0, the `_search` endpoint has been optimized for suggest only search requests.
+`_suggest`API已被弃用，倾向于通过`_search`API使用建议。 在5.0中，`_search`API已经被优化，仅用于建议搜索请求。
     
     
     POST twitter/_search
@@ -26,7 +26,7 @@ The suggest request part is defined alongside the query part in a `_search` requ
       }
     }
 
-Several suggestions can be specified per request. Each suggestion is identified with an arbitrary name. In the example below two suggestions are requested. Both `my-suggest-1` and `my-suggest-2` suggestions use the `term` suggester, but have a different `text`.
+可以为每个请求指定几个建议。 每个建议都以任意名称来标识。 在下面的例子中，需要两个建议。 “my-suggest-1”和“my-suggest-2”这两个建议都使用`term`建议，但是有一个不同的`text`。
     
     
     POST _search
@@ -47,8 +47,7 @@ Several suggestions can be specified per request. Each suggestion is identified 
       }
     }
 
-The below suggest response example includes the suggestion response for `my-suggest-1` and `my-suggest-2`. Each suggestion part contains entries. Each entry is effectively a token from the suggest text and contains the suggestion entry text, the original start offset and length in the suggest text and if found an arbitrary number of options.
-    
+以下建议的响应示例包括对“my-suggest-1”和“my-suggest-2”的建议响应。每个建议部分包含条目。每个条目实际上都是建议文本中的一个标记，并且包含建议条目文本，建议文本中的原始起始偏移量和长度，以及是否存在任意数量的选项。
     
     {
       "_shards": ...
@@ -76,11 +75,11 @@ The below suggest response example includes the suggestion response for `my-sugg
       }
     }
 
-Each options array contains an option object that includes the suggested text, its document frequency and score compared to the suggest entry text. The meaning of the score depends on the used suggester. The term suggester’s score is based on the edit distance.
+每个选项数组都包含一个`options`对象，其中包含建议文本，其文档频率和与建议输入文本相比较的得分。 得分的含义取决于使用的建议器（suggester）。 建议器（suggester）分数是基于编辑距离。
 
 ### Global suggest text
 
-To avoid repetition of the suggest text, it is possible to define a global text. In the example below the suggest text is defined globally and applies to the `my-suggest-1` and `my-suggest-2` suggestions.
+为了避免重复建议文本，可以定义全局文本。 在下面的示例中，建议文本是全局定义的，适用于“my-suggest-1”和“my-suggest-2”建议。
     
     
     POST _search
@@ -100,4 +99,4 @@ To avoid repetition of the suggest text, it is possible to define a global text.
       }
     }
 
-The suggest text can in the above example also be specified as suggestion specific option. The suggest text specified on suggestion level override the suggest text on the global level.
+建议的文字在上面的例子中也可以被指定为建议特定的选项。 在建议级别上指定的建议文本会覆盖全局级别的建议文本。

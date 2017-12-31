@@ -1,19 +1,19 @@
 ## 多查询模板 Multi Search Template
 
-The multi search template API allows to execute several search template requests within the same API using the `_msearch/template` endpoint.
+多搜索模板API允许使用`_msearch/template` API在同一个API中执行多个搜索模板请求。
 
-The format of the request is similar to the [Multi Search API](search-multi-search.html) format:
-    
-    
+
+请求的格式与[Multi Search API](search-multi-search.html)格式类似：
+
     header\n
     body\n
     header\n
     body\n
 
-The header part supports the same `index`, `types`, `search_type`, `preference`, and `routing` options as the usual Multi Search API.
+标题部分支持与通常的Multi Search API相同的`index`，`types`，`search_type`，`preference`和`routing`选项。
 
-The body includes a search template body request and supports inline, stored and file templates. Here is an example:
-    
+
+正文包含搜索模板正文请求，并支持内嵌，存储和文件模板。 这里是一个例子：    
     
     $ cat requests
     {"index": "test"}
@@ -27,9 +27,10 @@ The body includes a search template body request and supports inline, stored and
     
     $ curl -H "Content-Type: application/x-ndjson" -XGET localhost:9200/_msearch/template --data-binary "@requests"; echo
 
-<1>| Inline search template request     
+<1>| 内嵌搜索模板请求    
 ---|---    
-<2>| Search template request based on a stored template     
-<3>| Search template request based on a file template   
-  
-The response returns a `responses` array, which includes the search template response for each search template request matching its order in the original multi search template request. If there was a complete failure for that specific search template request, an object with `error` message will be returned in place of the actual search response.
+<2>| 基于存储的模板搜索模板请求     
+<3>| 基于文件模板的搜索模板请求   
+
+
+响应返回一个`responses`数组，其中包括每个搜索模板请求的搜索模板响应，以匹配原始多搜索模板请求中的顺序。如果该特定搜索模板请求完全失败，将返回带有`error`消息的对象，而不是实际的搜索响应。

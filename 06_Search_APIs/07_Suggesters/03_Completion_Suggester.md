@@ -139,7 +139,7 @@ returns this response:
 
 `_source` meta-field must be enabled, which is the default behavior, to enable returning `_source` with suggestions.
 
-The configured weight for a suggestion is returned as `_score`. The `text` field uses the `input` of your indexed suggestion. Suggestions return the full document `_source` by default. The size of the `_source` can impact performance due to disk fetch and network transport overhead. To save some network overhead, filter out unnecessary fields from the `_source` using [source filtering](search-request-source-filtering.html) to minimize `_source` size. Note that the _suggest endpoint doesn’t support source filtering but using suggest on the `_search` endpoint does:
+The configured weight for a suggestion is returned as `_score`. The `text` field uses the `input` of your indexed suggestion. Suggestions return the full document `_source` by default. The size of the `_source` can impact performance due to disk fetch and network transport overhead. To save some network overhead, filter out unnecessary fields from the `_source` using [source filtering](search-request-source-filtering.html) to minimize `_source` size. Note that the `_suggest` endpoint doesn’t support source filtering but using suggest on the `_search` endpoint does:
     
     
     POST music/_search?size=0

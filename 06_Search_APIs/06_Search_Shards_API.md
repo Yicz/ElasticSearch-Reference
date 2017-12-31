@@ -1,20 +1,20 @@
 ## 查询分片API Search Shards API
 
-The search shards api returns the indices and shards that a search request would be executed against. This can give useful feedback for working out issues or planning optimizations with routing and shard preferences. When filtered aliases are used, the filter is returned as part of the `indices` div  [5.1.0] Added in 5.1.0. .
+搜索分片api返回搜索请求将执行的索引和分片。 这可以提供有用的反馈，用于解决问题或使用路由和碎片首选项进行规划优化。 当使用过滤别名时，过滤器作为5.1.0版本中新增的`indices`内容[5.1.0]版本的一部分返回。。
 
-The `index` and `type` parameters may be single values, or comma-separated.
 
-The `type` parameter is deprecated  [5.1.0] Deprecated in 5.1.0. was ignored in previous versions .
+`index`和`type`参数可以是单个值，也可以逗号分隔的多个值。
 
-### Usage
+`type`参数已被弃用[5.1.0]在5.1.0中不推荐使用。 在以前的版本中被忽略。
 
-Full example:
+### 用法 Usage
+
+完整的例子:
     
     
     GET /twitter/_search_shards
 
-This will yield the following result:
-    
+这将产生以下结果：    
     
     {
       "nodes": ...,
@@ -80,13 +80,11 @@ This will yield the following result:
       ]
     }
 
-And specifying the same request, this time with a routing value:
-    
+然后指定相同的请求，这次使用路由值：    
     
     GET /twitter/_search_shards?routing=foo,baz
 
-This will yield the following result:
-    
+这将产生以下结果：    
     
     {
       "nodes": ...,
@@ -119,11 +117,10 @@ This will yield the following result:
       ]
     }
 
-This time the search will only be executed against two of the shards, because routing values have been specified.
+这次搜索将仅针对两个碎片执行，因为已经指定了路由值。
+### 所有参数：
 
-### All parameters:
-
-`routing`| A comma-separated list of routing values to take into account when determining which shards a request would be executed against.     
+`routing`| 在确定要执行哪个分片时，需要考虑路由值的逗号分隔列表。    
 ---|---    
-`preference`| Controls a `preference` of which shard replicas to execute the search request on. By default, the operation is randomized between the shard replicas. See the [preference](search-request-preference.html) documentation for a list of all acceptable values.     
-`local`| A boolean value whether to read the cluster state locally in order to determine where shards are allocated instead of using the Master node’s cluster state. 
+`preference`| 控制哪个分片复制品执行搜索请求的“首选项”。 默认情况下，操作在碎片副本之间是随机的。 请参阅[首选项]](search-request-preference.html)文档以获取所有可接受值的列表。
+`local`| 一个布尔值，是否在本地读取群集状态以确定分配哪个碎片而不是使用主节点的群集状态。

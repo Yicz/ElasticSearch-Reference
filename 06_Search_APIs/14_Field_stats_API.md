@@ -1,85 +1,86 @@
-## Field stats API
+## 字段状态API Field stats API（在 5.4.0版本中已经被弃用）
+
+![Warning](/images/icons/warning.png)此功能是实验性的，可能会在将来的版本中完全更改或删除。ES将采取尽最大努力解决任何问题，但实验功能不受支持官方遗传算法功能的SLA。
 
 ![Warning](/images/icons/warning.png)
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
+### 在 5.4.0版本中已经被弃用. 
 
-![Warning](/images/icons/warning.png)
+不推荐使用`_field_stats`，而是使用`_field_caps`，或者在所需字段上运行最小/最大聚合
 
-### Deprecated in 5.4.0. 
+字段状态api允许查找字段的统计属性而不执行搜索，但查找Lucene索引中本地可用的度量。 这对探索一个你不太了解的数据集是有用的。 例如，这允许根据值的最小/最大范围创建具有有意义间隔的直方图聚合。
 
-`_field_stats` is deprecated, use `_field_caps` instead or run an min/max aggregation on the desired fields 
+缺省情况下字段状态api在所有索引上执行，但也可以在特定索引上执行。
 
-The field stats api allows one to find statistical properties of a field without executing a search, but looking up measurements that are natively available in the Lucene index. This can be useful to explore a dataset which you don’t know much about. For example, this allows creating a histogram aggregation with meaningful intervals based on the min/max range of values.
+在所有索引上运行：
 
-The field stats api by defaults executes on all indices, but can execute on specific indices too.
-
-All indices:
     
     
     GET _field_stats?fields=rating
 
-Specific indices:
+指定索引:
     
     
     GET twitter/_field_stats?fields=rating
 
-Supported request options:
+支持的请求选项：
 
-`fields`| A list of fields to compute stats for. The field name supports wildcard notation. For example, using `text_*` will cause all fields that match the expression to be returned.     
+`fields`| 计算统计信息的字段列表。 该字段名称支持通配符表示法。 例如，使用`text_*`将导致返回匹配表达式的所有字段。   
 ---|---    
-`level`| Defines if field stats should be returned on a per index level or on a cluster wide level. Valid values are `indices` and `cluster` (default).   
+`level`| 定义是否应在每个索引级别或集群级别上返回字段统计信息。 有效值是“索引”和“集群”（默认）。 
   
-Alternatively the `fields` option can also be defined in the request body:
-    
+或者，也可以在请求主体中定义`fields`选项：    
     
     POST _field_stats?level=indices
     {
        "fields" : ["rating"]
     }
 
-This is equivalent to the previous request.
+### 字段统计分析
 
-### Field statistics
+字段状态api支持基于字符串，基于数字和日期的字段，并且可以返回以下每个字段的统计信息：
 
-The field stats api is supported on string based, number based and date based fields and can return the following statistics per field:
-
-`max_doc`| The total number of documents.     
+`max_doc`| 文件总数。    
 ---|---    
-`doc_count`| The number of documents that have at least one term for this field, or -1 if this measurement isn’t available on one or more shards.     
-`density`| The percentage of documents that have at least one value for this field. This is a derived statistic and is based on the `max_doc` and `doc_count`.     
-`sum_doc_freq`| The sum of each term’s document frequency in this field, or -1 if this measurement isn’t available on one or more shards. Document frequency is the number of documents containing a particular term.     
-`sum_total_term_freq`| The sum of the term frequencies of all terms in this field across all documents, or -1 if this measurement isn’t available on one or more shards. Term frequency is the total number of occurrences of a term in a particular document and field.   
+`doc_count`| 对于此字段至少有一个术语的文档数量，如果此度量在一个或多个分片上不可用，则为-1。  
+`density`| 该字段至少有一个值的文档的百分比。 这是一个派生统计量，基于`max_doc`和`doc_count`。  
+`sum_doc_freq`| 每个词条在此字段中文档频率的总和，如果此测量不适用于一个或多个分片，则为-1。 文档频率是包含特定词条的文档的数量。    
+`sum_total_term_freq`| 所有文档中该字段中所有术语的术语频率总和，如果此测量不适用于一个或多个碎片，则为-1。 术语频率是特定文档和字段中术语的总发生次数。  
   
 `is_searchable`
 
-True if any of the instances of the field is searchable, false otherwise.
+    如果该字段的任何实例都是可搜索的，则为true，否则为false。
 
 `is_aggregatable`
 
-True if any of the instances of the field is aggregatable, false otherwise.
+    如果该字段的任何实例是可聚合的，则为true，否则为false。
 
 `min_value`
-     The lowest value in the field. 
+
+    该字段中的最低值。
+
 `min_value_as_string`
-     The lowest value in the field represented in a displayable form. All fields, but string fields returns this. (since string fields, represent values already as strings) 
+
+    以可显示的形式表示的字段中的最小值。 所有字段，但字符串字段返回这个。 （因为字符串字段，表示值已经是字符串）
+
 `max_value`
-     The highest value in the field. 
+
+    在该字段的最大值。
+
 `max_value_as_string`
-     The highest value in the field represented in a displayable form. All fields, but string fields returns this. (since string fields, represent values already as strings) 
 
-![Note](/images/icons/note.png)
+    以可显示的形式表示的字段中的最高值。 所有字段，但字符串字段返回这个。 （因为字符串字段，表示值已经是字符串）
 
-Documents marked as deleted (but not yet removed by the merge process) still affect all the mentioned statistics.
+![Note](/images/icons/note.png)标记为已删除（但尚未被合并过程删除）的文档仍会影响所有提到的统计信息。
 
-### Cluster level field statistics example
+###  集群级别字段统计示例
 
-Request:
+请求:
     
     
     GET _field_stats?fields=rating,answer_count,creation_date,display_name
 
-Response:
+响应:
     
     
     {
@@ -140,12 +141,12 @@ Response:
        }
     }
 
-<1>| The `_all` key indicates that it contains the field stats of all indices in the cluster.     
+<1>| `_all`键表示它包含集群中所有索引的字段统计信息。     
 ---|---  
   
 ![Note](/images/icons/note.png)
 
-When using the cluster level field statistics it is possible to have conflicts if the same field is used in different indices with incompatible types. For instance a field of type `long` is not compatible with a field of type `float` or `string`. A div named `conflicts` is added to the response if one or more conflicts are raised. It contains all the fields with conflicts and the reason of the incompatibility.
+在使用集群级别字段统计信息时，如果在具有不兼容类型的不同索引中使用相同字段，则可能会发生冲突。 例如，long类型的字段与`float`或`string`类型的字段不兼容。 如果发生一个或多个冲突，则将一个`conflict`内容添加到响应中。 它包含所有冲突的领域和不兼容的原因。
     
     
     {
@@ -177,14 +178,14 @@ When using the cluster level field statistics it is possible to have conflicts i
        }
     }
 
-#### Indices level field statistics example
+#### 指标级别字段统计示例
 
-Request:
+请求:
     
     
     GET _field_stats?fields=rating,answer_count,creation_date,display_name&level=indices
 
-Response:
+响应:
     
     
     {
@@ -245,14 +246,14 @@ Response:
        }
     }
 
-<1>| The `stack` key means it contains all field stats for the `stack` index.     
+<1>|`stack`键意味着它包含`stack`索引的所有字段统计信息。    
 ---|---  
   
-### Field stats index constraints
+### 字段统计索引约束
 
-Field stats index constraints allows to omit all field stats for indices that don’t match with the constraint. An index constraint can exclude indices' field stats based on the `min_value` and `max_value` statistic. This option is only useful if the `level` option is set to `indices`. Fields that are not indexed (not searchable) are always omitted when an index constraint is defined.
+字段统计索引约束允许省略与约束不匹配的索引的所有字段统计信息。 索引约束可以根据“min_value”和“max_value”统计量来排除索引的字段统计信息。 这个选项只有在`level`选项设置为`indices`时才有用。 当索引约束被定义时，没有索引（不可搜索）的字段总是被省略。
 
-For example index constraints can be useful to find out the min and max value of a particular property of your data in a time based scenario. The following request only returns field stats for the `answer_count` property for indices holding questions created in the year 2014:
+例如，索引约束对于在基于时间的场景中查找数据的特定属性的最小值和最大值非常有用。 以下请求仅返回2014年创建的存有问题的索引的“answer_count”属性的字段统计信息：
     
     
     POST _field_stats?level=indices
@@ -270,21 +271,21 @@ For example index constraints can be useful to find out the min and max value of
        }
     }
 
-<1>| The fields to compute and return field stats for.     
+<1>|计算并返回字段统计信息的字段。   
 ---|---    
-<2>| The set index constraints. Note that index constrains can be defined for fields that aren’t defined in the `fields` option.     
-<3>| Index constraints for the field `creation_date`.     
-<4> <5>| Index constraints on the `max_value` and `min_value` property of a field statistic.   
+<2>| 设置索引约束。 请注意，索引约束可以为未在“fields”选项中定义的字段定义。    
+<3>| “create_date”字段的索引约束。     
+<4> <5>| 字段统计信息的`max_value`和`min_value`属性的索引限制。   
   
-For a field, index constraints can be defined on the `min_value` statistic, `max_value` statistic or both. Each index constraint support the following comparisons:
+对于一个字段，可以在`min_value`统计量，`max_value`统计量或两者上定义索引约束。 每个索引约束都支持以下比较：
 
-`gte`| Greater-than or equal to     
+`gte`| 大于或等于    
 ---|---    
-`gt`| Greater-than     
-lte`| Less-than or equal to     
-`lt`| Less-than   
+`gt`| 大于    
+`lte`| 小于或等于
+`lt`| 小于   
   
-Field stats index constraints on date fields optionally accept a `format` option, used to parse the constraint’s value. If missing, the format configured in the field’s mapping is used.
+日期字段上的字段统计信息索引约束可以接受`format`选项，用于解析约束的值。 如果缺少，则使用字段映射中配置的格式。
     
     
     POST _field_stats?level=indices
@@ -304,5 +305,5 @@ Field stats index constraints on date fields optionally accept a `format` option
        }
     }
 
-<1>| Custom date format     
+<1>| 自定义日期格式    
 ---|---
