@@ -43,7 +43,7 @@ Mustache语言是在elasticsearch中作为沙盒脚本语言实现的，因此�
 
 ##### 将参数转换为JSON
 
-{{#toJson}}参数{{/ toJson}}函数可以用来将地图和数组等参数转换为JSON表示形式：
+{ { #toJson}}参数{ {/ toJson} }函数可以用来将地图和数组等参数转换为JSON表示形式：
     
     GET _search/template
     {
@@ -107,7 +107,7 @@ Mustache语言是在elasticsearch中作为沙盒脚本语言实现的，因此�
 
 ##### 连接值的数组
 
-可以使用{{#join}}数组{{/ join}}函数将数组的值连接为逗号分隔的字符串：
+可以使用{ {#join}}数组{ {/ join}}函数将数组的值连接为逗号分隔的字符串：
     
     
     GET _search/template
