@@ -63,10 +63,5 @@ The request returns the following result:
       }
     }
 
-<1> <2>
-
-| 
-
-Output only "keyword" attribute, since specify "attributes" in the request.   
-  
+<1> <2>| Output only "keyword" attribute, since specify "attributes" in the request.     
 ---|---

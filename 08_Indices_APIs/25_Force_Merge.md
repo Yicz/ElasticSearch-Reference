@@ -11,25 +11,10 @@ This call will block until the merge is complete. If the http connection is lost
 
 The force merge API accepts the following request parameters:
 
-`max_num_segments`
-
-| 
-
-The number of segments to merge to. To fully merge the index, set it to `1`. Defaults to simply checking if a merge needs to execute, and if so, executes it.   
-  
+`max_num_segments`| The number of segments to merge to. To fully merge the index, set it to `1`. Defaults to simply checking if a mergeneeds to execute, and if so, executes it.     
 ---|---  
-  
-`only_expunge_deletes`
-
-| 
-
-Should the merge process only expunge segments with deletes in it. In Lucene, a document is not deleted from a segment, just marked as deleted. During a merge process of segments, a new segment is created that does not have those deletes. This flag allows to only merge segments that have deletes. Defaults to `false`. Note that this won’t override the `index.merge.policy.expunge_deletes_allowed` threshold.   
-  
-`flush`
-
-| 
-
-Should a flush be performed after the forced merge. Defaults to `true`.   
+`only_expunge_deletes`| Should the merge process only expunge segments with deletes in it. In Lucene, a document is not deleted from asegment, just marked as deleted. During a merge process of segments, a new segment is created that does not have thosedeletes. This flag allows to only merge segments that have deletes. Defaults to `false`. Note that this won’t overridethe `index.merge.policy.expunge_deletes_allowed` threshold.     
+`flush`| Should a flush be performed after the forced merge. Defaults to `true`.   
   
 ### Multi Index
 

@@ -1,18 +1,16 @@
-## Clear Cache
+## 清楚缓存 Clear Cache
 
-The clear cache API allows to clear either all caches or specific cached associated with one or more indices.
-    
+清除缓存API允许清除与一个或多个索引关联的所有缓存或特定缓存。    
     
     POST /twitter/_cache/clear
 
-The API, by default, will clear all caches. Specific caches can be cleaned explicitly by setting `query`, `fielddata` or `request`.
+这个API默认会清除所有的缓存。 通过设置`query`，`fielddata`或`request`可以明确清除特定的缓存。
 
-All caches relating to a specific field(s) can also be cleared by specifying `fields` parameter with a comma delimited list of the relevant fields.
+所有与特定字段相关的缓存也可以通过用逗号分隔的相关字段列表指定`fields`参数来清除。
 
-### Multi Index
+### 多索引 Multi Index
 
-The clear cache API can be applied to more than one index with a single call, or even on `_all` the indices.
-    
+清除缓存API可以通过一次调用应用于多个索引，甚至可以在_all这些索引上应用。    
     
     POST /kimchy,elasticsearch/_cache/clear
     

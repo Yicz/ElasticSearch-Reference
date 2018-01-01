@@ -40,25 +40,10 @@ For instance:
       }
     }
 
-<1>
-
-| 
-
-The `name` field is an analyzed string field which uses the default `standard` analyzer.   
-  
+<1>| The `name` field is an analyzed string field which uses the default `standard` analyzer.     
 ---|---  
-  
-<2>
-
-| 
-
-The `name.length` field is a `token_count` [multi-field](multi-fields.html) which will index the number of tokens in the `name` field.   
-  
-<3>
-
-| 
-
-This query matches only the document containing `Rachel Alice Williams`, as it contains three tokens.   
+<2>| The `name.length` field is a `token_count` [multi-field](multi-fields.html) which will index the number of tokens inthe `name` field.     
+<3>| This query matches only the document containing `Rachel Alice Williams`, as it contains three tokens.   
   
 ![Note](/images/icons/note.png)
 

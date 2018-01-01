@@ -15,25 +15,10 @@ JSON documents are hierarchical in nature: the document may contain inner object
       }
     }
 
-<1>
-
-| 
-
-The outer document is also a JSON object.   
-  
+<1>| The outer document is also a JSON object.     
 ---|---  
-  
-<2>
-
-| 
-
-It contains an inner object called `manager`.   
-  
-<3>
-
-| 
-
-Which in turn contains an inner object called `name`.   
+<2>| It contains an inner object called `manager`.     
+<3>| Which in turn contains an inner object called `name`.   
   
 Internally, this document is indexed as a simple, flat list of key-value pairs, something like this:
     
@@ -72,25 +57,10 @@ An explicit mapping for the above document could look like this:
       }
     }
 
-<1>
-
-| 
-
-The mapping type is a type of object, and has a `properties` field.   
-  
+<1>| The mapping type is a type of object, and has a `properties` field.     
 ---|---  
-  
-<2>
-
-| 
-
-The `manager` field is an inner `object` field.   
-  
-<3>
-
-| 
-
-The `manager.name` field is an inner `object` field within the `manager` field.   
+<2>| The `manager` field is an inner `object` field.     
+<3>| The `manager.name` field is an inner `object` field within the `manager` field.   
   
 You are not required to set the field `type` to `object` explicitly, as this is the default value.
 

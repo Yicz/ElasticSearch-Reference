@@ -1,9 +1,8 @@
-## Get Field Mapping
+## 获取字段映射关系 Get Field Mapping
 
-The get field mapping API allows you to retrieve mapping definitions for one or more fields. This is useful when you do not need the complete type mapping returned by the [_Get Mapping_](indices-get-mapping.html) API.
+获取字段映射API允许您检索一个或多个字段的映射定义。 当您不需要[_Get Mapping_](indices-get-mapping.html)API返回的完整类型映射时，这非常有用。
 
-For example, consider the following mapping:
-    
+如下面的映射关系：
     
     PUT publications
     {
@@ -24,13 +23,11 @@ For example, consider the following mapping:
         }
     }
 
-The following returns the mapping of the field `title` only:
-    
+使用如下的请求，可以只返回`title`的映射关系。
     
     GET publications/_mapping/article/field/title
 
-For which the response is:
-    
+响应如下:
     
     {
        "publications": {
@@ -49,10 +46,9 @@ For which the response is:
        }
     }
 
-### Multiple Indices, Types and Fields
+### 多索引，多类型，多字段  Multiple Indices, Types and Fields
 
-The get field mapping API can be used to get the mapping of multiple fields from more than one index or type with a single call. General usage of the API follows the following syntax: `host:port/{index}/{type}/_mapping/field/{field}` where `{index}`, `{type}` and `{field}` can stand for comma-separated list of names or wild cards. To get mappings for all indices you can use `_all` for `{index}`. The following are some examples:
-    
+get字段映射API可用于通过一次调用从多个索引或类型获取多个字段的映射。 API的一般用法如下：`host：port/{index}/{type}/_mapping/field/ {field}`其中`{index}`，`{type}`和`{field}`可以 代表逗号分隔的名单或通配符列表。 为了获得所有索引的映射，你可以在`{index}`中使用`_all`。 以下是一些例子：
     
     GET /twitter,kimchy/_mapping/field/message
     
@@ -60,16 +56,15 @@ The get field mapping API can be used to get the mapping of multiple fields from
     
     GET /_all/_mapping/tw*/field/*.id
 
-### Specifying fields
+### 指定字段 Specifying fields
 
-The get mapping api allows you to specify a comma-separated list of fields.
+获取映射api允许您指定逗号分隔的字段列表。
 
-For instance to select the `id` of the `author` field, you must use its full name `author.id`.
-    
+例如，要选择`author`字段的`id`，必须使用其全名`author.id`。
     
     GET publications/_mapping/article/field/author.id,abstract,name
 
-returns:
+响应内容:
     
     
     {
@@ -97,13 +92,11 @@ returns:
        }
     }
 
-The get field mapping API also supports wildcard notation.
-    
+获取字段映射API也支持通配符表示法。    
     
     GET publications/_mapping/article/field/a*
 
-returns:
-    
+响应:
     
     {
        "publications": {
@@ -138,12 +131,7 @@ returns:
        }
     }
 
-### Other options
+### 其他选项 Other options
 
-`include_defaults`
-
-| 
-
-adding `include_defaults=true` to the query string will cause the response to include default values, which are normally suppressed.   
-  
+`include_defaults`| 将`include_defaults = true`添加到查询字符串将导致响应包含默认值，这会被正常抑制。  
 ---|---

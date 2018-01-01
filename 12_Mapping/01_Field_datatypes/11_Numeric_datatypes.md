@@ -75,10 +75,5 @@ The following parameters are accepted by numeric types:
 
 `scaled_float` accepts an additional parameter:
 
-`scaling_factor`
-
-| 
-
-The scaling factor to use when encoding values. Values will be multiplied by this factor at index time and rounded to the closest long value. For instance, a `scaled_float` with a `scaling_factor` of `10` would internally store `2.34` as `23` and all search-time operations (queries, aggregations, sorting) will behave as if the document had a value of `2.3`. High values of `scaling_factor` improve accuracy but also increase space requirements. This parameter is required.   
-  
+`scaling_factor`| The scaling factor to use when encoding values. Values will be multiplied by this factor at index time and rounded to the closest long value. For instance, a `scaled_float` with a `scaling_factor` of `10` would internally store `2.34` as `23` and all search-time operations (queries, aggregations, sorting) will behave as if the document had a value of `2.3`. High values of `scaling_factor` improve accuracy but also increase space requirements. This parameter is required.   
 ---|---

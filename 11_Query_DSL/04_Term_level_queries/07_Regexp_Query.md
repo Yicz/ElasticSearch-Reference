@@ -236,7 +236,7 @@ These operators are available by default as the `flags` parameter defaults to `A
 Complement 
     
 
-The complement is probably the most useful option. The shortest pattern that follows a tilde `"~"` is negated. For instance, `"ab~cd" means:
+The complement is probably the most useful option. The shortest pattern that follows a tilde `"~"` is negated. For instance, `ab~cd` means:
 
   * Starts with `a`
   * Followed by `b`

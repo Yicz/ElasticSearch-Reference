@@ -1,14 +1,12 @@
-## Get Settings
+## 获取设置 Get Settings
 
-The get settings API allows to retrieve settings of index/indices:
-    
+获取设置API允许返回索引/索引的设置：    
     
     GET /twitter/_settings
 
-### Multiple Indices and Types
+### 多个索引和类型 Multiple Indices and Types
 
-The get settings API can be used to get settings for more than one index with a single call. General usage of the API follows the following syntax: `host:port/{index}/_settings` where `{index}` can stand for comma-separated list of index names and aliases. To get settings for all indices you can use `_all` for `{index}`. Wildcard expressions are also supported. The following are some examples:
-    
+获取设置API可用于通过一次调用获取多个索引的设置。 API的一般用法遵循以下语法：`host：port/{index}/_settings`其中`{index}`可以代表逗号分隔的索引名称和别名列表。 要获得所有索引的设置，你可以在`{index}`中使用`_all`。 通配符表达式也被支持。 以下是一些例子：
     
     GET /twitter,kimchy/_settings
     
@@ -16,9 +14,8 @@ The get settings API can be used to get settings for more than one index with a 
     
     GET /log_2013_*/_settings
 
-### Filtering settings by name
+### 按名称过滤设置 Filtering settings by name
 
-The settings that are returned can be filtered with wildcard matching as follows:
-    
+返回的设置可以使用通配符进行过滤，如下所示：    
     
     curl -XGET 'http://localhost:9200/2013-*/_settings/index.number_*'

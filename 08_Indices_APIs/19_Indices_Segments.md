@@ -28,7 +28,7 @@ Response:
         ...
     }
 
-_0 
+\_0 
      The key of the JSON document is the name of the segment. This name is used to generate file names: all files starting with this segment name in the directory of the shard belong to this segment. 
 generation 
      A generation number that is basically incremented when needing to write a new segment. The segment name is derived from this generation number. 

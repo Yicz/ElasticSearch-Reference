@@ -1,21 +1,18 @@
-## Get Mapping
+## 获取映射更新 Get Mapping
 
-The get mapping API allows to retrieve mapping definitions for an index or index/type.
-    
+获取更新可以检索出index/type的映射关系的定义内容。    
     
     GET /twitter/_mapping/tweet
 
-### Multiple Indices and Types
+### 多索引和类型 Multiple Indices and Types
 
-The get mapping API can be used to get more than one index or type mapping with a single call. General usage of the API follows the following syntax: `host:port/{index}/_mapping/{type}` where both `{index}` and `{type}` can accept a comma-separated list of names. To get mappings for all indices you can use `_all` for `{index}`. The following are some examples:
-    
+获取映射API可用于通过一次调用获取多个索引或类型映射。 API的一般用法遵循以下语法：`host：port/{index} /_mapping/{type}`其中`{index}`和`{type}`可以接受以逗号分隔的名称列表。 为了获得所有索引的映射，你可以在`{index}`中使用`_all`。 以下是一些例子：
     
     GET /_mapping/tweet,kimchy
     
     GET /_all/_mapping/tweet,book
 
-If you want to get mappings of all indices and types then the following two examples are equivalent:
-    
+如果你想得到所有指数和类型的映射，那么以下两个例子是等价的：    
     
     GET /_all/_mapping
     

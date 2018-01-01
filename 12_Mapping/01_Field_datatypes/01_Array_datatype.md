@@ -61,31 +61,11 @@ Nothing needs to be pre-configured in order to use arrays in documents, they are
       }
     }
 
-<1>
-
-| 
-
-The `tags` field is dynamically added as a `string` field.   
-  
+<1>| The `tags` field is dynamically added as a `string` field.     
 ---|---  
-  
-<2>
-
-| 
-
-The `lists` field is dynamically added as an `object` field.   
-  
-<3>
-
-| 
-
-The second document contains no arrays, but can be indexed into the same fields.   
-  
-<4>
-
-| 
-
-The query looks for `elasticsearch` in the `tags` field, and matches both documents.   
+<2>| The `lists` field is dynamically added as an `object` field.     
+<3>| The second document contains no arrays, but can be indexed into the same fields.     
+<4>| The query looks for `elasticsearch` in the `tags` field, and matches both documents.   
   
 **Multi-value fields and the inverted index**
 

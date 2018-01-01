@@ -35,7 +35,7 @@ For example:
 
 ![Note](/images/icons/note.png)
 
-Index templates provide C-style /* */ block comments. Comments are allowed everywhere in the JSON document except before the initial opening curly bracket.
+Index templates provide C-style /* \*/ block comments. Comments are allowed everywhere in the JSON document except before the initial opening curly bracket.
 
 Defines a template named `template_1`, with a template pattern of `te*`. The settings and mappings will be applied to any index name that matches the `te*` pattern.
 
