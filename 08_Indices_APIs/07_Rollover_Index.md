@@ -1,8 +1,8 @@
-## Rollover Index
+## 滚动索引 Rollover Index
 
-The rollover index API rolls an alias over to a new index when the existing index is considered to be too large or too old.
+当现有索引被认为太大或太旧时，滚动索引API会将别名滚动到新的索引。
 
-The API accepts a single alias name and a list of `conditions`. The alias must point to a single index only. If the index satisfies the specified conditions then a new index is created and the alias is switched to point to the new index.
+滚动索引API只接受一个别名参数和一系列的`conditions`(限定条件)，别名必须指向一个单索引。如果索引满足指定的条件，则创建一个新的索引，并将别名切换到指向新的索引。
     
     
     PUT /logs-000001 <1>
@@ -12,7 +12,7 @@ The API accepts a single alias name and a list of `conditions`. The alias must p
       }
     }
     
-    # Add > 1000 documents to logs-000001
+当文档数超过10000时
     
     POST /logs_write/_rollover <2>
     {
@@ -22,12 +22,11 @@ The API accepts a single alias name and a list of `conditions`. The alias must p
       }
     }
 
-<1>| Creates an index called `logs-0000001` with the alias `logs_write`.     
+<1>| 使用别名`logs_write`创建一个名为`logs-0000001`的索引。  
 ---|---    
-<2>| If the index pointed to by `logs_write` was created 7 or more days ago, or contains 1,000 or more documents, then the `logs-000002` index is created and the `logs_write` alias is updated to point to `logs-000002`.   
+<2>| 如果`logs_write`指向的索引是在7天或更多天前创建的，或者包含1,000个或更多的文档，则创建`logs-000002`索引，并且`logs_write`别名更新为指向`logs-000002`。   
   
-The above request might return the following response:
-    
+上述请求可能会返回以下响应：    
     
     {
       "acknowledged": true,
@@ -42,17 +41,16 @@ The above request might return the following response:
       }
     }
 
-<1>| Whether the index was rolled over.     
+<1>| 索引是否被滚动。     
 ---|---    
-<2>| Whether the rollover was dry run.     
-<3>| The result of each condition.   
+<2>| 翻车是否是空转。     
+<3>| 每个条件的结果。   
   
-### Naming the new index
+### 新索引的命名 Naming the new index
 
-If the name of the existing index ends with `-` and a number — e.g. `logs-000001` — then the name of the new index will follow the same pattern, incrementing the number (`logs-000002`). The number is zero-padded with a length of 6, regardless of the old index name.
+如果名称是以`-`分隔并使用数字结尾，新索引的名称会遵循增加后缀数字的规则进行增加。无论旧的索引名称如何，该数字的长度为6且都是零填充的。
 
-If the old name doesn’t match this pattern then you must specify the name for the new index as follows:
-    
+如果旧名称与此模式不匹配，则必须按如下所示为新索引指定名称：    
     
     POST /my_alias/_rollover/my_new_index_name
     {
@@ -62,13 +60,14 @@ If the old name doesn’t match this pattern then you must specify the name for 
       }
     }
 
-### Using date math with the rollover API
+### 使用日期数学结合滚动API Using date math with the rollover API
 
-It can be useful to use [date math](date-math-index-names.html) to name the rollover index according to the date that the index rolled over, e.g. `logstash-2016.02.03`. The rollover API supports date math, but requires the index name to end with a dash followed by a number, e.g. `logstash-2016.02.03-1` which is incremented every time the index is rolled over. For instance:
+使用[日期数学](date-math-index-names.html)根据索引滚动的日期命名滚动索引是有用的，例如，`logstash-2016.02.03`。 滚动API支持日期数学，但要求索引名称以短划线结尾，后跟数字，例如 `logstash-2016.02.03-1`每次索引被滚动时递增。 例如：
+
     
     
     # PUT /<logs-{now/d}-1> with URI encoding:
-    PUT /%3Clogs-%7Bnow%2Fd%7D-1%3E <1>
+    PUT /%3Clogs-%7Bnow%2Fd%7D-1%3E     <1>
     {
       "aliases": {
         "logs_write": {}
@@ -91,20 +90,19 @@ It can be useful to use [date math](date-math-index-names.html) to name the roll
       }
     }
 
-<1>| Creates an index named with today’s date (e.g.) `logs-2016.10.31-1`    
+<1>| 创建一个以今天的日期命名的索引（例如 `logs-2016.10.31-1` )
 ---|---    
-<2>| Rolls over to a new index with today’s date, e.g. `logs-2016.10.31-000002` if run immediately, or `logs-2016.11.01-000002` if run after 24 hours   
+<2>| 在今天的日期，例如，滚动到一个新的索引。 `logs-2016.10.31-000002`如果立即运行，或者`logs-2016.11.01-000002`如果在24小时后运行  
   
-These indices can then be referenced as described in the [date math documentation](date-math-index-names.html). For example, to search over indices created in the last three days, you could do the following:
+然后可以按照[日期数学文档](date-math-index-names.html)中的描述引用这些索引。 例如，要搜索过去三天创建的索引，可以执行以下操作：
     
     
     # GET /<logs-{now/d}-*>,<logs-{now/d-1d}-*>,<logs-{now/d-2d}-*>/_search
     GET /%3Clogs-%7Bnow%2Fd%7D-*%3E%2C%3Clogs-%7Bnow%2Fd-1d%7D-*%3E%2C%3Clogs-%7Bnow%2Fd-2d%7D-*%3E/_search
 
-### Defining the new index
+### 定义新的索引 Defining the new index
 
-The settings, mappings, and aliases for the new index are taken from any matching [index templates](indices-templates.html). Additionally, you can specify `settings`, `mappings`, and `aliases` in the body of the request, just like the [create index](indices-create-index.html) API. Values specified in the request override any values set in matching index templates. For example, the following `rollover` request overrides the `index.number_of_shards` setting:
-    
+新索引的`settings`，`mappings`和`aliases`来自任何匹配的[索引模板](indices-templates.html)。 另外，您可以在请求的主体中指定`settings`，`mappings`和`aliases`，就像[create index](indices-create-index.html)API一样。 请求中指定的值覆盖匹配索引模板中设置的任何值。 例如，下面的`rollover`请求覆盖`index.number_of_shards`设置：    
     
     PUT /logs-000001
     {
@@ -124,9 +122,9 @@ The settings, mappings, and aliases for the new index are taken from any matchin
       }
     }
 
-### Dry run
+### 空转 Dry run
 
-The rollover API supports `dry_run` mode, where request conditions can be checked without performing the actual rollover:
+滚动API支持`dry_run`模式，在这种模式下可以检查请求条件，而不需要执行实际的滚动：
     
     
     PUT /logs-000001
@@ -144,6 +142,8 @@ The rollover API supports `dry_run` mode, where request conditions can be checke
       }
     }
 
-### Wait For Active Shards
+### Wait For Active Shards/等待激活分片　
 
-Because the rollover operation creates a new index to rollover to, the [`wait_for_active_shards`](indices-create-index.html#create-index-wait-for-active-shards) setting on index creation applies to the rollover action as well.
+因为滚动操作会创建一个新的索引，因此在创建索引时的wait_for_active_shards 设置也适用于滚动操作。
+
+

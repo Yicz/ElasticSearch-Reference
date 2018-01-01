@@ -50,19 +50,9 @@ Furthermore, several functions can be combined. In this case one can optionally 
         }
     }
 
-<1>
-
-| 
-
-Boost for the whole query.   
-  
+<1>| Boost for the whole query.     
 ---|---  
-  
-<2>
-
-| 
-
-See [Function Score Query](query-dsl-function-score-query.html#score-functions) for a list of supported functions.   
+<2>| See [Function Score Query](query-dsl-function-score-query.html#score-functions) for a list of supported functions.   
   
 ![Note](/images/icons/note.png)
 
@@ -257,19 +247,9 @@ To use distance scoring on a query that has numerical fields, the user has to de
         }
     }
 
-<1>
-
-| 
-
-The `DECAY_FUNCTION` should be one of `linear`, `exp`, or `gauss`.   
-  
----|---  
-  
-<2>
-
-| 
-
-The specified field must be a numeric, date, or geo-point field.   
+<1>| The `DECAY_FUNCTION` should be one of `linear`, `exp`, or `gauss`.     
+---|---    
+<2>| The specified field must be a numeric, date, or geo-point field.   
   
 In the above example, the field is a [`geo_point`](geo-point.html) and origin can be provided in geo format. `scale` and `offset` must be given with a unit in this case. If your field is a date field, you can set `scale` and `offset` as days, weeks, and so on. Example:
     
@@ -290,16 +270,10 @@ In the above example, the field is a [`geo_point`](geo-point.html) and origin ca
         }
     }
 
-<1>
-
-| 
-
-The date format of the origin depends on the [`format`](mapping-date-format.html) defined in your mapping. If you do not define the origin, the current time is used.   
-  
+<1>| The date format of the origin depends on the [`format`](mapping-date-format.html) defined in your mapping. If you do not define the origin, the current time is used.   
 ---|---  
-  
-<2> <3>
-| The `offset` and `decay` parameters are optional. | 
+<2> <3>| The `offset` and `decay` parameters are optional. 
+
 `origin`| The point of origin used for calculating distance. Must be given as a number for numeric field, date for date fieldsand geo point for geo fields. Required for geo and numeric field. For date fields the default is `now`. Date math (forexample `now-1h`) is supported for origin.     
 ---|---    
 `scale`| Required for all types. Defines the distance from origin + offset at which the computed score will equal `decay`parameter. For geo fields: Can be defined as number+unit (1km, 12m,…). Default unit is meters. For date fields: Can tobe defined as a number+unit ("1h", "10d",…). Default unit is milliseconds. For numeric field: Any number.     
@@ -399,12 +373,7 @@ The function for `price` in this case would be
         }
     }
 
-<1>
-
-| 
-
-This decay function could also be `linear` or `exp`.   
-  
+<1>| This decay function could also be `linear` or `exp`.     
 ---|---  
   
 and for `location`:
@@ -417,14 +386,8 @@ and for `location`:
         }
     }
 
-<1>
-
-| 
-
-This decay function could also be `linear` or `exp`.   
-  
----|---  
-  
+<1>| This decay function could also be `linear` or `exp`.     
+---|---    
 Suppose you want to multiply these two functions on the original score, the request would look like this:
     
     

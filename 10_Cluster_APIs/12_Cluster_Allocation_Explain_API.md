@@ -91,43 +91,13 @@ The API response for an unassigned shard:
       ]
     }
 
-<1>
-
-| 
-
-The current state of the shard   
-  
+<1>| The current state of the shard     
 ---|---  
-  
-<2>
-
-| 
-
-The reason for the shard originally becoming unassigned   
-  
-<3>
-
-| 
-
-Whether to allocate the shard   
-  
-<4>
-
-| 
-
-Whether to allocate the shard to the particular node   
-  
-<5>
-
-| 
-
-The decider which led to the `no` decision for the node   
-  
-<6>
-
-| 
-
-An explanation as to why the decider returned a `no` decision, with a helpful hint pointing to the setting that led to the decision   
+<2>| The reason for the shard originally becoming unassigned     
+<3>| Whether to allocate the shard     
+<4>| Whether to allocate the shard to the particular node    
+<5>| The decider which led to the `no` decision for the node     
+<6>| An explanation as to why the decider returned a `no` decision, with a helpful hint pointing to the setting that led tothe decision   
   
 You can return information gathered by the cluster info service about disk usage and shard sizes by setting the `include_disk_info` parameter to `true`:
     
@@ -206,25 +176,10 @@ The API response output for a replica that is unassigned due to delayed allocati
       ]
     }
 
-<1>
-
-| 
-
-The configured delay before allocating a replica shard that does not exist due to the node holding it leaving the cluster   
-  
+<1>| The configured delay before allocating a replica shard that does not exist due to the node holding it leaving thecluster     
 ---|---  
-  
-<2>
-
-| 
-
-The remaining delay before allocating the replica shard   
-  
-<3>
-
-| 
-
-Information about the shard data found on a node   
+<2>| The remaining delay before allocating the replica shard     
+<3>| Information about the shard data found on a node   
   
 The API response output for an assigned shard that is not allowed to remain on its current node and is required to move:
     
@@ -267,25 +222,10 @@ The API response output for an assigned shard that is not allowed to remain on i
       ]
     }
 
-<1>
-
-| 
-
-Whether the shard is allowed to remain on its current node   
-  
+<1>| Whether the shard is allowed to remain on its current node     
 ---|---  
-  
-<2>
-
-| 
-
-The deciders that factored into the decision of why the shard is not allowed to remain on its current node   
-  
-<3>
-
-| 
-
-Whether the shard is allowed to be allocated to another node   
+<2>| The deciders that factored into the decision of why the shard is not allowed to remain on its current node     
+<3>| Whether the shard is allowed to be allocated to another node   
   
 The API response output for an assigned shard that remains on its current node because moving the shard to another node does not form a better cluster balance:
     
@@ -316,22 +256,7 @@ The API response output for an assigned shard that remains on its current node b
       ]
     }
 
-<1>
-
-| 
-
-Whether rebalancing is allowed on the cluster   
-  
+<1>| Whether rebalancing is allowed on the cluster     
 ---|---  
-  
-<2>
-
-| 
-
-Whether the shard can be rebalanced to another node   
-  
-<3>
-
-| 
-
-The reason the shard cannot be rebalanced to the node, in this case indicating that it offers no better balance than the current node 
+<2>| Whether the shard can be rebalanced to another node     
+<3>| The reason the shard cannot be rebalanced to the node, in this case indicating that it offers no better balance than the current node 

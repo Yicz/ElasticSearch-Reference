@@ -47,19 +47,9 @@ For example:
       }
     }
 
-<1>
-
-| 
-
-Indexing a document with `"true"`, which is interpreted as `true`.   
-  
+<1>| Indexing a document with `"true"`, which is interpreted as `true`.     
 ---|---  
-  
-<2>
-
-| 
-
-Searching for documents with a JSON `true`.   
+<2>| Searching for documents with a JSON `true`.   
   
 Aggregations like the [`terms` aggregation](search-aggregations-bucket-terms-aggregation.html) use `1` and `0` for the `key`, and the strings `"true"` and `"false"` for the `key_as_string`. Boolean fields when used in scripts, return `1` and `0`:
     

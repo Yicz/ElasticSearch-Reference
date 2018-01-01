@@ -48,37 +48,12 @@ For instance:
       "sort": { "date": "asc"} <5>
     }
 
-<1>
-
-| 
-
-The `date` field uses the default `format`.   
-  
+<1>| The `date` field uses the default `format`.     
 ---|---  
-  
-<2>
-
-| 
-
-This document uses a plain date.   
-  
-<3>
-
-| 
-
-This document includes a time.   
-  
-<4>
-
-| 
-
-This document uses milliseconds-since-the-epoch.   
-  
-<5>
-
-| 
-
-Note that the `sort` values that are returned are all in milliseconds-since-the-epoch.   
+<2>| This document uses a plain date.     
+<3>| This document includes a time.    
+<4>| This document uses milliseconds-since-the-epoch.     
+<5>| Note that the `sort` values that are returned are all in milliseconds-since-the-epoch.   
   
 ### Multiple date formats
 

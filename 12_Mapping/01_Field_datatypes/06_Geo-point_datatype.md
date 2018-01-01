@@ -70,37 +70,12 @@ There are four ways that a geo-point may be specified, as demonstrated below:
       }
     }
 
-<1>
-
-| 
-
-Geo-point expressed as an object, with `lat` and `lon` keys.   
-  
+<1>| Geo-point expressed as an object, with `lat` and `lon` keys.     
 ---|---  
-  
-<2>
-
-| 
-
-Geo-point expressed as a string with the format: `"lat,lon"`.   
-  
-<3>
-
-| 
-
-Geo-point expressed as a geohash.   
-  
-<4>
-
-| 
-
-Geo-point expressed as an array with the format: [ `lon`, `lat`]   
-  
-<5>
-
-| 
-
-A geo-bounding box query which finds all geo-points that fall inside the box.   
+<2>| Geo-point expressed as a string with the format: `"lat,lon"`.     
+<3>| Geo-point expressed as a geohash.     
+<4>| Geo-point expressed as an array with the format: [ `lon`, `lat`]     
+<5>| A geo-bounding box query which finds all geo-points that fall inside the box.   
   
 ![Important](/images/icons/important.png)
 
@@ -114,12 +89,7 @@ Originally, `lat,lon` was used for both array and string, but the array format w
 
 The following parameters are accepted by `geo_point` fields:
 
-[`ignore_malformed`](ignore-malformed.html)
-
-| 
-
-If `true`, malformed geo-points are ignored. If `false` (default), malformed geo-points throw an exception and reject the whole document.   
-  
+[`ignore_malformed`](ignore-malformed.html)| If `true`, malformed geo-points are ignored. If `false` (default), malformed geo-points throw an exception and rejectthe whole document.     
 ---|---  
   
 ### Using geo-points in scripts

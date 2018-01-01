@@ -90,44 +90,13 @@ The result produced by the above query.
       }
     }
 
-<1>
-
-| 
-
-`date_range` types accept the same field parameters defined by the 
-[`date`](date.html) type.   
-  
+<1>| `date_range` types accept the same field parameters defined by the [`date`](date.html) type.     
 ---|---  
-  
-<2>
-
-| 
-
-Example indexing a meeting with 10 to 20 attendees.   
-  
-<3>
-
-| 
-
-Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates).   
-  
-<4>
-
-| 
-
-Example date range using date time stamp. This also accepts [date math](common-options.html#date-math) formatting, or "now" for system time.   
-  
-<1>
-
-| 
-
-Range queries work the same as described in [range query](query-dsl-range-query.html).   
-  
-<2>
-
-| 
-
-Range queries over range [fields](mapping-types.html) support a `relation` parameter which can be one of `WITHIN`, `CONTAINS`, `INTERSECTS` (default).   
+<2>| Example indexing a meeting with 10 to 20 attendees.     
+<3>| Date ranges accept the same format as described in [date range queries](query-dsl-range-query.html#ranges-on-dates).     
+<4>| Example date range using date time stamp. This also accepts [date math](common-options.html#date-math) formatting, or"now" for system time.     
+<1>| Range queries work the same as described in [range query](query-dsl-range-query.html).     
+<2>| Range queries over range [fields](mapping-types.html) support a `relation` parameter which can be one of `WITHIN`, CONTAINS`, `INTERSECTS` (default).   
   
 ### Parameters for range fields
 

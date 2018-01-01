@@ -22,12 +22,7 @@ Arrays of inner [`object` fields](object.html) do not work the way you may expec
       ]
     }
 
-<1>
-
-| 
-
-The `user` field is dynamically added as a field of type `object`.   
-  
+<1>| The `user` field is dynamically added as a field of type `object`.     
 ---|---  
   
 would be transformed internally into a document that looks more like this:
@@ -128,31 +123,11 @@ If you need to index arrays of objects and to maintain the independence of each 
       }
     }
 
-<1>
-
-| 
-
-The `user` field is mapped as type `nested` instead of type `object`.   
-  
+<1>| The `user` field is mapped as type `nested` instead of type `object`.     
 ---|---  
-  
-<2>
-
-| 
-
-This query doesn’t match because `Alice` and `Smith` are not in the same nested object.   
-  
-<3>
-
-| 
-
-This query matches because `Alice` and `White` are in the same nested object.   
-  
-<4>
-
-| 
-
-`inner_hits` allow us to highlight the matching nested documents.   
+<2>| This query doesn’t match because `Alice` and `Smith` are not in the same nested object.     
+<3>| This query matches because `Alice` and `White` are in the same nested object.     
+<4>| `inner_hits` allow us to highlight the matching nested documents.   
   
 Nested documents can be:
 
@@ -167,25 +142,10 @@ Nested documents can be:
 
 The following parameters are accepted by `nested` fields:
 
-[`dynamic`](dynamic.html)
-
-| 
-
-Whether or not new `properties` should be added dynamically to an existing nested object. Accepts `true` (default), `false` and `strict`.   
-  
+[`dynamic`](dynamic.html)| Whether or not new `properties` should be added dynamically to an existing nested object. Accepts `true` (default), `false` and `strict`.   
 ---|---  
-  
-[`include_in_all`](include-in-all.html)
-
-| 
-
-Sets the default `include_in_all` value for all the `properties` within the nested object. Nested documents do not have their own `_all` field. Instead, values are added to the `_all` field of the main “root” document.   
-  
-[`properties`](properties.html)
-
-| 
-
-The fields within the nested object, which can be of any [datatype](mapping-types.html), including `nested`. New properties may be added to an existing nested object.   
+[`include_in_all`](include-in-all.html)| Sets the default `include_in_all` value for all the `properties` within the nested object. Nested documents do nothave their own `_all` field. Instead, values are added to the `_all` field of the main “root” document.     
+[`properties`](properties.html)| The fields within the nested object, which can be of any [datatype](mapping-types.html), including `nested`. New properties may be added to an existing nested object.   
   
 ![Important](/images/icons/important.png)
 
