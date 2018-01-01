@@ -1,21 +1,20 @@
-## Shrink Index
+## 收缩索引 Shrink Index
 
-The shrink index API allows you to shrink an existing index into a new index with fewer primary shards. The requested number of primary shards in the target index must be a factor of the number of shards in the source index. For example an index with `8` primary shards can be shrunk into `4`, `2` or `1` primary shards or an index with `15` primary shards can be shrunk into `5`, `3` or `1`. If the number of shards in the index is a prime number it can only be shrunk into a single primary shard. Before shrinking, a (primary or replica) copy of every shard in the index must be present on the same node.
+收缩索引允许对已经存在的索引进行变更它的主分片数据到一个新的索引中。目标索引中所请求的主分片数量必须是源索引中分片数量的一个因子。 例如，可以将具有`8`主分片的索引收缩为`4`，`2`或`1`主分片或者具有`15`主分片的索引可以收缩为`5`，`3`或`1`。如果索引中的碎片数量是素数，则只能将其缩小为(1)单个主碎片。在收缩之前，索引中每个分片的（主要或副本）副本必须出现在同一个节点上。
 
-Shrinking works as follows:
+收缩操作，做了如下的内容：
 
-  * First, it creates a new target index with the same definition as the source index, but with a smaller number of primary shards. 
-  * Then it hard-links segments from the source index into the target index. (If the file system doesn’t support hard-linking, then all segments are copied into the new index, which is a much more time consuming process.) 
-  * Finally, it recovers the target index as though it were a closed index which had just been re-opened. 
+   * 首先，它创建一个新的目标索引，其定义与源索引相同，但主碎片数量较少。
+   * 然后将源索引中的段硬连接到目标索引。 （如果文件系统不支持硬连接，那么所有的段都被复制到新的索引中，这是一个更耗时的过程。）
+   最后，它恢复了目标索引，好像它是一个刚刚重新开放的关闭状态的索引。
 
 
 
-### Preparing an index for shrinking
+### 收缩一个索引的准备工作 Preparing an index for shrinking
 
-In order to shrink an index, the index must be marked as read-only, and a (primary or replica) copy of every shard in the index must be relocated to the same node and have [health](cluster-health.html) `green`.
+为了缩小索引，必须将索引标记为只读，并且必须将索引中每个分片的（主要或副本）副本重定位到同一个节点，并且具有[health](cluster-health.html)状态为`green`。
 
-These two conditions can be achieved with the following request:
-    
+这两个条件可以通过以下要求来实现：    
     
     PUT /my_source_index/_settings
     {
@@ -25,34 +24,32 @@ These two conditions can be achieved with the following request:
       }
     }
 
-<1>| Forces the relocation of a copy of each shard to the node with name `shrink_node_name`. See [Shard Allocation Filtering](shard-allocation-filtering.html) for more options.     
+<1>| 强制将每个分片的副本重定位到名称为`shrink_node_name`的节点。 请参阅[Shard Allocation Filtering](shard-allocation-filtering.html)以获取更多内容。     
 ---|---    
-<2>| Prevents write operations to this index while still allowing metadata changes like deleting the index.   
+<2>| 防止对此索引执行写操作，同时允许更改元数据（如删除索引）。 
   
-It can take a while to relocate the source index. Progress can be tracked with the [`_cat recovery` API](cat-recovery.html), or the [`cluster health` API](cluster-health.html) can be used to wait until all shards have relocated with the `wait_for_no_relocating_shards` parameter.
+重分配索引的过程是一个比较耗时的过程，可以通过[`_cat recovery` API](cat-recovery.html)追踪处理过程,或 [`cluster health` API](cluster-health.html)使用`wait_for_no_relocating_shards`参数来查看是否分配完成。
 
-### Shrinking an index
+### 收缩一个索引 Shrinking an index
 
-To shrink `my_source_index` into a new index called `my_target_index`, issue the following request:
-    
+要将`my_source_index`缩小到一个名为`my_target_index`的新索引，请发出以下请求：    
     
     POST my_source_index/_shrink/my_target_index
 
-The above request returns immediately once the target index has been added to the cluster state — it doesn’t wait for the shrink operation to start.
+一旦目标索引添加到集群状态，上述请求立即返回 - 它不会等待收缩操作启动。
 
 ![Important](/images/icons/important.png)
 
-Indices can only be shrunk if they satisfy the following requirements:
-
-  * the target index must not exist 
-  * The index must have more primary shards than the target index. 
-  * The number of primary shards in the target index must be a factor of the number of primary shards in the source index. The source index must have more primary shards than the target index. 
-  * The index must not contain more than `2,147,483,519` documents in total across all shards that will be shrunk into a single shard on the target index as this is the maximum number of docs that can fit into a single shard. 
-  * The node handling the shrink process must have sufficient free disk space to accommodate a second copy of the existing index. 
-
+索引只能满足以下要求才能收缩：
+  * 目标索引必须存在 
+  * 源索引的分片数必须比目标索引的结构存在
+  * 目标索引中的主要碎片数量必须是源索引中主要碎片数量的一个因子。 源索引必须具有比目标索引更多的主分片。
+  * 该索引在所有分片中总共不能包含超过`2,147,483,519个`文档，这些文档将被缩减为目标索引中的一个分片，因为这是可以放入单个分片的文档的最大数量。
+  * 处理收缩进程的节点必须有足够的可用磁盘空间来容纳现有索引的第二个副本。
 
 
-The `_shrink` API is similar to the [`create index` API](indices-create-index.html) and accepts `settings` and `aliases` parameters for the target index:
+
+`_shrink` API类似于[`create index` API](indices-create-index.html)，接受目标索引的`settings`和`aliases`参数：
     
     
     POST my_source_index/_shrink/my_target_index
@@ -67,22 +64,24 @@ The `_shrink` API is similar to the [`create index` API](indices-create-index.ht
       }
     }
 
-<1>| The number of shards in the target index. This must be a factor of the number of shards in the source index.     
+<1>| 目标索引中的主分片数量。 这必须是源索引中的分片数量的一个因素。     
 ---|---    
-<2>| Best compression will only take affect when new writes are made to the index, such as when [force-merging](indices-forcemerge.html) the shard to a single segment.   
+<2>| 当对索引进行新的写入操作时，例如[force-merge](indices-forcemerge.html)将片段分割为单个片段时，最佳压缩只会起作用。  
   
 ![Note](/images/icons/note.png)
 
-Mappings may not be specified in the `_shrink` request, and all `index.analysis.*` and `index.similarity.*` settings will be overwritten with the settings from the source index.
+映射关系如果不会在`_shrink`请求中指定，所有`index.analysis.*`和`index.similarity.*`设置将被来自源索引的设置覆盖。
 
-### Monitoring the shrink process
 
-The shrink process can be monitored with the [`_cat recovery` API](cat-recovery.html), or the [`cluster health` API](cluster-health.html) can be used to wait until all primary shards have been allocated by setting the `wait_for_status` parameter to `yellow`.
+### 监控收缩过程 Monitoring the shrink process
 
-The `_shrink` API returns as soon as the target index has been added to the cluster state, before any shards have been allocated. At this point, all shards are in the state `unassigned`. If, for any reason, the target index can’t be allocated on the shrink node, its primary shard will remain `unassigned` until it can be allocated on that node.
 
-Once the primary shard is allocated, it moves to state `initializing`, and the shrink process begins. When the shrink operation completes, the shard will become `active`. At that point, Elasticsearch will try to allocate any replicas and may decide to relocate the primary shard to another node.
+可以使用[`_cat recovery API`](cat-recovery.html)或[`cluster health` API]（cluster-health.html）来监控收缩进程，以等待所有主分片 通过将`wait_for_status`参数设置为`yellow`来分配。
 
-### Wait For Active Shards
+只要目标索引已经添加到集群状态，在分配任何分片之前，`_shrink` API就会返回。 此时，所有碎片都处于“未分配”状态。 如果出于任何原因，目标索引不能在收缩节点上分配，则其主分片将保持“未分配”状态，直到可以在该节点上分配为止。
 
-Because the shrink operation creates a new index to shrink the shards to, the [wait for active shards](indices-create-index.html#create-index-wait-for-active-shards) setting on index creation applies to the shrink index action as well.
+一旦主分片被分配，它就进入“初始化”状态，收缩过程开始。 收缩操作完成后，分片将变为“活动”状态。 在这一点上，Elasticsearch将尝试分配任何副本，并可能决定将主分片重定位到另一个节点。
+
+### 等待激活的分片 Wait For Active Shards
+
+因为收缩操作会创建一个新的索引来收缩碎片，所以索引创建时的[等待活动碎片 `wait for active shards`](indices-create-index.html＃create-index-wait-for-active-shards)设置适用于收缩操作。

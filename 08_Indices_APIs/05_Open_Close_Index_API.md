@@ -1,20 +1,22 @@
-## 打开关闭 Open / Close Index API
+## 打开/关闭索引API Open / Close Index API
+
+打开/关闭索引API允许关闭一个索引，然后进行打开它，一个关闭状态的索引在集群上几乎没有任何开销（除了维护其元数据），并且对于读/写操作而言被阻塞。 关闭的索引可以打开，然后通过正常的恢复过程。
 
 
-
-The open and close index APIs allow to close an index, and later on opening it. A closed index has almost no overhead on the cluster (except for maintaining its metadata), and is blocked for read/write operations. A closed index can be opened which will then go through the normal recovery process.
-
-The REST endpoint is `/{index}/_close` and `/{index}/_open`. For example:
+REST API接口是 `/{index}/_close` 和 `/{index}/_open`. 例如：
     
     
     POST /my_index/_close
     
     POST /my_index/_open
 
-It is possible to open and close multiple indices. An error will be thrown if the request explicitly refers to a missing index. This behaviour can be disabled using the `ignore_unavailable=true` parameter.
+允许对多个索引进行打开和关闭的操作，如果没有明确地指定一个索引，操作会返回一个错误。可以通过设置`ignore_unavailable=true`来忽略这个错误。
 
-All indices can be opened or closed at once using `_all` as the index name or specifying patterns that identify them all (e.g. `*`).
+可以使用`_all`或`*`来表示全部的索引。
 
-Identifying indices via wildcards or `_all` can be disabled by setting the `action.destructive_requires_name` flag in the config file to `true`. This setting can also be changed via the cluster update settings api.
+可以通过设置`action.destructive_requires_name=true`来禁用通配符和`_all`的使用。这个设置同样会响应更新索引API操作。
 
-Closed indices consume a significant amount of disk-space which can cause problems in managed environments. Closing indices can be disabled via the cluster settings API by setting `cluster.indices.close.enable` to `false`. The default is `true`.
+封闭式索引消耗大量的磁盘空间，这可能会在托管环境中导致问题。 通过将cluster.indices.close.enable设置为false，可以通过集群设置API禁用关闭索引。 默认是`true`。
+
+关闭状态的索引会占用大量的磁盘空间，这可以会导致管理环境中的管理问题，可以通过`cluster.indices.close.enable=false`来设置禁用关闭索引操作。
+
