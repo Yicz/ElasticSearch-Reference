@@ -1,4 +1,4 @@
-## Pattern Analyzer
+## 模式分析器 Pattern Analyzer
 
 The `pattern` analyzer uses a regular expression to split the text into terms. The regular expression should match the **token separators** not the tokens themselves. The regular expression defaults to `\W+` (or all non-word characters).
 

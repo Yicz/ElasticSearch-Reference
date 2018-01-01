@@ -1,4 +1,4 @@
-## cat segments
+## 查看段信息 cat segments
 
 The `segments` command provides low level information about the segments in the shards of an index. It provides information similar to the [\_segments](indices-segments.html) endpoint. For example:
     

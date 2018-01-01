@@ -1,4 +1,4 @@
-## Fingerprint Analyzer
+## 指纹分析器 Fingerprint Analyzer
 
 The `fingerprint` analyzer implements a [fingerprinting algorithm](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth#fingerprint) which is used by the OpenRefine project to assist in clustering.
 

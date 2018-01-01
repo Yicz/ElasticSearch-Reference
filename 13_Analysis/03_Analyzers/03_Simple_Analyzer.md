@@ -1,4 +1,4 @@
-## Simple Analyzer
+## 简单分析器 Simple Analyzer
 
 The `simple` analyzer breaks text into terms whenever it encounters a character which is not a letter. All terms are lower cased.
 

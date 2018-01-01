@@ -1,4 +1,4 @@
-## cat recovery
+## 查看恢复 cat recovery
 
 The `recovery` command is a view of index shard recoveries, both on-going and previously completed. It is a more compact view of the JSON [recovery](indices-recovery.html) API.
 

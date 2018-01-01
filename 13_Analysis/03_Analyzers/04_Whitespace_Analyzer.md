@@ -1,4 +1,4 @@
-## Whitespace Analyzer
+##  空格分析器 Whitespace Analyzer
 
 The `whitespace` analyzer breaks text into terms whenever it encounters a whitespace character.
 

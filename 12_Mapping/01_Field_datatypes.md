@@ -1,4 +1,4 @@
-## Field datatypes
+##  字段类型 Field datatypes
 
 Elasticsearch supports a number of different datatypes for the fields in a document:
 

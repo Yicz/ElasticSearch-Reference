@@ -1,4 +1,4 @@
-## cat nodeattrs
+## 查看节点属性 cat nodeattrs
 
 The `nodeattrs` command shows custom node attributes. For example:
     

@@ -1,4 +1,4 @@
-## cat shards
+## 查看分片 cat shards
 
 The `shards` command is the detailed view of what nodes contain which shards. It will tell you if it’s a primary or replica, the number of docs, the bytes it takes on disk, and the node where it’s located.
 

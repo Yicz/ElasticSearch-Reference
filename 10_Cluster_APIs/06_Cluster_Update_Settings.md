@@ -1,4 +1,4 @@
-## Cluster Update Settings
+## 更新集群设置 Cluster Update Settings
 
 Allows to update cluster wide specific settings. Settings updated can either be persistent (applied cross restarts) or transient (will not survive a full cluster restart). Here is an example:
     

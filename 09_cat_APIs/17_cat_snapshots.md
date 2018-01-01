@@ -1,4 +1,4 @@
-## cat snapshots
+## 查看快照 cat snapshots
 
 The `snapshots` command shows all snapshots that belong to a specific repository. To find a list of available repositories to query, the command `/_cat/repositories` can be used. Querying the snapshots of a repository named `repo1` then looks as follows.
     

@@ -2,7 +2,7 @@
 
 ## 分词（分析，分解） analysis 
     
-分词是将[全文 full text](glossary.html#glossary-text)转换成[项 term](glossary.html#glossary-term)的过程。依赖于分词器的使用，例如：`FOO BAR`, `Foo-Bar`, `foo,bar`这些词，可能会分解成项`foo` 和 `bar`.这些项是实际保存在索引中的。一个全文查询（不是项（term）查询）查询`FoO:bAR`，将会分词成项 `foo`,`bar` 去匹配索引中保存的分词结果。分词过程（
+分词是将[全文 full text](glossary.html#glossary-text)转换成[项 term](glossary.html#glossary-term)的过程。依赖于分析器的使用，例如：`FOO BAR`, `Foo-Bar`, `foo,bar`这些词，可能会分解成项`foo` 和 `bar`.这些项是实际保存在索引中的。一个全文查询（不是项（term）查询）查询`FoO:bAR`，将会分词成项 `foo`,`bar` 去匹配索引中保存的分词结果。分词过程（
 ES会在查询和建立索引中用到）让ES在全文索引中表现更加优秀。参考[文本/全文 text](glossary.html#glossary-text)和[项 term](glossary.html#glossary-term)
 
 ## 集群 cluster 

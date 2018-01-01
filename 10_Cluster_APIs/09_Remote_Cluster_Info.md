@@ -1,4 +1,4 @@
-## Remote Cluster Info
+## 远程集群信息 Remote Cluster Info
 
 The cluster remote info API allows to retrieve all of the configured remote cluster information.
     

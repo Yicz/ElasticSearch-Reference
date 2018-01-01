@@ -1,4 +1,4 @@
-## cat fielddata
+## 查看字段信息 cat fielddata
 
 `fielddata` shows how much heap memory is currently being used by fielddata on every data node in the cluster.
     

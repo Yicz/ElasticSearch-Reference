@@ -1,4 +1,4 @@
-## Full text queries
+## 全文查询 Full text queries
 
 The high-level full text queries are usually used for running full text queries on full text fields like the body of an email. They understand how the field being queried is [analyzed](analysis.html) and will apply each field’s `analyzer` (or `search_analyzer`) to the query string before executing.
 

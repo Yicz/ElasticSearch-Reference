@@ -1,4 +1,4 @@
-## Dynamic templates
+## 动态模板 Dynamic templates
 
 Dynamic templates allow you to define custom mappings that can be applied to dynamically added fields based on:
 

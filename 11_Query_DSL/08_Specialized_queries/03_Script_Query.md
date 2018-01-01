@@ -1,4 +1,4 @@
-## Script Query
+## 脚本查询 Script Query
 
 A query allowing to define [scripts](modules-scripting.html) as queries. They are typically used in a filter context, for example:
     

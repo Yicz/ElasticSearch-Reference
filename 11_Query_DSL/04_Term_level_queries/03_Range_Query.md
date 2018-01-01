@@ -1,4 +1,4 @@
-## Range Query
+## 范围查度 Range Query
 
 Matches documents with fields that have terms within a certain range. The type of the Lucene query depends on the field type, for `string` fields, the `TermRangeQuery`, while for number/date fields, the query is a `NumericRangeQuery`. The following example returns all documents where `age` is between `10` and `20`:
     

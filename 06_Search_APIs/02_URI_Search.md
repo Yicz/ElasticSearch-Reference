@@ -42,7 +42,7 @@
 ---|---  
 `q`| 查询字符串（映射到`query_string`查询，更多详细信息请参见[_Query String Query_](query-dsl-query-string-query.html)）
 `df`| 在查询中未定义字段前缀时使用的默认字段。    
-`analyzer`| 分析查询字符串时要使用的分词器名称。
+`analyzer`| 分析查询字符串时要使用的分析器名称。
 `analyze_wildcard`| 是否应该分析通配符和前缀查询. 默认 `false`.    
 `batched_reduce_size`|在协调节点上应该一次减少分片结果的数量。如果请求中的潜在分片数可能很大，则应该使用此值作为保护机制来减少每个搜索请求的内存开销。
 `default_operator`| 默认查询条件连接词,  值为`AND` 或 `OR`. 默认 `OR`.    

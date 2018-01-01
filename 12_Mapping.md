@@ -31,7 +31,7 @@
   * 一个特殊别名 [`geo_point`](geo-point.html), [`geo_shape`](geo-shape.html), 或 [`completion`](search-suggesters-completion.html). 
 
 
-为了不同的目的在同一个索引的字段使用不同的字段类型是很有用的，如，使用`string`进行[索引 indexed](mapping-index.html)，`text`类型可用作全文查询,还有`keyword`类型可用作排序和聚合分析。另外，你还可以对一个`string`类型的字段使用不同的分词器，如 [`标准 standard` 分词器](analysis-standard-analyzer.html)，[`英文 english`](analysis-lang-analyzer.html#english-analyzer) 分词器, 还有 the [`法语 french` 分词器](analysis-lang-analyzer.html#french-analyzer).
+为了不同的目的在同一个索引的字段使用不同的字段类型是很有用的，如，使用`string`进行[索引 indexed](mapping-index.html)，`text`类型可用作全文查询,还有`keyword`类型可用作排序和聚合分析。另外，你还可以对一个`string`类型的字段使用不同的分析器，如 [`标准 standard` 分析器](analysis-standard-analyzer.html)，[`英文 english`](analysis-lang-analyzer.html#english-analyzer) 分析器, 还有 the [`法语 french` 分析器](analysis-lang-analyzer.html#french-analyzer).
 
 这是_multi-fields_的目的。 大多数数据类型通过[`fields`](multi-fields.html)参数支持多字段。
 

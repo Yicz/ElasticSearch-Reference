@@ -1,4 +1,4 @@
-## cat master
+##  查看主节点信息 cat master
 
 `master` doesn’t have any extra options. It simply displays the master’s node ID, bound IP address, and node name. For example:
     

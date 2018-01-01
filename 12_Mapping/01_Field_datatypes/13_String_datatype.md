@@ -1,4 +1,4 @@
-## String datatype
+## 字符串类型 String datatype
 
 The `string` field is unsupported for indexes created in 5.x in favor of the `text` and `keyword` fields. Attempting to create a string field in an index created in 5.x will cause Elasticsearch to attempt to upgrade the `string` into the appropriate `text` or `keyword` field. It will return an HTTP `Warning` header telling you that `string` is deprecated. This upgrade process isn’t always perfect because there are some combinations of features that are supported by `string` but not `text` or `keyword`. For that reason it is better to use `text` or `keyword`.
 

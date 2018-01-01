@@ -1,4 +1,4 @@
-## Text datatype
+## 文档类型 Text datatype
 
 A field to index full-text values, such as the body of an email or the description of a product. These fields are `analyzed`, that is they are passed through an [analyzer](analysis.html) to convert the string into a list of individual terms before being indexed. The analysis process allows Elasticsearch to search for individual words _within_ each full text field. Text fields are not used for sorting and seldom used for aggregations (although the [significant terms aggregation](search-aggregations-bucket-significantterms-aggregation.html) is a notable exception).
 

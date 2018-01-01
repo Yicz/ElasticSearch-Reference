@@ -1,4 +1,4 @@
-## Keyword Analyzer
+## 关键字分析器 Keyword Analyzer
 
 The `keyword` analyzer is a “noop” analyzer which returns the entire input string as a single token.
 

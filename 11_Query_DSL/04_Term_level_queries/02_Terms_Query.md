@@ -1,4 +1,4 @@
-## Terms Query
+## 多词条（项）查询 Terms Query
 
 Filters documents that have fields that match any of the provided terms ( **not analyzed** ). For example:
     

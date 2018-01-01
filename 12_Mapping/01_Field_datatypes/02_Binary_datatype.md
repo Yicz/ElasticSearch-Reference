@@ -1,4 +1,4 @@
-## Binary datatype
+## 二进制类型 Binary datatype
 
 The `binary` type accepts a binary value as a [Base64](https://en.wikipedia.org/wiki/Base64) encoded string. The field is not stored by default and is not searchable:
     

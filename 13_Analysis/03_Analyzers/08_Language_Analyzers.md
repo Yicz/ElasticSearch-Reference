@@ -1,4 +1,4 @@
-## Language Analyzers
+## 各种语言分析器 Language Analyzers
 
 A set of analyzers aimed at analyzing specific language text. The following types are supported: 
 

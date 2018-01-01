@@ -1,4 +1,4 @@
-## Term Query
+## 词条（项）查询 Term Query
 
 The `term` query finds documents that contain the **exact** term specified in the inverted index. For instance:
     

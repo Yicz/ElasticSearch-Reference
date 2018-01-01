@@ -1,4 +1,4 @@
-## cat count
+## 查询统计数据 cat count
 
 `count` provides quick access to the document count of the entire cluster, or individual indices.
     

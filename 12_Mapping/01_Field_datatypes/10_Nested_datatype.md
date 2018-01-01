@@ -1,4 +1,4 @@
-## Nested datatype
+## 嵌套对象类型 Nested datatype
 
 The `nested` type is a specialised version of the [`object`](object.html) datatype that allows arrays of objects to be indexed and queried independently of each other.
 

@@ -1,4 +1,4 @@
-## cat thread pool
+## 查看线程池 cat thread pool
 
 The `thread_pool` command shows cluster wide thread pool statistics per node. By default the active, queue and rejected statistics are returned for all thread pools.
     

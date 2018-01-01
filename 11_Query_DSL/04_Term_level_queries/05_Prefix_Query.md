@@ -1,4 +1,4 @@
-## Prefix Query
+## 前缀查询 Prefix Query
 
 Matches documents that have fields containing terms with a specified prefix ( **not analyzed** ). The prefix query maps to Lucene `PrefixQuery`. The following matches documents where the user field contains a term that starts with `ki`:
     

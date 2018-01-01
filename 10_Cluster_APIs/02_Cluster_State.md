@@ -1,4 +1,4 @@
-## Cluster State
+## 集群状态 Cluster State
 
 The cluster state API allows to get a comprehensive state information of the whole cluster.
     

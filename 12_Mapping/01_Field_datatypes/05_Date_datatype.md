@@ -1,4 +1,4 @@
-## Date datatype
+## 日期类型 Date datatype
 
 JSON doesn’t have a date datatype, so dates in Elasticsearch can either be:
 

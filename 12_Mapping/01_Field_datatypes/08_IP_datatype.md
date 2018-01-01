@@ -1,4 +1,4 @@
-## IP datatype
+## IP类型 IP datatype
 
 An `ip` field can index/store either [IPv4](https://en.wikipedia.org/wiki/IPv4) or [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
     

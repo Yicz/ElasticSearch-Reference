@@ -1,4 +1,4 @@
-## cat indices
+##  查看索引信息 cat indices
 
 The `indices` command provides a cross-div of each index. This information **spans nodes**. For example:
     

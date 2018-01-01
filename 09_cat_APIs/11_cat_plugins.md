@@ -1,4 +1,4 @@
-## cat plugins
+## 查看插件 cat plugins
 
 The `plugins` command provides a view per node of running plugins. This information **spans nodes**.
     

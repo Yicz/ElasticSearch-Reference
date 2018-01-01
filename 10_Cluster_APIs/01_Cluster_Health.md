@@ -1,4 +1,4 @@
-## Cluster Health
+## 群集健康 Cluster Health
 
 The cluster health API allows to get a very simple status on the health of the cluster. For example, on a quiet single node cluster with a single index with 5 shards and one replica, this:
     

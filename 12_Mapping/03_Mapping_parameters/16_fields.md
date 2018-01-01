@@ -1,4 +1,4 @@
-## `fields`
+## 字段 `fields`
 
 It is often useful to index the same field in different ways for different purposes. This is the purpose of _multi-fields_. For instance, a `string` field could be mapped as a `text` field for full-text search, and as a `keyword` field for sorting or aggregations:
     

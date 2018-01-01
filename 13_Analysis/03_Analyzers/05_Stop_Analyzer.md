@@ -1,4 +1,4 @@
-## Stop Analyzer
+## 停用词分析器 Stop Analyzer
 
 The `stop` analyzer is the same as the [`simple` analyzer](analysis-simple-analyzer.html) but adds support for removing stop words. It defaults to using the `_english_` stop words.
 

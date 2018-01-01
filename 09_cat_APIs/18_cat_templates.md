@@ -1,4 +1,4 @@
-## cat templates
+## 查看模板 cat templates
 
 The `templates` command provides information about existing templates.
     

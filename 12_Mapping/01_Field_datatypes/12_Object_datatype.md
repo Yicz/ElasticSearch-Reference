@@ -1,4 +1,4 @@
-## Object datatype
+## 对象类型 Object datatype
 
 JSON documents are hierarchical in nature: the document may contain inner objects which, in turn, may contain inner objects themselves:
     

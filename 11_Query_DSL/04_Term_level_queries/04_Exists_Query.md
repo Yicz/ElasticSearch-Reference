@@ -1,4 +1,4 @@
-## Exists Query
+## 是否存在查询 Exists Query
 
 Returns documents that have at least one non-`null` value in the original field:
     

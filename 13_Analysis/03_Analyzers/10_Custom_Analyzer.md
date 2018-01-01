@@ -1,4 +1,4 @@
-## Custom Analyzer
+## 自定义分析器 Custom Analyzer
 
 When the built-in analyzers do not fulfill your needs, you can create a `custom` analyzer which uses the appropriate combination of:
 

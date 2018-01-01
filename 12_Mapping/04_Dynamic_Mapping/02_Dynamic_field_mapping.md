@@ -1,4 +1,4 @@
-## Dynamic field mapping
+## 动态字段映射 Dynamic field mapping
 
 By default, when a previously unseen field is found in a document, Elasticsearch will add the new field to the type mapping. This behaviour can be disabled, both at the document and at the [`object`](object.html) level, by setting the [`dynamic`](dynamic.html) parameter to `false` (to ignore new fields) or to `strict` (to throw an exception if an unknown field is encountered).
 

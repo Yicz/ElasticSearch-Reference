@@ -1,4 +1,4 @@
-## Mapping parameters
+## 映射参数 Mapping parameters
 
 The following pages provide detailed explanations of the various mapping parameters that are used by [field mappings](mapping-types.html):
 

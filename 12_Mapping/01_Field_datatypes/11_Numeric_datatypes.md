@@ -1,4 +1,4 @@
-## Numeric datatypes
+## 数值类型 Numeric datatypes
 
 The following numeric types are supported:
 

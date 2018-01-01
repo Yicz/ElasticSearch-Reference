@@ -1,4 +1,4 @@
-## cat pending tasks
+## 查看正在执行的任务 cat pending tasks
 
 `pending_tasks` provides the same information as the [`/_cluster/pending_tasks`](cluster-pending.html) API in a convenient tabular format. For example:
     

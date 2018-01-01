@@ -1,4 +1,4 @@
-## `analyzer`
+## 分析器 `analyzer`
 
 The values of [`analyzed`](mapping-index.html) string fields are passed through an [analyzer](analysis.html) to convert the string into a stream of _tokens_ or _terms_. For instance, the string `"The quick Brown Foxes."` may, depending on which analyzer is used, be analyzed to the tokens: `quick`, `brown`, `fox`. These are the actual terms that are indexed for the field, which makes it possible to search efficiently for individual words _within_ big blobs of text.
 

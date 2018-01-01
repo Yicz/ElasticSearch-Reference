@@ -1,4 +1,4 @@
-## Regexp Query
+## 正则查询 Regexp Query
 
 The `regexp` query allows you to use regular expression term queries. See [Regular expression syntax](query-dsl-regexp-query.html#regexp-syntax) for details of the supported regular expression language. The "term queries" in that first sentence means that Elasticsearch will apply the regexp to the terms produced by the tokenizer for that field, and not to the original text of the field.
 

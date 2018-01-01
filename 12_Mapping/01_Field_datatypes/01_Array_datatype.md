@@ -1,4 +1,4 @@
-## Array datatype
+## 数组类型 Array datatype
 
 In Elasticsearch, there is no dedicated `array` type. Any field can contain zero or more values by default, however, all values in the array must be of the same datatype. For instance:
 

@@ -226,8 +226,8 @@ Setting `term_statistics` to `true` (default is `false`) will return
       }
     }
 
-##### 字段分词器 Per-field analyzer
-另外，通过使用`per_field_analyzer`参数可以提供不同的分词器。 这对于以任何方式生成词条向量都很有用，特别是在使用人造文档时。 当为已经存储了词条向量的字段提供分词器时，词条向量将被重新生成。
+##### 字段分析器 Per-field analyzer
+另外，通过使用`per_field_analyzer`参数可以提供不同的分析器。 这对于以任何方式生成词条向量都很有用，特别是在使用人造文档时。 当为已经存储了词条向量的字段提供分析器时，词条向量将被重新生成。
     
     GET /twitter/tweet/_termvectors
     {

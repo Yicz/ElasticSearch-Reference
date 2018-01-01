@@ -1,11 +1,10 @@
-## cat aliases
+## 查看别名 cat aliases
 
-`aliases` shows information about currently configured aliases to indices including filter and routing infos.
-    
+`aliases`展示了当前索引配置的别名（aliases）,包含了过滤和由路信息。
     
     GET /_cat/aliases?v
 
-Might respond with:
+响应内容：
     
     
     alias  index filter routing.index routing.search
@@ -14,6 +13,6 @@ Might respond with:
     alias3 test1 -      1            1
     alias4 test1 -      2            1,2
 
-The output shows that `alias2` has configured a filter, and specific routing configurations in `alias3` and `alias4`.
+上面的输出显示了`alias2`配置了一个滤过和`alias3`和`alias4`配置路由信息。
 
-If you only want to get information about a single alias, you can specify the alias in the URL, for example `/_cat/aliases/alias1`.
+如果你只想获取单个别名（alias）,你可以在URL上添加别名（alias）进行明确指定一个别名。

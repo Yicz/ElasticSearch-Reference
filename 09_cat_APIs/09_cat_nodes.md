@@ -1,4 +1,4 @@
-## cat nodes
+##  查看节点信息 cat nodes
 
 The `nodes` command shows the cluster topology. For example
     

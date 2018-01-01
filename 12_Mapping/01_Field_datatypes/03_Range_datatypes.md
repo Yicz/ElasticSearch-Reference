@@ -1,4 +1,4 @@
-## Range datatypes
+## 范围类型 Range datatypes
 
 The following range types are supported:
 

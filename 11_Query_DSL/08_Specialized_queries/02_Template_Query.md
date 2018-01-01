@@ -1,4 +1,4 @@
-## Template Query
+## 模板查询 Template Query
 
 ![Warning](/images/icons/warning.png)
 

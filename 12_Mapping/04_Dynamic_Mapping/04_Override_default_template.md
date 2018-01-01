@@ -1,4 +1,4 @@
-## Override default template
+## 覆盖默认模板 Override default template
 
 You can override the default mappings for all indices and all types by specifying a `_default_` type mapping in an index template which matches all indices.
 

@@ -1,4 +1,4 @@
-## Fuzzy Query
+##  模糊查询 Fuzzy Query
 
 The fuzzy query uses similarity based on Levenshtein edit distance.
 

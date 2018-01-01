@@ -1,4 +1,4 @@
-## cat allocation
+## 查看分配 cat allocation
 
 `allocation` provides a snapshot of how many shards are allocated to each data node and how much disk space they are using.
     

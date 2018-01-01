@@ -1,4 +1,4 @@
-## `store`
+##  存储 `store`
 
 By default, field values are [indexed](mapping-index.html) to make them searchable, but they are not _stored_. This means that the field can be queried, but the original field value cannot be retrieved.
 

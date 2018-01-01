@@ -1,4 +1,4 @@
-## cat repositories
+##  cat repositories
 
 The `repositories` command shows the snapshot repositories registered in the cluster. For example:
     

@@ -1,4 +1,4 @@
-## Nodes Info
+## 节点信息 Nodes Info
 
 The cluster nodes info API allows to retrieve one or more (or all) of the cluster nodes information.
     

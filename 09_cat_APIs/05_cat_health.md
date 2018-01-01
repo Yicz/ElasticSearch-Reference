@@ -1,4 +1,4 @@
-## cat health
+## 查看健康状态 cat health
 
 `health` is a terse, one-line representation of the same information from `/_cluster/health`.
     
