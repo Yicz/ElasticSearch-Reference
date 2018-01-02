@@ -1,7 +1,6 @@
 ## 设置映射关系 Put Mapping
 
 设置映射关系API允许在一个已经存在的索引中添加新的类型（type）,或给已经存在的类型添加新的字段（field）
-The PUT mapping API allows you to add a new type to an existing index, or add new fields to an existing type:
     
     
     PUT twitter <1>

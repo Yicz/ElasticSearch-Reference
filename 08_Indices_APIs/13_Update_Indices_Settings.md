@@ -1,10 +1,9 @@
-## Update Indices Settings
+## 更新索引设置 Update Indices Settings
 
-Change specific index level settings in real time.
+实时变更指定索引的设置.
 
-The REST endpoint is `/_settings` (to update all indices) or `{index}/_settings` to update one (or more) indices settings. The body of the request includes the updated settings, for example:
-    
-    
+接口是`_settings`(更新全部的索引)或`{index}/settings`,更新一个或者多个索引,`{index}`参数可以使用逗号进行分隔,更新设置API内容包含在的请求体中,例如:
+
     PUT /twitter/_settings
     {
         "index" : {
@@ -12,13 +11,12 @@ The REST endpoint is `/_settings` (to update all indices) or `{index}/_settings`
         }
     }
 
-The list of per-index settings which can be updated dynamically on live indices can be found in [Index Modules](index-modules.html). To preserve existing settings from being updated, the `preserve_existing` request parameter can be set to `true`.
+可以在[索引模块 index module](index-modules.html)中找到可以在动态索引上动态更新的每个索引设置的列表。 为了保持现有设置不被更新，可以将`preserve_existing`请求参数设置为`true`。
 
-### Bulk Indexing Usage
+### 批量索引用法 Bulk Indexing Usage
 
-For example, the update settings API can be used to dynamically change the index from being more performant for bulk indexing, and then move it to more real time indexing state. Before the bulk indexing is started, use:
-    
-    
+例如，可以使用更新设置API动态更改索引，使其更适合批量索引，然后将其更改为更实时的索引状态。 批量索引开始之前，请使用：
+
     PUT /twitter/_settings
     {
         "index" : {
@@ -26,9 +24,9 @@ For example, the update settings API can be used to dynamically change the index
         }
     }
 
-(Another optimization option is to start the index without any replicas, and only later adding them, but that really depends on the use case).
+（另一个优化选项是在没有任何副本的情况下启动索引，只在稍后添加它们，但这实际上取决于用例）。
 
-Then, once bulk indexing is done, the settings can be updated (back to the defaults for example):
+然后，一旦批量索引完成，设置可以更新（例如回到默认值）：
     
     
     PUT /twitter/_settings
@@ -38,18 +36,16 @@ Then, once bulk indexing is done, the settings can be updated (back to the defau
         }
     }
 
-And, a force merge should be called:
-    
+而且，强制合并设置的请求为：    
     
     POST /twitter/_forcemerge?max_num_segments=5
 
-### Updating Index Analysis
+### 更新索引分析器(添加) Updating Index Analysis
 
-It is also possible to define new [analyzers](analysis.html) for the index. But it is required to [close](indices-open-close.html) the index first and [open](indices-open-close.html) it after the changes are made.
+也可以为索引定义新的[分析器](analysis.html)。 但需要先[关闭](indices-open-close.html)索引，然后在更改之后[打开](indices-open-close.html)。
 
-For example if `content` analyzer hasn’t been defined on `myindex` yet you can use the following commands to add it:
-    
-    
+例如，如果“custom”分析器尚未在“myindex”上定义，您可以使用以下命令添加它：
+
     POST /twitter/_close
     
     PUT /twitter/_settings
