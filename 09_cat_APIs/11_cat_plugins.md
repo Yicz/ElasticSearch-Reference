@@ -1,11 +1,10 @@
 ## 查看插件 cat plugins
 
-The `plugins` command provides a view per node of running plugins. This information **spans nodes**.
-    
+`plugins`命令为每个运行插件的节点提供一个视图。 这个信息**跨越节点**。    
     
     GET /_cat/plugins?v&s=component&h=name,component,version,description
 
-Might look like:
+响应:
     
     
     name    component               version   description
@@ -30,4 +29,4 @@ Might look like:
     U7321H6 mapper-size             5.4.3 The Mapper Size plugin allows document to record their uncompressed size at index time.
     U7321H6 store-smb               5.4.3 The Store SMB plugin adds support for SMB stores.
 
-We can tell quickly how many plugins per node we have and which versions.
+我们可以快速判断每个节点有多少个插件以及哪些版本。

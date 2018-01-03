@@ -1,12 +1,10 @@
 ##  查看节点信息 cat nodes
 
-The `nodes` command shows the cluster topology. For example
-    
+`nodes`命令显示集群拓扑。 例如    
     
     GET /_cat/nodes?v
 
-Might look like:
-    
+响应:    
     
     ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
     127.0.0.1           65          99  42    3.07                  mdi       *      mJw06l1

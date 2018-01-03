@@ -1,11 +1,12 @@
 ## 查看正在执行的任务 cat pending tasks
 
-`pending_tasks` provides the same information as the [`/_cluster/pending_tasks`](cluster-pending.html) API in a convenient tabular format. For example:
+`pending_tasks`以便利的表格格式提供与[`/_cluster/pending_tasks`](cluster-pending.html)API相同的信息。 例如：
+
     
     
     GET /_cat/pending_tasks?v
 
-Might look like:
+响应:
     
     
     insertOrder timeInQueue priority source

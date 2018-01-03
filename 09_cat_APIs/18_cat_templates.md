@@ -1,7 +1,6 @@
 ## 查看模板 cat templates
 
-The `templates` command provides information about existing templates.
-    
+`templates`命令提供有关现有模板的信息。    
     
     % curl 'localhost:9200/_cat/templates?v=true'
     name      template order version
@@ -9,6 +8,6 @@ The `templates` command provides information about existing templates.
     template1 tea*     1
     template2 teak*    2     7
 
-The output shows that there are three existing templates, with template2 having a version value.
+输出显示有三个现有模板，其中template2具有版本值。
 
-The endpoint also supports giving a template name or pattern in the url to filter the results, for example `/_cat/templates/template*` or `/_cat/templates/template0`.
+端点还支持在url中给出模板名称或模式来过滤结果，例如`/_cat/templates/template*`或`/_cat/templates/template0`。

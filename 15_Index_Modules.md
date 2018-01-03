@@ -44,7 +44,7 @@ _动态 dynamic_
 
 `index.routing_partition_size`
 
-     自定义[routing](mapping-routing-field.html) 值可以转到的碎片数量。默认为1，只能在索引创建时设置。此值必须小于index.number_of_shards，除非index.number_of_shards值也为1.有关更多详细信息，请参阅[路由到索引分区](mapping-routing-field.html#routing-index-partition)。 关于如何使用这个设置。
+     自定义[routing](mapping-routing-field.html) 值可以转到的分片数量。默认为1，只能在索引创建时设置。此值必须小于index.number_of_shards，除非index.number_of_shards值也为1.有关更多详细信息，请参阅[路由到索引分区](mapping-routing-field.html#routing-index-partition)。 关于如何使用这个设置。
 
 ### 动态索引设置 Dynamic index settings
 

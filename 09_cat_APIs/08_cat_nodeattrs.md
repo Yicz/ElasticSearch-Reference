@@ -1,17 +1,16 @@
 ## 查看节点属性 cat nodeattrs
 
-The `nodeattrs` command shows custom node attributes. For example:
-    
+`nodeattrs`命令显示自定义节点属性。 例如：    
     
     GET /_cat/nodeattrs?v
 
-Could look like:
+响应:
     
     
     node    host      ip        attr     value
     EK_AsJb 127.0.0.1 127.0.0.1 testattr test
 
-The first few columns (`node`, `host`, `ip`) give you basic info per node and the `attr` and `value` columns give you the custom node attributes, one per line.
+前几列（`node`，`host`，`ip`）给出每个节点的基本信息，`attr`和`value`列给你定制节点属性，每行一个。
 
 ### Columns
 

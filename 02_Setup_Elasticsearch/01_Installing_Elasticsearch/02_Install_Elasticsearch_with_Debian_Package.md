@@ -162,7 +162,7 @@ Debian软件包也有一个系统配置文件（`/ etc / default / elasticsearch
 `DATA_DIR`| 日志存放目录,默认: `/var/lib/elasticsearch`.     
 `CONF_DIR`| 配置文件存放目录 (必须包含 `elasticsearch.yml` 和 `log4j2.properties` 文件), 默认: `/etc/elasticsearch`.     
 `ES_JAVA_OPTS`| JVM的额外运行优化参数  
-`RESTART_ON_UPGRADE`| 配置软件包升级重启，默认为“false”。 这意味着您必须在手动安装包后重新启动elasticsearch实例。 其原因是为了确保集群中的升级不会导致连续的碎片重新分配，从而导致高网络流量并缩短集群的响应时间。
+`RESTART_ON_UPGRADE`| 配置软件包升级重启，默认为“false”。 这意味着您必须在手动安装包后重新启动elasticsearch实例。 其原因是为了确保集群中的升级不会导致连续的分片重新分配，从而导致高网络流量并缩短集群的响应时间。
   
 ![Note](/images/icons/note.png)
 

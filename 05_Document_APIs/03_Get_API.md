@@ -157,7 +157,7 @@ curl -XGET 'localhost:9200/twitter/tweet/1/_source?_source_include=*.id&_source_
 * _local  
 请未会尽量在请求本地的分片上进行查询
 * 自定义值  
-自定义值将用于保证自定义值相同的碎片。这可以帮助与“jumping values”当触及不同的碎片刷新状态。自定义值可以像web会话id,或者用户名。
+自定义值将用于保证自定义值相同的分片。这可以帮助与“jumping values”当触及不同的分片刷新状态。自定义值可以像web会话id,或者用户名。
 
 # refresh 
 `refresh`参数可以让elastic正在索引的内容可以被搜索到，原理是在请求执行之前，对正在进行建立索引的内容先保存到索引中。

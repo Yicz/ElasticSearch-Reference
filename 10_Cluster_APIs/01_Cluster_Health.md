@@ -1,11 +1,11 @@
 ## 群集健康 Cluster Health
 
-The cluster health API allows to get a very simple status on the health of the cluster. For example, on a quiet single node cluster with a single index with 5 shards and one replica, this:
+群集健康API可以获得群集健康的非常简单的状态。 例如，在具有5个分片和一个副本的单个索引的安静单节点群集上，这样做：
     
     
     GET _cluster/health
 
-Returns this:
+响应内容:
     
     
     {
