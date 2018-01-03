@@ -93,11 +93,10 @@
         "shards_acknowledged": true
     }
 
-`acknowledged` indicates whether the index was successfully created in the cluster, while `shards_acknowledged` indicates whether the requisite number of shard copies were started for each shard in the index before timing out. Note that it is still possible for either `acknowledged` or `shards_acknowledged` to be `false`, but the index creation was successful. These values simply indicate whether the operation completed before the timeout. If `acknowledged` is `false`, then we timed out before the cluster state was updated with the newly created index, but it probably will be created sometime soon. If `shards_acknowledged` is `false`, then we timed out before the requisite number of shards were started (by default just the primaries), even if the cluster state was successfully updated to reflect the newly created index (i.e. `acknowledged=true`).
+`acknowledged`指示索引是否在群集中成功创建，而`shards_acknowledged`指示是否在超时之前为索引中的每个分片启动了必要的分片副本数。 请注意，`acknowledged`或`shards_acknowledged`仍然可能是`false`，但索引创建是成功的。 这些值只是**表示操作是否在超时之前完成**。 如果`acknowledged`是`false`，表示在新创建的索引更新集群状态之前，我们超时了，但可能很快就会创建。 如果`shards_acknowledged`是`false`，那么是集群状态已经成功更新反映新创建的索引（即`acknowledge = true`），但在我们在激活所需数量的分片之前超时了（默认情况下只是主分片的数量））。
 
-We can change the default of only waiting for the primary shards to start through the index setting `index.write.wait_for_active_shards` (note that changing this setting will also affect the `wait_for_active_shards` value on all subsequent write operations):
-    
-    
+我们可以通过索引设置`index.write.wait_for_active_shards`来改变只等待主分片的默认值（注意改变这个设置也会影响所有后续写操作的wait_for_active_shards值）：
+
     PUT test
     {
         "settings": {
@@ -105,9 +104,9 @@ We can change the default of only waiting for the primary shards to start throug
         }
     }
 
-or through the request parameter `wait_for_active_shards`:
+或者通过设置请求参数 `wait_for_active_shards`:
     
     
     PUT test?wait_for_active_shards=2
 
-A detailed explanation of `wait_for_active_shards` and its possible values can be found [here](docs-index_.html#index-wait-for-active-shards).
+有关`wait_for_active_shards`及其可能值的详细解释可以在[这里]((docs-index_.html#index-wait-for-active-shards))找到。

@@ -1,4 +1,4 @@
-## 清楚缓存 Clear Cache
+## 清除缓存 Clear Cache
 
 清除缓存API允许清除与一个或多个索引关联的所有缓存或特定缓存。    
     
@@ -10,7 +10,7 @@
 
 ### 多索引 Multi Index
 
-清除缓存API可以通过一次调用应用于多个索引，甚至可以在_all这些索引上应用。    
+清除缓存API可以在一次请求中设置多个索引或者全部(`_all`)索引   
     
     POST /kimchy,elasticsearch/_cache/clear
     

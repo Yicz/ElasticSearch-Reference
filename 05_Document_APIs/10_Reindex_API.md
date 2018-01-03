@@ -1,8 +1,6 @@
 ## Reindex API
 
-![Important](/images/icons/important.png)
-
-Reindex不试图设置目标索引。它不复制源索引的设置。在运行`_reindex`操作之前，应该设置目标索引，包括设置映射、碎片计数、副本等。
+![Important](/images/icons/important.png)Reindex不试图配置目标索引。它不复制源索引的设置。所以在运行`_reindex`操作之前，应该自己设置目标索引配置，包括设置映射、分片数量、副本等。
 
 `_reindex`的最基本形式只是将文档从一个索引复制到另一个索引。这将把`twitter`索引中的文档复制到`new_twitter`索引中:
     
@@ -184,7 +182,7 @@ Reindex不试图设置目标索引。它不复制源索引的设置。在运行`
       }
     }
 
-正如在`_update_by_query`中，您可以设置`ctx。op`更改目的地索引处执行的操作:
+正如在`_update_by_query`中，您可以设置`ctx.op`更改目的地索引处执行的操作:
 
 `noop`
 

@@ -1,4 +1,4 @@
-## Synced Flush
+##  同步刷新 Synced Flush
 
 Elasticsearch tracks the indexing activity of each shard. Shards that have not received any indexing operations for 5 minutes are automatically marked as inactive. This presents an opportunity for Elasticsearch to reduce shard resources and also perform a special kind of flush, called `synced flush`. A synced flush performs a normal flush, then adds a generated unique marker (sync_id) to all shards.
 

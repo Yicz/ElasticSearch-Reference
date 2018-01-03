@@ -1,25 +1,23 @@
-## Force Merge
+## 强制合并 Force Merge
 
-The force merge API allows to force merging of one or more indices through an API. The merge relates to the number of segments a Lucene index holds within each shard. The force merge operation allows to reduce the number of segments by merging them.
+强制合并API允许通过API强制合并一个或多个索引。 合并涉及Lucene索引在每个分片中保存的分段数量。 强制合并操作允许通过合并来减少分段的数量。
 
-This call will block until the merge is complete. If the http connection is lost, the request will continue in the background, and any new requests will block until the previous force merge is complete.
-    
-    
+此请求会阻止，直到合并完成。 如果http连接丢失，请求将在后台继续，并且任何新请求都将被阻塞，直到强制合并完成。
+
     POST /twitter/_forcemerge
 
-### Request Parameters
+### 请求参数 Request Parameters
 
-The force merge API accepts the following request parameters:
+强制合并API接受以下请求参数：
 
-`max_num_segments`| The number of segments to merge to. To fully merge the index, set it to `1`. Defaults to simply checking if a mergeneeds to execute, and if so, executes it.     
+`max_num_segments`| 要合并到的段的数量。 要完全合并索引，请将其设置为“1”。 默认只是检查合并是否需要执行，如果是的话，执行它。
 ---|---  
-`only_expunge_deletes`| Should the merge process only expunge segments with deletes in it. In Lucene, a document is not deleted from asegment, just marked as deleted. During a merge process of segments, a new segment is created that does not have thosedeletes. This flag allows to only merge segments that have deletes. Defaults to `false`. Note that this won’t overridethe `index.merge.policy.expunge_deletes_allowed` threshold.     
-`flush`| Should a flush be performed after the forced merge. Defaults to `true`.   
+`only_expunge_deletes`| 合并过程应该只删除其中有删除的段。 在Lucene中，文档不会从分段中删除，只会被标记为已删除。 在段的合并过程中，会创建一个没有这些删除的新段。 该标志只允许合并具有删除的段。 默认为“false”。 请注意，这不会覆盖`index.merge.policy.expunge_deletes_allowed`值。     
+`flush`| 强制合并后应该执行刷新。 默认为`true`。   
   
-### Multi Index
+### 多索引操作 Multi Index
 
-The force merge API can be applied to more than one index with a single call, or even on `_all` the indices.
-    
+强制合并API可以在一次请求中设置多个索引或者全部(`_all`)索引 
     
     POST /kimchy,elasticsearch/_forcemerge
     
