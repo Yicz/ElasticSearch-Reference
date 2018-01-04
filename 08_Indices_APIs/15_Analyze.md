@@ -1,9 +1,8 @@
-## Analyze
+## 分析 Analyze
 
-Performs the analysis process on a text and return the tokens breakdown of the text.
+对文本执行分析过程并返回文本的分解结果。
 
-Can be used without specifying an index against one of the many built in analyzers:
-    
+可以在没有指定众多内置分析器之一的索引的情况下使用：
     
     GET _analyze
     {
@@ -11,8 +10,7 @@ Can be used without specifying an index against one of the many built in analyze
       "text" : "this is a test"
     }
 
-If text parameter is provided as array of strings, it is analyzed as a multi-valued field.
-    
+如果文本参数是作为字符串数组提供的，则将其作为多值字段进行分析。    
     
     GET _analyze
     {
@@ -20,8 +18,7 @@ If text parameter is provided as array of strings, it is analyzed as a multi-val
       "text" : ["this is a test", "the second text"]
     }
 
-Or by building a custom transient analyzer out of tokenizers, token filters and char filters. Token filters can use the shorter _filter_ parameter name:
-    
+或者使用分词器，符号过滤器和字符过滤器构建自定义瞬态分析器。 符号过滤器可以使用较短的_filter_参数名称：
     
     GET _analyze
     {
@@ -42,12 +39,10 @@ Or by building a custom transient analyzer out of tokenizers, token filters and 
 ![Warning](/images/icons/warning.png)
 
 ### Deprecated in 5.0.0. 
+使用`filter`/`char_filter`代替了`filters`/`char_filters` 并移除了`token_filters` 
 
-Use `filter`/`char_filter` instead of `filters`/`char_filters` and `token_filters` has been removed 
+自定义分词器，符号过滤器和字符过滤器可以在请求主体中进行指定，如下所示：
 
-Custom tokenizers, token filters, and character filters can be specified in the request body as follows:
-    
-    
     GET _analyze
     {
       "tokenizer" : "whitespace",
@@ -55,16 +50,14 @@ Custom tokenizers, token filters, and character filters can be specified in the 
       "text" : "this is a test"
     }
 
-It can also run against a specific index:
-    
+它也可以针对特定的索引运行：    
     
     GET twitter/_analyze
     {
       "text" : "this is a test"
     }
 
-The above will run an analysis on the "this is a test" text, using the default index analyzer associated with the `test` index. An `analyzer` can also be provided to use a different analyzer:
-    
+以上将使用与`twitter`索引关联的默认索引分析器对`this is a test`文本进行分析。 也可以使用`analyzer`参数来指定的分析仪：
     
     GET twitter/_analyze
     {
@@ -72,8 +65,7 @@ The above will run an analysis on the "this is a test" text, using the default i
       "text" : "this is a test"
     }
 
-Also, the analyzer can be derived based on a field mapping, for example:
-    
+而且，分析器可以基于字段映射来导出，例如：    
     
     GET twitter/_analyze
     {
@@ -81,22 +73,16 @@ Also, the analyzer can be derived based on a field mapping, for example:
       "text" : "this is a test"
     }
 
-Will cause the analysis to happen based on the analyzer configured in the mapping for `obj1.field1` (and if not, the default index analyzer).
+将导致分析使用`obj1.field1`（如果没有，默认的索引分析器）映射中配置的分析器。
 
-![Warning](/images/icons/warning.png)
+![Warning](/images/icons/warning.png)在5.1.0请求参数中弃用，并将在下一个主要版本中删除。 请使用JSON参数而不是请求参数。
 
-Deprecated in 5.1.0 request parameters are deprecated and will be removed in the next major release. please use JSON params instead of request params. 
-
-All parameters can also supplied as request parameters. For example:
-    
+所有参数也可以作为请求参数提供。 例如：
     
     GET /_analyze?tokenizer=keyword&filter=lowercase&text=this+is+a+test
 
-For backwards compatibility, we also accept the text parameter as the body of the request, provided it doesn’t start with `{` :
-    
+为了向后兼容，我们也接受文本参数作为请求的主体，只要它不以`{`开始：    
     
     curl -XGET 'localhost:9200/_analyze?tokenizer=keyword&filter=lowercase&char_filter=reverse' -d 'this is a test' -H 'Content-Type: text/plain'
 
-![Warning](/images/icons/warning.png)
-
-Deprecated in 5.1.0 the text parameter as the body of the request are deprecated and this feature will be removed in the next major release. please use JSON text param. 
+![Warning](/images/icons/warning.png)在5.1.0中不推荐使用text参数作为请求的主体，这个特性将在下一个主版本中被删除。 请使用JSON文本参数。
