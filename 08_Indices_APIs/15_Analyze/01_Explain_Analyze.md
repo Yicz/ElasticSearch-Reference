@@ -1,10 +1,8 @@
-## Explain Analyze
+##  分析说明 Explain Analyze
 
-If you want to get more advanced details, set `explain` to `true` (defaults to `false`). It will output all token attributes for each token. You can filter token attributes you want to output by setting `attributes` option.
+如果想获得更加多的信息，可以通过设置`explain=true`(默认是`false`),将会输出更多每个符号的更多属性，同时你还可以通过设置`attributes`进行过滤这些符号的属性。
 
-![Warning](/images/icons/warning.png)
-
-The format of the additional detail information is experimental and can change at any time 
+![Warning](/images/icons/warning.png) 额外信息的内容格式是体验属性的，在未来任何时间都可能会做出变更。 
     
     
     GET _analyze
@@ -16,11 +14,10 @@ The format of the additional detail information is experimental and can change a
       "attributes" : ["keyword"] <1>
     }
 
-<1>| Set "keyword" to output "keyword" attribute only     
+<1>| 限制了只输出`keyword`属性   
 ---|---  
   
-The request returns the following result:
-    
+响应内容如下：
     
     {
       "detail" : {
@@ -63,5 +60,5 @@ The request returns the following result:
       }
     }
 
-<1> <2>| Output only "keyword" attribute, since specify "attributes" in the request.     
+<1> <2>| 因为请求指定了只输出`keyword`属性，所以响应内容只有`keyword`的说明信息。
 ---|---
