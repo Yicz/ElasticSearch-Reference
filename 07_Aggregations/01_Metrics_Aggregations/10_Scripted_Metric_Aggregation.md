@@ -106,7 +106,11 @@ map_script
 
 Executed once per document collected. This is the only required script. If no combine_script is specified, the resulting state needs to be stored in an object named `_agg`. 
 
+<<<<<<< Updated upstream
 In the above example, the `map_script` checks the value of the type field. If the value is _sale_ the value of the amount field is added to the transactions array. If the value of the type field is not _sale_ the negated value of the amount field is added to transactions.
+=======
+在上面的例子中，`combine_script`遍历所有存储的事务，将`profit`变量中的值相加，最后返回`profit`。
+>>>>>>> Stashed changes
 
 combine_script 
     
@@ -230,7 +234,11 @@ It reduces the responses for the shards down to a final overall profit figure (b
 
 ### Other Parameters
 
+<<<<<<< Updated upstream
 params | Optional. An object whose contents will be passed as variables to the `init_script`, `map_script` and `combine_script`. This can be useful to allow the user to control the behavior of the aggregation and for storing state between the scripts. If this is not specified, the default is the equivalent of providing:             "params" : {        "\_agg" : {}    }    
+=======
+params | 可选的。 一个对象，其内容将作为变量传递给`init_script`，`map_script`和`combine_script`。 这对于允许用户控制聚合的行为以及在脚本之间存储状态是有用的。 如果没有指定，默认等价于提供："params"：{"\_agg"：{ } }  
+>>>>>>> Stashed changes
 ---|---  
   
 ### Empty Buckets
