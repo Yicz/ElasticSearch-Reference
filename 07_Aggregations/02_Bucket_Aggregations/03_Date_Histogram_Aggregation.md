@@ -59,7 +59,7 @@ If no `format` is specified, then it will use the first date [format](mapping-da
 <1>| Supports expressive date [format pattern](search-aggregations-bucket-daterange-aggregation.html#date-format-pattern)    
 ---|---  
   
-Response:
+响应如下：
     
     
     {
@@ -239,9 +239,9 @@ Instead of a single bucket starting at midnight, the above request groups the do
 
 The start `offset` of each bucket is calculated after the `time_zone` adjustments have been made.
 
-### Keyed Response
+### 控制响应内容  Keyed Response
 
-Setting the `keyed` flag to `true` will associate a unique string key with each bucket and return the ranges as a hash rather than an array:
+默认的`keyed`参数设置的是`true`,它将一个唯一的字符串键与每个桶相关联，并将范围作为字典而不是数组返回。 将`keyed`标志设置为`false`将会返回数组类型的响应：
     
     
     POST /sales/_search?size=0
@@ -258,7 +258,7 @@ Setting the `keyed` flag to `true` will associate a unique string key with each 
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -290,7 +290,7 @@ Response:
 
 Like with the normal [histogram](search-aggregations-bucket-histogram-aggregation.html), both document level scripts and value level scripts are supported. It is also possible to control the order of the returned buckets using the `order` settings and filter the returned buckets based on a `min_doc_count` setting (by default all buckets between the first bucket that matches documents and the last one are returned). This histogram also supports the `extended_bounds` setting, which enables extending the bounds of the histogram beyond the data itself (to read more on why you’d want to do that please refer to the explanation [here](search-aggregations-bucket-histogram-aggregation.html#search-aggregations-bucket-histogram-aggregation-extended-bounds)).
 
-### Missing value
+### 缺省值 Missing value
 
 The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.
     

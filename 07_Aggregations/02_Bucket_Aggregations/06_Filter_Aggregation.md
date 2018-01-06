@@ -19,7 +19,7 @@ Example:
 
 In the above example, we calculate the average price of all the products that are of type t-shirt.
 
-Response:
+响应如下：
     
     
     {

@@ -1,8 +1,8 @@
-## IP Range Aggregation
+## IP范围聚合 IP Range Aggregation
 
-Just like the dedicated [date](search-aggregations-bucket-daterange-aggregation.html) range aggregation, there is also a dedicated range aggregation for IP typed fields:
+类似 [日期范围聚合](search-aggregations-bucket-daterange-aggregation.html) ,IP类型字段也有一个专门的范围聚合：
 
-Example:
+例如:
     
     
     {
@@ -19,7 +19,7 @@ Example:
         }
     }
 
-Response:
+响应:
     
     
     {
@@ -41,8 +41,7 @@ Response:
         }
     }
 
-IP ranges can also be defined as CIDR masks:
-    
+IP范围也可以定义为CIDR掩码：    
     
     {
         "aggs" : {
@@ -58,7 +57,7 @@ IP ranges can also be defined as CIDR masks:
         }
     }
 
-Response:
+响应:
     
     
     {
@@ -82,9 +81,9 @@ Response:
         }
     }
 
-### Keyed Response
+### 控制响应内容 Keyed Response
 
-Setting the `keyed` flag to `true` will associate a unique string key with each bucket and return the ranges as a hash rather than an array:
+默认的`keyed`参数设置的是`true`,它将一个唯一的字符串键与每个桶相关联，并将范围作为字典而不是数组返回。 将`keyed`标志设置为`false`将会返回数组类型的响应：
     
     
     {
@@ -102,7 +101,7 @@ Setting the `keyed` flag to `true` will associate a unique string key with each 
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -142,7 +141,7 @@ It is also possible to customize the key for each range:
         }
     }
 
-Response:
+响应如下：
     
     
     {

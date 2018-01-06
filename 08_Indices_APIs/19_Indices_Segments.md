@@ -9,7 +9,7 @@ Endpoints include segments for a specific index, several indices, or all:
     curl -XGET 'http://localhost:9200/test1,test2/_segments'
     curl -XGET 'http://localhost:9200/_segments'
 
-Response:
+响应如下：
     
     
     {
@@ -60,7 +60,7 @@ The format of the additional verbose information is experimental and can change 
     
     curl -XGET 'http://localhost:9200/test/_segments?verbose=true'
 
-Response:
+响应如下：
     
     
     {

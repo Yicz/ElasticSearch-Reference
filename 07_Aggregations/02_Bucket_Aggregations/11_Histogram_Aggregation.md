@@ -73,7 +73,7 @@ The response above show that no documents has a price that falls within the rang
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -251,7 +251,7 @@ By default, the buckets are returned as an ordered array. It is also possible to
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -284,7 +284,7 @@ Response:
         }
     }
 
-### Missing value
+### 缺省值 Missing value
 
 The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.
     

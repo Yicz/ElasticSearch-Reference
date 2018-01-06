@@ -52,7 +52,7 @@ We might want to see which tags are strongly associated with `#elasticsearch` on
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -113,7 +113,7 @@ In this scenario we might want to diversify on a combination of field values. We
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -162,7 +162,7 @@ The optional `execution_hint` setting can influence the management of the values
 
 The default setting is to use `global_ordinals` if this information is available from the Lucene index and reverting to `map` if not. The `bytes_hash` setting may prove faster in some cases but introduces the possibility of false positives in de-duplication logic due to the possibility of hash collisions. Please note that Elasticsearch will ignore the choice of execution hint if it is not applicable and that there is no backward compatibility guarantee on these hints.
 
-### Limitations
+### 限制 Limitations
 
 #### Cannot be nested under `breadth_first` aggregations
 

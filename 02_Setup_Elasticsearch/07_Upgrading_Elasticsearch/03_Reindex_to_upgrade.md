@@ -32,9 +32,9 @@ Elasticsearch能够只兼容在主要版本变动创建索引。例如,Elasticse
 
 对于要转移到5.x群集的每个1.x索引，您需要：
 
-* 在5.x中使用适当的映射和设置创建一个新的索引。将refresh_interval设置为-1，并将number_of_replicas设置为0以加快重新索引。
+* 在5.x中使用适当的映射和设置创建一个新的索引。将refresh_interval设置为-1，并设置`number_of_replicas=0`以加快重新索引。
 * 使用[reindex-from-remote](https://www.elastic.co/guide/en/elasticsearch/reference/5.4/docs-reindex.html#reindex-from-remote)将1.x索引中的文档拖入新的5.x索引。
-* 如果您在后台运行reindex作业（wait_for_completion设置为false），则重新索引请求将返回一个task_id，该task_id可用于监视任务API中reindex作业的进度：GET _tasks /task_id。
+* 如果您在后台运行reindex作业（设置`wait_for_completion=false`），则重新索引请求将返回一个`task_id`，该`task_id`可用于监视任务API中reindex作业的进度：`GET _tasks/task_id`。
 * 重新索引完成后，将refresh_interval和number_of_replicas设置为所需值（默认值分别为30秒和1）。
 * 新索引完成复制后，可以删除旧的索引。
 

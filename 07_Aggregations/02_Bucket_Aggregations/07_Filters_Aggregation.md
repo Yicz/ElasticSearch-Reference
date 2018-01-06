@@ -30,7 +30,7 @@ Example:
 
 In the above example, we analyze log messages. The aggregation will build two collection (buckets) of log messages - one for all those containing an error, and another for all those containing a warning.
 
-Response:
+响应如下：
     
     
     {

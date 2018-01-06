@@ -20,7 +20,7 @@ Example:
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -47,9 +47,9 @@ Response:
         }
     }
 
-### Keyed Response
+### 控制响应内容 Keyed Response
 
-Setting the `keyed` flag to `true` will associate a unique string key with each bucket and return the ranges as a hash rather than an array:
+默认的`keyed`参数设置的是`true`,它将一个唯一的字符串键与每个桶相关联，并将范围作为字典而不是数组返回。 将`keyed`标志设置为`false`将会返回数组类型的响应：
     
     
     {
@@ -68,7 +68,7 @@ Setting the `keyed` flag to `true` will associate a unique string key with each 
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -214,7 +214,7 @@ The following example, not only "bucket" the documents to the different buckets 
         }
     }
 
-Response:
+响应如下：
     
     
     {

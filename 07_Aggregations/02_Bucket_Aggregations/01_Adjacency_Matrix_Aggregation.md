@@ -47,7 +47,7 @@ Example:
 
 In the above example, we analyse email messages to see which groups of individuals have exchanged messages. We will get counts for each group individually and also a count of messages for pairs of groups that have recorded interactions.
 
-Response:
+响应如下：
     
     
     {
@@ -83,10 +83,10 @@ Response:
       }
     }
 
-### Usage
+### 用法 Usage
 
 On its own this aggregation can provide all of the data required to create an undirected weighted graph. However, when used with child aggregations such as a `date_histogram` the results can provide the additional levels of data required to perform [dynamic network analysis](https://en.wikipedia.org/wiki/Dynamic_network_analysis) where examining interactions _over time_ becomes important.
 
-### Limitations
+### 限制 Limitations
 
 For N filters the matrix of buckets produced can be N²/2 and so there is a default maximum imposed of 100 filters . This setting can be changed using the `index.max_adjacency_matrix_filters` index-level setting.

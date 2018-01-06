@@ -1,4 +1,4 @@
-## 多词条向量API Multi termvectors API
+## 多词条向量 API Multi termvectors API
 
 多个词条向量API允许一次获取多个词条向量。 从中检索词条向量的文档由索引，类型和ID指定。 但是文档也可以在请求体中人为地提供。
 

@@ -42,7 +42,7 @@ A query on StackOverflow data for the popular term `javascript` OR the rarer ter
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -95,7 +95,7 @@ Without the `sampler` aggregation the request query considers the full "long tai
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -131,7 +131,7 @@ Response:
 
 The `shard_size` parameter limits how many top-scoring documents are collected in the sample processed on each shard. The default value is 100.
 
-### Limitations
+### 限制 Limitations
 
 #### Cannot be nested under `breadth_first` aggregations
 
