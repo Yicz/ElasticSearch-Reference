@@ -45,7 +45,7 @@ The following aggregations will return the minimum price products can be purchas
 
 As you can see above, the nested aggregation requires the `path` of the nested documents within the top level documents. Then one can define any type of aggregation over these nested documents.
 
-Response:
+响应如下：
     
     
     {

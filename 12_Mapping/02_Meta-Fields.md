@@ -1,4 +1,4 @@
-##  元数据类型 Meta-Fields
+##  元字段 Meta-Fields
 
 Each document has metadata associated with it, such as the `_index`, mapping [`_type`](mapping-type-field.html), and `_id` meta-fields. The behaviour of some of these meta-fields can be customised when a mapping type is created.
 

@@ -16,7 +16,7 @@ The scope of shards to list store information can be changed through `status` pa
     
     curl -XGET 'http://localhost:9200/_shard_stores?status=green'
 
-Response:
+响应如下：
 
 The shard stores information is grouped by indices and shard ids.
     

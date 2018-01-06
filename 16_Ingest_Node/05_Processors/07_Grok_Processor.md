@@ -140,7 +140,7 @@ Here is an example of such a configuration executed against the simulate API:
       ]
     }
 
-response:
+响应如下：
     
     
     {

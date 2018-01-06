@@ -85,7 +85,7 @@ As compared to the `normal` analyzer which has `cats` stemmed to `cat`:
       "text" : "I like cats"
     }
 
-Response:
+响应如下：
     
     
     {

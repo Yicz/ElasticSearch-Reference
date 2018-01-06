@@ -92,18 +92,16 @@
       }
     }
 
-### Unified Highlighter
+###  统一高亮 Unified Highlighter
 
-![Warning](/images/icons/warning.png)
+![Warning](/images/icons/warning.png) 此功能是体验性的，可以会在未来的发布版中进行删除。但ES会尽最大的努力去修复问题。
 
-This functionality is experimental and may be changed or removed completely in a future release. Elastic will take a best effort approach to fix any issues, but experimental features are not subject to the support SLA of official GA features.
-
-The `unified` highlighter can extract offsets from either postings, term vectors, or via re-analyzing text. Under the hood it uses Lucene UnifiedHighlighter which picks its strategy depending on the field and the query to highlight. Independently of the strategy this highlighter breaks the text into sentences and scores individual sentences as if they were documents in this corpus, using the BM25 algorithm. It supports accurate phrase and multi-term (fuzzy, prefix, regex) highlighting and can be used with the following options:
+`unified（统一）`高亮器可以从`postings`，`词条向量（term vectors）`或通过重新分析文本中提取偏移量。 在底层，它使用了Lucene UnifiedHighlighter，它根据字段和查询选择策略来高亮显示。 与该策略无关，该高亮器使用BM25算法，将文本分解为句子，并将单个句子打分，就好像它们是该语料库中的文档一样。 它支持准确的短语和多项（模糊，前缀，正则表达式）高亮显示，并可以使用以下选项：
 
   * `force_source`
   * `encoder`
   * `highlight_query`
-  * `pre_tags and `post_tags`
+  * `pre_tags` and `post_tags`
   * `require_field_match`
   * `boundary_scanner` (`sentence` ( **default** ) or `word`) 
   * `max_fragment_length` (only for `sentence` scanner) 

@@ -12,7 +12,7 @@ To see cluster-wide recovery status simply leave out the index names.
     
     GET /_recovery?human
 
-Response:
+响应如下：
     
     
     {
@@ -83,7 +83,7 @@ In some cases a higher level of detail may be preferable. Setting "detailed=true
     
     GET _recovery?human&detailed=true
 
-Response:
+响应如下：
     
     
     {

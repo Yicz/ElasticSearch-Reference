@@ -68,7 +68,7 @@ Here is an example of a simulate request with a pipeline defined in the request 
       ]
     }
 
-Response:
+响应如下：
     
     
     {
@@ -159,7 +159,7 @@ Here is an example of a verbose request and its response:
       ]
     }
 
-Response:
+响应如下：
     
     
     {

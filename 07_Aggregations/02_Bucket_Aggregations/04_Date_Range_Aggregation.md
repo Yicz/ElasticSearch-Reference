@@ -27,7 +27,7 @@ Example:
   
 In the example above, we created two range buckets, the first will "bucket" all documents dated prior to 10 months ago and the second will "bucket" all documents dated since 10 months ago
 
-Response:
+响应如下：
     
     
     {
@@ -132,9 +132,9 @@ The `time_zone` parameter is also applied to rounding in date math expressions. 
 ---|---    
 <2>| `now/d` will be rounded to the beginning of the day in the CET time zone.   
   
-### Keyed Response
+### 控制响应内容 Keyed Response
 
-Setting the `keyed` flag to `true` will associate a unique string key with each bucket and return the ranges as a hash rather than an array:
+默认的`keyed`参数设置的是`true`,它将一个唯一的字符串键与每个桶相关联，并将范围作为字典而不是数组返回。 将`keyed`标志设置为`false`将会返回数组类型的响应：
     
     
     POST /sales/_search?size=0
@@ -154,7 +154,7 @@ Setting the `keyed` flag to `true` will associate a unique string key with each 
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -197,7 +197,7 @@ It is also possible to customize the key for each range:
         }
     }
 
-Response:
+响应如下：
     
     
     {

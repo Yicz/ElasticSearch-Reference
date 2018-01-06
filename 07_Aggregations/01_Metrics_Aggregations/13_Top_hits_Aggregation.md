@@ -15,7 +15,7 @@
 
 ### 支持的特性 Supported per hit features
 
-The top_hits aggregation returns regular search hits, because of this many per hit features can be supported:
+top_hits聚合返回常规搜索文档，因为这可以支持许多每击中功能：
 
   * [Highlighting](search-request-highlighting.html)
   * [Explain](search-request-explain.html)
@@ -30,8 +30,7 @@ The top_hits aggregation returns regular search hits, because of this many per h
 
 ### Example
 
-In the following example we group the questions by tag and per tag we show the last active question. For each question only the title field is being included in the source.
-    
+在下面的例子中，我们按标签和每个标签对问题进行分组，显示最后一个活动问题。 对于每个问题，只有标题字段被包含在源代码中。    
     
     POST /sales/_search?size=0
     {
@@ -152,15 +151,15 @@ In the following example we group the questions by tag and per tag we show the l
       }
     }
 
-### Field collapse example
+### 字段折叠的例子 Field collapse example
 
-Field collapsing or result grouping is a feature that logically groups a result set into groups and per group returns top documents. The ordering of the groups is determined by the relevancy of the first document in a group. In Elasticsearch this can be implemented via a bucket aggregator that wraps a `top_hits` aggregator as sub-aggregator.
+字段折叠或结果分组是将结果集合逻辑地分组成组，并且每个组返回顶部文档的功能。 组的排序取决于组中第一个文档的相关性。 在Elasticsearch中，这可以通过一个桶聚合来实现，该聚合将`top_hits`聚合包装为子聚合。
 
-In the example below we search across crawled webpages. For each webpage we store the body and the domain the webpage belong to. By defining a `terms` aggregator on the `domain` field we group the result set of webpages by domain. The `top_hits` aggregator is then defined as sub-aggregator, so that the top matching hits are collected per bucket.
+在下面的例子中，我们搜索了爬网的网页。 对于每个网页，我们存储正文和网页所属的域。 通过在`domain`字段上定义`terms`聚合，我们按域分组网页的结果集。 然后，将“top_hits”聚合定义为子聚合，以便每个存储桶收集最高匹配的匹配。
 
-Also a `max` aggregator is defined which is used by the `terms` aggregator’s order feature the return the buckets by relevancy order of the most relevant document in a bucket.
-    
-    
+另外还定义了一个`maxt`聚合，`terms`聚合的顺序特征使用“最大”聚合，通过桶中最相关文档的相关顺序返回分组。
+
+
     {
       "query": {
         "match": {
@@ -191,15 +190,15 @@ Also a `max` aggregator is defined which is used by the `terms` aggregator’s o
       }
     }
 
-At the moment the `max` (or `min`) aggregator is needed to make sure the buckets from the `terms` aggregator are ordered according to the score of the most relevant webpage per domain. Unfortunately the `top_hits` aggregator can’t be used in the `order` option of the `terms` aggregator yet.
+目前需要`max`（或`min`）聚合来确保来自`terms`聚合的桶按照每个域最相关的网页的得分排序。 不幸的是，`top_hits`聚合不能用在`terms`聚合的`order`选项中。
 
 ### top_hits support in a nested or reverse_nested aggregator
 
-If the `top_hits` aggregator is wrapped in a `nested` or `reverse_nested` aggregator then nested hits are being returned. Nested hits are in a sense hidden mini documents that are part of regular document where in the mapping a nested field type has been configured. The `top_hits` aggregator has the ability to un-hide these documents if it is wrapped in a `nested` or `reverse_nested` aggregator. Read more about nested in the [nested type mapping](nested.html).
+如果`top_hits`聚合被封装在`nested`或`reverse_nested`聚合中，则嵌套命中被返回。嵌套命中在某种意义上隐藏了迷你文档，这些文档是常规文档的一部分，其中映射中嵌套的字段类型已被配置。如果包含`nested`或`reverse_nested`聚合，“top_hits”聚合可以取消隐藏这些文档。阅读更多关于嵌套在[嵌套类型映射](nested.html)。
 
-If nested type has been configured a single document is actually indexed as multiple Lucene documents and they share the same id. In order to determine the identity of a nested hit there is more needed than just the id, so that is why nested hits also include their nested identity. The nested identity is kept under the `_nested` field in the search hit and includes the array field and the offset in the array field the nested hit belongs to. The offset is zero based.
+如果已经配置嵌套类型，则单个文档实际上被索引为多个Lucene文档，并且它们共享相同的ID。为了确定一个嵌套命中的身份，需要的不仅仅是id，所以这就是为什么嵌套命中还包括它们的嵌套身份。嵌套标识保存在搜索命中的_nested字段下，并包含数组字段和嵌套的命中所属的数组字段中的偏移量。偏移量是从零开始的。
 
-Top hits response snippet with a nested hit, which resides in the third slot of array field `nested_field1` in document with id `1`:
+顶部命中带有嵌套命中的响应片段，它位于ID为1的文档中的数组字段“nested_field1”的第三个插槽中：
     
     
     ...
@@ -223,17 +222,17 @@ Top hits response snippet with a nested hit, which resides in the third slot of 
     }
     ...
 
-If `_source` is requested then just the part of the source of the nested object is returned, not the entire source of the document. Also stored fields on the **nested** inner object level are accessible via `top_hits` aggregator residing in a `nested` or `reverse_nested` aggregator.
+如果`_source`被请求，那么只返回嵌套对象的部分源，而不是整个文档的源。 也可以通过驻留在嵌套或reverse_nested聚合器中的`top_hits`聚合器来访问嵌套的内部对象层上的字段。
 
-Only nested hits will have a `_nested` field in the hit, non nested (regular) hits will not have a `_nested` field.
+只有嵌套命中才会在命中中有_nested字段，非嵌套（常规）命中不会有_nested字段。
 
-The information in `_nested` can also be used to parse the original source somewhere else if `_source` isn’t enabled.
+如果`_source`没有被启用，`_nested`中的信息也可以用来解析其他地方的源代码。
 
-If there are multiple levels of nested object types defined in mappings then the `_nested` information can also be hierarchical in order to express the identity of nested hits that are two layers deep or more.
+如果在映射中定义了多层嵌套对象类型，那么`_nested`信息也可以是分层的，以便表达嵌套深度为两层或更深的嵌套的标识。
 
-In the example below a nested hit resides in the first slot of the field `nested_grand_child_field` which then resides in the second slow of the `nested_child_field` field:
-    
-    
+在下面的例子中，嵌套命中位于字段`nested_grand_child_field`的第一个插槽，该字段位于`nested_child_field`字段的第二个缓慢区域：
+
+
     ...
     "hits": {
      "total": 2565,

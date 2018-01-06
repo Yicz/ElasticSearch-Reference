@@ -15,7 +15,7 @@ Example:
 
 In the above example, we get the total number of products that do not have a price.
 
-Response:
+响应如下：
     
     
     {

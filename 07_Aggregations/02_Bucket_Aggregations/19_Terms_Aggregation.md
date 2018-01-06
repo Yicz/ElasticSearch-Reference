@@ -13,7 +13,7 @@ Example:
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -617,7 +617,7 @@ Elasticsearch tries to have sensible defaults so this is something that generall
   
 Please note that Elasticsearch will ignore this execution hint if it is not applicable and that there is no backward compatibility guarantee on these hints.
 
-### Missing value
+### 缺省值 Missing value
 
 The `missing` parameter defines how documents that are missing a value should be treated. By default they will be ignored but it is also possible to treat them as if they had a value.
     

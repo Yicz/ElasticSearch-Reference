@@ -36,7 +36,7 @@ Example:
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -84,7 +84,7 @@ Example using a parent aggregation for segmentation:
         }
     }
 
-Response:
+响应如下：
     
     
     {
@@ -192,7 +192,7 @@ The significance score from each term can also provide a useful `boost` setting 
 
 Ordinarily, the foreground set of documents is "diffed" against a background set of all the documents in your index. However, sometimes it may prove useful to use a narrower background set as the basis for comparisons. For example, a query on documents relating to "Madrid" in an index with content from all over the world might reveal that "Spanish" was a significant term. This may be true but if you want some more focused terms you could use a `background_filter` on the term _spain_ to establish a narrower set of documents as context. With this as a background "Spanish" would now be seen as commonplace and therefore not as significant as words like "capital" that relate more strongly with Madrid. Note that using a background filter will slow things down - each term’s background frequency must now be derived on-the-fly from filtering posting lists rather than reading the index’s pre-computed count for a term.
 
-### Limitations
+### 限制 Limitations
 
 #### Significant terms must be indexed values
 

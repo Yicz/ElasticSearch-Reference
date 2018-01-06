@@ -1,4 +1,4 @@
-## 关键字类型
+## 关键字类型 keyword
 
 A field to index structured content such as email addresses, hostnames, status codes, zip codes or tags.
 

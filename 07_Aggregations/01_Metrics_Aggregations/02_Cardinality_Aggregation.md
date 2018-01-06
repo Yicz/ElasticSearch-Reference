@@ -103,7 +103,7 @@ The `cardinality` metric supports scripting, with a noticeable performance hit h
 
 对于保存在`.script`索引脚本，用`id`参数替换`file`参数。
 
-### Missing value
+### 缺省值 Missing value
 
 “missing”参数定义了如何处理缺少值的文档。 默认情况下，它们将被忽略，但也可以把它们看作是有价值的。
     

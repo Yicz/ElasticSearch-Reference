@@ -78,7 +78,7 @@ The following example computes distance in kilometers from Washington, DC:
 
 In this example the coordinates could have been passed as parameters to the script, e.g. based on geolocation of the user.
 
-### Limitations
+### 限制 Limitations
 
 There are a few limitations relative to other script languages:
 
