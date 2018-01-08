@@ -9,11 +9,12 @@
     ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master name
     127.0.0.1           65          99  42    3.07                  mdi       *      mJw06l1
 
-The first few columns (`ip`, `heap.percent`, `ram.percent`, `cpu`, `load_*`) tell you where your nodes live and give a quick picture of performance stats.
+前几列信息(`ip`, `heap.percent`, `ram.percent`, `cpu`, `load_*`) 让你可以了存活的节点和简单的性能统计信息。
 
-The last (`node.role`, `master`, and `name`) columns provide ancillary information that can often be useful when looking at the cluster as a whole, particularly large ones. How many master-eligible nodes do I have?
+后几列 (`node.role`, `master`, and `name`) 列提供了辅助信息，在整个群集，特别是大型群集中，往往是有用的。 比如可以知道有多少个有资格成为主节点的节点？
 
-### Columns
+
+### 详细列说明
 
 Below is an exhaustive list of the existing headers that can be passed to `nodes?h=` to retrieve the relevant details in ordered columns. If no headers are specified, then those marked to Appear by Default will appear. If any header is specified, then the defaults are not used.
 
@@ -24,15 +25,14 @@ When specifying headers, the headers are not placed in the output by default. To
     
     GET /_cat/nodes?v&h=id,ip,port,v,m
 
-Might look like:
+响应:
     
     
     id   ip        port  v         m
     veJR 127.0.0.1 59938 5.4.3 *
 
-Header | Alias | Appear by Default | Description | Example  
----|---|---|---|---  
-  
+标题名称 | 别名 | 默认显示 | 描述 | 例如  
+---|---|---|---|---    
 `id` |  `nodeId` |  No |  Unique node ID |  k0zy    
 `pid` |  `p` |  No |  Process ID |  13061    
 `ip` |  `i` |  Yes |  IP address |  127.0.1.1    

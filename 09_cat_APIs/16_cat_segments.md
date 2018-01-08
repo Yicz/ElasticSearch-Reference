@@ -5,7 +5,7 @@ The `segments` command provides low level information about the segments in the 
     
     GET /_cat/segments?v
 
-might look like:
+响应如下:
     
     
     index shard prirep ip        segment generation docs.count docs.deleted size size.memory committed searchable version compound

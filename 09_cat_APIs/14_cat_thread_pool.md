@@ -78,7 +78,7 @@ All [built-in thread pools](modules-threadpool.html) and custom thread pools are
 
 For each thread pool, you can load details about it by using the field names in the table below.
 
-Field Name | Alias | Description  
+字段名 | 别名 | 描述  
 ---|---|---    
 `type`| `t`| The current (\*) type of thread pool (`fixed` or `scaling`)    
 `active`| `a`| The number of active threads in the current thread pool    
@@ -92,11 +92,11 @@ Field Name | Alias | Description
 `max`| `ma`| The configured maximum number of active threads allowed in the current thread pool    
 `keep_alive`| `k`| The configured keep alive time for threads  
   
-### Other Fields
+### 其他字段 Other Fields
 
 In addition to details about each thread pool, it is also convenient to get an understanding of where those thread pools reside. As such, you can request other details like the `ip` of the responding node(s).
 
-Field Name | Alias | Description  
+字段名 | 别名 | 描述  
 ---|---|---  
 `node_id`| `id`| The unique node ID    
 `ephemeral_id`| `eid`| The ephemeral node ID    

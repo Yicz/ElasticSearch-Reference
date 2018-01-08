@@ -7,7 +7,7 @@ Here we see a single index, with one primary shard and no replicas:
     
     GET _cat/shards
 
-This will return
+返回
     
     
     twitter 0 p STARTED 3014 31.1mb 192.168.56.10 H5dfFeA
@@ -20,8 +20,7 @@ If you have many shards, you may wish to limit which indices show up in the outp
     
     GET _cat/shards/twitt*
 
-Which will return the following
-    
+返回内容如下
     
     twitter 0 p STARTED 3014 31.1mb 192.168.56.10 H5dfFeA
     twitter 0 r UNASSIGNED

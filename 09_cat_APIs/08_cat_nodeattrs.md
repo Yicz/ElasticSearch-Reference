@@ -14,28 +14,26 @@
 
 ### Columns
 
-Below is an exhaustive list of the existing headers that can be passed to `nodeattrs?h=` to retrieve the relevant details in ordered columns. If no headers are specified, then those marked to Appear by Default will appear. If any header is specified, then the defaults are not used.
+以下是可以传递给`nodeattrs？h=`的已有标题的详尽列表，以按有序列检索相关细节。 如果没有指定标题，那么将显示标记为默认显示的标题。 如果指定了任何头部，则不使用默认值。
 
-Aliases can be used in place of the full header name for brevity. Columns appear in the order that they are listed below unless a different order is specified (e.g., `h=attr,value` versus `h=value,attr`).
+为简洁起见，别名可以用来代替完整的标题名称。 除非指定了不同的顺序（例如，`h = attr，value`对`h = value，attr`），否则列将按照下面列出的顺序出现。
 
-When specifying headers, the headers are not placed in the output by default. To have the headers appear in the output, use verbose mode (`v`). The header name will match the supplied value (e.g., `pid` versus `p`). For example:
-    
+指定标题时，标题不会默认放在输出中。 要在输出中显示标题，请使用详细模式（`v`）。 标题名称将与提供的值匹配（例如，`pid`与`p`）。 例如：
     
     GET /_cat/nodeattrs?v&h=name,pid,attr,value
 
-Might look like:
-    
+响应:
     
     name    pid   attr     value
     EK_AsJb 19566 testattr test
 
-Header | Alias | Appear by Default | Description | Example  
+标题名称 | 别名 | 默认显示 | 描述 | 例如  
 ---|---|---|---|---  
-`node`| `name`| Yes| Name of the node| DKDM97B    
-`id`| `nodeId`| No| Unique node ID| k0zy    
-`pid`| `p`| No| Process ID| 13061    
-`host`| `h`| Yes| Host name| n1    
-`ip`| `i`| Yes| IP address| 127.0.1.1    
-`port`| `po`| No| Bound transport port| 9300    
-`attr`| `attr.name`| Yes| Attribute name| rack    
-`value`| `attr.value`| Yes| Attribute value| rack123
+`node`| `name`| Yes| 节点名称 | DKDM97B    
+`id`| `nodeId`| No|唯一结节ID| k0zy    
+`pid`| `p`| No| 进行ID| 13061    
+`host`| `h`| Yes| 主机名| n1    
+`ip`| `i`| Yes| IP地址| 127.0.1.1    
+`port`| `po`| No| 传输端口| 9300    
+`attr`| `attr.name`| Yes| 属性名称| rack    
+`value`| `attr.value`| Yes| 属性值| rack123
