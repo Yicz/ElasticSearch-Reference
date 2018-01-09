@@ -1,14 +1,12 @@
-## Indices Recovery
+## 索引恢复 Indices Recovery
 
-The indices recovery API provides insight into on-going index shard recoveries. Recovery status may be reported for specific indices, or cluster-wide.
+索引恢复API提供了对正在进行的索引分片恢复的深入了解。 恢复状态可能会针对特定索引或集群范围进行报告。
 
-For example, the following command would show recovery information for the indices "index1" and "index2".
-    
+例如，以下命令将显示索引`index1`和`index`的恢复信息。    
     
     GET index1,index2/_recovery?human
 
-To see cluster-wide recovery status simply leave out the index names.
-    
+要查看群集范围的恢复状态，只需省略索引名称即可。    
     
     GET /_recovery?human
 
@@ -74,13 +72,12 @@ To see cluster-wide recovery status simply leave out the index names.
       }
     }
 
-The above response shows a single index recovering a single shard. In this case, the source of the recovery is a snapshot repository and the target of the recovery is the node with name "my_es_node".
+上面的响应显示了单个索引恢复单个分片。 在这种情况下，恢复的来源是快照库，恢复的目标是名为`my_es_node`的节点。
 
-Additionally, the output shows the number and percent of files recovered, as well as the number and percent of bytes recovered.
+此外，输出显示恢复的文件数量和百分比，以及恢复的字节数和百分比。
 
-In some cases a higher level of detail may be preferable. Setting "detailed=true" will present a list of physical files in recovery.
-    
-    
+在某些情况下，更高层次的细节可能更可取。 设置`detailed = true`将显示恢复中的物理文件列表。
+      
     GET _recovery?human&detailed=true
 
 响应如下：
@@ -159,30 +156,34 @@ In some cases a higher level of detail may be preferable. Setting "detailed=true
       }
     }
 
-This response shows a detailed listing (truncated for brevity) of the actual files recovered and their sizes.
+该响应显示了恢复的实际文件及其大小的详细列表(进行了精减)。
 
-Also shown are the timings in milliseconds of the various stages of recovery: index retrieval, translog replay, and index start time.
+还显示了恢复的各个阶段的时间（毫秒）：索引检索，超时重播和索引开始时间。
 
-Note that the above listing indicates that the recovery is in stage "done". All recoveries, whether on-going or complete, are kept in cluster state and may be reported on at any time. Setting "active_only=true" will cause only on-going recoveries to be reported.
+请注意，上面的清单表明恢复处于`DONE`阶段。 所有恢复，无论是正在进行还是完成，都保持集群状态，并可能随时进行报告。 设置`active_only = true`将导致仅报告正在进行的恢复。
 
-Here is a complete list of options:
+这是一个完整的选项列表：
 
-`detailed`| Display a detailed view. This is primarily useful for viewing the recovery of physical index files. Default: false.     
+
+`detailed`| 显示详细的视图。 这主要用于查看物理索引文件的恢复。 默认：false。     
 ---|---    
-`active_only`| Display only those recoveries that are currently on-going. Default: false.     Description of output 
+`active_only`| 只显示目前正在进行的恢复。 默认：false。     
 
-fields:
 
-`id`| Shard ID     
+输出内容的描述
+
+字段:
+
+`id`| 分片id     
 ---|---    
-`type`| Recovery type:   * store   * snapshot   * replica   * relocating     
-`stage`| Recovery stage:   * init: Recovery has not started   * index: Reading index meta-data and copying bytes from source to destination   * start: Starting the engine; opening the index for use   * translog: Replaying transaction log   * finalize: Cleanup   * done: Complete     
-`primary`| True if shard is primary, false otherwise     
-`start_time`| Timestamp of recovery start     
-`stop_time`| Timestamp of recovery finish     
-`total_time_in_millis`| Total time to recover shard in milliseconds     
-`source`| Recovery source:   * repository description if recovery is from a snapshot   * description of source node otherwise     
-`target`| Destination node     
+`type`| 恢复类型   <br> store   <br> snapshot   <br> replica   <br> relocating     
+`stage`| 恢复状态:   <br> init: 未开始   <br> index: Reading index meta-data and copying bytes from source to destination   <br> start: Starting the engine; opening the index for use   <br> translog: Replaying transaction log   <br> finalize: Cleanup   <br> done: Complete     
+`primary`| 是否主分片    
+`start_time`| 开始时间     
+`stop_time`| 结束时间     
+`total_time_in_millis`| 总恢复时间     
+`source`| 恢复来源:   * repository description if recovery is from a snapshot   * description of source node otherwise     
+`target`| 目标结节   
 `index`| Statistics about physical index recovery     
 `translog`| Statistics about translog recovery     
 `start`| Statistics about time to open and start the index 
