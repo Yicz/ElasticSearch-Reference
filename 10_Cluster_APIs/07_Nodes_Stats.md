@@ -1,4 +1,4 @@
-##  节点状态 Nodes Stats
+##  节点数据统计 Nodes Stats
 
 ### Nodes statistics
 
