@@ -1,7 +1,6 @@
-## Match Query
+## 匹配查询 Match Query
 
-`match` queries accept text/numerics/dates, analyzes them, and constructs a query. For example:
-    
+`match`接受text/numerics/dates类型的参数, 进行分析和构造一个查询，例如：
     
     GET /_search
     {
@@ -12,11 +11,12 @@
         }
     }
 
-Note, `message` is the name of a field, you can substitute the name of any field (including `_all`) instead.
+提示, `message` 字段的名字,你可以使用`_all`对文档的全部字段进行查询
 
-### match
+### 匹配 match
 
-The `match` query is of type `boolean`. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The `operator` flag can be set to `or` or `and` to control the boolean clauses (defaults to `or`). The minimum number of optional `should` clauses to match can be set using the [`minimum_should_match`](query-dsl-minimum-should-match.html) parameter.
+ `match` 查询是一个真假值类型。意味着它对提供文本进行分析并进行构造一个真假值类型的查询。`operator`可以设置为`or`或者`and`进行控制`boolean`类型的语句进行连接操作。
+ is of type `boolean`. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The `operator` flag can be set to `or` or `and` to control the boolean clauses (defaults to `or`). The minimum number of optional `should` clauses to match can be set using the [`minimum_should_match`](query-dsl-minimum-should-match.html) parameter.
 
 The `analyzer` can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer.
 

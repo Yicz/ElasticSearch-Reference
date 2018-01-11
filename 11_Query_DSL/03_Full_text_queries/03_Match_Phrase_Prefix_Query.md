@@ -1,4 +1,4 @@
-## Match Phrase Prefix Query
+## 匹配词组前缀查询 Match Phrase Prefix Query
 
 The `match_phrase_prefix` is the same as `match_phrase`, except that it allows for prefix matches on the last term in the text. For example:
     

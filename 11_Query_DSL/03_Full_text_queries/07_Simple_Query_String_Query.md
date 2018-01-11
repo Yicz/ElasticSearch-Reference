@@ -1,4 +1,4 @@
-## Simple Query String Query
+## 简单`query_string` Simple Query String Query
 
 A query that uses the SimpleQueryParser to parse its context. Unlike the regular `query_string` query, the `simple_query_string` query will never throw an exception, and discards invalid parts of the query. Here is an example:
     

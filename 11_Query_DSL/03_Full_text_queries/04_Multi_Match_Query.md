@@ -1,4 +1,4 @@
-## Multi Match Query
+##  多字段匹配查询 Multi Match Query
 
 The `multi_match` query builds on the [`match` query](query-dsl-match-query.html) to allow multi-field queries:
     

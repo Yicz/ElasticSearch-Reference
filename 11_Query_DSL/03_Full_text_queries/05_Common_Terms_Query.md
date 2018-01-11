@@ -1,4 +1,4 @@
-## Common Terms Query
+## 常用词条查询 Common Terms Query
 
 The `common` terms query is a modern alternative to stopwords which improves the precision and recall of search results (by taking stopwords into account), without sacrificing performance.
 

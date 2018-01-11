@@ -1,4 +1,4 @@
-## Match Phrase Query
+## 匹配词组查询 Match Phrase Query
 
 The `match_phrase` query analyzes the text and creates a `phrase` query out of the analyzed text. For example:
     

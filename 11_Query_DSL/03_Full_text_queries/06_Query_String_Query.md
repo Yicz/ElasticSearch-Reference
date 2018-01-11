@@ -1,4 +1,4 @@
-## Query String Query
+## `query_string`查询 Query String Query
 
 A query that uses a query parser in order to parse its content. Here is an example:
     
