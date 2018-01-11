@@ -15,22 +15,21 @@
 
 ### 匹配 match
 
- `match` 查询是一个真假值类型。意味着它对提供文本进行分析并进行构造一个真假值类型的查询。`operator`可以设置为`or`或者`and`进行控制`boolean`类型的语句进行连接操作。
- is of type `boolean`. It means that the text provided is analyzed and the analysis process constructs a boolean query from the provided text. The `operator` flag can be set to `or` or `and` to control the boolean clauses (defaults to `or`). The minimum number of optional `should` clauses to match can be set using the [`minimum_should_match`](query-dsl-minimum-should-match.html) parameter.
+`match` 查询是一个真假值类型。意味着它对提供文本进行分析并进行构造一个真假值类型的查询。`operator`可以设置为`or`或者`and`进行控制`boolean`类型的语句进行连接操作(默认为`or`)。可以使用[`minimum_should_match`](query-dsl-minimum-should-match.html)参数来设置匹配的最少数量的可选`should`子句。
 
-The `analyzer` can be set to control which analyzer will perform the analysis process on the text. It defaults to the field explicit mapping definition, or the default search analyzer.
+`analyzer`参数可以设置处理全文要分析的分析器。默认使用`mapping`中的定义或默认的查询分析器。
 
-The `lenient` parameter can be set to `true` to ignore exceptions caused by data-type mismatches, such as trying to query a numeric field with a text query string. Defaults to `false`.
+`lenient`参数可以设置成`true`来忽略类所类型不匹配的异常。例如在一个数值类型的字段使用字符串的参数，默认是`false`
 
-#### Fuzziness
+#### 模糊查询 Fuzziness
 
-`fuzziness` allows _fuzzy matching_ based on the type of field being queried. See [Fuzziness for allowed settings.
+`fuzziness` 参数可以 _模糊匹配_ 被查询的字段的类型。请参阅[模糊设置允许的设置]。
 
 The `prefix_length` and `max_expansions` can be set in this case to control the fuzzy process. If the fuzzy option is set the query will use `top_terms_blended_freqs_${max_expansions}` as its [rewrite method](query-dsl-multi-term-rewrite.html) the `fuzzy_rewrite` parameter allows to control how the query will get rewritten.
 
 Fuzzy transpositions (`ab` → `ba`) are allowed by default but can be disabled by setting `fuzzy_transpositions` to `false`.
 
-Here is an example when providing additional parameters (note the slight change in structure, `message` is the field name):
+以下是提供附加参数的示例（注意结构略有变化，message是字段名称）：
     
     
     GET /_search
@@ -47,8 +46,7 @@ Here is an example when providing additional parameters (note the slight change 
 
 #### Zero terms query
 
-If the analyzer used removes all tokens in a query like a `stop` filter does, the default behavior is to match no documents at all. In order to change that the `zero_terms_query` option can be used, which accepts `none` (default) and `all` which corresponds to a `match_all` query.
-    
+分析器如果在`stop`过滤阶段把查询的字符进行了全部过滤，则默认不再匹配任何文档。除非启用了`zero_terms_query`选项。参数是`none`(默认)或`all`匹配所有文档（跟`match_all`效果一致）。
     
     GET /_search
     {
@@ -63,16 +61,18 @@ If the analyzer used removes all tokens in a query like a `stop` filter does, th
         }
     }
 
-#### Cutoff frequency
+#### 截止频率 Cutoff frequency
+
+匹配查询支持`cutoff_frequency`，它允许指定绝对或相对的文档频率，其中高频词条被移入可选的子查询中，并且仅在`or`的情况下低频（低于截止频率）操作符或所有的低频项在`and`操作符匹配的情况下。
 
 The match query supports a `cutoff_frequency` that allows specifying an absolute or relative document frequency where high frequency terms are moved into an optional subquery and are only scored if one of the low frequency (below the cutoff) terms in the case of an `or` operator or all of the low frequency terms in the case of an `and` operator match.
 
-This query allows handling `stopwords` dynamically at runtime, is domain independent and doesn’t require a stopword file. It prevents scoring / iterating high frequency terms and only takes the terms into account if a more significant / lower frequency term matches a document. Yet, if all of the query terms are above the given `cutoff_frequency` the query is automatically transformed into a pure conjunction (`and`) query to ensure fast execution.
+这个查询允许在运行时动态地处理`stopwords`，是域独立的，不需要`stopword`文件。 它防止评分/迭代高频项，并且只有在更重要/更低的频率项匹配文档时才考虑这些项。 然而，如果所有查询条件都高于给定的`cutoff_frequency`，则查询会自动转换为纯连接（`and`）查询以确保快速执行。
 
-The `cutoff_frequency` can either be relative to the total number of documents if in the range `[0..1)` or absolute if greater or equal to `1.0`.
 
-Here is an example showing a query composed of stopwords exclusively:
-    
+`cutoff_frequency`可以是相对于文件总数（如果在[0..1]范围内），或者绝对值大于或等于'1.0'。
+
+下面是一个显示仅由停用词组成的查询的示例：    
     
     GET /_search
     {
@@ -88,8 +88,8 @@ Here is an example showing a query composed of stopwords exclusively:
 
 ![Important](/images/icons/important.png)
 
-The `cutoff_frequency` option operates on a per-shard-level. This means that when trying it out on test indexes with low document numbers you should follow the advice in [Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html).
+`cutoff_frequency`选项按分片级别运行。 这意味着，当试用低文档数的测试索引时，应该按照[Relevance is broken](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/relevance-is-broken.html)中的建议.
 
- **Comparison to query_string / field**
+ **query_string vs field**
 
-The match family of queries does not go through a "query parsing" process. It does not support field name prefixes, wildcard characters, or other "advanced" features. For this reason, chances of it failing are very small / non existent, and it provides an excellent behavior when it comes to just analyze and run that text as a query behavior (which is usually what a text search box does). Also, the `phrase_prefix` type can provide a great "as you type" behavior to automatically load search results.
+查询匹配族不通过`查询解析`过程。 它不支持字段名称前缀，通配符或其他“高级”功能。 由于这个原因，失败的几率很小/不存在，并且在分析和运行文本作为查询行为时（这通常是文本搜索框的功能），它提供了一个很好的行为。 另外，`phrase_prefix`类型可以提供很好的"像你输入"行为来自动加载搜索结果。

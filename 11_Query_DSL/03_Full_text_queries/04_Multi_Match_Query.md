@@ -349,7 +349,7 @@ You can force all fields into the same group by specifying the `analyzer` parame
       }
     }
 
-<1>| Use the `standard` analyzer for all fields.     
+<1>| 对全部字段使用`standard`分析器     
 ---|---  
   
 which will be executed as:

@@ -1,7 +1,6 @@
 ## `query_string`查询 Query String Query
 
-A query that uses a query parser in order to parse its content. Here is an example:
-    
+`query_string`使用查询分析器来解析其内容。 这里是一个例子：    
     
     GET /_search
     {
@@ -13,9 +12,9 @@ A query that uses a query parser in order to parse its content. Here is an examp
         }
     }
 
-The `query_string` top level parameters include:
+`query_string`顶级参数包括：
 
-Parameter | Description  
+参数 | 描述  
 ---|---  
 `query`| The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax).   
 `default_field`| The default field for query terms if no prefix field is specified. Defaults to the `index.query.default_field` indexsettings, which in turn defaults to `_all`.    
