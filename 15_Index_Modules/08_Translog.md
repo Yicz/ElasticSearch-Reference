@@ -1,4 +1,4 @@
-## Translog
+## 传输日志 Translog
 
 Changes to Lucene are only persisted to disk during a Lucene commit, which is a relatively heavy operation and so cannot be performed after every index or delete operation. Changes that happen after one commit and before another will be lost in the event of process exit or HW failure.
 

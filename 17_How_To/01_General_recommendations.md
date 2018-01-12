@@ -1,18 +1,19 @@
-## General recommendations
+##  通用建议 General recommendations
 
-### Don’t return large result sets
+### 不要返回大的结果集 Don’t return large result sets
 
-Elasticsearch is designed as a search engine, which makes it very good at getting back the top documents that match a query. However, it is not as good for workloads that fall into the database domain, such as retrieving all documents that match a particular query. If you need to do this, make sure to use the [Scroll](search-request-scroll.html) API.
+Elasticsearch被设计为一个搜索引擎，这使得它能够很好地找回匹配查询的顶级文档。 但是，对于落入数据库领域的工作负载来说，这并不是一件好事，例如检索与特定查询匹配的所有文档。 如果您需要这样做，请确保使用[Scroll](search-request-scroll.html)API。
 
-### Avoid large documents
+### 避免大文档 Avoid large documents
 
-Given that the default [`http.max_context_length`](modules-http.html) is set to 100MB, Elasticsearch will refuse to index any document that is larger than that. You might decide to increase that particular setting, but Lucene still has a limit of about 2GB.
+默认设置了 [`http.max_context_length`](modules-http.html)为100Mb,ES会拒绝大过这个设置的文档。你可以修改这个值，会内部Lucene对文档的最大限制是2GB
+
 
 Even without considering hard limits, large documents are usually not practical. Large documents put more stress on network, memory usage and disk, even for search requests that do not request the `_source` since Elasticsearch needs to fetch the `_id` of the document in all cases, and the cost of getting this field is bigger for large documents due to how the filesystem cache works. Indexing this document can use an amount of memory that is a multiplier of the original size of the document. Proximity search (phrase queries for instance) and [highlighting](search-request-highlighting.html) also become more expensive since their cost directly depends on the size of the original document.
 
 It is sometimes useful to reconsider what the unit of information should be. For instance, the fact you want to make books searchable doesn’t necesarily mean that a document should consist of a whole book. It might be a better idea to use chapters or even paragraphs as documents, and then have a property in these documents that identifies which book they belong to. This does not only avoid the issues with large documents, it also makes the search experience better. For instance if a user searches for two words `foo` and `bar`, a match across different chapters is probably very poor, while a match within the same paragraph is likely good.
 
-### Avoid sparsity
+### 避免稀疏 Avoid sparsity
 
 The data-structures behind Lucene, which Elasticsearch relies on in order to index and store data, work best with dense data, ie. when all documents have the same fields. This is especially true for fields that have norms enabled (which is the case for `text` fields by default) or doc values enabled (which is the case for numerics, `date`, `ip` and `keyword` by default).
 
@@ -28,20 +29,21 @@ This div mostly focused on `norms` and `doc values` because those are the two fe
 
 Here are some recommendations that can help avoid sparsity:
 
-#### Avoid putting unrelated data in the same index
+#### 避免在同一个索引中设置不相关的数据 Avoid putting unrelated data in the same index
 
-You should avoid putting documents that have totally different structures into the same index in order to avoid sparsity. It is often better to put these documents into different indices, you could also consider giving fewer shards to these smaller indices since they will contain fewer documents overall.
+您应该避免将具有完全不同结构的文档放在同一个索引中，以避免稀疏。 将这些文档放入不同的索引通常会更好，您也可以考虑给这些较小的索引分配更少的分片，因为它们将包含更少的文档。
 
-Note that this advice does not apply in the case that you need to use parent/child relations between your documents since this feature is only supported on documents that live in the same index.
+请注意，如果您需要在文档之间使用父/子关系，则此建议不适用，因为此功能仅支持位于同一索引中的文档。
 
-#### Normalize document structures
+#### 规范化文档结构 Normalize document structures
 
-Even if you really need to put different kinds of documents in the same index, maybe there are opportunities to reduce sparsity. For instance if all documents in the index have a timestamp field but some call it `timestamp` and others call it `creation_date`, it would help to rename it so that all documents have the same field name for the same data.
+即使你真的需要把不同类型的文件放在同一个索引中，也许有机会减少稀疏性。 例如，如果索引中的所有文档都有一个timestamp字段，但有一些叫做timestamp，而另外一些叫`creation_date`，那么它将有助于重命名它，以便所有文档对于相同的数据具有相同的字段名称。
 
-#### Avoid types
+#### 避免单个索引有多个类型 Avoid types
 
-Types might sound like a good way to store multiple tenants in a single index. They are not: given that types store everything in a single index, having multiple types that have different fields in a single index will also cause problems due to sparsity as described above. If your types do not have very similar mappings, you might want to consider moving them to a dedicated index.
+多类型可能听起来像是将多个租户存储在单个索引中的好方法。 它们不是：由于类型将所有内容都存储在单个索引中，因此在单个索引中具有不同字段的多个类型也会由于稀疏性而导致问题，如上所述。 如果你的类型没有非常相似的映射，你可能要考虑将它们移动到一个专门的索引。
 
-#### Disable `norms` and `doc_values` on sparse fields
 
-If none of the above recommendations apply in your case, you might want to check whether you actually need `norms` and `doc_values` on your sparse fields. `norms` can be disabled if producing scores is not necessary on a field, this is typically true for fields that are only used for filtering. `doc_values` can be disabled on fields that are neither used for sorting nor for aggregations. Beware that this decision should not be made lightly since these parameters cannot be changed on a live index, so you would have to reindex if you realize that you need `norms` or `doc_values`.
+#### 在稀疏字段上禁用`norms`和`doc_values` Disable `norms` and `doc_values` on sparse fields
+
+如果以上建议都不适用于您的情况，那么您可能需要检查您的稀疏字段是否确实需要`norms`和`doc_values`。 如果字段上不需要生成分数，则可以禁用`norms`，对于仅用于过滤的字段，这通常是正确的。 对于既不用于排序也不用于聚合的字段，可以禁用`doc_values`。 请注意，这个决定不应该轻易做出来，因为这些参数不能在实时索引中更改，所以如果您意识到需要`norms`或'doc_values`，则必须重新索引。

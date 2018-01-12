@@ -1,4 +1,4 @@
-## Shard Allocation Filtering
+## 分片分配过滤 Shard Allocation Filtering
 
 Shard allocation filtering allows you to specify which nodes are allowed to host the shards of a particular index.
 

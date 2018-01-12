@@ -1,4 +1,4 @@
-## Index Shard Allocation
+## 索引分片分配 Index Shard Allocation
 
 This module provides per-index settings to control the allocation of shards to nodes:
 

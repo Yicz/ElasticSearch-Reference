@@ -1,4 +1,4 @@
-## Store
+## 存储 Store
 
 The store module allows you to control how index data is stored and accessed on disk.
 

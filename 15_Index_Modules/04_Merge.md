@@ -1,10 +1,10 @@
-## Merge
+## 合并 Merge
 
 A shard in elasticsearch is a Lucene index, and a Lucene index is broken down into segments. Segments are internal storage elements in the index where the index data is stored, and are immutable. Smaller segments are periodically merged into larger segments to keep the index size at bay and to expunge deletes.
 
 The merge process uses auto-throttling to balance the use of hardware resources between merging and other activities like search.
 
-### Merge scheduling
+### 合并计划 Merge scheduling
 
 The merge scheduler (ConcurrentMergeScheduler) controls the execution of merge operations when they are needed. Merges run in separate threads, and when the maximum number of threads is reached, further merges will wait until a merge thread becomes available.
 

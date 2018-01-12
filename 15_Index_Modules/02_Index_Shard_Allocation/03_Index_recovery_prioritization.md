@@ -1,4 +1,4 @@
-## Index recovery prioritization
+## 索引恢复优先级 Index recovery prioritization
 
 Unallocated shards are recovered in order of priority, whenever possible. Indices are sorted into priority order as follows:
 

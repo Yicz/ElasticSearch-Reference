@@ -1,4 +1,4 @@
-## Pre-loading data into the file system cache
+## 预加载数据到缓存 Pre-loading data into the file system cache
 
 ![Warning](/images/icons/warning.png)
 

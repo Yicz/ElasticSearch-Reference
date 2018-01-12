@@ -1,4 +1,4 @@
-## Analysis
+## 分析 Analysis
 
 The index analysis module acts as a configurable registry of _analyzers_ that can be used in order to convert a string field into individual terms which are:
 

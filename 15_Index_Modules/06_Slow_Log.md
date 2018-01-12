@@ -1,6 +1,6 @@
-## Slow Log
+## 慢日志 Slow Log
 
-### Search Slow Log
+### 慢查询日志 Search Slow Log
 
 Shard level slow search log allows to log slow search (query and fetch phases) into a dedicated log file.
 
@@ -42,7 +42,7 @@ The logging file is configured by default using the following configuration (fou
     logger.index_search_slowlog_rolling.appenderRef.index_search_slowlog_rolling.ref = index_search_slowlog_rolling
     logger.index_search_slowlog_rolling.additivity = false
 
-### Index Slow log
+### 慢索引日志 Index Slow log
 
 The indexing slow log, similar in functionality to the search slow log. The log file name ends with `_index_indexing_slowlog.log`. Log and the thresholds are configured in the same way as the search slowlog. Index slowlog sample:
     

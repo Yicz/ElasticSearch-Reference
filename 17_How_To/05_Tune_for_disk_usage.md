@@ -1,6 +1,6 @@
-## Tune for disk usage
+## 磁盘利用直言 Tune for disk usage
 
-### Disable the features you do not need
+### 禁用你不使用的特性 Disable the features you do not need
 
 By default elasticsearch indexes and adds doc values to most fields so that they can be searched and aggregated out of the box. For instance if you have a numeric field called `foo` that you need to run histograms on but that you never need to filter on, you can safely disable indexing on this field in your [mappings](indices-create-index.html#mappings):
     
@@ -71,7 +71,7 @@ Furthermore if you do not care about scoring either, you can configure elasticse
       }
     }
 
-### Don’t use default dynamic string mappings
+### 不使用动态字符映射 Don’t use default dynamic string mappings
 
 The default [dynamic string mappings](dynamic-mapping.html) will index string fields both as [`text`](text.html) and [`keyword`](keyword.html). This is wasteful if you only need one of them. Typically an `id` field will only need to be indexed as a `keyword` while a `body` field will only need to be indexed as a `text` field.
 
@@ -98,14 +98,14 @@ For instance, here is a template that can be used in order to only map string fi
       }
     }
 
-### Disable `_all`
+### 禁用 `_all`
 
-The [`_all`](mapping-all-field.html) field indexes the value of all fields of a document and can use significant space. If you never need to search against all fields at the same time, it can be disabled.
+[`_all`](mapping-all-field.html)字段索引文档的所有字段的值，并且可以使用显着的空间。 如果您不需要同时搜索所有字段，则可以禁用它。
 
-### Use `best_compression`
+### 使用高压缩 `best_compression`
 
-The `_source` and stored fields can easily take a non negligible amount of disk space. They can be compressed more aggressively by using the `best_compression` [codec](index-modules.html#index-codec).
+`_source`和存储的字段很容易占用不可忽视的磁盘空间。 可以通过使用`best_compression` [codec](index-modules.html#index-codec).来进一步压缩它们。
 
 ### Use the smallest numeric type that is sufficient
 
-The type that you pick for [numeric data](number.html) can have a significant impact on disk usage. In particular, integers should be stored using an integer type (`byte`, `short`, `integer` or `long`) and floating points should either be stored in a `scaled_float` if appropriate or in the smallest type that fits the use-case: using `float` over `double`, or `half_float` over `float` will help save storage.
+您为[数字数据](number.html)选择的类型可能会对磁盘使用产生重大影响。 特别的，整数应该使用整数类型（`byte`，`short`，`integer`或`long`）来存储，浮点数应该存储在`scaled_float`中，如果合适的话， 用例：在double上使用`float`，或在`float`上使用`half_float`将有助于节省存储空间。

@@ -1,4 +1,4 @@
-## Delaying allocation when a node leaves
+## 节点丢失后延迟分配 Delaying allocation when a node leaves
 
 When a node leaves the cluster for whatever reason, intentional or otherwise, the master reacts by:
 

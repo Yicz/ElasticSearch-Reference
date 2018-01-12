@@ -1,4 +1,4 @@
-## Total Shards Per Node
+## 每个节点的总分片 Total Shards Per Node
 
 The cluster-level shard allocator tries to spread the shards of a single index across as many nodes as possible. However, depending on how many shards and indices you have, and how big they are, it may not always be possible to spread shards evenly.
 

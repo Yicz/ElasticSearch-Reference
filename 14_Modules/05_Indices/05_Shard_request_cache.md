@@ -9,7 +9,7 @@
 默认地请求缓存只会缓存请求结果`size=0`的请求，它不会绑在命中的文档，但可以缓存了`hist.total` [aggregations](search-aggregations.html), and [suggestions](search-suggesters.html).
 。
 
-Most queries that use `now` (see [Date Math cannot be cached]).
+使用`now`不会进行缓存
 
 #### 缓存失效 Cache invalidation
 
@@ -26,7 +26,7 @@ Most queries that use `now` (see [Date Math cannot be cached]).
 
 #### 使用和禁用缓存 Enabling and disabling caching
 
-缓存是默认使用的，但可以通过如下的设置进行在创建一个索引的时候进行禁用。
+缓存是默认使用的（true），但可以通过如下的设置进行在创建一个索引的时候进行禁用。
     
     PUT /my_index
     {

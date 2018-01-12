@@ -1,4 +1,4 @@
-## Similarity module
+## 相似模型 Similarity module
 
 A similarity (scoring / ranking model) defines how matching documents are scored. Similarity is per field, meaning that via the mapping one can define a different similarity per field.
 
