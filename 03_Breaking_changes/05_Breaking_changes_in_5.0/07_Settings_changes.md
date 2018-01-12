@@ -94,11 +94,11 @@ The following settings have been removed without replacement
 
 
 
-### Translog settings
+### 事务日志设置 Translog settings
 
-The `index.translog.flush_threshold_ops` setting is not supported anymore. In order to control flushes based on the transaction log growth use `index.translog.flush_threshold_size` instead.
+ `index.translog.flush_threshold_ops` 设置不再支持. 取而代之的是`index.translog.flush_threshold_size`控制基于事务日志增长的刷新 .
 
-Changing the translog type with `index.translog.fs.type` is not supported anymore, the `buffered` implementation is now the only available option and uses a fixed `8kb` buffer.
+ `index.translog.fs.type` 修改日志类型也不再支持，,只有`buffered`参数可以并默认设置为8k。
 
 The translog by default is fsynced after every `index`, `create`, `update`, `delete`, or `bulk` request. The ability to fsync on every operation is not necessary anymore. In fact, it can be a performance bottleneck and it’s trappy since it enabled by a special value set on `index.translog.sync_interval`. Now, `index.translog.sync_interval` doesn’t accept a value less than `100ms` which prevents fsyncing too often if async durability is enabled. The special value `0` is no longer supported.
 
@@ -106,9 +106,9 @@ The translog by default is fsynced after every `index`, `create`, `update`, `del
 
 ### Request Cache Settings
 
-The deprecated settings `index.cache.query.enable` and `indices.cache.query.size` have been removed and are replaced with `index.requests.cache.enable` and `indices.requests.cache.size` respectively.
+`index.cache.query.enable` 和 `indices.cache.query.size` 试用并使用 `index.requests.cache.enable` 和 `indices.requests.cache.size` 代替.
 
-`indices.requests.cache.clean_interval` has been replaced with `indices.cache.clean_interval` and is no longer supported.
+`indices.requests.cache.clean_interval` 也被 `indices.cache.clean_interval` 代替和不再支持使用.
 
 ### Field Data Cache Settings
 
