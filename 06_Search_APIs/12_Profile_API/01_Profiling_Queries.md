@@ -37,7 +37,7 @@ Profile API提供的细节直接暴露了Lucene类的名称和概念，这意味
         }
     ]
 
-<1>| 为简单起见，故障时间被省略    
+<1>| 为简单起见，`breakdown`被省略    
 ---|---  
 
 根据配置`profile`结构，我们可以看到我们的`match`查询被Lucene重写为带有两个子句的BooleanQuery（都是TermQuery）。 `type`字段显示Lucene类的名称，并且经常与Elasticsearch中的等价名称对齐。 `description`字段显示查询的Lucene说明文本，可用于帮助区分查询的各个部分（例如，message：search和message：test都是TermQuery，否则将显示相同的结果。
@@ -50,7 +50,7 @@ Profile API提供的细节直接暴露了Lucene类的名称和概念，这意味
 
 ![Note](/images/icons/note.png)
 
-`time`字段仅用于人类阅读。 如果您需要准确的时间值，请使用`time_in_nanos`.`time`字段默认是输出的，但是会随着下一个主要版本（6.0.0）而改变，默认打印time_in_nanos。
+`time`字段仅方便人类阅读。 如果您需要准确的时间值，请使用`time_in_nanos`.`time`字段默认是输出的，但是会随着下一个主要版本（6.0.0）而改变，默认打印time_in_nanos。
 
 #### Timing Breakdown
 
@@ -191,7 +191,7 @@ This example has:
 
 
 
-And the response:
+查询:
     
     
     {

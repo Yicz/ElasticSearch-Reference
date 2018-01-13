@@ -13,11 +13,11 @@ The `multi_match` query builds on the [`match` query](query-dsl-match-query.html
       }
     }
 
-<1>| The query string.     
+<1>| 查询内容     
 ---|---    
-<2>| The fields to be queried.   
+<2>| 查询字段   
   
-#### `fields` and per-field boosting
+#### 字段和每个字段的提升因子 `fields` and per-field boosting
 
 Fields can be specified with wildcards, eg:
     
