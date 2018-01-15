@@ -1,8 +1,9 @@
 ##  同步刷新 Synced Flush
 
-Elasticsearch tracks the indexing activity of each shard. Shards that have not received any indexing operations for 5 minutes are automatically marked as inactive. This presents an opportunity for Elasticsearch to reduce shard resources and also perform a special kind of flush, called `synced flush`. A synced flush performs a normal flush, then adds a generated unique marker (sync_id) to all shards.
+Elasticsearch跟踪每个分片的索引活动。 5分钟示收到索引操作的分片会自动标记为非活动状态。 这为Elasticsearch提供了一个减少分片资源的机会，并且执行了一种特殊的flush，称为`synced flush`。 同步刷新执行正常刷新，然后将生成的唯一标记（sync_id）添加到所有碎片。
 
-Since the sync id marker was added when there were no ongoing indexing operations, it can be used as a quick way to check if the two shards' lucene indices are identical. This quick sync id comparison (if present) is used during recovery or restarts to skip the first and most costly phase of the process. In that case, no segment files need to be copied and the transaction log replay phase of the recovery can start immediately. Note that since the sync id marker was applied together with a flush, it is very likely that the transaction log will be empty, speeding up recoveries even more.
+由于在没有正在进行索引操作时添加了同步标识符，因此可以用它作为快速检查两个分片的lucene索引是否相同的方法。 此快速同步ID比较（如果存在）在恢复过程中使用或重新启动以跳过过程的第一个也是最昂贵的阶段。 在这种情况下，不需要复制段文件，恢复的事务日志重放阶段可以立即开始。 请注意，由于同步ID标记与flush一起使用，事务日志很可能是空的，加快了恢复的速度。
+
 
 This is particularly useful for use cases having lots of indices which are never or very rarely updated, such as time based data. This use case typically generates lots of indices whose recovery without the synced flush marker would take a long time.
 
@@ -11,7 +12,7 @@ To check whether a shard has a marker or not, look for the `commit` div of shard
     
     GET twitter/_stats?level=shards
 
-which returns something similar to:
+响应如下:
     
     
     {
@@ -44,7 +45,7 @@ which returns something similar to:
        }
     }
 
-<1>| the `sync id` marker     
+<1>|  `sync id` 标识     
 ---|---  
   
 ### Synced Flush API

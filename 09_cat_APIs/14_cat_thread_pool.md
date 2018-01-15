@@ -1,6 +1,6 @@
 ## 查看线程池 cat thread pool
 
-The `thread_pool` command shows cluster wide thread pool statistics per node. By default the active, queue and rejected statistics are returned for all thread pools.
+`thread_pool`命令显示每个节点的集群范围线程池统计信息。 默认情况下，为所有线程池返回活动队列和反驳回统计信息。
     
     
     % curl 192.168.56.10:9200/_cat/thread_pool
@@ -19,13 +19,12 @@ The `thread_pool` command shows cluster wide thread pool statistics per node. By
     0EWUhXe snapshot            0 0 0
     0EWUhXe warmer              0 0 0
 
-The first column is the node name
-    
+第一列是节点的名字:    
     
     node_name
     0EWUhXe
 
-The second column is the thread pool name
+第二列是线程池的名字:  
     
     
     name
@@ -44,8 +43,8 @@ The second column is the thread pool name
     snapshot
     warmer
 
-The next three columns show the active, queue, and rejected statistics for each thread pool
-    
+第三列显示了活跃状态，队列和被驳回的线程池状态：
+  
     
     active queue rejected
          0     0        0
@@ -63,7 +62,7 @@ The next three columns show the active, queue, and rejected statistics for each 
          0     0        0
          0     0        0
 
-The cat thread pool API accepts a `thread_pool_patterns` URL parameter for specifying a comma-separated list of regular expressions to match thread pool names.
+URL接受一个`thread_pool_patterns`的参数进行对返回内容的过滤,可以使用正则表示：
     
     
     % curl 'localhost:9200/_cat/thread_pool/generic?v&h=id,name,active,rejected,completed'

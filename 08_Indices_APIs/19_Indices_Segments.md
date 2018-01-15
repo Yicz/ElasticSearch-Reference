@@ -1,16 +1,14 @@
-## Indices Segments
+## 索引段 Indices Segments
 
-Provide low level segments information that a Lucene index (shard level) is built with. Allows to be used to provide more information on the state of a shard and an index, possibly optimization information, data "wasted" on deletes, and so on.
+提供了lucene底层内置的分片级分段的信息。允许提供一个索引和分片的状态信息，可能包含优化信息和删除的文档在段中占用的存在大小等等。
 
-Endpoints include segments for a specific index, several indices, or all:
-    
+接口可以指定一个索引，多个索引或全部索引：
     
     curl -XGET 'http://localhost:9200/test/_segments'
     curl -XGET 'http://localhost:9200/test1,test2/_segments'
     curl -XGET 'http://localhost:9200/_segments'
 
 响应如下：
-    
     
     {
         ...
@@ -28,35 +26,53 @@ Endpoints include segments for a specific index, several indices, or all:
         ...
     }
 
-\_0 
-     The key of the JSON document is the name of the segment. This name is used to generate file names: all files starting with this segment name in the directory of the shard belong to this segment. 
-generation 
-     A generation number that is basically incremented when needing to write a new segment. The segment name is derived from this generation number. 
-num_docs 
-     The number of non-deleted documents that are stored in this segment. 
-deleted_docs 
-     The number of deleted documents that are stored in this segment. It is perfectly fine if this number is greater than 0, space is going to be reclaimed when this segment gets merged. 
-size_in_bytes 
-     The amount of disk space that this segment uses, in bytes. 
-memory_in_bytes 
-     Segments need to store some data into memory in order to be searchable efficiently. This number returns the number of bytes that are used for that purpose. A value of -1 indicates that Elasticsearch was not able to compute this number. 
-committed 
-     Whether the segment has been sync’ed on disk. Segments that are committed would survive a hard reboot. No need to worry in case of false, the data from uncommitted segments is also stored in the transaction log so that Elasticsearch is able to replay changes on the next start. 
-search 
-     Whether the segment is searchable. A value of false would most likely mean that the segment has been written to disk but no refresh occurred since then to make it searchable. 
-version 
-     The version of Lucene that has been used to write this segment. 
-compound 
-     Whether the segment is stored in a compound file. When true, this means that Lucene merged all files from the segment in a single one in order to save file descriptors. 
+`\_0`
 
-### Verbose mode
+     JSON文档的关键是段的名称。 该名称用于生成文件名：该分片的目录中以该分段名称开头的所有文件都属于该分段。
 
-To add additional information that can be used for debugging, use the `verbose` flag.
+生成器（generation）
+ 
+
+    在需要编写新段时基本上增加了一个数。 段名称来源于这一代号码。
+
+文档数（num_docs） 
+
+    存储在此段中的未被标记删除文档的数量。
+
+删除的文档数（deleted_docs） 
+
+     存储在此段中的已删除文档的数量。 如果这个数字大于0，那么这个分段完全没问题，当这个分段被合并时，空间将被回收。
+
+节点大小（size_in_bytes） 
+
+     此段使用的磁盘空间量（以字节为单位）。
+
+内存占用大小（memory_in_bytes） 
+
+     段需要将一些数据存储到内存中以便有效地进行搜索。 这个数字返回用于这个目的的字节数。 值为-1表示Elasticsearch无法计算此数字。
+
+已提交（committed） 
+
+     段是否已经在磁盘上同步。 承诺的细分将在硬重启后生存。 如果发生错误，不需要担心，未提交段的数据也会存储在事务日志中，以便Elasticsearch能够在下次启动时重播更改。
+
+可查询（search） 
+
+    分段是否可搜索。 false的值很可能意味着该段已写入磁盘，但自此之后不再刷新以使其可搜索。
+
+版本号 （version） 
+
+    已经被用来编写这个段的Lucene的版本。
+
+合成（compound） 
+
+    段是否存储在复合文件中。 如果为true，这意味着Lucene将合并段中的所有文件，以保存文件描述符。
+
+### 可视模式 Verbose mode
+
+要添加可用于调试的其他信息，请使用`verbose`参数
 
 ![Warning](/images/icons/warning.png)
-
-The format of the additional verbose information is experimental and can change at any time 
-    
+使用如下请求的数据，会随时可变
     
     curl -XGET 'http://localhost:9200/test/_segments?verbose=true'
 
