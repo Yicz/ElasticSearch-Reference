@@ -69,37 +69,37 @@ URL接受一个`thread_pool_patterns`的参数进行对返回内容的过滤,可
     id                     name    active rejected completed
     0EWUhXeBQtaVGlexUeVwMg generic      0        0        70
 
-Here the host columns and the active, rejected and completed suggest thread pool statistics are displayed.
+这里显示主机列和活动，拒绝和完成的线程池统计信息。
 
-All [built-in thread pools](modules-threadpool.html) and custom thread pools are available.
+内置的线程池[built-in thread pools](modules-threadpool.html)和自定义的线程池都是通用的.
 
-#### Thread Pool Fields
+#### 线程池字段 Thread Pool Fields
 
-For each thread pool, you can load details about it by using the field names in the table below.
+对于每个线程池，可以使用下表中的字段名称加载关于它的详细信息。
 
 字段名 | 别名 | 描述  
 ---|---|---    
-`type`| `t`| The current (\*) type of thread pool (`fixed` or `scaling`)    
-`active`| `a`| The number of active threads in the current thread pool    
-`size`| `s`| The number of threads in the current thread pool    
-`queue`| `q`| The number of tasks in the queue for the current thread pool    
-`queue_size`| `qs`| The maximum number of tasks permitted in the queue for the current thread pool    
-`rejected`| `r`| The number of tasks rejected by the thread pool executor    
-`largest`| `l`| The highest number of active threads in the current thread pool    
-`completed`| `c`| The number of tasks completed by the thread pool executor    
-`min`| `mi`| The configured minimum number of active threads allowed in the current thread pool    
-`max`| `ma`| The configured maximum number of active threads allowed in the current thread pool    
-`keep_alive`| `k`| The configured keep alive time for threads  
+`type`| `t`| 线程池的类型 (`fixed` or `scaling`)    
+`active`| `a`| 当前线程池激活的线程数  
+`size`| `s`| 线程池的大小   
+`queue`| `q`| 线程池的相关任务队列 
+`queue_size`| `qs`| 队列大小 
+`rejected`| `r`| 被线程池丢弃的请求数量   
+`largest`| `l`|  当前线程池的最大线程激活数量    
+`completed`| `c`| 线程池已经完成的请求数量    
+`min`| `mi`| 当前线程池允许最小的线程激活数量   
+`max`| `ma`| 当前线程池允许最大的线程激活数量   
+`keep_alive`| `k`| 线程池中线程存活时间 
   
 ### 其他字段 Other Fields
 
-In addition to details about each thread pool, it is also convenient to get an understanding of where those thread pools reside. As such, you can request other details like the `ip` of the responding node(s).
+除了每个线程池的细节之外，了解这些线程池驻留的位置也很方便。 因此，您可以请求其他详细信息，例如响应节点的“ip”。
 
 字段名 | 别名 | 描述  
 ---|---|---  
-`node_id`| `id`| The unique node ID    
+`node_id`| `id`| 节点id  
 `ephemeral_id`| `eid`| The ephemeral node ID    
-`pid`| `p`| The process ID of the running node    
-`host`| `h`| The hostname for the current node    
-`ip`| `i`| The IP address for the current node    
-`port`| `po`| The bound transport port for the current node
+`pid`| `p`| 进程id   
+`host`| `h`| 节点主机地址    
+`ip`| `i`| 节点ip   
+`port`| `po`| 节点传输端口

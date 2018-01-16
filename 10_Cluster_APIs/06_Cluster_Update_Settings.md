@@ -1,6 +1,6 @@
 ## 更新集群设置 Cluster Update Settings
 
-Allows to update cluster wide specific settings. Settings updated can either be persistent (applied cross restarts) or transient (will not survive a full cluster restart). Here is an example:
+允许更新群集范围的特定设置。 更新的设置可以是持久的（应用交叉重新启动）或瞬态的（不会在完全重新启动集群的情况下）。 这里是一个例子：
     
     
     PUT /_cluster/settings
@@ -10,7 +10,7 @@ Allows to update cluster wide specific settings. Settings updated can either be 
         }
     }
 
-Or:
+或:
     
     
     PUT /_cluster/settings?flat_settings=true
@@ -20,8 +20,7 @@ Or:
         }
     }
 
-The cluster responds with the settings updated. So the response for the last example will be:
-    
+群集响应设置更新。 所以最后一个例子的回应是：    
     
     {
         ...
@@ -31,9 +30,8 @@ The cluster responds with the settings updated. So the response for the last exa
         }
     }
 
-Resetting persistent or transient settings can be done by assigning a `null` value. If a transient setting is reset, the persistent setting is applied if available. Otherwise Elasticsearch will fallback to the setting defined at the configuration file or, if not existent, to the default value. Here is an example:
-    
-    
+重置持久或瞬态设置可以通过分配一个“null”值来完成。 如果瞬态设置被重置，则应用持久性设置（如果可用）。 否则，Elasticsearch将回退到在配置文件中定义的设置，或者如果不存在，则回到默认值。 这里是一个例子：
+
     PUT /_cluster/settings
     {
         "transient" : {
@@ -41,7 +39,7 @@ Resetting persistent or transient settings can be done by assigning a `null` val
         }
     }
 
-Reset settings will not be included in the cluster response. So the response for the last example will be:
+重置设置将不会包含在群集响应中。 所以最后一个例子的回应是：
     
     
     {
@@ -50,8 +48,7 @@ Reset settings will not be included in the cluster response. So the response for
         "transient" : {}
     }
 
-Settings can also be reset using simple wildcards. For instance to reset all dynamic `indices.recovery` setting a prefix can be used:
-    
+设置也可以使用简单的通配符来重置。 例如重置所有动态的`indices.recovery`设置一个前缀可以使用：
     
     PUT /_cluster/settings
     {
@@ -60,15 +57,14 @@ Settings can also be reset using simple wildcards. For instance to reset all dyn
         }
     }
 
-Cluster wide settings can be returned using:
-    
+可以使用以下命令返回群集范围设置
     
     GET /_cluster/settings
 
-### Precedence of settings
+### 设置的优先级 Precedence of settings
 
-Transient cluster settings take precedence over persistent cluster settings, which take precedence over settings configured in the `elasticsearch.yml` config file.
+暂时集群设置优先于持久集群设置，优先于在elasticsearch.yml配置文件中配置的设置。
 
-For this reason it is preferrable to use the `elasticsearch.yml` file only for local configurations, and set all cluster-wider settings with the `settings` API.
+出于这个原因，最好使用`elasticsearch.yml`文件来进行本地配置，并使用`settings` API来设置所有群集范围的设置。
 
-A list of dynamically updatable settings can be found in the [Modules](modules.html) documentation.
+可以在[Modules](modules.html)文档中找到动态可更新设置的列表。

@@ -1,9 +1,8 @@
 ## 查看分片 cat shards
 
-The `shards` command is the detailed view of what nodes contain which shards. It will tell you if it’s a primary or replica, the number of docs, the bytes it takes on disk, and the node where it’s located.
+“shards”命令是哪个节点包含哪些分片的详细视图。 它会告诉你，如果它是一个主分片或副本分片，文档的数量，它在磁盘上的字节和它所在的节点。
 
-Here we see a single index, with one primary shard and no replicas:
-    
+在这里，我们看到一个索引，一个主分片，没有副本：    
     
     GET _cat/shards
 
@@ -13,11 +12,10 @@ Here we see a single index, with one primary shard and no replicas:
     twitter 0 p STARTED 3014 31.1mb 192.168.56.10 H5dfFeA
     twitter 0 r UNASSIGNED
 
-### Index pattern
+### 索引匹配
 
-If you have many shards, you may wish to limit which indices show up in the output. You can always do this with `grep`, but you can save some bandwidth by supplying an index pattern to the end.
-    
-    
+如果你有许多分片，你可能希望限制在输出中显示的索引。 你可以用`grep（linux 命令）`来做到这一点，但是你可以通过提供索引模式来节省一些带宽。
+
     GET _cat/shards/twitt*
 
 返回内容如下
@@ -27,37 +25,34 @@ If you have many shards, you may wish to limit which indices show up in the outp
 
 ### Relocation
 
-Let’s say you’ve checked your health and you see a relocating shards. Where are they from and where are they going?
+假设你已经检查了你的健康状况，你看到了一个迁移的分片。 他们从哪里来，他们去哪里？
     
     
     GET _cat/shards
 
-A relocating shard will be shown as follows
-    
+重新定位分片将显示如下：    
     
     twitter 0 p RELOCATING 3014 31.1mb 192.168.56.10 H5dfFeA -> -> 192.168.56.30 bGG90GE
 
-### Shard states
+### 分片状态 Shard states
 
-Before a shard can be used, it goes through an `INITIALIZING` state. `shards` can show you which ones.
-    
-    
+在一个分片可以被使用之前，它会变成`INITIALIZING`状态，`_cat/shards`可以展示是哪一个分片。
+
     GET _cat/shards
 
-You can get the initializing state in the response like this
-    
+你可以像下面的内容一样获取`INITIALIZING`状态的分片信息：    
     
     twitter 0 p STARTED      3014 31.1mb 192.168.56.10 H5dfFeA
     twitter 0 r INITIALIZING    0 14.3mb 192.168.56.30 bGG90GE
 
-If a shard cannot be assigned, for example you’ve overallocated the number of replicas for the number of nodes in the cluster, the shard will remain `UNASSIGNED` with the [reason code](cat-shards.html#reason-unassigned) `ALLOCATION_FAILED`.
+如果无法分配分片，例如，您已经为集群中的节点数量分配了复制副本的数量，则分片将保持“UNASSIGNED”，并且[原因代码](cat-shards.html#reason-unassigned)为`ALLOCATION_FAILED`.
 
-You can use the shards API to find out that reason.
+你可以使用`_cat/shards`找出原因：
     
     
     GET _cat/shards?h=index,shard,prirep,state,unassigned.reason
 
-The reason for an unassigned shard will be listed as the last field
+没有被分配的理由将会被列举出来：
     
     
     twitter 0 p STARTED    3014 31.1mb 192.168.56.10 H5dfFeA
@@ -65,20 +60,20 @@ The reason for an unassigned shard will be listed as the last field
     twitter 0 r STARTED    3014 31.1mb 192.168.56.20 I8hydUG
     twitter 0 r UNASSIGNED ALLOCATION_FAILED
 
-### Reasons for unassigned shard
+### 分片没有分配的原由 Reasons for unassigned shard
 
-These are the possible reasons for a shard to be in a unassigned state:
+下面列举了分片没有被分配可能的理由：
 
-`INDEX_CREATED`| Unassigned as a result of an API creation of an index.     
+`INDEX_CREATED`| 由于创建索引的API而未分配。     
 ---|---    
-`CLUSTER_RECOVERED`| Unassigned as a result of a full cluster recovery.     
-`INDEX_REOPENED`| Unassigned as a result of opening a closed index.     
-`DANGLING_INDEX_IMPORTED`| Unassigned as a result of importing a dangling index.     
-`NEW_INDEX_RESTORED`| Unassigned as a result of restoring into a new index.     
-`EXISTING_INDEX_RESTORED`| Unassigned as a result of restoring into a closed index.     
-`REPLICA_ADDED`| Unassigned as a result of explicit addition of a replica.     
-`ALLOCATION_FAILED`| Unassigned as a result of a failed allocation of the shard.     
-`NODE_LEFT`| Unassigned as a result of the node hosting it leaving the cluster.     
-`REROUTE_CANCELLED`| Unassigned as a result of explicit cancel reroute command.     
-`REINITIALIZED`| When a shard moves from started back to initializing, for example, with shadow replicas.     
-`REALLOCATED_REPLICA`| A better replica location is identified and causes the existing replica allocation to be cancelled. 
+`CLUSTER_RECOVERED`| 由于完全集群恢复而未分配。    
+`INDEX_REOPENED`| 由于打开一个关闭的索引而未分配。     
+`DANGLING_INDEX_IMPORTED`| 作为导入空索引的结果未分配。    
+`NEW_INDEX_RESTORED`| 作为恢复到新索引的结果未分配。    
+`EXISTING_INDEX_RESTORED`| 由于恢复到已关闭的索引而未分配。    
+`REPLICA_ADDED`| 由于显式添加副本分片而未分配.     
+`ALLOCATION_FAILED`|由于分片分配失败而未分配。   
+`NODE_LEFT`| 由于承载它离开集群的节点而未分配。    
+`REROUTE_CANCELLED`| 作为显式取消重新路由命令的结果取消分配。    
+`REINITIALIZED`| 当分片从开始移动到初始化时，例如，使用影子副本。    
+`REALLOCATED_REPLICA`| 确定更好的副本位置并使现有的副本分配被取消。

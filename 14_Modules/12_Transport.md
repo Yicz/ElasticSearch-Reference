@@ -1,31 +1,29 @@
-## Transport
+## 传输 Transport
 
-The transport module is used for internal communication between nodes within the cluster. Each call that goes from one node to the other uses the transport module (for example, when an HTTP GET request is processed by one node, and should actually be processed by another node that holds the data).
+传输模块使用于集群中节点的内部交流。从一个节点到另一个节点的每个调用都使用传输模块（例如，当一个节点处理HTTP GET请求时，实际上应该由保存数据的另一个节点处理）。
 
-The transport mechanism is completely asynchronous in nature, meaning that there is no blocking thread waiting for a response. The benefit of using asynchronous communication is first solving the [C10k problem](http://en.wikipedia.org/wiki/C10k_problem), as well as being the ideal solution for scatter (broadcast) / gather operations such as search in ElasticSearch.
+传输机制本质上是完全异步的，意味着没有阻塞线程等待响应。 使用异步通信的好处是首先解决[C10k问题](http://en.wikipedia.org/wiki/C10k_problem)，同时也是分散（广播）/收集操作的理想解决方案，例如在ElasticSearch。
 
 ### TCP Transport
 
-The TCP transport is an implementation of the transport module using TCP. It allows for the following settings:
+TCP传输是使用TCP的传输模块的实现。 它允许以下设置：
 
-Setting | Description  
+设置 | 说明  
 ---|---    
-`transport.tcp.port`| A bind port range. Defaults to `9300-9400`.    
-`transport.publish_port`| The port that other nodes in the cluster should use when communicating with this node. Useful when a cluster node is behind a proxy or firewall and the 
-`transport.tcp.port` is not directly addressable from the outside. Defaults to the actual port assigned via `transport.tcp.port`.    
-`transport.bind_host`| The host address to bind the transport service to. Defaults to `transport.host` (if set) or `network.bind_host`.    
-`transport.publish_host`| The host address to publish for nodes in the cluster to connect to. Defaults to `transport.host` (if set) or `network.publish_host`.    
-`transport.host`| Used to set the `transport.bind_host` and the `transport.publish_host` Defaults to `transport.host` or `network.host`.    
-`transport.tcp.connect_timeout`| The socket connect timeout setting (in time setting format). Defaults to `30s`.    
-`transport.tcp.compress`| Set to `true` to enable compression (LZF) between all nodes. Defaults to `false`.    
-`transport.ping_schedule`| Schedule a regular ping message to ensure that connections are kept alive. Defaults to `5s` in the transport client and `-1` (disabled) elsewhere.  
+`transport.tcp.port`| 绑定端口范围. 默认 `9300-9400`.    
+`transport.publish_port`| 与该节点通信时，群集中的其他节点应该使用的端口。 当群集节点位于代理或防火墙后面时，这很有用`transport.tcp.port`不能直接从外部寻址。 默认为通过`transport.tcp.port`分配的实际端口。
+`transport.bind_host`| 将传输服务绑定到的主机地址。 默认为`transport.host`（如果设置）或`network.bind_host`。    
+`transport.publish_host`|公开集群中要连接到的节点的主机地址。 默认为`transport.host`（如果设置）或`network.publish_host`。
+`transport.host`| 用于设置`transport.bind_host` 和`transport.publish_host` 默认设置 `transport.host` 或 `network.host`.    
+`transport.tcp.connect_timeout`| 连接超时设置，默认是 `30s`.    
+`transport.tcp.compress`| 设置 `true` 会在各个结节间启用压缩算法(LZF). 默认是`false`.    
+`transport.ping_schedule`| 定时的ping节点信息，保证节点是活跃状态.默认是`5s` ， `-1` 是禁用 
   
-It also uses the common [network settings](modules-network.html).
+可以参考其他模块 [network settings](modules-network.html).
 
-#### TCP Transport Profiles
+#### TCP传输配置 TCP Transport Profiles
 
-Elasticsearch allows you to bind to multiple ports on different interfaces by the use of transport profiles. See this example configuration
-    
+ES可以通过设置绑定多个端口用于不同类型的接口。
     
     transport.profiles.default.port: 9300-9400
     transport.profiles.default.bind_host: 10.0.0.1
@@ -34,26 +32,25 @@ Elasticsearch allows you to bind to multiple ports on different interfaces by th
     transport.profiles.dmz.port: 9700-9800
     transport.profiles.dmz.bind_host: 172.16.1.2
 
-The `default` profile is a special. It is used as fallback for any other profiles, if those do not have a specific configuration setting set. Note that the default profile is how other nodes in the cluster will connect to this node usually. In the future this feature will allow to enable node-to-node communication via multiple interfaces.
+`default`配置文件是一个特殊的设置。 它用作任何其他配置文件的后备，如果这些没有特定的配置设置。 请注意，默认配置文件是群集中的其他节点通常会连接到此节点的方式。 将来这个功能将允许通过多个接口实现节点到节点的通信。
 
 The following parameters can be configured like that
 
-  * `port`: The port to bind to 
-  * `bind_host`: The host to bind 
-  * `publish_host`: The host which is published in informational APIs 
-  * `tcp_no_delay`: Configures the `TCP_NO_DELAY` option for this socket 
-  * `tcp_keep_alive`: Configures the `SO_KEEPALIVE` option for this socket 
-  * `reuse_address`: Configures the `SO_REUSEADDR` option for this socket 
-  * `tcp_send_buffer_size`: Configures the send buffer size of the socket 
-  * `tcp_receive_buffer_size`: Configures the receive buffer size of the socket 
+  * `port`: 绑定端口
+  * `bind_host`: 绑定地址
+  * `publish_host`: 公开内部接口的地址
+  * `tcp_no_delay`: 配置`TCP_NO_DELAY` socket （无延时）
+  * `tcp_keep_alive`: 配置 `SO_KEEPALIVE` socket（保持连接） 
+  * `reuse_address`: 配置 `SO_REUSEADDR` socket （拒绝连接的地址） 
+  * `tcp_send_buffer_size`: 配置socket发送缓冲区的大小。 
+  * `tcp_receive_buffer_size`: 配置socket接收缓冲区的大小。
 
 
 
-### Transport Tracer
+### 传输追踪 Transport Tracer
 
-The transport module has a dedicated tracer logger which, when activated, logs incoming and out going requests. The log can be dynamically activated by settings the level of the `org.elasticsearch.transport.TransportService.tracer` logger to `TRACE`:
-    
-    
+传输模块有一个专用的跟踪记录器，当被激活时记录进出的请求。 日志可以通过将`org.elasticsearch.transport.TransportService.tracer`记录器的级别设置为`TRACE`来动态激活：
+
     PUT _cluster/settings
     {
        "transient" : {
@@ -61,8 +58,7 @@ The transport module has a dedicated tracer logger which, when activated, logs i
        }
     }
 
-You can also control which actions will be traced, using a set of include and exclude wildcard patterns. By default every request will be traced except for fault detection pings:
-    
+您还可以使用一组包含和排除通配符模式来控制将跟踪哪些操作。 默认情况下，除故障检测外，每个请求都将被跟踪：
     
     PUT _cluster/settings
     {

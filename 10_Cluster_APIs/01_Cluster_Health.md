@@ -28,36 +28,47 @@
 
 The API can also be executed against one or more indices to get just the specified indices health:
     
-    
     GET /_cluster/health/test1,test2
 
-The cluster health status is: `green`, `yellow` or `red`. On the shard level, a `red` status indicates that the specific shard is not allocated in the cluster, `yellow` means that the primary shard is allocated but replicas are not, and `green` means that all shards are allocated. The index level status is controlled by the worst shard status. The cluster status is controlled by the worst index status.
+群集健康状态是：`green`, `yellow` 和 `red`。 在分片级别上，`red`状态表示特定分片未在簇中分配，`yellow`表示分配了主分片，但副本不分配，`green`表示分配了所有分片。 索引级别状态由最差的分片状态控制。 群集状态由最差的索引状态控制。
 
-One of the main benefits of the API is the ability to wait until the cluster reaches a certain high water-mark health level. For example, the following will wait for 50 seconds for the cluster to reach the `yellow` level (if it reaches the `green` or `yellow` status before 50 seconds elapse, it will return at that point):
-    
-    
+该API的主要优点之一是能够等待群集达到一定的高水位健康级别。 例如，以下内容将等待50秒，以达到`yellow`级别（如果在50秒之前达到`green`或`yellow`状态，则会在该点返回）：
+
     GET /_cluster/health?wait_for_status=yellow&timeout=50s
 
-### Request Parameters
+### 请求参数 Request Parameters
 
-The cluster health API accepts the following request parameters:
+群集健康API接受以下请求参数：
 
 `level`
-     Can be one of `cluster`, `indices` or `shards`. Controls the details level of the health information returned. Defaults to `cluster`. 
-`wait_for_status`
-     One of `green`, `yellow` or `red`. Will wait (until the timeout provided) until the status of the cluster changes to the one provided or better, i.e. `green` > `yellow` > `red`. By default, will not wait for any status. 
-`wait_for_no_relocating_shards`
-     A boolean value which controls whether to wait (until the timeout provided) for the cluster to have no shard relocations. Defaults to false, which means it will not wait for relocating shards. 
-`wait_for_active_shards`
-     A number controlling to how many active shards to wait for, `all` to wait for all shards in the cluster to be active, or `0` to not wait. Defaults to `0`. 
-`wait_for_nodes`
-     The request waits until the specified number `N` of nodes is available. It also accepts `>=N`, `<=N`, `>N` and `<N`. Alternatively, it is possible to use `ge(N)`, `le(N)`, `gt(N)` and `lt(N)` notation. 
-`timeout`
-     A time based parameter controlling how long to wait if one of the wait_for_XXX are provided. Defaults to `30s`. 
-`local`
-     If `true` returns the local node information and does not provide the state from master node. Default: `false`. 
+    
+    值内容可以是`cluster`, `indices` 或`shards`其中一个，控制着不同级别的健康信息的返回，默认是`cluster`级别
 
-The following is an example of getting the cluster health at the `shards` level:
+`wait_for_status`
+
+    值内容可以是`green`, `yellow` 或 `red`。等待达到提供的状态才返回内容，如果提供了超时参数，当到达超时设置之后也会返回。默认不设置
+
+`wait_for_no_relocating_shards`
+
+     一个布尔值，用于控制是否等待（直到提供超时），以使群集不具有分片重定位。 默认为false，这意味着它不会等待重定位碎片。
+     
+`wait_for_active_shards`
+
+    一个数字，用于控制要激活的分片的数量，等待集群中所有分片激活的“全部”，或者不等待。 默认为“0”。
+
+`wait_for_nodes`
+
+    请求等待，直到指定的节点数量“N”可用。 它也接受`>= N`，`<=N`，`>N`和`<N`。 或者，可以使用`ge（N）`，`le（N）`，`gt（N）`和`lt（N）`表示法。
+
+`timeout`
+
+    一个基于时间的参数，控制如果提供了wait_for_XXX之一等待的时间。 默认为`30s`。
+
+`local`
+
+    如果`true`返回本地节点信息，并且不提供来自主节点的状态。 默认：“false”。
+
+以下是在“分片”级别获取集群运行状况的示例：
     
     
     GET /_cluster/health/twitter?level=shards

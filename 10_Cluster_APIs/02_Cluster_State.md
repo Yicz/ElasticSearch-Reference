@@ -1,35 +1,46 @@
 ## 集群状态 Cluster State
 
-The cluster state API allows to get a comprehensive state information of the whole cluster.
-    
+群集状态API允许获得整个群集的综合状态信息。    
     
     $ curl -XGET 'http://localhost:9200/_cluster/state'
 
-By default, the cluster state request is routed to the master node, to ensure that the latest cluster state is returned. For debugging purposes, you can retrieve the cluster state local to a particular node by adding `local=true` to the query string.
+缺省情况下，集群状态请求路由到主节点，以确保返回最新的集群状态。 出于调试目的，您可以通过在查询字符串中添加“local = true”来检索本地到特定节点的集群状态。
 
-### Response Filters
 
-As the cluster state can grow (depending on the number of shards and indices, your mapping, templates), it is possible to filter the cluster state response specifying the parts in the URL.
-    
+### 响应内容过滤 Response Filters
+
+由于集群状态可以增长（取决于分片和索引的数量，映射，模板），因此可以指定URL中的部分过滤集群状态响应，。    
     
     $ curl -XGET 'http://localhost:9200/_cluster/state/{metrics}/{indices}'
 
-`metrics` can be a comma-separated list of
+`metrics` 可以接受如下的参数：
+
 
 `version`
-     Shows the cluster state version. 
-`master_node`
-     Shows the elected `master_node` part of the response 
-`nodes`
-     Shows the `nodes` part of the response 
-`routing_table`
-     Shows the `routing_table` part of the response. If you supply a comma separated list of indices, the returned output will only contain the indices listed. 
-`metadata`
-     Shows the `metadata` part of the response. If you supply a comma separated list of indices, the returned output will only contain the indices listed. 
-`blocks`
-     Shows the `blocks` part of the response 
 
-A couple of example calls:
+   集群状态的版本 
+
+`master_node`
+
+    显示响应的当选`master_node`部分
+
+`nodes`
+
+     显示响应的当选`nodes`部分
+
+`routing_table`
+
+    显示响应的`routing_table`部分。 如果您提供以逗号分隔的索引列表，则返回的输出将只包含列出的索引。
+
+`metadata`
+
+    显示响应的`metadata`部分。 如果您提供以逗号分隔的索引列表，则返回的输出将只包含列出的索引。
+
+`blocks`
+
+     显示响应的`blocks`部分
+
+一些请求用例:
     
     
     # return only metadata and routing_table data for specified indices

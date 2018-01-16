@@ -1,6 +1,6 @@
 ## 查看段信息 cat segments
 
-The `segments` command provides low level information about the segments in the shards of an index. It provides information similar to the [\_segments](indices-segments.html) endpoint. For example:
+`segments`命令提供有关索引分片中的分段的低级别信息。它提供的信息类似 [\_segments](indices-segments.html) 接口. 列出:
     
     
     GET /_cat/segments?v
@@ -12,33 +12,57 @@ The `segments` command provides low level information about the segments in the 
     test  3     p      127.0.0.1 _0               0          1            0  3kb        2042 false     true       6.5.0   true
     test1 3     p      127.0.0.1 _0               0          1            0  3kb        2042 false     true       6.5.0   true
 
-The output shows information about index names and shard numbers in the first two columns.
+输出显示前两列中索引名称和分片号的信息。
 
 If you only want to get information about segments in one particular index, you can add the index name in the URL, for example `/_cat/segments/test`. Also, several indexes can be queried like `/_cat/segments/test,test1`
 
-The following columns provide additional monitoring information:
+以下各栏提供了其他监控信息：
 
-prirep 
-     Whether this segment belongs to a primary or replica shard. 
-ip 
-     The ip address of the segment’s shard. 
-segment 
-     A segment name, derived from the segment generation. The name is internally used to generate the file names in the directory of the shard this segment belongs to. 
-generation 
-     The generation number is incremented with each segment that is written. The name of the segment is derived from this generation number. 
-docs.count 
-     The number of non-deleted documents that are stored in this segment. Note that these are Lucene documents, so the count will include hidden documents (e.g. from nested types). 
-docs.deleted 
-     The number of deleted documents that are stored in this segment. It is perfectly fine if this number is greater than 0, space is going to be reclaimed when this segment gets merged. 
-size 
-     The amount of disk space that this segment uses. 
-size.memory 
-     Segments store some data into memory in order to be searchable efficiently. This column shows the number of bytes in memory that are used. 
-committed 
-     Whether the segment has been sync’ed on disk. Segments that are committed would survive a hard reboot. No need to worry in case of false, the data from uncommitted segments is also stored in the transaction log so that Elasticsearch is able to replay changes on the next start. 
-searchable 
-     True if the segment is searchable. A value of false would most likely mean that the segment has been written to disk but no refresh occurred since then to make it searchable. 
-version 
-     The version of Lucene that has been used to write this segment. 
-compound 
-     Whether the segment is stored in a compound file. When true, this means that Lucene merged all files from the segment in a single one in order to save file descriptors. 
+
+`prirep` 
+
+     该分段是属于主分片还是复制分片。 
+
+`ip` 
+
+     段的分片的IP地址。 
+
+`segment` 
+
+    段名称，从段生成派生。 该名称在内部用于在该分段所属的分片的目录中生成文件名。
+
+`generation` 
+
+     生产号码随着每一段被写入而递增。 段的名称来源于这一代数字。
+
+`docs.count` 
+
+    存储在此段中的未删除文档的数量。 请注意，这些是Lucene文档，因此计数将包含隐藏文档（例如嵌套类型）。
+
+`docs.deleted` 
+
+     存储在此段中的已删除文档的数量。 如果这个数字大于0，那么这个分段完全没问题，当这个分段被合并时，空间将被回收。 
+
+`size` 
+
+     此分段使用的磁盘空间量
+
+`size.memory` 
+
+     段将一些数据存储到内存中以便有效地搜索。 此列显示所使用的内存中的字节数。
+
+`committed` 
+
+     段是否已经在磁盘上同步。 提供了的段将在硬重启后生存。 如果发生错误，不需要担心，未提交段的数据也会存储在事务日志中，以便Elasticsearch能够在下次启动时重播更改。
+
+`searchable` 
+
+    如果段可以搜索，则为真。 false的值很可能意味着该段已写入磁盘，但自此之后不再刷新以使其可搜索。 
+
+`version` 
+
+     已经被用来编写这个段的Lucene的版本。
+
+`compound` 
+
+     段是否存储在复合文件中。 如果为true，这意味着Lucene将合并段中的所有文件，以保存文件描述符。

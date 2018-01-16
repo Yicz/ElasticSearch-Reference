@@ -4,11 +4,10 @@ Elasticsearch跟踪每个分片的索引活动。 5分钟示收到索引操作�
 
 由于在没有正在进行索引操作时添加了同步标识符，因此可以用它作为快速检查两个分片的lucene索引是否相同的方法。 此快速同步ID比较（如果存在）在恢复过程中使用或重新启动以跳过过程的第一个也是最昂贵的阶段。 在这种情况下，不需要复制段文件，恢复的事务日志重放阶段可以立即开始。 请注意，由于同步ID标记与flush一起使用，事务日志很可能是空的，加快了恢复的速度。
 
+这对于具有很多从未或很少更新的索引（如基于时间的数据）的用例特别有用。 这个用例通常会产生很多索引，如果没有同步刷新标记，恢复将需要很长时间。
 
-This is particularly useful for use cases having lots of indices which are never or very rarely updated, such as time based data. This use case typically generates lots of indices whose recovery without the synced flush marker would take a long time.
 
-To check whether a shard has a marker or not, look for the `commit` div of shard stats returned by the [indices stats](indices-stats.html) API:
-    
+要检查一个分片是否有标记，查找由[indices stats](indices-stats.html)返回的分片统计信息的`commit`部分内容:
     
     GET twitter/_stats?level=shards
 
@@ -50,27 +49,25 @@ To check whether a shard has a marker or not, look for the `commit` div of shard
   
 ### Synced Flush API
 
-The Synced Flush API allows an administrator to initiate a synced flush manually. This can be particularly useful for a planned (rolling) cluster restart where you can stop indexing and don’t want to wait the default 5 minutes for idle indices to be sync-flushed automatically.
+Synced Flush API允许管理员手动启动同步刷新。这对于计划（滚动）的群集重新启动非常有用，您可以在其中停止建立索引，并且不希望等待缺省索引的默认5分钟自动同步刷新。
 
-While handy, there are a couple of caveats for this API:
+虽然方便，这个API有几个警告：
 
-  1. Synced flush is a best effort operation. Any ongoing indexing operations will cause the synced flush to fail on that shard. This means that some shards may be synced flushed while others aren’t. See below for more. 
-  2. The `sync_id` marker is removed as soon as the shard is flushed again. That is because a flush replaces the low level lucene commit point where the marker is stored. Uncommitted operations in the transaction log do not remove the marker. In practice, one should consider any indexing operation on an index as removing the marker as a flush can be triggered by Elasticsearch at any time. 
+  1. 同步刷新是尽力而为的操作。 任何正在进行的索引操作都将导致同步刷新在该分片上失败。 这意味着一些分片可能会被同步刷新，而另一些分片则不会被刷新。 请参阅下面的更多的信息。 
+  2. 只要再次刷新分片，`sync_id`标记就会被删除。 这是因为flush会替换存储标记的低级lucene提交点。 事务日志中未提交的操作不会删除标记。 在实践中，我们应该考虑索引上的任何索引操作，因为Elasticsearch可以随时触发清除标记。
 
 
 
 ![Note](/images/icons/note.png)
 
-It is harmless to request a synced flush while there is ongoing indexing. Shards that are idle will succeed and shards that are not will fail. Any shards that succeeded will have faster recovery times.
-    
+正在进行索引时请求同步刷新是无害的。 闲置的分片将会成功，分片不会失败。 任何成功的分片将有更快的恢复时间。
     
     POST twitter/_flush/synced
 
-The response contains details about how many shards were successfully sync-flushed and information about any failure.
+该响应包含有关成功刷新了多少个分片的详细信息以及有关任何故障的信息。
 
-Here is what it looks like when all shards of a two shards and one replica index successfully sync-flushed:
-    
-    
+以下是当两个分片和一个副本索引的所有分片成功同步刷新时的样子：
+
     {
        "_shards": {
           "total": 2,
@@ -84,8 +81,7 @@ Here is what it looks like when all shards of a two shards and one replica index
        }
     }
 
-Here is what it looks like when one shard group failed due to pending operations:
-    
+下面是一个分片组由于未决操作而失败的情况：    
     
     {
        "_shards": {
@@ -108,9 +104,9 @@ Here is what it looks like when one shard group failed due to pending operations
 
 ![Note](/images/icons/note.png)
 
-The above error is shown when the synced flush fails due to concurrent indexing operations. The HTTP status code in that case will be `409 CONFLICT`.
+由于并发索引操作，同步刷新失败时，会显示以上错误。 这种情况下的HTTP状态码将是`409 CONFLICT`。
 
-Sometimes the failures are specific to a shard copy. The copies that failed will not be eligible for fast recovery but those that succeeded still will be. This case is reported as follows:
+有时故障是特定于分片副本的。 失败的副本将不具备快速恢复的资格，但成功的副本仍然会执行。 这个案例报道如下：
     
     
     {
@@ -142,9 +138,9 @@ Sometimes the failures are specific to a shard copy. The copies that failed will
 
 ![Note](/images/icons/note.png)
 
-When a shard copy fails to sync-flush, the HTTP status code returned will be `409 CONFLICT`.
+当分片复制无法同步刷新时，返回的HTTP状态代码将是“409 CONFLICT”。
 
-The synced flush API can be applied to more than one index with a single call, or even on `_all` the indices.
+同步的flush API可以通过一次调用应用于多个索引，甚至可以在_all这些索引上应用。
     
     
     POST kimchy,elasticsearch/_flush/synced

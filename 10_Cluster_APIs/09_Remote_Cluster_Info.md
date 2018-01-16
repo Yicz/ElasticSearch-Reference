@@ -1,21 +1,33 @@
 ## 远程集群信息 Remote Cluster Info
 
-The cluster remote info API allows to retrieve all of the configured remote cluster information.
+集群远程信息API允许检索所有已配置的远程集群信息。
     
     
     GET /_remote/info
 
-This command returns returns connection and endpoint information keyed by the configured remote cluster alias.
+此命令返回由配置的远程群集别名键入的连接和端点信息。
+
 
 `seeds`
-     The configured initial seed transport addresses of the remote cluster. 
+
+     配置的远程集群的初始种子传输地址。 
+
 `http_addresses`
-     The published http addresses of all connected remote nodes. 
+
+     已发布的所有连接的远程节点的http地址。
+
 `connected`
-     True if there is at least one connection to the remote cluster. 
+
+     如果至少有一个到远程群集的连接，则为真。
+
 `num_nodes_connected`
-     The number of connected nodes in the remote cluster. 
+
+     远程集群中连接的节点数。 
+
 `max_connection_per_cluster`
-     The maximum number of connections maintained for the remote cluster. 
+
+     为远程集群维护的最大连接数。
+
 `initial_connect_timeout`
-     The initial connect timeout for remote cluster connections. 
+
+     远程群集连接的初始连接超时。

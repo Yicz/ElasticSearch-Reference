@@ -1,16 +1,16 @@
-## Cluster
+## 集群 Cluster
 
-One of the main roles of the master is to decide which shards to allocate to which nodes, and when to move shards between nodes in order to rebalance the cluster.
+主服务器的主要角色之一是决定将哪些分片分配给哪些节点，以及何时移动节点之间的分片以重新平衡集群。
 
-There are a number of settings available to control the shard allocation process:
+有许多设置可用于控制分片分配过程：
 
-  * [Cluster Level Shard Allocation](shards-allocation.html) lists the settings to control the allocation and rebalancing operations. 
-  * [Disk-based Shard Allocation](disk-allocator.html) explains how Elasticsearch takes available disk space into account, and the related settings. 
-  * [Shard Allocation Awareness](allocation-awareness.html) and [Forced Awareness control how shards can be distributed across different racks or availability zones. 
-  * [Shard Allocation Filtering](allocation-filtering.html) allows certain nodes or groups of nodes excluded from allocation so that they can be decommissioned. 
+  * [Cluster Level Shard Allocation](shards-allocation.html) 设置控制分配和重新平衡操作。
+  * [Disk-based Shard Allocation](disk-allocator.html) 介绍了Elasticsearch如何考虑磁盘空间以及相关的设置。
+  * [Shard Allocation Awareness](allocation-awareness.html) 强制感知控制如何在不同的机架或可用区域分配分片。
+  * [Shard Allocation Filtering](allocation-filtering.html) 允许从分配中排除某些节点或节点组，以便它们可以退出。
 
 
 
-Besides these, there are a few other [miscellaneous cluster-level settings](misc-cluster.html).
+除此之处，还有其他的设置 [miscellaneous cluster-level settings](misc-cluster.html).
 
-All of the settings in this div are _dynamic_ settings which can be updated on a live cluster with the [cluster-update-settings](cluster-update-settings.html) API.
+以上全部的设置都是动态的，可以通过[cluster-update-settings](cluster-update-settings.html) API进行动态更新。
