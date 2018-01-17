@@ -1,7 +1,6 @@
 ## 前缀查询 Prefix Query
 
-Matches documents that have fields containing terms with a specified prefix ( **not analyzed** ). The prefix query maps to Lucene `PrefixQuery`. The following matches documents where the user field contains a term that starts with `ki`:
-    
+匹配包含具有指定前缀的字段的字段的文档（**未分析**）。 前缀查询映射到Lucene`PrefixQuery`。 以下匹配用户字段包含以`ki`开头的术语的文档：
     
     GET /_search
     { "query": {
@@ -9,8 +8,7 @@ Matches documents that have fields containing terms with a specified prefix ( **
       }
     }
 
-A boost can also be associated with the query:
-    
+可以给查询指定一个提升因子:
     
     GET /_search
     { "query": {
@@ -18,7 +16,7 @@ A boost can also be associated with the query:
       }
     }
 
-Or with the `prefix` [5.0.0] Deprecated in 5.0.0. Use `value` syntax:
+或者使用 `prefix` [5.0.0] 版本中已经弃用. 使用 `value` 语法:
     
     
     GET /_search
@@ -27,4 +25,4 @@ Or with the `prefix` [5.0.0] Deprecated in 5.0.0. Use `value` syntax:
       }
     }
 
-This multi term query allows you to control how it gets rewritten using the [rewrite](query-dsl-multi-term-rewrite.html) parameter.
+这个多项查询允许你使用[rewrite](query-dsl-multi-term-rewrite.html)参数来控制它被重写的方式。

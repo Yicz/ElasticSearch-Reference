@@ -1,7 +1,6 @@
-## Constant Score Query
+## 恒定分数查询
 
-A query that wraps another query and simply returns a constant score equal to the query boost for every document in the filter. Maps to Lucene `ConstantScoreQuery`.
-    
+包装另一个查询的查询，并简单地返回一个恒定分数，该分数等于过滤器中每个文档的查询提升。 映射到Lucene的`ConstantScoreQuery`。   
     
     GET /_search
     {
@@ -15,4 +14,4 @@ A query that wraps another query and simply returns a constant score equal to th
         }
     }
 
-Filter clauses are executed in [filter context](query-filter-context.html), meaning that scoring is ignored and clauses are considered for caching.
+Filter子句在[filter context](query-filter-context.html)中执行，这意味着评分被忽略，子句被考虑用于缓存。

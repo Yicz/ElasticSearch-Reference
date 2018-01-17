@@ -1,7 +1,6 @@
 ## 是否存在查询 Exists Query
 
-Returns documents that have at least one non-`null` value in the original field:
-    
+返回*原始字段*值不为`null`的文档。
     
     GET /_search
     {
@@ -10,8 +9,7 @@ Returns documents that have at least one non-`null` value in the original field:
         }
     }
 
-For instance, these documents would all match the above query:
-    
+上面的查询，将返回下面的匹配到下面所有的返回结果    
     
     { "user": "jane" }
     { "user": "" } <1>
@@ -19,52 +17,42 @@ For instance, these documents would all match the above query:
     { "user": ["jane"] }
     { "user": ["jane", null ] } <3>
 
-<1>| An empty string is a non-`null` value.     
+<1>| 空字符也是一个非`null`数据    
 ---|---  
-<2>| Even though the `standard` analyzer would emit zero tokens, the original field is non-`null`.   
-  
-<3>
+<2>| 即使`standard`分析器会发出零标记，原始字段值也不是`null`。   
+<3>| 数组内容中，至少有一个是非`null`的数据
 
-| 
-
-At least one non-`null` value is required.   
-  
-These documents would **not** match the above query:
-    
+下面的文档不会匹配到上面的查询语句：
     
     { "user": null }
     { "user": [] } <1>
     { "user": [null] } <2>
     { "foo":  "bar" } <3>
 
-<1>| This field has no values.     
+<1>| 该字段没有内容.     
 ---|---  
-<2>| At least one non-`null` value is required.     
-<3>| The `user` field is missing completely.   
+<2>| 数组内容中，至少有一个是非`null`的数据    
+<3>| 没有`user`字段   
   
-#### `null_value` mapping
+#### 空值映射 `null_value` mapping
 
-If the field mapping includes the [`null_value`](null-value.html) setting then explicit `null` values are replaced with the specified `null_value`. For instance, if the `user` field were mapped as follows:
-    
+如果字段映射包含[`null_value`](null-value.html)设置，则显式的`null`值将被替换为指定的`null_value`。 例如，如果`user`字段被映射如下：
     
       "user": {
         "type": "keyword",
         "null_value": "_null_"
       }
 
-then explicit `null` values would be indexed as the string `_null_`, and the following docs would match the `exists` filter:
-    
+那么明确的`null`值将会被索引为字符串`_null_`，下面的文档将会匹配`exists`过滤器：    
     
     { "user": null }
     { "user": [null] }
+但是，这些文档（没有显式的“null”值）在`user`字段中仍然没有值，因此不匹配`exists`过滤器：    
 
-However, these docs—without explicit `null` values—would still have no values in the `user` field and thus would not match the `exists` filter:
-    
-    
     { "user": [] }
     { "foo": "bar" }
 
-### `missing` query
+### 没有值查询 `missing` query
 
  _missing_ query has been removed because it can be advantageously replaced by an `exists` query inside a must_not clause as follows:
     
@@ -81,5 +69,5 @@ However, these docs—without explicit `null` values—would still have no value
             }
         }
     }
-
-This query returns documents that have no value in the user field.
+    
+此查询返回用户字段中没有值的文档。

@@ -1,7 +1,6 @@
 ## Ids Query
 
-Filters documents that only have the provided ids. Note, this query uses the [\_uid](mapping-uid-field.html) field.
-    
+过滤只有提供的ID的文档。 请注意，此查询使用[\_uid](mapping-uid-field.html)字段。
     
     GET /_search
     {
@@ -13,4 +12,4 @@ Filters documents that only have the provided ids. Note, this query uses the [\_
         }
     }
 
-The `type` is optional and can be omitted, and can also accept an array of values. If no type is specified, all types defined in the index mapping are tried.
+`type`是可选的，可以省略，也可以接受一组值。 如果没有指定类型，则尝试在索引映射中定义的所有类型。

@@ -16,16 +16,16 @@ Matches documents with fields that have terms within a certain range. The type o
         }
     }
 
-The `range` query accepts the following parameters:
+`range`查询可以使用如下的参数:
 
-`gte`| Greater-than or equal to    
+`gte`| 大于等于  
  ---|---    
-`gt`| Greater-than     
-`lte`| Less-than or equal to     
-`lt`| Less-than     
-`boost`| Sets the boost value of the query, defaults to `1.0`  
+`gt`| 大于     
+`lte`| 小于等于   
+`lt`| 小于     
+`boost`| 提升因子，默认`1.0`  
   
-### Ranges on date fields
+### 日期字段的范围查询 Ranges on date fields
 
 When running `range` queries on fields of type [`date`](date.html), ranges can be specified using [Date Math:
     
@@ -42,7 +42,7 @@ When running `range` queries on fields of type [`date`](date.html), ranges can b
         }
     }
 
-#### Date math and rounding
+#### 日期数据格式和四舍五入 Date math and rounding
 
 When using [date math](common-options.html#date-math) to round dates to the nearest day, month, hour, etc, the rounded dates depend on whether the ends of the ranges are inclusive or exclusive.
 
@@ -72,7 +72,7 @@ Formatted dates will be parsed using the [`format`](mapping-date-format.html) sp
         }
     }
 
-#### Time zone in range queries
+#### 根据时区的范围查询 Time zone in range queries
 
 Dates can be converted from another timezone to UTC either by specifying the time zone in the date value itself (if the [`format`](mapping-date-format.html) accepts it), or it can be specified as the `time_zone` parameter:
     
@@ -90,6 +90,6 @@ Dates can be converted from another timezone to UTC either by specifying the tim
         }
     }
 
-<1>| This date will be converted to `2014-12-31T23:00:00 UTC`.     
+<1>| 日期会被转换成`2014-12-31T23:00:00 UTC`.     
 ---|---    
-<2>| `now` is not affected by the `time_zone` parameter (dates must be stored as UTC). 
+<2>| `now` 在 `time_zone` 参数下不生效 (日期一定要求UTC格式). 

@@ -1,29 +1,29 @@
 ##  字段类型 Field datatypes
 
-Elasticsearch supports a number of different datatypes for the fields in a document:
+Elasticsearch为文档中的字段支持许多不同的数据类型：
 
-### Core datatypes
+### 核心数据类型 Core datatypes
 
-string 
+字符串 
      [`text`](text.html) and [`keyword`](keyword.html)
-[Numeric datatypes](number.html)
+数值类型[Numeric datatypes](number.html)
      `long`, `integer`, `short`, `byte`, `double`, `float`, `half_float`, `scaled_float`
-[Date datatype](date.html)
+日期类型[Date datatype](date.html)
      `date`
-[Boolean datatype](boolean.html)
+布尔类型[Boolean datatype](boolean.html)
      `boolean`
-[Binary datatype](binary.html)
+二进制类型[Binary datatype](binary.html)
      `binary`
-[Range datatypes](range.html)
+范围类型[Range datatypes](range.html)
      `integer_range`, `float_range`, `long_range`, `double_range`, `date_range`
 
-### Complex datatypes
+### 复合类型 Complex datatypes
 
-[Array datatype](array.html)
+数组类型[Array datatype](array.html)
      Array support does not require a dedicated `type`
-[Object datatype](object.html)
+对象类型[Object datatype](object.html)
      `object` for single JSON objects 
-[Nested datatype](nested.html)
+嵌套类型[Nested datatype](nested.html)
      `nested` for arrays of JSON objects 
 
 ### Geo datatypes

@@ -1,18 +1,30 @@
-## Compound queries
+## 合查询 Compound queries
 
-Compound queries wrap other compound or leaf queries, either to combine their results and scores, to change their behaviour, or to switch from query to filter context.
+复合查询包含其他复合或叶子查询，可以将其结果与分数相结合，更改其行为或从查询切换到过滤器上下文。
 
-The queries in this group are:
+本节的查询有如下的内容:
+
 
 [`constant_score` query](query-dsl-constant-score-query.html)
-     A query which wraps another query, but executes it in filter context. All matching documents are given the same “constant” `_score`. 
+
+    包含另一个查询的查询，但在过滤器上下文(filter context)中执行。 所有匹配的文件都被赋予相同的“常量”_score. 
+
 [`bool` query](query-dsl-bool-query.html)
-     The default query for combining multiple leaf or compound query clauses, as `must`, `should`, `must_not`, or `filter` clauses. The `must` and `should` clauses have their scores combined — the more matching clauses, the better — while the `must_not` and `filter` clauses are executed in filter context. 
+
+     用于组合多个叶子或复合查询子句的默认查询，例如`must`，`should`，`must_not`或`filter`子句。 `must`和`should`子句的分数相加 - 匹配的子句越多越好，而`must_not`和`filter`子句在过滤器上下(filter context)文中执行。
+
 [`dis_max` query](query-dsl-dis-max-query.html)
-     A query which accepts multiple queries, and returns any documents which match any of the query clauses. While the `bool` query combines the scores from all matching queries, the `dis_max` query uses the score of the single best- matching query clause. 
+
+     一个查询接受多个查询，并返回任何匹配任何查询子句的文档。 当`bool`查询结合所有匹配查询的分数时，`dis_max`查询使用单个最佳匹配查询子句的分数。
+
 [`function_score` query](query-dsl-function-score-query.html)
-     Modify the scores returned by the main query with functions to take into account factors like popularity, recency, distance, or custom algorithms implemented with scripting. 
+
+    使用函数修改主查询返回的分数，以考虑流行度，新近度，距离或使用脚本实现的自定义算法等因素。
+
 [`boosting` query](query-dsl-boosting-query.html)
-     Return documents which match a `positive` query, but reduce the score of documents which also match a `negative` query. 
+
+     返回与查询相匹配的文档，但会降低不匹配的文档的分数。
+
 [`indices` query](query-dsl-indices-query.html)
-     Execute one query for the specified indices, and another for other indices. 
+
+    对指定的索引执行一个查询，对其他索引执行另一个查询。
