@@ -16,7 +16,7 @@
 
 参数 | 描述  
 ---|---  
-`query`| The actual query to be parsed. See [Query string syntax](query-dsl-query-string-query.html#query-string-syntax).   
+`query`| 真实用于查询的语句. 详情[Query string syntax](query-dsl-query-string-query.html#query-string-syntax).   
 `default_field`| The default field for query terms if no prefix field is specified. Defaults to the `index.query.default_field` indexsettings, which in turn defaults to `_all`.    
 `default_operator`| The default operator used if no explicit operator is specified. For example, with a default operator of `OR`, thequery `capital of Hungary` is translated to `capital OR of OR Hungary`, and with default operator of `AND`, the samequery is translated to `capital AND of AND Hungary`. The default value is `OR`.    
 `analyzer`| The analyzer name used to analyze the query string.    
@@ -374,6 +374,6 @@ Failing to escape these special characters correctly could lead to a syntax erro
 
 A space may also be a reserved character. For instance, if you have a synonym list which converts `"wi fi"` to `"wifi"`, a `query_string` search for `"wi fi"` would fail. The query string parser would interpret your query as a search for `"wi OR fi"`, while the token stored in your index is actually `"wifi"`. The option `split_on_whitespace=false` will protect it from being touched by the query string parser and will let the analysis run on the entire input (`"wi fi"`).
 
-#### Empty Query
+#### 空查询 Empty Query
 
-If the query string is empty or only contains whitespaces the query will yield an empty result set.
+如果查询字符串为空或仅包含空格，则查询将生成空的结果集。

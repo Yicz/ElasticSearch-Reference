@@ -15,7 +15,7 @@
 
 ### 匹配 match
 
-`match` 查询是一个真假值类型。意味着它对提供文本进行分析并进行构造一个真假值类型的查询。`operator`可以设置为`or`或者`and`进行控制`boolean`类型的语句进行连接操作(默认为`or`)。可以使用[`minimum_should_match`](query-dsl-minimum-should-match.html)参数来设置匹配的最少数量的可选`should`子句。
+`match` 查询是一个真假值(boolean)类型。意味着它对提供文本进行分析并进行构造一个真假值类型的查询。`operator`可以设置为`or`或者`and`进行控制`boolean`类型的语句进行连接操作(默认为`or`)。可以使用[`minimum_should_match`](query-dsl-minimum-should-match.html)参数来设置匹配的最少数量的可选`should`子句。
 
 `analyzer`参数可以设置处理全文要分析的分析器。默认使用`mapping`中的定义或默认的查询分析器。
 

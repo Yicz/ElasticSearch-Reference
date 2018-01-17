@@ -85,7 +85,7 @@ The fields parameter can also include pattern based field names, allowing to aut
 
 #### Flags
 
-`simple_query_string` support multiple flags to specify which parsing features should be enabled. It is specified as a `|`-delimited string with the `flags` parameter:
+`simple_query_string`支持多个标志来指定应该启用哪些分析功能。 它使用`flags`参数指定为`|`-delimited字符串：
     
     
     GET /_search
@@ -98,4 +98,4 @@ The fields parameter can also include pattern based field names, allowing to aut
         }
     }
 
-The available flags are: `ALL`, `NONE`, `AND`, `OR`, `NOT`, `PREFIX`, `PHRASE`, `PRECEDENCE`, `ESCAPE`, `WHITESPACE`, `FUZZY`, `NEAR`, and `SLOP`.
+flags参数可以接受的值: `ALL`, `NONE`, `AND`, `OR`, `NOT`, `PREFIX`, `PHRASE`, `PRECEDENCE`, `ESCAPE`, `WHITESPACE`, `FUZZY`, `NEAR`, and `SLOP`.

@@ -19,7 +19,7 @@ The `multi_match` query builds on the [`match` query](query-dsl-match-query.html
   
 #### 字段和每个字段的提升因子 `fields` and per-field boosting
 
-Fields can be specified with wildcards, eg:
+字段的名称可以通过使用通配符进行指定:
     
     
     GET /_search
@@ -32,11 +32,10 @@ Fields can be specified with wildcards, eg:
       }
     }
 
-<1>| Query the `title`, `first_name` and `last_name` fields.     
+<1>| 匹配`title`, `first_name` 和 `last_name` 字段.     
 ---|---  
-  
-Individual fields can be boosted with the caret (`^`) notation:
-    
+
+不同字段可以通过使用（^）对该字段的一个分数提升：
     
     GET /_search
     {
@@ -48,14 +47,14 @@ Individual fields can be boosted with the caret (`^`) notation:
       }
     }
 
-<1>| The `subject` field is three times as important as the `message` field.     
+<1>|  `subject` 的提升因子是 `message` 字段的3倍.     
 ---|---  
-#### Types of `multi_match` query:The way the `multi_match` query is executed internally depends on the `type` parameter, which can be set to:`best_fields`| ( **default** ) Finds documents which match any field, but uses the `_score` from the best field. See [`best_fields`]query-dsl-multi-match-query.html#type-best-fields).    
 
- ---|---    
- `most_fields`| Finds documents which match any field and combines the `_score` from each field. See [`most_fields`]query-dsl-multi-match-query.html#type-most-fields).     
- `cross_fields`| Treats fields with the same `analyzer` as though they were one big field. Looks for each word in **any** field. See [cross_fields`](query-dsl-multi-match-query.html#type-cross-fields).     
- `phrase`| Runs a `match_phrase` query on each field and combines the `_score` from each field. See [`phrase` and `phrase_prefix`(query-dsl-multi-match-query.html#type-phrase).     
+Types of `multi_match` query:The way the `multi_match` query is executed internally depends on the `type` parameter, which can be set to:`best_fields`| ( **default** ) Finds documents which match any field, but uses the `_score` from the best field. See [`best_fields`]query-dsl-multi-match-query.html#type-best-fields).    
+---|---    
+`most_fields`| Finds documents which match any field and combines the `_score` from each field. See [`most_fields`]query-dsl-multi-match-query.html#type-most-fields).     
+`cross_fields`| Treats fields with the same `analyzer` as though they were one big field. Looks for each word in **any** field. See [cross_fields`](query-dsl-multi-match-query.html#type-cross-fields).     
+`phrase`| Runs a `match_phrase` query on each field and combines the `_score` from each field. See [`phrase` and `phrase_prefix`(query-dsl-multi-match-query.html#type-phrase). 
 `phrase_prefix`| Runs a `match_phrase_prefix` query on each field and combines the `_score` from each field. See [`phrase` and phrase_prefix`](query-dsl-multi-match-query.html#type-phrase).   
   
 ### `best_fields`
@@ -77,7 +76,7 @@ The `best_fields` type generates a [`match` query](query-dsl-match-query.html) f
       }
     }
 
-would be executed as:
+等见同于如下请求:
     
     
     GET /_search
@@ -100,7 +99,7 @@ Normally the `best_fields` type uses the score of the **single** best matching f
 
 
 
-Also, accepts `analyzer`, `boost`, `operator`, `minimum_should_match`, `fuzziness`, `lenient`, `prefix_length`, `max_expansions`, `rewrite`, `zero_terms_query` and `cutoff_frequency`, as explained in [match query](query-dsl-match-query.html).
+接受`analyzer`, `boost`, `operator`, `minimum_should_match`, `fuzziness`, `lenient`, `prefix_length`, `max_expansions`, `rewrite`, `zero_terms_query` 和 `cutoff_frequency`，相关参数说明在 [match query](query-dsl-match-query.html)中.
 
 ![Important](/images/icons/important.png)
 
@@ -361,6 +360,7 @@ which will be executed as:
 #### `tie_breaker`
 
 By default, each per-term `blended` query will use the best score returned by any field in a group, then these scores are added together to give the final score. The `tie_breaker` parameter can change the default behaviour of the per-term `blended` queries. It accepts:
+
 `0.0`| Take the single best score out of (eg) `first_name:will` and `last_name:will` ( **default** )     
 ---|---    `1.0`| Add together the scores for (eg) `first_name:will` and `last_name:will`    
 `0.0 < n < 1.0`| Take the single best score plus `tie_breaker` multiplied by each of the scores from other matching fields.   

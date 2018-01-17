@@ -1,7 +1,6 @@
 ## 匹配词组前缀查询 Match Phrase Prefix Query
 
-The `match_phrase_prefix` is the same as `match_phrase`, except that it allows for prefix matches on the last term in the text. For example:
-    
+`match_phrase_prefix`和`match_phrase`是一样的，不同的是它允许在文本中最后一个词的前缀匹配。 例如：
     
     GET /_search
     {
@@ -12,8 +11,7 @@ The `match_phrase_prefix` is the same as `match_phrase`, except that it allows f
         }
     }
 
-It accepts the same parameters as the phrase type. In addition, it also accepts a `max_expansions` parameter (default `50`) that can control to how many suffixes the last term will be expanded. It is highly recommended to set it to an acceptable value to control the execution time of the query. For example:
-    
+它接受与短语类型相同的参数。 另外，它还接受一个`max_expansions`参数（默认为`50`），可以控制最后一个词将被扩展多少个后缀。 强烈建议将其设置为可接受的值以控制查询的执行时间。 例如：
     
     GET /_search
     {
@@ -29,10 +27,10 @@ It accepts the same parameters as the phrase type. In addition, it also accepts 
 
 ![Important](/images/icons/important.png)
 
-The `match_phrase_prefix` query is a poor-man’s autocomplete. It is very easy to use, which lets you get started quickly with _search-as-you-type_ but its results, which usually are good enough, can sometimes be confusing.
+`match_phrase_prefix`查询是一个自动完成的语句。 它非常易于使用，它可以让您快速开始使用_查询你输入的内容_，其结果通常足够好，但也有时会令人困惑。
 
-Consider the query string `quick brown f`. This query works by creating a phrase query out of `quick` and `brown` (i.e. the term `quick` must exist and must be followed by the term `brown`). Then it looks at the sorted term dictionary to find the first 50 terms that begin with `f`, and adds these terms to the phrase query.
+考虑查询字符串“quick brown f”。 这个查询的工作原理是用`quick`和`brown`创建一个短语查询（即术语`quick`必须存在，后面必须跟着`brown`）。 然后，它查看已排序的词条字典，以查找以“f”开头的前50个术语，并将这些术语添加到短语查询中。
 
-The problem is that the first 50 terms may not include the term `fox` so the phrase `quick brown fox` will not be found. This usually isn’t a problem as the user will continue to type more letters until the word they are looking for appears.
+问题是，前50项可能不包括词条`fox`，所以短语`quick brown fox`将不会被查询到。 这通常不是一个问题，因为用户将继续键入更多的字母，直到他们正在寻找的单词出现。
 
-For better solutions for _search-as-you-type_ see the [completion suggester](search-suggesters-completion.html) and [Index-Time Search-as-You-Type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html).
+为更好地解决输入建议，可以参考 [completion suggester](search-suggesters-completion.html) 和 [Index-Time Search-as-You-Type](https://www.elastic.co/guide/en/elasticsearch/guide/2.x/_index_time_search_as_you_type.html).

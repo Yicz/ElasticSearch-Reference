@@ -1,7 +1,6 @@
 ## 词条（项）查询 Term Query
 
-The `term` query finds documents that contain the **exact** term specified in the inverted index. For instance:
-    
+`term`查询查找包含在倒排索引中指定的**确切**项的文档。 例如：    
     
     POST _search
     {
@@ -10,11 +9,10 @@ The `term` query finds documents that contain the **exact** term specified in th
       }
     }
 
-<1>| Finds documents which contain the exact term `Kimchy` in the inverted index of the `user` field.     
+<1>| 在`user`字段的倒排索引中查找包含确切名词`Kimchy`的文档。     
 ---|---  
   
-A `boost` parameter can be specified to give this `term` query a higher relevance score than another query, for instance:
-    
+可以指定`boost`参数来给这个`term`查询一个比另一个查询更高的相关性分数，例如：    
     
     GET _search
     {
@@ -39,11 +37,11 @@ A `boost` parameter can be specified to give this `term` query a higher relevanc
       }
     }
 
-<1>| The `urgent` query clause has a boost of `2.0`, meaning it is twice as important as the query clause for `normal`.     
+<1>| `urgent`查询子句有`2.0`的提升，这意味着它是`normal`的查询子句的两倍。    
 ---|---    
-<2>| The `normal` clause has the default neutral boost of `1.0`.   
+<2>| `normal`字段默认提升了`1.0`。   
   
-**Why doesn’t the`term` query match my document?**
+**为什么`term`查询不到文档**
 
 String fields can be of type `text` (treated as full text, like the body of an email), or `keyword` (treated as exact values, like an email address or a zip code). Exact values (like numbers, dates, and keywords) have the exact value specified in the field added to the inverted index in order to make them searchable.
 
